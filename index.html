@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Step Teller</title>
+<meta name="description" content="Quanti minuti sul tappeto per arrivare all'obiettivo di passi.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Step Teller">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F0EEE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1413" media="(prefers-color-scheme: dark)">
+<style>
+:root{
+  --bg:#F0EEE9; --text:#18181b; --pop:#00897b; --pop-soft:rgba(0,137,123,.08); --pop-line:rgba(0,137,123,.25);
+  --glass:rgba(255,255,255,.5); --glass-border:rgba(255,255,255,.75); --glass-hi:rgba(255,255,255,.9);
+  --shadow:0 8px 32px 0 rgba(0,77,64,.06); --muted:rgba(24,24,27,.55); --track:rgba(24,24,27,.07);
+  --field:rgba(255,255,255,.35); --field-focus:rgba(255,255,255,.95); --thumb:#fff;
+  --orb1:#ffffff; --orb2:#e0f2f1; --danger:#b3261e;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0e1413; --text:#eef2f1; --pop:#4fd1c0; --pop-soft:rgba(79,209,192,.10); --pop-line:rgba(79,209,192,.30);
+    --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.10); --glass-hi:rgba(255,255,255,.22);
+    --shadow:0 8px 32px 0 rgba(0,0,0,.35); --muted:rgba(238,242,241,.58); --track:rgba(255,255,255,.10);
+    --field:rgba(255,255,255,.06); --field-focus:rgba(255,255,255,.12); --thumb:#e8eeec;
+    --orb1:#12332f; --orb2:#0b2a3a; --danger:#ff8a80;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
+  min-height:100dvh; overflow-x:hidden; touch-action:manipulation;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.6;animation:float 25s infinite ease-in-out}
+.orb-1{top:-10%;left:-10%;width:60vw;height:60vw;background:var(--orb1)}
+.orb-2{bottom:-10%;right:-10%;width:70vw;height:70vw;background:var(--orb2);animation-delay:-5s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-20px) scale(1.05)}}
+@media (prefers-reduced-motion: reduce){.orb{animation:none}}
+
+.container{width:100%;max-width:520px;margin:0 auto;padding:16px 16px 28px;display:flex;flex-direction:column;gap:14px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:4px 6px 0}
+.brand{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:.45}
+.pill{font:600 11px "SF Mono",ui-monospace,monospace;color:var(--pop);background:var(--pop-soft);
+  border:1px solid var(--pop-line);padding:6px 11px;border-radius:12px;cursor:pointer}
+
+.seg{display:flex;background:var(--track);border-radius:16px;padding:4px;gap:4px}
+.seg button{flex:1;border:0;background:transparent;color:var(--muted);font:700 13px inherit;font-family:inherit;
+  padding:10px 6px;border-radius:12px;cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--glass-hi);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+@media (prefers-color-scheme: dark){.seg button[aria-pressed="true"]{background:rgba(255,255,255,.14)}}
+
+.hero{text-align:center;padding:18px 0 8px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero-val{font-size:clamp(64px,22vw,120px);font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--pop);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.hero-val small{font-size:.28em;font-weight:700;letter-spacing:0;margin-left:.15em;opacity:.8}
+.hero-cap{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.stat{background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;padding:7px 12px;
+  font-size:12px;font-weight:700;color:var(--muted)}
+.stat b{color:var(--text);font-family:ui-monospace,"SF Mono",monospace;font-size:14px;margin-right:3px}
+
+.card{background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid var(--glass-border);box-shadow:var(--shadow);border-radius:26px;padding:18px;position:relative}
+.card::before{content:'';position:absolute;top:1px;left:20px;right:20px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--glass-hi),transparent);opacity:.8}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.row + .row{margin-top:12px}
+label,.lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.field{display:flex;align-items:baseline;gap:6px;background:var(--field);border:1px solid var(--glass-border);
+  border-radius:14px;padding:8px 12px;transition:background .2s,border-color .2s}
+.field:focus-within{background:var(--field-focus);border-color:var(--pop)}
+.field input{width:92px;border:0;background:transparent;outline:none;color:var(--text);text-align:right;
+  font:700 22px inherit;font-family:inherit;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.field .unit{font-size:12px;font-weight:600;color:var(--muted);min-width:30px}
+.note{margin-top:12px;font-size:13px;font-weight:600;color:var(--muted)}
+.note b{color:var(--pop)}
+
+.slider{position:relative;height:44px;display:flex;align-items:center;margin-top:10px}
+.slider::before{content:'';position:absolute;left:0;right:0;top:50%;height:8px;background:var(--track);
+  border-radius:4px;transform:translateY(-50%)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;position:relative;margin:0;height:44px}
+input[type=range]::-webkit-slider-runnable-track{height:8px;background:transparent}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:36px;width:36px;border-radius:50%;background:var(--thumb);
+  border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 10px rgba(0,0,0,.18);margin-top:-14px;cursor:grab}
+input[type=range]::-moz-range-track{height:8px;background:transparent}
+input[type=range]::-moz-range-thumb{height:34px;width:34px;border-radius:50%;background:var(--thumb);border:1px solid rgba(0,0,0,.06)}
+
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.chip{border:1px solid var(--glass-border);background:var(--field);color:var(--text);border-radius:14px;padding:9px 4px;
+  font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:52px}
+.chip .s{font-size:11px;font-weight:700;color:var(--muted)}
+.chip .m{font:800 16px ui-monospace,"SF Mono",monospace}
+.chip[aria-pressed="true"]{border-color:var(--pop);background:var(--pop-soft)}
+.chip[aria-pressed="true"] .m{color:var(--pop)}
+
+.hidden{display:none !important}
+details.card summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:'+';font-size:20px;font-weight:600;color:var(--muted)}
+details[open].card summary::after{content:'–'}
+.cal-help{font-size:13px;line-height:1.45;color:var(--muted);margin:12px 0}
+.cal-list{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+.cal-item{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;
+  background:var(--field);border-radius:12px;padding:8px 12px}
+.cal-item button{border:0;background:transparent;color:var(--danger);font:700 13px inherit;font-family:inherit;cursor:pointer;padding:6px}
+.cal-add{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.cal-add .field input{width:64px;font-size:18px}
+.btn{border:0;background:var(--pop);color:var(--bg);font:800 13px inherit;font-family:inherit;border-radius:14px;
+  padding:12px 16px;cursor:pointer;min-height:44px}
+.foot{text-align:center;font-size:11px;color:var(--muted);padding-top:4px}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+<main class="container">
+  <div class="header">
+    <div class="brand">Step Teller</div>
+    <button class="pill" id="calPill" type="button">CURVA STANDARD</button>
+  </div>
+
+  <div class="seg" role="group" aria-label="Modalità">
+    <button type="button" id="tabGoal" aria-pressed="true">Quanto manca</button>
+    <button type="button" id="tabFree" aria-pressed="false">Quanti passi</button>
+  </div>
+
+  <section class="hero" aria-live="polite">
+    <div class="hero-cap" id="heroCap">Minuti sul tappeto</div>
+    <div class="hero-val" id="heroVal">0<small>min</small></div>
+    <div class="stats">
+      <div class="stat"><b id="stA">0</b><span id="stAl">passi</span></div>
+      <div class="stat"><b id="stKm">0,0</b>km</div>
+      <div class="stat"><b id="stCad">0</b>spm</div>
+    </div>
+  </section>
+
+  <!-- Obiettivo -->
+  <div class="card" id="cardGoal">
+    <div class="row">
+      <label for="today">Passi di oggi</label>
+      <div class="field"><input id="today" type="number" inputmode="numeric" min="0" step="100" placeholder="0"><span class="unit">passi</span></div>
+    </div>
+    <div class="row">
+      <label for="target">Obiettivo</label>
+      <div class="field"><input id="target" type="number" inputmode="numeric" min="0" step="500" value="10000"><span class="unit">passi</span></div>
+    </div>
+    <div class="note" id="gapNote"></div>
+  </div>
+
+  <!-- Durata (solo modalità libera) -->
+  <div class="card hidden" id="cardDur">
+    <div class="row">
+      <label for="durNum">Durata</label>
+      <div class="field"><input id="durNum" type="number" inputmode="numeric" min="0" max="180" step="1" value="30"><span class="unit">min</span></div>
+    </div>
+    <div class="slider"><input id="durSl" type="range" min="0" max="120" step="1" value="30" aria-label="Durata"></div>
+    <div class="note" id="totNote"></div>
+  </div>
+
+  <!-- Andatura -->
+  <div class="card">
+    <div class="seg" role="group" aria-label="Andatura">
+      <button type="button" id="mWalk" aria-pressed="true">Cammino</button>
+      <button type="button" id="mRun" aria-pressed="false">Corsa</button>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <label for="spNum">Velocità</label>
+      <div class="field"><input id="spNum" type="number" inputmode="decimal" step="0.1" value="6"><span class="unit">km/h</span></div>
+    </div>
+    <div class="slider"><input id="spSl" type="range" min="2" max="8" step="0.1" value="6" aria-label="Velocità"></div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <!-- Taratura -->
+  <details class="card" id="calCard">
+    <summary><span class="lbl">Taratura personale</span></summary>
+    <p class="cal-help">Sul tappeto, a velocità fissa, conta i passi per 60 secondi (oppure un piede solo per 30 s × 4) e inserisci qui la coppia velocità → cadenza. Con un punto la curva si scala, con due o più segue i tuoi dati. Bastano 2 punti in cammino e 2 in corsa.</p>
+    <div class="lbl">Cammino</div><div class="cal-list" id="calWalk"></div>
+    <div class="lbl">Corsa</div><div class="cal-list" id="calRun"></div>
+    <div class="cal-add">
+      <div class="field"><input id="calV" type="number" inputmode="decimal" step="0.1" placeholder="6,0"><span class="unit">km/h</span></div>
+      <div class="field"><input id="calC" type="number" inputmode="numeric" step="1" placeholder="120"><span class="unit">spm</span></div>
+      <button class="btn" id="calAdd" type="button">Aggiungi a <span id="calMode">cammino</span></button>
+    </div>
+  </details>
+
+  <div class="foot" id="foot">v2.0 · curva standard da letteratura finché non tari</div>
+</main>
+
+<script src="model.js"></script>
+<script>
+(function(){
+  const M = StepModel, $ = id => document.getElementById(id);
+  const fmt = (n, d=0) => Number(n).toLocaleString('it-IT', {minimumFractionDigits:d, maximumFractionDigits:d});
+  const KEY = 'stepteller.v2';
+  const PRESETS = { walk:[5, 6, 6.5], run:[8, 9, 10] };
+  const todayStr = () => new Date().toLocaleDateString('sv-SE');
+
+  let S = { tab:'goal', mode:'walk', speed:{walk:6, run:8.5}, target:10000, today:0, todayDate:todayStr(), dur:30, cal:{walk:[], run:[]} };
+  try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch(e){}
+  if (S.todayDate !== todayStr()) { S.today = 0; S.todayDate = todayStr(); }   // i passi di ieri non valgono oggi
+  S.cal = S.cal || {walk:[], run:[]}; S.cal.walk = S.cal.walk || []; S.cal.run = S.cal.run || [];
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+
+  // parametri URL (per Comandi): ?passi=7200&target=10000&v=6&modo=corsa&min=30
+  const Q = new URLSearchParams(location.search);
+  const qn = k => { const v = parseFloat((Q.get(k) || '').replace(',', '.')); return isFinite(v) ? v : null; };
+  if (Q.get('modo')) S.mode = /cors|run/i.test(Q.get('modo')) ? 'run' : 'walk';
+  if (qn('passi') !== null) { S.today = Math.max(0, Math.round(qn('passi'))); S.todayDate = todayStr(); S.tab = 'goal'; }
+  if (qn('target') !== null) S.target = Math.max(0, Math.round(qn('target')));
+  if (qn('v') !== null) S.speed[S.mode] = qn('v');
+  if (qn('min') !== null) { S.dur = Math.max(0, qn('min')); S.tab = 'free'; }
+
+  const clampSpeed = (mode, v) => { const [a,b] = M.RANGE[mode]; return Math.min(b, Math.max(a, Math.round(v*10)/10)); };
+  const num = el => { const v = parseFloat(String(el.value).replace(',', '.')); return isFinite(v) ? v : 0; };
+
+  function hhmm(min){ if (min < 60) return null; const h = Math.floor(min/60), m = min % 60; return h + ' h ' + String(m).padStart(2,'0'); }
+
+  function render(){
+    const mode = S.mode, v = clampSpeed(mode, S.speed[mode]); S.speed[mode] = v;
+    const cad = M.cadence(mode, v, S.cal);
+    const goal = S.tab === 'goal';
+
+    $('tabGoal').setAttribute('aria-pressed', goal); $('tabFree').setAttribute('aria-pressed', !goal);
+    $('mWalk').setAttribute('aria-pressed', mode==='walk'); $('mRun').setAttribute('aria-pressed', mode==='run');
+    $('cardGoal').classList.toggle('hidden', !goal); $('cardDur').classList.toggle('hidden', goal);
+
+    const sl = $('spSl'); sl.min = M.RANGE[mode][0]; sl.max = M.RANGE[mode][1]; sl.value = v;
+    if (document.activeElement !== $('spNum')) $('spNum').value = v;
+    if (document.activeElement !== $('today')) $('today').value = S.today || '';
+    if (document.activeElement !== $('target')) $('target').value = S.target;
+    if (document.activeElement !== $('durNum')) $('durNum').value = S.dur;
+    $('durSl').value = S.dur;
+
+    const gap = Math.max(0, S.target - S.today);
+    let minutes, steps;
+    if (goal) { steps = gap; minutes = gap > 0 ? Math.ceil(M.minutesFor(mode, v, gap, S.cal)) : 0; }
+    else      { minutes = S.dur; steps = Math.round(M.stepsFor(mode, v, minutes, S.cal)); }
+    const km = v * minutes / 60;
+
+    if (goal) {
+      $('heroCap').textContent = gap > 0 ? 'Minuti sul tappeto' : 'Obiettivo raggiunto';
+      $('heroVal').innerHTML = fmt(minutes) + '<small>min</small>';
+      $('stA').textContent = fmt(steps); $('stAl').textContent = 'passi mancanti';
+      const h = hhmm(minutes);
+      $('gapNote').innerHTML = gap > 0
+        ? 'Mancano <b>' + fmt(gap) + '</b> passi' + (h ? ' · ' + h : '')
+        : 'Sei a <b>' + fmt(S.today) + '</b> su ' + fmt(S.target) + ': niente tappeto.';
+    } else {
+      $('heroCap').textContent = 'Passi stimati';
+      $('heroVal').textContent = fmt(steps);
+      $('stA').textContent = fmt(minutes); $('stAl').textContent = 'min';
+      $('totNote').innerHTML = S.today > 0 ? 'Con i ' + fmt(S.today) + ' di oggi arrivi a <b>' + fmt(S.today + steps) + '</b>' : '';
+    }
+    $('stKm').textContent = fmt(km, 1);
+    $('stCad').textContent = fmt(cad);
+
+    // preset: minuti (o passi) a ciascuna andatura
+    $('chips').innerHTML = '';
+    ['walk','run'].forEach(m => PRESETS[m].forEach(pv => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'chip';
+      b.setAttribute('aria-pressed', m === mode && Math.abs(pv - v) < 0.05);
+      const val = goal ? (gap > 0 ? Math.ceil(M.minutesFor(m, pv, gap, S.cal)) + '′' : '0′')
+                       : fmt(Math.round(M.stepsFor(m, pv, S.dur, S.cal)));
+      b.innerHTML = '<span class="s">' + (m==='walk' ? 'Cammino ' : 'Corsa ') + fmt(pv,1) + '</span><span class="m">' + val + '</span>';
+      b.addEventListener('click', () => { S.mode = m; S.speed[m] = pv; save(); render(); });
+      $('chips').appendChild(b);
+    }));
+
+    // taratura
+    const nCal = S.cal.walk.length + S.cal.run.length;
+    $('calPill').textContent = nCal ? 'TARATA · ' + nCal + (nCal === 1 ? ' PUNTO' : ' PUNTI') : 'CURVA STANDARD';
+    $('foot').textContent = 'v2.0 · ' + (S.cal[mode].length ? 'curva tarata sui tuoi dati' : 'curva standard da letteratura (' + (mode==='walk'?'cammino':'corsa') + ' non tarato)');
+    $('calMode').textContent = mode === 'walk' ? 'cammino' : 'corsa';
+    ['walk','run'].forEach(m => {
+      const box = $(m === 'walk' ? 'calWalk' : 'calRun'); box.innerHTML = '';
+      if (!S.cal[m].length) { box.innerHTML = '<div class="cal-item" style="opacity:.6">Nessun punto</div>'; return; }
+      S.cal[m].slice().sort((a,b)=>a[0]-b[0]).forEach(p => {
+        const row = document.createElement('div'); row.className = 'cal-item';
+        row.innerHTML = '<span>' + fmt(p[0],1) + ' km/h → ' + fmt(p[1]) + ' spm</span>';
+        const del = document.createElement('button'); del.type = 'button'; del.textContent = 'Rimuovi';
+        del.addEventListener('click', () => { S.cal[m] = S.cal[m].filter(x => x !== p); save(); render(); });
+        row.appendChild(del); box.appendChild(row);
+      });
+    });
+  }
+
+  const on = (id, ev, fn) => $(id).addEventListener(ev, () => { fn(); save(); render(); });
+  on('tabGoal','click', () => S.tab = 'goal');
+  on('tabFree','click', () => S.tab = 'free');
+  on('mWalk','click', () => S.mode = 'walk');
+  on('mRun','click', () => S.mode = 'run');
+  on('spSl','input', () => S.speed[S.mode] = num($('spSl')));
+  on('spNum','input', () => { const v = num($('spNum')); if (v > 0) S.speed[S.mode] = v; });
+  on('spNum','blur', () => {});
+  on('today','input', () => { S.today = Math.max(0, Math.round(num($('today')))); S.todayDate = todayStr(); });
+  on('target','input', () => S.target = Math.max(0, Math.round(num($('target')))));
+  on('durSl','input', () => S.dur = num($('durSl')));
+  on('durNum','input', () => S.dur = Math.max(0, Math.round(num($('durNum')))));
+  on('calAdd','click', () => {
+    const v = num($('calV')), c = num($('calC'));
+    if (v >= 1 && v <= 20 && c >= 40 && c <= 230) {
+      S.cal[S.mode] = S.cal[S.mode].filter(p => Math.abs(p[0] - v) > 0.05); // stesso punto: sostituisce
+      S.cal[S.mode].push([v, Math.round(c)]); $('calV').value = ''; $('calC').value = '';
+    }
+  });
+  $('calPill').addEventListener('click', () => { const d = $('calCard'); d.open = true; d.scrollIntoView({behavior:'smooth'}); });
+  // la velocità digitata a mano si normalizza solo all'uscita dal campo, non mentre scrivi
+  $('spNum').addEventListener('focus', e => e.target.select());
+  ['today','target','durNum'].forEach(id => $(id).addEventListener('focus', e => e.target.select()));
+
+  save(); render();
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>

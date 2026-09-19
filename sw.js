@@ -1,5 +1,5 @@
 /* Step Teller — service worker. A ogni rilascio incrementare CACHE. */
-const CACHE = 'stepteller-v3.0';
+const CACHE = 'stepteller-v4.0';
 const ASSETS = ['./', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {

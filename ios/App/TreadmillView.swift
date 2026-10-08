@@ -12,7 +12,7 @@ struct TreadmillView: View {
     @State private var clock = BeltClock()
 
     /// Dimensione della foto ritagliata (pixel): le coordinate sotto sono in questo spazio.
-    private static let imageSize = CGSize(width: 843, height: 718)
+    private static let imageSize = CGSize(width: 843, height: 717)
     /// Angoli del nastro nella foto: dietro-sinistra, dietro-destra, davanti-destra, davanti-sinistra.
     private static let belt: [CGPoint] = [
         CGPoint(x: 150, y: 548), CGPoint(x: 585, y: 447), CGPoint(x: 705, y: 487), CGPoint(x: 225, y: 592)

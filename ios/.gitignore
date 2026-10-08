@@ -1,0 +1,7 @@
+build/
+*.xcodeproj
+.build/
+DerivedData/
+*.p8
+*.p12
+*.mobileprovision

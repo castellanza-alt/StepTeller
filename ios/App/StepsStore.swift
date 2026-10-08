@@ -50,10 +50,10 @@ final class StepsStore {
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
         #endif
         treadmillActive = liveActivity.isRunning
-        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
-        SharedStore.calibration = calibration
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
+        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.calibration = calibration
     }
 
     // MARK: derivati
@@ -170,8 +170,6 @@ final class StepsStore {
             liveActivity.start(plan: plan)
         }
         treadmillActive = liveActivity.isRunning
-        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
-        SharedStore.calibration = calibration
     }
 
     /// Tiene la Live Activity allineata a passi e velocità; la chiude a obiettivo chiuso.
@@ -179,8 +177,6 @@ final class StepsStore {
         guard liveActivity.isRunning else { treadmillActive = false; return }
         await liveActivity.update(plan: plan)
         treadmillActive = liveActivity.isRunning
-        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
-        SharedStore.calibration = calibration
     }
 
     // MARK: promemoria serale

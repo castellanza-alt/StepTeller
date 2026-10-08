@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 — in lavorazione
+## 0.4.0 — 8 ottobre 2026
 - Widget piccolo «Passi di oggi» (tema scuro): arco di 270° con i passi, avanzamento e, nell'apertura, i minuti a piedi
   che mancano stimati a 4 km/h; stato «Fatto» a obiettivo chiuso. Legge Salute direttamente; a telefono bloccato usa
   l'ultimo valore salvato dall'app (App Group `group.it.castellanza.stepteller`, anche per obiettivo e taratura).

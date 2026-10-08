@@ -49,7 +49,7 @@ struct StepsWidgetView: View {
     private var content: some View {
         ZStack(alignment: .topLeading) {
             ring
-            if done { doneCenter } else { stepsCenter; minutesBlock }
+            if done { doneCenter } else { stepsCenter; if plan != nil { minutesBlock } }
         }
     }
 

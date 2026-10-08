@@ -92,10 +92,17 @@ def bootstrap():
     if 'HEALTH_KIT' in caps:
         lines.append('- ✅ Capability HealthKit già attiva')
     else:
-        call('POST', '/v1/bundleIdCapabilities', body={'data': {
-            'type': 'bundleIdCapabilities', 'attributes': {'capabilityType': 'HEALTH_KIT'},
-            'relationships': {'bundleId': {'data': {'type': 'bundleIds', 'id': bundle['id']}}}}})
-        lines.append('- ✅ Capability HealthKit abilitata ora')
+        # HealthKit non è tra i tipi di capability dell'API: si abilita dal portale oppure la
+        # sincronizza Xcode (firma automatica) dall'entitlement. Qui si tenta e, se l'API rifiuta,
+        # si segnala senza fermarsi.
+        try:
+            call('POST', '/v1/bundleIdCapabilities', body={'data': {
+                'type': 'bundleIdCapabilities', 'attributes': {'capabilityType': 'HEALTH_KIT'},
+                'relationships': {'bundleId': {'data': {'type': 'bundleIds', 'id': bundle['id']}}}}})
+            lines.append('- ✅ Capability HealthKit abilitata ora')
+        except RuntimeError:
+            lines.append('- ⚠️ HealthKit non attivabile via API: la firma automatica prova ad abilitarla; '
+                         'se la build si ferma qui, va spuntata a mano nel portale (App ID → HealthKit).')
     # 3. record dell'app (si crea solo dal sito web)
     if app_record():
         lines.append(f'- ✅ Record app «{APP_NAME}» presente in App Store Connect')

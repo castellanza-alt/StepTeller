@@ -44,9 +44,9 @@ wshot zero 0
 wshot nodati ""
 hshot() { # nome tab periodo [sheet]
   xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
-  extra=()
-  [ "${4:-}" = "sheet" ] && extra=(-stepteller.debugSheet 1)
-  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps 7200 -stepteller.debugHistory 1 -stepteller.debugTab "$2" -stepteller.debugPeriod "$3" -stepteller.speed 6.0 -stepteller.goal 10000 "${extra[@]}" >/dev/null
+  extra=""
+  [ "${4:-}" = "sheet" ] && extra="-stepteller.debugSheet 1"
+  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps 7200 -stepteller.debugHistory 1 -stepteller.debugTab "$2" -stepteller.debugPeriod "$3" -stepteller.speed 6.0 -stepteller.goal 10000 $extra >/dev/null
   sleep 5
   xcrun simctl io "$UDID" screenshot "$OUT/$1.png"
 }

@@ -41,6 +41,10 @@ final class StepsStore {
         speed = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, (v * 10).rounded() / 10))
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
+        #if DEBUG
+        // Screenshot sul simulatore: niente richiesta di permesso notifiche sopra l'interfaccia.
+        if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
+        #endif
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
     }

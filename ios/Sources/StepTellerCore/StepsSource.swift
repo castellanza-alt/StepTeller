@@ -9,8 +9,10 @@ public protocol StepsProvider: Sendable {
     /// Passi dall'inizio di `day` fino a `now`. `nil` = nessun campione o errore
     /// (iOS non distingue «nessun dato» da «permesso negato»).
     func steps(from startOfDay: Date, to now: Date) async -> Int?
-    /// Chiamata ogni volta che Salute riceve nuovi passi (solo in primo piano).
-    func observe(_ onChange: @escaping @Sendable () -> Void) async
+    /// Chiamata ogni volta che Salute riceve nuovi passi, anche con l'app in background
+    /// (Salute risveglia l'app al massimo ogni ora). L'adattatore segnala a iOS la fine del lavoro
+    /// solo dopo che `onChange` è terminata.
+    func observe(_ onChange: @escaping @Sendable () async -> Void) async
     func stopObserving() async
 }
 

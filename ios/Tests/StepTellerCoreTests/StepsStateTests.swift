@@ -4,11 +4,11 @@ import XCTest
 private final class FakeProvider: StepsProvider, @unchecked Sendable {
     var available = true
     var value: Int?
-    var handler: (@Sendable () -> Void)?
+    var handler: (@Sendable () async -> Void)?
     var isAvailable: Bool { available }
     func requestAccess() async {}
     func steps(from startOfDay: Date, to now: Date) async -> Int? { value }
-    func observe(_ onChange: @escaping @Sendable () -> Void) async { handler = onChange }
+    func observe(_ onChange: @escaping @Sendable () async -> Void) async { handler = onChange }
     func stopObserving() async { handler = nil }
 }
 

@@ -58,6 +58,11 @@ public struct CadenceModel: Sendable {
 
     public func gait(at speed: Double) -> Gait { speed >= Self.runFrom ? .run : .walk }
 
+    /// Cadenza della curva standard (senza taratura) alla velocità `speed`.
+    static func baseCadence(at speed: Double) -> Double {
+        Self.interp(speed >= runFrom ? defaultRun : defaultWalk, speed)
+    }
+
     /// Cadenza in passi/min alla velocità `speed` (km/h).
     public func cadence(at speed: Double) -> Double {
         let g = gait(at: speed)

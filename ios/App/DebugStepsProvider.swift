@@ -11,7 +11,7 @@ final class DebugStepsProvider: StepsProvider, @unchecked Sendable {
     var isAvailable: Bool { true }
     func requestAccess() async {}
     func steps(from startOfDay: Date, to now: Date) async -> Int? { value }
-    func observe(_ onChange: @escaping @Sendable () -> Void) async {}
+    func observe(_ onChange: @escaping @Sendable () async -> Void) async {}
     func stopObserving() async {}
 }
 #endif

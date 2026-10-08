@@ -8,6 +8,7 @@ struct ContentView: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.scenePhase) private var scenePhase
     @FocusState private var focus: Field?
+    @State private var showReminder = false
 
     @ScaledMetric(relativeTo: .caption2) private var labelSize: CGFloat = 11
 
@@ -35,9 +36,10 @@ struct ContentView: View {
         .onChange(of: scenePhase) { _, phase in
             Task {
                 if phase == .active { await store.becameActive() }
-                else if phase == .background { await store.becameInactive() }
+                else if phase == .background { store.becameInactive() }
             }
         }
+        .sheet(isPresented: $showReminder) { ReminderSheet() }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
@@ -54,6 +56,14 @@ struct ContentView: View {
                 .font(.system(size: 11, weight: .semibold)).tracking(11 * 0.34)
                 .foregroundStyle(Theme.soft)
             Spacer()
+            Button { showReminder = true } label: {
+                Image(systemName: store.reminderEnabled ? "bell.fill" : "bell")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Theme.soft)
+                    .padding(.horizontal, 10).padding(.vertical, 6)
+            }
+            .accessibilityLabel("Promemoria serale")
+            .accessibilityValue(store.reminderEnabled ? "attivo" : "spento")
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 Text("OBIETTIVO")
                     .font(.system(size: 11, weight: .semibold)).tracking(11 * 0.18)
@@ -235,7 +245,7 @@ struct ContentView: View {
     // MARK: riga finale
 
     private var footer: some View {
-        Text((store.plan.gait == .run ? "corsa tarata sulle tue corse · set 2026" : "cammino · curva standard").uppercased())
+        Text(store.calibrationNote.uppercased())
             .font(.system(size: 10)).tracking(10 * 0.14)
             .foregroundStyle(Theme.faint)
             .frame(maxWidth: .infinity)

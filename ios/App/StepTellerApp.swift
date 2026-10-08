@@ -21,6 +21,7 @@ struct StepTellerApp: App {
             return StepsStore(provider: DebugStepsProvider(value: n))
         }
         #endif
-        return StepsStore(provider: HealthKitStepsProvider())
+        let health = HealthKitStepsProvider()
+        return StepsStore(provider: health, workouts: health)
     }
 }

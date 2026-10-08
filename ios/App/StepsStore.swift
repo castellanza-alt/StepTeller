@@ -2,68 +2,106 @@ import Foundation
 import Observation
 import StepTellerCore
 
-/// Stato dell'app: obiettivo e velocità (persistiti in UserDefaults) e passi di oggi (mai
-/// persistiti: si rileggono da Salute).
+/// Stato dell'app: obiettivo, velocità, promemoria e taratura (persistiti in UserDefaults) e passi
+/// di oggi (mai persistiti: si rileggono da Salute).
 @MainActor
 @Observable
 final class StepsStore {
-    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal) } }
-    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed) } }
+    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); Task { await updateReminders() } } }
+    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders() } } }
+    /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
+    var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
+    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
     private(set) var state = StepsState()
+    private(set) var calibration: CalibrationResult
 
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let controller: StepsController
+    @ObservationIgnored private let workouts: (any WorkoutsProvider)?
+    @ObservationIgnored private let scheduler = ReminderScheduler()
     @ObservationIgnored private var dayTask: Task<Void, Never>?
+    @ObservationIgnored private var lastCalibration: Date?
+    @ObservationIgnored private var observing = false
 
     private enum Keys {
         static let goal = "stepteller.goal"
         static let speed = "stepteller.speed"
+        static let reminderOn = "stepteller.reminder.on"
+        static let reminderTime = "stepteller.reminder.minutes"
+        static let calibration = "stepteller.calibration.v1"
     }
 
-    init(provider: any StepsProvider, defaults: UserDefaults = .standard) {
+    init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil, defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        self.workouts = workouts
         controller = StepsController(provider: provider)
         // `integer/double(forKey:)` leggono anche i valori passati come argomenti di avvio (stringhe).
         goal = max(0, defaults.object(forKey: Keys.goal) != nil ? defaults.integer(forKey: Keys.goal) : 10_000)
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : 6.0
         speed = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, (v * 10).rounded() / 10))
+        reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
+        reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
+        // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
+        calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
     }
 
     // MARK: derivati
 
+    /// Modello di cadenza: taratura automatica se disponibile, altrimenti quella manuale di `Calibration`.
+    var model: CadenceModel {
+        CadenceModel(walkCalibration: calibration.walk.isEmpty ? Calibration.walk : calibration.walkPoints,
+                     runCalibration: calibration.run.isEmpty ? Calibration.run : calibration.runPoints)
+    }
     var steps: Int { state.steps }
-    var plan: Plan { Plan(goal: goal, steps: steps, speed: speed) }
+    var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
     var showsNoDataWarning: Bool { state.showsNoDataWarning }
     var hasOverride: Bool { state.override != nil }
     var lastUpdate: Date? { state.lastUpdate }
 
+    /// Riga finale: da dove viene la curva usata per l'andatura corrente.
+    var calibrationNote: String {
+        if plan.gait == .run {
+            if calibration.runWorkouts > 0 { return "corsa tarata su \(calibration.runWorkouts) tue uscite · ultimi 90 giorni" }
+            return Calibration.run.isEmpty ? "corsa · curva standard" : "corsa tarata sulle tue corse · set 2026"
+        }
+        if calibration.walkWorkouts > 0 { return "cammino tarato su \(calibration.walkWorkouts) tue uscite · ultimi 90 giorni" }
+        return Calibration.walk.isEmpty ? "cammino · curva standard" : "cammino tarato sulle tue camminate"
+    }
+
     // MARK: ciclo di vita
 
-    /// Primo avvio: permesso, lettura, osservazione in tempo reale.
+    /// Primo avvio: permesso Salute, lettura, osservazione, taratura, promemoria.
     func start() async {
         await controller.provider.requestAccess()
         await refresh()
-        await controller.provider.observe { [weak self] in
-            Task { @MainActor in await self?.refresh() }
-        }
+        await startObserving()
         startDayWatcher()
+        await refreshCalibration(force: true)
+        if reminderEnabled { _ = await scheduler.requestIfNeeded() }
+        await updateReminders()
     }
 
     /// App in primo piano (anche ritorno da background).
     func becameActive() async {
         await refresh()
-        await controller.provider.observe { [weak self] in
-            Task { @MainActor in await self?.refresh() }
-        }
         startDayWatcher()
+        await refreshCalibration(force: false)
     }
 
-    /// App in background: nessun aggiornamento (niente background delivery nella v1).
-    func becameInactive() async {
-        await controller.provider.stopObserving()
+    func becameInactive() {
         dayTask?.cancel()
         dayTask = nil
+    }
+
+    /// Un solo osservatore per tutta la vita dell'app: in primo piano aggiorna il numero, in
+    /// background (consegna oraria di Salute) ricalcola il promemoria.
+    private func startObserving() async {
+        guard !observing else { return }
+        observing = true
+        await controller.provider.observe { [weak self] in
+            await self?.refresh()
+        }
     }
 
     /// Rilegge Salute. Tre passi separati: nessuno stato resta «preso» durante l'attesa.
@@ -75,17 +113,51 @@ final class StepsStore {
         guard canRead else { return }
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
+        await updateReminders()
     }
 
     // MARK: passi manuali
 
     func setManualSteps(_ value: Int) {
         state.setManual(value, at: Date(), calendar: controller.calendar)
+        Task { await updateReminders() }
     }
 
     func useHealth() async {
         state.useHealth()
         await refresh()
+    }
+
+    // MARK: taratura automatica
+
+    /// Ricalcola i punti dagli allenamenti degli ultimi 90 giorni (al massimo una volta all'ora).
+    func refreshCalibration(force: Bool) async {
+        guard let workouts else { return }
+        if !force, let last = lastCalibration, Date().timeIntervalSince(last) < 3600 { return }
+        lastCalibration = Date()
+        let since = Date().addingTimeInterval(-Double(AutoCalibration.windowDays) * 86_400)
+        let samples = await workouts.workouts(since: since)
+        // Nessun allenamento letto (permesso negato o vuoto): si tiene la taratura precedente.
+        guard !samples.isEmpty else { return }
+        let result = AutoCalibration.compute(from: samples, now: Date())
+        calibration = result
+        if let data = try? JSONEncoder().encode(result) { defaults.set(data, forKey: Keys.calibration) }
+        await updateReminders()
+    }
+
+    // MARK: promemoria serale
+
+    private func reminderSettingsChanged() async {
+        if reminderEnabled { _ = await scheduler.requestIfNeeded() }
+        await updateReminders()
+    }
+
+    /// Riprogramma le notifiche con i minuti attuali (oggi preciso, giorni successivi generici).
+    func updateReminders() async {
+        guard reminderEnabled else { await scheduler.cancelAll(); return }
+        let requests = ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
+                                                plan: plan, calendar: controller.calendar)
+        await scheduler.apply(requests)
     }
 
     // MARK: cambio di giorno

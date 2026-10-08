@@ -87,11 +87,11 @@ struct ContentView: View {
                 if p.isDone {
                     Text("Fatto")
                         .font(.system(size: doneSize, weight: .light)).tracking(-0.04 * doneSize)
-                        .frame(height: doneSize * 1.25)
+                        .padding(.vertical, doneSize * 0.03)
                 } else {
                     Text(ItalianFormat.integer(p.minutes))
                         .font(.system(size: big, weight: .ultraLight)).tracking(-0.06 * big)
-                        .frame(height: big * 0.88)
+                        .padding(.vertical, -big * 0.155)   // interlinea 0,88 come nel CSS
                     Text("min")
                         .font(.system(size: 17, weight: .medium)).tracking(17 * 0.02)
                         .foregroundStyle(Theme.soft)
@@ -154,7 +154,7 @@ struct ContentView: View {
             stepsBlock
             VStack(spacing: 0) {
                 HStack(alignment: .firstTextBaseline) {
-                    Text("VELOCITÀ · \(Text(p.gait.label).foregroundStyle(Theme.accent))")
+                    Text("VELOCITÀ · \(Text(p.gait.label.uppercased()).foregroundStyle(Theme.accent))")
                         .font(.system(size: labelSize, weight: .semibold)).tracking(labelSize * 0.24)
                         .foregroundStyle(Theme.soft)
                     Spacer(minLength: 16)

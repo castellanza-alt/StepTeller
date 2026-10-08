@@ -46,10 +46,12 @@ jobs:
         run: xcodegen generate
       - name: Compila per simulatore (Debug)
         working-directory: ios
-        run: >-
-          xcodebuild -project StepTeller.xcodeproj -scheme StepTeller -configuration Debug
-          -sdk iphonesimulator -destination 'generic/platform=iOS Simulator'
-          -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build
+        run: |
+          set -o pipefail
+          xcodebuild -project StepTeller.xcodeproj -scheme StepTeller -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build > build.log 2>&1 \
+            || { echo "::error::Build fallita; errori:"; grep -E "error:" build.log | sort -u | head -30; exit 1; }
       - name: Screenshot chiaro e scuro
         working-directory: ios
         run: bash scripts/screenshots.sh build/DerivedData/Build/Products/Debug-iphonesimulator/StepTeller.app build/screenshots

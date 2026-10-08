@@ -24,4 +24,12 @@ final class ReminderTests: XCTestCase {
         XCTAssertEqual(late.count, 6)
         XCTAssertEqual(late[0].id, "stepteller.reminder.2026-10-09")
     }
+
+    func testStreakWarningsInText() {
+        let plan = Plan(goal: 10_000, steps: 7_200, speed: 6)
+        var st = StreakState(); st.streak = 22; st.jolly = 3; st.todayWouldUseJolly = true
+        XCTAssertTrue(ReminderPlanner.content(for: plan, streak: st)!.body.hasSuffix("stasera usi un Jolly (ne restano 2)."))
+        st.todayWouldUseJolly = false; st.jolly = 0; st.todayWouldBreak = true
+        XCTAssertTrue(ReminderPlanner.content(for: plan, streak: st)!.body.hasSuffix("la streak di 22 giorni si interrompe."))
+    }
 }

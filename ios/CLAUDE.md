@@ -6,5 +6,6 @@
 - Nessun Mac: si compila e si distribuisce solo da GitHub Actions (`.github/workflows/ios-*.yml`). Linux può fare `swift test`.
 - Repo pubblico: nessun segreto/profilo/chiave nel repo. Segreti solo `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`.
 - Non toccare i file in radice (web app) né il repo `diario-alimentare` (briciola.).
+- Streak, Jolly e statistiche sono funzioni pure in `StepTellerCore` (`StreakEngine`, `HistoryStats`, `GoalHistory`): si calcolano dai dati di Salute, non si salvano. Regole in `StreakEngine.swift`.
 - Il merge su `main` pubblica anche su Pages: chiederlo a Will, una volta, dopo la sua prova.
 - Salute: solo lettura passi, mai scrittura né rete. Il provider finto è solo `#if DEBUG`.

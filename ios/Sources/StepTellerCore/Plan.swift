@@ -15,6 +15,10 @@ public struct Plan: Sendable, Equatable {
 
     /// Obiettivo chiuso: stato «Fatto».
     public var isDone: Bool { remaining == 0 }
+    /// Avanzamento 0…1 (obiettivo 0 ⇒ 1).
+    public var progress: Double { goal > 0 ? min(1, Double(steps) / Double(goal)) : 1 }
+    /// Velocità di riferimento del widget: camminata normale, solo per dare un'idea di massima.
+    public static let glanceSpeed = 4.0
 
     public init(goal: Int, steps: Int, speed: Double, model: CadenceModel = .standard) {
         let v = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, speed))

@@ -5,7 +5,10 @@ import StepTellerCore
 
 @main
 struct StepTellerWidgets: WidgetBundle {
-    var body: some Widget { TreadmillLiveActivity() }
+    var body: some Widget {
+        StepsWidget()
+        TreadmillLiveActivity()
+    }
 }
 
 /// Live Activity sul Blocco schermo e nella Dynamic Island: minuti restanti con conto alla rovescia.

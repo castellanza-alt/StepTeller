@@ -43,6 +43,12 @@ public struct CalibrationResult: Sendable, Equatable, Codable {
         self.walk = walk; self.run = run; self.walkWorkouts = walkWorkouts; self.runWorkouts = runWorkouts
     }
 
+    /// Modello di cadenza: taratura automatica se c'è, altrimenti quella manuale di `Calibration`.
+    public var model: CadenceModel {
+        CadenceModel(walkCalibration: walk.isEmpty ? Calibration.walk : walkPoints,
+                     runCalibration: run.isEmpty ? Calibration.run : runPoints)
+    }
+
     public var walkPoints: [CalibrationPoint] { walk.map { CalibrationPoint(speed: $0.speed, cadence: $0.cadence) } }
     public var runPoints: [CalibrationPoint] { run.map { CalibrationPoint(speed: $0.speed, cadence: $0.cadence) } }
 }

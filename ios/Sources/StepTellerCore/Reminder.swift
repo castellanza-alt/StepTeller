@@ -16,10 +16,17 @@ public struct ReminderRequest: Sendable, Equatable {
 /// Promemoria serale: decide cosa programmare. Nessuna dipendenza da UserNotifications (testabile).
 public enum ReminderPlanner {
     /// Testo preciso con i minuti di stasera; `nil` se l'obiettivo è già chiuso.
-    public static func content(for plan: Plan) -> ReminderContent? {
+    public static func content(for plan: Plan, streak: StreakState? = nil) -> ReminderContent? {
         guard !plan.isDone else { return nil }
-        let body = "Ti servono \(plan.minutes) min a \(ItalianFormat.number(plan.speed, decimals: 1)) km/h "
+        var body = "Ti servono \(plan.minutes) min a \(ItalianFormat.number(plan.speed, decimals: 1)) km/h "
             + "per chiudere i \(ItalianFormat.integer(plan.goal)) passi (mancano \(ItalianFormat.integer(plan.remaining)))."
+        if let streak {
+            if streak.todayWouldUseJolly {
+                body += " Se non chiudi, stasera usi un Jolly (ne restano \(streak.jolly - 1))."
+            } else if streak.todayWouldBreak {
+                body += " Senza Jolly, la streak di \(streak.streak) giorni si interrompe."
+            }
+        }
         return ReminderContent(title: "Minuti sul tappeto", body: body)
     }
 
@@ -31,7 +38,7 @@ public enum ReminderPlanner {
     /// Notifiche da programmare per i prossimi `days` giorni (oggi compreso).
     /// - Oggi: testo preciso, solo se l'ora è ancora nel futuro e l'obiettivo non è chiuso.
     /// - Giorni successivi: testo generico (verrà sostituito dal preciso quando quel giorno sarà «oggi»).
-    public static func schedule(now: Date, minutesFromMidnight: Int, plan: Plan,
+    public static func schedule(now: Date, minutesFromMidnight: Int, plan: Plan, streak: StreakState? = nil,
                                 calendar: Calendar, days: Int = 7) -> [ReminderRequest] {
         let hour = minutesFromMidnight / 60, minute = minutesFromMidnight % 60
         var result: [ReminderRequest] = []
@@ -39,7 +46,7 @@ public enum ReminderPlanner {
             guard let day = calendar.date(byAdding: .day, value: offset, to: now),
                   let fire = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: day),
                   fire > now else { continue }
-            let content = offset == 0 ? Self.content(for: plan) : Self.genericContent()
+            let content = offset == 0 ? Self.content(for: plan, streak: streak) : Self.genericContent()
             guard let content else { continue }
             let parts = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
             let id = String(format: "stepteller.reminder.%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)

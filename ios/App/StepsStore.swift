@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import WidgetKit
 import StepTellerCore
 
 /// Stato dell'app: obiettivo, velocità, promemoria e taratura (persistiti in UserDefaults) e passi
@@ -7,12 +8,14 @@ import StepTellerCore
 @MainActor
 @Observable
 final class StepsStore {
-    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); Task { await updateReminders() } } }
+    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); SharedStore.goal = goal; history.recordGoal(goal); WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
     var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders(); await syncActivity() } } }
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
     var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
     private(set) var state = StepsState()
+    /// Storico, streak e Jolly.
+    let history: HistoryStore
     private(set) var calibration: CalibrationResult
     /// Live Activity del tappeto in corso.
     private(set) var treadmillActive = false
@@ -34,12 +37,17 @@ final class StepsStore {
         static let calibration = "stepteller.calibration.v1"
     }
 
-    init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil, defaults: UserDefaults = .standard) {
+    init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
+         historyProvider: (any HistoryProvider)? = nil, streakStartOverride: Date? = nil,
+         defaults: UserDefaults = .standard) {
         self.defaults = defaults
         self.workouts = workouts
         controller = StepsController(provider: provider)
         // `integer/double(forKey:)` leggono anche i valori passati come argomenti di avvio (stringhe).
-        goal = max(0, defaults.object(forKey: Keys.goal) != nil ? defaults.integer(forKey: Keys.goal) : 10_000)
+        let initialGoal = max(0, defaults.object(forKey: Keys.goal) != nil ? defaults.integer(forKey: Keys.goal) : 10_000)
+        goal = initialGoal
+        history = HistoryStore(provider: historyProvider, currentGoal: initialGoal, defaults: defaults,
+                               streakStartOverride: streakStartOverride)
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : 6.0
         speed = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, (v * 10).rounded() / 10))
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
@@ -51,15 +59,14 @@ final class StepsStore {
         treadmillActive = liveActivity.isRunning
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
+        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.calibration = calibration
     }
 
     // MARK: derivati
 
     /// Modello di cadenza: taratura automatica se disponibile, altrimenti quella manuale di `Calibration`.
-    var model: CadenceModel {
-        CadenceModel(walkCalibration: calibration.walk.isEmpty ? Calibration.walk : calibration.walkPoints,
-                     runCalibration: calibration.run.isEmpty ? Calibration.run : calibration.runPoints)
-    }
+    var model: CadenceModel { calibration.model }
     var steps: Int { state.steps }
     var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
@@ -86,6 +93,8 @@ final class StepsStore {
         await startObserving()
         startDayWatcher()
         await refreshCalibration(force: true)
+        await history.refresh()
+        await updateReminders()
         if reminderEnabled { _ = await scheduler.requestIfNeeded() }
         await updateReminders()
     }
@@ -95,6 +104,7 @@ final class StepsStore {
         await refresh()
         startDayWatcher()
         await refreshCalibration(force: false)
+        await history.refresh()
     }
 
     func becameInactive() {
@@ -121,6 +131,9 @@ final class StepsStore {
         guard canRead else { return }
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
+        if let value { SharedStore.saveSteps(value) }      // copia per il widget a telefono bloccato
+        WidgetCenter.shared.reloadAllTimelines()
+        await history.refresh(minInterval: 20)       // oggi nello storico e nella streak
         await updateReminders()
         await syncActivity()
     }
@@ -150,6 +163,8 @@ final class StepsStore {
         guard !samples.isEmpty else { return }
         let result = AutoCalibration.compute(from: samples, now: Date())
         calibration = result
+        SharedStore.calibration = result
+        WidgetCenter.shared.reloadAllTimelines()
         if let data = try? JSONEncoder().encode(result) { defaults.set(data, forKey: Keys.calibration) }
         await updateReminders()
     }
@@ -186,7 +201,7 @@ final class StepsStore {
     func updateReminders() async {
         guard reminderEnabled else { await scheduler.cancelAll(); return }
         let requests = ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
-                                                plan: plan, calendar: controller.calendar)
+                                                plan: plan, streak: history.streak, calendar: controller.calendar)
         await scheduler.apply(requests)
     }
 

@@ -14,7 +14,7 @@ struct TreadmillView: View {
     private static let imageSize = CGSize(width: 843, height: 717)
     /// Angoli del nastro nella foto: dietro-sinistra, dietro-destra, davanti-destra, davanti-sinistra.
     private static let belt: [CGPoint] = [
-        CGPoint(x: 150, y: 548), CGPoint(x: 585, y: 447), CGPoint(x: 705, y: 487), CGPoint(x: 225, y: 592)
+        CGPoint(x: 86, y: 580), CGPoint(x: 563, y: 496), CGPoint(x: 700, y: 545), CGPoint(x: 157, y: 640)
     ]
     private static let stripes = 14
 

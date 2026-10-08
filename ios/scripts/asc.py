@@ -5,6 +5,8 @@ Comandi
 -------
 bootstrap   Verifica la chiave API, registra il Bundle ID `it.castellanza.stepteller` con la
             capability HealthKit se manca e controlla che esista il record dell'app.
+certs       Revoca i certificati creati dalla firma automatica via API («Created via API»): su un runner
+            effimero la chiave privata si perde a fine job, quindi non servono più e Apple ne ammette pochi.
 distribute  Dopo l'upload: aspetta che Apple elabori la build in BUILD_NUMBER, imposta la
             conformità crittografica se serve e aggiunge la build al gruppo interno «Personale».
 
@@ -114,6 +116,23 @@ def bootstrap():
         raise RuntimeError('Record app mancante in App Store Connect')
 
 
+def certs():
+    """Libera i certificati di Xcode creati via API (mai quelli creati a mano o da un Mac)."""
+    revoked, kept = 0, 0
+    while True:
+        data = call('GET', '/v1/certificates', params={'limit': 200})['data']
+        mine = [c for c in data if 'created via api' in str(c['attributes'].get('name', '')).lower()]
+        kept = len(data) - len(mine)
+        if not mine:
+            break
+        for c in mine:
+            call('DELETE', '/v1/certificates/' + c['id'])
+            revoked += 1
+        if revoked > 200:
+            break
+    summary(f'## Certificati\n- Revocati {revoked} certificati creati via API; altri certificati lasciati: {kept}')
+
+
 def distribute():
     build_number = os.environ['BUILD_NUMBER'].strip()
     app = app_record()
@@ -154,7 +173,7 @@ def distribute():
 
 if __name__ == '__main__':
     try:
-        {'bootstrap': bootstrap, 'distribute': distribute}[sys.argv[1]]()
+        {'bootstrap': bootstrap, 'certs': certs, 'distribute': distribute}[sys.argv[1]]()
     except Exception as error:  # noqa: BLE001
         print('::error::' + str(error)[:500])
         sys.exit(1)

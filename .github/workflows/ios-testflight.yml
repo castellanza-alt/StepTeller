@@ -30,6 +30,13 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
         run: python3 ios/scripts/asc.py bootstrap
+      - name: Libera i certificati creati dalla firma automatica
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[testflight]')
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+        run: python3 ios/scripts/asc.py certs
 
   nucleo:
     name: Nucleo (Linux)

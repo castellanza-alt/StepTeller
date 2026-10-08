@@ -8,7 +8,6 @@ struct TreadmillView: View {
     let moving: Bool
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.colorScheme) private var scheme
     @State private var clock = BeltClock()
 
     /// Dimensione della foto ritagliata (pixel): le coordinate sotto sono in questo spazio.
@@ -25,7 +24,6 @@ struct TreadmillView: View {
             ZStack {
                 Image("Treadmill")
                     .resizable().scaledToFit()
-                    .brightness(scheme == .dark ? 0.10 : 0)     // sul fondo scuro il nero si perderebbe
                 Canvas { ctx, size in
                     drawBelt(&ctx, size: size, phase: phase)
                 }

@@ -1,11 +1,14 @@
 # Firma, carica su TestFlight e assegna la build al gruppo «Personale».
-# Si avvia con un tag `ios-v*` (es. ios-v0.1.0) oppure a mano (dopo il merge su main).
+# Si avvia con un push su `ios-nativa` il cui messaggio di commit contiene:
+#   [apple]       solo preparazione Apple (chiave, Bundle ID, HealthKit, record app)
+#   [testflight]  preparazione + build + upload + assegnazione a «Personale»
+# oppure a mano (workflow_dispatch, disponibile dopo il merge su main).
 # I segreti sono usati solo qui; mai su pull request. Il repository è pubblico: nessun
 # segreto, profilo o chiave deve entrare nel codice.
 name: iOS TestFlight
 on:
   push:
-    tags: ['ios-v*']
+    branches: [ios-nativa]
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,6 +18,7 @@ concurrency:
 jobs:
   prepara:
     name: Verifica Apple (Linux)
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[apple]') || contains(github.event.head_commit.message, '[testflight]')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -29,6 +33,7 @@ jobs:
 
   nucleo:
     name: Nucleo (Linux)
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[testflight]')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     container:
@@ -41,6 +46,7 @@ jobs:
   testflight:
     name: Archivia e carica (macOS)
     needs: [prepara, nucleo]
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[testflight]')
     runs-on: macos-15
     timeout-minutes: 45
     outputs:

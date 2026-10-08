@@ -32,7 +32,7 @@ Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli scree
 
 - `.github/workflows/ios-verifica.yml` — su PR e push a `ios-nativa` quando cambia `ios/**`: `swift test` (Linux),
   build simulatore + test + screenshot chiaro/scuro (artefatto `screenshot-simulatore`).
-- `.github/workflows/ios-testflight.yml` — con tag `ios-v*` (o avvio manuale): verifica Apple, firma automatica con
+- `.github/workflows/ios-testflight.yml` — con un push su `ios-nativa` il cui messaggio contiene `[apple]` (solo preparazione Apple) o `[testflight]` (build completa); avvio manuale dopo il merge: verifica Apple, firma automatica con
   chiave API, upload, assegnazione al gruppo «Personale». Numero di build `1.<run_number>.<run_attempt>`.
 
 Segreti Actions (solo nomi): `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`. Il repository è pubblico: **mai**
@@ -40,5 +40,5 @@ chiavi, profili o certificati nel codice.
 
 ## Distribuzione
 
-Tag `ios-v0.1.0` sul ramo → build su TestFlight → Will aggiorna dall'app TestFlight. La versione di marketing è in
+Commit con `[testflight]` sul ramo → build su TestFlight → Will aggiorna dall'app TestFlight. La versione di marketing è in
 `project.yml` (`MARKETING_VERSION`).

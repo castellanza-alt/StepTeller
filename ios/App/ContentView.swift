@@ -224,6 +224,7 @@ struct ContentView: View {
             Text("Nessun dato da Salute. Controlla Salute → Condivisione → App → Step Teller")
                 .font(.system(size: 12)).foregroundStyle(Theme.soft)
                 .multilineTextAlignment(.trailing)
+                .fixedSize(horizontal: false, vertical: true)
             Button("Apri Impostazioni") {
                 if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
             }

@@ -9,7 +9,7 @@
   e salva la streak senza farla crescere (il conto dei 15 giorni riparte da 0). Nessun Jolly se la streak è a 0.
 - Obiettivo nelle Impostazioni (default 10.000), vale da oggi; lo storico degli obiettivi è conservato.
 - Il promemoria serale avvisa se stasera si usa un Jolly o se la streak si interrompe.
-- Ritaglio della foto del tappeto senza l'ombra grigia a terra.
+- Il tappeto è ora l'illustrazione scelta da Will (senza sfondo né ombra), con il nastro animato riallineato.
 
 ## 0.4.0 — 8 ottobre 2026
 - Widget piccolo «Passi di oggi» (tema scuro): arco di 270° con i passi, avanzamento e, nell'apertura, i minuti a piedi

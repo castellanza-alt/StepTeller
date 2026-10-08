@@ -1,0 +1,60 @@
+# Verifica iOS: nucleo su Linux (gratuito), poi build per simulatore su macOS con test e screenshot.
+# Parte solo se cambia ios/** (la web app in radice non la avvia). Nessun segreto, nessuna firma.
+name: iOS verifica
+on:
+  pull_request:
+    paths: ['ios/**', '.github/workflows/ios-verifica.yml']
+  push:
+    branches: [ios-nativa]
+    paths: ['ios/**', '.github/workflows/ios-verifica.yml']
+permissions:
+  contents: read
+concurrency:
+  group: ios-verifica-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  nucleo:
+    name: Nucleo (Linux, swift test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: swift:6.1.2-noble
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test del nucleo
+        working-directory: ios
+        run: swift test
+      - name: Icona valida (1024×1024, senza trasparenza)
+        run: python3 ios/scripts/check_icon.py || (apt-get update -qq && apt-get install -y -qq python3 && python3 ios/scripts/check_icon.py)
+
+  build:
+    name: Build simulatore e screenshot (macOS)
+    needs: nucleo
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Seleziona Xcode
+        run: bash ios/scripts/select_xcode.sh
+      - name: Installa XcodeGen
+        run: brew install xcodegen
+      - name: Test del nucleo su Darwin
+        working-directory: ios
+        run: swift test
+      - name: Genera progetto Xcode
+        working-directory: ios
+        run: xcodegen generate
+      - name: Compila per simulatore (Debug)
+        working-directory: ios
+        run: >-
+          xcodebuild -project StepTeller.xcodeproj -scheme StepTeller -configuration Debug
+          -sdk iphonesimulator -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build
+      - name: Screenshot chiaro e scuro
+        working-directory: ios
+        run: bash scripts/screenshots.sh build/DerivedData/Build/Products/Debug-iphonesimulator/StepTeller.app build/screenshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshot-simulatore
+          path: ios/build/screenshots/*.png
+          retention-days: 7

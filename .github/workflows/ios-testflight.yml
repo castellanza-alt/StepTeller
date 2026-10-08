@@ -114,7 +114,11 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         run: |
           ipa=$(ls "$GITHUB_WORKSPACE"/ios/build/TestFlight/*.ipa)
-          xcrun altool --upload-app --type ios --file "$ipa" --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
+          xcrun altool --upload-app --type ios --file "$ipa" --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID" 2>&1 | tee "$RUNNER_TEMP/altool.log"
+          # altool può uscire con 0 anche se Apple rifiuta il file: si controlla l'esito nel testo.
+          if grep -q "UPLOAD FAILED" "$RUNNER_TEMP/altool.log" || ! grep -q "UPLOAD SUCCEEDED" "$RUNNER_TEMP/altool.log"; then
+            echo "::error::Upload rifiutato da App Store Connect (vedi log sopra)"; exit 1
+          fi
       - name: Rimuovi la chiave dal runner
         if: always()
         run: rm -rf "$RUNNER_TEMP/private_keys"

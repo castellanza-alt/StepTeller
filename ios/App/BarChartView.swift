@@ -74,8 +74,9 @@ struct BarChartView: View {
                 Text(showLabel(b) ? b.label : "")
                     .font(.system(size: 10, weight: .semibold)).tracking(1)
                     .foregroundStyle(b.isCurrent ? Theme.accent : Theme.soft)
+                    .lineLimit(1)
+                    .fixedSize()                    // le etichette del mese sono più larghe della barra: non vanno ridotte
                     .frame(maxWidth: .infinity)
-                    .lineLimit(1).minimumScaleFactor(0.5)
             }
         }
     }

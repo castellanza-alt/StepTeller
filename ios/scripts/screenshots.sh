@@ -27,5 +27,20 @@ for theme in light dark; do
   shot fatto $theme 10450 6.0
   shot zero-10 $theme 0 10.0
 done
+wshot() { # nome passi (vuoto = dato non disponibile)
+  xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
+  if [ -n "$2" ]; then
+    xcrun simctl launch "$UDID" $BID -stepteller.debugWidget 1 -stepteller.debugSteps "$2" >/dev/null
+  else
+    xcrun simctl launch "$UDID" $BID -stepteller.debugWidget 1 >/dev/null
+  fi
+  sleep 3
+  xcrun simctl io "$UDID" screenshot "$OUT/widget-$1.png"
+}
+xcrun simctl ui "$UDID" appearance dark
+wshot parziale 7200
+wshot fatto 10450
+wshot zero 0
+wshot nodati ""
 xcrun simctl delete "$UDID"
 ls -la "$OUT"

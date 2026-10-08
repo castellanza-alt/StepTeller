@@ -7,8 +7,17 @@ struct StepTellerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(store)
+            Group {
+                #if DEBUG
+                if UserDefaults.standard.object(forKey: "stepteller.debugWidget") != nil {
+                    WidgetPreviewScreen()          // solo Debug: anteprima del widget per gli screenshot
+                } else {
+                    ContentView().environment(store)
+                }
+                #else
+                ContentView().environment(store)
+                #endif
+            }
         }
     }
 

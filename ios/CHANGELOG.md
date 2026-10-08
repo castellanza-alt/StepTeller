@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 — in lavorazione
+- Widget piccolo «Passi di oggi» (tema scuro): arco di 270° con i passi, avanzamento e, nell'apertura, i minuti a piedi
+  che mancano stimati a 4 km/h; stato «Fatto» a obiettivo chiuso. Legge Salute direttamente; a telefono bloccato usa
+  l'ultimo valore salvato dall'app (App Group `group.it.castellanza.stepteller`, anche per obiettivo e taratura).
+
 ## 0.2.0 — 8 ottobre 2026
 - Foto del Technogym di Will al posto del disegno, con il nastro animato sopra.
 - Taratura automatica da Salute: allenamenti di camminata/corsa degli ultimi 90 giorni (≥ 10 min, scarto degli anomali,

@@ -86,4 +86,13 @@ final class CadenceTests: XCTestCase {
         XCTAssertEqual(ItalianFormat.digits("7.200"), 7200)
         XCTAssertEqual(ItalianFormat.digits(""), 0)
     }
+
+    func testGlancePlanAtFourKmh() {
+        // widget: camminata a 4 km/h (101 passi/min), 7.200 su 10.000 → 28 min
+        let p = Plan(goal: 10_000, steps: 7_200, speed: Plan.glanceSpeed, model: CalibrationResult.empty.model)
+        XCTAssertEqual(p.minutes, 28)
+        XCTAssertEqual(p.progress, 0.72, accuracy: 1e-9)
+        XCTAssertEqual(Plan(goal: 0, steps: 0, speed: 4).progress, 1)
+        XCTAssertEqual(Plan(goal: 10_000, steps: 12_000, speed: 4).progress, 1)
+    }
 }

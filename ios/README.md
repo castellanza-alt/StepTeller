@@ -28,6 +28,12 @@ Solo lettura di `stepCount`, `HKStatisticsQuery` `.cumulativeSum` da mezzanotte 
 0 passi, fonte «manuale» e l'avviso con il pulsante per le Impostazioni. I passi non vengono mai salvati.
 Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli screenshot.
 
+## Widget
+
+`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (disegno, nello spazio dei
+mockup 340×340). Obiettivo e taratura arrivano dall'app via App Group (`Shared/SharedStore.swift`). I minuti usano
+`Plan.glanceSpeed` (4 km/h). In Debug `WidgetPreviewScreen` mostra il widget ingrandito per gli screenshot.
+
 ## CI
 
 - `.github/workflows/ios-verifica.yml` — su PR e push a `ios-nativa` quando cambia `ios/**`: `swift test` (Linux),

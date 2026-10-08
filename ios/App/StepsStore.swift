@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import WidgetKit
 import StepTellerCore
 
 /// Stato dell'app: obiettivo, velocità, promemoria e taratura (persistiti in UserDefaults) e passi
@@ -7,7 +8,7 @@ import StepTellerCore
 @MainActor
 @Observable
 final class StepsStore {
-    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); Task { await updateReminders() } } }
+    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); SharedStore.goal = goal; WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
     var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders(); await syncActivity() } } }
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
@@ -49,6 +50,8 @@ final class StepsStore {
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
         #endif
         treadmillActive = liveActivity.isRunning
+        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.calibration = calibration
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
     }
@@ -56,10 +59,7 @@ final class StepsStore {
     // MARK: derivati
 
     /// Modello di cadenza: taratura automatica se disponibile, altrimenti quella manuale di `Calibration`.
-    var model: CadenceModel {
-        CadenceModel(walkCalibration: calibration.walk.isEmpty ? Calibration.walk : calibration.walkPoints,
-                     runCalibration: calibration.run.isEmpty ? Calibration.run : calibration.runPoints)
-    }
+    var model: CadenceModel { calibration.model }
     var steps: Int { state.steps }
     var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
@@ -121,6 +121,8 @@ final class StepsStore {
         guard canRead else { return }
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
+        if let value { SharedStore.saveSteps(value) }      // copia per il widget a telefono bloccato
+        WidgetCenter.shared.reloadAllTimelines()
         await updateReminders()
         await syncActivity()
     }
@@ -150,6 +152,8 @@ final class StepsStore {
         guard !samples.isEmpty else { return }
         let result = AutoCalibration.compute(from: samples, now: Date())
         calibration = result
+        SharedStore.calibration = result
+        WidgetCenter.shared.reloadAllTimelines()
         if let data = try? JSONEncoder().encode(result) { defaults.set(data, forKey: Keys.calibration) }
         await updateReminders()
     }
@@ -166,6 +170,8 @@ final class StepsStore {
             liveActivity.start(plan: plan)
         }
         treadmillActive = liveActivity.isRunning
+        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.calibration = calibration
     }
 
     /// Tiene la Live Activity allineata a passi e velocità; la chiude a obiettivo chiuso.
@@ -173,6 +179,8 @@ final class StepsStore {
         guard liveActivity.isRunning else { treadmillActive = false; return }
         await liveActivity.update(plan: plan)
         treadmillActive = liveActivity.isRunning
+        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.calibration = calibration
     }
 
     // MARK: promemoria serale

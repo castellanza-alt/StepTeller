@@ -89,7 +89,7 @@ struct ContentView: View {
                         .font(.system(size: doneSize, weight: .light)).tracking(-0.04 * doneSize)
                         .padding(.vertical, doneSize * 0.03)
                 } else {
-                    Text(ItalianFormat.integer(p.minutes))
+                    Text(ItalianFormat.integer(p.minutes) + "\u{2009}")   // spazio sottile: la spaziatura negativa non taglia l'ultima cifra
                         .font(.system(size: big, weight: .ultraLight)).tracking(-0.06 * big)
                         .padding(.vertical, -big * 0.155)   // interlinea 0,88 come nel CSS
                     Text("min")

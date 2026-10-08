@@ -14,7 +14,6 @@ final class DebugStepsProvider: StepsProvider, @unchecked Sendable {
     func observe(_ onChange: @escaping @Sendable () async -> Void) async {}
     func stopObserving() async {}
 }
-#endif
 
 /// Storico finto per gli screenshot (solo Debug): ultimi 24 giorni come nei mockup
 /// (streak 22 con 1 Jolly speso), prima circa 2 anni di dati verosimili.
@@ -43,3 +42,4 @@ final class DebugHistoryProvider: HistoryProvider, @unchecked Sendable {
         return out
     }
 }
+#endif

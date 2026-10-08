@@ -76,15 +76,17 @@ jobs:
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-        run: >-
-          xcodebuild -project StepTeller.xcodeproj -scheme StepTeller -configuration Release
-          -destination 'generic/platform=iOS' -archivePath build/StepTeller.xcarchive
-          -derivedDataPath build/DerivedData
-          -allowProvisioningUpdates
-          -authenticationKeyPath "$RUNNER_TEMP/private_keys/AuthKey_${ASC_KEY_ID}.p8"
-          -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID"
-          CURRENT_PROJECT_VERSION="${{ steps.num.outputs.build_number }}" COMMIT_SHA="${{ github.sha }}"
-          archive
+        run: |
+          set -o pipefail
+          xcodebuild -project StepTeller.xcodeproj -scheme StepTeller -configuration Release \
+            -destination 'generic/platform=iOS' -archivePath build/StepTeller.xcarchive \
+            -derivedDataPath build/DerivedData \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/private_keys/AuthKey_${ASC_KEY_ID}.p8" \
+            -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
+            CURRENT_PROJECT_VERSION="${{ steps.num.outputs.build_number }}" COMMIT_SHA="${{ github.sha }}" \
+            archive > build-archive.log 2>&1 \
+            || { echo "::error::Archivio fallito; errori:"; grep -E "error:" build-archive.log | sort -u | cut -c1-400 | head -30; exit 1; }
       - name: Esporta IPA firmata
         working-directory: ios
         env:

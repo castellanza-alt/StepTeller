@@ -12,7 +12,7 @@ settings:
     # Il nucleo è Swift 6; l'app resta in modalità linguaggio 5 (come briciola.) perché HealthKit
     # e SwiftUI di Xcode 26 danno avvisi di concorrenza che qui non servono.
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "0.2.0"
+    MARKETING_VERSION: "0.3.0"
     CURRENT_PROJECT_VERSION: "1"
     COMMIT_SHA: ""
 targets:
@@ -24,9 +24,11 @@ targets:
         excludes:
           - Info.plist
           - StepTeller.entitlements
+      - path: Shared
     dependencies:
       - package: StepTellerCore
         product: StepTellerCore
+      - target: StepTellerLiveActivity
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: it.castellanza.stepteller
@@ -43,6 +45,36 @@ targets:
       SystemCapabilities:
         com.apple.HealthKit:
           enabled: 1
+  # Estensione WidgetKit: Live Activity del tappeto (Blocco schermo e Dynamic Island).
+  StepTellerLiveActivity:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: LiveActivity
+      - path: Shared
+      - path: App/Theme.swift
+    dependencies:
+      - package: StepTellerCore
+        product: StepTellerCore
+      - sdk: SwiftUI.framework
+      - sdk: WidgetKit.framework
+      - sdk: ActivityKit.framework
+    info:
+      path: LiveActivity/Info.plist
+      properties:
+        CFBundleDisplayName: Step Teller
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: it.castellanza.stepteller.liveactivity
+        DEVELOPMENT_TEAM: 5E426PLFWN
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: "YES"
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
 schemes:
   StepTeller:
     build:

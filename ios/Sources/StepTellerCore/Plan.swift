@@ -30,3 +30,8 @@ public struct Plan: Sendable, Equatable {
         self.km = v * Double(minutes) / 60
     }
 }
+
+extension Plan {
+    /// Quando finirebbe il tappeto se si parte a `start` (per il conto alla rovescia).
+    public func finishDate(from start: Date) -> Date { start.addingTimeInterval(Double(minutes) * 60) }
+}

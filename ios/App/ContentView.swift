@@ -116,10 +116,24 @@ struct ContentView: View {
                 .foregroundStyle(Theme.soft)
                 .padding(.top, 12)
                 .frame(minHeight: 18)
+            if !p.isDone && store.liveActivityAvailable { treadmillButton }
         }
         .frame(maxWidth: .infinity)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(heroAccessibility(p))
+    }
+
+    /// «Avvia» mette il conto alla rovescia sul Blocco schermo (Live Activity); «Ferma» lo toglie.
+    private var treadmillButton: some View {
+        Button { Task { await store.toggleTreadmill() } } label: {
+            Label(store.treadmillActive ? "Ferma" : "Avvia sul Blocco schermo",
+                  systemImage: store.treadmillActive ? "stop.fill" : "play.fill")
+                .font(.system(size: 12, weight: .semibold)).tracking(0.5)
+                .foregroundStyle(Theme.accent)
+                .padding(.horizontal, 14).padding(.vertical, 7)
+                .background(Capsule().fill(Theme.accentSoft))
+        }
+        .padding(.top, 10)
     }
 
     private func sub(_ p: Plan) -> Text {

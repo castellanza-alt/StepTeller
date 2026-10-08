@@ -5,3 +5,4 @@ DerivedData/
 *.p8
 *.p12
 *.mobileprovision
+LiveActivity/Info.plist

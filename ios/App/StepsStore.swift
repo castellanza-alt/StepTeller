@@ -8,17 +8,20 @@ import StepTellerCore
 @Observable
 final class StepsStore {
     var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); Task { await updateReminders() } } }
-    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders() } } }
+    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders(); await syncActivity() } } }
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
     var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
     private(set) var state = StepsState()
     private(set) var calibration: CalibrationResult
+    /// Live Activity del tappeto in corso.
+    private(set) var treadmillActive = false
 
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let controller: StepsController
     @ObservationIgnored private let workouts: (any WorkoutsProvider)?
     @ObservationIgnored private let scheduler = ReminderScheduler()
+    @ObservationIgnored private let liveActivity = LiveActivityController()
     @ObservationIgnored private var dayTask: Task<Void, Never>?
     @ObservationIgnored private var lastCalibration: Date?
     @ObservationIgnored private var observing = false
@@ -45,6 +48,7 @@ final class StepsStore {
         // Screenshot sul simulatore: niente richiesta di permesso notifiche sopra l'interfaccia.
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
         #endif
+        treadmillActive = liveActivity.isRunning
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
     }
@@ -118,6 +122,7 @@ final class StepsStore {
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
         await updateReminders()
+        await syncActivity()
     }
 
     // MARK: passi manuali
@@ -147,6 +152,27 @@ final class StepsStore {
         calibration = result
         if let data = try? JSONEncoder().encode(result) { defaults.set(data, forKey: Keys.calibration) }
         await updateReminders()
+    }
+
+    // MARK: Live Activity
+
+    var liveActivityAvailable: Bool { liveActivity.isAvailable }
+
+    /// «Avvia» / «Ferma» sul Blocco schermo.
+    func toggleTreadmill() async {
+        if liveActivity.isRunning {
+            await liveActivity.end(plan: nil)
+        } else {
+            liveActivity.start(plan: plan)
+        }
+        treadmillActive = liveActivity.isRunning
+    }
+
+    /// Tiene la Live Activity allineata a passi e velocità; la chiude a obiettivo chiuso.
+    private func syncActivity() async {
+        guard liveActivity.isRunning else { treadmillActive = false; return }
+        await liveActivity.update(plan: plan)
+        treadmillActive = liveActivity.isRunning
     }
 
     // MARK: promemoria serale

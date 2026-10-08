@@ -37,8 +37,9 @@ final class HistoryStore {
         self.provider = provider
         self.defaults = defaults
         let cal = Calendar.current
-        goals = defaults.data(forKey: Keys.goals).flatMap { try? JSONDecoder().decode(GoalHistory.self, from: $0) }
+        let loadedGoals = defaults.data(forKey: Keys.goals).flatMap { try? JSONDecoder().decode(GoalHistory.self, from: $0) }
             ?? GoalHistory(initialGoal: currentGoal)
+        goals = loadedGoals
         if let override = streakStartOverride {
             streakStart = cal.startOfDay(for: override)
         } else if let saved = defaults.object(forKey: Keys.start) as? Date {
@@ -47,7 +48,7 @@ final class HistoryStore {
             streakStart = cal.startOfDay(for: Date())
             defaults.set(streakStart, forKey: Keys.start)
         }
-        stats = HistoryStats(records: [], goals: goals, now: Date(), calendar: cal)
+        stats = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal)
         recompute()
     }
 

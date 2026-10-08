@@ -28,6 +28,11 @@ enum Theme {
     static let glassLine = dynamic(0xFFFFFF, 0.80, dark: 0xFFFFFF, 0.12)
     static let glassShadow = dynamic(0x1E2828, 0.08, dark: 0x000000, 0.35)
 
+    // Barra in basso e riquadri pieni
+    static let pill = dynamic(0xFFFFFF, 0.70, dark: 0x1E2326)
+    static let pillLine = dynamic(0x1E2022, 0.08, dark: 0xFFFFFF, 0.08)
+    static let onAccent = dynamic(0xFFFFFF, dark: 0x0E1113)
+
     // Tappeto
     static let mFrame = dynamic(0x2A2C2E, dark: 0xD6D4CE)
     static let mFrame2 = dynamic(0x4A4D50, dark: 0x9A9893)

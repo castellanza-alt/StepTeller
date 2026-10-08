@@ -42,5 +42,23 @@ wshot parziale 7200
 wshot fatto 10450
 wshot zero 0
 wshot nodati ""
+hshot() { # nome tab periodo [sheet]
+  xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
+  extra=()
+  [ "${4:-}" = "sheet" ] && extra=(-stepteller.debugSheet 1)
+  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps 7200 -stepteller.debugHistory 1 -stepteller.debugTab "$2" -stepteller.debugPeriod "$3" -stepteller.speed 6.0 -stepteller.goal 10000 "${extra[@]}" >/dev/null
+  sleep 5
+  xcrun simctl io "$UDID" screenshot "$OUT/$1.png"
+}
+for theme in dark light; do
+  xcrun simctl ui "$UDID" appearance $theme
+  hshot storico-sett-$theme storico week
+  hshot storico-mese-$theme storico month
+  hshot storico-anno-$theme storico year
+  hshot streak-$theme streak week
+done
+xcrun simctl ui "$UDID" appearance dark
+hshot oggi-storia-dark oggi week
+hshot impostazioni-dark storico week sheet
 xcrun simctl delete "$UDID"
 ls -la "$OUT"

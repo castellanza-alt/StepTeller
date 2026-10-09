@@ -19,7 +19,9 @@ struct OggiView: View {
                 Spacer(minLength: 8)
                 hero(arc: arc)
                 Spacer(minLength: 10)
-                panel
+                if !store.plan.isDone {                 // a obiettivo chiuso la card non serve
+                    panel.transition(.opacity)
+                }
                 Color.clear.frame(height: 112)      // spazio per la barra in basso
             }
             .padding(.horizontal, 22)
@@ -139,33 +141,22 @@ struct OggiView: View {
         let p = store.plan
         return VStack(spacing: 12) {
             HStack(spacing: 6) {
-                TreadmillView(speed: p.speed, moving: !p.isDone)
+                TreadmillView(speed: p.speed, moving: true)
                     .frame(width: 160)
                     .padding(.leading, -8)
                 Spacer(minLength: 0)
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text(p.isDone ? "OLTRE\nL'OBIETTIVO" : "MINUTI SUL\nTAPPETO")
+                    Text("MINUTI SUL\nTAPPETO")
                         .font(.system(size: 10, weight: .semibold)).tracking(2.4)
                         .multilineTextAlignment(.trailing).lineSpacing(3).foregroundStyle(Theme.soft)
-                    if p.isDone {
-                        HStack(alignment: .firstTextBaseline, spacing: 6) {
-                            Text("+" + ItalianFormat.integer(max(0, p.steps - p.goal)))
-                                .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
-                                .foregroundStyle(Theme.accent).lineLimit(1).minimumScaleFactor(0.4)
-                            Text("passi").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
-                        }
-                        Text("\(Text(verbatim: "\(p.goal > 0 ? p.steps * 100 / p.goal : 100)%").fontWeight(.semibold).foregroundStyle(Theme.ink)) dell'obiettivo")
-                            .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
-                    } else {
-                        HStack(alignment: .firstTextBaseline, spacing: 6) {
-                            Text(ItalianFormat.integer(p.minutes) + "\u{2009}")
-                                .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
-                                .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.5)
-                            Text("min").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
-                        }
-                        Text("per \(Text(ItalianFormat.integer(p.remaining)).fontWeight(.semibold).foregroundStyle(Theme.ink)) passi · \(ItalianFormat.number(p.km, decimals: 1)) km")
-                            .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Text(ItalianFormat.integer(p.minutes) + "\u{2009}")
+                            .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
+                            .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.5)
+                        Text("min").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
                     }
+                    Text("per \(Text(ItalianFormat.integer(p.remaining)).fontWeight(.semibold).foregroundStyle(Theme.ink)) passi · \(ItalianFormat.number(p.km, decimals: 1)) km")
+                        .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(accessibilityMinutes(p))
@@ -191,7 +182,6 @@ struct OggiView: View {
     }
 
     private func accessibilityMinutes(_ p: Plan) -> String {
-        if p.isDone { return "Obiettivo raggiunto: \(ItalianFormat.integer(max(0, p.steps - p.goal))) passi oltre l'obiettivo" }
         return "\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi, \(ItalianFormat.number(p.km, decimals: 1)) chilometri"
     }
 }

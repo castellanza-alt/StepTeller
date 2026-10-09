@@ -50,7 +50,7 @@ struct StepsWidgetView: View {
         ZStack(alignment: .topLeading) {
             ring
             stepsCenter
-            if done { extraBlock } else if plan != nil { minutesBlock }
+            if !done && plan != nil { minutesBlock }
         }
     }
 
@@ -90,19 +90,6 @@ struct StepsWidgetView: View {
         }
         .frame(width: 190)
         .position(x: 170, y: 151)
-    }
-
-    /// Nell'apertura dell'arco, a obiettivo chiuso: i passi oltre l'obiettivo.
-    private var extraBlock: some View {
-        VStack(spacing: 2) {
-            Text(plan.map { "+" + ItalianFormat.integer(max(0, $0.steps - $0.goal)) } ?? "—")
-                .font(.system(size: 38, weight: .light)).tracking(-1.5).monospacedDigit()
-                .foregroundStyle(WidgetColors.accent).lineLimit(1).minimumScaleFactor(0.6)
-            Text("OLTRE").font(.system(size: 11, weight: .semibold)).tracking(2.2)
-                .foregroundStyle(WidgetColors.soft)
-        }
-        .frame(width: 150)
-        .position(x: 170, y: 279)
     }
 
     private var minutesBlock: some View {

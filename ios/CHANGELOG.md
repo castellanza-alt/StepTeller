@@ -5,7 +5,7 @@
 - Numero dei passi centrato nell'arco e ridotto quando serve: «10.729» non viene più troncato in «10.7…».
 - Streak e Jolly senza pillole, solo icona e numero; la fiamma è colorata solo con streak > 0.
 - La streak scatta appena Salute supera l'obiettivo, senza aspettare la rilettura dello storico.
-- Card del tappeto a obiettivo chiuso: al posto di «Fatto» i passi oltre l'obiettivo e la percentuale.
+- A obiettivo chiuso la card del tappeto sparisce (niente più «Fatto», anche nel widget): resta l'arco a fondo scala.
 - Festa «Obiettivo raggiunto» alla prima apertura dopo aver chiuso l'obiettivo del giorno (una volta al giorno,
   solo con i passi di Salute): l'arco si riempie, spunta, scintille e vibrazione; si chiude da sola o con un tocco.
 

@@ -12,7 +12,7 @@ settings:
     # Il nucleo è Swift 6; l'app resta in modalità linguaggio 5 (come briciola.) perché HealthKit
     # e SwiftUI di Xcode 26 danno avvisi di concorrenza che qui non servono.
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "0.5.2"
+    MARKETING_VERSION: "0.5.3"
     CURRENT_PROJECT_VERSION: "1"
     COMMIT_SHA: ""
 targets:

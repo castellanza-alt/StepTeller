@@ -8,6 +8,7 @@ struct NumberField: View {
     var placeholder = "0"
     /// Con 0 mostra il segnaposto invece di «0» (passi di oggi).
     var emptyWhenZero = false
+    var alignment: TextAlignment = .trailing
     let onEdit: (Int) -> Void
     var isFocused: FocusState<Bool>.Binding
 
@@ -17,7 +18,7 @@ struct NumberField: View {
     var body: some View {
         TextField(placeholder, text: $text)
             .keyboardType(.numberPad)
-            .multilineTextAlignment(.trailing)
+            .multilineTextAlignment(alignment)
             .focused(isFocused)
             .onAppear { text = format(value) }
             .onChange(of: value) { _, new in

@@ -26,6 +26,8 @@ final class HistoryStore {
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let calendar = Calendar.current
     @ObservationIgnored private var lastRefresh: Date?
+    /// Passi di oggi letti dall'app (vedi `updateToday`); vale solo per il giorno in corso.
+    @ObservationIgnored private var todayLive: (day: Date, steps: Int)?
 
     private enum Keys {
         static let goals = "stepteller.goalHistory"
@@ -63,6 +65,15 @@ final class HistoryStore {
         recompute()
     }
 
+    /// Passi di oggi già letti dall'app: la streak scatta appena si supera l'obiettivo, senza
+    /// aspettare la rilettura dello storico (che è più lenta e limitata a una ogni 20 s).
+    func updateToday(steps: Int) {
+        let day = calendar.startOfDay(for: Date())
+        if let live = todayLive, live.day == day, live.steps == steps { return }
+        todayLive = (day, steps)
+        recompute()
+    }
+
     /// Il nuovo obiettivo vale da oggi.
     func recordGoal(_ goal: Int) {
         goals.set(goal, from: calendar.startOfDay(for: Date()))
@@ -73,7 +84,9 @@ final class HistoryStore {
     private func recompute() {
         let now = Date()
         stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar)
-        let steps = Dictionary(records.map { (calendar.startOfDay(for: $0.day), $0.steps) }, uniquingKeysWith: { a, _ in a })
+        var steps = Dictionary(records.map { (calendar.startOfDay(for: $0.day), $0.steps) }, uniquingKeysWith: { a, _ in a })
+        let today = calendar.startOfDay(for: now)
+        if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
         stepsByDay = steps

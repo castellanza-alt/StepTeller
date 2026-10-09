@@ -131,7 +131,10 @@ final class StepsStore {
         guard canRead else { return }
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
-        if let value { SharedStore.saveSteps(value) }      // copia per il widget a telefono bloccato
+        if let value {
+            SharedStore.saveSteps(value)                  // copia per il widget a telefono bloccato
+            history.updateToday(steps: value)             // la streak scatta subito, non alla rilettura dello storico
+        }
         WidgetCenter.shared.reloadAllTimelines()
         await history.refresh(minInterval: 20)       // oggi nello storico e nella streak
         await updateReminders()

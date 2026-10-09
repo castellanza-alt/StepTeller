@@ -21,25 +21,6 @@ extension View {
     }
 }
 
-/// Piastrella con titolo e valore (passi, km, media, giorni a obiettivo).
-struct StatTile: View {
-    let title: String
-    let value: String
-    let unit: String
-    var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(title.uppercased()).font(.system(size: 10, weight: .semibold)).tracking(2.2).foregroundStyle(Theme.soft)
-            HStack(alignment: .firstTextBaseline, spacing: 5) {
-                Text(value).font(.system(size: 22, weight: .light)).tracking(-0.66).monospacedDigit()
-                    .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
-                Text(unit).font(.system(size: 12)).foregroundStyle(Theme.soft).lineLimit(1)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .glassCard(radius: 18, padding: EdgeInsets(top: 9, leading: 16, bottom: 9, trailing: 16))
-    }
-}
-
 /// Rombo (Jolly) disegnato come nei mockup; la fiamma (streak) è il simbolo di sistema `flame.fill`.
 struct GemShape: Shape {
     func path(in rect: CGRect) -> Path {

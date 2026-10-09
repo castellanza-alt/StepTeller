@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.3 — 9 ottobre 2026
+- Storico e Streak senza riquadri: periodi e Passi/Km come testo, grafico libero, totale in evidenza con distanza,
+  media e giorni a obiettivo affiancati, record e righe della streak separati da linee sottili.
+- Barra del giorno in corso piena e tenue invece che contornata.
+
 ## 0.5.2 — 9 ottobre 2026
 - Tapis roulant di nuovo a destra nella card; minuti e passi a sinistra.
 - Impostazioni → Aspetto: «Mostra il tapis roulant» (acceso di default).

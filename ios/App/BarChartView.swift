@@ -4,7 +4,7 @@ import StepTellerCore
 enum HistoryMetric { case steps, km }
 
 /// Grafico a barre dello storico. Passi: linea tratteggiata dell'obiettivo (solo grafici a giorni);
-/// barra piena = obiettivo raggiunto, contorno = oggi/periodo in corso, assenti = punto sottile.
+/// barra piena = obiettivo raggiunto, tenue = oggi/periodo in corso, assenti = punto sottile.
 struct BarChartView: View {
     let bars: [HistoryBar]
     let metric: HistoryMetric
@@ -55,8 +55,7 @@ struct BarChartView: View {
             if b.isFuture {
                 RoundedRectangle(cornerRadius: 2).fill(Theme.ink.opacity(0.14)).frame(height: 3)
             } else if b.isCurrent {
-                RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.accent.opacity(0.22))
-                    .overlay(RoundedRectangle(cornerRadius: radius, style: .continuous).strokeBorder(Theme.accent.opacity(0.7), lineWidth: 1))
+                RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.accent.opacity(0.38))
                     .frame(height: height)
             } else if b.goal == 0 || b.reachedGoal {
                 RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.accent.opacity(0.9)).frame(height: height)

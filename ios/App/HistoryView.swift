@@ -89,17 +89,116 @@ struct StoricoPage: View {
     var body: some View {
         let stats = store.history.stats
         let summary = stats.summary(period, offset: offset)
-        VStack(spacing: 10) {
-            periodPicker
-            chartCard(stats)
-            statsGrid(summary)
-            if period == .month { calendarCard(stats) }
-            recordsCard(stats.personalRecords())
+        VStack(alignment: .leading, spacing: 0) {
+            periodPicker.padding(.top, 18)
+            chart(stats).padding(.top, 26)
+            figures(summary).padding(.top, 34)
+            if period == .month { calendar(stats).padding(.top, 38) }
+            records(stats.personalRecords()).padding(.top, 38)
         }
     }
 
-    private func calendarCard(_ stats: HistoryStats) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+    /// Periodi come testo: l'attivo in inchiostro con un trattino accent sotto; nessun fondo.
+    private var periodPicker: some View {
+        HStack(spacing: 0) {
+            ForEach([(HistoryPeriod.week, "Settimana"), (.month, "Mese"), (.year, "Anno"), (.all, "Sempre")], id: \.1) { p, title in
+                Button { withAnimation(.easeInOut(duration: 0.2)) { period = p; offset = 0 } } label: {
+                    VStack(spacing: 7) {
+                        Text(title).font(.system(size: 14, weight: period == p ? .semibold : .regular))
+                            .foregroundStyle(period == p ? Theme.ink : Theme.soft)
+                        Capsule().fill(period == p ? Theme.accent : .clear).frame(width: 16, height: 2)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityAddTraits(period == p ? .isSelected : [])
+            }
+        }
+    }
+
+    private func chart(_ stats: HistoryStats) -> some View {
+        let maxOff = stats.maxOffset(period)
+        return VStack(spacing: 18) {
+            HStack(alignment: .firstTextBaseline, spacing: 2) {
+                if period != .all {
+                    Button { if offset < maxOff { offset += 1 } } label: {
+                        Image(systemName: "chevron.left").font(.system(size: 12, weight: .medium))
+                            .frame(width: 26, height: 26).contentShape(Rectangle())
+                    }
+                    .disabled(offset >= maxOff).opacity(offset >= maxOff ? 0.25 : 0.7)
+                    .padding(.leading, -8)
+                    .accessibilityLabel("Periodo precedente")
+                }
+                Text(stats.title(period, offset: offset)).font(.system(size: 15, weight: .medium))
+                if period != .all {
+                    Button { if offset > 0 { offset -= 1 } } label: {
+                        Image(systemName: "chevron.right").font(.system(size: 12, weight: .medium))
+                            .frame(width: 26, height: 26).contentShape(Rectangle())
+                    }
+                    .disabled(offset == 0).opacity(offset == 0 ? 0.25 : 0.7)
+                    .accessibilityLabel("Periodo successivo")
+                }
+                Spacer()
+                metricButton("Passi", .steps)
+                Text("·").font(.system(size: 12)).foregroundStyle(Theme.faint)
+                metricButton("Km", .km)
+            }
+            .foregroundStyle(Theme.ink)
+            BarChartView(bars: stats.bars(period, offset: offset), metric: metric, period: period)
+        }
+        .animation(.easeInOut(duration: 0.2), value: period)
+    }
+
+    private func metricButton(_ title: String, _ value: HistoryMetric) -> some View {
+        Button { withAnimation(.easeInOut(duration: 0.2)) { metric = value } } label: {
+            Text(title).font(.system(size: 13, weight: metric == value ? .semibold : .regular))
+                .foregroundStyle(metric == value ? Theme.accent : Theme.soft)
+                .padding(.horizontal, 4).padding(.vertical, 4)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(metric == value ? .isSelected : [])
+    }
+
+    /// Totale in evidenza, poi tre cifre affiancate separate da sottili linee verticali.
+    private func figures(_ s: PeriodSummary) -> some View {
+        VStack(alignment: .leading, spacing: 22) {
+            VStack(alignment: .leading, spacing: 4) {
+                SectionLabel("Totale")
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(ItalianFormat.integer(s.steps))
+                        .font(.system(size: 52, weight: .ultraLight)).tracking(-2.4).monospacedDigit()
+                        .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
+                    Text("passi").font(.system(size: 15)).foregroundStyle(Theme.soft)
+                }
+            }
+            Hairline()
+            HStack(alignment: .top, spacing: 0) {
+                figure("Distanza", ItalianFormat.number(s.km, decimals: s.km >= 1000 ? 0 : 1), "km", first: true)
+                VLine()
+                figure("Media", ItalianFormat.integer(s.averageSteps), "al giorno")
+                VLine()
+                figure("A obiettivo", ItalianFormat.integer(s.daysAtGoal), "su \(ItalianFormat.integer(s.elapsedDays)) giorni")
+            }
+        }
+    }
+
+    private func figure(_ title: String, _ value: String, _ unit: String, first: Bool = false) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(title.uppercased()).font(.system(size: 10, weight: .semibold)).tracking(1.8).foregroundStyle(Theme.soft)
+                .lineLimit(1).minimumScaleFactor(0.8)
+            Text(value).font(.system(size: 24, weight: .light)).tracking(-0.6).monospacedDigit()
+                .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
+            Text(unit).font(.system(size: 11)).foregroundStyle(Theme.soft).lineLimit(1).minimumScaleFactor(0.8)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, first ? 0 : 14).padding(.trailing, 8)
+        .accessibilityElement(children: .combine)
+    }
+
+    private func calendar(_ stats: HistoryStats) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 SectionLabel("Calendario")
                 Spacer()
@@ -108,107 +207,50 @@ struct StoricoPage: View {
             CalendarGrid(monthStart: stats.interval(.month, offset: offset).start,
                          mark: { store.history.mark(for: $0) }, today: stats.today)
         }
-        .glassCard(padding: EdgeInsets(top: 14, leading: 20, bottom: 12, trailing: 20))
     }
 
-    private var periodPicker: some View {
-        HStack(spacing: 0) {
-            ForEach([(HistoryPeriod.week, "Sett."), (.month, "Mese"), (.year, "Anno"), (.all, "Sempre")], id: \.1) { p, title in
-                Button { period = p; offset = 0 } label: {
-                    Text(title).font(.system(size: 12, weight: .semibold)).tracking(1.2)
-                        .foregroundStyle(period == p ? Theme.accent : Theme.soft)
-                        .frame(maxWidth: .infinity).frame(height: 32)
-                        .background(Capsule().fill(period == p ? Theme.accentSoft : .clear))
-                }
-                .buttonStyle(.plain)
-            }
+    private func records(_ r: PersonalRecords) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            SectionLabel("Record personali").padding(.bottom, 6)
+            recordRow("Giorno", r.day)
+            recordRow("Settimana", r.week)
+            recordRow("Mese", r.month)
+            recordRow("Anno", r.year)
         }
-        .padding(3)
-        .background(Capsule().fill(Theme.ink.opacity(0.06)))
-        .overlay(Capsule().strokeBorder(Theme.ink.opacity(0.08), lineWidth: 1))
     }
 
-    private func chartCard(_ stats: HistoryStats) -> some View {
-        let maxOff = stats.maxOffset(period)
-        return VStack(spacing: 10) {
+    private func recordRow(_ title: String, _ r: RecordEntry?) -> some View {
+        VStack(spacing: 0) {
+            Hairline()
             HStack(alignment: .firstTextBaseline) {
-                if period != .all {
-                    Button { if offset < maxOff { offset += 1 } } label: {
-                        Image(systemName: "chevron.left").font(.system(size: 12, weight: .semibold))
-                            .frame(width: 28, height: 28)
-                    }
-                    .disabled(offset >= maxOff).opacity(offset >= maxOff ? 0.3 : 1)
-                    .accessibilityLabel("Periodo precedente")
-                }
-                Text(stats.title(period, offset: offset)).font(.system(size: 13, weight: .semibold))
-                if period != .all {
-                    Button { if offset > 0 { offset -= 1 } } label: {
-                        Image(systemName: "chevron.right").font(.system(size: 12, weight: .semibold))
-                            .frame(width: 28, height: 28)
-                    }
-                    .disabled(offset == 0).opacity(offset == 0 ? 0.3 : 1)
-                    .accessibilityLabel("Periodo successivo")
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title).font(.system(size: 15)).foregroundStyle(Theme.ink)
+                    Text(r?.label ?? "—").font(.system(size: 12)).foregroundStyle(Theme.soft)
                 }
                 Spacer()
-                HStack(spacing: 4) {
-                    metricButton("Passi", .steps)
-                    metricButton("Km", .km)
+                if let r {
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text(ItalianFormat.integer(r.steps)).font(.system(size: 22, weight: .light)).tracking(-0.5)
+                            .monospacedDigit().foregroundStyle(Theme.ink)
+                        Text("\(ItalianFormat.number(r.km, decimals: r.km >= 1000 ? 0 : 1)) km")
+                            .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
+                    }
                 }
             }
-            .foregroundStyle(Theme.ink)
-            BarChartView(bars: stats.bars(period, offset: offset), metric: metric, period: period)
+            .padding(.vertical, 14)
         }
-        .glassCard(padding: EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
-        .animation(.easeInOut(duration: 0.2), value: period)
+        .accessibilityElement(children: .combine)
     }
+}
 
-    private func metricButton(_ title: String, _ value: HistoryMetric) -> some View {
-        Button { metric = value } label: {
-            Text(title).font(.system(size: 11, weight: .semibold)).tracking(1.1)
-                .foregroundStyle(metric == value ? Theme.accent : Theme.soft)
-                .padding(.horizontal, 8).padding(.vertical, 3)
-                .background(Capsule().fill(metric == value ? Theme.accentSoft : .clear))
-        }
-        .buttonStyle(.plain)
-    }
+/// Linea orizzontale sottile: separa senza chiudere in un riquadro.
+struct Hairline: View {
+    var body: some View { Rectangle().fill(Theme.hair).frame(height: 1) }
+}
 
-    private func statsGrid(_ s: PeriodSummary) -> some View {
-        LazyVGrid(columns: [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)], spacing: 8) {
-            StatTile(title: "Totale", value: ItalianFormat.integer(s.steps), unit: "passi")
-            StatTile(title: "Distanza", value: ItalianFormat.number(s.km, decimals: s.km >= 1000 ? 0 : 1), unit: "km")
-            StatTile(title: "Media", value: ItalianFormat.integer(s.averageSteps), unit: "al giorno")
-            StatTile(title: "A obiettivo", value: ItalianFormat.integer(s.daysAtGoal),
-                     unit: "giorni su \(ItalianFormat.integer(s.elapsedDays))")
-        }
-    }
-
-    private func recordsCard(_ r: PersonalRecords) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            SectionLabel("Record personali").padding(.bottom, 2)
-            recordRow("Giorno", r.day, last: false)
-            recordRow("Settimana", r.week, last: false)
-            recordRow("Mese", r.month, last: false)
-            recordRow("Anno", r.year, last: true)
-        }
-        .glassCard(padding: EdgeInsets(top: 14, leading: 20, bottom: 4, trailing: 20))
-    }
-
-    private func recordRow(_ title: String, _ r: RecordEntry?, last: Bool) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 1) {
-                Text(title).font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.ink)
-                Text(r?.label ?? "—").font(.system(size: 11)).foregroundStyle(Theme.soft)
-            }
-            Spacer()
-            if let r {
-                (Text(ItalianFormat.integer(r.steps)).font(.system(size: 18, weight: .light)).foregroundColor(Theme.ink)
-                 + Text("  · \(ItalianFormat.number(r.km, decimals: r.km >= 1000 ? 0 : 1)) km").font(.system(size: 12)).foregroundColor(Theme.accent))
-                    .monospacedDigit()
-            }
-        }
-        .padding(.vertical, 8)
-        .overlay(alignment: .bottom) { if !last { Rectangle().fill(Theme.ink.opacity(0.08)).frame(height: 1) } }
-    }
+/// Linea verticale sottile tra cifre affiancate.
+private struct VLine: View {
+    var body: some View { Rectangle().fill(Theme.hair).frame(width: 1, height: 52) }
 }
 
 struct CalendarLegend: View {
@@ -233,9 +275,9 @@ struct StreakPage: View {
     var body: some View {
         let s = store.history.streak
         let stats = store.history.stats
-        VStack(spacing: 10) {
-            streakCard(s)
-            VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
+            streakHero(s).padding(.top, 24)
+            VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     SectionLabel(monthTitle(stats))
                     Spacer()
@@ -243,23 +285,25 @@ struct StreakPage: View {
                 }
                 CalendarGrid(monthStart: stats.interval(.month).start, mark: { store.history.mark(for: $0) }, today: stats.today)
             }
-            .glassCard(padding: EdgeInsets(top: 14, leading: 20, bottom: 12, trailing: 20))
+            .padding(.top, 40)
             VStack(spacing: 0) {
+                Hairline()
                 row("Streak più lunga") {
-                    Text("\(s.longest)").font(.system(size: 18, weight: .light)).foregroundStyle(Theme.accent)
+                    Text("\(s.longest)").font(.system(size: 20, weight: .light)).foregroundStyle(Theme.ink)
                     + Text(" giorni").font(.system(size: 12)).foregroundColor(Theme.soft)
                 }
-                Rectangle().fill(Theme.ink.opacity(0.08)).frame(height: 1)
+                Hairline()
                 row("Jolly") {
-                    Text("maturati ").foregroundColor(Theme.ink.opacity(0.62))
-                    + Text("\(s.jollyEarned)").fontWeight(.semibold).foregroundColor(Theme.ink)
-                    + Text(" · usati ").foregroundColor(Theme.ink.opacity(0.62))
-                    + Text("\(s.jollyUsed)").fontWeight(.semibold).foregroundColor(Theme.ink)
-                    + Text(" · disponibili ").foregroundColor(Theme.ink.opacity(0.62))
+                    Text("maturati ").foregroundColor(Theme.soft)
+                    + Text("\(s.jollyEarned)").foregroundColor(Theme.ink)
+                    + Text(" · usati ").foregroundColor(Theme.soft)
+                    + Text("\(s.jollyUsed)").foregroundColor(Theme.ink)
+                    + Text(" · disponibili ").foregroundColor(Theme.soft)
                     + Text("\(s.jolly)").fontWeight(.semibold).foregroundColor(Theme.accent)
                 }
+                Hairline()
             }
-            .glassCard(padding: EdgeInsets(top: 2, leading: 20, bottom: 2, trailing: 20))
+            .padding(.top, 34)
         }
     }
 
@@ -267,22 +311,21 @@ struct StreakPage: View {
 
     private func row(_ title: String, @ViewBuilder value: () -> Text) -> some View {
         HStack {
-            Text(title).font(.system(size: 14)).foregroundStyle(Theme.ink)
+            Text(title).font(.system(size: 15)).foregroundStyle(Theme.ink)
             Spacer()
             value().font(.system(size: 13)).monospacedDigit()
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, 14)
     }
 
-    private func streakCard(_ s: StreakState) -> some View {
+    private func streakHero(_ s: StreakState) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 SectionLabel("Streak attuale")
                 Spacer()
                 if s.streak > 0 && s.streak == s.longest {
-                    Text("Record personale").font(.system(size: 11, weight: .semibold)).foregroundStyle(Theme.accent)
-                        .padding(.horizontal, 10).padding(.vertical, 3)
-                        .background(Capsule().fill(Theme.accentSoft))
+                    Text("RECORD PERSONALE").font(.system(size: 10, weight: .semibold)).tracking(1.8)
+                        .foregroundStyle(Theme.accent)
                 }
             }
             HStack(alignment: .bottom) {
@@ -325,7 +368,6 @@ struct StreakPage: View {
             }
             statusLine(s)
         }
-        .glassCard(padding: EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
     }
 
     private func statusLine(_ s: StreakState) -> some View {

@@ -34,51 +34,52 @@ struct OggiView: View {
         }
     }
 
-    // MARK: chip streak e Jolly
+    // MARK: streak e Jolly (solo icona e numero)
 
     private var chips: some View {
         let s = store.history.streak
-        return HStack(spacing: 8) {
+        return HStack(spacing: 18) {
             HStack(spacing: 5) {
-                Image(systemName: "flame.fill").font(.system(size: 12))
+                Image(systemName: "flame.fill").font(.system(size: 13))
                 Text("\(s.streak)").monospacedDigit()
             }
-            .font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.accent)
-            .padding(.horizontal, 10).padding(.vertical, 5)
-            .background(Capsule().fill(Theme.accentSoft))
-            .overlay(Capsule().strokeBorder(Theme.accent.opacity(0.22), lineWidth: 1))
+            .font(.system(size: 14, weight: .semibold))
+            .foregroundStyle(s.streak > 0 ? Theme.accent : Theme.soft)
+            .contentTransition(.numericText())
+            .animation(.snappy, value: s.streak)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Streak: \(s.streak) giorni")
 
             HStack(spacing: 5) {
-                GemShape().stroke(Theme.ink.opacity(0.8), style: StrokeStyle(lineWidth: 1.8, lineJoin: .round))
-                    .frame(width: 12, height: 12)
+                GemShape().stroke(Theme.soft, style: StrokeStyle(lineWidth: 1.8, lineJoin: .round))
+                    .frame(width: 13, height: 13)
                 Text("\(s.jolly)").monospacedDigit()
             }
-            .font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.ink.opacity(0.8))
-            .padding(.horizontal, 10).padding(.vertical, 5)
-            .background(Capsule().fill(Theme.ink.opacity(0.07)))
-            .overlay(Capsule().strokeBorder(Theme.ink.opacity(0.12), lineWidth: 1))
+            .font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.soft)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Jolly disponibili: \(s.jolly)")
         }
+        .padding(.trailing, 8)
     }
 
     // MARK: passi (arco)
 
     private func hero(arc: CGFloat) -> some View {
         let p = store.plan
+        let numberWidth = arc * 0.74
+        let numberSize = fittedNumberSize(ItalianFormat.integer(store.steps), base: arc * 0.29, width: numberWidth)
         return VStack(spacing: 8) {
             ZStack {
-                ArcGauge(progress: p.progress, done: p.isDone)
+                ArcGauge(progress: p.progress)
+                    .animation(.spring(duration: 0.9, bounce: 0.15), value: p.progress)
                 VStack(spacing: 6) {
                     Text("PASSI DI OGGI").font(.system(size: 11, weight: .semibold)).tracking(11 * 0.3)
                         .foregroundStyle(Theme.soft)
-                    NumberField(value: store.steps, placeholder: "0", emptyWhenZero: true,
+                    NumberField(value: store.steps, placeholder: "0", emptyWhenZero: true, alignment: .center,
                                 onEdit: { store.setManualSteps($0) }, isFocused: $stepsFocused)
-                        .font(.system(size: arc * 0.29, weight: .ultraLight)).tracking(-arc * 0.29 * 0.05).monospacedDigit()
+                        .font(.system(size: numberSize, weight: .ultraLight)).tracking(-numberSize * 0.05).monospacedDigit()
                         .foregroundStyle(Theme.ink)
-                        .frame(width: arc * 0.78)
+                        .frame(width: numberWidth)
                         .accessibilityLabel("Passi di oggi")
                     Text("su \(ItalianFormat.integer(p.goal))")
                         .font(.system(size: 14)).monospacedDigit().foregroundStyle(Theme.soft)
@@ -89,6 +90,14 @@ struct OggiView: View {
             sourceLine
             if store.showsNoDataWarning { noDataWarning }
         }
+    }
+
+    /// Corpo del numero centrale: pieno finché entra nell'arco, poi si riduce (mai troncato).
+    private func fittedNumberSize(_ text: String, base: CGFloat, width: CGFloat) -> CGFloat {
+        let font = UIFont.monospacedDigitSystemFont(ofSize: base, weight: .ultraLight)
+        let measured = (text as NSString).size(withAttributes: [.font: font, .kern: -base * 0.05]).width
+        guard measured > 0 else { return base }
+        return base * min(1, width * 0.94 / measured)
     }
 
     /// «da Salute · 21:04» / «manuale · 21:04», con «Usa Salute» quando c'è una sovrascrittura.
@@ -135,12 +144,17 @@ struct OggiView: View {
                     .padding(.leading, -8)
                 Spacer(minLength: 0)
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text(p.isDone ? "OBIETTIVO\nCHIUSO" : "MINUTI SUL\nTAPPETO")
+                    Text(p.isDone ? "OLTRE\nL'OBIETTIVO" : "MINUTI SUL\nTAPPETO")
                         .font(.system(size: 10, weight: .semibold)).tracking(2.4)
                         .multilineTextAlignment(.trailing).lineSpacing(3).foregroundStyle(Theme.soft)
                     if p.isDone {
-                        Text("Fatto").font(.system(size: 54, weight: .light)).tracking(-2.2).foregroundStyle(Theme.ink)
-                        Text("\(Text(ItalianFormat.integer(p.steps)).fontWeight(.semibold).foregroundStyle(Theme.ink)) su \(ItalianFormat.integer(p.goal))")
+                        HStack(alignment: .firstTextBaseline, spacing: 6) {
+                            Text("+" + ItalianFormat.integer(max(0, p.steps - p.goal)))
+                                .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
+                                .foregroundStyle(Theme.accent).lineLimit(1).minimumScaleFactor(0.4)
+                            Text("passi").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
+                        }
+                        Text("\(Text(verbatim: "\(p.goal > 0 ? p.steps * 100 / p.goal : 100)%").fontWeight(.semibold).foregroundStyle(Theme.ink)) dell'obiettivo")
                             .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
                     } else {
                         HStack(alignment: .firstTextBaseline, spacing: 6) {
@@ -177,7 +191,7 @@ struct OggiView: View {
     }
 
     private func accessibilityMinutes(_ p: Plan) -> String {
-        if p.isDone { return "Obiettivo chiuso: \(ItalianFormat.integer(p.steps)) passi su \(ItalianFormat.integer(p.goal))" }
+        if p.isDone { return "Obiettivo raggiunto: \(ItalianFormat.integer(max(0, p.steps - p.goal))) passi oltre l'obiettivo" }
         return "\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi, \(ItalianFormat.number(p.km, decimals: 1)) chilometri"
     }
 }

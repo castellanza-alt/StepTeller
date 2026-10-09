@@ -49,30 +49,28 @@ struct StepsWidgetView: View {
     private var content: some View {
         ZStack(alignment: .topLeading) {
             ring
-            if done { doneCenter } else { stepsCenter; if plan != nil { minutesBlock } }
+            stepsCenter
+            if done { extraBlock } else if plan != nil { minutesBlock }
         }
     }
 
     // MARK: anello
 
     private var ring: some View {
-        let center = CGPoint(x: 170, y: done ? 170 : 158)
+        // Sempre un arco di 270°: a obiettivo chiuso arriva a fondo scala e si ferma.
+        let center = CGPoint(x: 170, y: 158)
         let track = Color.white.opacity(0.10)
         let line = StrokeStyle(lineWidth: 7, lineCap: .round)
+        let p = min(1, max(0, progress))
         return ZStack {
-            if done {
-                Circle().stroke(WidgetColors.accent, style: line)
-                    .shadow(color: WidgetColors.accent.opacity(0.5), radius: 6)
-            } else {
-                Circle().trim(from: 0, to: 0.75).stroke(track, style: line).rotationEffect(.degrees(135))
-                Circle().trim(from: 0, to: 0.75 * progress).stroke(WidgetColors.accent, style: line)
-                    .rotationEffect(.degrees(135))
-                    .shadow(color: WidgetColors.accent.opacity(0.45), radius: 6)
-                let angle = (135 + 270 * progress) * .pi / 180
-                Circle().fill(WidgetColors.ink).frame(width: 11, height: 11)
-                    .shadow(color: WidgetColors.accent.opacity(0.8), radius: 5)
-                    .offset(x: 106 * cos(angle), y: 106 * sin(angle))
-            }
+            Circle().trim(from: 0, to: 0.75).stroke(track, style: line).rotationEffect(.degrees(135))
+            Circle().trim(from: 0, to: 0.75 * p).stroke(WidgetColors.accent, style: line)
+                .rotationEffect(.degrees(135))
+                .shadow(color: WidgetColors.accent.opacity(0.45), radius: 6)
+            let angle = (135 + 270 * p) * .pi / 180
+            Circle().fill(WidgetColors.ink).frame(width: 11, height: 11)
+                .shadow(color: WidgetColors.accent.opacity(0.8), radius: 5)
+                .offset(x: 106 * cos(angle), y: 106 * sin(angle))
         }
         .frame(width: 212, height: 212)
         .position(center)
@@ -94,19 +92,17 @@ struct StepsWidgetView: View {
         .position(x: 170, y: 151)
     }
 
-    private var doneCenter: some View {
-        VStack(spacing: 8) {
-            Text("OBIETTIVO CHIUSO").font(.system(size: 10, weight: .semibold)).tracking(2.6)
-                .foregroundStyle(WidgetColors.accent)
-            Text("Fatto").font(.system(size: 64, weight: .light)).tracking(-2.8)
-                .foregroundStyle(WidgetColors.ink)
-            if let plan {
-                Text("\(Text(ItalianFormat.integer(plan.steps)).fontWeight(.semibold).foregroundStyle(WidgetColors.ink)) su \(ItalianFormat.integer(plan.goal))")
-                    .font(.system(size: 14)).monospacedDigit().foregroundStyle(WidgetColors.soft)
-            }
+    /// Nell'apertura dell'arco, a obiettivo chiuso: i passi oltre l'obiettivo.
+    private var extraBlock: some View {
+        VStack(spacing: 2) {
+            Text(plan.map { "+" + ItalianFormat.integer(max(0, $0.steps - $0.goal)) } ?? "—")
+                .font(.system(size: 38, weight: .light)).tracking(-1.5).monospacedDigit()
+                .foregroundStyle(WidgetColors.accent).lineLimit(1).minimumScaleFactor(0.6)
+            Text("OLTRE").font(.system(size: 11, weight: .semibold)).tracking(2.2)
+                .foregroundStyle(WidgetColors.soft)
         }
-        .frame(width: 190)
-        .position(x: 170, y: 170)
+        .frame(width: 150)
+        .position(x: 170, y: 279)
     }
 
     private var minutesBlock: some View {

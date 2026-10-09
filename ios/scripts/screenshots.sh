@@ -24,7 +24,7 @@ shot() { # nome tema passi velocità
 for theme in light dark; do
   shot cammino-6 $theme 7200 6.0
   shot corsa-8-3 $theme 7200 8.3
-  shot fatto $theme 10450 6.0
+  shot fatto $theme 10729 4.5
   shot zero-10 $theme 0 10.0
 done
 wshot() { # nome passi (vuoto = dato non disponibile)
@@ -37,6 +37,15 @@ wshot() { # nome passi (vuoto = dato non disponibile)
   sleep 3
   xcrun simctl io "$UDID" screenshot "$OUT/widget-$1.png"
 }
+fshot() { # festa «Obiettivo raggiunto» a metà animazione
+  xcrun simctl ui "$UDID" appearance "$1"
+  xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
+  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps 10729 -stepteller.debugCelebrate 1 -stepteller.goal 10000 >/dev/null
+  sleep 2.2
+  xcrun simctl io "$UDID" screenshot "$OUT/festa-$1.png"
+}
+fshot light
+fshot dark
 xcrun simctl ui "$UDID" appearance dark
 wshot parziale 7200
 wshot fatto 10450

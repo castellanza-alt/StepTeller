@@ -13,6 +13,8 @@ final class StepsStore {
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
     var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
+    /// Illustrazione del tappeto nella card di Oggi (default sì).
+    var showsTreadmill: Bool { didSet { defaults.set(showsTreadmill, forKey: Keys.treadmill) } }
     private(set) var state = StepsState()
     /// Storico, streak e Jolly.
     let history: HistoryStore
@@ -35,6 +37,7 @@ final class StepsStore {
         static let reminderOn = "stepteller.reminder.on"
         static let reminderTime = "stepteller.reminder.minutes"
         static let calibration = "stepteller.calibration.v1"
+        static let treadmill = "stepteller.showsTreadmill"
     }
 
     init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
@@ -51,6 +54,7 @@ final class StepsStore {
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : 6.0
         speed = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, (v * 10).rounded() / 10))
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
+        showsTreadmill = defaults.object(forKey: Keys.treadmill) != nil ? defaults.bool(forKey: Keys.treadmill) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         #if DEBUG
         // Screenshot sul simulatore: niente richiesta di permesso notifiche sopra l'interfaccia.

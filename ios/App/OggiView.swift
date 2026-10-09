@@ -141,14 +141,10 @@ struct OggiView: View {
         let p = store.plan
         return VStack(spacing: 12) {
             HStack(spacing: 6) {
-                TreadmillView(speed: p.speed, moving: true)
-                    .frame(width: 160)
-                    .padding(.leading, -8)
-                Spacer(minLength: 0)
-                VStack(alignment: .trailing, spacing: 4) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("MINUTI SUL\nTAPPETO")
                         .font(.system(size: 10, weight: .semibold)).tracking(2.4)
-                        .multilineTextAlignment(.trailing).lineSpacing(3).foregroundStyle(Theme.soft)
+                        .lineSpacing(3).foregroundStyle(Theme.soft)
                     HStack(alignment: .firstTextBaseline, spacing: 6) {
                         Text(ItalianFormat.integer(p.minutes) + "\u{2009}")
                             .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
@@ -160,6 +156,12 @@ struct OggiView: View {
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(accessibilityMinutes(p))
+                Spacer(minLength: 0)
+                if store.showsTreadmill {               // si può nascondere dalle Impostazioni
+                    TreadmillView(speed: p.speed, moving: true)
+                        .frame(width: 160)
+                        .padding(.trailing, -8)
+                }
             }
             Rectangle().fill(Theme.ink.opacity(0.10)).frame(height: 1)
             VStack(spacing: 0) {

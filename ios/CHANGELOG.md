@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.2 — 9 ottobre 2026
+- Tapis roulant di nuovo a destra nella card; minuti e passi a sinistra.
+- Impostazioni → Aspetto: «Mostra il tapis roulant» (acceso di default).
+- Widget sul blocco schermo: tondo (arco con i passi), rettangolare (anello con l'omino e i passi) e in linea.
+
 ## 0.5.1 — 9 ottobre 2026
 - Arco dei passi sempre di 270°: a obiettivo chiuso arriva a fondo scala e si ferma (niente anello), anche nel widget.
 - Numero dei passi centrato nell'arco e ridotto quando serve: «10.729» non viene più troncato in «10.7…».

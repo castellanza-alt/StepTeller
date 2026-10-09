@@ -3,17 +3,78 @@ import SwiftUI
 import WidgetKit
 import StepTellerCore
 
-/// Widget piccolo «Passi di oggi»: passi, avanzamento e minuti a piedi che mancano.
+/// Widget «Passi di oggi»: piccolo in Home (passi, avanzamento, minuti a piedi) e, sul blocco schermo,
+/// tondo (arco con i passi), rettangolare (anello con l'omino e i passi) e in linea sopra l'ora.
 struct StepsWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StepsWidget", provider: StepsTimelineProvider()) { entry in
-            StepsWidgetView(plan: entry.plan)
-                .containerBackground(for: .widget) { StepsWidgetBackground() }
+            StepsWidgetEntryView(plan: entry.plan)
         }
         .configurationDisplayName("Passi di oggi")
-        .description("Passi, avanzamento e minuti a piedi che mancano all'obiettivo.")
-        .supportedFamilies([.systemSmall])
+        .description("Passi e avanzamento verso l'obiettivo, anche sul blocco schermo.")
+        .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline])
         .contentMarginsDisabled()
+    }
+}
+
+/// Sceglie la grafica in base al formato.
+struct StepsWidgetEntryView: View {
+    @Environment(\.widgetFamily) private var family
+    let plan: Plan?
+
+    var body: some View {
+        switch family {
+        case .accessoryCircular:
+            LockCircular(plan: plan).containerBackground(for: .widget) { Color.clear }
+        case .accessoryRectangular:
+            LockRectangular(plan: plan).containerBackground(for: .widget) { Color.clear }
+        case .accessoryInline:
+            Label(plan.map { "\(ItalianFormat.integer($0.steps)) passi" } ?? "Passi —", systemImage: "figure.walk")
+                .containerBackground(for: .widget) { Color.clear }
+        default:
+            StepsWidgetView(plan: plan).containerBackground(for: .widget) { StepsWidgetBackground() }
+        }
+    }
+}
+
+/// Blocco schermo, tondo: arco di 270° (come nell'app) con i passi al centro.
+struct LockCircular: View {
+    let plan: Plan?
+    var body: some View {
+        Gauge(value: plan?.progress ?? 0) {
+            Image(systemName: "figure.walk")
+        } currentValueLabel: {
+            Text(plan.map { ItalianFormat.integer($0.steps) } ?? "—")
+                .font(.system(size: 15, weight: .medium)).monospacedDigit()
+                .minimumScaleFactor(0.5).lineLimit(1)
+        }
+        .gaugeStyle(.accessoryCircular)
+        .widgetAccentable()
+        .accessibilityLabel(plan.map { "\(ItalianFormat.integer($0.steps)) passi su \(ItalianFormat.integer($0.goal))" } ?? "Passi non disponibili")
+    }
+}
+
+/// Blocco schermo, rettangolare: anello con l'omino e, accanto, i passi grandi e l'obiettivo.
+struct LockRectangular: View {
+    let plan: Plan?
+    var body: some View {
+        HStack(spacing: 10) {
+            Gauge(value: plan?.progress ?? 0) {
+                Image(systemName: "figure.walk")
+            }
+            .gaugeStyle(.accessoryCircularCapacity)
+            .widgetAccentable()
+            VStack(alignment: .leading, spacing: 0) {
+                Text(plan.map { ItalianFormat.integer($0.steps) } ?? "—")
+                    .font(.system(size: 30, weight: .medium)).monospacedDigit()
+                    .lineLimit(1).minimumScaleFactor(0.6)
+                Text(plan.map { "su \(ItalianFormat.integer($0.goal))" } ?? "apri l'app")
+                    .font(.system(size: 12)).foregroundStyle(.secondary).lineLimit(1)
+            }
+            Spacer(minLength: 0)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(plan.map { "\(ItalianFormat.integer($0.steps)) passi su \(ItalianFormat.integer($0.goal))" } ?? "Passi non disponibili")
     }
 }
 

@@ -137,31 +137,63 @@ struct OggiView: View {
 
     // MARK: minuti sul tappeto
 
+    private func minutesHeader(_ p: Plan) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("MINUTI SUL\nTAPPETO")
+                .font(.system(size: 10, weight: .semibold)).tracking(2.4)
+                .lineSpacing(3).foregroundStyle(Theme.soft)
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Text(ItalianFormat.integer(p.minutes) + "\u{2009}")
+                    .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
+                    .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.5)
+                Text("min").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
+            }
+        }
+    }
+
+    private func sideStat(_ label: String, _ value: String, unit: String?) -> some View {
+        VStack(alignment: .trailing, spacing: 2) {
+            Text(label).font(.system(size: 10, weight: .semibold)).tracking(2.4).foregroundStyle(Theme.soft)
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(value).font(.system(size: 28, weight: .light)).tracking(-0.8).monospacedDigit()
+                    .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
+                if let unit {
+                    Text(unit).font(.system(size: 13, weight: .medium)).foregroundStyle(Theme.soft)
+                }
+            }
+        }
+    }
+
     private var panel: some View {
         let p = store.plan
         return VStack(spacing: 12) {
-            HStack(spacing: 6) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("MINUTI SUL\nTAPPETO")
-                        .font(.system(size: 10, weight: .semibold)).tracking(2.4)
-                        .lineSpacing(3).foregroundStyle(Theme.soft)
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
-                        Text(ItalianFormat.integer(p.minutes) + "\u{2009}")
-                            .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
-                            .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.5)
-                        Text("min").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
+            if store.showsTreadmill {
+                HStack(spacing: 6) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        minutesHeader(p)
+                        Text("per \(Text(ItalianFormat.integer(p.remaining)).fontWeight(.semibold).foregroundStyle(Theme.ink)) passi · \(ItalianFormat.number(p.km, decimals: 1)) km")
+                            .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
                     }
-                    Text("per \(Text(ItalianFormat.integer(p.remaining)).fontWeight(.semibold).foregroundStyle(Theme.ink)) passi · \(ItalianFormat.number(p.km, decimals: 1)) km")
-                        .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
-                }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(accessibilityMinutes(p))
-                Spacer(minLength: 0)
-                if store.showsTreadmill {               // si può nascondere dalle Impostazioni
-                    TreadmillView(speed: p.speed, moving: true)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(accessibilityMinutes(p))
+                    Spacer(minLength: 0)
+                    TreadmillView(speed: p.speed, moving: true)   // si può nascondere dalle Impostazioni
                         .frame(width: 160)
                         .padding(.trailing, -8)
                 }
+            } else {
+                // Senza tappeto: passi e km a destra, come numeri, al posto della riga piccola.
+                HStack(alignment: .bottom, spacing: 12) {
+                    minutesHeader(p)
+                    Spacer(minLength: 0)
+                    VStack(alignment: .trailing, spacing: 14) {
+                        sideStat("PASSI MANCANTI", ItalianFormat.integer(p.remaining), unit: nil)
+                        sideStat("DISTANZA", ItalianFormat.number(p.km, decimals: 1), unit: "km")
+                    }
+                    .padding(.bottom, 8)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(accessibilityMinutes(p))
             }
             Rectangle().fill(Theme.ink.opacity(0.10)).frame(height: 1)
             VStack(spacing: 0) {

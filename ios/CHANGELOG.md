@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.4 — 10 ottobre 2026
+- Nuova icona dell'app (impronte e percorso tratteggiato, scelta da Will).
+- Tappeto nascosto: la card non lascia più il vuoto a destra; passi mancanti e distanza diventano numeri a destra
+  dei minuti.
+
 ## 0.5.3 — 9 ottobre 2026
 - Storico e Streak senza riquadri: periodi e Passi/Km come testo, grafico libero, totale in evidenza con distanza,
   media e giorni a obiettivo affiancati, record e righe della streak separati da linee sottili.

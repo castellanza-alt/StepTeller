@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.5 — 14 ottobre 2026
+- I passi di oggi non si modificano più a mano (arriva tutto da Salute).
+- La streak conta anche i giorni precedenti all'uso dell'app (storico di Salute, con l'obiettivo iniziale; senza
+  Jolly da spendere prima dell'inizio).
+- La festa «Obiettivo raggiunto» aspetta lo storico, così non mostra più «1 giorno di fila» per errore.
+
 ## 0.5.4 — 10 ottobre 2026
 - Nuova icona dell'app (impronte e percorso tratteggiato, scelta da Will).
 - Tappeto nascosto: la card non lascia più il vuoto a destra; passi mancanti e distanza diventano numeri a destra

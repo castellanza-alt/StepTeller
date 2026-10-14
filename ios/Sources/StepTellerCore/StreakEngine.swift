@@ -41,9 +41,11 @@ public enum StreakEngine {
     public static let jollyEvery = 15
 
     /// - Parameters:
-    ///   - start: primo giorno del conteggio (inizio del giorno).
+    ///   - start: primo giorno del conteggio dei Jolly (inizio del giorno): da qui si ricevono i Jolly iniziali.
+    ///   - historyStart: primo giorno con dati precedente a `start`. I giorni prima di `start` contano per la
+    ///     streak (con l'obiettivo iniziale) ma senza Jolly da spendere.
     ///   - steps: passi per giorno (chiave = inizio del giorno); giorni assenti = 0.
-    public static func compute(start: Date, initialJolly: Int = 3, steps: [Date: Int],
+    public static func compute(start: Date, historyStart: Date? = nil, initialJolly: Int = 3, steps: [Date: Int],
                                goals: GoalHistory, now: Date, calendar: Calendar) -> StreakState {
         var s = StreakState()
         s.jolly = initialJolly
@@ -70,8 +72,10 @@ public enum StreakEngine {
             }
         }
 
-        var day = first
+        var day = min(first, historyStart.map { calendar.startOfDay(for: $0) } ?? first)
+        if day < first { s.jolly = 0 }
         while day < today {
+            if day == first, first > (historyStart.map { calendar.startOfDay(for: $0) } ?? first) { s.jolly += initialJolly }
             apply(reached: (steps[day] ?? 0) >= goals.goal(on: day), day: day)
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
             day = next

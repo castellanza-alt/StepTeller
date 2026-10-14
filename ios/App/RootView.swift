@@ -60,6 +60,7 @@ struct RootView: View {
         }
         .onChange(of: store.plan.isDone) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
+        .onChange(of: store.history.loaded) { _, _ in celebrateIfNeeded() }
         .sheet(isPresented: $showSettings) { SettingsSheet() }
     }
 }
@@ -75,6 +76,7 @@ extension RootView {
         #endif
         // solo con una lettura di oggi: al risveglio il numero può essere ancora quello di ieri
         guard scenePhase == .active, !celebrating, store.goal > 0, store.plan.isDone, store.origin == .health,
+              store.history.loaded,      // senza lo storico la streak risulterebbe 1
               let read = store.lastUpdate, Calendar.current.isDateInToday(read)
         else { return }
         let c = Calendar.current.dateComponents([.year, .month, .day], from: Date())

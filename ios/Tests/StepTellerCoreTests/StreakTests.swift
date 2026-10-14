@@ -67,6 +67,22 @@ final class StreakTests: XCTestCase {
         XCTAssertEqual(s.statuses[day(1)], .missed)
     }
 
+    func testDaysBeforeStartCountWithoutJolly() {
+        // giorni 1–4 a obiettivo prima dell'inizio (giorno 5), 5–6 riusciti, oggi 7 raggiunto
+        var steps: [Date: Int] = [:]
+        for d in 1...7 { steps[day(d)] = 10_000 }
+        let s = StreakEngine.compute(start: day(5), historyStart: day(1), steps: steps,
+                                     goals: goals, now: at(7), calendar: cal)
+        XCTAssertEqual(s.streak, 7)
+        XCTAssertEqual(s.jolly, 3)
+        // un giorno mancato prima dell'inizio non può essere salvato da un Jolly
+        steps[day(2)] = 100
+        let t = StreakEngine.compute(start: day(5), historyStart: day(1), steps: steps,
+                                     goals: goals, now: at(7), calendar: cal)
+        XCTAssertEqual(t.streak, 5)
+        XCTAssertEqual(t.statuses[day(2)], .missed)
+    }
+
     func testGoalChangeAppliesFromTodayOnly() {
         var g = GoalHistory(initialGoal: 10_000)
         g.set(8_000, from: day(5))

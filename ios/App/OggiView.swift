@@ -5,7 +5,6 @@ import StepTellerCore
 /// servono con il selettore di velocità.
 struct OggiView: View {
     @Environment(StepsStore.self) private var store
-    @FocusState private var stepsFocused: Bool
     let onSettings: () -> Void
 
     @ScaledMetric(relativeTo: .caption2) private var labelSize: CGFloat = 11
@@ -27,12 +26,6 @@ struct OggiView: View {
             .padding(.horizontal, 22)
             .frame(maxWidth: 460)
             .frame(maxWidth: .infinity)
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Fine") { stepsFocused = false }
-            }
         }
     }
 
@@ -77,8 +70,8 @@ struct OggiView: View {
                 VStack(spacing: 6) {
                     Text("PASSI DI OGGI").font(.system(size: 11, weight: .semibold)).tracking(11 * 0.3)
                         .foregroundStyle(Theme.soft)
-                    NumberField(value: store.steps, placeholder: "0", emptyWhenZero: true, alignment: .center,
-                                onEdit: { store.setManualSteps($0) }, isFocused: $stepsFocused)
+                    Text(ItalianFormat.integer(store.steps))
+                        .lineLimit(1)
                         .font(.system(size: numberSize, weight: .ultraLight)).tracking(-numberSize * 0.05).monospacedDigit()
                         .foregroundStyle(Theme.ink)
                         .frame(width: numberWidth)

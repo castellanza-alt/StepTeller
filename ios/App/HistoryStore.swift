@@ -87,7 +87,7 @@ final class HistoryStore {
         var steps = Dictionary(records.map { (calendar.startOfDay(for: $0.day), $0.steps) }, uniquingKeysWith: { a, _ in a })
         let today = calendar.startOfDay(for: now)
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
-        streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
+        streak = StreakEngine.compute(start: streakStart, historyStart: records.first?.day, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
         stepsByDay = steps
     }

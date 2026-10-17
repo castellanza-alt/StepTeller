@@ -83,8 +83,8 @@ struct HistoryView: View {
                         SketchText("\(s.streak)", size: 104)
                         Text("giorni consecutivi").font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.ink)
                             .fixedSize()
-                            .padding(.horizontal, 6)
-                            .paperHalo()
+                            .padding(.horizontal, 8).padding(.vertical, 2)
+                            .background(Capsule().fill(Theme.bg.opacity(0.9)))
                     }
                     .offset(x: 40, y: 14)
                 }

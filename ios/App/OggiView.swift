@@ -25,16 +25,16 @@ struct OggiView: View {
 
                 if p.isDone {
                     doneBadge
-                        .position(x: full.width - 24 - 70, y: art.minY + art.height * 0.775)
+                        .position(x: full.width - 24 - 70, y: art.minY + art.height * 0.675)
                         .transition(.opacity)
                 } else {
                     minutesBlock(p)
                         .frame(width: full.width * 0.5, alignment: .trailing)
-                        .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.775)
+                        .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.675)
                         .transition(.opacity)
                     speedLabel(p)
                         .frame(width: full.width * 0.6, alignment: .leading)
-                        .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.705)
+                        .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.735)
                         .transition(.opacity)
                     RoadSpeedControl(speed: Binding(get: { store.speed }, set: { store.speed = $0 }),
                                      samples: OggiArt.roadSamples(art: art, limitY: full.height - safe.bottom - 22))
@@ -156,7 +156,7 @@ struct OggiView: View {
                 .font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
                 .lineSpacing(2).foregroundStyle(Theme.ink.opacity(0.8))
             HStack(alignment: .lastTextBaseline, spacing: 6) {
-                SketchText(ItalianFormat.integer(p.minutes), size: 84)
+                SketchText(ItalianFormat.integer(p.minutes), size: 76)
                 Text("min").font(.system(size: 24, weight: .semibold)).foregroundStyle(Theme.ink)
             }
         }

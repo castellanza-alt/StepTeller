@@ -160,7 +160,7 @@ struct OggiView: View {
             if p.isDone {
                 VStack(alignment: .leading, spacing: 0) {
                     dockLabel("OBIETTIVO")
-                    SketchText("FATTO", size: 50, color: Theme.accent)
+                    SketchText("FATTO", size: 50, color: Theme.accent).fixedSize()
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Obiettivo raggiunto")
@@ -174,6 +174,7 @@ struct OggiView: View {
                             .animation(.snappy, value: p.speed)
                         Text("km/h").font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.ink)
                     }
+                    .fixedSize()
                 }
                 .accessibilityHidden(true)       // la velocità si legge (e si cambia) dal pallino sulla strada
                 Spacer(minLength: 8)
@@ -187,6 +188,7 @@ struct OggiView: View {
                             .animation(.snappy, value: p.minutes)
                         Text("min").font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.ink)
                     }
+                    .fixedSize()
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi")

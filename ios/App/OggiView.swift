@@ -23,22 +23,18 @@ struct OggiView: View {
 
                 hero(full: full, safe: safe, art: art)
 
-                sourceBlock
-                    .frame(width: full.width - 60)
-                    .position(x: full.width / 2, y: art.minY + art.height * 0.64)
-
                 if p.isDone {
                     doneBadge
-                        .position(x: full.width - 24 - 70, y: art.minY + art.height * 0.735)
+                        .position(x: full.width - 24 - 70, y: art.minY + art.height * 0.775)
                         .transition(.opacity)
                 } else {
                     minutesBlock(p)
                         .frame(width: full.width * 0.5, alignment: .trailing)
-                        .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.735)
+                        .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.775)
                         .transition(.opacity)
                     speedLabel(p)
                         .frame(width: full.width * 0.6, alignment: .leading)
-                        .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.80)
+                        .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.705)
                         .transition(.opacity)
                     RoadSpeedControl(speed: Binding(get: { store.speed }, set: { store.speed = $0 }),
                                      samples: OggiArt.roadSamples(art: art, limitY: full.height - safe.bottom - 22))
@@ -112,6 +108,7 @@ struct OggiView: View {
                     .accessibilityLabel("Passi di oggi: \(text)")
                 Text("su \(ItalianFormat.integer(p.goal))")
                     .font(.system(size: 21, weight: .semibold)).monospacedDigit().foregroundStyle(Theme.ink.opacity(0.8))
+                sourceBlock.padding(.top, 4)
             }
             .offset(y: rect.height * 0.04)
         }
@@ -139,8 +136,7 @@ struct OggiView: View {
                 .font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.accent)
             }
         }
-        .padding(.horizontal, 10).padding(.vertical, 4)
-        .paperHalo()
+        .frame(maxWidth: 260)
     }
 
     private var sourceText: String {

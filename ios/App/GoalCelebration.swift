@@ -21,7 +21,7 @@ struct GoalCelebration: View {
     var body: some View {
         ZStack {
             Rectangle().fill(.ultraThinMaterial)
-            Theme.bg.opacity(0.8)
+            Theme.bg.opacity(0.94)
 
             if !reduceMotion {
                 TimelineView(.animation) { timeline in

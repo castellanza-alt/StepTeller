@@ -82,8 +82,11 @@ struct HistoryView: View {
                     VStack(alignment: .trailing, spacing: 0) {
                         SketchText("\(s.streak)", size: 104)
                         Text("giorni consecutivi").font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.ink)
+                            .fixedSize()
+                            .padding(.horizontal, 6)
+                            .paperHalo()
                     }
-                    .offset(x: 34, y: 8)
+                    .offset(x: 40, y: 14)
                 }
                 .frame(width: 170, height: 160, alignment: .leading)
                 .accessibilityElement(children: .ignore)
@@ -341,8 +344,9 @@ struct PillPicker<Value: Hashable>: View {
                 let selected = option.0 == selection
                 Button { withAnimation(.easeInOut(duration: 0.2)) { selection = option.0 } } label: {
                     Text(option.1)
-                        .font(.system(size: 15, weight: selected ? .semibold : .regular))
-                        .lineLimit(1).minimumScaleFactor(0.75)
+                        .font(.system(size: 14, weight: selected ? .semibold : .regular))
+                        .lineLimit(1).minimumScaleFactor(0.7)
+                        .padding(.horizontal, 4)
                         .foregroundStyle(selected ? Theme.onAccent : Theme.ink)
                         .frame(maxWidth: .infinity, minHeight: 42)
                         .background {

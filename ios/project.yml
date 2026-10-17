@@ -12,7 +12,7 @@ settings:
     # Il nucleo è Swift 6; l'app resta in modalità linguaggio 5 (come briciola.) perché HealthKit
     # e SwiftUI di Xcode 26 danno avvisi di concorrenza che qui non servono.
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "0.5.5"
+    MARKETING_VERSION: "0.6.0"
     CURRENT_PROJECT_VERSION: "4"
     COMMIT_SHA: ""
 targets:
@@ -68,6 +68,7 @@ targets:
         CFBundleDisplayName: Step Teller
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UIAppFonts: [Anton-Regular.ttf]
         NSHealthShareUsageDescription: Il widget legge i tuoi passi di oggi da Salute per mostrarli e per stimare i minuti a piedi che mancano. Non scrive nulla e non invia dati fuori dal telefono.
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

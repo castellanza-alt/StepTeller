@@ -2,7 +2,11 @@
 
 - Italiano con Will (non programma, lavora da telefono). Prima la conclusione, breve.
 - Il modello di calcolo è in `Sources/StepTellerCore`; i valori golden dei test vengono dalla web app v4.0: non cambiarli
-  senza motivo. Il tappeto (`TreadmillView`) è la foto del Technogym di Will (PNG senza sfondo) con il nastro animato sopra.
+  senza motivo.
+- Aspetto 0.6 «carta e matita»: illustrazioni in `Assets.xcassets/Art*` (generate con Canva, convertite da
+  `scripts/make_art.py` in chiaro/scuro con fondo trasparente), font Anton in `Shared/Fonts` (OFL), componenti in
+  `Shared/Sketch.swift`. Il cursore della velocità segue `OggiArt.road` (punti della linea tratteggiata
+  nell'immagine `ArtOggi`): se si cambia l'immagine vanno ricalcati.
 - Ora c'è un Mac (Mac mini M4, Xcode 27, repo in `~/Developer/StepTeller`). La distribuzione resta su GitHub Actions
   (`.github/workflows/ios-*.yml`); in locale si genera, compila e testa (da `ios/`, `.xcodeproj` e `build/` sono ignorati da git):
   - Generare il progetto: `xcodegen generate`

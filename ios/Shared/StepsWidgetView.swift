@@ -1,34 +1,13 @@
 import SwiftUI
 import StepTellerCore
 
-/// Colori fissi del widget (sempre tema scuro, come i mockup).
-enum WidgetColors {
-    static let bg = Color(red: 0x12 / 255, green: 0x15 / 255, blue: 0x17 / 255)
-    static let ink = Color(red: 0xE4 / 255, green: 0xE2 / 255, blue: 0xDC / 255)
-    static let soft = ink.opacity(0.52)
-    static let accent = Color(red: 0x8C / 255, green: 0xCB / 255, blue: 0xBF / 255)
-}
-
-/// Sfondo del widget: antracite con due orb sfumati.
+/// Sfondo del widget: carta (chiaro o scuro come il sistema).
 struct StepsWidgetBackground: View {
-    var body: some View {
-        GeometryReader { geo in
-            let w = geo.size.width
-            ZStack {
-                WidgetColors.bg
-                Circle().fill(Color(red: 0x3C / 255, green: 0x6E / 255, blue: 0x68 / 255).opacity(0.55))
-                    .frame(width: w * 0.76).blur(radius: w * 0.18).offset(x: -w * 0.26, y: -w * 0.32)
-                Circle().fill(Color(red: 0x48 / 255, green: 0x42 / 255, blue: 0x78 / 255).opacity(0.42))
-                    .frame(width: w * 0.68).blur(radius: w * 0.18).offset(x: w * 0.30, y: w * 0.34)
-            }
-            .frame(width: geo.size.width, height: geo.size.height)
-            .clipped()
-        }
-    }
+    var body: some View { Theme.bg }
 }
 
-/// Widget piccolo «A1»: arco di 270° con i passi al centro e, nell'apertura, i minuti a piedi
-/// (camminata a 4 km/h, solo un'idea di massima). Disegnato nello spazio 340×340 dei mockup e scalato.
+/// Widget piccolo: anello a pennello con i passi al centro e, sotto, i minuti a piedi che mancano
+/// (camminata a 4 km/h, solo un'idea di massima). Disegnato nello spazio 340×340 e scalato.
 struct StepsWidgetView: View {
     /// `nil` = dato non disponibile.
     let plan: Plan?
@@ -43,67 +22,45 @@ struct StepsWidgetView: View {
         }
     }
 
-    private var progress: Double { plan?.progress ?? 0 }
-    private var done: Bool { plan?.isDone ?? false }
-
     private var content: some View {
         ZStack(alignment: .topLeading) {
-            ring
+            BrushGauge(progress: plan?.progress ?? 0, width: 15)
+                .frame(width: 284, height: 226)
+                .position(x: 170, y: 140)
             stepsCenter
-            if !done && plan != nil { minutesBlock }
+            bottomLine
         }
     }
-
-    // MARK: anello
-
-    private var ring: some View {
-        // Sempre un arco di 270°: a obiettivo chiuso arriva a fondo scala e si ferma.
-        let center = CGPoint(x: 170, y: 158)
-        let track = Color.white.opacity(0.10)
-        let line = StrokeStyle(lineWidth: 7, lineCap: .round)
-        let p = min(1, max(0, progress))
-        return ZStack {
-            Circle().trim(from: 0, to: 0.75).stroke(track, style: line).rotationEffect(.degrees(135))
-            Circle().trim(from: 0, to: 0.75 * p).stroke(WidgetColors.accent, style: line)
-                .rotationEffect(.degrees(135))
-                .shadow(color: WidgetColors.accent.opacity(0.45), radius: 6)
-            let angle = (135 + 270 * p) * .pi / 180
-            Circle().fill(WidgetColors.ink).frame(width: 11, height: 11)
-                .shadow(color: WidgetColors.accent.opacity(0.8), radius: 5)
-                .offset(x: 106 * cos(angle), y: 106 * sin(angle))
-        }
-        .frame(width: 212, height: 212)
-        .position(center)
-    }
-
-    // MARK: testi
 
     private var stepsCenter: some View {
-        VStack(spacing: 6) {
-            Text("PASSI").font(.system(size: 11, weight: .semibold)).tracking(3.3)
-                .foregroundStyle(WidgetColors.soft)
-            Text(plan.map { ItalianFormat.integer($0.steps) } ?? "—")
-                .font(.system(size: 62, weight: .ultraLight)).tracking(-3.1).monospacedDigit()
-                .foregroundStyle(WidgetColors.ink).lineLimit(1).minimumScaleFactor(0.6)
+        let text = plan.map { ItalianFormat.integer($0.steps) } ?? "—"
+        return VStack(spacing: 2) {
+            Text("PASSI DI OGGI").font(.system(size: 15, weight: .semibold)).tracking(3)
+                .foregroundStyle(Theme.ink.opacity(0.75))
+            SketchText(text, size: SketchFont.fitted(text, base: 86, width: 180))
             Text(plan.map { "su \(ItalianFormat.integer($0.goal))" } ?? "apri l'app")
-                .font(.system(size: 13)).monospacedDigit().foregroundStyle(WidgetColors.soft)
+                .font(.system(size: 19, weight: .semibold)).monospacedDigit().foregroundStyle(Theme.ink.opacity(0.8))
         }
-        .frame(width: 190)
-        .position(x: 170, y: 151)
+        .frame(width: 210)
+        .position(x: 170, y: 150)
     }
 
-    private var minutesBlock: some View {
-        VStack(spacing: 2) {
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
-                Text("≈").font(.system(size: 13)).foregroundStyle(WidgetColors.soft)
-                Text(plan.map { String($0.minutes) } ?? "—")
-                    .font(.system(size: 38, weight: .light)).tracking(-1.5).monospacedDigit()
-                    .foregroundStyle(WidgetColors.accent)
-                Text("min").font(.system(size: 15, weight: .medium)).foregroundStyle(WidgetColors.soft)
+    @ViewBuilder
+    private var bottomLine: some View {
+        if let plan {
+            Group {
+                if plan.isDone {
+                    Text("OBIETTIVO FATTO").font(.system(size: 19, weight: .bold)).tracking(2)
+                        .foregroundStyle(Theme.accent)
+                } else {
+                    HStack(alignment: .lastTextBaseline, spacing: 6) {
+                        Text("≈").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.ink.opacity(0.7))
+                        SketchText(String(plan.minutes), size: 48, color: Theme.accent)
+                        Text("min a piedi").font(.system(size: 19, weight: .semibold)).foregroundStyle(Theme.ink)
+                    }
+                }
             }
-            Text("A PIEDI").font(.system(size: 11, weight: .semibold)).tracking(2.2)
-                .foregroundStyle(WidgetColors.soft)
+            .position(x: 170, y: 296)
         }
-        .position(x: 170, y: 279)
     }
 }

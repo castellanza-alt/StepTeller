@@ -3,7 +3,8 @@ import StepTellerCore
 
 enum AppTab { case oggi, storico }
 
-/// Radice dell'app: sfondo con gli orb, la pagina scelta e, in basso, la barra Oggi | Storico.
+/// Radice dell'app: la pagina scelta su fondo carta. Da Oggi si va allo Storico con la bandierina,
+/// dallo Storico si torna con le impronte.
 struct RootView: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.scenePhase) private var scenePhase
@@ -27,18 +28,17 @@ struct RootView: View {
 
     var body: some View {
         ZStack {
-            OrbsBackground()
+            Theme.bg.ignoresSafeArea()
             Group {
                 switch tab {
-                case .oggi: OggiView(onSettings: { showSettings = true })
-                case .storico: HistoryView(onSettings: { showSettings = true })
+                case .oggi:
+                    OggiView(onSettings: { showSettings = true }, onHistory: { go(.storico) })
+                        .transition(.move(edge: .leading).combined(with: .opacity))
+                case .storico:
+                    HistoryView(onSettings: { showSettings = true }, onToday: { go(.oggi) })
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
                 }
             }
-            VStack {
-                Spacer()
-                BottomBar(tab: $tab)
-            }
-            .ignoresSafeArea(edges: .bottom)
             .ignoresSafeArea(.keyboard)
 
             if celebrating {
@@ -66,6 +66,10 @@ struct RootView: View {
 }
 
 extension RootView {
+    private func go(_ value: AppTab) {
+        withAnimation(.easeInOut(duration: 0.3)) { tab = value }
+    }
+
     /// Festa alla prima apertura dopo aver chiuso l'obiettivo del giorno (solo con i passi di Salute,
     /// non con una correzione manuale).
     private func celebrateIfNeeded() {
@@ -84,45 +88,5 @@ extension RootView {
         guard celebratedDay != today else { return }
         celebratedDay = today
         withAnimation(.easeOut(duration: 0.25)) { celebrating = true }
-    }
-}
-
-/// Barra in basso: il contenuto che scorre sotto sfuma e si sfoca prima di arrivare al selettore,
-/// che ha uno sfondo pieno (mai sovrapposizioni).
-struct BottomBar: View {
-    @Binding var tab: AppTab
-
-    var body: some View {
-        ZStack(alignment: .top) {
-            Rectangle().fill(.regularMaterial)
-                .mask(LinearGradient(stops: [.init(color: .clear, location: 0), .init(color: .black, location: 0.5)],
-                                     startPoint: .top, endPoint: .bottom))
-            LinearGradient(stops: [.init(color: Theme.bg.opacity(0), location: 0),
-                                   .init(color: Theme.bg.opacity(0.88), location: 0.5),
-                                   .init(color: Theme.bg.opacity(0.96), location: 1)],
-                           startPoint: .top, endPoint: .bottom)
-            HStack(spacing: 0) {
-                item("OGGI", .oggi)
-                item("STORICO", .storico)
-            }
-            .padding(4)
-            .background(Capsule().fill(Theme.pill))
-            .overlay(Capsule().strokeBorder(Theme.pillLine, lineWidth: 1))
-            .padding(.top, 34)
-        }
-        .frame(height: 124)
-    }
-
-    private func item(_ title: String, _ value: AppTab) -> some View {
-        Button { withAnimation(.easeInOut(duration: 0.2)) { tab = value } } label: {
-            Text(title)
-                .font(.system(size: 12, weight: .semibold)).tracking(2.4)
-                .foregroundStyle(tab == value ? Theme.accent : Theme.soft)
-                .frame(width: 112, height: 40)
-                .background(Capsule().fill(tab == value ? Theme.accentSoft : .clear))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(title.capitalized)
-        .accessibilityAddTraits(tab == value ? .isSelected : [])
     }
 }

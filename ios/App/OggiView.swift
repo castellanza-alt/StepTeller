@@ -1,110 +1,146 @@
 import SwiftUI
 import StepTellerCore
 
-/// Pagina «Oggi»: passi di oggi nell'arco (grafica del widget) e, sotto, quanti minuti di tappeto
-/// servono con il selettore di velocità.
+/// Pagina «Oggi»: illustrazione a tutto schermo (scarpa e strada), passi nell'anello a pennello in alto,
+/// minuti sul tappeto a destra e velocità scelta trascinando il pallino rosso lungo la strada.
 struct OggiView: View {
     @Environment(StepsStore.self) private var store
     let onSettings: () -> Void
-
-    @ScaledMetric(relativeTo: .caption2) private var labelSize: CGFloat = 11
+    let onHistory: () -> Void
 
     var body: some View {
         GeometryReader { geo in
-            let arc = min(262, geo.size.width * 0.68)
-            VStack(spacing: 0) {
-                AppHeader(onSettings: onSettings) { chips }
-                    .padding(.top, 10)
-                Spacer(minLength: 8)
-                hero(arc: arc)
-                Spacer(minLength: 10)
-                if !store.plan.isDone {                 // a obiettivo chiuso la card non serve
-                    panel.transition(.opacity)
+            let safe = geo.safeAreaInsets
+            let full = CGSize(width: geo.size.width, height: geo.size.height + safe.top + safe.bottom)
+            let art = OggiArt.rect(in: full)
+            let p = store.plan
+            ZStack(alignment: .topLeading) {
+                Theme.bg
+                Image("ArtOggi").resizable().interpolation(.high)
+                    .frame(width: art.width, height: art.height)
+                    .position(x: art.midX, y: art.midY)
+                    .accessibilityHidden(true)
+
+                hero(full: full, safe: safe, art: art)
+
+                sourceBlock
+                    .frame(width: full.width - 60)
+                    .position(x: full.width / 2, y: art.minY + art.height * 0.64)
+
+                if p.isDone {
+                    doneBadge
+                        .position(x: full.width - 24 - 70, y: art.minY + art.height * 0.735)
+                        .transition(.opacity)
+                } else {
+                    minutesBlock(p)
+                        .frame(width: full.width * 0.5, alignment: .trailing)
+                        .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.735)
+                        .transition(.opacity)
+                    speedLabel(p)
+                        .frame(width: full.width * 0.6, alignment: .leading)
+                        .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.80)
+                        .transition(.opacity)
+                    RoadSpeedControl(speed: Binding(get: { store.speed }, set: { store.speed = $0 }),
+                                     samples: OggiArt.roadSamples(art: art, limitY: full.height - safe.bottom - 22))
+                        .transition(.opacity)
                 }
-                Color.clear.frame(height: 112)      // spazio per la barra in basso
+
+                topBar
+                    .frame(width: full.width - 44)
+                    .position(x: full.width / 2, y: safe.top + 30)
+
+                RoundIconButton(label: "Storico", action: onHistory) {
+                    Image(systemName: "flag.checkered").font(.system(size: 22, weight: .medium))
+                }
+                .position(x: full.width - 22 - 28, y: full.height - max(safe.bottom, 12) - 34)
             }
-            .padding(.horizontal, 22)
-            .frame(maxWidth: 460)
-            .frame(maxWidth: .infinity)
+            .frame(width: full.width, height: full.height)
+            .offset(y: -safe.top)
+            .animation(.easeInOut(duration: 0.3), value: p.isDone)
         }
     }
 
-    // MARK: streak e Jolly (solo icona e numero)
+    // MARK: streak, Jolly e impostazioni
 
-    private var chips: some View {
+    private var topBar: some View {
         let s = store.history.streak
-        return HStack(spacing: 18) {
-            HStack(spacing: 5) {
-                Image(systemName: "flame.fill").font(.system(size: 13))
-                Text("\(s.streak)").monospacedDigit()
+        return HStack(spacing: 22) {
+            HStack(spacing: 6) {
+                Image(systemName: "flame.fill").font(.system(size: 22))
+                    .foregroundStyle(s.streak > 0 ? Theme.accent : Theme.soft)
+                Text("\(s.streak)").font(.system(size: 20, weight: .semibold)).monospacedDigit()
+                    .foregroundStyle(Theme.ink)
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: s.streak)
             }
-            .font(.system(size: 14, weight: .semibold))
-            .foregroundStyle(s.streak > 0 ? Theme.accent : Theme.soft)
-            .contentTransition(.numericText())
-            .animation(.snappy, value: s.streak)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Streak: \(s.streak) giorni")
 
-            HStack(spacing: 5) {
-                GemShape().stroke(Theme.soft, style: StrokeStyle(lineWidth: 1.8, lineJoin: .round))
-                    .frame(width: 13, height: 13)
-                Text("\(s.jolly)").monospacedDigit()
+            HStack(spacing: 6) {
+                GemShape().fill(Theme.ink).frame(width: 19, height: 19)
+                Text("\(s.jolly)").font(.system(size: 20, weight: .semibold)).monospacedDigit()
+                    .foregroundStyle(Theme.ink)
             }
-            .font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.soft)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Jolly disponibili: \(s.jolly)")
+
+            Spacer()
+            RoundIconButton(label: "Impostazioni", action: onSettings) { SlidersIcon() }
         }
-        .padding(.trailing, 8)
     }
 
-    // MARK: passi (arco)
+    // MARK: passi nell'anello
 
-    private func hero(arc: CGFloat) -> some View {
+    private func hero(full: CGSize, safe: EdgeInsets, art: CGRect) -> some View {
         let p = store.plan
-        let numberWidth = arc * 0.74
-        let numberSize = fittedNumberSize(ItalianFormat.integer(store.steps), base: arc * 0.29, width: numberWidth)
-        return VStack(spacing: 8) {
-            ZStack {
-                ArcGauge(progress: p.progress)
-                    .animation(.spring(duration: 0.9, bounce: 0.15), value: p.progress)
-                VStack(spacing: 6) {
-                    Text("PASSI DI OGGI").font(.system(size: 11, weight: .semibold)).tracking(11 * 0.3)
-                        .foregroundStyle(Theme.soft)
-                    Text(ItalianFormat.integer(store.steps))
-                        .lineLimit(1)
-                        .font(.system(size: numberSize, weight: .ultraLight)).tracking(-numberSize * 0.05).monospacedDigit()
-                        .foregroundStyle(Theme.ink)
-                        .frame(width: numberWidth)
-                        .accessibilityLabel("Passi di oggi")
-                    Text("su \(ItalianFormat.integer(p.goal))")
-                        .font(.system(size: 14)).monospacedDigit().foregroundStyle(Theme.soft)
-                }
-                .padding(.bottom, arc * 0.07)
+        let top = safe.top + 64
+        let bottom = max(top + 200, art.minY + art.height * 0.30)
+        let rect = CGRect(x: 16, y: top, width: full.width - 32, height: bottom - top)
+        let numberWidth = rect.width * 0.64
+        let text = ItalianFormat.integer(store.steps)
+        let size = SketchFont.fitted(text, base: min(116, rect.height * 0.46), width: numberWidth)
+        return ZStack {
+            BrushGauge(progress: p.progress, width: 13)
+                .frame(width: rect.width, height: rect.height)
+                .animation(.spring(duration: 0.9, bounce: 0.15), value: p.progress)
+                .accessibilityHidden(true)
+            VStack(spacing: 2) {
+                Text("PASSI DI OGGI").font(.system(size: 15, weight: .semibold)).tracking(15 * 0.22)
+                    .foregroundStyle(Theme.ink.opacity(0.75))
+                SketchText(text, size: size)
+                    .frame(height: size * 1.12)
+                    .accessibilityLabel("Passi di oggi: \(text)")
+                Text("su \(ItalianFormat.integer(p.goal))")
+                    .font(.system(size: 21, weight: .semibold)).monospacedDigit().foregroundStyle(Theme.ink.opacity(0.8))
             }
-            .frame(width: arc, height: arc)
-            sourceLine
-            if store.showsNoDataWarning { noDataWarning }
+            .offset(y: rect.height * 0.04)
         }
-    }
-
-    /// Corpo del numero centrale: pieno finché entra nell'arco, poi si riduce (mai troncato).
-    private func fittedNumberSize(_ text: String, base: CGFloat, width: CGFloat) -> CGFloat {
-        let font = UIFont.monospacedDigitSystemFont(ofSize: base, weight: .ultraLight)
-        let measured = (text as NSString).size(withAttributes: [.font: font, .kern: -base * 0.05]).width
-        guard measured > 0 else { return base }
-        return base * min(1, width * 0.94 / measured)
+        .frame(width: rect.width, height: rect.height)
+        .position(x: rect.midX, y: rect.midY)
     }
 
     /// «da Salute · 21:04» / «manuale · 21:04», con «Usa Salute» quando c'è una sovrascrittura.
-    private var sourceLine: some View {
-        HStack(spacing: 10) {
-            if store.hasOverride {
-                Button("Usa Salute") { Task { await store.useHealth() } }
-                    .font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.accent)
+    private var sourceBlock: some View {
+        VStack(spacing: 6) {
+            HStack(spacing: 10) {
+                if store.hasOverride {
+                    Button("Usa Salute") { Task { await store.useHealth() } }
+                        .font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.accent)
+                }
+                Text(sourceText).font(.system(size: 14)).monospacedDigit().foregroundStyle(Theme.ink.opacity(0.7))
             }
-            Text(sourceText).font(.system(size: 14)).monospacedDigit().foregroundStyle(Theme.soft)
+            if store.showsNoDataWarning {
+                Text("Nessun dato da Salute. Controlla Salute → Condivisione → App → Step Teller")
+                    .font(.system(size: 12)).foregroundStyle(Theme.ink.opacity(0.7)).multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button("Apri Impostazioni") {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
+                }
+                .font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.accent)
+            }
         }
-        .padding(.top, 2)
+        .padding(.horizontal, 10).padding(.vertical, 4)
+        .paperHalo()
     }
 
     private var sourceText: String {
@@ -116,99 +152,150 @@ struct OggiView: View {
         return "\(origin) · \(f.string(from: date))"
     }
 
-    private var noDataWarning: some View {
-        VStack(spacing: 4) {
-            Text("Nessun dato da Salute. Controlla Salute → Condivisione → App → Step Teller")
-                .font(.system(size: 12)).foregroundStyle(Theme.soft).multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-            Button("Apri Impostazioni") {
-                if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
-            }
-            .font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.accent)
-        }
-    }
+    // MARK: minuti e velocità
 
-    // MARK: minuti sul tappeto
-
-    private func minutesHeader(_ p: Plan) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+    private func minutesBlock(_ p: Plan) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
             Text("MINUTI SUL\nTAPPETO")
-                .font(.system(size: 10, weight: .semibold)).tracking(2.4)
-                .lineSpacing(3).foregroundStyle(Theme.soft)
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
-                Text(ItalianFormat.integer(p.minutes) + "\u{2009}")
-                    .font(.system(size: 76, weight: .ultraLight)).tracking(-4.5).monospacedDigit()
-                    .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.5)
-                Text("min").font(.system(size: 16, weight: .medium)).foregroundStyle(Theme.soft)
+                .font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
+                .lineSpacing(2).foregroundStyle(Theme.ink.opacity(0.8))
+            HStack(alignment: .lastTextBaseline, spacing: 6) {
+                SketchText(ItalianFormat.integer(p.minutes), size: 84)
+                Text("min").font(.system(size: 24, weight: .semibold)).foregroundStyle(Theme.ink)
             }
         }
+        .padding(8)
+        .paperHalo()
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi")
     }
 
-    private func sideStat(_ label: String, _ value: String, unit: String?) -> some View {
+    private func speedLabel(_ p: Plan) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("VELOCITÀ · \(Text(p.gait.label.uppercased()).foregroundStyle(Theme.accent))")
+                .font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
+                .foregroundStyle(Theme.ink.opacity(0.8))
+            HStack(alignment: .lastTextBaseline, spacing: 8) {
+                SketchText(ItalianFormat.number(p.speed, decimals: 1), size: 64)
+                Text("km/h").font(.system(size: 22, weight: .semibold)).foregroundStyle(Theme.ink)
+            }
+        }
+        .padding(8)
+        .paperHalo()
+        .accessibilityHidden(true)       // la velocità si legge (e si cambia) dal cursore sulla strada
+    }
+
+    private var doneBadge: some View {
         VStack(alignment: .trailing, spacing: 2) {
-            Text(label).font(.system(size: 10, weight: .semibold)).tracking(2.4).foregroundStyle(Theme.soft)
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(value).font(.system(size: 28, weight: .light)).tracking(-0.8).monospacedDigit()
-                    .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
-                if let unit {
-                    Text(unit).font(.system(size: 13, weight: .medium)).foregroundStyle(Theme.soft)
-                }
+            Text("OBIETTIVO").font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
+                .foregroundStyle(Theme.ink.opacity(0.8))
+            SketchText("FATTO", size: 64, color: Theme.accent)
+        }
+        .padding(8)
+        .paperHalo()
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Obiettivo raggiunto")
+    }
+}
+
+/// Posizione dell'illustrazione e della strada (coordinate normalizzate dell'immagine 944×1680).
+enum OggiArt {
+    static let aspect: CGFloat = 1680.0 / 944.0
+
+    /// Larga quanto lo schermo e appoggiata in basso; sugli schermi bassi lascia comunque il 22% in alto
+    /// (la parte bassa dell'immagine esce dallo schermo).
+    static func rect(in size: CGSize) -> CGRect {
+        let h = size.width * aspect
+        let top = max(size.height - h, size.height * 0.22)
+        return CGRect(x: 0, y: top, width: size.width, height: h)
+    }
+
+    /// Linea tratteggiata al centro della strada, dal basso a sinistra (3 km/h) alla curva dietro la scarpa (12 km/h).
+    static let road: [CGPoint] = [
+        CGPoint(x: 0.03, y: 0.972), CGPoint(x: 0.132, y: 0.911), CGPoint(x: 0.242, y: 0.857), CGPoint(x: 0.35, y: 0.808),
+        CGPoint(x: 0.443, y: 0.771), CGPoint(x: 0.53, y: 0.744), CGPoint(x: 0.606, y: 0.714), CGPoint(x: 0.69, y: 0.683),
+        CGPoint(x: 0.77, y: 0.655), CGPoint(x: 0.83, y: 0.638), CGPoint(x: 0.855, y: 0.615), CGPoint(x: 0.835, y: 0.597),
+        CGPoint(x: 0.785, y: 0.592), CGPoint(x: 0.735, y: 0.587), CGPoint(x: 0.69, y: 0.576),
+    ]
+
+    /// Punti della strada sullo schermo; il tratto iniziale sotto `limitY` (fuori schermo o sotto la barra
+    /// di sistema) non si usa.
+    static func roadSamples(art: CGRect, limitY: CGFloat) -> [CGPoint] {
+        let all = SmoothCurve.samples(road, in: art)
+        guard let first = all.firstIndex(where: { $0.y <= limitY }) else { return all }
+        return Array(all[first...])
+    }
+}
+
+/// Cursore della velocità: pallino rosso trascinabile lungo la strada (3–12 km/h, passo 0,1).
+struct RoadSpeedControl: View {
+    @Binding var speed: Double
+    let samples: [CGPoint]
+    private let range = CadenceModel.minSpeed...CadenceModel.maxSpeed
+
+    /// Lunghezza cumulata normalizzata 0…1 di ogni punto.
+    private var fractions: [CGFloat] {
+        var acc: [CGFloat] = [0]
+        for i in 1..<max(1, samples.count) {
+            acc.append(acc[i - 1] + hypot(samples[i].x - samples[i - 1].x, samples[i].y - samples[i - 1].y))
+        }
+        let total = max(acc.last ?? 1, 1)
+        return acc.map { $0 / total }
+    }
+
+    var body: some View {
+        let f = fractions
+        let t = CGFloat((speed - range.lowerBound) / (range.upperBound - range.lowerBound))
+        ZStack(alignment: .topLeading) {
+            RoadHitShape(samples: samples).fill(Color.clear)
+            RoadDot(size: 32).position(point(at: t, fractions: f))
+                .allowsHitTesting(false)
+        }
+        .contentShape(RoadHitShape(samples: samples))
+        .gesture(DragGesture(minimumDistance: 0).onChanged { drag in
+            guard !samples.isEmpty else { return }
+            let i = samples.indices.min(by: { dist(samples[$0], drag.location) < dist(samples[$1], drag.location) }) ?? 0
+            let v = range.lowerBound + Double(f[i]) * (range.upperBound - range.lowerBound)
+            speed = min(range.upperBound, max(range.lowerBound, (v * 10).rounded() / 10))
+        })
+        .sensoryFeedback(.selection, trigger: Int(speed))      // tocco aptico a ogni km/h intero
+        .accessibilityElement()
+        .accessibilityLabel("Velocità")
+        .accessibilityValue("\(ItalianFormatBridge.speed(speed)) chilometri orari")
+        .accessibilityAdjustableAction { direction in
+            switch direction {
+            case .increment: speed = min(range.upperBound, ((speed + 0.1) * 10).rounded() / 10)
+            case .decrement: speed = max(range.lowerBound, ((speed - 0.1) * 10).rounded() / 10)
+            @unknown default: break
             }
         }
     }
 
-    private var panel: some View {
-        let p = store.plan
-        return VStack(spacing: 12) {
-            if store.showsTreadmill {
-                HStack(spacing: 6) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        minutesHeader(p)
-                        Text("per \(Text(ItalianFormat.integer(p.remaining)).fontWeight(.semibold).foregroundStyle(Theme.ink)) passi · \(ItalianFormat.number(p.km, decimals: 1)) km")
-                            .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
-                    }
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel(accessibilityMinutes(p))
-                    Spacer(minLength: 0)
-                    TreadmillView(speed: p.speed, moving: true)   // si può nascondere dalle Impostazioni
-                        .frame(width: 160)
-                        .padding(.trailing, -8)
-                }
-            } else {
-                // Senza tappeto: passi e km a destra, come numeri, al posto della riga piccola.
-                HStack(alignment: .bottom, spacing: 12) {
-                    minutesHeader(p)
-                    Spacer(minLength: 0)
-                    VStack(alignment: .trailing, spacing: 14) {
-                        sideStat("PASSI MANCANTI", ItalianFormat.integer(p.remaining), unit: nil)
-                        sideStat("DISTANZA", ItalianFormat.number(p.km, decimals: 1), unit: "km")
-                    }
-                    .padding(.bottom, 8)
-                }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(accessibilityMinutes(p))
-            }
-            Rectangle().fill(Theme.ink.opacity(0.10)).frame(height: 1)
-            VStack(spacing: 0) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text("VELOCITÀ · \(Text(p.gait.label.uppercased()).foregroundStyle(Theme.accent))")
-                        .font(.system(size: labelSize, weight: .semibold)).tracking(labelSize * 0.24)
-                        .foregroundStyle(Theme.soft)
-                    Spacer(minLength: 16)
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
-                        Text(ItalianFormat.number(p.speed, decimals: 1))
-                            .font(.system(size: 34, weight: .light)).tracking(-1).monospacedDigit().foregroundStyle(Theme.ink)
-                        Text("km/h").font(.system(size: 13, weight: .medium)).foregroundStyle(Theme.soft)
-                    }
-                }
-                SpeedDial(speed: Binding(get: { store.speed }, set: { store.speed = $0 }))
-            }
-        }
-        .padding(EdgeInsets(top: 18, leading: 20, bottom: 14, trailing: 20))
-        .background(GlassPanelBackground())
-    }
+    private func dist(_ a: CGPoint, _ b: CGPoint) -> CGFloat { hypot(a.x - b.x, a.y - b.y) }
 
-    private func accessibilityMinutes(_ p: Plan) -> String {
-        return "\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi, \(ItalianFormat.number(p.km, decimals: 1)) chilometri"
+    private func point(at t: CGFloat, fractions f: [CGFloat]) -> CGPoint {
+        guard let last = samples.last else { return .zero }
+        guard let i = f.firstIndex(where: { $0 >= t }), i > 0 else { return t <= 0 ? samples.first ?? last : last }
+        let span = max(f[i] - f[i - 1], 0.0001)
+        let k = (t - f[i - 1]) / span
+        return CGPoint(x: samples[i - 1].x + (samples[i].x - samples[i - 1].x) * k,
+                       y: samples[i - 1].y + (samples[i].y - samples[i - 1].y) * k)
+    }
+}
+
+/// Zona sensibile al tocco: una fascia larga 64 pt attorno alla strada.
+private struct RoadHitShape: Shape {
+    let samples: [CGPoint]
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.addLines(samples)
+        return p.strokedPath(StrokeStyle(lineWidth: 64, lineCap: .round, lineJoin: .round))
+    }
+}
+
+extension View {
+    /// Alone di carta dietro le scritte che stanno sopra l'illustrazione.
+    func paperHalo() -> some View {
+        background(RoundedRectangle(cornerRadius: 24).fill(Theme.bg.opacity(0.78)).blur(radius: 12))
     }
 }

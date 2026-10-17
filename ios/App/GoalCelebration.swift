@@ -2,7 +2,7 @@ import SwiftUI
 import StepTellerCore
 
 /// Festa «Obiettivo raggiunto»: la prima volta che si apre l'app dopo aver chiuso l'obiettivo del
-/// giorno. L'arco si riempie fino a fondo scala, compare la spunta e partono le scintille; si chiude
+/// giorno. La pennellata dell'anello si completa, compare la spunta e partono le scintille; si chiude
 /// da sola dopo qualche secondo o con un tocco. Con «Riduci movimento» niente scintille né scatti.
 struct GoalCelebration: View {
     let steps: Int
@@ -21,7 +21,7 @@ struct GoalCelebration: View {
     var body: some View {
         ZStack {
             Rectangle().fill(.ultraThinMaterial)
-            Theme.bg.opacity(0.55)
+            Theme.bg.opacity(0.8)
 
             if !reduceMotion {
                 TimelineView(.animation) { timeline in
@@ -34,17 +34,12 @@ struct GoalCelebration: View {
 
             VStack(spacing: 26) {
                 ZStack {
-                    ArcShape(progress: 1, lineWidth: 6)
-                        .stroke(Theme.ink.opacity(0.10), style: StrokeStyle(lineWidth: 6, lineCap: .round))
-                    ArcShape(progress: arc, lineWidth: 6)
-                        .stroke(Theme.accent, style: StrokeStyle(lineWidth: 6, lineCap: .round))
-                        .shadow(color: Theme.accent.opacity(0.55), radius: 8)
-                    CheckShape().trim(from: 0, to: check)
-                        .stroke(Theme.accent, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-                        .frame(width: 52, height: 40)
-                        .offset(y: -6)
+                    BrushGauge(progress: arc, width: 10)
+                    BrushStroke(shape: CheckShape().trim(from: 0, to: check), width: 8)
+                        .frame(width: 70, height: 52)
+                        .offset(y: 4)
                 }
-                .frame(width: 150, height: 150)
+                .frame(width: 200, height: 170)
                 .background(GeometryReader { g in
                     let f = g.frame(in: .named("festa"))
                     Color.clear
@@ -54,23 +49,21 @@ struct GoalCelebration: View {
 
                 VStack(spacing: 10) {
                     Text("OBIETTIVO RAGGIUNTO")
-                        .font(.system(size: 12, weight: .semibold)).tracking(12 * 0.34)
+                        .font(.system(size: 15, weight: .bold)).tracking(15 * 0.24)
                         .foregroundStyle(Theme.accent)
-                    Text(ItalianFormat.integer(steps))
-                        .font(.system(size: 64, weight: .ultraLight)).tracking(-3.2).monospacedDigit()
-                        .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.5)
+                    SketchText(ItalianFormat.integer(steps), size: 88)
                     Text("passi su \(ItalianFormat.integer(goal))")
-                        .font(.system(size: 14)).monospacedDigit().foregroundStyle(Theme.soft)
+                        .font(.system(size: 18, weight: .semibold)).monospacedDigit().foregroundStyle(Theme.ink.opacity(0.8))
                 }
                 .opacity(shown ? 1 : 0)
                 .offset(y: shown ? 0 : 12)
 
                 if streak > 0 {
-                    HStack(spacing: 6) {
-                        Image(systemName: "flame.fill").font(.system(size: 13))
+                    HStack(spacing: 8) {
+                        Image("ArtFiamma").resizable().scaledToFit().frame(width: 40, height: 40)
                         Text(streak == 1 ? "1 giorno di fila" : "\(streak) giorni di fila")
                     }
-                    .font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.accent)
+                    .font(.system(size: 18, weight: .semibold)).foregroundStyle(Theme.ink)
                     .opacity(shown ? 1 : 0)
                     .offset(y: shown ? 0 : 12)
                 }
@@ -113,7 +106,7 @@ struct GoalCelebration: View {
     }
 }
 
-/// Spunta dentro l'arco.
+/// Spunta dentro l'anello.
 private struct CheckShape: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
@@ -124,7 +117,7 @@ private struct CheckShape: Shape {
     }
 }
 
-/// Scintille: due scoppi dal centro dell'arco, con gravità leggera e dissolvenza. Deterministiche
+/// Scintille: due scoppi dal centro dell'anello, con gravità leggera e dissolvenza. Deterministiche
 /// (stesso disegno a ogni festa), nei colori della palette.
 private enum Sparks {
     private struct Spark {
@@ -146,9 +139,9 @@ private enum Sparks {
         }
     }()
 
-    private static let colors: [Color] = [Theme.accent, Theme.orb2, Theme.orb3, Theme.ink.opacity(0.7)]
+    private static let colors: [Color] = [Theme.accent, Theme.accent.opacity(0.6), Theme.ink.opacity(0.75), Theme.ink.opacity(0.4)]
 
-    /// `origin`: centro dell'arco, nello spazio della festa.
+    /// `origin`: centro dell'anello, nello spazio della festa.
     static func draw(_ ctx: inout GraphicsContext, origin: CGPoint, t: Double) {
         for s in sparks {
             let life = t - s.delay

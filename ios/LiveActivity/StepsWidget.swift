@@ -3,7 +3,7 @@ import SwiftUI
 import WidgetKit
 import StepTellerCore
 
-/// Widget «Passi di oggi»: piccolo in Home (passi, avanzamento, minuti a piedi) e, sul blocco schermo,
+/// Widget «Passi di oggi»: piccolo in Home (anello a pennello, passi, minuti a piedi) e, sul blocco schermo,
 /// tondo (arco con i passi), rettangolare (anello con l'omino e i passi) e in linea sopra l'ora.
 struct StepsWidget: Widget {
     var body: some WidgetConfiguration {
@@ -66,7 +66,7 @@ struct LockRectangular: View {
             .widgetAccentable()
             VStack(alignment: .leading, spacing: 0) {
                 Text(plan.map { ItalianFormat.integer($0.steps) } ?? "—")
-                    .font(.system(size: 30, weight: .medium)).monospacedDigit()
+                    .font(.anton(32))
                     .lineLimit(1).minimumScaleFactor(0.6)
                 Text(plan.map { "su \(ItalianFormat.integer($0.goal))" } ?? "apri l'app")
                     .font(.system(size: 12)).foregroundStyle(.secondary).lineLimit(1)

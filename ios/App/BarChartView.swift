@@ -1,66 +1,75 @@
 import SwiftUI
 import StepTellerCore
 
-enum HistoryMetric { case steps, km }
-
-/// Grafico a barre dello storico. Passi: linea tratteggiata dell'obiettivo (solo grafici a giorni);
-/// barra piena = obiettivo raggiunto, tenue = oggi/periodo in corso, assenti = punto sottile.
-struct BarChartView: View {
+/// Grafico a barre dei passi «a matita»: barre tratteggiate, rosse se l'obiettivo è raggiunto, nere se no,
+/// rosso tenue per il periodo in corso; linea tratteggiata dell'obiettivo con l'etichetta a sinistra
+/// (solo grafici a giorni); assi disegnati.
+struct SketchBarChart: View {
     let bars: [HistoryBar]
-    let metric: HistoryMetric
     let period: HistoryPeriod
 
-    private func value(_ b: HistoryBar) -> Double { metric == .steps ? Double(b.steps) : b.km }
-
     var body: some View {
-        let showGoal = metric == .steps && (period == .week || period == .month)
+        let showGoal = period == .week || period == .month
         let goal = Double(bars.last(where: { !$0.isFuture })?.goal ?? bars.first?.goal ?? 0)
-        let maxValue = max(bars.map(value).max() ?? 1, showGoal ? goal : 0, 1)
-        VStack(spacing: 6) {
+        let maxValue = max(Double(bars.map(\.steps).max() ?? 1), showGoal ? goal : 0, 1) * 1.1
+        HStack(alignment: .top, spacing: 6) {
+            // etichetta dell'obiettivo a sinistra, all'altezza della linea
             GeometryReader { geo in
-                let h = geo.size.height
-                ZStack(alignment: .bottom) {
-                    if showGoal && goal > 0 {
-                        Path { p in
-                            let y = h - h * CGFloat(goal / (maxValue * 1.08))
-                            p.move(to: CGPoint(x: 0, y: y)); p.addLine(to: CGPoint(x: geo.size.width, y: y))
-                        }
-                        .stroke(Theme.ink.opacity(0.28), style: StrokeStyle(lineWidth: 1, dash: [4, 4]))
-                        Text(ItalianFormat.integer(Int(goal)))
-                            .font(.system(size: 9)).tracking(0.9).foregroundStyle(Theme.ink.opacity(0.45))
-                            .position(x: geo.size.width - 18, y: h - h * CGFloat(goal / (maxValue * 1.08)) - 8)
-                    }
-                    HStack(alignment: .bottom, spacing: spacing) {
-                        ForEach(bars) { b in
-                            bar(b, h: h, maxValue: maxValue)
-                        }
-                    }
+                if showGoal && goal > 0 {
+                    Text(ItalianFormat.integer(Int(goal))).font(.system(size: 13, weight: .medium)).monospacedDigit()
+                        .foregroundStyle(Theme.ink).fixedSize()
+                        .position(x: geo.size.width / 2, y: geo.size.height * (1 - CGFloat(goal / maxValue)))
                 }
             }
-            .frame(height: 122)
-            labels
+            .frame(width: showGoal ? 44 : 0, height: 120)
+
+            VStack(spacing: 6) {
+                GeometryReader { geo in
+                    let h = geo.size.height
+                    ZStack(alignment: .bottomLeading) {
+                        HStack(alignment: .bottom, spacing: spacing) {
+                            ForEach(bars) { b in bar(b, h: h, maxValue: maxValue) }
+                        }
+                        .padding(.horizontal, 6)
+                        if showGoal && goal > 0 {
+                            Path { p in
+                                let y = h * (1 - CGFloat(goal / maxValue))
+                                p.move(to: CGPoint(x: 0, y: y)); p.addLine(to: CGPoint(x: geo.size.width, y: y))
+                            }
+                            .stroke(Theme.ink.opacity(0.75), style: StrokeStyle(lineWidth: 1.2, dash: [5, 4]))
+                        }
+                        // assi
+                        Path { p in
+                            p.move(to: CGPoint(x: 0, y: 0)); p.addLine(to: CGPoint(x: 0, y: h))
+                            p.addLine(to: CGPoint(x: geo.size.width, y: h))
+                        }
+                        .stroke(Theme.ink, style: StrokeStyle(lineWidth: 1.6, lineCap: .round, lineJoin: .round))
+                    }
+                }
+                .frame(height: 120)
+                labels
+            }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Grafico: \(bars.count) barre")
+        .accessibilityLabel("Grafico: \(bars.count) barre, \(bars.filter(\.reachedGoal).count) a obiettivo")
     }
 
-    private var spacing: CGFloat { period == .month ? 2.5 : (period == .week ? 10 : 8) }
-    private var maxBarWidth: CGFloat { period == .week ? 30 : (period == .month ? 12 : 22) }
+    private var spacing: CGFloat { period == .month ? 2.5 : (period == .week ? 14 : 8) }
+    private var maxBarWidth: CGFloat { period == .week ? 40 : (period == .month ? 12 : 22) }
 
     @ViewBuilder
     private func bar(_ b: HistoryBar, h: CGFloat, maxValue: Double) -> some View {
-        let height = max(3, h * CGFloat(value(b) / (maxValue * 1.08)))
-        let radius: CGFloat = period == .month ? 3 : 7
+        let height = max(3, h * CGFloat(Double(b.steps) / maxValue))
         Group {
             if b.isFuture {
-                RoundedRectangle(cornerRadius: 2).fill(Theme.ink.opacity(0.14)).frame(height: 3)
-            } else if b.isCurrent {
-                RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.accent.opacity(0.38))
-                    .frame(height: height)
-            } else if b.goal == 0 || b.reachedGoal {
-                RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.accent.opacity(0.9)).frame(height: height)
+                Rectangle().fill(Theme.ink.opacity(0.18)).frame(height: 2)
             } else {
-                RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.ink.opacity(0.22)).frame(height: height)
+                let color: Color = b.isCurrent ? Theme.accent.opacity(0.45)
+                    : (b.goal == 0 || b.reachedGoal ? Theme.accent : Theme.ink.opacity(0.72))
+                Rectangle().fill(color)
+                    .overlay(Hatch(spacing: 3.2).stroke(Theme.bg.opacity(0.45), lineWidth: 0.8).clipped())
+                    .overlay(Rectangle().stroke(color, lineWidth: 1))
+                    .frame(height: height)
             }
         }
         .frame(maxWidth: maxBarWidth)
@@ -71,13 +80,14 @@ struct BarChartView: View {
         HStack(spacing: spacing) {
             ForEach(bars) { b in
                 Text(showLabel(b) ? b.label : "")
-                    .font(.system(size: 10, weight: .semibold)).tracking(1)
-                    .foregroundStyle(b.isCurrent ? Theme.accent : Theme.soft)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(b.isCurrent ? Theme.accent : Theme.ink)
                     .lineLimit(1)
                     .fixedSize()                    // le etichette del mese sono più larghe della barra: non vanno ridotte
                     .frame(maxWidth: .infinity)
             }
         }
+        .padding(.horizontal, 6)
     }
 
     /// Mese: solo alcuni giorni (1, 8, 15, 22, ultimo); gli altri periodi: tutte le etichette.

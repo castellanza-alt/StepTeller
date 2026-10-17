@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 — 17 ottobre 2026
+- Nuovo aspetto «carta e matita» dai mockup di Will, in chiaro e in scuro: illustrazioni disegnate a mano
+  (generate con Canva), numeri condensati con tratteggio (font Anton), rosso al posto del verde acqua.
+- Oggi: illustrazione a tutto schermo con la scarpa sulla strada; i passi sono nell'anello a pennello in alto
+  (rosso fin dove sei arrivato, matita per il resto); la velocità si sceglie trascinando il pallino rosso lungo
+  la linea tratteggiata della strada (3 km/h in basso a sinistra, 12 km/h dietro la scarpa).
+- Storico e Streak in un'unica pagina: fiamma con i giorni consecutivi e Jolly, calendario del mese sfogliabile,
+  «I miei passi» (totale, grafico, media) e «Il mio meglio» (giorno, settimana, mese, anno, serie più lunga).
+- Niente più barra in basso: bandierina per lo Storico, impronte per tornare a Oggi.
+- Tolti il tapis roulant illustrato (e la sua opzione), la scelta Passi/Km e le cifre secondarie dello Storico.
+- Festa «Obiettivo raggiunto» e widget piccolo nel nuovo stile.
+
 ## 0.5.5 — 14 ottobre 2026
 - I passi di oggi non si modificano più a mano (arriva tutto da Salute).
 - La streak conta anche i giorni precedenti all'uso dell'app (storico di Salute, con l'obiettivo iniziale; senza

@@ -1,388 +1,457 @@
 import SwiftUI
 import StepTellerCore
 
-enum HistorySection { case storico, streak }
-
-/// Pagina «Storico»: selettore Storico | Streak in alto, poi il contenuto scelto.
+/// Pagina «Storico» (unica, a scorrimento): streak e Jolly con il calendario del mese, «I miei passi»
+/// (settimana/mese/anno/sempre) e «Il mio meglio» (record). Illustrazioni in alto e in fondo.
 struct HistoryView: View {
     @Environment(StepsStore.self) private var store
-    @State private var section: HistorySection
     @State private var period: HistoryPeriod
     @State private var offset = 0
-    @State private var metric: HistoryMetric = .steps
+    @State private var monthOffset = 0
+    @State private var best: BestKind = .day
     let onSettings: () -> Void
+    let onToday: () -> Void
 
-    init(onSettings: @escaping () -> Void) {
+    init(onSettings: @escaping () -> Void, onToday: @escaping () -> Void) {
         self.onSettings = onSettings
-        var sec = HistorySection.storico
+        self.onToday = onToday
         var per = HistoryPeriod.week
         #if DEBUG
-        let d = UserDefaults.standard
-        if d.string(forKey: "stepteller.debugTab") == "streak" { sec = .streak }
-        switch d.string(forKey: "stepteller.debugPeriod") {
+        switch UserDefaults.standard.string(forKey: "stepteller.debugPeriod") {
         case "month": per = .month
         case "year": per = .year
         case "all": per = .all
         default: break
         }
         #endif
-        _section = State(initialValue: sec)
         _period = State(initialValue: per)
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                AppHeader(onSettings: onSettings) { EmptyView() }
-                sectionTabs
-                if section == .storico {
-                    StoricoPage(period: $period, offset: $offset, metric: $metric)
-                } else {
-                    StreakPage()
+        GeometryReader { geo in
+            let w = geo.size.width
+            ScrollViewReader { reader in
+                ScrollView {
+                    VStack(spacing: 0) {
+                        streakSection(width: w)
+                        TrailLine().frame(height: 56).padding(.horizontal, 40)
+                        StepsSection(period: $period, offset: $offset)
+                            .padding(.horizontal, 22)
+                        TrailLine(flipped: true).frame(height: 56).padding(.horizontal, 40)
+                        bestSection(width: w).id("fondo")
+                    }
                 }
+                .scrollIndicators(.hidden)
+                #if DEBUG
+                .onAppear {     // solo screenshot: `-stepteller.debugScroll 1` mostra il fondo della pagina
+                    if UserDefaults.standard.object(forKey: "stepteller.debugScroll") != nil {
+                        reader.scrollTo("fondo", anchor: .bottom)
+                    }
+                }
+                #endif
             }
-            .padding(.horizontal, 22)
-            .padding(.top, 10)
-            .padding(.bottom, 130)
-            .frame(maxWidth: 460)
-            .frame(maxWidth: .infinity)
+            .ignoresSafeArea(edges: .bottom)
+            .overlay(alignment: .bottomLeading) {
+                RoundIconButton(label: "Oggi", action: onToday) {
+                    Image(systemName: "shoeprints.fill").font(.system(size: 22, weight: .medium))
+                }
+                .padding(.leading, 22).padding(.bottom, 6)
+            }
         }
-        .scrollIndicators(.hidden)
     }
 
-    /// Selettore a due titoli con linea sotto quello attivo (diverso dai pulsanti dei periodi).
-    private var sectionTabs: some View {
-        HStack(alignment: .bottom, spacing: 30) {
-            tab("Storico", .storico, icon: nil)
-            tab("Streak", .streak, icon: "flame.fill")
-            Spacer()
+    // MARK: streak, Jolly e calendario
+
+    private func streakSection(width w: CGFloat) -> some View {
+        let s = store.history.streak
+        let stats = store.history.stats
+        let maxMonth = stats.maxOffset(.month)
+        return VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                RoundIconButton(label: "Impostazioni", action: onSettings) { SlidersIcon() }
+            }
+            .padding(.horizontal, 22).padding(.top, 4)
+
+            HStack(alignment: .center, spacing: 16) {
+                ZStack(alignment: .bottomTrailing) {
+                    Image("ArtFiamma").resizable().scaledToFit()
+                        .frame(width: 150, height: 150)
+                        .opacity(s.streak > 0 ? 1 : 0.35)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .trailing, spacing: 0) {
+                        SketchText("\(s.streak)", size: 104)
+                        Text("giorni consecutivi").font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.ink)
+                    }
+                    .offset(x: 34, y: 8)
+                }
+                .frame(width: 170, height: 160, alignment: .leading)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Streak: \(s.streak) giorni consecutivi")
+
+                Rectangle().fill(Theme.ink.opacity(0.6)).frame(width: 1.5, height: 60).padding(.leading, 14)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: -4) {
+                        ForEach(0..<min(max(s.jolly, 0), 3), id: \.self) { _ in JollyGem().frame(width: 34, height: 34) }
+                        if s.jolly == 0 { JollyGem(empty: true).frame(width: 34, height: 34) }
+                    }
+                    Text(s.jolly == 1 ? "1 Jolly disponibile" : "\(s.jolly) Jolly disponibili")
+                        .font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.ink)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Jolly disponibili: \(s.jolly)")
+                Spacer(minLength: 0)
+            }
+            .padding(.leading, 30).padding(.top, 6)
+
+            VStack(spacing: 10) {
+                HStack {
+                    chevron("chevron.left", "Mese precedente", disabled: monthOffset >= maxMonth) { monthOffset += 1 }
+                    Spacer()
+                    Text(stats.title(.month, offset: monthOffset).uppercased())
+                        .font(.system(size: 19, weight: .semibold)).tracking(0.6).foregroundStyle(Theme.ink)
+                    Spacer()
+                    chevron("chevron.right", "Mese successivo", disabled: monthOffset == 0) { monthOffset -= 1 }
+                }
+                CalendarGrid(monthStart: stats.interval(.month, offset: monthOffset).start,
+                             mark: { store.history.mark(for: $0) }, today: stats.today)
+            }
+            .padding(12)
+            .paperHalo()
+            .frame(width: min(w * 0.68, 300))
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding(.trailing, 14).padding(.top, 18)
         }
-        .padding(.horizontal, 2)
-        .overlay(alignment: .bottom) { Rectangle().fill(Theme.ink.opacity(0.10)).frame(height: 1) }
+        .padding(.bottom, 30)
+        .background(alignment: .top) {
+            Image("ArtStoricoAlto").resizable().scaledToFit()
+                .frame(width: w)
+                .padding(.top, 70)
+                .accessibilityHidden(true)
+        }
     }
 
-    private func tab(_ title: String, _ value: HistorySection, icon: String?) -> some View {
-        Button { withAnimation(.easeInOut(duration: 0.2)) { section = value } } label: {
-            HStack(spacing: 7) {
-                if let icon { Image(systemName: icon).font(.system(size: 14)) }
-                Text(title).font(.system(size: 24, weight: .light)).tracking(-0.5)
-            }
-            .foregroundStyle(section == value ? Theme.ink : Theme.ink.opacity(0.40))
-            .padding(.top, 4).padding(.bottom, 10)
-            .overlay(alignment: .bottom) {
-                Rectangle().fill(section == value ? Theme.accent : .clear).frame(height: 2)
-            }
+    private func chevron(_ symbol: String, _ label: String, disabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: { withAnimation(.easeInOut(duration: 0.2)) { action() } }) {
+            Image(systemName: symbol).font(.system(size: 18, weight: .semibold))
+                .frame(width: 36, height: 36).contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityAddTraits(section == value ? .isSelected : [])
+        .foregroundStyle(Theme.ink)
+        .disabled(disabled).opacity(disabled ? 0.2 : 1)
+        .accessibilityLabel(label)
+    }
+
+    // MARK: il mio meglio
+
+    private func bestSection(width w: CGFloat) -> some View {
+        let r = store.history.stats.personalRecords()
+        let longest = store.history.streak.longest
+        let entry = bestEntry(r, longest: longest)
+        let artHeight = w * 1088 / 1456
+        return VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 18) {
+                SketchTitle("Il mio meglio")
+                PillPicker(options: BestKind.allCases.map { ($0, $0.title) }, selection: $best)
+            }
+            .padding(.horizontal, 22)
+
+            HStack(spacing: 4) {
+                Image(systemName: "laurel.leading").font(.system(size: 64, weight: .regular))
+                    .foregroundStyle(Theme.accent)
+                VStack(spacing: 0) {
+                    let text = entry?.value ?? "—"
+                    SketchText(text, size: SketchFont.fitted(text, base: 76, width: w * 0.48))
+                    Text(entry?.unit ?? "nessun dato").font(.system(size: 19, weight: .bold)).foregroundStyle(Theme.ink)
+                    Text(entry?.label ?? " ").font(.system(size: 15)).foregroundStyle(Theme.ink.opacity(0.75))
+                }
+                .frame(minWidth: w * 0.42)
+                Image(systemName: "laurel.trailing").font(.system(size: 64, weight: .regular))
+                    .foregroundStyle(Theme.accent)
+            }
+            .padding(.top, 22)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(entry.map { "Record \(best.title): \($0.value) \($0.unit), \($0.label)" } ?? "Record \(best.title): nessun dato")
+            .animation(.easeInOut(duration: 0.2), value: best)
+
+            Image("ArtStoricoBasso").resizable().scaledToFit()
+                .frame(width: w, height: artHeight)
+                .padding(.top, -artHeight * 0.30)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
     }
 }
 
-// MARK: - Storico
+extension HistoryView {
+    private struct BestEntry {
+        let value: String
+        let unit: String
+        let label: String
+    }
 
-struct StoricoPage: View {
+    private func bestEntry(_ r: PersonalRecords, longest: Int) -> BestEntry? {
+        func steps(_ e: RecordEntry?) -> BestEntry? {
+            e.map { BestEntry(value: ItalianFormat.integer($0.steps), unit: "passi", label: $0.label) }
+        }
+        switch best {
+        case .day: return steps(r.day)
+        case .week: return steps(r.week)
+        case .month: return steps(r.month)
+        case .year: return steps(r.year)
+        case .streak:
+            return longest > 0 ? BestEntry(value: "\(longest)", unit: longest == 1 ? "giorno" : "giorni",
+                                           label: "streak più lunga") : nil
+        }
+    }
+}
+
+enum BestKind: CaseIterable, Hashable {
+    case day, week, month, year, streak
+    var title: String {
+        switch self {
+        case .day: "Giorno"
+        case .week: "Settimana"
+        case .month: "Mese"
+        case .year: "Anno"
+        case .streak: "Serie"
+        }
+    }
+}
+
+// MARK: - I miei passi
+
+struct StepsSection: View {
     @Environment(StepsStore.self) private var store
     @Binding var period: HistoryPeriod
     @Binding var offset: Int
-    @Binding var metric: HistoryMetric
 
     var body: some View {
         let stats = store.history.stats
         let summary = stats.summary(period, offset: offset)
-        VStack(alignment: .leading, spacing: 0) {
-            periodPicker.padding(.top, 18)
-            chart(stats).padding(.top, 26)
-            figures(summary).padding(.top, 34)
-            if period == .month { calendar(stats).padding(.top, 38) }
-            records(stats.personalRecords()).padding(.top, 38)
-        }
-    }
-
-    /// Periodi come testo: l'attivo in inchiostro con un trattino accent sotto; nessun fondo.
-    private var periodPicker: some View {
-        HStack(spacing: 0) {
-            ForEach([(HistoryPeriod.week, "Settimana"), (.month, "Mese"), (.year, "Anno"), (.all, "Sempre")], id: \.1) { p, title in
-                Button { withAnimation(.easeInOut(duration: 0.2)) { period = p; offset = 0 } } label: {
-                    VStack(spacing: 7) {
-                        Text(title).font(.system(size: 14, weight: period == p ? .semibold : .regular))
-                            .foregroundStyle(period == p ? Theme.ink : Theme.soft)
-                        Capsule().fill(period == p ? Theme.accent : .clear).frame(width: 16, height: 2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityAddTraits(period == p ? .isSelected : [])
-            }
-        }
-    }
-
-    private func chart(_ stats: HistoryStats) -> some View {
         let maxOff = stats.maxOffset(period)
-        return VStack(spacing: 18) {
-            HStack(alignment: .firstTextBaseline, spacing: 2) {
+        VStack(alignment: .leading, spacing: 18) {
+            SketchTitle("I miei passi")
+            PillPicker(options: [(HistoryPeriod.week, "Settimana"), (.month, "Mese"), (.year, "Anno"), (.all, "Sempre")],
+                       selection: Binding(get: { period }, set: { period = $0; offset = 0 }))
+
+            HStack {
                 if period != .all {
-                    Button { if offset < maxOff { offset += 1 } } label: {
-                        Image(systemName: "chevron.left").font(.system(size: 12, weight: .medium))
-                            .frame(width: 26, height: 26).contentShape(Rectangle())
-                    }
-                    .disabled(offset >= maxOff).opacity(offset >= maxOff ? 0.25 : 0.7)
-                    .padding(.leading, -8)
-                    .accessibilityLabel("Periodo precedente")
-                }
-                Text(stats.title(period, offset: offset)).font(.system(size: 15, weight: .medium))
-                if period != .all {
-                    Button { if offset > 0 { offset -= 1 } } label: {
-                        Image(systemName: "chevron.right").font(.system(size: 12, weight: .medium))
-                            .frame(width: 26, height: 26).contentShape(Rectangle())
-                    }
-                    .disabled(offset == 0).opacity(offset == 0 ? 0.25 : 0.7)
-                    .accessibilityLabel("Periodo successivo")
+                    navButton("chevron.left", "Periodo precedente", disabled: offset >= maxOff) { offset += 1 }
                 }
                 Spacer()
-                metricButton("Passi", .steps)
-                Text("·").font(.system(size: 12)).foregroundStyle(Theme.faint)
-                metricButton("Km", .km)
+                Text(stats.title(period, offset: offset)).font(.system(size: 19, weight: .semibold)).foregroundStyle(Theme.ink)
+                Spacer()
+                if period != .all {
+                    navButton("chevron.right", "Periodo successivo", disabled: offset == 0) { offset -= 1 }
+                }
             }
-            .foregroundStyle(Theme.ink)
-            BarChartView(bars: stats.bars(period, offset: offset), metric: metric, period: period)
+            .padding(.horizontal, 30)
+
+            VStack(spacing: 0) {
+                HStack(spacing: 10) {
+                    SwirlBracket().frame(width: 18, height: 72)
+                    SketchText(ItalianFormat.integer(summary.steps), size: 82)
+                        .minimumScaleFactor(0.5)
+                    SwirlBracket().scaleEffect(x: -1).frame(width: 18, height: 72)
+                }
+                Text("passi").font(.system(size: 19, weight: .bold)).foregroundStyle(Theme.ink)
+            }
+            .frame(maxWidth: .infinity)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Totale: \(ItalianFormat.integer(summary.steps)) passi")
+
+            SketchBarChart(bars: stats.bars(period, offset: offset), period: period)
+                .padding(.trailing, 40)
+                .overlay(alignment: .topTrailing) {
+                    Image("ArtImpronte").resizable().scaledToFit().frame(width: 40)
+                        .offset(x: 18, y: -120)
+                        .accessibilityHidden(true)
+                }
+
+            HStack(alignment: .center, spacing: 12) {
+                Spacer()
+                Text("Media").font(.system(size: 17, weight: .medium)).foregroundStyle(Theme.ink)
+                SketchText(ItalianFormat.integer(summary.averageSteps), size: 44)
+                    .overlay { Sparkles().padding(-14) }
+                Text("passi al giorno").font(.system(size: 15, weight: .medium)).foregroundStyle(Theme.ink)
+                Spacer()
+            }
+            .padding(.top, 6)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Media: \(ItalianFormat.integer(summary.averageSteps)) passi al giorno")
         }
         .animation(.easeInOut(duration: 0.2), value: period)
     }
 
-    private func metricButton(_ title: String, _ value: HistoryMetric) -> some View {
-        Button { withAnimation(.easeInOut(duration: 0.2)) { metric = value } } label: {
-            Text(title).font(.system(size: 13, weight: metric == value ? .semibold : .regular))
-                .foregroundStyle(metric == value ? Theme.accent : Theme.soft)
-                .padding(.horizontal, 4).padding(.vertical, 4)
-                .contentShape(Rectangle())
+    private func navButton(_ symbol: String, _ label: String, disabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol).font(.system(size: 18, weight: .semibold))
+                .frame(width: 36, height: 36).contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityAddTraits(metric == value ? .isSelected : [])
-    }
-
-    /// Totale in evidenza, poi tre cifre affiancate separate da sottili linee verticali.
-    private func figures(_ s: PeriodSummary) -> some View {
-        VStack(alignment: .leading, spacing: 22) {
-            VStack(alignment: .leading, spacing: 4) {
-                SectionLabel("Totale")
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(ItalianFormat.integer(s.steps))
-                        .font(.system(size: 52, weight: .ultraLight)).tracking(-2.4).monospacedDigit()
-                        .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
-                    Text("passi").font(.system(size: 15)).foregroundStyle(Theme.soft)
-                }
-            }
-            Hairline()
-            HStack(alignment: .top, spacing: 0) {
-                figure("Distanza", ItalianFormat.number(s.km, decimals: s.km >= 1000 ? 0 : 1), "km", first: true)
-                VLine()
-                figure("Media", ItalianFormat.integer(s.averageSteps), "al giorno")
-                VLine()
-                figure("A obiettivo", ItalianFormat.integer(s.daysAtGoal), "su \(ItalianFormat.integer(s.elapsedDays)) giorni")
-            }
-        }
-    }
-
-    private func figure(_ title: String, _ value: String, _ unit: String, first: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(title.uppercased()).font(.system(size: 10, weight: .semibold)).tracking(1.8).foregroundStyle(Theme.soft)
-                .lineLimit(1).minimumScaleFactor(0.8)
-            Text(value).font(.system(size: 24, weight: .light)).tracking(-0.6).monospacedDigit()
-                .foregroundStyle(Theme.ink).lineLimit(1).minimumScaleFactor(0.6)
-            Text(unit).font(.system(size: 11)).foregroundStyle(Theme.soft).lineLimit(1).minimumScaleFactor(0.8)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.leading, first ? 0 : 14).padding(.trailing, 8)
-        .accessibilityElement(children: .combine)
-    }
-
-    private func calendar(_ stats: HistoryStats) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                SectionLabel("Calendario")
-                Spacer()
-                CalendarLegend()
-            }
-            CalendarGrid(monthStart: stats.interval(.month, offset: offset).start,
-                         mark: { store.history.mark(for: $0) }, today: stats.today)
-        }
-    }
-
-    private func records(_ r: PersonalRecords) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            SectionLabel("Record personali").padding(.bottom, 6)
-            recordRow("Giorno", r.day)
-            recordRow("Settimana", r.week)
-            recordRow("Mese", r.month)
-            recordRow("Anno", r.year)
-        }
-    }
-
-    private func recordRow(_ title: String, _ r: RecordEntry?) -> some View {
-        VStack(spacing: 0) {
-            Hairline()
-            HStack(alignment: .firstTextBaseline) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title).font(.system(size: 15)).foregroundStyle(Theme.ink)
-                    Text(r?.label ?? "—").font(.system(size: 12)).foregroundStyle(Theme.soft)
-                }
-                Spacer()
-                if let r {
-                    VStack(alignment: .trailing, spacing: 2) {
-                        Text(ItalianFormat.integer(r.steps)).font(.system(size: 22, weight: .light)).tracking(-0.5)
-                            .monospacedDigit().foregroundStyle(Theme.ink)
-                        Text("\(ItalianFormat.number(r.km, decimals: r.km >= 1000 ? 0 : 1)) km")
-                            .font(.system(size: 12)).monospacedDigit().foregroundStyle(Theme.soft)
-                    }
-                }
-            }
-            .padding(.vertical, 14)
-        }
-        .accessibilityElement(children: .combine)
+        .foregroundStyle(Theme.ink)
+        .disabled(disabled).opacity(disabled ? 0.2 : 1)
+        .accessibilityLabel(label)
     }
 }
 
-/// Linea orizzontale sottile: separa senza chiudere in un riquadro.
-struct Hairline: View {
-    var body: some View { Rectangle().fill(Theme.hair).frame(height: 1) }
-}
+// MARK: - Componenti
 
-/// Linea verticale sottile tra cifre affiancate.
-private struct VLine: View {
-    var body: some View { Rectangle().fill(Theme.hair).frame(width: 1, height: 52) }
-}
-
-struct CalendarLegend: View {
-    var body: some View {
-        HStack(spacing: 10) {
-            item(AnyView(Circle().fill(Theme.accent).frame(width: 8, height: 8)), "obiettivo")
-            item(AnyView(Circle().strokeBorder(Theme.accent, lineWidth: 1.5).frame(width: 10, height: 10)), "Jolly")
-            item(AnyView(Circle().strokeBorder(Theme.ink, lineWidth: 1.5).frame(width: 10, height: 10)), "oggi")
-        }
-        .font(.system(size: 10)).foregroundStyle(Theme.soft)
-    }
-    private func item(_ icon: AnyView, _ text: String) -> some View {
-        HStack(spacing: 4) { icon; Text(text) }
-    }
-}
-
-// MARK: - Streak
-
-struct StreakPage: View {
-    @Environment(StepsStore.self) private var store
+/// Titolo di sezione in Anton inclinato con pennellata rossa sotto.
+struct SketchTitle: View {
+    let text: String
+    init(_ text: String) { self.text = text }
 
     var body: some View {
-        let s = store.history.streak
-        let stats = store.history.stats
-        VStack(alignment: .leading, spacing: 0) {
-            streakHero(s).padding(.top, 24)
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    SectionLabel(monthTitle(stats))
-                    Spacer()
-                    CalendarLegend()
-                }
-                CalendarGrid(monthStart: stats.interval(.month).start, mark: { store.history.mark(for: $0) }, today: stats.today)
+        SketchText(text, size: 40)
+            .transformEffect(CGAffineTransform(a: 1, b: -0.04, c: -0.2, d: 1, tx: 8, ty: 0))
+            .padding(.bottom, 6)
+            .background(alignment: .bottomLeading) {
+                BrushStroke(shape: UnderlineSwash(), width: 3.5)
+                    .frame(height: 12)
+                    .padding(.trailing, -40).padding(.leading, -6)
+                    .offset(y: 8)
             }
-            .padding(.top, 40)
-            VStack(spacing: 0) {
-                Hairline()
-                row("Streak più lunga") {
-                    Text("\(s.longest)").font(.system(size: 20, weight: .light)).foregroundStyle(Theme.ink)
-                    + Text(" giorni").font(.system(size: 12)).foregroundColor(Theme.soft)
-                }
-                Hairline()
-                row("Jolly") {
-                    Text("maturati ").foregroundColor(Theme.soft)
-                    + Text("\(s.jollyEarned)").foregroundColor(Theme.ink)
-                    + Text(" · usati ").foregroundColor(Theme.soft)
-                    + Text("\(s.jollyUsed)").foregroundColor(Theme.ink)
-                    + Text(" · disponibili ").foregroundColor(Theme.soft)
-                    + Text("\(s.jolly)").fontWeight(.semibold).foregroundColor(Theme.accent)
-                }
-                Hairline()
-            }
-            .padding(.top, 34)
-        }
+            .accessibilityAddTraits(.isHeader)
     }
+}
 
-    private func monthTitle(_ stats: HistoryStats) -> String { stats.title(.month) }
-
-    private func row(_ title: String, @ViewBuilder value: () -> Text) -> some View {
-        HStack {
-            Text(title).font(.system(size: 15)).foregroundStyle(Theme.ink)
-            Spacer()
-            value().font(.system(size: 13)).monospacedDigit()
-        }
-        .padding(.vertical, 14)
+/// Sottolineatura a pennello leggermente curva.
+private struct UnderlineSwash: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+        p.addCurve(to: CGPoint(x: rect.maxX, y: rect.minY),
+                   control1: CGPoint(x: rect.width * 0.35, y: rect.minY - 2),
+                   control2: CGPoint(x: rect.width * 0.7, y: rect.minY + 4))
+        return p
     }
+}
 
-    private func streakHero(_ s: StreakState) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                SectionLabel("Streak attuale")
-                Spacer()
-                if s.streak > 0 && s.streak == s.longest {
-                    Text("RECORD PERSONALE").font(.system(size: 10, weight: .semibold)).tracking(1.8)
-                        .foregroundStyle(Theme.accent)
-                }
-            }
-            HStack(alignment: .bottom) {
-                HStack(alignment: .bottom, spacing: 10) {
-                    Image(systemName: "flame.fill").font(.system(size: 30)).foregroundStyle(Theme.accent)
-                        .shadow(color: Theme.accent.opacity(0.45), radius: 8).padding(.bottom, 12)
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("\(s.streak)").font(.system(size: 84, weight: .ultraLight)).tracking(-5).monospacedDigit()
-                            .foregroundStyle(Theme.ink).lineLimit(1)
-                        Text("giorni di fila a obiettivo").font(.system(size: 13)).foregroundStyle(Theme.soft)
-                    }
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 7) {
-                    SectionLabel("Jolly")
-                    HStack(spacing: 5) {
-                        ForEach(0..<min(max(s.jolly, 0), 5), id: \.self) { _ in
-                            GemShape().stroke(Theme.accent, style: StrokeStyle(lineWidth: 2, lineJoin: .round)).frame(width: 22, height: 22)
+/// Selettore a pillola: voce scelta in rosso pieno, le altre su fondo bianco separate da righe sottili.
+struct PillPicker<Value: Hashable>: View {
+    let options: [(Value, String)]
+    @Binding var selection: Value
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(Array(options.enumerated()), id: \.offset) { i, option in
+                let selected = option.0 == selection
+                Button { withAnimation(.easeInOut(duration: 0.2)) { selection = option.0 } } label: {
+                    Text(option.1)
+                        .font(.system(size: 15, weight: selected ? .semibold : .regular))
+                        .lineLimit(1).minimumScaleFactor(0.75)
+                        .foregroundStyle(selected ? Theme.onAccent : Theme.ink)
+                        .frame(maxWidth: .infinity, minHeight: 42)
+                        .background {
+                            if selected {
+                                Capsule().fill(Theme.accent).shadow(color: Theme.accent.opacity(0.45), radius: 6, y: 2)
+                            }
                         }
-                        if s.jolly > 5 { Text("+\(s.jolly - 5)").font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.accent) }
-                    }
-                    Text("\(s.jolly) disponibili").font(.system(size: 12)).foregroundStyle(Theme.soft)
+                        .contentShape(Rectangle())
                 }
-            }
-            VStack(spacing: 6) {
-                GeometryReader { g in
-                    ZStack(alignment: .leading) {
-                        Capsule().fill(Theme.ink.opacity(0.10))
-                        Capsule().fill(Theme.accent).frame(width: g.size.width * CGFloat(s.counter) / CGFloat(StreakEngine.jollyEvery))
-                            .shadow(color: Theme.accent.opacity(0.5), radius: 5)
+                .buttonStyle(.plain)
+                .overlay(alignment: .leading) {
+                    if i > 0 && !selected && options[i - 1].0 != selection {
+                        Rectangle().fill(Theme.cardLine).frame(width: 1, height: 42)
                     }
                 }
-                .frame(height: 5)
-                HStack {
-                    Text("Prossimo Jolly tra \(s.daysToNextJolly) \(s.daysToNextJolly == 1 ? "giorno" : "giorni")")
-                    Spacer()
-                    Text("\(s.counter) / \(StreakEngine.jollyEvery)").monospacedDigit()
-                }
-                .font(.system(size: 12)).foregroundStyle(Theme.soft)
+                .accessibilityAddTraits(selected ? .isSelected : [])
             }
-            statusLine(s)
         }
+        .background(Capsule().fill(Theme.card))
+        .overlay(Capsule().strokeBorder(Theme.cardLine, lineWidth: 1))
     }
+}
 
-    private func statusLine(_ s: StreakState) -> some View {
-        let missing = store.plan.remaining
-        return Group {
-            if s.todayReached {
-                Text("Oggi **obiettivo raggiunto**: la streak è \(s.streak).")
-            } else if s.todayWouldUseJolly {
-                Text("Oggi **in corso** · mancano \(ItalianFormat.integer(missing)) passi. A mezzanotte, senza obiettivo, usi un Jolly (ne restano \(s.jolly - 1)).")
-            } else if s.todayWouldBreak {
-                Text("Oggi **in corso** · mancano \(ItalianFormat.integer(missing)) passi. Senza Jolly, a mezzanotte la streak si interrompe.")
-            } else {
-                Text("Oggi **in corso** · mancano \(ItalianFormat.integer(missing)) passi per iniziare la streak.")
+/// Jolly: rombo rosso lucido.
+struct JollyGem: View {
+    var empty = false
+    var body: some View {
+        ZStack {
+            DiamondShape().fill(empty ? AnyShapeStyle(Theme.faint)
+                                      : AnyShapeStyle(LinearGradient(colors: [Theme.accent.opacity(0.75), Theme.accent],
+                                                                     startPoint: .topLeading, endPoint: .bottomTrailing)))
+            DiamondShape().stroke(empty ? Theme.soft : Theme.accent, style: StrokeStyle(lineWidth: 1.5, lineJoin: .round))
+            DiamondShape().inset(by: 9).fill(.white.opacity(empty ? 0 : 0.35))
+        }
+        .shadow(color: Theme.accent.opacity(empty ? 0 : 0.35), radius: 4, y: 2)
+    }
+}
+
+/// Rombo con gli angoli arrotondati (quadrato ruotato).
+struct DiamondShape: InsettableShape {
+    var inset: CGFloat = 0
+    func inset(by amount: CGFloat) -> DiamondShape { DiamondShape(inset: inset + amount) }
+    func path(in rect: CGRect) -> Path {
+        let r = rect.insetBy(dx: inset, dy: inset)
+        var p = Path()
+        p.move(to: CGPoint(x: r.midX, y: r.minY))
+        p.addLine(to: CGPoint(x: r.maxX, y: r.midY))
+        p.addLine(to: CGPoint(x: r.midX, y: r.maxY))
+        p.addLine(to: CGPoint(x: r.minX, y: r.midY))
+        p.closeSubpath()
+        return p.strokedPath(StrokeStyle(lineWidth: max(0, r.width * 0.16), lineJoin: .round)).union(p)
+    }
+}
+
+/// Parentesi a ricciolo rosse ai lati del totale.
+private struct SwirlBracket: View {
+    var body: some View {
+        BrushStroke(shape: SwirlShape(), width: 2.6)
+    }
+}
+
+private struct SwirlShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: rect.maxX, y: rect.minY))
+        p.addCurve(to: CGPoint(x: rect.maxX * 0.8, y: rect.maxY),
+                   control1: CGPoint(x: rect.minX - rect.width * 0.6, y: rect.height * 0.25),
+                   control2: CGPoint(x: rect.minX - rect.width * 0.2, y: rect.height * 0.95))
+        return p
+    }
+}
+
+/// Trattini rossi a raggiera attorno a un numero.
+private struct Sparkles: View {
+    var body: some View {
+        Canvas { ctx, size in
+            let marks: [(CGFloat, CGFloat, Double)] = [(0.02, 0.22, -150), (-0.02, 0.5, 180), (0.02, 0.78, 150),
+                                                       (0.98, 0.22, -30), (1.02, 0.5, 0), (0.98, 0.78, 30)]
+            for (x, y, deg) in marks {
+                let a = deg * .pi / 180
+                let start = CGPoint(x: x * size.width, y: y * size.height)
+                var p = Path()
+                p.move(to: start)
+                p.addLine(to: CGPoint(x: start.x + cos(a) * 9, y: start.y + sin(a) * 9))
+                ctx.stroke(p, with: .color(Theme.accent), style: StrokeStyle(lineWidth: 2, lineCap: .round))
             }
         }
-        .font(.system(size: 12)).foregroundStyle(Theme.ink.opacity(0.62))
+        .allowsHitTesting(false)
+    }
+}
+
+/// Sentiero rosso tratteggiato che collega le sezioni.
+struct TrailLine: View {
+    var flipped = false
+    var body: some View {
+        TrailShape()
+            .stroke(Theme.accent.opacity(0.75), style: StrokeStyle(lineWidth: 1.6, lineCap: .round, dash: [9, 6]))
+            .scaleEffect(x: flipped ? -1 : 1)
+            .accessibilityHidden(true)
+    }
+}
+
+private struct TrailShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        p.addCurve(to: CGPoint(x: rect.maxX, y: rect.maxY),
+                   control1: CGPoint(x: rect.width * 0.8, y: rect.minY - rect.height * 0.2),
+                   control2: CGPoint(x: rect.width * 0.2, y: rect.maxY + rect.height * 0.2))
+        return p
     }
 }

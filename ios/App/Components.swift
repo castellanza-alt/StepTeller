@@ -12,15 +12,6 @@ struct SectionLabel: View {
     }
 }
 
-extension View {
-    /// Riquadro in vetro: fill traslucido + bordo chiaro.
-    func glassCard(radius: CGFloat = 28, padding: EdgeInsets = EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20)) -> some View {
-        self.padding(padding)
-            .background(RoundedRectangle(cornerRadius: radius, style: .continuous).fill(Theme.glass))
-            .overlay(RoundedRectangle(cornerRadius: radius, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
-    }
-}
-
 /// Rombo (Jolly) disegnato come nei mockup; la fiamma (streak) è il simbolo di sistema `flame.fill`.
 struct GemShape: Shape {
     func path(in rect: CGRect) -> Path {
@@ -48,28 +39,25 @@ struct SlidersIcon: View {
             ctx.stroke(Path(ellipseIn: CGRect(x: (15.5 - 2.3) * s, y: (7 - 2.3) * s, width: 4.6 * s, height: 4.6 * s)), with: .foreground, style: st)
             ctx.stroke(Path(ellipseIn: CGRect(x: (8.5 - 2.3) * s, y: (17 - 2.3) * s, width: 4.6 * s, height: 4.6 * s)), with: .foreground, style: st)
         }
-        .frame(width: 20, height: 20)
+        .frame(width: 24, height: 24)
     }
 }
 
-/// Intestazione comune: marchio a sinistra, (chip) e impostazioni a destra.
-struct AppHeader<Trailing: View>: View {
-    let onSettings: () -> Void
-    @ViewBuilder var trailing: () -> Trailing
+/// Bottone tondo bianco con ombra (impostazioni, Storico, Oggi).
+struct RoundIconButton<Icon: View>: View {
+    let label: String
+    let action: () -> Void
+    @ViewBuilder var icon: () -> Icon
+
     var body: some View {
-        HStack(alignment: .center) {
-            Text("STEP TELLER")
-                .font(.system(size: 11, weight: .semibold)).tracking(11 * 0.34)
-                .foregroundStyle(Theme.soft)
-            Spacer()
-            trailing()
-            Button(action: onSettings) {
-                SlidersIcon().foregroundStyle(Theme.soft)
-                    .frame(width: 44, height: 44)
-            }
-            .padding(.trailing, -10)
-            .accessibilityLabel("Impostazioni")
+        Button(action: action) {
+            icon().foregroundStyle(Theme.ink)
+                .frame(width: 56, height: 56)
+                .background(Circle().fill(Theme.card))
+                .overlay(Circle().strokeBorder(Theme.cardLine, lineWidth: 0.5))
+                .shadow(color: Theme.shadow, radius: 10, y: 4)
         }
-        .frame(height: 30)
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 }

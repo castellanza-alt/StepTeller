@@ -13,12 +13,12 @@ struct WidgetPreviewScreen: View {
                    model: CalibrationResult.empty.model)
             : nil
         ZStack {
-            Color(red: 0.05, green: 0.06, blue: 0.065).ignoresSafeArea()
+            Theme.ink.opacity(0.08).ignoresSafeArea()
             StepsWidgetView(plan: plan)
                 .frame(width: 170, height: 170)
                 .background(StepsWidgetBackground())
                 .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-                .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).stroke(Color.white.opacity(0.08), lineWidth: 0.5))
+                .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).stroke(Theme.cardLine, lineWidth: 0.5))
                 .scaleEffect(2.2)
         }
     }

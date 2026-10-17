@@ -9,9 +9,10 @@ La web app resta in radice al repository (non toccata).
 |---|---|
 | `Sources/StepTellerCore/` | Nucleo (solo Foundation): cadenza e taratura, calcolo, formato italiano, logica sorgente passi |
 | `Tests/StepTellerCoreTests/` | Test del nucleo (valori golden della web app v4.0) — `swift test` anche su Linux |
-| `App/` | App SwiftUI: `ContentView`, `StepsStore`, `HealthKitStepsProvider`, tappeto, orb, pannello in vetro, cursore |
+| `App/` | App SwiftUI: `OggiView` (strada e cursore), `HistoryView`, `StepsStore`, `HealthKitStepsProvider`, illustrazioni `Art*` |
+| `Shared/` | Codice comune app/widget: `Sketch.swift` (numeri a tratteggio, pennellata, anello), font Anton |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
-| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_icon.py`, `select_xcode.sh` |
+| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_icon.py`, `make_art.py`, `select_xcode.sh` |
 
 Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 
@@ -30,8 +31,8 @@ Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli scree
 
 ## Widget
 
-`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (disegno, nello spazio dei
-mockup 340×340). Obiettivo e taratura arrivano dall'app via App Group (`Shared/SharedStore.swift`). I minuti usano
+`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (disegno, nello spazio
+340×340). Obiettivo e taratura arrivano dall'app via App Group (`Shared/SharedStore.swift`). I minuti usano
 `Plan.glanceSpeed` (4 km/h). In Debug `WidgetPreviewScreen` mostra il widget ingrandito per gli screenshot.
 
 ## CI

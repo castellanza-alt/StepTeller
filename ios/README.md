@@ -12,7 +12,7 @@ La web app resta in radice al repository (non toccata).
 | `App/` | App SwiftUI: `OggiView` (strada e cursore), `HistoryView`, `StepsStore`, `HealthKitStepsProvider`, illustrazioni `Art*` |
 | `Shared/` | Codice comune app/widget: `Sketch.swift` (numeri a tratteggio, pennellata, anello), font Anton |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
-| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_icon.py`, `make_art.py`, `select_xcode.sh` |
+| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_art.py`, `select_xcode.sh` |
 
 Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 

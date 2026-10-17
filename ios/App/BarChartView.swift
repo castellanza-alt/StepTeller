@@ -7,6 +7,9 @@ import StepTellerCore
 struct SketchBarChart: View {
     let bars: [HistoryBar]
     let period: HistoryPeriod
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// 0→1 all'apertura e a ogni cambio di periodo: le barre crescono dal basso.
+    @State private var grow: CGFloat = 0
 
     var body: some View {
         let showGoal = period == .week || period == .month
@@ -21,7 +24,7 @@ struct SketchBarChart: View {
                         .position(x: geo.size.width / 2, y: geo.size.height * (1 - CGFloat(goal / maxValue)))
                 }
             }
-            .frame(width: showGoal ? 44 : 0, height: 120)
+            .frame(width: showGoal ? 44 : 0, height: 110)
 
             VStack(spacing: 6) {
                 GeometryReader { geo in
@@ -46,12 +49,21 @@ struct SketchBarChart: View {
                         .stroke(Theme.ink, style: StrokeStyle(lineWidth: 1.6, lineCap: .round, lineJoin: .round))
                     }
                 }
-                .frame(height: 120)
+                .frame(height: 110)
                 labels
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Grafico: \(bars.count) barre, \(bars.filter(\.reachedGoal).count) a obiettivo")
+        .onAppear { animateGrow() }
+        .onChange(of: bars) { _, _ in animateGrow() }
+    }
+
+    private func animateGrow() {
+        guard !reduceMotion else { grow = 1; return }
+        var reset = Transaction(); reset.disablesAnimations = true
+        withTransaction(reset) { grow = 0 }
+        DispatchQueue.main.async { withAnimation(.spring(duration: 0.7, bounce: 0.25)) { grow = 1 } }
     }
 
     private var spacing: CGFloat { period == .month ? 2.5 : (period == .week ? 14 : 8) }
@@ -59,7 +71,7 @@ struct SketchBarChart: View {
 
     @ViewBuilder
     private func bar(_ b: HistoryBar, h: CGFloat, maxValue: Double) -> some View {
-        let height = max(3, h * CGFloat(Double(b.steps) / maxValue))
+        let height = max(3, h * CGFloat(Double(b.steps) / maxValue) * grow)
         Group {
             if b.isFuture {
                 Rectangle().fill(Theme.ink.opacity(0.18)).frame(height: 2)

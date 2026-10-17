@@ -61,7 +61,8 @@ struct RootView: View {
         .onChange(of: store.plan.isDone) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.history.loaded) { _, _ in celebrateIfNeeded() }
-        .sheet(isPresented: $showSettings) { SettingsSheet() }
+        .sheet(isPresented: $showSettings) { SettingsSheet().preferredColorScheme(store.appearance.scheme) }
+        .preferredColorScheme(store.appearance.scheme)
     }
 }
 
@@ -88,5 +89,16 @@ extension RootView {
         guard celebratedDay != today else { return }
         celebratedDay = today
         withAnimation(.easeOut(duration: 0.25)) { celebrating = true }
+    }
+}
+
+extension AppAppearance {
+    /// `nil` = segue il sistema.
+    var scheme: ColorScheme? {
+        switch self {
+        case .system: nil
+        case .light: .light
+        case .dark: .dark
+        }
     }
 }

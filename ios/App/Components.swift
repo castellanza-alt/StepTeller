@@ -43,7 +43,7 @@ struct SlidersIcon: View {
     }
 }
 
-/// Bottone tondo bianco con ombra (impostazioni, Storico, Oggi).
+/// Bottone tondo in vetro (Liquid Glass da iOS 26; materiale sfocato sulle versioni precedenti).
 struct RoundIconButton<Icon: View>: View {
     let label: String
     let action: () -> Void
@@ -53,11 +53,24 @@ struct RoundIconButton<Icon: View>: View {
         Button(action: action) {
             icon().foregroundStyle(Theme.ink)
                 .frame(width: 56, height: 56)
-                .background(Circle().fill(Theme.card))
-                .overlay(Circle().strokeBorder(Theme.cardLine, lineWidth: 0.5))
-                .shadow(color: Theme.shadow, radius: 10, y: 4)
+                .contentShape(Circle())
+                .glass(Circle(), interactive: true)
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label)
+    }
+}
+
+extension View {
+    /// Vetro di sistema: `glassEffect` da iOS 26, altrimenti materiale sottile con un filo di bordo.
+    @ViewBuilder
+    func glass<S: Shape>(_ shape: S, interactive: Bool = false) -> some View {
+        if #available(iOS 26.0, *) {
+            self.glassEffect(interactive ? .regular.interactive() : .regular, in: shape)
+        } else {
+            self.background(shape.fill(.ultraThinMaterial))
+                .overlay(shape.stroke(Theme.cardLine, lineWidth: 0.5))
+                .shadow(color: Theme.shadow, radius: 10, y: 4)
+        }
     }
 }

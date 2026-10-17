@@ -32,6 +32,16 @@ final class HistoryStore {
     private enum Keys {
         static let goals = "stepteller.goalHistory"
         static let start = "stepteller.streak.start"
+        static let shown = "stepteller.streak.lastShown"     // [streak, jolly] dell'ultimo storico letto
+    }
+
+    /// Streak e Jolly da mostrare: finché lo storico di Salute non è stato letto (all'apertura ci vuole
+    /// qualche secondo) si mostrano gli ultimi valori noti, non quelli parziali di oggi.
+    var shownStreak: Int { loaded ? streak.streak : (lastShown?[0] ?? streak.streak) }
+    var shownJolly: Int { loaded ? streak.jolly : (lastShown?[1] ?? streak.jolly) }
+    private var lastShown: [Int]? {
+        let v = defaults.array(forKey: Keys.shown) as? [Int]
+        return v?.count == 2 ? v : nil
     }
 
     init(provider: (any HistoryProvider)?, currentGoal: Int, defaults: UserDefaults = .standard,
@@ -63,6 +73,7 @@ final class HistoryStore {
         records = result
         loaded = true
         recompute()
+        if !result.isEmpty { defaults.set([streak.streak, streak.jolly], forKey: Keys.shown) }
     }
 
     /// Passi di oggi già letti dall'app: la streak scatta appena si supera l'obiettivo, senza

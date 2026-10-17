@@ -53,6 +53,14 @@ struct SettingsSheet: View {
                     note("Se l'obiettivo non è chiuso: i minuti che ti servono e, se serve, un avviso sulla streak o sul Jolly.")
                 }
 
+                section("Aspetto") {
+                    Picker("Aspetto", selection: $store.appearance) {
+                        ForEach(AppAppearance.allCases) { a in Text(a.title).tag(a) }
+                    }
+                    .pickerStyle(.segmented)
+                    note("Automatico segue il telefono; Giorno e Notte restano fissi.")
+                }
+
                 section("Streak e Jolly") {
                     VStack(spacing: 0) {
                         HStack {

@@ -29,10 +29,12 @@ struct OggiView: View {
                         .transition(.opacity)
                 } else {
                     minutesBlock(p)
+                        .fixedSize()
                         .frame(width: full.width * 0.5, alignment: .trailing)
                         .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.675)
                         .transition(.opacity)
                     speedLabel(p)
+                        .fixedSize()
                         .frame(width: full.width * 0.6, alignment: .leading)
                         .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.735)
                         .transition(.opacity)
@@ -51,6 +53,11 @@ struct OggiView: View {
                 .position(x: full.width - 22 - 28, y: full.height - max(safe.bottom, 12) - 34)
             }
             .frame(width: full.width, height: full.height)
+            .contentShape(Rectangle())
+            // scorrere verso sinistra porta allo Storico (il cursore sulla strada ha la precedenza)
+            .gesture(DragGesture(minimumDistance: 24).onEnded { g in
+                if g.translation.width < -60, abs(g.translation.width) > abs(g.translation.height) * 1.3 { onHistory() }
+            })
             .offset(y: -safe.top)
             .animation(.easeInOut(duration: 0.3), value: p.isDone)
         }
@@ -59,26 +66,34 @@ struct OggiView: View {
     // MARK: streak, Jolly e impostazioni
 
     private var topBar: some View {
-        let s = store.history.streak
-        return HStack(spacing: 22) {
+        let streak = store.history.shownStreak
+        let jolly = store.history.shownJolly
+        return HStack(spacing: 10) {
             HStack(spacing: 6) {
                 Image(systemName: "flame.fill").font(.system(size: 22))
-                    .foregroundStyle(s.streak > 0 ? Theme.accent : Theme.soft)
-                Text("\(s.streak)").font(.system(size: 20, weight: .semibold)).monospacedDigit()
+                    .foregroundStyle(streak > 0 ? Theme.accent : Theme.soft)
+                    .symbolEffect(.bounce, value: streak)
+                Text("\(streak)").font(.system(size: 20, weight: .semibold)).monospacedDigit()
                     .foregroundStyle(Theme.ink)
                     .contentTransition(.numericText())
-                    .animation(.snappy, value: s.streak)
+                    .animation(.snappy, value: streak)
             }
+            .padding(.horizontal, 14).frame(height: 44)
+            .glass(Capsule())
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Streak: \(s.streak) giorni")
+            .accessibilityLabel("Streak: \(streak) giorni")
 
             HStack(spacing: 6) {
                 GemShape().fill(Theme.ink).frame(width: 19, height: 19)
-                Text("\(s.jolly)").font(.system(size: 20, weight: .semibold)).monospacedDigit()
+                Text("\(jolly)").font(.system(size: 20, weight: .semibold)).monospacedDigit()
                     .foregroundStyle(Theme.ink)
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: jolly)
             }
+            .padding(.horizontal, 14).frame(height: 44)
+            .glass(Capsule())
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Jolly disponibili: \(s.jolly)")
+            .accessibilityLabel("Jolly disponibili: \(jolly)")
 
             Spacer()
             RoundIconButton(label: "Impostazioni", action: onSettings) { SlidersIcon() }
@@ -104,6 +119,8 @@ struct OggiView: View {
                 Text("PASSI DI OGGI").font(.system(size: 15, weight: .semibold)).tracking(15 * 0.22)
                     .foregroundStyle(Theme.ink.opacity(0.75))
                 SketchText(text, size: size)
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: store.steps)
                     .frame(height: size * 1.12)
                     .accessibilityLabel("Passi di oggi: \(text)")
                 Text("su \(ItalianFormat.integer(p.goal))")
@@ -153,15 +170,17 @@ struct OggiView: View {
     private func minutesBlock(_ p: Plan) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("MINUTI SUL\nTAPPETO")
-                .font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
+                .font(.system(size: 12, weight: .semibold)).tracking(12 * 0.2)
                 .lineSpacing(2).foregroundStyle(Theme.ink.opacity(0.8))
             HStack(alignment: .lastTextBaseline, spacing: 6) {
-                SketchText(ItalianFormat.integer(p.minutes), size: 76)
-                Text("min").font(.system(size: 24, weight: .semibold)).foregroundStyle(Theme.ink)
+                SketchText(ItalianFormat.integer(p.minutes), size: 64)
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: p.minutes)
+                Text("min").font(.system(size: 22, weight: .semibold)).foregroundStyle(Theme.ink)
             }
         }
-        .padding(8)
-        .paperHalo()
+        .padding(.horizontal, 16).padding(.vertical, 12)
+        .glass(RoundedRectangle(cornerRadius: 26, style: .continuous))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi")
     }
@@ -169,15 +188,18 @@ struct OggiView: View {
     private func speedLabel(_ p: Plan) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("VELOCITÀ · \(Text(p.gait.label.uppercased()).foregroundStyle(Theme.accent))")
-                .font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
+                .font(.system(size: 12, weight: .semibold)).tracking(12 * 0.2)
                 .foregroundStyle(Theme.ink.opacity(0.8))
             HStack(alignment: .lastTextBaseline, spacing: 8) {
-                SketchText(ItalianFormat.number(p.speed, decimals: 1), size: 64)
-                Text("km/h").font(.system(size: 22, weight: .semibold)).foregroundStyle(Theme.ink)
+                SketchText(ItalianFormat.number(p.speed, decimals: 1), size: 52)
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: p.speed)
+                Text("km/h").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.ink)
             }
+            Text("trascina il pallino sulla strada").font(.system(size: 11)).foregroundStyle(Theme.ink.opacity(0.6))
         }
-        .padding(8)
-        .paperHalo()
+        .padding(.horizontal, 16).padding(.vertical, 12)
+        .glass(RoundedRectangle(cornerRadius: 26, style: .continuous))
         .accessibilityHidden(true)       // la velocità si legge (e si cambia) dal cursore sulla strada
     }
 
@@ -187,8 +209,8 @@ struct OggiView: View {
                 .foregroundStyle(Theme.ink.opacity(0.8))
             SketchText("FATTO", size: 64, color: Theme.accent)
         }
-        .padding(8)
-        .paperHalo()
+        .padding(.horizontal, 16).padding(.vertical, 12)
+        .glass(RoundedRectangle(cornerRadius: 26, style: .continuous))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Obiettivo raggiunto")
     }
@@ -244,7 +266,7 @@ struct RoadSpeedControl: View {
         let t = CGFloat((speed - range.lowerBound) / (range.upperBound - range.lowerBound))
         ZStack(alignment: .topLeading) {
             RoadHitShape(samples: samples).fill(Color.clear)
-            RoadDot(size: 32).position(point(at: t, fractions: f))
+            PulsingDot().position(point(at: t, fractions: f))
                 .allowsHitTesting(false)
         }
         .contentShape(RoadHitShape(samples: samples))
@@ -276,6 +298,25 @@ struct RoadSpeedControl: View {
         let k = (t - f[i - 1]) / span
         return CGPoint(x: samples[i - 1].x + (samples[i].x - samples[i - 1].x) * k,
                        y: samples[i - 1].y + (samples[i].y - samples[i - 1].y) * k)
+    }
+}
+
+/// Pallino della velocità con un'onda che pulsa (ferma con «Riduci movimento»).
+private struct PulsingDot: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var pulse = false
+
+    var body: some View {
+        ZStack {
+            Circle().stroke(Theme.accent.opacity(pulse ? 0 : 0.6), lineWidth: 2)
+                .frame(width: 32, height: 32)
+                .scaleEffect(pulse ? 2.1 : 1)
+            RoadDot(size: 32)
+        }
+        .onAppear {
+            guard !reduceMotion else { return }
+            withAnimation(.easeOut(duration: 1.6).repeatForever(autoreverses: false)) { pulse = true }
+        }
     }
 }
 

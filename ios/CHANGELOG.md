@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.1 — 18 ottobre 2026
+- Storico rifatto sul mockup: fiamma con i giorni consecutivi e Jolly sopra la collina, niente più calendario;
+  nel vuoto a destra la serie più lunga e il prossimo Jolly. Sentiero rosso animato tra le sezioni, totale
+  nell'ovale rosso, barre che crescono, alloro attorno al record.
+- Si passa da Oggi allo Storico (e ritorno) anche scorrendo col dito.
+- Bottoni, selettori e card in vetro (Liquid Glass di iOS 26/27); la capsula rossa del selettore scivola sulla voce scelta.
+- Oggi: minuti e velocità in due card di vetro, numeri che scorrono quando cambiano, pallino che pulsa sulla strada.
+- Impostazioni → Aspetto: Automatico, Giorno o Notte.
+- All'apertura streak e Jolly mostrano subito l'ultimo valore noto invece di «1» finché Salute non ha letto lo storico.
+- Nuova icona: la scarpa sulla strada con la pennellata rossa.
+
 ## 0.6.0 — 17 ottobre 2026
 - Nuovo aspetto «carta e matita» dai mockup di Will, in chiaro e in scuro: illustrazioni disegnate a mano
   (generate con Canva), numeri condensati con tratteggio (font Anton), rosso al posto del verde acqua.

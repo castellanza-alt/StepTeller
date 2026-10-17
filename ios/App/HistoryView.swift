@@ -451,7 +451,7 @@ private struct OvalArc: Shape {
         let steps = 40
         for i in 0...steps {
             let a = (from + (to - from) * Double(i) / Double(steps)) * .pi / 180
-            let pt = CGPoint(x: rect.midX + rect.width / 2 * cos(a), y: rect.midY + rect.height / 2 * sin(a))
+            let pt = CGPoint(x: rect.midX + rect.width / 2 * CGFloat(cos(a)), y: rect.midY + rect.height / 2 * CGFloat(sin(a)))
             if i == 0 { p.move(to: pt) } else { p.addLine(to: pt) }
         }
         return p

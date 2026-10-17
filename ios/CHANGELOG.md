@@ -6,7 +6,9 @@
   nell'ovale rosso, barre che crescono, alloro attorno al record.
 - Si passa da Oggi allo Storico (e ritorno) anche scorrendo col dito.
 - Bottoni, selettori e card in vetro (Liquid Glass di iOS 26/27); la capsula rossa del selettore scivola sulla voce scelta.
-- Oggi: minuti e velocità in due card di vetro, numeri che scorrono quando cambiano, pallino che pulsa sulla strada.
+- Oggi: velocità, minuti e bandierina in un'unica barra di vetro in basso; il pallino (che pulsa) resta sulla strada
+  sopra la barra; numeri che scorrono quando cambiano.
+- Storico: impronte per tornare a Oggi in alto a sinistra, accanto alle impostazioni.
 - Impostazioni → Aspetto: Automatico, Giorno o Notte.
 - All'apertura streak e Jolly mostrano subito l'ultimo valore noto invece di «1» finché Salute non ha letto lo storico.
 - Nuova icona: la scarpa sulla strada con la pennellata rossa.

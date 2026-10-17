@@ -55,12 +55,6 @@ struct HistoryView: View {
             .simultaneousGesture(DragGesture(minimumDistance: 24).onEnded { g in
                 if g.translation.width > 60, abs(g.translation.width) > abs(g.translation.height) * 1.5 { onToday() }
             })
-            .overlay(alignment: .bottomLeading) {
-                RoundIconButton(label: "Oggi", action: onToday) {
-                    Image(systemName: "shoeprints.fill").font(.system(size: 22, weight: .medium))
-                }
-                .padding(.leading, 22).padding(.bottom, 6)
-            }
         }
     }
 
@@ -74,6 +68,9 @@ struct HistoryView: View {
         let artWidth = w * 0.86
         return VStack(spacing: 0) {
             HStack {
+                RoundIconButton(label: "Oggi", action: onToday) {
+                    Image(systemName: "shoeprints.fill").font(.system(size: 22, weight: .medium))
+                }
                 Spacer()
                 RoundIconButton(label: "Impostazioni", action: onSettings) { SlidersIcon() }
             }

@@ -23,23 +23,11 @@ struct OggiView: View {
 
                 hero(full: full, safe: safe, art: art)
 
-                if p.isDone {
-                    doneBadge
-                        .position(x: full.width - 24 - 70, y: art.minY + art.height * 0.675)
-                        .transition(.opacity)
-                } else {
-                    minutesBlock(p)
-                        .fixedSize()
-                        .frame(width: full.width * 0.5, alignment: .trailing)
-                        .position(x: full.width - 24 - full.width * 0.25, y: art.minY + art.height * 0.675)
-                        .transition(.opacity)
-                    speedLabel(p)
-                        .fixedSize()
-                        .frame(width: full.width * 0.6, alignment: .leading)
-                        .position(x: 24 + full.width * 0.3, y: art.minY + art.height * 0.735)
-                        .transition(.opacity)
+                let dockHeight: CGFloat = 104
+                let dockY = full.height - max(safe.bottom, 12) - dockHeight / 2 - 2
+                if !p.isDone {
                     RoadSpeedControl(speed: Binding(get: { store.speed }, set: { store.speed = $0 }),
-                                     samples: OggiArt.roadSamples(art: art, limitY: full.height - safe.bottom - 22))
+                                     samples: OggiArt.roadSamples(art: art, limitY: dockY - dockHeight / 2 - 26))
                         .transition(.opacity)
                 }
 
@@ -47,10 +35,9 @@ struct OggiView: View {
                     .frame(width: full.width - 44)
                     .position(x: full.width / 2, y: safe.top + 30)
 
-                RoundIconButton(label: "Storico", action: onHistory) {
-                    Image(systemName: "flag.checkered").font(.system(size: 22, weight: .medium))
-                }
-                .position(x: full.width - 22 - 28, y: full.height - max(safe.bottom, 12) - 34)
+                dock(p)
+                    .frame(width: full.width - 28, height: dockHeight)
+                    .position(x: full.width / 2, y: dockY)
             }
             .frame(width: full.width, height: full.height)
             .contentShape(Rectangle())
@@ -167,52 +154,62 @@ struct OggiView: View {
 
     // MARK: minuti e velocità
 
-    private func minutesBlock(_ p: Plan) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("MINUTI SUL\nTAPPETO")
-                .font(.system(size: 12, weight: .semibold)).tracking(12 * 0.2)
-                .lineSpacing(2).foregroundStyle(Theme.ink.opacity(0.8))
-            HStack(alignment: .lastTextBaseline, spacing: 6) {
-                SketchText(ItalianFormat.integer(p.minutes), size: 64)
-                    .contentTransition(.numericText())
-                    .animation(.snappy, value: p.minutes)
-                Text("min").font(.system(size: 22, weight: .semibold)).foregroundStyle(Theme.ink)
+    /// Barra in vetro in basso: velocità e minuti affiancati (o «Obiettivo fatto») e la bandierina per lo Storico.
+    private func dock(_ p: Plan) -> some View {
+        HStack(spacing: 0) {
+            if p.isDone {
+                VStack(alignment: .leading, spacing: 0) {
+                    dockLabel("OBIETTIVO")
+                    SketchText("FATTO", size: 50, color: Theme.accent)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Obiettivo raggiunto")
+                Spacer(minLength: 8)
+            } else {
+                VStack(alignment: .leading, spacing: 0) {
+                    dockLabel("VELOCITÀ · \(Text(p.gait.label.uppercased()).foregroundStyle(Theme.accent))")
+                    HStack(alignment: .lastTextBaseline, spacing: 5) {
+                        SketchText(ItalianFormat.number(p.speed, decimals: 1), size: 46)
+                            .contentTransition(.numericText())
+                            .animation(.snappy, value: p.speed)
+                        Text("km/h").font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.ink)
+                    }
+                }
+                .accessibilityHidden(true)       // la velocità si legge (e si cambia) dal pallino sulla strada
+                Spacer(minLength: 8)
+                Rectangle().fill(Theme.ink.opacity(0.15)).frame(width: 1, height: 56)
+                Spacer(minLength: 8)
+                VStack(alignment: .leading, spacing: 0) {
+                    dockLabel("MINUTI SUL TAPPETO")
+                    HStack(alignment: .lastTextBaseline, spacing: 5) {
+                        SketchText(ItalianFormat.integer(p.minutes), size: 46)
+                            .contentTransition(.numericText())
+                            .animation(.snappy, value: p.minutes)
+                        Text("min").font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.ink)
+                    }
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi")
+                Spacer(minLength: 8)
             }
+            Button(action: onHistory) {
+                Image(systemName: "flag.checkered").font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(Theme.onAccent)
+                    .frame(width: 52, height: 52)
+                    .background(Circle().fill(Theme.accent))
+                    .shadow(color: Theme.accent.opacity(0.45), radius: 8, y: 3)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Storico")
         }
-        .padding(.horizontal, 16).padding(.vertical, 12)
-        .glass(RoundedRectangle(cornerRadius: 26, style: .continuous))
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(p.minutes) minuti sul tappeto per \(ItalianFormat.integer(p.remaining)) passi")
+        .padding(.leading, 20).padding(.trailing, 14)
+        .glass(RoundedRectangle(cornerRadius: 32, style: .continuous))
+        .animation(.easeInOut(duration: 0.3), value: p.isDone)
     }
 
-    private func speedLabel(_ p: Plan) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("VELOCITÀ · \(Text(p.gait.label.uppercased()).foregroundStyle(Theme.accent))")
-                .font(.system(size: 12, weight: .semibold)).tracking(12 * 0.2)
-                .foregroundStyle(Theme.ink.opacity(0.8))
-            HStack(alignment: .lastTextBaseline, spacing: 8) {
-                SketchText(ItalianFormat.number(p.speed, decimals: 1), size: 52)
-                    .contentTransition(.numericText())
-                    .animation(.snappy, value: p.speed)
-                Text("km/h").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.ink)
-            }
-            Text("trascina il pallino sulla strada").font(.system(size: 11)).foregroundStyle(Theme.ink.opacity(0.6))
-        }
-        .padding(.horizontal, 16).padding(.vertical, 12)
-        .glass(RoundedRectangle(cornerRadius: 26, style: .continuous))
-        .accessibilityHidden(true)       // la velocità si legge (e si cambia) dal cursore sulla strada
-    }
-
-    private var doneBadge: some View {
-        VStack(alignment: .trailing, spacing: 2) {
-            Text("OBIETTIVO").font(.system(size: 14, weight: .semibold)).tracking(14 * 0.2)
-                .foregroundStyle(Theme.ink.opacity(0.8))
-            SketchText("FATTO", size: 64, color: Theme.accent)
-        }
-        .padding(.horizontal, 16).padding(.vertical, 12)
-        .glass(RoundedRectangle(cornerRadius: 26, style: .continuous))
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Obiettivo raggiunto")
+    private func dockLabel(_ text: LocalizedStringKey) -> some View {
+        Text(text).font(.system(size: 10, weight: .semibold)).tracking(1)
+            .foregroundStyle(Theme.ink.opacity(0.75)).lineLimit(1).fixedSize()
     }
 }
 
@@ -327,12 +324,5 @@ private struct RoadHitShape: Shape {
         var p = Path()
         p.addLines(samples)
         return p.strokedPath(StrokeStyle(lineWidth: 64, lineCap: .round, lineJoin: .round))
-    }
-}
-
-extension View {
-    /// Alone di carta dietro le scritte che stanno sopra l'illustrazione.
-    func paperHalo() -> some View {
-        background(RoundedRectangle(cornerRadius: 24).fill(Theme.bg.opacity(0.78)).blur(radius: 12))
     }
 }

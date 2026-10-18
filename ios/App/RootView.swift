@@ -1,53 +1,82 @@
 import SwiftUI
 import StepTellerCore
 
-enum AppTab { case oggi, storico }
-
-/// Radice dell'app: sfondo con gli orb, la pagina scelta e, in basso, la barra Oggi | Storico.
+/// Radice dell'app: tema (giorno/notte), la schermata scelta (Home ↔ Storico con transizione
+/// orizzontale), la barra superiore fissa e la festa dell'obiettivo.
 struct RootView: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.scenePhase) private var scenePhase
-    @State private var tab: AppTab
+    @Environment(\.colorScheme) private var systemScheme
+    @AppStorage(ThemeMode.storageKey) private var themeModeRaw = ThemeMode.system.rawValue
+    @State private var screen: AppScreen
     @State private var showSettings: Bool
+    @State private var storicoScrolled = false
     /// Giorno (yyyy-MM-dd) dell'ultima festa «Obiettivo raggiunto»: una sola al giorno.
     @AppStorage("stepteller.celebratedDay") private var celebratedDay = ""
     @State private var celebrating = false
 
     init() {
-        var t = AppTab.oggi
+        var s = AppScreen.home
         var sheet = false
         #if DEBUG
         let d = UserDefaults.standard
-        if d.string(forKey: "stepteller.debugTab") != nil { t = .storico }   // «storico» o «streak»
+        if d.string(forKey: "stepteller.debugTab") != nil { s = .storico }
         sheet = d.object(forKey: "stepteller.debugSheet") != nil
         #endif
-        _tab = State(initialValue: t)
+        _screen = State(initialValue: s)
         _showSettings = State(initialValue: sheet)
     }
 
-    var body: some View {
-        ZStack {
-            OrbsBackground()
-            Group {
-                switch tab {
-                case .oggi: OggiView(onSettings: { showSettings = true })
-                case .storico: HistoryView(onSettings: { showSettings = true })
-                }
-            }
-            VStack {
-                Spacer()
-                BottomBar(tab: $tab)
-            }
-            .ignoresSafeArea(edges: .bottom)
-            .ignoresSafeArea(.keyboard)
+    private var themeMode: ThemeMode { ThemeMode(rawValue: themeModeRaw) ?? .system }
 
-            if celebrating {
-                GoalCelebration(steps: store.steps, goal: store.goal, streak: store.history.streak.streak) {
-                    celebrating = false
+    var body: some View {
+        TimelineView(.everyMinute) { timeline in
+            let palette = MangaPalette.of(themeMode.resolve(systemScheme: systemScheme, now: timeline.date))
+            GeometryReader { geo in
+                let size = CGSize(width: geo.size.width,
+                                  height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom)
+                let s = size.width / Manga.frameWidth
+                let rowTop = max(Manga.statusBarHeight, geo.safeAreaInsets.top / s)
+                ZStack(alignment: .top) {
+                    palette.paper
+                    Group {
+                        switch screen {
+                        case .home:
+                            HomeView(size: size)
+                                .transition(.move(edge: .leading))
+                        case .storico:
+                            StoricoView(size: size, scrolled: $storicoScrolled)
+                                .transition(.move(edge: .trailing))
+                        }
+                    }
+                    MangaCanvas(width: size.width, height: rowTop + Manga.topBarHeight - Manga.statusBarHeight) {
+                        TopBar(screen: screen, streak: store.history.streak.streak, jolly: store.history.streak.jolly,
+                               storicoScrolled: storicoScrolled, rowTop: rowTop,
+                               onNav: navigate, onSettings: { showSettings = true })
+                    }
+                    if celebrating {
+                        GoalCelebration(steps: store.steps, goal: store.goal, streak: store.history.streak.streak) {
+                            celebrating = false
+                        }
+                        .transition(.opacity)
+                        .zIndex(1)
+                    }
                 }
-                .transition(.opacity)
-                .zIndex(1)
+                .frame(width: size.width, height: size.height)
+                .ignoresSafeArea()
             }
+            .environment(\.manga, palette)
+            .preferredColorScheme(themeMode == .system ? nil : palette.colorScheme)
+            .sheet(isPresented: $showSettings) {
+                SettingsSheet()
+                    .environment(\.manga, palette)
+                    .preferredColorScheme(themeMode == .system ? nil : palette.colorScheme)
+            }
+        }
+        .onOpenURL { url in
+            // widget: `stepteller://oggi` apre la Home
+            guard url.scheme == "stepteller", url.host == "oggi", screen != .home else { return }
+            navigate()
         }
         .task { await store.start() }
         .onAppear { celebrateIfNeeded() }
@@ -60,7 +89,13 @@ struct RootView: View {
         }
         .onChange(of: store.plan.isDone) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
-        .sheet(isPresented: $showSettings) { SettingsSheet() }
+    }
+
+    private func navigate() {
+        withAnimation(.easeInOut(duration: Manga.navDuration)) {
+            screen = screen == .home ? .storico : .home
+        }
+        if screen == .home { storicoScrolled = false }
     }
 }
 
@@ -82,45 +117,5 @@ extension RootView {
         guard celebratedDay != today else { return }
         celebratedDay = today
         withAnimation(.easeOut(duration: 0.25)) { celebrating = true }
-    }
-}
-
-/// Barra in basso: il contenuto che scorre sotto sfuma e si sfoca prima di arrivare al selettore,
-/// che ha uno sfondo pieno (mai sovrapposizioni).
-struct BottomBar: View {
-    @Binding var tab: AppTab
-
-    var body: some View {
-        ZStack(alignment: .top) {
-            Rectangle().fill(.regularMaterial)
-                .mask(LinearGradient(stops: [.init(color: .clear, location: 0), .init(color: .black, location: 0.5)],
-                                     startPoint: .top, endPoint: .bottom))
-            LinearGradient(stops: [.init(color: Theme.bg.opacity(0), location: 0),
-                                   .init(color: Theme.bg.opacity(0.88), location: 0.5),
-                                   .init(color: Theme.bg.opacity(0.96), location: 1)],
-                           startPoint: .top, endPoint: .bottom)
-            HStack(spacing: 0) {
-                item("OGGI", .oggi)
-                item("STORICO", .storico)
-            }
-            .padding(4)
-            .background(Capsule().fill(Theme.pill))
-            .overlay(Capsule().strokeBorder(Theme.pillLine, lineWidth: 1))
-            .padding(.top, 34)
-        }
-        .frame(height: 124)
-    }
-
-    private func item(_ title: String, _ value: AppTab) -> some View {
-        Button { withAnimation(.easeInOut(duration: 0.2)) { tab = value } } label: {
-            Text(title)
-                .font(.system(size: 12, weight: .semibold)).tracking(2.4)
-                .foregroundStyle(tab == value ? Theme.accent : Theme.soft)
-                .frame(width: 112, height: 40)
-                .background(Capsule().fill(tab == value ? Theme.accentSoft : .clear))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(title.capitalized)
-        .accessibilityAddTraits(tab == value ? .isSelected : [])
     }
 }

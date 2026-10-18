@@ -21,7 +21,7 @@ public struct Plan: Sendable, Equatable {
     public static let glanceSpeed = 4.0
 
     public init(goal: Int, steps: Int, speed: Double, model: CadenceModel = .standard) {
-        let v = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, speed))
+        let v = min(SpeedTrack.maxSpeed, max(SpeedTrack.minSpeed, speed))
         let cad = model.cadence(at: v)
         let gap = max(0, goal - steps)
         self.goal = goal

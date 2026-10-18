@@ -9,12 +9,10 @@ import StepTellerCore
 @Observable
 final class StepsStore {
     var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); SharedStore.goal = goal; history.recordGoal(goal); WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
-    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders(); await syncActivity() } } }
+    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); SharedStore.speed = speed; WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders(); await syncActivity() } } }
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
     var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
-    /// Illustrazione del tappeto nella card di Oggi (default sì).
-    var showsTreadmill: Bool { didSet { defaults.set(showsTreadmill, forKey: Keys.treadmill) } }
     private(set) var state = StepsState()
     /// Storico, streak e Jolly.
     let history: HistoryStore
@@ -37,7 +35,6 @@ final class StepsStore {
         static let reminderOn = "stepteller.reminder.on"
         static let reminderTime = "stepteller.reminder.minutes"
         static let calibration = "stepteller.calibration.v1"
-        static let treadmill = "stepteller.showsTreadmill"
     }
 
     init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
@@ -51,10 +48,10 @@ final class StepsStore {
         goal = initialGoal
         history = HistoryStore(provider: historyProvider, currentGoal: initialGoal, defaults: defaults,
                                streakStartOverride: streakStartOverride)
-        let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : 6.0
-        speed = min(CadenceModel.maxSpeed, max(CadenceModel.minSpeed, (v * 10).rounded() / 10))
+        // Cursore sulla strada: 3–16 km/h a scatti di 0,5 (un valore vecchio come 8,3 diventa 8,5).
+        let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed
+        speed = SpeedTrack.snap(v)
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
-        showsTreadmill = defaults.object(forKey: Keys.treadmill) != nil ? defaults.bool(forKey: Keys.treadmill) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         #if DEBUG
         // Screenshot sul simulatore: niente richiesta di permesso notifiche sopra l'interfaccia.
@@ -63,7 +60,8 @@ final class StepsStore {
         treadmillActive = liveActivity.isRunning
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
-        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.goal = goal              // il widget legge obiettivo, taratura e velocità dall'App Group
+        SharedStore.speed = speed
         SharedStore.calibration = calibration
     }
 
@@ -112,6 +110,7 @@ final class StepsStore {
     }
 
     func becameInactive() {
+        WidgetCenter.shared.reloadAllTimelines()
         dayTask?.cancel()
         dayTask = nil
     }

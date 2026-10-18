@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "stepteller-art-night.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

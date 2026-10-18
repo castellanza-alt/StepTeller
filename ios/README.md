@@ -1,6 +1,6 @@
-# Step Teller — app iOS nativa
+# NEAT (ex Step Teller) — app iOS nativa
 
-Versione nativa (SwiftUI) di Step Teller, con i passi di oggi letti da Apple Salute.
+Versione nativa (SwiftUI) di Step Teller, sul telefono col nome **NEAT**, con i passi di oggi letti da Apple Salute.
 La web app resta in radice al repository (non toccata).
 
 ## Struttura
@@ -9,9 +9,11 @@ La web app resta in radice al repository (non toccata).
 |---|---|
 | `Sources/StepTellerCore/` | Nucleo (solo Foundation): cadenza e taratura, calcolo, formato italiano, logica sorgente passi |
 | `Tests/StepTellerCoreTests/` | Test del nucleo (valori golden della web app v4.0) — `swift test` anche su Linux |
-| `App/` | App SwiftUI: `ContentView`, `StepsStore`, `HealthKitStepsProvider`, tappeto, orb, pannello in vetro, cursore |
+| `App/` | App SwiftUI: `RootView` (tema e navigazione), `TopBar`, `Home/` (Home e cursore sulla strada), `Storico/`, `StepsStore`, `HealthKitStepsProvider` |
+| `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
+| `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
-| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_icon.py`, `select_xcode.sh` |
+| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `check_icon.py`, `select_xcode.sh` |
 
 Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 
@@ -20,6 +22,14 @@ Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 `Sources/StepTellerCore/CadenceModel.swift`, enum `Calibration` (un solo posto). Esempio per la camminata:
 `public static let walk = [CalibrationPoint(speed: 5.0, cadence: 112.0)]`. Con 1 punto il rapporto è costante,
 con 2 o più è interpolato e costante oltre gli estremi. Aggiornare poi i test golden se cambiano.
+
+## Stile e tema
+
+Le schermate sono disegnate sulla tela del handoff (390 × 844 pt) e scalate in larghezza (`MangaCanvas`). Colori solo da
+`MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per Impostazioni, widget e Live Activity.
+Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–16 km/h
+lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
+(Salute senza dati).
 
 ## Salute (HealthKit)
 
@@ -30,9 +40,16 @@ Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli scree
 
 ## Widget
 
-`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (disegno, nello spazio dei
-mockup 340×340). Obiettivo e taratura arrivano dall'app via App Group (`Shared/SharedStore.swift`). I minuti usano
-`Plan.glanceSpeed` (4 km/h). In Debug `WidgetPreviewScreen` mostra il widget ingrandito per gli screenshot.
+`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (piccolo 170×170, medio
+364×170, blocco schermo), nello stile «Dan Dan Dan» con i token dell'app; arte in `Shared/WidgetAssets.xcassets`.
+Obiettivo, taratura, velocità del cursore, serie e Jolly arrivano dall'app via App Group (`Shared/SharedStore.swift`);
+i minuti usano lo stesso modello tarato dell'app. Tocco → `stepteller://oggi`. In Debug `WidgetPreviewScreen` mostra i widget
+per gli screenshot (`-stepteller.debugWidget 1`).
+
+## Icona
+
+`App/AppIcon.icon` (Icon Composer, Liquid Glass): livelli scarpa (PNG ritagliato), pennellata e raggi (SVG), varianti
+giorno/notte. Anteprima da terminale con `ictool` (dentro Icon Composer.app). `scripts/check_icon.py` la verifica in CI.
 
 ## CI
 

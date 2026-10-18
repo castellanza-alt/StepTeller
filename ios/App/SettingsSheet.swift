@@ -7,6 +7,7 @@ struct SettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
     @FocusState private var goalFocused: Bool
     @State private var showRules = false
+    @AppStorage(ThemeMode.storageKey) private var themeMode = ThemeMode.system.rawValue
 
     var body: some View {
         @Bindable var store = store
@@ -53,12 +54,12 @@ struct SettingsSheet: View {
                     note("Se l'obiettivo non è chiuso: i minuti che ti servono e, se serve, un avviso sulla streak o sul Jolly.")
                 }
 
-                section("Aspetto") {
-                    Toggle("Mostra il tapis roulant", isOn: $store.showsTreadmill).tint(Theme.accent)
-                        .padding(.horizontal, 16).padding(.vertical, 10)
-                        .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
-                        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
-                    note("Spento: nella card di Oggi restano solo i minuti e la velocità.")
+                section("Tema") {
+                    Picker("Tema", selection: $themeMode) {
+                        ForEach(ThemeMode.allCases) { Text($0.label).tag($0.rawValue) }
+                    }
+                    .pickerStyle(.segmented)
+                    note("Sistema: giorno con l'aspetto chiaro del telefono, notte con quello scuro. Orario: giorno dalle 7 alle 19.")
                 }
 
                 section("Streak e Jolly") {

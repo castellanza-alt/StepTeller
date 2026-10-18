@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.6.0 — 18 ottobre 2026
+- L'app si chiama **NEAT** (nome sotto l'icona, Salute e widget). Bundle ID, dati salvati e link `stepteller://`
+  restano quelli di prima.
+- Home sugli iPhone bassi (es. SE, 375 × 667): la tela si adatta all'altezza, strada e cursore restano visibili.
+- Nuovo stile «Dan Dan Dan» (handoff Home + Storico): inchiostro, rosso come unico accento, font Anton, linee
+  cinetiche, vignette storte. Tema **giorno** e **notte** con palette e illustrazioni proprie; in Impostazioni → Tema:
+  Sistema (predefinito), Orario (giorno 7–19), Giorno, Notte.
+- Home: illustrazione a tutto schermo, passi di oggi, minuti mancanti e cursore della velocità che scorre sulla strada
+  disegnata (3–16 km/h a scatti di 0,5, tocco aptico a ogni scatto). I minuti restano quelli del modello di cadenza
+  tarato. A obiettivo chiuso: «FATTO!» e niente cursore. Tocco sul numero per correggere i passi; «USA SALUTE» e
+  avviso senza dati restano.
+- Navigazione con il bottone rosso in alto a sinistra (Home ↔ Storico); niente più barra in basso.
+- Storico: serie con fiamma, Jolly pronti, serie più lunga, prossimo Jolly (15 tacche), istogrammi a parallelogrammi
+  (Settimana = somma, Mese/Anno/Sempre = media giornaliera; Anno e Sempre ora mostrano medie giornaliere, non totali),
+  Passi · Km, record con la nuova scheda «Serie» (con le date).
+- Medie giornaliere: contano i giorni conclusi (oggi escluso), dal primo giorno con dati.
+- Tolti: tapis roulant illustrato e relativa opzione, calendario, dettagli Jolly maturati/usati.
+- Festa dell'obiettivo ridisegnata nello stesso stile.
+- Nuova icona Liquid Glass fatta con Icon Composer (`App/AppIcon.icon`): la suola rossa in primo piano su raggi manga,
+  con varianti giorno, notte, colorata e trasparente.
+- Widget nello stesso stile: piccolo e nuovo **medio** (passi, serie, Jolly, minuti e km che mancano alla velocità scelta
+  in Home), tondo e rettangolare sul blocco schermo; giorno/notte secondo l'aspetto del telefono; un tocco apre la Home.
+
 ## 0.5.4 — 10 ottobre 2026
 - Nuova icona dell'app (impronte e percorso tratteggiato, scelta da Will).
 - Tappeto nascosto: la card non lascia più il vuoto a destra; passi mancanti e distanza diventano numeri a destra

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Screenshot sul simulatore (iPhone 15 Pro Max se disponibile) in chiaro e scuro.
+# Screenshot sul simulatore (iPhone 15 Pro Max se disponibile), tema giorno e notte.
 # Usa il fornitore finto SOLO della build Debug (argomenti di avvio), mai l'app distribuita.
 set -euo pipefail
 APP="$1"; OUT="$2"; mkdir -p "$OUT"
@@ -13,62 +13,51 @@ echo "runtime=$RUNTIME tipo=$TYPE"
 UDID=$(xcrun simctl create StepTellerShots "$TYPE" "$RUNTIME")
 xcrun simctl boot "$UDID"; xcrun simctl bootstatus "$UDID" -b >/dev/null
 xcrun simctl install "$UDID" "$APP"
+# Salute può rilanciare l'app in background senza argomenti di avvio: quella istanza non deve chiedere il
+# permesso notifiche (il popup resterebbe sopra tutti gli screenshot). Promemoria spento in partenza.
+xcrun simctl spawn "$UDID" defaults write $BID stepteller.reminder.on -bool NO
 xcrun simctl status_bar "$UDID" override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 || true
-shot() { # nome tema passi velocità [tappeto YES/NO]
-  xcrun simctl ui "$UDID" appearance "$2"
+shot() { # nome tema(day/night) passi velocità [argomenti extra…]
+  name=$1; theme=$2; steps=$3; speed=$4; shift 4
   xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
-  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps "$3" -stepteller.speed "$4" -stepteller.goal 10000 -stepteller.showsTreadmill "${5:-YES}" >/dev/null
+  xcrun simctl launch --terminate-running-process "$UDID" $BID -stepteller.debugSteps "$steps" -stepteller.debugHistory 1 -stepteller.speed "$speed" \
+    -stepteller.goal 10000 -stepteller.themeMode "$theme" "$@" >/dev/null
   sleep 5
-  xcrun simctl io "$UDID" screenshot "$OUT/$1-$2.png"
+  xcrun simctl io "$UDID" screenshot "$OUT/$name-$theme.png"
 }
-for theme in light dark; do
-  shot cammino-6 $theme 7200 6.0
-  shot corsa-8-3 $theme 7200 8.3
-  shot fatto $theme 10729 4.5
-  shot zero-10 $theme 0 10.0
-  shot senza-tappeto $theme 7413 5.6 NO
+for theme in day night; do
+  shot home-4kmh $theme 3465 4.0
+  shot home-16kmh $theme 3465 16.0
+  shot home-fatto $theme 10729 6.0
+  shot home-nodati $theme -1 4.0
+  shot storico-sett $theme 3465 4.0 -stepteller.debugTab storico
+  shot storico-mese $theme 3465 4.0 -stepteller.debugTab storico -stepteller.debugPeriod month
+  shot storico-anno $theme 3465 4.0 -stepteller.debugTab storico -stepteller.debugPeriod year
+  shot storico-sempre $theme 3465 4.0 -stepteller.debugTab storico -stepteller.debugPeriod all
 done
+shot impostazioni night 3465 4.0 -stepteller.debugSheet 1
 wshot() { # nome passi (vuoto = dato non disponibile)
   xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
   if [ -n "$2" ]; then
-    xcrun simctl launch "$UDID" $BID -stepteller.debugWidget 1 -stepteller.debugSteps "$2" >/dev/null
+    xcrun simctl launch --terminate-running-process "$UDID" $BID -stepteller.debugWidget 1 -stepteller.debugSteps "$2" >/dev/null
   else
-    xcrun simctl launch "$UDID" $BID -stepteller.debugWidget 1 >/dev/null
+    xcrun simctl launch --terminate-running-process "$UDID" $BID -stepteller.debugWidget 1 >/dev/null
   fi
   sleep 3
   xcrun simctl io "$UDID" screenshot "$OUT/widget-$1.png"
 }
 fshot() { # festa «Obiettivo raggiunto» a metà animazione
-  xcrun simctl ui "$UDID" appearance "$1"
   xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
-  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps 10729 -stepteller.debugCelebrate 1 -stepteller.goal 10000 >/dev/null
+  xcrun simctl launch --terminate-running-process "$UDID" $BID -stepteller.debugSteps 10729 -stepteller.debugCelebrate 1 -stepteller.goal 10000 -stepteller.themeMode "$1" >/dev/null
   sleep 2.2
   xcrun simctl io "$UDID" screenshot "$OUT/festa-$1.png"
 }
-fshot light
-fshot dark
+fshot day
+fshot night
 xcrun simctl ui "$UDID" appearance dark
 wshot parziale 7200
 wshot fatto 10450
 wshot zero 0
 wshot nodati ""
-hshot() { # nome tab periodo [sheet]
-  xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
-  extra=""
-  [ "${4:-}" = "sheet" ] && extra="-stepteller.debugSheet 1"
-  xcrun simctl launch "$UDID" $BID -stepteller.debugSteps 7200 -stepteller.debugHistory 1 -stepteller.debugTab "$2" -stepteller.debugPeriod "$3" -stepteller.speed 6.0 -stepteller.goal 10000 $extra >/dev/null
-  sleep 5
-  xcrun simctl io "$UDID" screenshot "$OUT/$1.png"
-}
-for theme in dark light; do
-  xcrun simctl ui "$UDID" appearance $theme
-  hshot storico-sett-$theme storico week
-  hshot storico-mese-$theme storico month
-  hshot storico-anno-$theme storico year
-  hshot streak-$theme streak week
-done
-xcrun simctl ui "$UDID" appearance dark
-hshot oggi-storia-dark oggi week
-hshot impostazioni-dark storico week sheet
 xcrun simctl delete "$UDID"
 ls -la "$OUT"

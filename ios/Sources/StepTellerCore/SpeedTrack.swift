@@ -1,0 +1,104 @@
+import Foundation
+
+/// Tracciato del cursore della velocità: la linea tratteggiata della strada nell'illustrazione della Home.
+/// Le coordinate sono **pixel dell'illustrazione** (881 × 1786); la vista le converte in punti.
+/// Inizio del tracciato = `minSpeed`, fine = `maxSpeed`, lineare sulla lunghezza dell'arco.
+public struct SpeedTrack: Sendable {
+    public struct Point: Sendable, Equatable {
+        public var x: Double
+        public var y: Double
+        public init(_ x: Double, _ y: Double) { self.x = x; self.y = y }
+    }
+
+    public static let minSpeed = 3.0
+    public static let maxSpeed = 16.0
+    public static let step = 0.5
+    public static let defaultSpeed = 4.0
+
+    /// Dimensioni dell'illustrazione in pixel.
+    public static let artWidth = 881.0
+    public static let artHeight = 1786.0
+
+    /// `M 50 1697 C 170 1664, 310 1630, 480 1604 C 590 1586, 660 1560, 690 1530
+    ///  C 715 1500, 712 1450, 690 1420 C 670 1395, 630 1385, 600 1380` (dal handoff).
+    public static let road = SpeedTrack(start: Point(50, 1697), curves: [
+        (Point(170, 1664), Point(310, 1630), Point(480, 1604)),
+        (Point(590, 1586), Point(660, 1560), Point(690, 1530)),
+        (Point(715, 1500), Point(712, 1450), Point(690, 1420)),
+        (Point(670, 1395), Point(630, 1385), Point(600, 1380)),
+    ])
+
+    /// Punti campionati lungo il tracciato e lunghezza cumulata fino a ciascuno.
+    public let samples: [Point]
+    public let lengths: [Double]
+    public var totalLength: Double { lengths.last ?? 0 }
+
+    public init(start: Point, curves: [(Point, Point, Point)], samplesPerCurve: Int = 128) {
+        var pts = [start]
+        var p0 = start
+        for (c1, c2, p3) in curves {
+            for i in 1...samplesPerCurve {
+                let t = Double(i) / Double(samplesPerCurve), u = 1 - t
+                let a = u * u * u, b = 3 * u * u * t, c = 3 * u * t * t, d = t * t * t
+                pts.append(Point(a * p0.x + b * c1.x + c * c2.x + d * p3.x,
+                                 a * p0.y + b * c1.y + c * c2.y + d * p3.y))
+            }
+            p0 = p3
+        }
+        var lens = [0.0]
+        for i in 1..<pts.count { lens.append(lens[i - 1] + Self.distance(pts[i - 1], pts[i])) }
+        samples = pts
+        lengths = lens
+    }
+
+    /// Punto a una frazione 0…1 della lunghezza.
+    public func point(atFraction f: Double) -> Point {
+        let target = min(1, max(0, f)) * totalLength
+        var lo = 0, hi = lengths.count - 1
+        while hi - lo > 1 {
+            let mid = (lo + hi) / 2
+            if lengths[mid] < target { lo = mid } else { hi = mid }
+        }
+        let span = lengths[hi] - lengths[lo]
+        let t = span > 0 ? (target - lengths[lo]) / span : 0
+        let a = samples[lo], b = samples[hi]
+        return Point(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t)
+    }
+
+    /// Proiezione sul tracciato: frazione del punto più vicino e distanza da esso (stesse unità dei punti).
+    public func nearest(to p: Point) -> (fraction: Double, distance: Double) {
+        var best = (fraction: 0.0, distance: Double.infinity)
+        for i in 1..<samples.count {
+            let a = samples[i - 1], b = samples[i]
+            let dx = b.x - a.x, dy = b.y - a.y
+            let len2 = dx * dx + dy * dy
+            let t = len2 > 0 ? min(1, max(0, ((p.x - a.x) * dx + (p.y - a.y) * dy) / len2)) : 0
+            let q = Point(a.x + dx * t, a.y + dy * t)
+            let d = Self.distance(p, q)
+            if d < best.distance {
+                let along = lengths[i - 1] + (lengths[i] - lengths[i - 1]) * t
+                best = (totalLength > 0 ? along / totalLength : 0, d)
+            }
+        }
+        return best
+    }
+
+    /// Velocità (arrotondata a `step`) per una frazione del tracciato.
+    public static func speed(forFraction f: Double) -> Double {
+        snap(minSpeed + min(1, max(0, f)) * (maxSpeed - minSpeed))
+    }
+
+    /// Frazione del tracciato per una velocità.
+    public static func fraction(forSpeed v: Double) -> Double {
+        (min(maxSpeed, max(minSpeed, v)) - minSpeed) / (maxSpeed - minSpeed)
+    }
+
+    /// Velocità nell'intervallo e arrotondata al passo (0,5).
+    public static func snap(_ v: Double) -> Double {
+        min(maxSpeed, max(minSpeed, (v / step).rounded() * step))
+    }
+
+    static func distance(_ a: Point, _ b: Point) -> Double {
+        ((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)).squareRoot()
+    }
+}

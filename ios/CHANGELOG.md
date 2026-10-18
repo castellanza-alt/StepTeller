@@ -1,6 +1,9 @@
 # Changelog
 
 ## 0.6.0 — 18 ottobre 2026
+- L'app si chiama **NEAT** (nome sotto l'icona, Salute e widget). Bundle ID, dati salvati e link `stepteller://`
+  restano quelli di prima.
+- Home sugli iPhone bassi (es. SE, 375 × 667): la tela si adatta all'altezza, strada e cursore restano visibili.
 - Nuovo stile «Dan Dan Dan» (handoff Home + Storico): inchiostro, rosso come unico accento, font Anton, linee
   cinetiche, vignette storte. Tema **giorno** e **notte** con palette e illustrazioni proprie; in Impostazioni → Tema:
   Sistema (predefinito), Orario (giorno 7–19), Giorno, Notte.

@@ -2,7 +2,8 @@ import SwiftUI
 import StepTellerCore
 
 /// Home («Oggi»): illustrazione a tutto schermo, passi di oggi, minuti mancanti e il cursore della
-/// velocità che scorre sulla strada. Tela 390 pt del handoff, scalata in larghezza.
+/// velocità che scorre sulla strada. Tela 390 × 844 pt del handoff, scalata in larghezza (o in altezza se lo
+/// schermo è più basso del riferimento).
 struct HomeView: View {
     let size: CGSize
     @Environment(StepsStore.self) private var store
@@ -12,8 +13,10 @@ struct HomeView: View {
     @State private var editText = ""
 
     var body: some View {
-        let s = size.width / Manga.frameWidth
-        MangaCanvas(width: size.width, height: size.height / s) {
+        // Di norma la tela si scala in larghezza; sui telefoni bassi (es. SE, 375 × 667) si adatta
+        // all'altezza, così strada e cursore restano sullo schermo (ai lati resta il fondo `paper`).
+        let s = min(size.width / Manga.frameWidth, size.height / Manga.frameHeight)
+        MangaCanvas(width: Manga.frameWidth * s, height: size.height / s) {
             Board {
                 Image(c.homeArt)
                     .resizable()
@@ -39,6 +42,7 @@ struct HomeView: View {
             .background(c.paper)
             .animation(.easeInOut(duration: 0.25), value: store.plan.isDone)
         }
+        .frame(width: size.width)
         .alert("Passi di oggi", isPresented: $editing) {
             TextField("Passi", text: $editText).keyboardType(.numberPad)
             Button("Salva") { store.setManualSteps(ItalianFormat.digits(editText)) }
@@ -86,7 +90,7 @@ struct HomeView: View {
             if store.showsNoDataWarning {
                 VStack(alignment: .leading, spacing: 6) {
                     TagText(text: "NESSUN DATO DA SALUTE", size: 14, tracking: 0.06, foreground: c.paper, background: c.ink)
-                    AntonText("SALUTE → CONDIVISIONE → APP → STEP TELLER", 11, tracking: 0.04)
+                    AntonText("SALUTE → CONDIVISIONE → APP → NEAT", 11, tracking: 0.04)
                     Button {
                         if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
                     } label: {

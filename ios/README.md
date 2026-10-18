@@ -1,6 +1,6 @@
-# Step Teller — app iOS nativa
+# NEAT (ex Step Teller) — app iOS nativa
 
-Versione nativa (SwiftUI) di Step Teller, con i passi di oggi letti da Apple Salute.
+Versione nativa (SwiftUI) di Step Teller, sul telefono col nome **NEAT**, con i passi di oggi letti da Apple Salute.
 La web app resta in radice al repository (non toccata).
 
 ## Struttura

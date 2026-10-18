@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// Palette di Step Teller (porta fedelmente i token CSS della v4.0 web).
+/// Palette di NEAT (ex Step Teller) (porta fedelmente i token CSS della v4.0 web).
 /// Nessun nero o bianco assoluto; il tema segue il sistema (chiaro/scuro).
 enum Theme {
     private static func dynamic(_ light: UInt32, _ lightA: Double = 1,

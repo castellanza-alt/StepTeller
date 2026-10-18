@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>it</string>
 	<key>CFBundleDisplayName</key>
-	<string>Step Teller</string>
+	<string>NEAT</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Step Teller</string>
+	<string>NEAT</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -29,9 +29,9 @@
 	<key>NSSupportsLiveActivities</key>
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Step Teller legge i tuoi passi di oggi per calcolare quanti minuti di tappeto ti servono, e i tuoi allenamenti di camminata e corsa (passi, distanza, durata) per tarare la cadenza. Non scrive nulla e non invia dati fuori dal telefono.</string>
+	<string>NEAT legge i tuoi passi di oggi per calcolare quanti minuti di tappeto ti servono, e i tuoi allenamenti di camminata e corsa (passi, distanza, durata) per tarare la cadenza. Non scrive nulla e non invia dati fuori dal telefono.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Step Teller non scrive nulla in Salute: legge soltanto i tuoi passi. Questa dichiarazione è richiesta da Apple per le app con accesso a Salute.</string>
+	<string>NEAT non scrive nulla in Salute: legge soltanto i tuoi passi. Questa dichiarazione è richiesta da Apple per le app con accesso a Salute.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

@@ -9,7 +9,9 @@ La web app resta in radice al repository (non toccata).
 |---|---|
 | `Sources/StepTellerCore/` | Nucleo (solo Foundation): cadenza e taratura, calcolo, formato italiano, logica sorgente passi |
 | `Tests/StepTellerCoreTests/` | Test del nucleo (valori golden della web app v4.0) — `swift test` anche su Linux |
-| `App/` | App SwiftUI: `ContentView`, `StepsStore`, `HealthKitStepsProvider`, tappeto, orb, pannello in vetro, cursore |
+| `App/` | App SwiftUI: `RootView` (tema e navigazione), `TopBar`, `Home/` (Home e cursore sulla strada), `Storico/`, `StepsStore`, `HealthKitStepsProvider` |
+| `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
+| `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
 | `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_icon.py`, `select_xcode.sh` |
 
@@ -20,6 +22,14 @@ Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 `Sources/StepTellerCore/CadenceModel.swift`, enum `Calibration` (un solo posto). Esempio per la camminata:
 `public static let walk = [CalibrationPoint(speed: 5.0, cadence: 112.0)]`. Con 1 punto il rapporto è costante,
 con 2 o più è interpolato e costante oltre gli estremi. Aggiornare poi i test golden se cambiano.
+
+## Stile e tema
+
+Le schermate sono disegnate sulla tela del handoff (390 × 844 pt) e scalate in larghezza (`MangaCanvas`). Colori solo da
+`MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per Impostazioni, widget e Live Activity.
+Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–16 km/h
+lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
+(Salute senza dati).
 
 ## Salute (HealthKit)
 

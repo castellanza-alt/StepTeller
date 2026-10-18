@@ -2,11 +2,6 @@ import Foundation
 import Observation
 import StepTellerCore
 
-/// Segno di un giorno nel calendario.
-enum CalendarMark {
-    case reached, saved, todayOpen, missed, future
-}
-
 /// Storico giornaliero, streak e Jolly. Tutto è **calcolato** dai dati di Salute (nessun archivio
 /// proprio dei passi): si salvano solo l'inizio del conteggio e lo storico degli obiettivi.
 @MainActor
@@ -89,27 +84,5 @@ final class HistoryStore {
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
-        stepsByDay = steps
-    }
-
-    @ObservationIgnored private var stepsByDay: [Date: Int] = [:]
-
-    /// Segno del calendario per un giorno. Prima dell'inizio della streak non esistono Jolly:
-    /// conta solo se l'obiettivo era raggiunto.
-    func mark(for day: Date) -> CalendarMark {
-        let d = calendar.startOfDay(for: day)
-        let today = calendar.startOfDay(for: Date())
-        if d > today { return .future }
-        if let status = streak.statuses[d] {
-            switch status {
-            case .reached: return .reached
-            case .saved: return .saved
-            case .missed: return .missed
-            case .inProgress: return .todayOpen
-            }
-        }
-        let steps = stepsByDay[d] ?? 0
-        let goal = goals.goal(on: d)
-        return goal > 0 && steps >= goal ? .reached : .missed
     }
 }

@@ -118,7 +118,8 @@ public struct HistoryStats: Sendable {
         case .year:
             return String(calendar.component(.year, from: i.start))
         case .all:
-            return "Da sempre"
+            let y0 = calendar.component(.year, from: i.start), y1 = calendar.component(.year, from: today)
+            return y0 == y1 ? "\(y1)" : "\(y0) – \(y1)"
         }
     }
 
@@ -157,7 +158,7 @@ public struct HistoryStats: Sendable {
             let y0 = calendar.component(.year, from: i.start), y1 = calendar.component(.year, from: today)
             return (y0...max(y0, y1)).enumerated().map { n, y in
                 let (s, km) = sum(year: y, month: nil)
-                return HistoryBar(id: n, label: "’" + String(format: "%02d", y % 100), steps: s, km: km, goal: 0,
+                return HistoryBar(id: n, label: String(format: "%02d", y % 100), steps: s, km: km, goal: 0,
                                   isCurrent: y == y1, isFuture: false)
             }
         }
@@ -170,6 +171,74 @@ public struct HistoryStats: Sendable {
             if c.year == year && (month == nil || c.month == month) { steps += r.steps; km += r.km }
         }
         return (steps, km)
+    }
+
+    // MARK: medie giornaliere
+
+    /// Barre di Anno e Sempre come **media giornaliera** (passi/giorno) di ogni mese o anno, così
+    /// l'obiettivo giornaliero resta confrontabile in tutti i grafici. Regola delle medie: `dailyAverage`.
+    public func averageBars(_ period: HistoryPeriod, offset: Int = 0) -> [HistoryBar] {
+        let base = bars(period, offset: offset)
+        guard period == .year || period == .all else { return base }
+        let i = interval(period, offset: offset)
+        let year0 = calendar.component(.year, from: i.start)
+        return base.map { b in
+            let start: Date, end: Date
+            if period == .year {
+                start = calendar.date(from: DateComponents(year: year0, month: b.id + 1, day: 1)) ?? i.start
+            } else {
+                start = calendar.date(from: DateComponents(year: year0 + b.id, month: 1, day: 1)) ?? i.start
+            }
+            let next = calendar.date(byAdding: period == .year ? .month : .year, value: 1, to: start) ?? start
+            end = calendar.date(byAdding: .day, value: -1, to: next) ?? start
+            let avg = dailyAverage(from: start, to: end)
+            return HistoryBar(id: b.id, label: b.label, steps: avg.steps, km: avg.km, goal: b.goal,
+                              isCurrent: b.isCurrent, isFuture: b.isFuture)
+        }
+    }
+
+    /// Media dei totali giornalieri tra `start` ed `end` (inclusi). Conta i giorni **conclusi**
+    /// (oggi escluso, perché a metà giornata abbasserebbe la media) a partire dal primo giorno con dati;
+    /// i giorni senza dati valgono 0. Se nel periodo c'è solo oggi, la media è il valore di oggi.
+    public func dailyAverage(from start: Date, to end: Date) -> (steps: Int, km: Double) {
+        guard let first = records.map(\.day).min().map({ calendar.startOfDay(for: $0) }) else { return (0, 0) }
+        let from = max(calendar.startOfDay(for: start), first)
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today) ?? today
+        let to = min(calendar.startOfDay(for: end), yesterday)
+        var steps = 0, km = 0.0, n = 0
+        var day = from
+        while day <= to {
+            steps += byDay[day]?.steps ?? 0
+            km += byDay[day]?.km ?? 0
+            n += 1
+            guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
+            day = next
+        }
+        if n == 0 {
+            let t = today
+            guard t >= from, t <= calendar.startOfDay(for: end) else { return (0, 0) }
+            return (byDay[t]?.steps ?? 0, byDay[t]?.km ?? 0)
+        }
+        return (Int((Double(steps) / Double(n)).rounded()), km / Double(n))
+    }
+
+    /// Media giornaliera di un periodo (stessa regola di `dailyAverage`).
+    public func dailyAverage(_ period: HistoryPeriod, offset: Int = 0) -> (steps: Int, km: Double) {
+        let i = interval(period, offset: offset)
+        return dailyAverage(from: i.start, to: i.end)
+    }
+
+    /// Etichetta di un intervallo di giorni (es. la streak più lunga): «3 – 17 ott 2026»,
+    /// «giu – ott 2024», «dic 2025 – feb 2026», o il solo giorno.
+    public func rangeLabel(from start: Date, to end: Date) -> String {
+        let a = calendar.dateComponents([.day, .month, .year], from: start)
+        let b = calendar.dateComponents([.day, .month, .year], from: end)
+        let ma = Self.shortMonths[a.month! - 1], mb = Self.shortMonths[b.month! - 1]
+        if a.year == b.year && a.month == b.month {
+            return a.day == b.day ? "\(b.day!) \(mb) \(b.year!)" : "\(a.day!) – \(b.day!) \(mb) \(b.year!)"
+        }
+        if a.year == b.year { return "\(ma) – \(mb) \(b.year!)" }
+        return "\(ma) \(a.year!) – \(mb) \(b.year!)"
     }
 
     // MARK: riepilogo

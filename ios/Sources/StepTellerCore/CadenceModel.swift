@@ -36,6 +36,8 @@ public struct CadenceModel: Sendable {
 
     /// Da questa velocità (inclusa) si corre.
     public static let runFrom = 7.1
+    /// Velocità valide per la taratura automatica (gli allenamenti fuori da qui si ignorano).
+    /// Il cursore dell'app va oltre (fino a `SpeedTrack.maxSpeed`): la curva si estrapola.
     public static let minSpeed = 3.0
     public static let maxSpeed = 12.0
 

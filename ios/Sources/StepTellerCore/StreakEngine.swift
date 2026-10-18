@@ -13,6 +13,9 @@ public struct StreakState: Sendable, Equatable {
     public var streak = 0
     /// Streak più lunga dall'inizio del conteggio.
     public var longest = 0
+    /// Primo e ultimo giorno riuscito della streak più lunga (la più recente, a parità).
+    public var longestStart: Date?
+    public var longestEnd: Date?
     /// Jolly disponibili.
     public var jolly = 0
     public var jollyEarned = 0
@@ -47,15 +50,21 @@ public enum StreakEngine {
                                goals: GoalHistory, now: Date, calendar: Calendar) -> StreakState {
         var s = StreakState()
         s.jolly = initialJolly
+        var currentStart: Date?
         let first = calendar.startOfDay(for: start)
         let today = calendar.startOfDay(for: now)
         guard first <= today else { return s }
 
         func apply(reached: Bool, day: Date) {
             if reached {
+                if s.streak == 0 { currentStart = day }
                 s.streak += 1
                 s.counter += 1
-                s.longest = max(s.longest, s.streak)
+                if s.streak >= s.longest {
+                    s.longest = s.streak
+                    s.longestStart = currentStart
+                    s.longestEnd = day
+                }
                 s.statuses[day] = .reached
                 if s.counter == jollyEvery { s.jolly += 1; s.jollyEarned += 1; s.counter = 0 }
             } else if s.streak > 0 && s.jolly > 0 {

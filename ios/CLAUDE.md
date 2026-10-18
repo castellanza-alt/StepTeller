@@ -2,8 +2,10 @@
 
 - Italiano con Will (non programma, lavora da telefono). Prima la conclusione, breve.
 - Il modello di calcolo è in `Sources/StepTellerCore`; i valori golden dei test vengono dalla web app v4.0: non cambiarli
-  senza motivo. Il tappeto (`TreadmillView`) è la foto del Technogym di Will (PNG senza sfondo) con il nastro animato sopra.
-- Nessun Mac: si compila e si distribuisce solo da GitHub Actions (`.github/workflows/ios-*.yml`). Linux può fare `swift test`.
+  senza motivo. L'interfaccia segue il handoff «Dan Dan Dan» (Home + Storico, giorno/notte): token in `App/Design/MangaTokens.swift`,
+  niente colori scritti a mano nelle viste. Jolly ogni 15 giorni (non 14 come nel handoff), minuti dal modello tarato.
+- La distribuzione passa da GitHub Actions (`.github/workflows/ios-*.yml`). Da ottobre 2026 c'è anche un Mac con Xcode e simulatori:
+  build e screenshot si possono fare in locale. Linux può fare `swift test`.
 - Repo pubblico: nessun segreto/profilo/chiave nel repo. Segreti solo `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`.
 - Non toccare i file in radice (web app) né il repo `diario-alimentare` (briciola.).
 - Streak, Jolly e statistiche sono funzioni pure in `StepTellerCore` (`StreakEngine`, `HistoryStats`, `GoalHistory`): si calcolano dai dati di Salute, non si salvano. Regole in `StreakEngine.swift`.

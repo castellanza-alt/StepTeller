@@ -13,7 +13,7 @@ settings:
     # e SwiftUI di Xcode 26 danno avvisi di concorrenza che qui non servono.
     SWIFT_VERSION: "5.0"
     MARKETING_VERSION: "0.6.1"
-    CURRENT_PROJECT_VERSION: "4"
+    CURRENT_PROJECT_VERSION: "5"
     COMMIT_SHA: ""
 targets:
   StepTeller:

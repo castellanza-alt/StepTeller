@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2 — 18 ottobre 2026
+- Stesso contenuto della 0.6.0 (NEAT, stile «Dan Dan Dan», icona e widget nuovi), con un numero di versione più
+  alto della 0.6.1 caricata dal Mac: TestFlight mostra in cima la versione più alta, quindi la 0.6.0 restava nascosta.
+
 ## 0.6.0 — 18 ottobre 2026
 - L'app si chiama **NEAT** (nome sotto l'icona, Salute e widget). Bundle ID, dati salvati e link `stepteller://`
   restano quelli di prima.

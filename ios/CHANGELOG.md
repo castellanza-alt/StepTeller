@@ -15,6 +15,10 @@
 - Medie giornaliere: contano i giorni conclusi (oggi escluso), dal primo giorno con dati.
 - Tolti: tapis roulant illustrato e relativa opzione, calendario, dettagli Jolly maturati/usati.
 - Festa dell'obiettivo ridisegnata nello stesso stile.
+- Nuova icona Liquid Glass fatta con Icon Composer (`App/AppIcon.icon`): la suola rossa in primo piano su raggi manga,
+  con varianti giorno, notte, colorata e trasparente.
+- Widget nello stesso stile: piccolo e nuovo **medio** (passi, serie, Jolly, minuti e km che mancano alla velocità scelta
+  in Home), tondo e rettangolare sul blocco schermo; giorno/notte secondo l'aspetto del telefono; un tocco apre la Home.
 
 ## 0.5.4 — 10 ottobre 2026
 - Nuova icona dell'app (impronte e percorso tratteggiato, scelta da Will).

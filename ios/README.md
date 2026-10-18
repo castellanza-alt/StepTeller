@@ -13,7 +13,7 @@ La web app resta in radice al repository (non toccata).
 | `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
 | `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
-| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `make_icon.py`, `select_xcode.sh` |
+| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `check_icon.py`, `select_xcode.sh` |
 
 Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 
@@ -40,9 +40,16 @@ Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli scree
 
 ## Widget
 
-`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (disegno, nello spazio dei
-mockup 340×340). Obiettivo e taratura arrivano dall'app via App Group (`Shared/SharedStore.swift`). I minuti usano
-`Plan.glanceSpeed` (4 km/h). In Debug `WidgetPreviewScreen` mostra il widget ingrandito per gli screenshot.
+`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (piccolo 170×170, medio
+364×170, blocco schermo), nello stile «Dan Dan Dan» con i token dell'app; arte in `Shared/WidgetAssets.xcassets`.
+Obiettivo, taratura, velocità del cursore, serie e Jolly arrivano dall'app via App Group (`Shared/SharedStore.swift`);
+i minuti usano lo stesso modello tarato dell'app. Tocco → `stepteller://oggi`. In Debug `WidgetPreviewScreen` mostra i widget
+per gli screenshot (`-stepteller.debugWidget 1`).
+
+## Icona
+
+`App/AppIcon.icon` (Icon Composer, Liquid Glass): livelli scarpa (PNG ritagliato), pennellata e raggi (SVG), varianti
+giorno/notte. Anteprima da terminale con `ictool` (dentro Icon Composer.app). `scripts/check_icon.py` la verifica in CI.
 
 ## CI
 

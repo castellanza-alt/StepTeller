@@ -73,6 +73,11 @@ struct RootView: View {
                     .preferredColorScheme(themeMode == .system ? nil : palette.colorScheme)
             }
         }
+        .onOpenURL { url in
+            // widget: `stepteller://oggi` apre la Home
+            guard url.scheme == "stepteller", url.host == "oggi", screen != .home else { return }
+            navigate()
+        }
         .task { await store.start() }
         .onAppear { celebrateIfNeeded() }
         .onChange(of: scenePhase) { _, phase in

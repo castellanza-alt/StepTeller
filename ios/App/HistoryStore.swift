@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import WidgetKit
 import StepTellerCore
 
 /// Storico giornaliero, streak e Jolly. Tutto è **calcolato** dai dati di Salute (nessun archivio
@@ -84,5 +85,10 @@ final class HistoryStore {
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
+        if SharedStore.streak != streak.streak || SharedStore.jolly != streak.jolly {
+            SharedStore.streak = streak.streak            // serie e Jolly per il widget
+            SharedStore.jolly = streak.jolly
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
 }

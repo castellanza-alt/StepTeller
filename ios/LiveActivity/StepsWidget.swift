@@ -3,16 +3,17 @@ import SwiftUI
 import WidgetKit
 import StepTellerCore
 
-/// Widget «Passi di oggi»: piccolo in Home (passi, avanzamento, minuti a piedi) e, sul blocco schermo,
-/// tondo (arco con i passi), rettangolare (anello con l'omino e i passi) e in linea sopra l'ora.
+/// Widget «Passi di oggi» nello stile «Dan Dan Dan»: piccolo e medio in Home (tema giorno/notte secondo
+/// l'aspetto del sistema) e, sul blocco schermo, tondo, rettangolare e in linea. Un tocco apre la Home.
 struct StepsWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StepsWidget", provider: StepsTimelineProvider()) { entry in
-            StepsWidgetEntryView(plan: entry.plan)
+            StepsWidgetEntryView(data: entry.data)
+                .widgetURL(URL(string: "stepteller://oggi"))
         }
         .configurationDisplayName("Passi di oggi")
-        .description("Passi e avanzamento verso l'obiettivo, anche sul blocco schermo.")
-        .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline])
+        .description("Passi, minuti che mancano e serie, anche sul blocco schermo.")
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline])
         .contentMarginsDisabled()
     }
 }
@@ -20,72 +21,34 @@ struct StepsWidget: Widget {
 /// Sceglie la grafica in base al formato.
 struct StepsWidgetEntryView: View {
     @Environment(\.widgetFamily) private var family
-    let plan: Plan?
+    let data: WidgetSnapshot
 
     var body: some View {
         switch family {
         case .accessoryCircular:
-            LockCircular(plan: plan).containerBackground(for: .widget) { Color.clear }
+            LockCircular(plan: data.plan).containerBackground(for: .widget) { Color.clear }
         case .accessoryRectangular:
-            LockRectangular(plan: plan).containerBackground(for: .widget) { Color.clear }
+            LockRectangular(data: data).containerBackground(for: .widget) { Color.clear }
         case .accessoryInline:
-            Label(plan.map { "\(ItalianFormat.integer($0.steps)) passi" } ?? "Passi —", systemImage: "figure.walk")
+            Label(data.plan.map { "\(ItalianFormat.integer($0.steps)) passi" } ?? "Passi —", systemImage: "flame.fill")
                 .containerBackground(for: .widget) { Color.clear }
+        case .systemMedium:
+            WidgetThemed { WidgetMediumView(data: data) }.containerBackground(for: .widget) { WidgetPaper() }
         default:
-            StepsWidgetView(plan: plan).containerBackground(for: .widget) { StepsWidgetBackground() }
+            WidgetThemed { WidgetSmallView(data: data) }.containerBackground(for: .widget) { WidgetPaper() }
         }
-    }
-}
-
-/// Blocco schermo, tondo: arco di 270° (come nell'app) con i passi al centro.
-struct LockCircular: View {
-    let plan: Plan?
-    var body: some View {
-        Gauge(value: plan?.progress ?? 0) {
-            Image(systemName: "figure.walk")
-        } currentValueLabel: {
-            Text(plan.map { ItalianFormat.integer($0.steps) } ?? "—")
-                .font(.system(size: 15, weight: .medium)).monospacedDigit()
-                .minimumScaleFactor(0.5).lineLimit(1)
-        }
-        .gaugeStyle(.accessoryCircular)
-        .widgetAccentable()
-        .accessibilityLabel(plan.map { "\(ItalianFormat.integer($0.steps)) passi su \(ItalianFormat.integer($0.goal))" } ?? "Passi non disponibili")
-    }
-}
-
-/// Blocco schermo, rettangolare: anello con l'omino e, accanto, i passi grandi e l'obiettivo.
-struct LockRectangular: View {
-    let plan: Plan?
-    var body: some View {
-        HStack(spacing: 10) {
-            Gauge(value: plan?.progress ?? 0) {
-                Image(systemName: "figure.walk")
-            }
-            .gaugeStyle(.accessoryCircularCapacity)
-            .widgetAccentable()
-            VStack(alignment: .leading, spacing: 0) {
-                Text(plan.map { ItalianFormat.integer($0.steps) } ?? "—")
-                    .font(.system(size: 30, weight: .medium)).monospacedDigit()
-                    .lineLimit(1).minimumScaleFactor(0.6)
-                Text(plan.map { "su \(ItalianFormat.integer($0.goal))" } ?? "apri l'app")
-                    .font(.system(size: 12)).foregroundStyle(.secondary).lineLimit(1)
-            }
-            Spacer(minLength: 0)
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(plan.map { "\(ItalianFormat.integer($0.steps)) passi su \(ItalianFormat.integer($0.goal))" } ?? "Passi non disponibili")
     }
 }
 
 struct StepsEntry: TimelineEntry {
     let date: Date
-    let plan: Plan?
+    let data: WidgetSnapshot
 }
 
 struct StepsTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> StepsEntry {
-        StepsEntry(date: Date(), plan: Plan(goal: 10_000, steps: 7_200, speed: Plan.glanceSpeed))
+        StepsEntry(date: Date(), data: WidgetSnapshot(plan: Plan(goal: 10_000, steps: 3_465, speed: SpeedTrack.defaultSpeed),
+                                                      streak: 14, jolly: 2))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (StepsEntry) -> Void) {
@@ -106,9 +69,11 @@ struct StepsTimelineProvider: TimelineProvider {
         let now = Date()
         var steps = await WidgetHealth.todaySteps(now: now)
         if let s = steps { SharedStore.saveSteps(s, now: now) } else { steps = SharedStore.cachedStepsToday(now: now) }
-        guard let steps else { return StepsEntry(date: now, plan: nil) }
-        let plan = Plan(goal: SharedStore.goal, steps: steps, speed: Plan.glanceSpeed, model: SharedStore.calibration.model)
-        return StepsEntry(date: now, plan: plan)
+        let plan = steps.map {
+            // stessa velocità del cursore in Home e stesso modello di cadenza tarato dell'app
+            Plan(goal: SharedStore.goal, steps: $0, speed: SharedStore.speed, model: SharedStore.calibration.model)
+        }
+        return StepsEntry(date: now, data: WidgetSnapshot(plan: plan, streak: SharedStore.streak, jolly: SharedStore.jolly))
     }
 }
 

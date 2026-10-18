@@ -9,7 +9,7 @@ import StepTellerCore
 @Observable
 final class StepsStore {
     var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); SharedStore.goal = goal; history.recordGoal(goal); WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
-    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); Task { await updateReminders(); await syncActivity() } } }
+    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); SharedStore.speed = speed; WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders(); await syncActivity() } } }
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
     var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
@@ -60,7 +60,8 @@ final class StepsStore {
         treadmillActive = liveActivity.isRunning
         // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
-        SharedStore.goal = goal              // il widget legge obiettivo e taratura dall'App Group
+        SharedStore.goal = goal              // il widget legge obiettivo, taratura e velocità dall'App Group
+        SharedStore.speed = speed
         SharedStore.calibration = calibration
     }
 
@@ -109,6 +110,7 @@ final class StepsStore {
     }
 
     func becameInactive() {
+        WidgetCenter.shared.reloadAllTimelines()
         dayTask?.cancel()
         dayTask = nil
     }

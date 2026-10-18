@@ -1,6 +1,7 @@
 name: StepTeller
 options:
-  minimumXcodeGenVersion: 2.42.0
+  # 2.45.1: prima versione che riconosce i pacchetti `.icon` di Icon Composer (icona dell'app).
+  minimumXcodeGenVersion: 2.45.1
   deploymentTarget:
     iOS: "17.0"          # stesso target di briciola.
   developmentLanguage: it
@@ -33,6 +34,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: it.castellanza.stepteller
         DEVELOPMENT_TEAM: 5E426PLFWN
+        # Icona Liquid Glass (Icon Composer): `App/AppIcon.icon`, varianti giorno, notte, colorata e trasparente.
+        # Xcode 26+ ne ricava da solo le immagini per iOS 17–18.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "1"
         INFOPLIST_FILE: App/Info.plist
@@ -56,6 +59,11 @@ targets:
           - StepTellerWidgets.entitlements
       - path: Shared
       - path: App/Theme.swift
+      # Stile «Dan Dan Dan» condiviso con l'app: token, testo Anton, forme.
+      - path: App/Design/MangaTokens.swift
+      - path: App/Design/MangaViews.swift
+      - path: App/Design/MangaShapes.swift
+      - path: App/Fonts/Anton-Regular.ttf
     dependencies:
       - package: StepTellerCore
         product: StepTellerCore
@@ -68,6 +76,7 @@ targets:
         CFBundleDisplayName: Step Teller
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UIAppFonts: [Anton-Regular.ttf]
         NSHealthShareUsageDescription: Il widget legge i tuoi passi di oggi da Salute per mostrarli e per stimare i minuti a piedi che mancano. Non scrive nulla e non invia dati fuori dal telefono.
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

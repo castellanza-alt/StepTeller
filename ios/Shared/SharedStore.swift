@@ -1,7 +1,8 @@
 import Foundation
 import StepTellerCore
 
-/// Dati condivisi tra app e widget tramite App Group: obiettivo, taratura e ultimo conteggio passi
+/// Dati condivisi tra app e widget tramite App Group: obiettivo, taratura, velocità scelta in Home,
+/// serie e Jolly, ultimo conteggio passi
 /// (usato dal widget solo quando Salute è bloccata, cioè a telefono bloccato). Tutto resta sul telefono.
 enum SharedStore {
     static let suite = "group.it.castellanza.stepteller"
@@ -12,6 +13,26 @@ enum SharedStore {
         static let calibration = "calibration"
         static let lastSteps = "lastSteps"
         static let lastStepsDay = "lastStepsDay"
+        static let speed = "speed"
+        static let streak = "streak"
+        static let jolly = "jolly"
+    }
+
+    /// Velocità del cursore in Home (km/h): il widget calcola i minuti con la stessa.
+    static var speed: Double {
+        get { defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed }
+        set { defaults.set(newValue, forKey: Keys.speed) }
+    }
+
+    /// Serie e Jolly come li calcola l'app (il widget non rilegge lo storico).
+    static var streak: Int {
+        get { defaults.integer(forKey: Keys.streak) }
+        set { defaults.set(newValue, forKey: Keys.streak) }
+    }
+
+    static var jolly: Int {
+        get { defaults.integer(forKey: Keys.jolly) }
+        set { defaults.set(newValue, forKey: Keys.jolly) }
     }
 
     static var goal: Int {

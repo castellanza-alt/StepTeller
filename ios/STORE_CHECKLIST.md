@@ -15,6 +15,8 @@ prima tra Will e la chat di coordinamento.
 | Paesi | Tutti |
 | Trader UE (DSA) | Non-trader (progetto personale, gratuito) |
 | Versione | 1.0 |
+| Email di supporto | castellanza@gmail.com (pubblica su pagina di supporto e store) |
+| Live Activity del tappeto | Tolta (chat 1b): dalla 0.6.0 nessun bottone la avviava |
 | Lingue | Italiano, inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato, cinese tradizionale |
 | Font lingue asiatiche | Da scegliere nella chat 4b, con prove a confronto |
 
@@ -23,14 +25,11 @@ prima tra Will e la chat di coordinamento.
 - [ ] Ramo di uscita: `ia/versione-0.6.2` (base attuale) e `ios-nativa` (10 commit 0.5.5–0.6.1 fatti dal Mac, non
       presenti nel ramo attuale) sono divergenti. Il workflow TestFlight parte da `ios-nativa`. Decidere quale ramo
       porta la 1.0 prima della chat 7.
-- [ ] Live Activity del tappeto: dalla 0.6.0 nessuna parte dell'interfaccia la avvia più, ma il codice c'è ancora.
-      Toglierla o rimetterla? Da decidere prima della chat 4a (altrimenti si traducono testi mai mostrati).
-- [ ] Email di supporto da pubblicare sulla pagina di supporto e sullo store.
 
 ## 0. Finetuning — fatto
 - [x] Modifiche della chat «finetuning» salvate: 0.6.3 (`0aa5c2e`), codice bloccato da qui
 
-## 1. Pulizia e conformità — PR [#11](https://github.com/castellanza-alt/StepTeller/pull/11), da unire
+## 1. Pulizia e conformità — fatto, PR [#11](https://github.com/castellanza-alt/StepTeller/pull/11)
 - [x] `PrivacyInfo.xcprivacy` nell'app e nel widget (UserDefaults CA92.1 e 1C8F.1; nessuna altra API da dichiarare)
 - [x] Avvisi del compilatore a zero in Debug e Release
 - [x] Codice morto rimosso (colori del vecchio tappeto, funzioni senza chiamanti), screenshot invariati
@@ -38,7 +37,12 @@ prima tra Will e la chat di coordinamento.
 - [x] Build Release pulita, `swift test` verde (43), PR aperta
 - [x] Controllo della chat di coordinamento: diff letto, build rifatta sul Mac con Xcode 27.1 (0 avvisi,
       manifest in `.app` e `.appex`)
-- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
+- [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `6ab9596`)
+
+## 1b. Rimozione della Live Activity del tappeto
+- [ ] Live Activity, controller, attributi e `NSSupportsLiveActivities` tolti; widget intatti
+- [ ] Build pulita, test verdi, widget invariati negli screenshot
+- [ ] Controllo della chat di coordinamento e merge
 
 ## 2. Pagine di privacy e supporto
 - [ ] Privacy policy (solo lettura da Salute, niente rete, nessun dato raccolto)

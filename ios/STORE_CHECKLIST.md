@@ -24,8 +24,6 @@ prima tra Will e la chat di coordinamento.
 
 ## Da decidere
 
-- [ ] Home a obiettivo raggiunto: «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» si sovrappone alla gamba
-      disegnata e «+729 PASSI» è in parte coperto (visto negli screenshot della 0.6.3/1.0). Sistemare prima dell'uscita?
 
 - [ ] Ramo di uscita: `ia/versione-0.6.2` (base attuale) e `ios-nativa` (10 commit 0.5.5–0.6.1 fatti dal Mac, non
       presenti nel ramo attuale) sono divergenti. Il workflow TestFlight parte da `ios-nativa`. Decidere quale ramo
@@ -89,7 +87,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 ### 4a. Localizzazione nel codice — fatto, PR [#16](https://github.com/castellanza-alt/StepTeller/pull/16)
 - [x] String Catalog per app, widget, onboarding, notifiche e testi dei permessi, riempito dal foglio (`scripts/cataloghi.py`)
 - [x] Info.plist italiano: nuovo testo del permesso di scrittura; nomi del percorso «Salute → Condivisione → App» giusti su iOS 27
-- [ ] Percorso di Salute sul telefono di Will: NEAT (che solo legge) compare in Salute → Condivisione → App? Sul simulatore l'elenco è vuoto
+- [x] Percorso di Salute sul telefono di Will: NEAT compare in Salute → Condivisione → App (sul simulatore l'elenco è vuoto)
 - [x] Lingua di riserva inglese (`CFBundleDevelopmentRegion` en in app e widget): olandese → inglese, italiano → italiano,
       provato sulla build Release
 - [x] ES «COMODINES» nella barra in alto: le schede si rimpiccioliscono quando serve
@@ -99,6 +97,11 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Controllo della chat di coordinamento: tutte le 1.557 traduzioni del foglio trovate nei cataloghi, nessun testo
       italiano rimasto nel codice, 0 avvisi Release/Debug, screenshot DE e JA rifatti sul Mac
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `aeec748`)
+
+### 3b. Home a obiettivo raggiunto (deciso da Will: si sistema prima dell'uscita)
+- [ ] «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» non più sopra la gamba disegnata, leggibile in tutte le lingue
+- [ ] Proposte mostrate a Will e scelta fatta
+- [ ] Controllo della chat di coordinamento e merge
 
 ### 4b. Lingue asiatiche e font
 - [ ] Font scelto da Will tra le prove (sistema vs font OFL dedicato, con peso in MB)

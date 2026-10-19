@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreText
 
 /// Design token dello stile «Dan Dan Dan» (handoff Home + Storico). **Unico posto** per colori,
 /// font, misure e angoli: le viste non scrivono colori a mano.
@@ -140,8 +141,48 @@ enum Manga {
 // MARK: - Tipografia
 
 extension Font {
-    /// Anton (OFL), unico font display. Corpo fisso come nel handoff.
-    static func anton(_ size: CGFloat) -> Font { .custom("Anton-Regular", fixedSize: size) }
+    /// Anton (OFL), unico font display. Corpo fisso come nel handoff. In giapponese, coreano e cinese i caratteri
+    /// che Anton non ha li disegna il font di `TitleFont` (cifre e lettere restano Anton).
+    static func anton(_ size: CGFloat) -> Font {
+        TitleFont.asian == nil ? .custom("Anton-Regular", fixedSize: size) : Font(TitleFont.ctFont(size))
+    }
+
+    /// Testo corrente in Anton (paragrafi dell'introduzione, righe dei controlli). In JA/KO/ZH un font da titolo
+    /// così spesso non si legge in un paragrafo: si usa il grassetto di sistema.
+    static func antonText(_ size: CGFloat) -> Font {
+        TitleFont.asian == nil ? .custom("Anton-Regular", fixedSize: size) : .system(size: size, weight: .bold)
+    }
+}
+
+/// Carattere dei titoli secondo la lingua dell'app: **unico punto** che lo decide (testo SwiftUI e `GlyphText`, app e
+/// widget). Anton ha solo l'alfabeto latino; per JA/KO/ZH un font OFL spesso, ridotto ai caratteri usati
+/// (`scripts/font_asia.py`), entra in cascata dopo Anton. Le altre lingue restano solo Anton.
+enum TitleFont {
+    /// Nome PostScript del font asiatico per la lingua dell'app (`nil` = solo Anton).
+    static let asian: String? = {
+        switch Bundle.main.preferredLocalizations.first {
+        case "ja": "DelaGothicOne-Regular"
+        case "ko": "BlackHanSans-Regular"
+        case "zh-Hans": "NotoSansSC-Black"
+        case "zh-Hant": "NotoSansTC-Black"
+        default: nil
+        }
+    }()
+
+    /// Anton con, in JA/KO/ZH, il font asiatico in cascata.
+    static func ctFont(_ size: CGFloat) -> CTFont {
+        guard let asian else { return CTFontCreateWithName("Anton-Regular" as CFString, size, nil) }
+        let cascade = [CTFontDescriptorCreateWithNameAndSize(asian as CFString, size)]
+        let descriptor = CTFontDescriptorCreateWithAttributes([
+            kCTFontNameAttribute: "Anton-Regular",
+            kCTFontCascadeListAttribute: cascade,
+        ] as CFDictionary)
+        return CTFontCreateWithFontDescriptor(descriptor, size, nil)
+    }
+
+    /// Spaziatura (in em) per la lingua: quella larga pensata per le maiuscole di Anton separa troppo gli ideogrammi
+    /// e i caratteri coreani, quindi in JA/KO/ZH si ferma a 0,02 em. Quella negativa (cifre) resta.
+    static func tracking(_ em: CGFloat) -> CGFloat { asian == nil ? em : min(em, 0.02) }
 }
 
 /// Metriche di Anton (hhea, per em) per riprodurre il `line-height` del CSS.

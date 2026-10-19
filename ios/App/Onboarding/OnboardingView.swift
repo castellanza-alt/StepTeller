@@ -141,7 +141,7 @@ struct OnboardingView: View {
                 NumberField(value: goal, placeholder: "0", onEdit: { goal = $0 }, isFocused: $goalFocused)
                     .font(.anton(44)).monospacedDigit().foregroundStyle(c.ink).fixedSize()
                     .accessibilityLabel(Text(L10n.text("goal.field.vo")))
-                Text(L10n.text("goal.unit")).font(.anton(18)).foregroundStyle(c.ink.opacity(0.6))
+                Text(L10n.text("goal.unit")).font(.antonText(18)).foregroundStyle(c.ink.opacity(0.6))
                     .accessibilityHidden(true)
             }
             Spacer(minLength: 8)
@@ -165,13 +165,13 @@ struct OnboardingView: View {
     private var reminderControl: some View {
         VStack(spacing: 0) {
             Toggle(isOn: $reminderOn) {
-                Text(L10n.text("reminder.toggle")).font(.anton(20)).foregroundStyle(c.ink)
+                Text(L10n.text("reminder.toggle")).font(.antonText(20)).foregroundStyle(c.ink)
             }
             .tint(c.red)
             .padding(.vertical, 8)
             Rectangle().fill(c.ink.opacity(0.15)).frame(height: 1.5)
             DatePicker(selection: timeBinding, displayedComponents: .hourAndMinute) {
-                Text(L10n.text("reminder.time")).font(.anton(20)).foregroundStyle(c.ink)
+                Text(L10n.text("reminder.time")).font(.antonText(20)).foregroundStyle(c.ink)
             }
             .tint(c.red)
             .disabled(!reminderOn).opacity(reminderOn ? 1 : 0.4)
@@ -305,7 +305,7 @@ private struct Paragraph: ViewModifier {
     var note = false
     @Environment(\.manga) private var c
     func body(content: Content) -> some View {
-        content.font(.anton(note ? 15 : 17)).tracking(0.4).lineSpacing(note ? 2 : 3)
+        content.font(.antonText(note ? 15 : 17)).tracking(0.4).lineSpacing(note ? 2 : 3)
             .foregroundStyle(note ? c.ink.opacity(0.6) : c.ink)
             .fixedSize(horizontal: false, vertical: true)
     }

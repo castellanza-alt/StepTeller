@@ -90,7 +90,7 @@ struct AntonText: View {
     var body: some View {
         Text(text)
             .font(.anton(size))
-            .tracking(size * tracking)
+            .tracking(size * TitleFont.tracking(tracking))
             .foregroundStyle(color ?? c.ink)
             .lineLimit(1)
             .minimumScaleFactor(minScale ?? 1)
@@ -112,7 +112,7 @@ struct GlyphText: View {
     var shadow: (color: Color, dx: CGFloat, dy: CGFloat)? = nil
 
     var body: some View {
-        let g = GlyphText.path(text, size: size, tracking: size * tracking)
+        let g = GlyphText.path(text, size: size, tracking: size * TitleFont.tracking(tracking))
         let h = size * lineHeight
         let baseline = (h - (AntonMetrics.ascent + AntonMetrics.descent) * size) / 2 + AntonMetrics.ascent * size
         let path = Path(g.path).applying(CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: baseline))
@@ -139,7 +139,7 @@ struct GlyphText: View {
     static func path(_ text: String, size: CGFloat, tracking: CGFloat) -> (path: CGPath, width: CGFloat) {
         let key = "\(text)|\(size)|\(tracking)"
         if let hit = cache[key] { return hit }
-        let font = CTFontCreateWithName("Anton-Regular" as CFString, size, nil)
+        let font = TitleFont.ctFont(size)
         let attr = NSAttributedString(string: text, attributes: [
             NSAttributedString.Key(kCTFontAttributeName as String): font,
             NSAttributedString.Key(kCTKernAttributeName as String): tracking,
@@ -147,13 +147,16 @@ struct GlyphText: View {
         let line = CTLineCreateWithAttributedString(attr)
         let out = CGMutablePath()
         for run in (CTLineGetGlyphRuns(line) as? [CTRun]) ?? [] {
+            // ogni tratto con il suo font: Anton, il font asiatico in cascata o quello di ripiego di iOS
+            let attributes = CTRunGetAttributes(run) as NSDictionary
+            let runFont = attributes[kCTFontAttributeName as String].map { $0 as! CTFont } ?? font
             let n = CTRunGetGlyphCount(run)
             var glyphs = [CGGlyph](repeating: 0, count: n)
             var positions = [CGPoint](repeating: .zero, count: n)
             CTRunGetGlyphs(run, CFRange(location: 0, length: n), &glyphs)
             CTRunGetPositions(run, CFRange(location: 0, length: n), &positions)
             for i in 0..<n {
-                guard let gp = CTFontCreatePathForGlyph(font, glyphs[i], nil) else { continue }
+                guard let gp = CTFontCreatePathForGlyph(runFont, glyphs[i], nil) else { continue }
                 out.addPath(gp, transform: CGAffineTransform(translationX: positions[i].x, y: positions[i].y))
             }
         }

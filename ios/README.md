@@ -78,7 +78,10 @@ traduzioni del foglio**: lo script prende tutti i testi della lingua dal foglio 
 (date di Impostazioni e record, titoli dei periodi, mesi e iniziali dei giorni dello Storico, numeri), prodotti con gli
 stessi formattatori dell'app da `scripts/font_asia/stringhe.swift`, scarica i font interi da google/fonts a un commit
 fisso (controllo SHA-256, cache in `build/font_asia/`) e si ferma con errore se un carattere non è coperto. I file
-ottenuti sono identici a ogni rigenerazione, quindi un diff vuoto vuol dire che non serviva cambiarli.
+ottenuti sono identici a ogni rigenerazione, quindi un diff vuoto vuol dire che non serviva cambiarli. Nel codice
+un solo punto decide il carattere: `TitleFont` in `App/Design/MangaTokens.swift` (usato da `Font.anton`, da
+`GlyphText` e dal widget), con la spaziatura delle maiuscole di Anton ridotta a 0,02 em nelle quattro lingue; i
+paragrafi dell'introduzione lì usano il grassetto di sistema (`Font.antonText`).
 
 **Aggiungere una lingua**: una colonna nel foglio (titolo come le altre, es. «Olandese (NL)») con tutte le righe;
 la coppia colonna → codice (`("Olandese (NL)", "nl")`) in `LANGUAGES` di `scripts/cataloghi.py` (e in

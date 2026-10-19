@@ -76,16 +76,6 @@ final class StepsStore {
     var hasOverride: Bool { state.override != nil }
     var lastUpdate: Date? { state.lastUpdate }
 
-    /// Riga finale: da dove viene la curva usata per l'andatura corrente.
-    var calibrationNote: String {
-        if plan.gait == .run {
-            if calibration.runWorkouts > 0 { return "corsa tarata su \(calibration.runWorkouts) tue uscite · ultimi 90 giorni" }
-            return Calibration.run.isEmpty ? "corsa · curva standard" : "corsa tarata sulle tue corse · set 2026"
-        }
-        if calibration.walkWorkouts > 0 { return "cammino tarato su \(calibration.walkWorkouts) tue uscite · ultimi 90 giorni" }
-        return Calibration.walk.isEmpty ? "cammino · curva standard" : "cammino tarato sulle tue camminate"
-    }
-
     // MARK: ciclo di vita
 
     /// Primo avvio: permesso Salute, lettura, osservazione, taratura, promemoria.

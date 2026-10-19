@@ -114,7 +114,7 @@ struct GlyphText: View {
             if let shadow {
                 ZStack {
                     path.fill(shadow.color)
-                    if let stroke, strokeWidth > 0 { path.stroke(shadow.color, lineWidth: strokeWidth) }
+                    if stroke != nil, strokeWidth > 0 { path.stroke(shadow.color, lineWidth: strokeWidth) }
                 }
                 .offset(x: shadow.dx, y: shadow.dy)
             }

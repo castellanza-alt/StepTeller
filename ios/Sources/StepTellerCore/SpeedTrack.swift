@@ -15,10 +15,6 @@ public struct SpeedTrack: Sendable {
     public static let step = 0.5
     public static let defaultSpeed = 4.0
 
-    /// Dimensioni dell'illustrazione in pixel.
-    public static let artWidth = 881.0
-    public static let artHeight = 1786.0
-
     /// `M 50 1697 C 170 1664, 310 1630, 480 1604 C 590 1586, 660 1560, 690 1530
     ///  C 715 1500, 712 1450, 690 1420 C 670 1395, 630 1385, 600 1380` (dal handoff).
     public static let road = SpeedTrack(start: Point(50, 1697), curves: [

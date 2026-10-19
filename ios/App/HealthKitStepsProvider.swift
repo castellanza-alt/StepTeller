@@ -54,13 +54,13 @@ final class HealthKitStepsProvider: StepsProvider, @unchecked Sendable {
                 completion()          // a iOS si dice «finito» solo dopo l'aggiornamento
             }
         }
-        lock.lock(); observer = query; lock.unlock()
+        lock.withLock { observer = query }
         store.execute(query)
         try? await store.enableBackgroundDelivery(for: stepType, frequency: .hourly)
     }
 
     func stopObserving() async {
-        lock.lock(); let query = observer; observer = nil; lock.unlock()
+        let query = lock.withLock { () -> HKObserverQuery? in let q = observer; observer = nil; return q }
         if let query { store.stop(query) }
     }
 }

@@ -9,6 +9,7 @@ struct HomeView: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.manga) private var c
     @State private var minutesWidth: CGFloat = 96
+    @State private var doneWidth: CGFloat = 130
     @State private var editing = false
     @State private var editText = ""
     @State private var motion = ParallaxMotion()
@@ -36,10 +37,16 @@ struct HomeView: View {
                     .at(14, Manga.artTop + 112)
                 notices
                     .at(20, Manga.artTop + 286)
-                minutesBlock
-                    .manga(rotate: -5, skew: -9)
-                    .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { minutesWidth = $0 }
-                    .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480)
+                if store.plan.isDone {
+                    doneBlock
+                        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { doneWidth = $0 }
+                        .at(min(250, Manga.frameWidth - 10 - doneWidth), Manga.artTop + 452)
+                } else {
+                    minutesBlock
+                        .manga(rotate: -5, skew: -9)
+                        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { minutesWidth = $0 }
+                        .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480)
+                }
                 if !store.plan.isDone {
                     RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }))
                         .frame(width: Manga.artSize.width, height: Manga.artSize.height)
@@ -126,29 +133,42 @@ struct HomeView: View {
     private var minutesBlock: some View {
         let p = store.plan
         return VStack(alignment: .leading, spacing: 0) {
-            if p.isDone {
-                AntonText(L10n.text("home.done.1"), 17)
-                AntonText(L10n.text("home.done.2"), 17)
-                AntonText(L10n.text("home.done.3"), 68, lineHeight: 0.95, tracking: -0.02, color: c.red).padding(.top, 2)
-                if store.steps > store.goal {
-                    AntonText(L10n.format("home.done.extra", LocalFormat.integer(store.steps - store.goal)), 15, color: c.red).padding(.top, 3)
-                }
-            } else {
-                AntonText(L10n.text("home.minutes.1"), 17)
-                AntonText(L10n.text("home.minutes.2"), 17)
-                HStack(alignment: .lastTextBaseline, spacing: 5) {
-                    AntonText(LocalFormat.integer(p.minutes), 68, lineHeight: 0.95, tracking: -0.02)
-                        .contentTransition(.numericText())
-                    AntonText(L10n.text("home.minutes.unit"), 18)
-                }
-                .padding(.top, 2)
-                AntonText(L10n.format("home.minutes.km", LocalFormat.number(p.km, decimals: 1)), 15, color: c.red).padding(.top, 3)
+            AntonText(L10n.text("home.minutes.1"), 17)
+            AntonText(L10n.text("home.minutes.2"), 17)
+            HStack(alignment: .lastTextBaseline, spacing: 5) {
+                AntonText(LocalFormat.integer(p.minutes), 68, lineHeight: 0.95, tracking: -0.02)
+                    .contentTransition(.numericText())
+                AntonText(L10n.text("home.minutes.unit"), 18)
             }
+            .padding(.top, 2)
+            AntonText(L10n.format("home.minutes.km", LocalFormat.number(p.km, decimals: 1)), 15, color: c.red).padding(.top, 3)
         }
         .animation(.snappy(duration: 0.2), value: p.minutes)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(p.isDone ? L10n.text("home.done.vo")
-                            : L10n.format("home.minutes.vo", "\(p.minutes)", LocalFormat.number(p.speed, decimals: 1),
-                                          LocalFormat.number(p.km, decimals: 1)))
+        .accessibilityLabel(L10n.format("home.minutes.vo", "\(p.minutes)", LocalFormat.number(p.speed, decimals: 1),
+                                        LocalFormat.number(p.km, decimals: 1)))
+    }
+
+    // MARK: obiettivo raggiunto
+
+    /// «OBIETTIVO / RAGGIUNTO / FATTO! / +729 PASSI» in una vignetta storta come quelle dello Storico:
+    /// il fondo `paper` stacca il testo da gamba e lacci dell'illustrazione.
+    private var doneBlock: some View {
+        Vignette(shape: .panelA) {
+            VStack(alignment: .leading, spacing: 0) {
+                AntonText(L10n.text("home.done.1"), 17, tracking: 0.04)
+                AntonText(L10n.text("home.done.2"), 17, tracking: 0.04)
+                AntonText(L10n.text("home.done.3"), 68, lineHeight: 0.95, tracking: -0.02, color: c.red).padding(.top, 2)
+                if store.steps > store.goal {
+                    AntonText(L10n.format("home.done.extra", LocalFormat.integer(store.steps - store.goal)), 15, color: c.red)
+                        .padding(.top, 3)
+                }
+            }
+            .manga(skew: -9)
+            .padding(.trailing, 4)
+        }
+        .rotationEffect(.degrees(-5))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(L10n.text("home.done.vo"))
     }
 }

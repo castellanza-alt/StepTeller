@@ -38,14 +38,14 @@ struct GoalCelebration: View {
             }
 
             VStack(spacing: 18) {
-                AntonText("OBIETTIVO RAGGIUNTO!", 30, tracking: 0.02)
+                AntonText(L10n.text("party.title"), 30, tracking: 0.02)
                     .manga(rotate: -5, skew: -10)
                 ZStack {
                     KineticLines.star(cx: 160, cy: 90, points: 16, outer: 92, inner: 62, rotation: 0.1)
                         .fill(c.ink)
                     KineticLines.star(cx: 160, cy: 90, points: 16, outer: 80, inner: 52, rotation: 0.1)
                         .fill(c.red)
-                    GlyphText(text: ItalianFormat.integer(steps), size: 96, lineHeight: 0.9, tracking: -0.03, fill: c.paper,
+                    GlyphText(text: LocalFormat.integer(steps), size: 96, lineHeight: 0.9, tracking: -0.03, fill: c.paper,
                               stroke: c.ink, strokeWidth: 2.5, shadow: (c.ink, 5, 5))
                         .manga(rotate: -5, skew: -10)
                 }
@@ -57,13 +57,13 @@ struct GoalCelebration: View {
                         .onAppear { sparkOrigin = CGPoint(x: f.midX, y: f.midY) }
                         .onChange(of: f) { _, f in sparkOrigin = CGPoint(x: f.midX, y: f.midY) }
                 })
-                TagText(text: "PASSI SU \(ItalianFormat.integer(goal))", size: 18, tracking: 0.14,
+                TagText(text: L10n.format("party.of", LocalFormat.integer(goal)), size: 18, tracking: 0.14,
                         foreground: c.paper, background: c.ink)
                     .manga(rotate: -3, skew: -10)
                 if streak > 0 {
                     HStack(spacing: 6) {
                         FlameIcon(kind: .streak).frame(width: 22, height: 27)
-                        AntonText(streak == 1 ? "1 GIORNO DI FILA" : "\(streak) GIORNI DI FILA", 22, tracking: 0.04)
+                        AntonText(L10n.format("party.streak", streak), 22, tracking: 0.04)
                     }
                     .manga(rotate: -3, skew: -8)
                 }
@@ -78,9 +78,9 @@ struct GoalCelebration: View {
         .onTapGesture { close() }
         .sensoryFeedback(.success, trigger: shown)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Obiettivo raggiunto: \(ItalianFormat.integer(steps)) passi su \(ItalianFormat.integer(goal))")
+        .accessibilityLabel(L10n.format("party.vo", LocalFormat.integer(steps), LocalFormat.integer(goal)))
         .accessibilityAddTraits(.isButton)
-        .accessibilityHint("Tocca per chiudere")
+        .accessibilityHint(L10n.text("party.close.vo"))
         .task {
             start = Date()
             if reduceMotion {

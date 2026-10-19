@@ -32,4 +32,16 @@ final class ReminderTests: XCTestCase {
         st.todayWouldUseJolly = false; st.jolly = 0; st.todayWouldBreak = true
         XCTAssertTrue(ReminderPlanner.content(for: plan, streak: st)!.body.hasSuffix("la streak di 22 giorni si interrompe."))
     }
+
+    /// Il nucleo dà caso e numeri: l'app compone il testo nella lingua del telefono.
+    func testMessageCarriesNumbers() {
+        let plan = Plan(goal: 10_000, steps: 7_200, speed: 8.3)
+        var st = StreakState(); st.streak = 22; st.jolly = 3; st.todayWouldUseJolly = true
+        XCTAssertEqual(ReminderPlanner.message(for: plan, streak: st),
+                       .precise(minutes: 19, speed: 8.3, goal: 10_000, remaining: 2_800, warning: .wouldUseJolly(jollyLeft: 2)))
+        st.todayWouldUseJolly = false; st.jolly = 0; st.todayWouldBreak = true
+        XCTAssertEqual(ReminderPlanner.message(for: plan, streak: st)?.italian.body,
+                       "Ti servono 19 min a 8,3 km/h per chiudere i 10.000 passi (mancano 2.800). Senza Jolly, la streak di 22 giorni si interrompe.")
+        XCTAssertNil(ReminderPlanner.message(for: Plan(goal: 10_000, steps: 10_500, speed: 6)))
+    }
 }

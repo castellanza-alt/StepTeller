@@ -31,8 +31,8 @@ struct RoadSpeedSlider: View {
         }
         .sensoryFeedback(.selection, trigger: speed)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Velocità")
-        .accessibilityValue("\(ItalianFormat.number(speed, decimals: 1)) chilometri orari")
+        .accessibilityLabel(L10n.text("home.speed.vo"))
+        .accessibilityValue(L10n.format("home.speed.value.vo", LocalFormat.number(speed, decimals: 1)))
         .accessibilityAdjustableAction { direction in
             switch direction {
             case .increment: speed = SpeedTrack.snap(speed + SpeedTrack.step)
@@ -68,8 +68,8 @@ struct RoadSpeedSlider: View {
 
     private var label: some View {
         HStack(alignment: .lastTextBaseline, spacing: 3) {
-            AntonText(ItalianFormat.number(speed, decimals: 1), 26)
-            AntonText("km/h", 15)
+            AntonText(LocalFormat.number(speed, decimals: 1), 26)
+            AntonText(L10n.text("home.speed.unit"), 15)
         }
         .shadow(color: c.paper, radius: 2)
         .shadow(color: c.paper, radius: 4)

@@ -18,7 +18,8 @@ struct MangaTabs<Value: Hashable>: View {
             ForEach(items, id: \.0) { value, label in
                 let on = value == selection
                 Button { selection = value } label: {
-                    AntonText(label, fontSize, tracking: tracking, color: on ? c.paper : c.ink)
+                    AntonText(label, fontSize, tracking: tracking, color: on ? c.paper : c.ink, minScale: 0.6)
+                        .padding(.horizontal, 4)
                         .frame(maxWidth: .infinity)
                         .frame(height: height)
                         .background(on ? c.ink : c.paper)

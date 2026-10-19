@@ -29,7 +29,7 @@
 	<key>NSHealthShareUsageDescription</key>
 	<string>NEAT legge i tuoi passi di oggi per calcolare quanti minuti di tappeto ti servono, e i tuoi allenamenti di camminata e corsa (passi, distanza, durata) per tarare la cadenza. Non scrive nulla e non invia dati fuori dal telefono.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>NEAT non scrive nulla in Salute: legge soltanto i tuoi passi. Questa dichiarazione è richiesta da Apple per le app con accesso a Salute.</string>
+	<string>NEAT non scrive nulla in Salute: si limita a leggere i dati. Questa dichiarazione è richiesta da Apple per le app con accesso a Salute.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

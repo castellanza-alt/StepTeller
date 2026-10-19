@@ -21,10 +21,10 @@ enum ThemeMode: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .system: "Sistema"
-        case .clock: "Orario"
-        case .day: "Giorno"
-        case .night: "Notte"
+        case .system: L10n.text("set.theme.system")
+        case .clock: L10n.text("set.theme.clock")
+        case .day: L10n.text("set.theme.day")
+        case .night: L10n.text("set.theme.night")
         }
     }
 

@@ -98,10 +98,12 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       italiano rimasto nel codice, 0 avvisi Release/Debug, screenshot DE e JA rifatti sul Mac
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `aeec748`)
 
-### 3b. Home a obiettivo raggiunto (deciso da Will: si sistema prima dell'uscita)
-- [ ] «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» non più sopra la gamba disegnata, leggibile in tutte le lingue
-- [ ] Proposte mostrate a Will e scelta fatta
-- [ ] Controllo della chat di coordinamento e merge
+### 3b. Home a obiettivo raggiunto — PR [#17](https://github.com/castellanza-alt/StepTeller/pull/17), da unire
+- [x] «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» in una vignetta storta con fondo carta, leggibile in tutte le lingue
+- [x] Proposte mostrate a Will: scelta la B (vignetta)
+- [x] Controllo della chat di coordinamento: diff letto (Vignette dello Storico invariata se riceve la larghezza),
+      44 test, 0 avvisi; screenshot su iPhone SE in IT, DE (notte), FR, JA
+- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
 
 ### 4b. Lingue asiatiche e font
 - [x] Font scelto da Will tra le prove: OFL ridotti (Dela Gothic One, Black Han Sans, Noto Sans SC/TC Black)

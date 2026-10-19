@@ -23,6 +23,8 @@ struct StepTellerApp: App {
 
     @MainActor
     private static func makeStore() -> StepsStore {
+        // Prima di creare lo store: riconosce chi aveva già l'app dalle chiavi salvate.
+        Onboarding.resolveAtLaunch()
         #if DEBUG
         // Solo Debug (screenshot/test sul simulatore): `-stepteller.debugSteps 7200`.
         if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil {

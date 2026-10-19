@@ -25,6 +25,7 @@ final class StepsStore {
     @ObservationIgnored private var dayTask: Task<Void, Never>?
     @ObservationIgnored private var lastCalibration: Date?
     @ObservationIgnored private var observing = false
+    @ObservationIgnored private var started = false
 
     private enum Keys {
         static let goal = "stepteller.goal"
@@ -74,8 +75,11 @@ final class StepsStore {
 
     // MARK: ciclo di vita
 
-    /// Primo avvio: permesso Salute, lettura, osservazione, taratura, promemoria.
+    /// Avvio (a introduzione conclusa, una volta sola): permesso Salute (già chiesto dall'introduzione:
+    /// iOS non lo ripropone), lettura, osservazione, taratura, promemoria.
     func start() async {
+        guard !started else { return }
+        started = true
         await controller.provider.requestAccess()
         await refresh()
         await startObserving()
@@ -158,6 +162,18 @@ final class StepsStore {
         WidgetCenter.shared.reloadAllTimelines()
         if let data = try? JSONEncoder().encode(result) { defaults.set(data, forKey: Keys.calibration) }
         await updateReminders()
+    }
+
+    // MARK: permessi (introduzione)
+
+    /// Richiesta di sistema per Salute (solo lettura). iOS la mostra una volta sola.
+    func requestHealthAccess() async {
+        await controller.provider.requestAccess()
+    }
+
+    /// Richiesta di sistema per le notifiche, solo se mai chiesta.
+    func requestReminderPermission() async {
+        _ = await scheduler.requestIfNeeded()
     }
 
     // MARK: promemoria serale

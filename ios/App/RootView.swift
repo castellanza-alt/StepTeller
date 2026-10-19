@@ -16,18 +16,39 @@ struct RootView: View {
     /// Ultima apertura (o ritorno in primo piano): la festa aspetta uno storico riletto da allora,
     /// altrimenti la serie mostrerebbe solo oggi («1 giorno di fila»).
     @State private var activeSince = Date()
+    /// Introduzione: al primo avvio finché non è conclusa; poi solo se richiesta dalle Impostazioni.
+    @AppStorage(Onboarding.doneKey) private var onboardingDone = false
+    @State private var replayingIntro = false
+    @State private var introStartPage = 0
+    /// Solo Debug: con i passi finti (screenshot) l'introduzione non compare, salvo `debugOnboarding`.
+    private let skipIntro: Bool
 
     init() {
         var s = AppScreen.home
         var sheet = false
+        var intro = false
+        var introPage = 0
+        var skip = false
         #if DEBUG
         let d = UserDefaults.standard
         if d.string(forKey: "stepteller.debugTab") != nil { s = .storico }
         sheet = d.object(forKey: "stepteller.debugSheet") != nil
+        // Screenshot: `-stepteller.debugOnboarding 1…4` apre l'introduzione su quella pagina.
+        if d.object(forKey: "stepteller.debugOnboarding") != nil {
+            intro = true
+            introPage = min(max(d.integer(forKey: "stepteller.debugOnboarding"), 1), Onboarding.pageCount) - 1
+        } else if ProcessInfo.processInfo.arguments.contains("-stepteller.debugSteps") {
+            skip = true                    // anche con `-1`, che UserDefaults non legge come valore
+        }
         #endif
         _screen = State(initialValue: s)
         _showSettings = State(initialValue: sheet)
+        _replayingIntro = State(initialValue: intro)
+        _introStartPage = State(initialValue: introPage)
+        skipIntro = skip
     }
+
+    private var showsIntro: Bool { (!onboardingDone && !skipIntro) || replayingIntro }
 
     private var themeMode: ThemeMode { ThemeMode(rawValue: themeModeRaw) ?? .system }
 
@@ -41,6 +62,7 @@ struct RootView: View {
                 let rowTop = max(Manga.statusBarHeight, geo.safeAreaInsets.top / s)
                 ZStack(alignment: .top) {
                     palette.paper
+                    if !showsIntro {
                     Group {
                         switch screen {
                         case .home:
@@ -68,14 +90,31 @@ struct RootView: View {
                         .transition(.opacity)
                         .zIndex(1)
                     }
+                    }
                 }
                 .frame(width: size.width, height: size.height)
                 .ignoresSafeArea()
             }
+            .overlay {
+                // fuori dalla tela a tutto schermo: rispetta aree sicure e tastiera
+                if showsIntro {
+                    OnboardingView(startPage: introStartPage, isReplay: onboardingDone) {
+                        withAnimation(.easeInOut(duration: Manga.navDuration)) {
+                            onboardingDone = true
+                            replayingIntro = false
+                        }
+                    }
+                    .transition(.opacity)
+                }
+            }
             .environment(\.manga, palette)
             .preferredColorScheme(themeMode == .system ? nil : palette.colorScheme)
             .sheet(isPresented: $showSettings) {
-                SettingsSheet()
+                SettingsSheet(onReplayIntro: {
+                    showSettings = false
+                    introStartPage = 0
+                    withAnimation(.easeInOut(duration: Manga.navDuration)) { replayingIntro = true }
+                })
                     .environment(\.manga, palette)
                     .preferredColorScheme(themeMode == .system ? nil : palette.colorScheme)
             }
@@ -85,7 +124,8 @@ struct RootView: View {
             guard url.scheme == "stepteller", url.host == "oggi", screen != .home else { return }
             navigate()
         }
-        .task { await store.start() }
+        // Salute, osservazione e promemoria partono solo a introduzione conclusa.
+        .task(id: showsIntro) { if !showsIntro { await store.start() } }
         .onAppear { celebrateIfNeeded() }
         .onChange(of: scenePhase) { _, phase in
             Task {

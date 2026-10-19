@@ -24,6 +24,9 @@ prima tra Will e la chat di coordinamento.
 
 ## Da decidere
 
+- [ ] Home a obiettivo raggiunto: «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» si sovrappone alla gamba
+      disegnata e «+729 PASSI» è in parte coperto (visto negli screenshot della 0.6.3/1.0). Sistemare prima dell'uscita?
+
 - [ ] Ramo di uscita: `ia/versione-0.6.2` (base attuale) e `ios-nativa` (10 commit 0.5.5–0.6.1 fatti dal Mac, non
       presenti nel ramo attuale) sono divergenti. Il workflow TestFlight parte da `ios-nativa`. Decidere quale ramo
       porta la 1.0 prima della chat 7.
@@ -70,17 +73,24 @@ prima tra Will e la chat di coordinamento.
       iPhone SE: installazione nuova → introduzione; **aggiornamento reale** dalla base → Home, nessuna introduzione
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `7a333a4`)
 
-## 4a. Traduzioni — base e lingue europee
-- [ ] Glossario dei termini chiave nelle 6 lingue, approvato da Will
-- [ ] String Catalog per app, widget, onboarding, notifiche e testi dei permessi
+## 4. Traduzioni — testi tradotti con ChatGPT, controllati dalla chat di coordinamento
+Materiale in `ios/localizzazione/`: `NEAT_testi_da_tradurre.xlsx` (173 testi + glossario, 9 lingue),
+`PROMPT_CHATGPT.md` (descrizione dell'app e delle schermate, regole), `screenshot/`.
+- [x] Inventario dei testi dal codice (introduzione, Home, Storico, Impostazioni, festa, widget, notifiche, permessi)
+- [ ] ChatGPT: glossario (Jolly, serie, Salute…) approvato da Will
+- [ ] ChatGPT: foglio compilato in EN, ES, FR, DE, PT-BR, JA, KO, ZH-Hans, ZH-Hant
+- [ ] Controllo della chat di coordinamento: segnaposto, lunghezze, coerenza, MAIUSCOLO, testi dei permessi
+
+### 4a. Localizzazione nel codice — lingue europee (chat dedicata, dopo il foglio approvato)
+- [ ] String Catalog per app, widget, onboarding, notifiche e testi dei permessi, riempito dal foglio
 - [ ] Numeri e date secondo la lingua, test golden invariati
 - [ ] IT, EN, ES, FR, DE, PT-BR
 - [ ] Nessun testo tagliato (screenshot di prova per lingua)
 - [ ] Controllo della chat di coordinamento
 
-## 4b. Traduzioni — lingue asiatiche e font
+### 4b. Lingue asiatiche e font
 - [ ] Font scelto da Will tra le prove (sistema vs font OFL dedicato, con peso in MB)
-- [ ] JA, KO, ZH-Hans, ZH-Hant
+- [ ] JA, KO, ZH-Hans, ZH-Hant dal foglio
 - [ ] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)
 - [ ] Controllo della chat di coordinamento

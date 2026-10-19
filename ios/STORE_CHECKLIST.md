@@ -98,17 +98,17 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       italiano rimasto nel codice, 0 avvisi Release/Debug, screenshot DE e JA rifatti sul Mac
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `aeec748`)
 
-### 3b. Home a obiettivo raggiunto — PR [#17](https://github.com/castellanza-alt/StepTeller/pull/17), da unire
+### 3b. Home a obiettivo raggiunto — fatto, PR [#17](https://github.com/castellanza-alt/StepTeller/pull/17)
 - [x] «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» in una vignetta storta con fondo carta, leggibile in tutte le lingue
 - [x] Proposte mostrate a Will: scelta la B (vignetta)
 - [x] Controllo della chat di coordinamento: diff letto (Vignette dello Storico invariata se riceve la larghezza),
       44 test, 0 avvisi; screenshot su iPhone SE in IT, DE (notte), FR, JA
-- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
+- [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `f191cf5`)
 
 ### 4b. Lingue asiatiche e font
 - [x] Font scelto da Will tra le prove: OFL ridotti (Dela Gothic One, Black Han Sans, Noto Sans SC/TC Black)
 - [ ] Sottoinsieme che copre anche date e mesi scritti da iOS (年月日, 월/년/일, giorni della settimana) e un controllo automatico
-- [ ] Implementazione dopo il merge della 3b
+- [ ] Implementazione (3b unita: via libera dato)
 - [ ] JA, KO, ZH-Hans, ZH-Hant dal foglio
 - [ ] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)

@@ -183,6 +183,11 @@ enum TitleFont {
     /// Spaziatura (in em) per la lingua: quella larga pensata per le maiuscole di Anton separa troppo gli ideogrammi
     /// e i caratteri coreani, quindi in JA/KO/ZH si ferma a 0,02 em. Quella negativa (cifre) resta.
     static func tracking(_ em: CGFloat) -> CGFloat { asian == nil ? em : min(em, 0.02) }
+
+    /// Spazio in più tra una scritta e un numero gigante attaccato. Anton ha molto spazio sopra le maiuscole e
+    /// le righe sono alte quanto il corpo; i caratteri asiatici riempiono tutto il quadrato e finirebbero sul
+    /// numero. In JA/KO/ZH un terzo del corpo della scritta, altrove 0 (layout invariato).
+    static func gap(_ size: CGFloat) -> CGFloat { asian == nil ? 0 : (size * 0.33).rounded() }
 }
 
 /// Metriche di Anton (hhea, per em) per riprodurre il `line-height` del CSS.

@@ -86,14 +86,19 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       (kilometers), DE «NUR ZUM LESEN»
 - [ ] Rilettura madrelingua JA, KO, ZH (facoltativa; dubbi annotati nel foglio)
 
-### 4a. Localizzazione nel codice — lingue europee (chat dedicata, dopo il foglio approvato)
-- [ ] String Catalog per app, widget, onboarding, notifiche e testi dei permessi, riempito dal foglio
-- [ ] Info.plist italiano: nuovo testo del permesso di scrittura; percorso «Salute → Condivisione → App» verificato su iOS 27
-- [ ] ES «COMODINES» nella barra in alto: verificato a schermo
-- [ ] Numeri e date secondo la lingua, test golden invariati
-- [ ] IT, EN, ES, FR, DE, PT-BR
-- [ ] Nessun testo tagliato (screenshot di prova per lingua)
-- [ ] Controllo della chat di coordinamento
+### 4a. Localizzazione nel codice — PR [#16](https://github.com/castellanza-alt/StepTeller/pull/16), da unire
+- [x] String Catalog per app, widget, onboarding, notifiche e testi dei permessi, riempito dal foglio (`scripts/cataloghi.py`)
+- [x] Info.plist italiano: nuovo testo del permesso di scrittura; nomi del percorso «Salute → Condivisione → App» giusti su iOS 27
+- [ ] Percorso di Salute sul telefono di Will: NEAT (che solo legge) compare in Salute → Condivisione → App? Sul simulatore l'elenco è vuoto
+- [ ] Lingua di riserva: con il telefono in una lingua non tradotta (es. olandese) l'app è in italiano → `CFBundleDevelopmentRegion` en
+      (provato: così diventa inglese, l'italiano resta italiano)
+- [x] ES «COMODINES» nella barra in alto: le schede si rimpiccioliscono quando serve
+- [x] Numeri e date secondo la lingua, test golden invariati (44 test)
+- [x] Tutte e 10 le lingue nei cataloghi (le asiatiche con il carattere di sistema, da rifinire nella 4b)
+- [x] Nessun testo tagliato (screenshot per lingua)
+- [x] Controllo della chat di coordinamento: tutte le 1.557 traduzioni del foglio trovate nei cataloghi, nessun testo
+      italiano rimasto nel codice, 0 avvisi Release/Debug, screenshot DE e JA rifatti sul Mac
+- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
 
 ### 4b. Lingue asiatiche e font
 - [ ] Font scelto da Will tra le prove (sistema vs font OFL dedicato, con peso in MB)

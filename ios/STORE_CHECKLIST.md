@@ -20,7 +20,7 @@ prima tra Will e la chat di coordinamento.
 | Lingue | Italiano, inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato, cinese tradizionale |
 | Unità di misura | km e km/h per tutte le lingue nella 1.0 (miglia eventualmente in una versione successiva) |
 | Termini chiave | Glossario (Jolly, serie, tappeto, obiettivo…) approvato da Will prima di tradurre |
-| Font lingue asiatiche | Da scegliere nella chat 4b, con prove a confronto |
+| Font lingue asiatiche | Font OFL ridotti ai caratteri usati: Dela Gothic One (JA), Black Han Sans (KO), Noto Sans SC/TC Black (ZH), ~270 KB |
 
 ## Da decidere
 
@@ -104,7 +104,9 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [ ] Controllo della chat di coordinamento e merge
 
 ### 4b. Lingue asiatiche e font
-- [ ] Font scelto da Will tra le prove (sistema vs font OFL dedicato, con peso in MB)
+- [x] Font scelto da Will tra le prove: OFL ridotti (Dela Gothic One, Black Han Sans, Noto Sans SC/TC Black)
+- [ ] Sottoinsieme che copre anche date e mesi scritti da iOS (年月日, 월/년/일, giorni della settimana) e un controllo automatico
+- [ ] Implementazione dopo il merge della 3b
 - [ ] JA, KO, ZH-Hans, ZH-Hant dal foglio
 - [ ] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)

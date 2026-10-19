@@ -23,22 +23,28 @@ prima tra Will e la chat di coordinamento.
 - [ ] Ramo di uscita: `ia/versione-0.6.2` (base attuale) e `ios-nativa` (10 commit 0.5.5–0.6.1 fatti dal Mac, non
       presenti nel ramo attuale) sono divergenti. Il workflow TestFlight parte da `ios-nativa`. Decidere quale ramo
       porta la 1.0 prima della chat 7.
+- [ ] Live Activity del tappeto: dalla 0.6.0 nessuna parte dell'interfaccia la avvia più, ma il codice c'è ancora.
+      Toglierla o rimetterla? Da decidere prima della chat 4a (altrimenti si traducono testi mai mostrati).
+- [ ] Email di supporto da pubblicare sulla pagina di supporto e sullo store.
 
 ## 0. Finetuning — fatto
 - [x] Modifiche della chat «finetuning» salvate: 0.6.3 (`0aa5c2e`), codice bloccato da qui
 
-## 1. Pulizia e conformità
-- [ ] `PrivacyInfo.xcprivacy` nell'app e nel widget (UserDefaults e App Group dichiarati)
-- [ ] Avvisi del compilatore risolti (lucchetto in `HealthKitStepsProvider`, variabile in `MangaViews`)
-- [ ] Codice morto rimosso, nessuna modifica visibile
-- [ ] `MARKETING_VERSION` 1.0 e CHANGELOG
-- [ ] Build Release pulita, `swift test` verde, PR aperta
-- [ ] Controllo della chat di coordinamento
+## 1. Pulizia e conformità — PR [#11](https://github.com/castellanza-alt/StepTeller/pull/11), da unire
+- [x] `PrivacyInfo.xcprivacy` nell'app e nel widget (UserDefaults CA92.1 e 1C8F.1; nessuna altra API da dichiarare)
+- [x] Avvisi del compilatore a zero in Debug e Release
+- [x] Codice morto rimosso (colori del vecchio tappeto, funzioni senza chiamanti), screenshot invariati
+- [x] `MARKETING_VERSION` 1.0 e CHANGELOG
+- [x] Build Release pulita, `swift test` verde (43), PR aperta
+- [x] Controllo della chat di coordinamento: diff letto, build rifatta sul Mac con Xcode 27.1 (0 avvisi,
+      manifest in `.app` e `.appex`)
+- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
 
 ## 2. Pagine di privacy e supporto
 - [ ] Privacy policy (solo lettura da Salute, niente rete, nessun dato raccolto)
 - [ ] Pagina di supporto (email, domande frequenti)
-- [ ] Pubblicate su GitHub Pages senza toccare la web app in radice; URL annotati qui
+- [ ] Pubblicate su GitHub Pages (servite da `main`, radice) in una cartella nuova `neat/`, senza toccare la web app;
+      URL annotati qui
 - [ ] Link nelle Impostazioni dell'app (dopo la chat 1)
 - [ ] Controllo della chat di coordinamento
 

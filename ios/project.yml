@@ -79,6 +79,8 @@ targets:
     info:
       path: LiveActivity/Info.plist
       properties:
+        # Lingua di riserva: chi ha il telefono in una lingua non tradotta vede l'inglese (i testi sorgente restano in italiano).
+        CFBundleDevelopmentRegion: en
         CFBundleDisplayName: NEAT
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)

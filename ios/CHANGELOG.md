@@ -17,6 +17,7 @@
   `scripts/cataloghi.py`). Numeri, date, nomi dei mesi e iniziali dei giorni nella lingua del telefono; in italiano
   tutto come prima. Il permesso di scrittura in Salute ora dice «si limita a leggere i dati» (legge anche gli
   allenamenti). In giapponese, coreano e cinese i caratteri che Anton non ha usano per ora il font di sistema.
+- Lingua di riserva inglese: con il telefono in una lingua non tradotta (es. olandese) l'app è in inglese, non in italiano.
 
 ## 0.6.3 — 19 ottobre 2026
 - Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).

@@ -58,13 +58,15 @@ prima tra Will e la chat di coordinamento.
       (nessun conflitto, 43 test, 0 avvisi in Release)
 - [x] Merge della #12 su `main` (`fa6b677`, pagine online) e della #13 in `ia/versione-0.6.2` (`2c75d6a`)
 
-## 3. Onboarding
-- [ ] Schermate: cosa fa NEAT, permesso Salute, obiettivo, promemoria e permesso notifiche
-- [ ] Solo al primo avvio; chi ha già l'app non lo vede
-- [ ] Rivedibile dalle Impostazioni; opzione Debug per gli screenshot
-- [ ] Promemoria: «Apri Step Teller» → «Apri NEAT» (`Sources/StepTellerCore/Reminder.swift`)
-- [ ] Prova su iPhone SE e Pro Max, giorno e notte
-- [ ] Controllo della chat di coordinamento
+## 3. Onboarding — PR [#15](https://github.com/castellanza-alt/StepTeller/pull/15), da unire
+- [x] 4 pagine: benvenuto, Salute (richiesta di sistema lasciando la pagina), obiettivo, promemoria (notifiche su «Inizia»)
+- [x] Solo al primo avvio; utente esistente riconosciuto dalle chiavi già salvate (nessuna introduzione, nessun permesso)
+- [x] «Rivedi l'introduzione» nelle Impostazioni; `-stepteller.debugOnboarding 1…4` per gli screenshot
+- [x] Promemoria: «Apri NEAT» al posto di «Apri Step Teller»
+- [x] Prove della chat: Salute concessa e negata, utente esistente, rivedi; Home/Storico/widget invariati
+- [x] Controllo della chat di coordinamento: diff letto, 43 test, 0 avvisi Release e Debug; build Release provata su
+      iPhone SE: installazione nuova → introduzione; **aggiornamento reale** dalla base → Home, nessuna introduzione
+- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
 
 ## 4a. Traduzioni — base e lingue europee
 - [ ] String Catalog per app, widget, Live Activity, notifiche e testi dei permessi

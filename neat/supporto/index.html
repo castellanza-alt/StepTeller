@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<title>NEAT · Supporto</title>
+<meta name="description" content="Supporto e domande frequenti per l'app iOS NEAT – ogni passo conta. Support and FAQ for the NEAT iOS app.">
+<style>
+  :root { --bg: #f7f5f0; --ink: #1a1a1a; --soft: #5c5c5c; --line: #dedad2; --card: #ffffff; --accent: #c8102e; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111214; --ink: #ececec; --soft: #a3a3a3; --line: #2c2e33; --card: #1b1c20; --accent: #ff5a6e; }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 28px 16px 56px; }
+  header p { margin: 0; color: var(--soft); font-size: 14px; }
+  h1 { font-size: 28px; line-height: 1.2; margin: 4px 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 19px; margin: 28px 0 8px; }
+  a { color: var(--accent); }
+  nav { display: flex; gap: 10px; margin: 18px 0 8px; flex-wrap: wrap; }
+  nav a { text-decoration: none; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 14px; font-size: 14px; color: var(--ink); }
+  section.lang { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 8px; }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 14px 0; }
+  .box p { margin: 0; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin: 10px 0; }
+  summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
+  details > div { padding: 0 16px 12px; }
+  details p { margin: 0 0 8px; }
+  ul, ol { padding-left: 1.2em; margin: 0 0 8px; }
+  li { margin: 4px 0; }
+  .muted { color: var(--soft); font-size: 14px; }
+  footer { margin-top: 40px; color: var(--soft); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p>NEAT – ogni passo conta</p>
+  <h1>Supporto</h1>
+  <nav aria-label="Lingua / Language">
+    <a href="#it" hreflang="it">Italiano</a>
+    <a href="#en" hreflang="en">English</a>
+    <a href="../privacy/">Privacy</a>
+  </nav>
+</header>
+
+<section class="lang" id="it" lang="it">
+  <div class="box"><p><strong>Contatto:</strong> scrivi a <a href="mailto:castellanza@gmail.com?subject=NEAT">castellanza@gmail.com</a>. Indica, se puoi, il modello di iPhone e la versione di iOS (Impostazioni → Generali → Info) e la versione di NEAT (in fondo alle Impostazioni dell'app). Rispondo appena possibile: NEAT è un progetto personale.</p></div>
+
+  <h2>Domande frequenti</h2>
+
+  <details>
+    <summary>Perché NEAT chiede il permesso di Salute?</summary>
+    <div>
+      <p>NEAT legge da Apple Salute i passi (per i passi di oggi, lo storico, la serie e i Jolly), la distanza a piedi e di corsa e gli allenamenti di camminata e corsa (per tarare la tua cadenza e calcolare i minuti che ti servono). Non scrive mai in Salute e nessun dato lascia il telefono: vedi la <a href="../privacy/">privacy</a>.</p>
+      <p>Se all'inizio hai detto di no, puoi cambiare idea in <strong>Impostazioni → Salute → Accesso ai dati e dispositivi → NEAT</strong>, oppure nell'app Salute in <strong>Condivisione → App → NEAT</strong>.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Perché vedo 0 passi?</summary>
+    <div>
+      <p>iOS non dice alle app se l'accesso è stato negato o se semplicemente non ci sono dati, quindi NEAT mostra 0 passi e l'avviso «Nessun dato da Salute» in tutti questi casi. Controlla, nell'ordine:</p>
+      <ol>
+        <li><strong>Permesso:</strong> Impostazioni → Salute → Accesso ai dati e dispositivi → NEAT, con Passi attivo.</li>
+        <li><strong>Rilevamento sull'iPhone:</strong> Impostazioni → Privacy e sicurezza → Movimento e fitness → Rilevamento fitness attivo.</li>
+        <li><strong>Dati in Salute:</strong> apri l'app Salute e guarda se oggi ci sono passi. Se usi un Apple Watch, i suoi passi arrivano quando si sincronizza con l'iPhone.</li>
+        <li><strong>È presto:</strong> appena dopo mezzanotte i passi ripartono da zero.</li>
+      </ol>
+      <p>Nel frattempo puoi toccare il numero dei passi e correggerlo a mano; con «Usa Salute» torni ai dati di Salute.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Come funzionano serie e Jolly?</summary>
+    <div>
+      <p>La serie conta i giorni di fila in cui hai raggiunto l'obiettivo. Si parte con 3 Jolly, dal giorno del primo avvio. Le regole:</p>
+      <ul>
+        <li>Un giorno è riuscito se i passi raggiungono l'obiettivo di quel giorno. Oggi non rompe mai la serie: conta solo a giornata finita.</li>
+        <li>Ogni 15 giorni riusciti di fila matura 1 Jolly, senza limite.</li>
+        <li>Se manchi un giorno, un Jolly salva la serie da solo: la serie resta, non aumenta, e il conto verso il prossimo Jolly riparte da 0.</li>
+        <li>Senza Jolly, un giorno mancato azzera la serie. Il record resta.</li>
+        <li>Nessun Jolly viene speso se la serie è a 0.</li>
+        <li>Se cambi obiettivo, il nuovo vale da oggi: i giorni passati restano valutati con l'obiettivo che avevi allora.</li>
+      </ul>
+      <p>Serie e Jolly si ricalcolano ogni volta dai passi in Salute: non vengono salvati altrove. Le stesse regole sono nell'app, in Impostazioni → Streak e Jolly → Come funzionano.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Come tolgo (o sposto) il promemoria serale?</summary>
+    <div>
+      <p>In NEAT tocca l'icona delle impostazioni in alto, poi in <strong>Promemoria serale</strong> spegni «Avvisami la sera» o cambia l'ora. Il promemoria arriva solo se l'obiettivo del giorno non è ancora raggiunto, e ti dice quanti minuti ti servono.</p>
+      <p>Puoi anche spegnere tutte le notifiche dell'app in Impostazioni di iOS → Notifiche → NEAT.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Come aggiungo il widget?</summary>
+    <div>
+      <p>Tieni premuto su uno spazio vuoto della schermata Home → Modifica → Aggiungi widget → cerca NEAT. Ci sono il widget piccolo e medio per la Home e tre formati per il blocco schermo (personalizza il blocco schermo e aggiungi un widget). Mostra passi, minuti che mancano e serie; toccalo per aprire l'app.</p>
+      <p>Il widget si aggiorna quando iOS lo consente: se ti sembra indietro, apri NEAT e si riallinea. Quando l'iPhone è bloccato, iOS può non dare accesso ai dati di Salute e il widget mostra l'ultimo valore disponibile.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>NEAT raccoglie i miei dati?</summary>
+    <div>
+      <p>No. Niente account, niente rete, niente pubblicità né analisi. Tutto resta sul tuo iPhone. Per cancellare tutto basta disinstallare l'app. Dettagli nella <a href="../privacy/">privacy</a>.</p>
+    </div>
+  </details>
+</section>
+
+<section class="lang" id="en" lang="en">
+  <h1>Support</h1>
+  <div class="box"><p><strong>Contact:</strong> write to <a href="mailto:castellanza@gmail.com?subject=NEAT">castellanza@gmail.com</a>. If you can, include your iPhone model and iOS version (Settings → General → About) and the NEAT version (at the bottom of the app's Settings). I'll reply as soon as I can: NEAT is a personal project.</p></div>
+
+  <h2>Frequently asked questions</h2>
+
+  <details>
+    <summary>Why does NEAT ask for Health access?</summary>
+    <div>
+      <p>NEAT reads steps from Apple Health (for today's steps, history, streak and Jolly), plus walking + running distance and walking and running workouts (to calibrate your cadence and work out the minutes you need). It never writes to Health and no data leaves the phone: see the <a href="../privacy/">privacy policy</a>.</p>
+      <p>If you said no at first, you can change it in <strong>Settings → Health → Data Access &amp; Devices → NEAT</strong>, or in the Health app under <strong>Sharing → Apps → NEAT</strong>.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Why do I see 0 steps?</summary>
+    <div>
+      <p>iOS does not tell apps whether access was denied or there is simply no data, so NEAT shows 0 steps and the “no data from Health” notice in all these cases. Check, in order:</p>
+      <ol>
+        <li><strong>Permission:</strong> Settings → Health → Data Access &amp; Devices → NEAT, with Steps turned on.</li>
+        <li><strong>iPhone tracking:</strong> Settings → Privacy &amp; Security → Motion &amp; Fitness → Fitness Tracking turned on.</li>
+        <li><strong>Data in Health:</strong> open the Health app and check there are steps today. If you use an Apple Watch, its steps arrive when it syncs with the iPhone.</li>
+        <li><strong>It's early:</strong> steps start again from zero right after midnight.</li>
+      </ol>
+      <p>Meanwhile you can tap the step count and correct it by hand; “Usa Salute” (Use Health) goes back to Health data.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>How do streak and Jolly work?</summary>
+    <div>
+      <p>The streak counts the days in a row on which you reached your goal. You start with 3 Jolly (streak savers), from the day of first launch. The rules:</p>
+      <ul>
+        <li>A day counts if your steps reach that day's goal. Today never breaks the streak: it only counts once the day is over.</li>
+        <li>Every 15 successful days in a row earn 1 Jolly, with no limit.</li>
+        <li>If you miss a day, a Jolly saves the streak automatically: the streak stays, does not grow, and the count toward the next Jolly restarts from 0.</li>
+        <li>With no Jolly left, a missed day resets the streak. Your record stays.</li>
+        <li>No Jolly is spent when the streak is 0.</li>
+        <li>If you change your goal, the new one applies from today: past days keep the goal you had then.</li>
+      </ul>
+      <p>Streak and Jolly are recomputed every time from your steps in Health: they are not stored anywhere else. The same rules are in the app, under Settings → Streak e Jolly → Come funzionano.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>How do I turn off (or move) the evening reminder?</summary>
+    <div>
+      <p>In NEAT, tap the settings icon at the top, then under <strong>Promemoria serale</strong> (Evening reminder) turn off “Avvisami la sera” or change the time. The reminder only arrives if the day's goal is not reached yet, and tells you how many minutes you need.</p>
+      <p>You can also turn off all of the app's notifications in iOS Settings → Notifications → NEAT.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>How do I add the widget?</summary>
+    <div>
+      <p>Press and hold an empty area of the Home Screen → Edit → Add Widget → search for NEAT. There are small and medium widgets for the Home Screen and three Lock Screen formats (customise the Lock Screen and add a widget). It shows steps, minutes left and streak; tap it to open the app.</p>
+      <p>The widget refreshes when iOS allows it: if it looks behind, open NEAT and it catches up. While the iPhone is locked, iOS may not give access to Health data and the widget shows the latest value available.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Does NEAT collect my data?</summary>
+    <div>
+      <p>No. No account, no network, no ads or analytics. Everything stays on your iPhone. To delete everything, just uninstall the app. Details in the <a href="../privacy/">privacy policy</a>.</p>
+    </div>
+  </details>
+</section>
+
+<footer>
+  <p>NEAT – ogni passo conta · <a href="../privacy/">Privacy</a> · <a href="mailto:castellanza@gmail.com">castellanza@gmail.com</a></p>
+</footer>
+</main>
+</body>
+</html>

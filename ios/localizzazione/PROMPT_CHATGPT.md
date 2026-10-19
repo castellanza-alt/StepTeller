@@ -1,5 +1,7 @@
 # Prompt per ChatGPT — traduzione di NEAT
 
+> Già usato il 19 ottobre 2026: il risultato, controllato, è `NEAT_testi_tradotti.xlsx`.
+
 Da incollare in una nuova chat di ChatGPT, allegando:
 - `NEAT_testi_da_tradurre.xlsx` (questa cartella);
 - gli screenshot della cartella `screenshot/` (bastano quelli di giorno).

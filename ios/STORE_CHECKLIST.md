@@ -74,15 +74,22 @@ prima tra Will e la chat di coordinamento.
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `7a333a4`)
 
 ## 4. Traduzioni — testi tradotti con ChatGPT, controllati dalla chat di coordinamento
-Materiale in `ios/localizzazione/`: `NEAT_testi_da_tradurre.xlsx` (173 testi + glossario, 9 lingue),
+Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glossario, 9 lingue),
 `PROMPT_CHATGPT.md` (descrizione dell'app e delle schermate, regole), `screenshot/`.
 - [x] Inventario dei testi dal codice (introduzione, Home, Storico, Impostazioni, festa, widget, notifiche, permessi)
-- [ ] ChatGPT: glossario (Jolly, serie, Salute…) approvato da Will
-- [ ] ChatGPT: foglio compilato in EN, ES, FR, DE, PT-BR, JA, KO, ZH-Hans, ZH-Hant
-- [ ] Controllo della chat di coordinamento: segnaposto, lunghezze, coerenza, MAIUSCOLO, testi dei permessi
+- [x] ChatGPT: glossario approvato da Will (Jolly: EN/FR/DE Joker, ES Comodín, PT-BR Coringa, JA おまもり,
+      KO 지킴이, ZH 护身符/護身符; serie: streak, racha, série, Serie, sequência)
+- [x] ChatGPT: foglio compilato in EN, ES, FR, DE, PT-BR, JA, KO, ZH-Hans, ZH-Hant (1.557 traduzioni)
+- [x] Controllo della chat di coordinamento: segnaposto, celle vuote, MAIUSCOLO, lunghezze, coerenza, caratteri
+      semplificati nel cinese tradizionale; letti per intero EN e DE, a campione le altre. Corretti: testo del permesso
+      di scrittura (italiano inesatto: «legge soltanto i tuoi passi») in tutte le lingue, inglese americano
+      (kilometers), DE «NUR ZUM LESEN»
+- [ ] Rilettura madrelingua JA, KO, ZH (facoltativa; dubbi annotati nel foglio)
 
 ### 4a. Localizzazione nel codice — lingue europee (chat dedicata, dopo il foglio approvato)
 - [ ] String Catalog per app, widget, onboarding, notifiche e testi dei permessi, riempito dal foglio
+- [ ] Info.plist italiano: nuovo testo del permesso di scrittura; percorso «Salute → Condivisione → App» verificato su iOS 27
+- [ ] ES «COMODINES» nella barra in alto: verificato a schermo
 - [ ] Numeri e date secondo la lingua, test golden invariati
 - [ ] IT, EN, ES, FR, DE, PT-BR
 - [ ] Nessun testo tagliato (screenshot di prova per lingua)

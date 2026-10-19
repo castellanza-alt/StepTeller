@@ -44,7 +44,7 @@ struct GlassButton: View {
                 .contentShape(Circle())
         }
         .buttonStyle(PressScale())
-        .accessibilityLabel("Impostazioni")
+        .accessibilityLabel(L10n.text("top.settings.vo"))
     }
 }
 

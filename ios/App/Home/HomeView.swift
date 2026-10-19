@@ -55,12 +55,12 @@ struct HomeView: View {
         .onDisappear { motion.stop() }
         .onChange(of: scenePhase) { _, _ in updateMotion() }
         .onChange(of: reduceMotion) { _, _ in updateMotion() }
-        .alert("Passi di oggi", isPresented: $editing) {
-            TextField("Passi", text: $editText).keyboardType(.numberPad)
-            Button("Salva") { store.setManualSteps(ItalianFormat.digits(editText)) }
-            Button("Annulla", role: .cancel) {}
+        .alert(L10n.text("home.edit.title"), isPresented: $editing) {
+            TextField(L10n.text("home.edit.placeholder"), text: $editText).keyboardType(.numberPad)
+            Button(L10n.text("common.save")) { store.setManualSteps(LocalFormat.digits(editText)) }
+            Button(L10n.text("common.cancel"), role: .cancel) {}
         } message: {
-            Text("Correggi a mano i passi di oggi. Con «Usa Salute» torni ai dati di Salute.")
+            Text(L10n.text("home.edit.message"))
         }
     }
 
@@ -75,12 +75,12 @@ struct HomeView: View {
     /// in alto a sinistra. Un tocco sul numero apre la correzione manuale.
     private var stepsBlock: some View {
         VStack(spacing: 0) {
-            AntonText("PASSI DI OGGI", 27, tracking: 0.01)
-            AntonText(ItalianFormat.integer(store.steps), 108, lineHeight: 0.92, tracking: -0.035)
+            AntonText(L10n.text("home.steps.label"), 27, tracking: 0.01)
+            AntonText(LocalFormat.integer(store.steps), 108, lineHeight: 0.92, tracking: -0.035)
                 .manga(scaleX: 0.86)
                 .contentTransition(.numericText())
                 .animation(.snappy, value: store.steps)
-            AntonText("SU \(ItalianFormat.integer(store.goal))", 19, tracking: 0.02)
+            AntonText(L10n.format("home.steps.of", LocalFormat.integer(store.goal)), 19, tracking: 0.02)
         }
         .contentShape(Rectangle())
         .onTapGesture {
@@ -88,8 +88,8 @@ struct HomeView: View {
             editing = true
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Passi di oggi: \(ItalianFormat.integer(store.steps)) su \(ItalianFormat.integer(store.goal))")
-        .accessibilityHint("Tocca due volte per correggere a mano")
+        .accessibilityLabel(L10n.format("home.steps.vo", LocalFormat.integer(store.steps), LocalFormat.integer(store.goal)))
+        .accessibilityHint(L10n.text("home.steps.hint.vo"))
         .accessibilityAddTraits(.isButton)
     }
 
@@ -98,20 +98,20 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 8) {
             if store.hasOverride {
                 Button { Task { await store.useHealth() } } label: {
-                    TagText(text: "USA SALUTE", size: 15, tracking: 0.06, foreground: c.paper, background: c.red,
+                    TagText(text: L10n.text("home.useHealth"), size: 15, tracking: 0.06, foreground: c.paper, background: c.red,
                             padding: EdgeInsets(top: 5, leading: 9, bottom: 5, trailing: 9))
                 }
                 .buttonStyle(PressScale())
-                .accessibilityHint("Torna ai passi letti da Salute")
+                .accessibilityHint(L10n.text("home.useHealth.vo"))
             }
             if store.showsNoDataWarning {
                 VStack(alignment: .leading, spacing: 6) {
-                    TagText(text: "NESSUN DATO DA SALUTE", size: 14, tracking: 0.06, foreground: c.paper, background: c.ink)
-                    AntonText("SALUTE → CONDIVISIONE → APP → NEAT", 11, tracking: 0.04)
+                    TagText(text: L10n.text("home.noData.title"), size: 14, tracking: 0.06, foreground: c.paper, background: c.ink)
+                    AntonText(L10n.text("home.noData.path"), 11, tracking: 0.04)
                     Button {
                         if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
                     } label: {
-                        TagText(text: "APRI IMPOSTAZIONI", size: 13, tracking: 0.06, foreground: c.ink, background: c.paper, border: c.ink)
+                        TagText(text: L10n.text("home.noData.button"), size: 13, tracking: 0.06, foreground: c.ink, background: c.paper, border: c.ink)
                     }
                     .buttonStyle(PressScale())
                 }
@@ -127,27 +127,28 @@ struct HomeView: View {
         let p = store.plan
         return VStack(alignment: .leading, spacing: 0) {
             if p.isDone {
-                AntonText("OBIETTIVO", 17)
-                AntonText("RAGGIUNTO", 17)
-                AntonText("FATTO!", 68, lineHeight: 0.95, tracking: -0.02, color: c.red).padding(.top, 2)
+                AntonText(L10n.text("home.done.1"), 17)
+                AntonText(L10n.text("home.done.2"), 17)
+                AntonText(L10n.text("home.done.3"), 68, lineHeight: 0.95, tracking: -0.02, color: c.red).padding(.top, 2)
                 if store.steps > store.goal {
-                    AntonText("+\(ItalianFormat.integer(store.steps - store.goal)) PASSI", 15, color: c.red).padding(.top, 3)
+                    AntonText(L10n.format("home.done.extra", LocalFormat.integer(store.steps - store.goal)), 15, color: c.red).padding(.top, 3)
                 }
             } else {
-                AntonText("MINUTI", 17)
-                AntonText("MANCANTI", 17)
+                AntonText(L10n.text("home.minutes.1"), 17)
+                AntonText(L10n.text("home.minutes.2"), 17)
                 HStack(alignment: .lastTextBaseline, spacing: 5) {
-                    AntonText(ItalianFormat.integer(p.minutes), 68, lineHeight: 0.95, tracking: -0.02)
+                    AntonText(LocalFormat.integer(p.minutes), 68, lineHeight: 0.95, tracking: -0.02)
                         .contentTransition(.numericText())
-                    AntonText("min", 18)
+                    AntonText(L10n.text("home.minutes.unit"), 18)
                 }
                 .padding(.top, 2)
-                AntonText("≈ \(ItalianFormat.number(p.km, decimals: 1)) KM", 15, color: c.red).padding(.top, 3)
+                AntonText(L10n.format("home.minutes.km", LocalFormat.number(p.km, decimals: 1)), 15, color: c.red).padding(.top, 3)
             }
         }
         .animation(.snappy(duration: 0.2), value: p.minutes)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(p.isDone ? "Obiettivo raggiunto"
-                            : "Mancano \(p.minutes) minuti a \(ItalianFormat.number(p.speed, decimals: 1)) chilometri orari, circa \(ItalianFormat.number(p.km, decimals: 1)) chilometri")
+        .accessibilityLabel(p.isDone ? L10n.text("home.done.vo")
+                            : L10n.format("home.minutes.vo", "\(p.minutes)", LocalFormat.number(p.speed, decimals: 1),
+                                          LocalFormat.number(p.km, decimals: 1)))
     }
 }

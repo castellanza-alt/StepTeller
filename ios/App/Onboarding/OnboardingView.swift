@@ -87,13 +87,13 @@ struct OnboardingView: View {
         PageLayout(compact: compact) {
             WelcomeArt()
         } content: {
-            Kicker(String(localized: "BENVENUTO SU"))
+            Kicker(L10n.text("intro.1.kicker"))
             GlyphText(text: "NEAT", size: compact ? 84 : 110, lineHeight: 0.9, tracking: -0.02, fill: c.ink,
                       stroke: c.ink, strokeWidth: 2, shadow: (c.red, 6, 6))
                 .manga(rotate: -5, skew: -10, anchor: UnitPoint(x: 0, y: 0.5))
                 .accessibilityAddTraits(.isHeader)
-            Text("Legge i passi di oggi da Salute e ti dice quanti minuti di camminata o di tappeto ti mancano, alla tua velocità.").modifier(Paragraph())
-            Text("Ogni giorno a obiettivo allunga la serie. Ogni 15 giorni di fila arriva un Jolly, che la salva se salti un giorno.").modifier(Paragraph())
+            Text(L10n.text("intro.1.p1")).modifier(Paragraph())
+            Text(L10n.text("intro.1.p2")).modifier(Paragraph())
         }
     }
 
@@ -101,11 +101,11 @@ struct OnboardingView: View {
         PageLayout(compact: compact) {
             Image(c.hill).resizable().scaledToFit().accessibilityHidden(true)
         } content: {
-            Kicker(String(localized: "SALUTE"))
-            TitleText(String(localized: "I TUOI PASSI, SOLO DA LEGGERE"), compact: compact)
-            Text("NEAT legge da Salute i passi di oggi e i tuoi allenamenti, per calcolare i minuti alla tua andatura.").modifier(Paragraph())
-            Text("Non scrive niente e nessun dato esce dal telefono.").modifier(Paragraph())
-            Text("Se scegli di non condividerli, l'app funziona lo stesso: inserisci i passi a mano.").modifier(Paragraph(note: true))
+            Kicker(L10n.text("intro.2.kicker"))
+            TitleText(L10n.text("intro.2.title"), compact: compact)
+            Text(L10n.text("intro.2.p1")).modifier(Paragraph())
+            Text(L10n.text("intro.2.p2")).modifier(Paragraph())
+            Text(L10n.text("intro.2.note")).modifier(Paragraph(note: true))
         }
     }
 
@@ -113,10 +113,10 @@ struct OnboardingView: View {
         PageLayout(compact: compact) {
             GoalBurst(goal: goal)
         } content: {
-            Kicker(String(localized: "OBIETTIVO"))
-            TitleText(String(localized: "QUANTI PASSI AL GIORNO?"), compact: compact)
+            Kicker(L10n.text("intro.3.kicker"))
+            TitleText(L10n.text("intro.3.title"), compact: compact)
             goalControl
-            Text("Puoi cambiarlo quando vuoi dalle Impostazioni.").modifier(Paragraph(note: true))
+            Text(L10n.text("intro.3.note")).modifier(Paragraph(note: true))
         }
     }
 
@@ -124,9 +124,9 @@ struct OnboardingView: View {
         PageLayout(compact: compact) {
             Image(c.horizon).resizable().scaledToFit().accessibilityHidden(true)
         } content: {
-            Kicker(String(localized: "PROMEMORIA"))
-            TitleText(String(localized: "UN AVVISO LA SERA"), compact: compact)
-            Text("Se l'obiettivo non è chiuso, ti dice quanti minuti ti servono e se la serie è in pericolo.").modifier(Paragraph())
+            Kicker(L10n.text("intro.4.kicker"))
+            TitleText(L10n.text("intro.4.title"), compact: compact)
+            Text(L10n.text("intro.4.p1")).modifier(Paragraph())
             reminderControl
         }
     }
@@ -135,17 +135,17 @@ struct OnboardingView: View {
 
     private var goalControl: some View {
         HStack {
-            stepButton("minus", String(localized: "Diminuisci obiettivo")) { goal = max(500, goal - 500) }
+            stepButton("minus", L10n.text("goal.minus.vo")) { goal = max(500, goal - 500) }
             Spacer(minLength: 8)
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 NumberField(value: goal, placeholder: "0", onEdit: { goal = $0 }, isFocused: $goalFocused)
                     .font(.anton(44)).monospacedDigit().foregroundStyle(c.ink).fixedSize()
-                    .accessibilityLabel(Text("Obiettivo passi"))
-                Text("passi").font(.anton(18)).foregroundStyle(c.ink.opacity(0.6))
+                    .accessibilityLabel(Text(L10n.text("goal.field.vo")))
+                Text(L10n.text("goal.unit")).font(.anton(18)).foregroundStyle(c.ink.opacity(0.6))
                     .accessibilityHidden(true)
             }
             Spacer(minLength: 8)
-            stepButton("plus", String(localized: "Aumenta obiettivo")) { goal += 500 }
+            stepButton("plus", L10n.text("goal.plus.vo")) { goal += 500 }
         }
         .padding(.vertical, 6)
     }
@@ -165,13 +165,13 @@ struct OnboardingView: View {
     private var reminderControl: some View {
         VStack(spacing: 0) {
             Toggle(isOn: $reminderOn) {
-                Text("Avvisami la sera").font(.anton(20)).foregroundStyle(c.ink)
+                Text(L10n.text("reminder.toggle")).font(.anton(20)).foregroundStyle(c.ink)
             }
             .tint(c.red)
             .padding(.vertical, 8)
             Rectangle().fill(c.ink.opacity(0.15)).frame(height: 1.5)
             DatePicker(selection: timeBinding, displayedComponents: .hourAndMinute) {
-                Text("Ora").font(.anton(20)).foregroundStyle(c.ink)
+                Text(L10n.text("reminder.time")).font(.anton(20)).foregroundStyle(c.ink)
             }
             .tint(c.red)
             .disabled(!reminderOn).opacity(reminderOn ? 1 : 0.4)
@@ -197,7 +197,7 @@ struct OnboardingView: View {
             PageDots(count: Onboarding.pageCount, current: page)
             Spacer()
             Button(action: next) {
-                AntonText(isLast ? String(localized: "INIZIA") : String(localized: "CONTINUA"), 22, tracking: 0.08,
+                AntonText(L10n.text(isLast ? "intro.start" : "intro.next"), 22, tracking: 0.08,
                           color: MangaPalette.onRed)
                     .padding(.horizontal, 30).padding(.vertical, 14)
                     .background(PercentPolygon.button.fill(RedGradient.fill(red: c.red, center: UnitPoint(x: 0.3, y: 0.2),
@@ -208,7 +208,7 @@ struct OnboardingView: View {
             }
             .buttonStyle(PressScale())
             .disabled(finishing)
-            .accessibilityLabel(isLast ? Text("Inizia") : Text("Continua"))
+            .accessibilityLabel(Text(L10n.text(isLast ? "intro.start.vo" : "intro.next.vo")))
         }
         .frame(height: 76)
     }
@@ -325,7 +325,7 @@ private struct PageDots: View {
         }
         .animation(.easeInOut(duration: 0.2), value: current)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Pagina \(current + 1) di \(count)"))
+        .accessibilityLabel(Text(L10n.format("intro.page.vo", "\(current + 1)", "\(count)")))
     }
 }
 
@@ -366,7 +366,7 @@ private struct GoalBurst: View {
                 .frame(width: 320, height: 180)
             KineticLines.star(cx: 160, cy: 90, points: 16, outer: 80, inner: 52, rotation: 0.1).fill(c.red)
                 .frame(width: 320, height: 180)
-            GlyphText(text: ItalianFormat.integer(goal), size: 72, lineHeight: 0.9, tracking: -0.03, fill: c.paper,
+            GlyphText(text: LocalFormat.integer(goal), size: 72, lineHeight: 0.9, tracking: -0.03, fill: c.paper,
                       stroke: c.ink, strokeWidth: 2.5, shadow: (c.ink, 4, 4))
                 .manga(rotate: -5, skew: -10)
         }

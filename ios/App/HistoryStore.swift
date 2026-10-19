@@ -48,7 +48,7 @@ final class HistoryStore {
             streakStart = cal.startOfDay(for: Date())
             defaults.set(streakStart, forKey: Keys.start)
         }
-        stats = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal)
+        stats = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
         recompute()
     }
 
@@ -82,7 +82,7 @@ final class HistoryStore {
 
     private func recompute() {
         let now = Date()
-        stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar)
+        stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar, labels: .current)
         var steps = Dictionary(records.map { (calendar.startOfDay(for: $0.day), $0.steps) }, uniquingKeysWith: { a, _ in a })
         let today = calendar.startOfDay(for: now)
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }

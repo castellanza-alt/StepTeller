@@ -11,8 +11,8 @@ struct StepsWidget: Widget {
             StepsWidgetEntryView(data: entry.data)
                 .widgetURL(URL(string: "stepteller://oggi"))
         }
-        .configurationDisplayName("Passi di oggi")
-        .description("Passi, minuti che mancano e serie, anche sul blocco schermo.")
+        .configurationDisplayName(L10n.text("w.gallery.name", table: L10n.widget))
+        .description(L10n.text("w.gallery.desc", table: L10n.widget))
         .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline])
         .contentMarginsDisabled()
     }
@@ -30,7 +30,8 @@ struct StepsWidgetEntryView: View {
         case .accessoryRectangular:
             LockRectangular(data: data).containerBackground(for: .widget) { Color.clear }
         case .accessoryInline:
-            Label(data.plan.map { "\(ItalianFormat.integer($0.steps)) passi" } ?? "Passi —", systemImage: "flame.fill")
+            Label(data.plan.map { L10n.format("w.inline", table: L10n.widget, LocalFormat.integer($0.steps)) }
+                  ?? L10n.text("w.inline.none", table: L10n.widget), systemImage: "flame.fill")
                 .containerBackground(for: .widget) { Color.clear }
         case .systemMedium:
             WidgetThemed { WidgetMediumView(data: data) }.containerBackground(for: .widget) { WidgetPaper() }

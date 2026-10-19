@@ -7,13 +7,14 @@ La web app resta in radice al repository (non toccata).
 
 | Percorso | Contenuto |
 |---|---|
-| `Sources/StepTellerCore/` | Nucleo (solo Foundation): cadenza e taratura, calcolo, formato italiano, logica sorgente passi |
+| `Sources/StepTellerCore/` | Nucleo (solo Foundation): cadenza e taratura, calcolo, formato e date italiane (test golden), testi del promemoria come dati, logica sorgente passi |
 | `Tests/StepTellerCoreTests/` | Test del nucleo (valori golden della web app v4.0) — `swift test` anche su Linux |
 | `App/` | App SwiftUI: `RootView` (tema e navigazione), `TopBar`, `Home/` (Home e cursore sulla strada), `Storico/`, `StepsStore`, `HealthKitStepsProvider` |
 | `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
 | `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
-| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `check_icon.py`, `select_xcode.sh` |
+| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `cataloghi.py` (String Catalog dal foglio), `check_icon.py`, `select_xcode.sh` |
+| `localizzazione/` | Foglio delle traduzioni approvate (fonte dei cataloghi), prompt e screenshot usati per tradurre |
 
 Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
 
@@ -29,7 +30,7 @@ Le schermate sono disegnate sulla tela del handoff (390 × 844 pt) e scalate in 
 `MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per le Impostazioni.
 Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–16 km/h
 lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
-(Salute senza dati).
+(Salute senza dati), `-stepteller.debugScroll 0…1` (Storico già scorso, per gli screenshot).
 
 ## Introduzione (primo avvio)
 
@@ -42,6 +43,38 @@ Si rivede da Impostazioni → Informazioni → «Rivedi l'introduzione» (non ri
 obiettivo e promemoria se non li si tocca). Debug: `-stepteller.debugOnboarding 1…4` la apre su quella pagina
 (solo build Debug; screenshot `intro-*` in `scripts/screenshots.sh`). Con `-stepteller.debugSteps` l'introduzione non
 compare, così gli screenshot di Home e Storico restano quelli di prima.
+
+## Lingue
+
+Italiano (lingua di sviluppo) e inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese
+semplificato e tradizionale: l'app segue la lingua del telefono (o quella scelta per NEAT in Impostazioni di iOS).
+
+- **Fonte dei testi**: `localizzazione/NEAT_testi_tradotti.xlsx`, foglio «Testi» (una riga per testo con ID, contesto,
+  limite e una colonna per lingua; foglio «Glossario» per i termini). I cataloghi **non si modificano a mano**: si
+  correggono le righe del foglio e si rigenerano con `python3 scripts/cataloghi.py` (serve `pip install openpyxl`).
+- **Cataloghi**: `App/Localizable.xcstrings` (app), `Shared/Widget.xcstrings` (tabella `Widget`, compilata nell'app e
+  nell'estensione), `App/InfoPlist.xcstrings` e `LiveActivity/InfoPlist.xcstrings` (permessi di Salute). Le chiavi
+  sono gli ID del foglio, il commento è il contesto. Nel codice: `L10n.text("home.done.1")`,
+  `L10n.format("home.done.extra", numero)`, tabella del widget con `table: L10n.widget` (`Shared/Localization.swift`).
+- **Segnaposto** `{passi}` → `%@`/`%1$@` nell'ordine di `PARAMS` in `scripts/cataloghi.py` (quello del codice; le
+  lingue possono spostarli). Righe `.one`/`.other` → una chiave con plurale. Frasi fatte di più righe (notifica con
+  avviso sul Jolly o sulla serie, VoiceOver del widget) → una stringa intera per lingua (`COMPOSED`).
+- **Numeri e date**: `LocalFormat` e `HistoryLabels.current`. In italiano restano `ItalianFormat` e
+  `HistoryLabels.italian` del nucleo (stessi valori dei test golden: iOS scriverebbe «7200» e «19–25 ottobre»); nelle
+  altre lingue `NumberFormatter`, `DateFormatter` e `DateIntervalFormatter` con la lingua del telefono. Il campo dei
+  passi accetta qualsiasi separatore.
+- **Promemoria**: il nucleo (`ReminderPlanner`) dà il caso e i numeri (`ReminderMessage`), il testo lo compone
+  `ReminderScheduler` con il catalogo.
+- **Testi lunghi**: le schede dello Storico si rimpiccioliscono fino al 60% se una traduzione non entra
+  (`AntonText(…, minScale:)`); in italiano non cambia nulla.
+- **Screenshot per lingua**: `scripts/screenshots.sh APP USCITA [lingua] [giorno]` (es. `… build/shots-de de`;
+  `giorno` = solo tema giorno).
+
+**Aggiungere una lingua**: una colonna nel foglio (titolo come le altre, es. «Olandese (NL)») con tutte le righe;
+la coppia colonna → codice (`("Olandese (NL)", "nl")`) in `LANGUAGES` di `scripts/cataloghi.py` (e in
+`PLURAL_CATEGORIES` se la lingua non ha le forme one/other); `python3 scripts/cataloghi.py`; `xcodegen generate`
+(le lingue del progetto si leggono dai cataloghi); la lingua in `case "$LINGUA"` di `scripts/screenshots.sh`; poi
+screenshot e controllo delle lunghezze.
 
 ## Salute (HealthKit)
 

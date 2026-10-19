@@ -1,7 +1,7 @@
 import SwiftUI
 import StepTellerCore
 
-/// Campo numerico con formato italiano (`10.000`). Mostra `value`; chiama `onEdit` solo quando
+/// Campo numerico con il formato della lingua (`10.000`, `10,000`): accetta qualsiasi separatore. Mostra `value`; chiama `onEdit` solo quando
 /// è Will a digitare (non quando il valore cambia perché Salute si aggiorna).
 struct NumberField: View {
     let value: Int
@@ -26,7 +26,7 @@ struct NumberField: View {
             }
             .onChange(of: text) { _, new in
                 if skipNext { skipNext = false; return }
-                let n = ItalianFormat.digits(new)
+                let n = LocalFormat.digits(new)
                 let formatted = format(n)
                 if formatted != new { text = formatted }
                 if isFocused.wrappedValue { onEdit(n) }
@@ -41,6 +41,6 @@ struct NumberField: View {
     }
 
     private func format(_ n: Int) -> String {
-        n == 0 && emptyWhenZero ? "" : ItalianFormat.integer(n)
+        n == 0 && emptyWhenZero ? "" : LocalFormat.integer(n)
     }
 }

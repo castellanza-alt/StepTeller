@@ -69,15 +69,20 @@ extension View {
 
 /// Testo Anton con `font: size/lineHeight` e `letter-spacing` in em, come nel CSS: la riga è alta
 /// `size × lineHeight` e il testo è centrato in verticale (mezza interlinea).
+/// Con `minScale` il testo si rimpicciolisce fino a quella scala se non entra nella larghezza offerta
+/// (traduzioni più lunghe); se entra resta identico.
 struct AntonText: View {
     let text: String
     let size: CGFloat
     var lineHeight: CGFloat = 1
     var tracking: CGFloat = 0
     var color: Color? = nil
+    var minScale: CGFloat? = nil
 
-    init(_ text: String, _ size: CGFloat, lineHeight: CGFloat = 1, tracking: CGFloat = 0, color: Color? = nil) {
+    init(_ text: String, _ size: CGFloat, lineHeight: CGFloat = 1, tracking: CGFloat = 0, color: Color? = nil,
+         minScale: CGFloat? = nil) {
         self.text = text; self.size = size; self.lineHeight = lineHeight; self.tracking = tracking; self.color = color
+        self.minScale = minScale
     }
 
     @Environment(\.manga) private var c
@@ -88,7 +93,8 @@ struct AntonText: View {
             .tracking(size * tracking)
             .foregroundStyle(color ?? c.ink)
             .lineLimit(1)
-            .fixedSize()
+            .minimumScaleFactor(minScale ?? 1)
+            .fixedSize(horizontal: minScale == nil, vertical: true)
             .frame(height: size * lineHeight)
     }
 }

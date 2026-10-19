@@ -20,6 +20,8 @@ struct StoricoView: View {
     @State private var grow: CGFloat = 1
     @State private var punch: CGFloat = 1
     @State private var jollyWidth: CGFloat = 200
+    /// Solo Debug (screenshot): `-stepteller.debugScroll 0.5` apre lo Storico già scorso (0 = in alto, 1 = in fondo).
+    private let initialAnchor: UnitPoint?
 
     init(size: CGSize) {
         self.size = size
@@ -33,6 +35,13 @@ struct StoricoView: View {
         }
         #endif
         _tabSteps = State(initialValue: per)
+        var anchor: UnitPoint?
+        #if DEBUG
+        if UserDefaults.standard.object(forKey: "stepteller.debugScroll") != nil {
+            anchor = UnitPoint(x: 0.5, y: UserDefaults.standard.double(forKey: "stepteller.debugScroll"))
+        }
+        #endif
+        initialAnchor = anchor
     }
 
     var body: some View {
@@ -46,6 +55,7 @@ struct StoricoView: View {
             }
         }
         .scrollIndicators(.hidden)
+        .defaultScrollAnchor(initialAnchor)
         .ignoresSafeArea()
         .background(c.paper)
         .onChange(of: tabSteps) { _, _ in periodOffset = 0; selectedBar = nil; replayBars() }
@@ -89,12 +99,12 @@ struct StoricoView: View {
         VStack(alignment: .leading, spacing: 0) {
             GlyphText(text: "\(st.streak)", size: 200, lineHeight: 0.86, tracking: -0.04, fill: c.ink,
                       stroke: c.ink, strokeWidth: 2, shadow: (c.red, 7, 7))
-            AntonText(st.streak == 1 ? "GIORNO DI FILA!" : "GIORNI DI FILA!", 30, tracking: 0.02)
+            AntonText(L10n.format("st.streak", st.streak), 30, tracking: 0.02)
                 .padding(.top, 4).padding(.leading, 6)
         }
         .manga(rotate: -8, skew: -10)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Serie: \(st.streak) \(st.streak == 1 ? "giorno" : "giorni") di fila")
+        .accessibilityLabel(L10n.format("st.streak.vo", st.streak))
         .at(112, 118)
         jollyGroup(st.jolly)
             .manga(rotate: -6)
@@ -102,25 +112,25 @@ struct StoricoView: View {
             .at(min(196, Manga.frameWidth - 8 - jollyWidth), 316)
         Vignette(shape: .panelA, width: 220) {
             VStack(alignment: .leading, spacing: 2) {
-                AntonText("LA MIA SERIE PIÙ LUNGA", 14, tracking: 0.08)
+                AntonText(L10n.text("st.longest.title"), 14, tracking: 0.08)
                 HStack(alignment: .lastTextBaseline, spacing: 6) {
                     AntonText("\(st.longest)", 74, lineHeight: 0.95, tracking: -0.03)
-                    AntonText(st.longest == 1 ? "GIORNO" : "GIORNI", 22, color: c.red)
+                    AntonText(L10n.format("st.days", st.longest), 22, color: c.red)
                 }
                 .manga(skew: -10)
             }
         }
         .rotationEffect(.degrees(-4))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Serie più lunga: \(st.longest) giorni")
+        .accessibilityLabel(L10n.format("st.longest.vo", "\(st.longest)"))
         .at(18, 440)
         Vignette(shape: .panelB, width: 222) {
             VStack(alignment: .leading, spacing: 8) {
-                AntonText("PROSSIMO JOLLY", 14, tracking: 0.08)
+                AntonText(L10n.text("st.nextJolly.title"), 14, tracking: 0.08)
                 HStack(alignment: .lastTextBaseline, spacing: 6) {
-                    AntonText("TRA", 15)
+                    AntonText(L10n.text("st.nextJolly.in"), 15)
                     AntonText("\(st.daysToNextJolly)", 40, lineHeight: 0.9, color: c.red)
-                    AntonText(st.daysToNextJolly == 1 ? "GIORNO" : "GIORNI", 15)
+                    AntonText(L10n.format("st.days", st.daysToNextJolly), 15)
                 }
                 .manga(skew: -10)
                 HStack(spacing: 3) {
@@ -136,7 +146,7 @@ struct StoricoView: View {
         }
         .rotationEffect(.degrees(3))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Prossimo Jolly tra \(st.daysToNextJolly) giorni: \(st.counter) su \(Manga.jollyTicks)")
+        .accessibilityLabel(L10n.format("st.nextJolly.vo", "\(st.daysToNextJolly)", "\(st.counter)", "\(Manga.jollyTicks)"))
         .at(150, 590)
     }
 
@@ -149,24 +159,25 @@ struct StoricoView: View {
                     }
                 }
             }
-            TagText(text: jolly == 0 ? "NESSUN JOLLY" : jolly == 1 ? "1 JOLLY PRONTO" : "\(jolly) JOLLY PRONTI",
+            TagText(text: jolly == 0 ? L10n.text("st.jolly.none") : L10n.format("st.jolly", jolly),
                     size: 15, tracking: 0.04, foreground: c.paper, background: c.ink,
                     padding: EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                 .manga(skew: -10)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Jolly pronti: \(jolly)")
+        .accessibilityLabel(L10n.format("st.jolly.vo", "\(jolly)"))
     }
 
     // MARK: - I miei passi
 
     @ViewBuilder private var stepsSection: some View {
         let stats = store.history.stats
-        BrushTitle(text: "I MIEI PASSI", brushWidth: 290).at(18, 790)
-        MangaTabs(items: [(StepsMetric.steps, "PASSI"), (.km, "KM")], selection: $metric,
+        BrushTitle(text: L10n.text("st.steps.title"), brushWidth: 290).at(18, 790)
+        MangaTabs(items: [(StepsMetric.steps, L10n.text("st.metric.steps")), (.km, L10n.text("st.metric.km"))], selection: $metric,
                   width: 92, height: 28, fontSize: 13, tracking: 0.04, gap: 3, rotation: -5)
             .at(282, 846)
-        MangaTabs(items: [(HistoryPeriod.week, "SETTIMANA"), (.month, "MESE"), (.year, "ANNO"), (.all, "SEMPRE")],
+        MangaTabs(items: [(HistoryPeriod.week, L10n.text("st.tab.week")), (.month, L10n.text("st.tab.month")),
+                          (.year, L10n.text("st.tab.year")), (.all, L10n.text("st.tab.all"))],
                   selection: $tabSteps, width: 350, height: 38, fontSize: 16, tracking: 0.04, gap: 4)
             .at(20, 896)
         periodNav(stats).frame(width: 330).at(30, 960)
@@ -177,7 +188,7 @@ struct StoricoView: View {
             .scaleEffect(punch)
             .at(0, 1010)
         MangaBarChart(bars: chartBars(stats), goal: metric == .steps ? Double(chartGoal(stats)) : nil,
-                      goalLabel: ItalianFormat.integer(chartGoal(stats)), selected: $selectedBar, grow: grow)
+                      goalLabel: LocalFormat.integer(chartGoal(stats)), selected: $selectedBar, grow: grow)
             .frame(width: 346, height: 230)
             .at(24, 1190)
         secondaryRow(stats)
@@ -192,7 +203,7 @@ struct StoricoView: View {
                 ChevronGlyph(forward: false).frame(width: 40, height: 40).contentShape(Rectangle())
             }
             .opacity(periodOffset < maxOff ? 1 : 0.25)
-            .accessibilityLabel("Periodo precedente")
+            .accessibilityLabel(L10n.text("st.prev.vo"))
             Spacer(minLength: 0)
             AntonText(stats.title(tabSteps, offset: periodOffset).uppercased(), 22, tracking: 0.03)
                 .manga(skew: -10)
@@ -201,7 +212,7 @@ struct StoricoView: View {
                 ChevronGlyph(forward: true).frame(width: 40, height: 40).contentShape(Rectangle())
             }
             .opacity(periodOffset > 0 ? 1 : 0.25)
-            .accessibilityLabel("Periodo successivo")
+            .accessibilityLabel(L10n.text("st.next.vo"))
         }
         .buttonStyle(.plain)
     }
@@ -214,10 +225,10 @@ struct StoricoView: View {
         let text: String
         let label: String
         switch (metric, isWeek) {
-        case (.steps, true): text = ItalianFormat.integer(sum.steps); label = "PASSI"
-        case (.steps, false): text = ItalianFormat.integer(avg.steps); label = "PASSI AL GIORNO · MEDIA"
-        case (.km, true): text = Self.km(sum.km); label = "KM"
-        case (.km, false): text = Self.km(avg.km); label = "KM AL GIORNO · MEDIA"
+        case (.steps, true): text = LocalFormat.integer(sum.steps); label = L10n.text("st.big.steps")
+        case (.steps, false): text = LocalFormat.integer(avg.steps); label = L10n.text("st.big.stepsAvg")
+        case (.km, true): text = Self.km(sum.km); label = L10n.text("st.big.km")
+        case (.km, false): text = Self.km(avg.km); label = L10n.text("st.big.kmAvg")
         }
         let size: CGFloat = [120, 120, 120, 120, 120, 120, 120, 110, 96, 82, 72][min(10, text.count)]
         return VStack(spacing: 0) {
@@ -230,7 +241,7 @@ struct StoricoView: View {
                 .padding(.top, 6)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(text) \(label.lowercased())")
+        .accessibilityLabel(L10n.format("st.big.vo", text, label.lowercased()))
     }
 
     /// Settimana: «MEDIA … AL GIORNO»; altri tab: «TOTALE … NEL PERIODO».
@@ -239,22 +250,23 @@ struct StoricoView: View {
         let value: String
         if isWeek {
             let a = stats.dailyAverage(.week, offset: periodOffset)
-            value = metric == .steps ? ItalianFormat.integer(a.steps) : Self.km(a.km)
+            value = metric == .steps ? LocalFormat.integer(a.steps) : Self.km(a.km)
         } else {
             let t = stats.summary(tabSteps, offset: periodOffset)
-            value = metric == .steps ? ItalianFormat.integer(t.steps) : Self.km(t.km)
+            value = metric == .steps ? LocalFormat.integer(t.steps) : Self.km(t.km)
         }
         let size: CGFloat = isWeek ? 64 : (value.count > 9 ? 40 : 52)
         return HStack(spacing: 10) {
-            AntonText(isWeek ? "MEDIA" : "TOTALE", 18, tracking: 0.06)
+            AntonText(L10n.text(isWeek ? "st.second.avg" : "st.second.total"), 18, tracking: 0.06)
             GlyphText(text: value, size: size, lineHeight: 0.9, tracking: -0.03, fill: c.red, stroke: c.ink, strokeWidth: 1.5)
             VStack(alignment: .leading, spacing: 0) {
-                AntonText(metric == .steps ? "PASSI" : "KM", 16, tracking: 0.04)
-                AntonText(isWeek ? "AL GIORNO" : "NEL PERIODO", 16, tracking: 0.04)
+                AntonText(L10n.text(metric == .steps ? "st.big.steps" : "st.big.km"), 16, tracking: 0.04)
+                AntonText(L10n.text(isWeek ? "st.second.perDay" : "st.second.inPeriod"), 16, tracking: 0.04)
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(isWeek ? "Media" : "Totale") \(value) \(metric == .steps ? "passi" : "chilometri") \(isWeek ? "al giorno" : "nel periodo")")
+        .accessibilityLabel(L10n.format(isWeek ? (metric == .steps ? "st.second.vo.avgSteps" : "st.second.vo.avgKm")
+                                               : (metric == .steps ? "st.second.vo.totSteps" : "st.second.vo.totKm"), value))
     }
 
     /// Barre del periodo. Settimana: 7 giorni (i futuri vuoti); mese e anno in corso: fino a oggi.
@@ -272,7 +284,7 @@ struct StoricoView: View {
             let showLabel = tabSteps != .month || i % 5 == 0 || i == bars.count - 1
             return MangaBar(id: b.id, label: b.label, showLabel: showLabel,
                             value: metric == .steps ? Double(b.steps) : b.km,
-                            display: metric == .steps ? ItalianFormat.integer(b.steps) : Self.km(b.km) + " KM",
+                            display: metric == .steps ? LocalFormat.integer(b.steps) : Self.km(b.km) + " KM",
                             style: style)
         }
     }
@@ -287,8 +299,10 @@ struct StoricoView: View {
     @ViewBuilder private var bestSection: some View {
         let best = bestValue()
         let size: CGFloat = best.value.count > 7 ? 74 : best.value.count > 6 ? 88 : 104
-        BrushTitle(text: "IL MIO MEGLIO", brushWidth: 320).at(18, 1572)
-        MangaTabs(items: [(BestTab.day, "GIORNO"), (.week, "SETTIM."), (.month, "MESE"), (.year, "ANNO"), (.streak, "SERIE")],
+        BrushTitle(text: L10n.text("st.best.title"), brushWidth: 320).at(18, 1572)
+        MangaTabs(items: [(BestTab.day, L10n.text("st.best.tab.day")), (.week, L10n.text("st.best.tab.week")),
+                          (.month, L10n.text("st.best.tab.month")), (.year, L10n.text("st.best.tab.year")),
+                          (.streak, L10n.text("st.best.tab.streak"))],
                   selection: $tabBest, width: 362, height: 36, fontSize: 13, tracking: 0.03, gap: 3)
             .at(14, 1676)
         Image(c.horizon).resizable().scaledToFit().frame(width: 406)
@@ -315,7 +329,7 @@ struct StoricoView: View {
         .frame(width: 390)
         .manga(rotate: -5, skew: -10)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Record: \(best.value) \(best.unit.lowercased()), \(best.when.lowercased())")
+        .accessibilityLabel(L10n.format("st.best.vo", best.value, best.unit.lowercased(), best.when.lowercased()))
         .at(0, 1770)
     }
 
@@ -323,9 +337,9 @@ struct StoricoView: View {
         let stats = store.history.stats
         let r = stats.personalRecords()
         func entry(_ e: RecordEntry?) -> (String, String, String) {
-            guard let e else { return ("—", metric == .steps ? "PASSI" : "KM", "NESSUN DATO") }
-            return metric == .steps ? (ItalianFormat.integer(e.steps), "PASSI", e.label.uppercased())
-                                    : (Self.km(e.km), "KM", e.label.uppercased())
+            let unit = L10n.text(metric == .steps ? "st.best.unit.steps" : "st.big.km")
+            guard let e else { return ("—", unit, L10n.text("st.best.noData")) }
+            return (metric == .steps ? LocalFormat.integer(e.steps) : Self.km(e.km), unit, e.label.uppercased())
         }
         switch tabBest {
         case .day: return entry(r.day)
@@ -337,11 +351,11 @@ struct StoricoView: View {
             let when: String
             if let a = s.longestStart, let b = s.longestEnd { when = stats.rangeLabel(from: a, to: b).uppercased() }
             else { when = "—" }
-            return ("\(s.longest)", s.longest == 1 ? "GIORNO DI FILA" : "GIORNI DI FILA", when)
+            return ("\(s.longest)", L10n.format("st.best.streak", s.longest), when)
         }
     }
 
-    private static func km(_ v: Double) -> String { ItalianFormat.number(v, decimals: v >= 100 ? 0 : 1) }
+    private static func km(_ v: Double) -> String { LocalFormat.number(v, decimals: v >= 100 ? 0 : 1) }
 
     // MARK: - Disegni fissi (stessi semi del prototipo)
 

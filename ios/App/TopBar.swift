@@ -29,7 +29,7 @@ struct TopBar: View {
                     .transition(.opacity)
             }
             HStack(spacing: Manga.barGap) {
-                RedNavButton(label: screen == .home ? "Storico" : "Torna a oggi", action: onNav) {
+                RedNavButton(label: L10n.text(screen == .home ? "top.storico.vo" : "top.home.vo"), action: onNav) {
                     ZStack {
                         if screen == .home { HistogramIcon().transition(.opacity) }
                         else { FootprintsIcon().transition(.opacity) }
@@ -56,14 +56,14 @@ struct TopBar: View {
                 AntonText("\(streak)", 20)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Serie: \(streak) \(streak == 1 ? "giorno" : "giorni")")
+            .accessibilityLabel(L10n.format("top.streak.vo", streak))
             HStack(spacing: 5) {
                 FlameIcon(kind: .jolly).frame(width: 16, height: 20)
                 AntonText("\(jolly)", 20)
-                AntonText("JOLLY", 12, tracking: 0.06)
+                AntonText(L10n.text("top.jolly"), 12, tracking: 0.06)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Jolly disponibili: \(jolly)")
+            .accessibilityLabel(L10n.format("top.jolly.vo", "\(jolly)"))
         }
         .contentTransition(.numericText())
         .manga(rotate: -3, skew: -8)

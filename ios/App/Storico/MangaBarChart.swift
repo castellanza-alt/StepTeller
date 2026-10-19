@@ -42,7 +42,7 @@ struct MangaBarChart: View {
                                 .onTapGesture { selected = selected == b.id ? nil : b.id }
                                 .zIndex(selected == b.id ? 1 : 0)
                                 .accessibilityElement(children: .ignore)
-                                .accessibilityLabel("\(b.label): \(b.display)")
+                                .accessibilityLabel(L10n.format("st.chart.bar.vo", b.label, b.display))
                         }
                     }
                     if let goal, goal > 0 {
@@ -57,7 +57,7 @@ struct MangaBarChart: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                             .offset(y: -(h - y) - 5)
                             .allowsHitTesting(false)
-                            .accessibilityLabel("Obiettivo \(goalLabel)")
+                            .accessibilityLabel(L10n.format("st.chart.goal.vo", goalLabel))
                     }
                     tooltips(heights: bars.map { h * CGFloat($0.value / maxValue) * grow }, gap: gap)
                 }

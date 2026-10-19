@@ -38,9 +38,10 @@ struct MangaTabs<Value: Hashable>: View {
 }
 
 /// Vignetta: bordo `ink` 3 pt ottenuto da due poligoni storti, interno `paper`.
+/// Senza `width` si adatta al contenuto (Home a obiettivo raggiunto).
 struct Vignette<Content: View>: View {
     let shape: PercentPolygon
-    let width: CGFloat
+    var width: CGFloat? = nil
     @ViewBuilder var content: () -> Content
     @Environment(\.manga) private var c
 

@@ -39,10 +39,13 @@ prima tra Will e la chat di coordinamento.
       manifest in `.app` e `.appex`)
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `6ab9596`)
 
-## 1b. Rimozione della Live Activity del tappeto
-- [ ] Live Activity, controller, attributi e `NSSupportsLiveActivities` tolti; widget intatti
-- [ ] Build pulita, test verdi, widget invariati negli screenshot
-- [ ] Controllo della chat di coordinamento e merge
+## 1b. Rimozione della Live Activity del tappeto — PR [#14](https://github.com/castellanza-alt/StepTeller/pull/14), da unire
+- [x] Live Activity, controller, attributi, `NSSupportsLiveActivities` e ActivityKit tolti; widget intatti
+      (WidgetBundle ora in `LiveActivity/WidgetsBundle.swift`; target e bundle ID invariati)
+- [x] Build pulita, test verdi, widget invariati negli screenshot
+- [x] Controllo della chat di coordinamento: diff letto, build sul Mac con Xcode 27.1 (0 avvisi, `.appex` presente
+      con bundle ID di sempre, niente ActivityKit nel binario)
+- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
 
 ## 2. Pagine di privacy e supporto
 - [ ] Privacy policy (solo lettura da Salute, niente rete, nessun dato raccolto)

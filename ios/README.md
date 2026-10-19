@@ -38,6 +38,11 @@ Solo lettura di `stepCount`, `HKStatisticsQuery` `.cumulativeSum` da mezzanotte 
 0 passi, fonte «manuale» e l'avviso con il pulsante per le Impostazioni. I passi non vengono mai salvati.
 Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli screenshot.
 
+Privacy manifest: `App/PrivacyInfo.xcprivacy` e `LiveActivity/PrivacyInfo.xcprivacy` (inclusi da `project.yml`).
+Nessun tracciamento, nessun dato raccolto; unica API «required reason» è UserDefaults (CA92.1, 1C8F.1 per
+l'App Group `group.it.castellanza.stepteller` condiviso col widget). Se si aggiungono API di quella lista
+(date dei file, uptime, spazio su disco, tastiere attive) vanno dichiarate lì.
+
 ## Widget
 
 `LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (piccolo 170×170, medio

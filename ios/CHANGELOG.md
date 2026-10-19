@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0 — 19 ottobre 2026
+- Preparazione per l'App Store, nessuna modifica visibile: privacy manifest (`PrivacyInfo.xcprivacy`) nell'app e
+  nel widget, avvisi del compilatore azzerati, tolto codice non più usato (colori del vecchio tappeto illustrato,
+  funzioni senza chiamanti).
+
 ## 0.6.3 — 19 ottobre 2026
 - Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).
 - Swipe tra le schermate: verso sinistra dalla Home allo Storico, verso destra per tornare. Il cursore della

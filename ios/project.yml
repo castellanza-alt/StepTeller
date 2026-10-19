@@ -52,7 +52,8 @@ targets:
       SystemCapabilities:
         com.apple.HealthKit:
           enabled: 1
-  # Estensione WidgetKit: Live Activity del tappeto (Blocco schermo e Dynamic Island).
+  # Estensione WidgetKit: widget (Home e blocco schermo). Nome del target, cartella e bundle ID restano
+  # «LiveActivity»: sono registrati su App Store Connect e già installati sui telefoni.
   StepTellerLiveActivity:
     type: app-extension
     platform: iOS
@@ -65,7 +66,6 @@ targets:
       - path: LiveActivity/PrivacyInfo.xcprivacy
         buildPhase: resources
       - path: Shared
-      - path: App/Theme.swift
       # Stile «Dan Dan Dan» condiviso con l'app: token, testo Anton, forme.
       - path: App/Design/MangaTokens.swift
       - path: App/Design/MangaViews.swift
@@ -76,7 +76,6 @@ targets:
         product: StepTellerCore
       - sdk: SwiftUI.framework
       - sdk: WidgetKit.framework
-      - sdk: ActivityKit.framework
     info:
       path: LiveActivity/Info.plist
       properties:

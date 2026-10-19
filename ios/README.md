@@ -26,7 +26,7 @@ con 2 o più è interpolato e costante oltre gli estremi. Aggiornare poi i test 
 ## Stile e tema
 
 Le schermate sono disegnate sulla tela del handoff (390 × 844 pt) e scalate in larghezza (`MangaCanvas`). Colori solo da
-`MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per Impostazioni, widget e Live Activity.
+`MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per le Impostazioni.
 Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–16 km/h
 lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
 (Salute senza dati).
@@ -45,8 +45,9 @@ l'App Group `group.it.castellanza.stepteller` condiviso col widget). Se si aggiu
 
 ## Widget
 
-`LiveActivity/StepsWidget.swift` (provider e lettura Salute) e `Shared/StepsWidgetView.swift` (piccolo 170×170, medio
-364×170, blocco schermo), nello stile «Dan Dan Dan» con i token dell'app; arte in `Shared/WidgetAssets.xcassets`.
+`LiveActivity/WidgetsBundle.swift` (punto di ingresso), `LiveActivity/StepsWidget.swift` (provider e lettura Salute) e
+`Shared/StepsWidgetView.swift` (piccolo 170×170, medio 364×170, blocco schermo), nello stile «Dan Dan Dan» con i token
+dell'app; arte in `Shared/WidgetAssets.xcassets`.
 Obiettivo, taratura, velocità del cursore, serie e Jolly arrivano dall'app via App Group (`Shared/SharedStore.swift`);
 i minuti usano lo stesso modello tarato dell'app. Tocco → `stepteller://oggi`. In Debug `WidgetPreviewScreen` mostra i widget
 per gli screenshot (`-stepteller.debugWidget 1`).

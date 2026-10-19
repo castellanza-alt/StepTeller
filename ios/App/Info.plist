@@ -26,8 +26,6 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSSupportsLiveActivities</key>
-	<true/>
 	<key>NSHealthShareUsageDescription</key>
 	<string>NEAT legge i tuoi passi di oggi per calcolare quanti minuti di tappeto ti servono, e i tuoi allenamenti di camminata e corsa (passi, distanza, durata) per tarare la cadenza. Non scrive nulla e non invia dati fuori dal telefono.</string>
 	<key>NSHealthUpdateUsageDescription</key>

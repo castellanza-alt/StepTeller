@@ -4,6 +4,8 @@
 - Preparazione per l'App Store, nessuna modifica visibile: privacy manifest (`PrivacyInfo.xcprivacy`) nell'app e
   nel widget, avvisi del compilatore azzerati, tolto codice non più usato (colori del vecchio tappeto illustrato,
   funzioni senza chiamanti).
+- Tolta la Live Activity del tappeto, non più raggiungibile dalla 0.6.0. I widget restano tutti; l'estensione
+  mantiene nome e bundle ID (`StepTellerLiveActivity`, `it.castellanza.stepteller.liveactivity`).
 
 ## 0.6.3 — 19 ottobre 2026
 - Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).

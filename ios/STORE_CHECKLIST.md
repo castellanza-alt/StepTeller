@@ -18,6 +18,8 @@ prima tra Will e la chat di coordinamento.
 | Email di supporto | castellanza@gmail.com (pubblica su pagina di supporto e store) |
 | Live Activity del tappeto | Tolta (chat 1b): dalla 0.6.0 nessun bottone la avviava |
 | Lingue | Italiano, inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato, cinese tradizionale |
+| Unità di misura | km e km/h per tutte le lingue nella 1.0 (miglia eventualmente in una versione successiva) |
+| Termini chiave | Glossario (Jolly, serie, tappeto, obiettivo…) approvato da Will prima di tradurre |
 | Font lingue asiatiche | Da scegliere nella chat 4b, con prove a confronto |
 
 ## Da decidere
@@ -58,7 +60,7 @@ prima tra Will e la chat di coordinamento.
       (nessun conflitto, 43 test, 0 avvisi in Release)
 - [x] Merge della #12 su `main` (`fa6b677`, pagine online) e della #13 in `ia/versione-0.6.2` (`2c75d6a`)
 
-## 3. Onboarding — PR [#15](https://github.com/castellanza-alt/StepTeller/pull/15), da unire
+## 3. Onboarding — fatto, PR [#15](https://github.com/castellanza-alt/StepTeller/pull/15)
 - [x] 4 pagine: benvenuto, Salute (richiesta di sistema lasciando la pagina), obiettivo, promemoria (notifiche su «Inizia»)
 - [x] Solo al primo avvio; utente esistente riconosciuto dalle chiavi già salvate (nessuna introduzione, nessun permesso)
 - [x] «Rivedi l'introduzione» nelle Impostazioni; `-stepteller.debugOnboarding 1…4` per gli screenshot
@@ -66,10 +68,11 @@ prima tra Will e la chat di coordinamento.
 - [x] Prove della chat: Salute concessa e negata, utente esistente, rivedi; Home/Storico/widget invariati
 - [x] Controllo della chat di coordinamento: diff letto, 43 test, 0 avvisi Release e Debug; build Release provata su
       iPhone SE: installazione nuova → introduzione; **aggiornamento reale** dalla base → Home, nessuna introduzione
-- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
+- [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `7a333a4`)
 
 ## 4a. Traduzioni — base e lingue europee
-- [ ] String Catalog per app, widget, Live Activity, notifiche e testi dei permessi
+- [ ] Glossario dei termini chiave nelle 6 lingue, approvato da Will
+- [ ] String Catalog per app, widget, onboarding, notifiche e testi dei permessi
 - [ ] Numeri e date secondo la lingua, test golden invariati
 - [ ] IT, EN, ES, FR, DE, PT-BR
 - [ ] Nessun testo tagliato (screenshot di prova per lingua)

@@ -32,7 +32,7 @@ public enum ReminderPlanner {
 
     /// Testo per i giorni futuri, quando i passi non si conoscono ancora.
     public static func genericContent() -> ReminderContent {
-        ReminderContent(title: "È ora del tappeto?", body: "Apri Step Teller per vedere quanti minuti ti servono stasera.")
+        ReminderContent(title: "È ora del tappeto?", body: "Apri NEAT per vedere quanti minuti ti servono stasera.")
     }
 
     /// Notifiche da programmare per i prossimi `days` giorni (oggi compreso).

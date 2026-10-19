@@ -4,6 +4,11 @@
 - Preparazione per l'App Store, nessuna modifica visibile: privacy manifest (`PrivacyInfo.xcprivacy`) nell'app e
   nel widget, avvisi del compilatore azzerati, tolto codice non più usato (colori del vecchio tappeto illustrato,
   funzioni senza chiamanti).
+- Introduzione al primo avvio (benvenuto, Salute, obiettivo, promemoria serale), nello stile «Dan Dan Dan»: i
+  permessi di Salute e notifiche si chiedono lì, al momento giusto, e non più all'apertura. Se Salute viene negata si
+  va avanti lo stesso (passi a mano). Chi aveva già l'app non la vede; si rivede da Impostazioni → Informazioni →
+  «Rivedi l'introduzione».
+- Promemoria serale generico: «Apri NEAT…» invece del vecchio nome «Step Teller».
 - Tolta la Live Activity del tappeto, non più raggiungibile dalla 0.6.0. I widget restano tutti; l'estensione
   mantiene nome e bundle ID (`StepTellerLiveActivity`, `it.castellanza.stepteller.liveactivity`).
 

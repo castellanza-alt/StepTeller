@@ -31,6 +31,18 @@ Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato
 lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
 (Salute senza dati).
 
+## Introduzione (primo avvio)
+
+`App/Onboarding/OnboardingView.swift`: quattro pagine (benvenuto, Salute, obiettivo, promemoria). La richiesta di
+Salute parte lasciando la sua pagina; quella delle notifiche al tocco su «Inizia», solo con il promemoria acceso.
+`StepsStore.start()` parte solo a introduzione conclusa. Chi aveva già l'app non la vede: al primo avvio della
+versione nuova, se UserDefaults contiene già una chiave dell'app (obiettivo, storico obiettivi, inizio serie,
+velocità, promemoria, taratura, tema) l'introduzione è segnata come fatta (`stepteller.onboarding.done`).
+Si rivede da Impostazioni → Informazioni → «Rivedi l'introduzione» (non richiede di nuovo i permessi e non cambia
+obiettivo e promemoria se non li si tocca). Debug: `-stepteller.debugOnboarding 1…4` la apre su quella pagina
+(solo build Debug; screenshot `intro-*` in `scripts/screenshots.sh`). Con `-stepteller.debugSteps` l'introduzione non
+compare, così gli screenshot di Home e Storico restano quelli di prima.
+
 ## Salute (HealthKit)
 
 Solo lettura di `stepCount`, `HKStatisticsQuery` `.cumulativeSum` da mezzanotte (deduplica iPhone/Watch),

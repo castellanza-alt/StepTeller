@@ -1,13 +1,16 @@
 import SwiftUI
 import StepTellerCore
 
-/// Impostazioni: obiettivo giornaliero, promemoria serale, streak e Jolly, link a privacy e supporto e versione.
+/// Impostazioni: obiettivo giornaliero, promemoria serale, streak e Jolly, link a privacy e supporto,
+/// «Rivedi l'introduzione» e versione.
 struct SettingsSheet: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.dismiss) private var dismiss
     @FocusState private var goalFocused: Bool
     @State private var showRules = false
     @AppStorage(ThemeMode.storageKey) private var themeMode = ThemeMode.system.rawValue
+    /// «Rivedi l'introduzione»: chiude le Impostazioni e la mostra di nuovo.
+    var onReplayIntro: () -> Void = {}
 
     var body: some View {
         @Bindable var store = store
@@ -96,6 +99,18 @@ struct SettingsSheet: View {
                         linkRow("Privacy", Self.privacyURL)
                         Divider().overlay(Theme.ink.opacity(0.08))
                         linkRow("Supporto", Self.supportURL)
+                        Divider().overlay(Theme.ink.opacity(0.08))
+                        Button { goalFocused = false; onReplayIntro() } label: {
+                            HStack {
+                                Text("Rivedi l'introduzione").foregroundStyle(Theme.ink)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.ink.opacity(0.4))
+                            }
+                            .font(.system(size: 15)).padding(.horizontal, 16).padding(.vertical, 14)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
                     }
                     .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
                     .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))

@@ -36,6 +36,14 @@ for theme in day night; do
   shot storico-sempre $theme 3465 4.0 -stepteller.debugTab storico -stepteller.debugPeriod all
 done
 shot impostazioni night 3465 4.0 -stepteller.debugSheet 1
+oshot() { # introduzione: pagina (1–4) tema
+  xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
+  xcrun simctl launch --terminate-running-process "$UDID" $BID -stepteller.debugOnboarding "$1" -stepteller.themeMode "$2" \
+    -stepteller.reminder.on YES >/dev/null
+  sleep 4
+  xcrun simctl io "$UDID" screenshot "$OUT/intro-$1-$2.png"
+}
+for theme in day night; do for p in 1 2 3 4; do oshot $p $theme; done; done
 wshot() { # nome passi (vuoto = dato non disponibile)
   xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1 || true
   if [ -n "$2" ]; then

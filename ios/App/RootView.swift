@@ -10,10 +10,12 @@ struct RootView: View {
     @AppStorage(ThemeMode.storageKey) private var themeModeRaw = ThemeMode.system.rawValue
     @State private var screen: AppScreen
     @State private var showSettings: Bool
-    @State private var storicoScrolled = false
     /// Giorno (yyyy-MM-dd) dell'ultima festa «Obiettivo raggiunto»: una sola al giorno.
     @AppStorage("stepteller.celebratedDay") private var celebratedDay = ""
     @State private var celebrating = false
+    /// Ultima apertura (o ritorno in primo piano): la festa aspetta uno storico riletto da allora,
+    /// altrimenti la serie mostrerebbe solo oggi («1 giorno di fila»).
+    @State private var activeSince = Date()
 
     init() {
         var s = AppScreen.home
@@ -42,16 +44,21 @@ struct RootView: View {
                     Group {
                         switch screen {
                         case .home:
+                            // i gesti dei figli (cursore sulla strada) hanno la precedenza sullo swipe
                             HomeView(size: size)
+                                .contentShape(Rectangle())
+                                .gesture(swipe(to: .storico))
                                 .transition(.move(edge: .leading))
                         case .storico:
-                            StoricoView(size: size, scrolled: $storicoScrolled)
+                            // simultaneo, altrimenti blocca lo scorrimento verticale
+                            StoricoView(size: size)
+                                .simultaneousGesture(swipe(to: .home))
                                 .transition(.move(edge: .trailing))
                         }
                     }
                     MangaCanvas(width: size.width, height: rowTop + Manga.topBarHeight - Manga.statusBarHeight) {
                         TopBar(screen: screen, streak: store.history.streak.streak, jolly: store.history.streak.jolly,
-                               storicoScrolled: storicoScrolled, rowTop: rowTop,
+                               rowTop: rowTop,
                                onNav: navigate, onSettings: { showSettings = true })
                     }
                     if celebrating {
@@ -85,17 +92,29 @@ struct RootView: View {
                 if phase == .active { await store.becameActive() }
                 else if phase == .background { store.becameInactive() }
             }
-            if phase == .active { celebrateIfNeeded() }
+            if phase == .active { activeSince = Date(); celebrateIfNeeded() }
         }
         .onChange(of: store.plan.isDone) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
+        .onChange(of: store.history.refreshedAt) { _, _ in celebrateIfNeeded() }
     }
 
     private func navigate() {
         withAnimation(.easeInOut(duration: Manga.navDuration)) {
             screen = screen == .home ? .storico : .home
         }
-        if screen == .home { storicoScrolled = false }
+    }
+
+    /// Swipe orizzontale: verso sinistra dalla Home allo Storico, verso destra dallo Storico alla Home.
+    /// Basta uno spostamento deciso o un colpo veloce, purché più orizzontale che verticale.
+    private func swipe(to target: AppScreen) -> some Gesture {
+        DragGesture(minimumDistance: 24).onEnded { v in
+            guard screen != target else { return }
+            let dx = target == .storico ? -v.translation.width : v.translation.width
+            let flick = target == .storico ? -v.predictedEndTranslation.width : v.predictedEndTranslation.width
+            guard abs(v.translation.width) > abs(v.translation.height) * 1.5, dx > 70 || flick > 160 else { return }
+            navigate()
+        }
     }
 }
 
@@ -110,7 +129,8 @@ extension RootView {
         #endif
         // solo con una lettura di oggi: al risveglio il numero può essere ancora quello di ieri
         guard scenePhase == .active, !celebrating, store.goal > 0, store.plan.isDone, store.origin == .health,
-              let read = store.lastUpdate, Calendar.current.isDateInToday(read)
+              let read = store.lastUpdate, Calendar.current.isDateInToday(read),
+              let history = store.history.refreshedAt, history >= activeSince
         else { return }
         let c = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let today = String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)

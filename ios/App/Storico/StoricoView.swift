@@ -9,7 +9,6 @@ enum BestTab: CaseIterable { case day, week, month, year, streak }
 /// Tela 390 × 2020 del handoff, scalata in larghezza; scorre sotto la barra fissa.
 struct StoricoView: View {
     let size: CGSize
-    @Binding var scrolled: Bool
     @Environment(StepsStore.self) private var store
     @Environment(\.manga) private var c
 
@@ -22,9 +21,8 @@ struct StoricoView: View {
     @State private var punch: CGFloat = 1
     @State private var jollyWidth: CGFloat = 200
 
-    init(size: CGSize, scrolled: Binding<Bool>) {
+    init(size: CGSize) {
         self.size = size
-        _scrolled = scrolled
         var per = HistoryPeriod.week
         #if DEBUG
         switch UserDefaults.standard.string(forKey: "stepteller.debugPeriod") {
@@ -38,7 +36,6 @@ struct StoricoView: View {
     }
 
     var body: some View {
-        let s = size.width / Manga.frameWidth
         ScrollView {
             MangaCanvas(width: size.width, height: Manga.storicoHeight) {
                 Board {
@@ -46,9 +43,6 @@ struct StoricoView: View {
                     stepsSection
                     bestSection
                 }
-            }
-            .onGeometryChange(for: Bool.self) { -$0.frame(in: .scrollView).minY / s > Manga.scrolledThreshold } action: { v in
-                if v != scrolled { scrolled = v }
             }
         }
         .scrollIndicators(.hidden)

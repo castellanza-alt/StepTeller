@@ -15,6 +15,8 @@ final class HistoryStore {
     private(set) var stats: HistoryStats
     private(set) var streak = StreakState()
     private(set) var loaded = false
+    /// Fine dell'ultima rilettura da Salute: la festa aspetta uno storico letto dopo l'apertura.
+    private(set) var refreshedAt: Date?
     /// Primo giorno del conteggio della streak (primo avvio di questa versione).
     let streakStart: Date
 
@@ -59,6 +61,7 @@ final class HistoryStore {
         records = result
         loaded = true
         recompute()
+        refreshedAt = Date()
     }
 
     /// Passi di oggi già letti dall'app: la streak scatta appena si supera l'obiettivo, senza

@@ -4,13 +4,12 @@ import StepTellerCore
 enum AppScreen { case home, storico }
 
 /// Barra superiore fissa (non scorre mai): bottone rosso di navigazione a sinistra, al centro serie e
-/// Jolly (Home) o «STORICO» (Storico, quando si è scorso), impostazioni in vetro a destra.
+/// Jolly (solo in Home), impostazioni in vetro a destra.
 /// Disegnata sulla tela 390; `rowTop` è la y della riga dei bottoni (sotto la status bar reale).
 struct TopBar: View {
     let screen: AppScreen
     let streak: Int
     let jolly: Int
-    let storicoScrolled: Bool
     let rowTop: CGFloat
     let onNav: () -> Void
     let onSettings: () -> Void
@@ -36,16 +35,8 @@ struct TopBar: View {
                         else { FootprintsIcon().transition(.opacity) }
                     }
                 }
-                ZStack(alignment: .leading) {
-                    if screen == .home {
-                        streakGroup.transition(.opacity)
-                    } else {
-                        AntonText("STORICO", 20, tracking: 0.06)
-                            .manga(rotate: -3, skew: -10)
-                            .opacity(storicoScrolled ? 1 : 0)
-                            .animation(.easeInOut(duration: Manga.titleFade), value: storicoScrolled)
-                            .accessibilityHidden(!storicoScrolled)
-                    }
+                if screen == .home {
+                    streakGroup.transition(.opacity)
                 }
                 Spacer(minLength: 0)
                 GlassButton(action: onSettings)

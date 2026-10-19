@@ -11,6 +11,9 @@ struct HomeView: View {
     @State private var minutesWidth: CGFloat = 96
     @State private var editing = false
     @State private var editText = ""
+    @State private var motion = ParallaxMotion()
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         // Di norma la tela si scala in larghezza; sui telefoni bassi (es. SE, 375 × 667) si adatta
@@ -18,11 +21,16 @@ struct HomeView: View {
         let s = min(size.width / Manga.frameWidth, size.height / Manga.frameHeight)
         MangaCanvas(width: Manga.frameWidth * s, height: size.height / s) {
             Board {
-                Image(c.homeArt)
-                    .resizable()
-                    .frame(width: Manga.artSize.width, height: Manga.artSize.height)
-                    .accessibilityHidden(true)
-                    .at(0, Manga.artTop)
+                ZStack(alignment: .topLeading) {
+                    Image(c.homeArt)
+                        .resizable()
+                        .frame(width: Manga.artSize.width, height: Manga.artSize.height)
+                        .accessibilityHidden(true)
+                    ParallaxLeg(image: c.homeLeg, motion: motion)
+                }
+                .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
+                .clipped()
+                .at(0, Manga.artTop)
                 stepsBlock
                     .manga(rotate: -15, skew: -10, anchor: .topLeading)
                     .at(14, Manga.artTop + 112)
@@ -43,6 +51,10 @@ struct HomeView: View {
             .animation(.easeInOut(duration: 0.25), value: store.plan.isDone)
         }
         .frame(width: size.width)
+        .onAppear { updateMotion() }
+        .onDisappear { motion.stop() }
+        .onChange(of: scenePhase) { _, _ in updateMotion() }
+        .onChange(of: reduceMotion) { _, _ in updateMotion() }
         .alert("Passi di oggi", isPresented: $editing) {
             TextField("Passi", text: $editText).keyboardType(.numberPad)
             Button("Salva") { store.setManualSteps(ItalianFormat.digits(editText)) }
@@ -50,6 +62,11 @@ struct HomeView: View {
         } message: {
             Text("Correggi a mano i passi di oggi. Con «Usa Salute» torni ai dati di Salute.")
         }
+    }
+
+    /// Parallasse solo con l'app in primo piano e senza «Riduci movimento».
+    private func updateMotion() {
+        if scenePhase == .active, !reduceMotion { motion.start() } else { motion.stop() }
     }
 
     // MARK: passi di oggi

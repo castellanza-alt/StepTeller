@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.3 — 19 ottobre 2026
+- Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).
+- Swipe tra le schermate: verso sinistra dalla Home allo Storico, verso destra per tornare. Il cursore della
+  velocità sulla strada non fa cambiare schermata.
+- Parallasse: scarpa e gamba si spostano leggermente rispetto allo sfondo inclinando il telefono (al massimo 8 pt,
+  tornano al centro a telefono fermo; spenta con «Riduci movimento»). Livelli ricavati con `scripts/arte/`.
+- Festa «Obiettivo raggiunto»: aspetta lo storico riletto da Salute, così mostra la serie giusta invece di
+  «1 giorno di fila».
+- Storico: scorrendo in giù non compare più la scritta «STORICO» in alto.
+
 ## 0.6.2 — 18 ottobre 2026
 - Stesso contenuto della 0.6.0 (NEAT, stile «Dan Dan Dan», icona e widget nuovi), con un numero di versione più
   alto della 0.6.1 caricata dal Mac: TestFlight mostra in cima la versione più alta, quindi la 0.6.0 restava nascosta.

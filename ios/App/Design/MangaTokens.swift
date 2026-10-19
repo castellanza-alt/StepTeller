@@ -70,6 +70,8 @@ struct MangaPalette: Equatable {
 
     // Illustrazioni (asset catalog)
     var homeArt: String { theme == .night ? "HomeArtNight" : "HomeArtDay" }
+    /// Scarpa e gamba scontornate, sopra `homeArt` per la parallasse.
+    var homeLeg: String { theme == .night ? "HomeLegNight" : "HomeLegDay" }
     var hill: String { theme == .night ? "HillNight" : "HillDay" }
     var horizon: String { theme == .night ? "HorizonNight" : "HorizonDay" }
 }
@@ -112,6 +114,10 @@ enum Manga {
     static let artSize = CGSize(width: 390, height: 790)
     /// px → pt (390 / 881).
     static let artScale: CGFloat = 390 / 881
+    /// Scarpa e gamba (`homeLeg`): stessa tela dell'illustrazione più 24 px ripetuti su ogni lato.
+    static let legPadding: CGFloat = 24
+    /// Spostamento massimo di scarpa e gamba inclinando il telefono (pt).
+    static let parallaxMax: CGFloat = 8
 
     // Cursore
     static let knobSize: CGFloat = 34
@@ -125,12 +131,10 @@ enum Manga {
 
     // Storico
     static let storicoHeight: CGFloat = 2020
-    static let scrolledThreshold: CGFloat = 60
     static let jollyTicks = 15          // StreakEngine.jollyEvery (decisione: 15 come l'app, non 14)
 
     // Animazioni
     static let navDuration = 0.35
-    static let titleFade = 0.2
 }
 
 // MARK: - Tipografia

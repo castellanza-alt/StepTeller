@@ -105,10 +105,12 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       44 test, 0 avvisi; screenshot su iPhone SE in IT, DE (notte), FR, JA
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `f191cf5`)
 
-### 4b. Lingue asiatiche e font
+### 4b. Lingue asiatiche e font — PR [#18](https://github.com/castellanza-alt/StepTeller/pull/18), da correggere
 - [x] Font scelto da Will tra le prove: OFL ridotti (Dela Gothic One, Black Han Sans, Noto Sans SC/TC Black)
 - [ ] Sottoinsieme che copre anche date e mesi scritti da iOS (年月日, 월/년/일, giorni della settimana) e un controllo automatico
-- [ ] Implementazione (3b unita: via libera dato)
+- [x] Implementazione: un solo punto in MangaTokens (Anton + font asiatico in cascata), paragrafi in grassetto di sistema,
+      +0,6 MB; 44 test, 0 avvisi; IT/EN/DE identici
+- [ ] Storico: «日連続！» (JA) finisce sotto il «22»; «連續天數！» (ZH) e «일 연속!» (KO) lo toccano → rimandata alla chat
 - [ ] JA, KO, ZH-Hans, ZH-Hant dal foglio
 - [ ] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)

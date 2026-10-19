@@ -47,18 +47,22 @@ prima tra Will e la chat di coordinamento.
       con bundle ID di sempre, niente ActivityKit nel binario)
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `7f5ab52`)
 
-## 2. Pagine di privacy e supporto
-- [ ] Privacy policy (solo lettura da Salute, niente rete, nessun dato raccolto)
-- [ ] Pagina di supporto (email, domande frequenti)
-- [ ] Pubblicate su GitHub Pages (servite da `main`, radice) in una cartella nuova `neat/`, senza toccare la web app;
-      URL annotati qui
-- [ ] Link nelle Impostazioni dell'app (dopo la chat 1)
-- [ ] Controllo della chat di coordinamento
+## 2. Pagine di privacy e supporto — PR [#12](https://github.com/castellanza-alt/StepTeller/pull/12) (pagine, verso `main`) e [#13](https://github.com/castellanza-alt/StepTeller/pull/13) (link nell'app), da unire
+- [x] Privacy policy (solo lettura da Salute, niente rete, nessun dato raccolto), italiano e inglese
+- [x] Pagina di supporto (email, domande frequenti), italiano e inglese
+- [x] Cartella nuova `neat/`, nessun file della web app toccato. URL (attivi dopo il merge della #12 su `main`):
+      https://castellanza-alt.github.io/StepTeller/neat/privacy/ ·
+      https://castellanza-alt.github.io/StepTeller/neat/supporto/
+- [x] Sezione «Informazioni» nelle Impostazioni: Privacy, Supporto, versione
+- [x] Controllo della chat di coordinamento: testi letti, screenshot visti, #13 provata sopra la base attuale
+      (nessun conflitto, 43 test, 0 avvisi in Release)
+- [ ] Merge della #12 su `main` (pubblica le pagine) e della #13 in `ia/versione-0.6.2` (ok di Will)
 
 ## 3. Onboarding
 - [ ] Schermate: cosa fa NEAT, permesso Salute, obiettivo, promemoria e permesso notifiche
 - [ ] Solo al primo avvio; chi ha già l'app non lo vede
 - [ ] Rivedibile dalle Impostazioni; opzione Debug per gli screenshot
+- [ ] Promemoria: «Apri Step Teller» → «Apri NEAT» (`Sources/StepTellerCore/Reminder.swift`)
 - [ ] Prova su iPhone SE e Pro Max, giorno e notte
 - [ ] Controllo della chat di coordinamento
 

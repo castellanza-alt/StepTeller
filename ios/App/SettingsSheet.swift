@@ -1,7 +1,7 @@
 import SwiftUI
 import StepTellerCore
 
-/// Impostazioni: obiettivo giornaliero, promemoria serale, informazioni su streak e Jolly.
+/// Impostazioni: obiettivo giornaliero, promemoria serale, streak e Jolly, link a privacy e supporto e versione.
 struct SettingsSheet: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.dismiss) private var dismiss
@@ -90,6 +90,17 @@ struct SettingsSheet: View {
                     .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
                     .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
                 }
+
+                section("Informazioni") {
+                    VStack(spacing: 0) {
+                        linkRow("Privacy", Self.privacyURL)
+                        Divider().overlay(Theme.ink.opacity(0.08))
+                        linkRow("Supporto", Self.supportURL)
+                    }
+                    .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
+                    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
+                    note("Versione \(appVersion)")
+                }
             }
             .padding(.horizontal, 22).padding(.top, 22).padding(.bottom, 40)
         }
@@ -110,6 +121,27 @@ struct SettingsSheet: View {
     private var startText: String {
         let f = DateFormatter(); f.locale = Locale(identifier: "it_IT"); f.dateFormat = "d MMMM yyyy"
         return f.string(from: store.history.streakStart)
+    }
+
+    private static let privacyURL = URL(string: "https://castellanza-alt.github.io/StepTeller/neat/privacy/")!
+    private static let supportURL = URL(string: "https://castellanza-alt.github.io/StepTeller/neat/supporto/")!
+
+    private var appVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—"
+    }
+
+    private func linkRow(_ title: String, _ url: URL) -> some View {
+        Link(destination: url) {
+            HStack {
+                Text(title).foregroundStyle(Theme.ink)
+                Spacer()
+                Image(systemName: "arrow.up.right")
+                    .font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.ink.opacity(0.4))
+            }
+            .font(.system(size: 15)).padding(.horizontal, 16).padding(.vertical, 14)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {

@@ -31,15 +31,7 @@ final class HealthKitStepsProvider: StepsProvider, @unchecked Sendable {
 
     /// Somma statistica dei passi in un intervallo (nil = nessun dato o errore).
     func stepsBetween(_ start: Date, _ end: Date) async -> Int? {
-        let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
-        return await withCheckedContinuation { continuation in
-            let query = HKStatisticsQuery(quantityType: stepType, quantitySamplePredicate: predicate,
-                                          options: .cumulativeSum) { _, statistics, _ in
-                let value = statistics?.sumQuantity()?.doubleValue(for: .count())
-                continuation.resume(returning: value.map { Int($0.rounded()) })
-            }
-            store.execute(query)
-        }
+        await HealthKitQueries.stepSum(store, type: stepType, from: start, to: end)
     }
 
     /// Osserva i nuovi passi. Con la consegna in background (ogni ora al massimo) iOS può risvegliare

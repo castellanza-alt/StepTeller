@@ -113,8 +113,10 @@ enum Manga {
     // Illustrazione della Home: 881 × 1786 px mostrata a 390 × 790 pt da y = 54.
     static let artTop: CGFloat = 54
     static let artSize = CGSize(width: 390, height: 790)
+    /// Pixel dell'illustrazione (e del tracciato `SpeedTrack.road`).
+    static let artPixelSize = CGSize(width: 881, height: 1786)
     /// px → pt (390 / 881).
-    static let artScale: CGFloat = 390 / 881
+    static let artScale: CGFloat = artSize.width / artPixelSize.width
     /// Scarpa e gamba (`homeLeg`): stessa tela dell'illustrazione più 24 px ripetuti su ogni lato.
     static let legPadding: CGFloat = 24
     /// Spostamento massimo di scarpa e gamba inclinando il telefono (pt).

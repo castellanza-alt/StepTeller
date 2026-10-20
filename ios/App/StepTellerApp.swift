@@ -7,19 +7,19 @@ struct StepTellerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                #if DEBUG
-                if UserDefaults.standard.object(forKey: "stepteller.debugWidget") != nil {
-                    WidgetPreviewScreen()          // solo Debug: anteprima del widget per gli screenshot
-                } else {
-                    RootView().environment(store)
-                }
-                #else
-                RootView().environment(store)
-                #endif
+            #if DEBUG
+            if UserDefaults.standard.object(forKey: "stepteller.debugWidget") != nil {
+                WidgetPreviewScreen()          // solo Debug: anteprima del widget per gli screenshot
+            } else {
+                root
             }
+            #else
+            root
+            #endif
         }
     }
+
+    private var root: some View { RootView().environment(store) }
 
     @MainActor
     private static func makeStore() -> StepsStore {

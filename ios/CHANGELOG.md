@@ -27,6 +27,7 @@
   quattro lingue la spaziatura larga delle maiuscole di Anton è ridotta. Anche i numeri con contorno (festa,
   record) usano il font giusto. Italiano e le altre lingue invariati. L'app cresce di circa 0,5 MB (268 KB di font
   nell'app e altrettanti nel widget).
+- Nuova icona: suola rossa e scarpa bianca su fondo nero, vettoriale, in Liquid Glass (Icon Composer).
 
 ## 0.6.3 — 19 ottobre 2026
 - Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).

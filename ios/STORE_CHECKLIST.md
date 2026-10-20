@@ -118,8 +118,17 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [ ] Rilettura di un madrelingua (facoltativa)
 
 ## 5. Scheda App Store Connect
-- [ ] Nome, sottotitolo, descrizione, parole chiave, testo promozionale in 10 lingue
-- [ ] Categoria (Salute e fitness), classificazione per età, etichette privacy «Dati non raccolti»
+Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto
+camminare ancora) + «i tuoi dati restano sul tuo iPhone». Comunicazione semplice, pochi messaggi. Niente
+promesse su salute/calorie; il significato di NEAT (Non-Exercise Activity Thermogenesis) non si spiega nella scheda.
+Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `PROMPT_CHATGPT_STORE.md`.
+- [x] Italiano approvato: nome «NEAT - ogni passo conta», sottotitolo «Il tuo obiettivo. Raggiungilo.»,
+      promozionale, descrizione (655 car.), parole chiave
+- [ ] ChatGPT: testi dello store nelle 9 lingue
+- [ ] Controllo della chat di coordinamento: limiti (30/30/170/100), glossario, nessuna promessa sanitaria
+- [ ] Lingua principale della scheda: inglese (così i paesi senza traduzione vedono l'inglese, non l'italiano);
+      copie per en-GB/en-AU/en-CA, es-MX, fr-CA dove servono
+- [ ] Categoria Salute e fitness (seconda: Stile di vita), età 4+, privacy «Dati non raccolti»
 - [ ] URL di privacy e supporto
 - [ ] Prezzo gratuito, tutti i paesi, dichiarazione non-trader UE
 - [ ] Note per il revisore (Salute vuota, passi inseribili a mano)

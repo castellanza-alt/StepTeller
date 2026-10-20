@@ -86,7 +86,6 @@ final class StepsStore {
         startDayWatcher()
         await refreshCalibration(force: true)
         await history.refresh()
-        await updateReminders()
         if reminderEnabled { _ = await scheduler.requestIfNeeded() }
         await updateReminders()
     }

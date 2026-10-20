@@ -10,11 +10,10 @@ import StepTellerCore
 final class HistoryStore {
     static let initialJolly = 3
 
-    private(set) var records: [DayRecord] = []
-    private(set) var goals: GoalHistory
+    private var records: [DayRecord] = []
+    private var goals: GoalHistory
     private(set) var stats: HistoryStats
     private(set) var streak = StreakState()
-    private(set) var loaded = false
     /// Fine dell'ultima rilettura da Salute: la festa aspetta uno storico letto dopo l'apertura.
     private(set) var refreshedAt: Date?
     /// Primo giorno del conteggio della streak (primo avvio di questa versione).
@@ -59,7 +58,6 @@ final class HistoryStore {
         lastRefresh = Date()
         let result = await provider.dailyRecords(until: Date())
         records = result
-        loaded = true
         recompute()
         refreshedAt = Date()
     }

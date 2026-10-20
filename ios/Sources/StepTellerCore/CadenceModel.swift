@@ -4,9 +4,6 @@ import Foundation
 public enum Gait: String, Sendable {
     case walk
     case run
-
-    /// Etichetta italiana mostrata nell'interfaccia.
-    public var label: String { self == .run ? "corsa" : "cammino" }
 }
 
 /// Punto di taratura: velocità (km/h) e cadenza misurata (passi/min).

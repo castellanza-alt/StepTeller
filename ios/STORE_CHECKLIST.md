@@ -134,7 +134,9 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       codice (verifica automatica); chiavi salvate identiche; 48 test, 0 avvisi Release/Debug; Storico rifotografato
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, 10 commit in fila, ultimo `f918bf2`)
 - [x] TestFlight 0.99 pubblicata nel gruppo «Personale» (`4b441fc`); versione da riportare a 1.0 prima dell'invio ad Apple
-- [x] Prova di Will sul telefono (20 ottobre): tutto ok
+- [x] Prova di Will sul telefono (20 ottobre): tutto ok, salvo lo «0» per qualche secondo all'apertura
+- [x] Apertura senza «0»: ultimi passi e serie salvati mostrati fino alla lettura di Salute — PR [#21](https://github.com/castellanza-alt/StepTeller/pull/21) (`ae28edf`)
+- [ ] Nuova build 0.99 su TestFlight con la correzione e prova di Will
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

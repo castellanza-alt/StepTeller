@@ -153,7 +153,9 @@ struct GlyphText: View {
         for run in (CTLineGetGlyphRuns(line) as? [CTRun]) ?? [] {
             // ogni tratto con il suo font: Anton, il font asiatico in cascata o quello di ripiego di iOS
             let attributes = CTRunGetAttributes(run) as NSDictionary
-            let runFont = attributes[kCTFontAttributeName as String].map { $0 as! CTFont } ?? font
+            // `as? CTFont` non esiste per i tipi CoreFoundation: si controlla il tipo prima della conversione
+            let value = attributes[kCTFontAttributeName as String] as CFTypeRef?
+            let runFont = value.map { CFGetTypeID($0) == CTFontGetTypeID() } == true ? (value as! CTFont) : font
             let n = CTRunGetGlyphCount(run)
             var glyphs = [CGGlyph](repeating: 0, count: n)
             var positions = [CGPoint](repeating: .zero, count: n)

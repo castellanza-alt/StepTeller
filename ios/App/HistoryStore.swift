@@ -23,7 +23,8 @@ final class HistoryStore {
 
     @ObservationIgnored private let provider: (any HistoryProvider)?
     @ObservationIgnored private let defaults: UserDefaults
-    @ObservationIgnored private let calendar = Calendar.current
+    /// Segue il fuso del telefono (vedi `StepsStore`).
+    @ObservationIgnored private let calendar = Calendar.autoupdatingCurrent
     @ObservationIgnored private var lastRefresh: Date?
     /// Passi di oggi letti dall'app (vedi `updateToday`); vale solo per il giorno in corso.
     @ObservationIgnored private var todayLive: (day: Date, steps: Int)?
@@ -37,7 +38,7 @@ final class HistoryStore {
          streakStartOverride: Date? = nil) {
         self.provider = provider
         self.defaults = defaults
-        let cal = Calendar.current
+        let cal = Calendar.autoupdatingCurrent
         let loadedGoals = defaults.data(forKey: Keys.goals).flatMap { try? JSONDecoder().decode(GoalHistory.self, from: $0) }
             ?? GoalHistory(initialGoal: currentGoal)
         goals = loadedGoals

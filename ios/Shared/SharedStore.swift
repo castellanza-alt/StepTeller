@@ -35,6 +35,11 @@ enum SharedStore {
         set { defaults.set(newValue, forKey: Keys.jolly) }
     }
 
+    /// Streak and Jollies saved by an earlier launch (`nil` on a fresh install): shown until the history is read.
+    static var cachedStreak: (streak: Int, jolly: Int)? {
+        defaults.object(forKey: Keys.streak) != nil ? (streak, jolly) : nil
+    }
+
     static var goal: Int {
         get { defaults.object(forKey: Keys.goal) != nil ? defaults.integer(forKey: Keys.goal) : 10_000 }
         set { defaults.set(newValue, forKey: Keys.goal) }

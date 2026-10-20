@@ -71,3 +71,28 @@ final class StepsStateTests: XCTestCase {
         XCTAssertNotNil(p.handler)
     }
 }
+
+final class StepsSeedTests: XCTestCase {
+    func testSeedShowsCachedStepsUntilFirstRead() {
+        var s = StepsState()
+        s.seed(cachedSteps: 4_321)
+        XCTAssertEqual(s.steps, 4_321)
+        XCTAssertFalse(s.showsNoDataWarning)
+        XCTAssertNil(s.lastUpdate)
+        s.applyHealth(5_000, at: Date())
+        XCTAssertEqual(s.steps, 5_000)
+    }
+
+    func testSeedIgnoredAfterARealRead() {
+        var s = StepsState()
+        s.applyHealth(1_200, at: Date())
+        s.seed(cachedSteps: 9_999)
+        XCTAssertEqual(s.steps, 1_200)
+    }
+
+    func testSeedIgnoresZero() {
+        var s = StepsState()
+        s.seed(cachedSteps: 0)
+        XCTAssertEqual(s.steps, 0)
+    }
+}

@@ -59,6 +59,14 @@ public struct StepsState: Equatable, Sendable {
         lastUpdate = date
     }
 
+    /// Last count known from a previous launch (today only), shown until the first Health read so the app
+    /// never opens on 0. It does not set `lastUpdate`: the real read replaces it as usual.
+    public mutating func seed(cachedSteps value: Int) {
+        guard value > 0, lastUpdate == nil else { return }
+        healthSteps = value
+        noHealthData = false
+    }
+
     /// Manual override typed by the user, valid for the day of `date`.
     public mutating func setManual(_ value: Int, at date: Date, calendar: Calendar) {
         override = max(0, value)

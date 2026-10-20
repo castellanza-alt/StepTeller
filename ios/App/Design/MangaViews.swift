@@ -134,11 +134,15 @@ struct GlyphText: View {
         .accessibilityLabel(text)
     }
 
-    private static var cache: [String: (path: CGPath, width: CGFloat)] = [:]
+    /// Tracciati già calcolati. Le chiavi includono numeri che cambiano (passi di oggi, record): oltre un certo numero
+    /// di voci si svuota, così la memoria resta limitata nelle sessioni lunghe. Solo dal body, quindi sul main actor.
+    @MainActor private static var cache: [String: (path: CGPath, width: CGFloat)] = [:]
+    private static let cacheLimit = 128
 
-    static func path(_ text: String, size: CGFloat, tracking: CGFloat) -> (path: CGPath, width: CGFloat) {
+    @MainActor static func path(_ text: String, size: CGFloat, tracking: CGFloat) -> (path: CGPath, width: CGFloat) {
         let key = "\(text)|\(size)|\(tracking)"
         if let hit = cache[key] { return hit }
+        if cache.count >= cacheLimit { cache.removeAll(keepingCapacity: true) }
         let font = TitleFont.ctFont(size)
         let attr = NSAttributedString(string: text, attributes: [
             NSAttributedString.Key(kCTFontAttributeName as String): font,

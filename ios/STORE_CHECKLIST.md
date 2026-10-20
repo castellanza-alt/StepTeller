@@ -151,7 +151,9 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Claude Design: versione italiana finale (6 PNG 1320×2868, 06 con «Nessun dato lascia il telefono» e tre etichette)
 - [x] Screenshot dell'app nelle 9 lingue per Claude Design (`design/app-lingue/`, 54 immagini controllate) e zip
       `NEAT_lingue_per_Claude_Design.zip` con didascalie per lingua
-- [ ] Claude Design: 6 immagini per ciascuna delle 9 lingue
+- [x] Claude Design: 6 immagini per ciascuna delle 9 lingue (`design/claude-design-lingue/`, 54 PNG 1320×2868, didascalie
+      identiche al foglio, controllate tutte)
+- [ ] EN 02: «kilometres» → «kilometers» (inglese americano, come nell'app) da rifare in Claude Design
 - [x] ChatGPT: testi dello store e 15 didascalie degli screenshot nelle 9 lingue → `NEAT_store_tradotto.xlsx`
 - [x] Controllo della chat di coordinamento: limiti (30/30/170/100) rispettati, a capo «/» in tutti i titoli, nessuna
       promessa sanitaria; serie in JA/KO/ZH riallineata al glossario dell'app (連続記録/연속 기록/连续记录/連續紀錄)
@@ -165,11 +167,11 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [ ] Note per il revisore (Salute vuota, passi inseribili a mano)
 - [ ] Controllo della chat di coordinamento
 
-## 6. Screenshot per lo store
-- [ ] Scelta di 5–6 schermate
-- [ ] Didascalie tradotte
-- [ ] Script aggiornato, immagini in 10 lingue
-- [ ] Controllo della chat di coordinamento
+## 6. Screenshot per lo store — fatti con Claude Design (vedi sezione 5)
+- [x] Scelta di 6 schermate
+- [x] Didascalie tradotte
+- [x] Immagini in 10 lingue
+- [x] Controllo della chat di coordinamento
 
 ## 7. Uscita
 - [ ] Build 1.0 su TestFlight, prova completa di Will

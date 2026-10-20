@@ -49,8 +49,11 @@ PARAMS = {
     "home.steps.vo": ["passi", "obiettivo"],
     "home.done.extra": ["passi"],
     "home.minutes.km": ["km"],
+    "home.minutes.mi": ["mi"],
     "home.minutes.vo": ["min", "velocita", "km"],
+    "home.minutes.vo.mi": ["min", "velocita", "mi"],
     "home.speed.value.vo": ["velocita"],
+    "home.speed.value.vo.mi": ["velocita"],
     "top.jolly.vo": ["n"],
     "st.longest.vo": ["n"],
     "st.nextJolly.vo": ["n", "fatti", "tot"],
@@ -58,8 +61,10 @@ PARAMS = {
     "st.big.vo": ["valore", "etichetta"],
     "st.second.vo.avgSteps": ["valore"],
     "st.second.vo.avgKm": ["valore"],
+    "st.second.vo.avgMi": ["valore"],
     "st.second.vo.totSteps": ["valore"],
     "st.second.vo.totKm": ["valore"],
+    "st.second.vo.totMi": ["valore"],
     "st.chart.goal.vo": ["valore"],
     "st.chart.bar.vo": ["giorno", "valore"],
     "st.best.vo": ["valore", "unita", "quando"],
@@ -69,15 +74,21 @@ PARAMS = {
     "party.vo": ["passi", "obiettivo"],
     "w.of": ["obiettivo"],
     "w.minKm": ["km"],
+    "w.minMi": ["mi"],
     "w.lock.left": ["min", "km"],
+    "w.lock.left.mi": ["min", "mi"],
     "w.inline": ["passi"],
     "w.vo.steps": ["passi", "obiettivo"],
     "n.body": ["min", "velocita", "obiettivo", "mancano"],
+    "n.body.mi": ["min", "velocita", "obiettivo", "mancano"],
     # composed
     "n.body.jolly": ["min", "velocita", "obiettivo", "mancano", "n"],
     "n.body.lose": ["min", "velocita", "obiettivo", "mancano", "n"],
+    "n.body.jolly.mi": ["min", "velocita", "obiettivo", "mancano", "n"],
+    "n.body.lose.mi": ["min", "velocita", "obiettivo", "mancano", "n"],
     "w.vo.summary.done": ["passi", "obiettivo", "n", "jolly"],
     "w.vo.summary.left": ["passi", "obiettivo", "min", "km", "n", "jolly"],
+    "w.vo.summary.left.mi": ["passi", "obiettivo", "min", "mi", "n", "jolly"],
 }
 
 # Whole sentences made of several sheet rows. The separator depends on the language only where the row
@@ -88,13 +99,19 @@ def sentence_gap(lang):
 COMPOSED = {
     "n.body.jolly": (["n.body", "n.jolly"], sentence_gap, "Corpo della notifica con l'avviso sul Jolly (n.body + n.jolly)."),
     "n.body.lose": (["n.body", "n.lose"], sentence_gap, "Corpo della notifica con l'avviso sulla serie (n.body + n.lose)."),
+    "n.body.jolly.mi": (["n.body.mi", "n.jolly"], sentence_gap,
+                        "Come n.body.jolly, con la velocità in mph (n.body.mi + n.jolly)."),
+    "n.body.lose.mi": (["n.body.mi", "n.lose"], sentence_gap,
+                       "Come n.body.lose, con la velocità in mph (n.body.mi + n.lose)."),
     "w.vo.summary.done": (["w.vo.steps", "w.vo.done", "w.vo.streak"], lambda _: "",
                           "VoiceOver del widget a obiettivo raggiunto (w.vo.steps + w.vo.done + w.vo.streak)."),
     "w.vo.summary.left": (["w.vo.steps", "w.vo.left", "w.vo.streak"], lambda _: "",
                           "VoiceOver del widget con minuti e km che mancano (w.vo.steps + w.vo.left + w.vo.streak)."),
+    "w.vo.summary.left.mi": (["w.vo.steps", "w.vo.left.mi", "w.vo.streak"], lambda _: "",
+                             "VoiceOver del widget con minuti e miglia che mancano (w.vo.steps + w.vo.left.mi + w.vo.streak)."),
 }
 # rows used only inside composed sentences
-ONLY_COMPOSED = {"n.jolly", "n.lose", "w.vo.done", "w.vo.left", "w.vo.streak"}
+ONLY_COMPOSED = {"n.jolly", "n.lose", "w.vo.done", "w.vo.left", "w.vo.left.mi", "w.vo.streak"}
 
 INFO_PLIST = {
     "p.health.read": ("app", "NSHealthShareUsageDescription"),

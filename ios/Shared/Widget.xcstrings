@@ -595,6 +595,72 @@
         }
       }
     },
+    "w.lock.left.mi" : {
+      "comment" : "Come w.lock.left, in miglia. {min}, {mi} = numeri. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NOCH %1$@ MIN · %2$@ MI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ MIN LEFT · %2$@ MI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FALTAN %1$@ MIN · %2$@ MI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RESTE %1$@ MIN · %2$@ MI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ANCORA %1$@ MIN · %2$@ MI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あと%1$@分・%2$@ MI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앞으로 %1$@분 · %2$@ MI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FALTAM %1$@ MIN · %2$@ MI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还需%1$@分钟 · %2$@ MI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還需%1$@分鐘 · %2$@ MI"
+          }
+        }
+      }
+    },
     "w.lock.steps" : {
       "comment" : "Blocco schermo rettangolare: etichetta piccola, MAIUSCOLO. Limite: ≤ 8.",
       "extractionState" : "manual",
@@ -985,6 +1051,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "分鐘 · %@ KM"
+          }
+        }
+      }
+    },
+    "w.minMi" : {
+      "comment" : "Come w.minKm, in miglia. {mi} = numero. Limite: ≤ 16.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIN · %@ MI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIN · %@ MI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIN · %@ MI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIN · %@ MI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIN · %@ MI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分・%@ MI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "분 · %@ MI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MIN · %@ MI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分钟 · %@ MI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分鐘 · %@ MI"
           }
         }
       }
@@ -1579,6 +1711,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已走%1$@步，目標%2$@步，還需%3$@分鐘，%4$@公里。連續紀錄：%5$@天，護身符：%6$@枚"
+          }
+        }
+      }
+    },
+    "w.vo.summary.left.mi" : {
+      "comment" : "VoiceOver del widget con minuti e miglia che mancano (w.vo.steps + w.vo.left.mi + w.vo.streak).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Schritte von %2$@, noch %3$@ Minuten, %4$@ Meilen. Serie: %5$@ Tage, Joker: %6$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ steps of %2$@, %3$@ minutes left, %4$@ miles. Streak: %5$@ days, Jokers: %6$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ pasos de %2$@, faltan %3$@ minutos, %4$@ millas. Racha: %5$@ días, Comodines: %6$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ pas sur %2$@, il reste %3$@ minutes, %4$@ miles. Série : %5$@ jours, Jokers : %6$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@, mancano %3$@ minuti, %4$@ miglia. Serie: %5$@ giorni, Jolly: %6$@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標%2$@歩に対して%1$@歩、あと%3$@分、%4$@マイル。連続記録：%5$@日、おまもり：%6$@個"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %2$@걸음 중 %1$@걸음, 남은 시간 %3$@분, 거리 %4$@마일. 연속 기록: %5$@일, 지킴이: %6$@개"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passos de %2$@, faltam %3$@ minutos, %4$@ milhas. Sequência: %5$@ dias, Coringas: %6$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已走%1$@步，目标%2$@步，还需%3$@分钟，%4$@英里。连续记录：%5$@天，护身符：%6$@枚"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已走%1$@步，目標%2$@步，還需%3$@分鐘，%4$@英里。連續紀錄：%5$@天，護身符：%6$@枚"
           }
         }
       }

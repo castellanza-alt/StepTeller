@@ -29,7 +29,7 @@ con 2 o più è interpolato e costante oltre gli estremi. Aggiornare poi i test 
 Le schermate sono disegnate sulla tela del handoff (390 × 844 pt) e scalate in larghezza (`MangaCanvas`). Colori solo da
 `MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per le Impostazioni.
 Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–16 km/h
-lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
+(o 2–10 mph) lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
 (Salute senza dati), `-stepteller.debugScroll 0…1` (Storico già scorso, per gli screenshot).
 
 ## Introduzione (primo avvio)
@@ -63,12 +63,21 @@ semplificato e tradizionale: l'app segue la lingua del telefono (o quella scelta
   `HistoryLabels.italian` del nucleo (stessi valori dei test golden: iOS scriverebbe «7200» e «19–25 ottobre»); nelle
   altre lingue `NumberFormatter`, `DateFormatter` e `DateIntervalFormatter` con la lingua del telefono. Il campo dei
   passi accetta qualsiasi separatore.
+- **Unità di misura**: con il paese del telefono negli USA o nel Regno Unito (`Locale.current.measurementSystem` `.us`
+  o `.uk`) distanze in miglia e velocità in mph, altrimenti km e km/h; Impostazioni → «Unità di misura» sceglie
+  Automatiche (predefinito), Chilometri o Miglia. **Dentro tutto resta in km/h e km** (calcoli, taratura, App Group,
+  test golden): le miglia sono solo visualizzazione (`DistanceUnit` nel nucleo, `Shared/Units.swift`). Il cursore in
+  miglia va da 2 a 10 mph a scatti di 0,5 sulla stessa strada; cambiando unità la velocità salvata passa allo scatto
+  più vicino (4 km/h → 2,5 mph). Testi in miglia: righe del foglio con «mi» nell'ID (es. `home.minutes.mi`,
+  `n.body.mi`); nel codice `unit.pick("home.minutes.km", "home.minutes.mi")`. L'unità arriva al widget via App Group.
+  Debug: `-stepteller.units miles|kilometers|automatic`.
 - **Promemoria**: il nucleo (`ReminderPlanner`) dà il caso e i numeri (`ReminderMessage`), il testo lo compone
   `ReminderScheduler` con il catalogo.
 - **Testi lunghi**: le schede dello Storico si rimpiccioliscono fino al 60% se una traduzione non entra
   (`AntonText(…, minScale:)`); in italiano non cambia nulla.
 - **Screenshot per lingua**: `scripts/screenshots.sh APP USCITA [lingua] [giorno]` (es. `… build/shots-de de`;
-  `giorno` = solo tema giorno).
+  `giorno` = solo tema giorno). Un altro paese per la stessa lingua con `NEAT_LOCALE` (es. `NEAT_LOCALE=en_GB … en`:
+  inglese britannico, in miglia).
 
 **Titoli in giapponese, coreano e cinese**: Anton ha solo l'alfabeto latino; i caratteri che gli mancano li
 disegna un font OFL spesso, ridotto ai soli caratteri usati: Dela Gothic One (JA), Black Han Sans (KO), Noto Sans SC
@@ -106,7 +115,7 @@ l'App Group `group.it.castellanza.stepteller` condiviso col widget). Se si aggiu
 `LiveActivity/WidgetsBundle.swift` (punto di ingresso), `LiveActivity/StepsWidget.swift` (provider e lettura Salute) e
 `Shared/StepsWidgetView.swift` (piccolo 170×170, medio 364×170, blocco schermo), nello stile «Dan Dan Dan» con i token
 dell'app; arte in `Shared/WidgetAssets.xcassets`.
-Obiettivo, taratura, velocità del cursore, serie e Jolly arrivano dall'app via App Group (`Shared/SharedStore.swift`);
+Obiettivo, taratura, velocità del cursore, unità di misura, serie e Jolly arrivano dall'app via App Group (`Shared/SharedStore.swift`);
 i minuti usano lo stesso modello tarato dell'app. Tocco → `stepteller://oggi`. In Debug `WidgetPreviewScreen` mostra i widget
 per gli screenshot (`-stepteller.debugWidget 1`).
 

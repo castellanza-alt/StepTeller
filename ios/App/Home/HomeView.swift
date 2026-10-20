@@ -48,7 +48,7 @@ struct HomeView: View {
                         .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480)
                 }
                 if !store.plan.isDone {
-                    RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }))
+                    RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }), unit: store.unit)
                         .frame(width: Manga.artSize.width, height: Manga.artSize.height)
                         .at(0, Manga.artTop)
                         .transition(.opacity)
@@ -133,7 +133,7 @@ struct HomeView: View {
     // MARK: minutes left
 
     private var minutesBlock: some View {
-        let p = store.plan
+        let p = store.plan, unit = store.unit
         return VStack(alignment: .leading, spacing: 0) {
             AntonText(L10n.text("home.minutes.1"), 17)
             AntonText(L10n.text("home.minutes.2"), 17)
@@ -143,12 +143,13 @@ struct HomeView: View {
                 AntonText(L10n.text("home.minutes.unit"), 18)
             }
             .padding(.top, 2)
-            AntonText(L10n.format("home.minutes.km", LocalFormat.number(p.km, decimals: 1)), 15, color: c.red).padding(.top, 3)
+            AntonText(L10n.format(unit.pick("home.minutes.km", "home.minutes.mi"), unit.distanceText(km: p.km)), 15, color: c.red)
+                .padding(.top, 3)
         }
         .animation(.snappy(duration: 0.2), value: p.minutes)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(L10n.format("home.minutes.vo", "\(p.minutes)", LocalFormat.number(p.speed, decimals: 1),
-                                        LocalFormat.number(p.km, decimals: 1)))
+        .accessibilityLabel(L10n.format(unit.pick("home.minutes.vo", "home.minutes.vo.mi"), "\(p.minutes)",
+                                        unit.speedText(kmh: p.speed), unit.distanceText(km: p.km)))
     }
 
     // MARK: goal reached

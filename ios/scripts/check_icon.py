@@ -7,7 +7,12 @@ from pathlib import Path
 
 icon = Path(__file__).resolve().parents[1] / 'App/AppIcon.icon'
 doc = json.loads((icon / 'icon.json').read_text())
-names = {spec['value'] for g in doc['groups'] for layer in g['layers'] for spec in layer['image-name-specializations']}
+names = set()
+for g in doc['groups']:
+    for layer in g['layers']:
+        if 'image-name' in layer:
+            names.add(layer['image-name'])
+        names.update(spec['value'] for spec in layer.get('image-name-specializations', []))
 assert names, 'Nessun livello nell\'icona'
 for name in sorted(names):
     path = icon / 'Assets' / name

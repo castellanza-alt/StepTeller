@@ -112,8 +112,9 @@ per gli screenshot (`-stepteller.debugWidget 1`).
 
 ## Icona
 
-`App/AppIcon.icon` (Icon Composer, Liquid Glass): livelli scarpa (PNG ritagliato), pennellata e raggi (SVG), varianti
-giorno/notte. Anteprima da terminale con `ictool` (dentro Icon Composer.app). `scripts/check_icon.py` la verifica in CI.
+`App/AppIcon.icon` (Icon Composer, Liquid Glass): fondo nero pieno, livello «Suola» (`rosso.svg`, vetro con riflessi) e
+livello «Scarpa» (`bianco.svg`), vettoriali ricavati dal disegno scelto da Will (ottobre 2026). Varianti scura, colorata e
+trasparente generate da iOS. Anteprima da terminale con `ictool` (dentro Icon Composer.app). `scripts/check_icon.py` la verifica in CI.
 
 ## CI
 

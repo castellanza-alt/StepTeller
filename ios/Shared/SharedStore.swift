@@ -6,7 +6,7 @@ import StepTellerCore
 /// (usato dal widget solo quando Salute è bloccata, cioè a telefono bloccato). Tutto resta sul telefono.
 enum SharedStore {
     static let suite = "group.it.castellanza.stepteller"
-    static var defaults: UserDefaults { UserDefaults(suiteName: suite) ?? .standard }
+    static let defaults = UserDefaults(suiteName: suite) ?? .standard
 
     private enum Keys {
         static let goal = "goal"

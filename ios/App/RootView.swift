@@ -1,6 +1,8 @@
 import SwiftUI
 import StepTellerCore
 
+enum AppScreen { case home, storico }
+
 /// Radice dell'app: tema (giorno/notte), la schermata scelta (Home ↔ Storico con transizione
 /// orizzontale), la barra superiore fissa e la festa dell'obiettivo.
 struct RootView: View {

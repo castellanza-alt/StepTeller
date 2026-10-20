@@ -1,8 +1,6 @@
 import SwiftUI
 import StepTellerCore
 
-enum AppScreen { case home, storico }
-
 /// Barra superiore fissa (non scorre mai): bottone rosso di navigazione a sinistra, al centro serie e
 /// Jolly (solo in Home), impostazioni in vetro a destra.
 /// Disegnata sulla tela 390; `rowTop` è la y della riga dei bottoni (sotto la status bar reale).

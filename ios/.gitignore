@@ -8,3 +8,5 @@ DerivedData/
 LiveActivity/Info.plist
 localizzazione/design/
 localizzazione/NEAT_design_materiale.zip
+__pycache__/
+.DS_Store

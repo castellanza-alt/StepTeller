@@ -133,7 +133,8 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Controllo della chat di coordinamento: letti i commit a rischio (E1, E2, D2); il commit dei commenti non cambia
       codice (verifica automatica); chiavi salvate identiche; 48 test, 0 avvisi Release/Debug; Storico rifotografato
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, 10 commit in fila, ultimo `f918bf2`)
-- [ ] TestFlight 0.99 per la prova di Will (`4b441fc`, versione da riportare a 1.0 prima dell'invio ad Apple)
+- [x] TestFlight 0.99 pubblicata nel gruppo «Personale» (`4b441fc`); versione da riportare a 1.0 prima dell'invio ad Apple
+- [ ] Prova di Will sul telefono
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

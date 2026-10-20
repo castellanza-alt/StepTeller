@@ -335,7 +335,7 @@ struct StoricoView: View {
 
     private func bestValue() -> (value: String, unit: String, when: String) {
         let stats = store.history.stats
-        let r = stats.personalRecords()
+        let r = store.history.personalRecords
         func entry(_ e: RecordEntry?) -> (String, String, String) {
             let unit = L10n.text(metric == .steps ? "st.best.unit.steps" : "st.big.km")
             guard let e else { return ("—", unit, L10n.text("st.best.noData")) }

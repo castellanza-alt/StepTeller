@@ -48,7 +48,21 @@ public struct HistoryStats: Sendable {
     public let calendar: Calendar
     /// Etichette delle date (italiano se non indicato).
     public let labels: HistoryLabels
-    private let byDay: [Date: DayRecord]
+    /// Record per inizio del giorno (il primo, se un giorno compare due volte).
+    public let byDay: [Date: DayRecord]
+    /// Primo giorno con dati (inizio del giorno); `nil` senza record.
+    public let firstDay: Date?
+    // Totali per settimana (chiave: inizio), mese (anno × 100 + mese) e anno, sommati una volta sola
+    // nell'ordine dei record: grafici e record li leggono senza riscorrere lo storico.
+    private let weekTotals: [Date: Total]
+    private let monthTotals: [Int: Total]
+    private let yearTotals: [Int: Total]
+
+    private struct Total: Sendable {
+        var steps = 0
+        var km = 0.0
+        mutating func add(_ r: DayRecord) { steps += r.steps; km += r.km }
+    }
 
     public init(records: [DayRecord], goals: GoalHistory, now: Date, calendar: Calendar, labels: HistoryLabels = .italian) {
         var cal = calendar
@@ -59,7 +73,23 @@ public struct HistoryStats: Sendable {
         self.goals = goals
         self.now = now
         self.labels = labels
-        byDay = Dictionary(records.map { (cal.startOfDay(for: $0.day), $0) }, uniquingKeysWith: { a, _ in a })
+        var byDay: [Date: DayRecord] = [:]
+        var first: Date?
+        var weeks: [Date: Total] = [:], months: [Int: Total] = [:], years: [Int: Total] = [:]
+        for r in records {
+            let day = cal.startOfDay(for: r.day)
+            if byDay[day] == nil { byDay[day] = r }
+            if first.map({ day < $0 }) ?? true { first = day }
+            let c = cal.dateComponents([.year, .month], from: r.day)
+            months[c.year! * 100 + c.month!, default: Total()].add(r)
+            years[c.year!, default: Total()].add(r)
+            weeks[cal.dateInterval(of: .weekOfYear, for: r.day)?.start ?? r.day, default: Total()].add(r)
+        }
+        self.byDay = byDay
+        firstDay = first
+        weekTotals = weeks
+        monthTotals = months
+        yearTotals = years
     }
 
     public var today: Date { calendar.startOfDay(for: now) }
@@ -84,21 +114,17 @@ public struct HistoryStats: Sendable {
             let next = calendar.date(byAdding: .year, value: 1, to: start) ?? start
             return (start, calendar.date(byAdding: .day, value: -1, to: next) ?? start)
         case .all:
-            let first = records.map(\.day).min().map { calendar.startOfDay(for: $0) } ?? today
-            return (first, today)
+            return (firstDay ?? today, today)
         }
     }
 
-    /// Numero massimo di periodi indietro con dati.
+    /// Numero massimo di periodi indietro con dati: periodi interi tra quello del primo record e quello di oggi.
     public func maxOffset(_ period: HistoryPeriod) -> Int {
-        guard period != .all, let first = records.map(\.day).min() else { return 0 }
-        var offset = 0
-        while offset < 2000 {
-            let i = interval(period, offset: offset + 1)
-            if i.end < calendar.startOfDay(for: first) { break }
-            offset += 1
-        }
-        return offset
+        guard period != .all, let first = firstDay else { return 0 }
+        let unit: Calendar.Component = period == .week ? .weekOfYear : period == .month ? .month : .year
+        let from = calendar.dateInterval(of: unit, for: first)?.start ?? first
+        let to = calendar.dateInterval(of: unit, for: today)?.start ?? today
+        return max(0, calendar.dateComponents([unit], from: from, to: to).value(for: unit) ?? 0)
     }
 
     public func title(_ period: HistoryPeriod, offset: Int = 0) -> String {
@@ -158,12 +184,8 @@ public struct HistoryStats: Sendable {
     }
 
     private func sum(year: Int, month: Int?) -> (Int, Double) {
-        var steps = 0, km = 0.0
-        for r in records {
-            let c = calendar.dateComponents([.year, .month], from: r.day)
-            if c.year == year && (month == nil || c.month == month) { steps += r.steps; km += r.km }
-        }
-        return (steps, km)
+        let t = month.map { monthTotals[year * 100 + $0] } ?? yearTotals[year]
+        return (t?.steps ?? 0, t?.km ?? 0)
     }
 
     // MARK: medie giornaliere
@@ -194,7 +216,7 @@ public struct HistoryStats: Sendable {
     /// (oggi escluso, perché a metà giornata abbasserebbe la media) a partire dal primo giorno con dati;
     /// i giorni senza dati valgono 0. Se nel periodo c'è solo oggi, la media è il valore di oggi.
     public func dailyAverage(from start: Date, to end: Date) -> (steps: Int, km: Double) {
-        guard let first = records.map(\.day).min().map({ calendar.startOfDay(for: $0) }) else { return (0, 0) }
+        guard let first = firstDay else { return (0, 0) }
         let from = max(calendar.startOfDay(for: start), first)
         let yesterday = calendar.date(byAdding: .day, value: -1, to: today) ?? today
         let to = min(calendar.startOfDay(for: end), yesterday)
@@ -255,31 +277,16 @@ public struct HistoryStats: Sendable {
         let day = records.max(by: { $0.steps < $1.steps }).flatMap { r -> RecordEntry? in
             r.steps > 0 ? RecordEntry(steps: r.steps, km: r.km, label: fmt(r.day)) : nil
         }
-        // settimane
-        var weeks: [Date: (Int, Double)] = [:]
-        for r in records {
-            let w = calendar.dateInterval(of: .weekOfYear, for: r.day)?.start ?? r.day
-            let v = weeks[w] ?? (0, 0)
-            weeks[w] = (v.0 + r.steps, v.1 + r.km)
-        }
-        let week = weeks.max(by: { $0.value.0 < $1.value.0 }).map { start, v -> RecordEntry in
+        let week = weekTotals.max(by: { $0.value.steps < $1.value.steps }).map { start, v -> RecordEntry in
             let end = calendar.date(byAdding: .day, value: 6, to: start) ?? start
-            return RecordEntry(steps: v.0, km: v.1, label: labels.weekRange(start, end, calendar))
+            return RecordEntry(steps: v.steps, km: v.km, label: labels.weekRange(start, end, calendar))
         }
-        // mesi e anni
-        var months: [Int: (Int, Double)] = [:], years: [Int: (Int, Double)] = [:]
-        for r in records {
-            let c = calendar.dateComponents([.year, .month], from: r.day)
-            let mk = c.year! * 100 + c.month!
-            let m = months[mk] ?? (0, 0); months[mk] = (m.0 + r.steps, m.1 + r.km)
-            let y = years[c.year!] ?? (0, 0); years[c.year!] = (y.0 + r.steps, y.1 + r.km)
-        }
-        let month = months.max(by: { $0.value.0 < $1.value.0 }).map { k, v in
+        let month = monthTotals.max(by: { $0.value.steps < $1.value.steps }).map { k, v in
             let first = calendar.date(from: DateComponents(year: k / 100, month: k % 100, day: 1)) ?? now
-            return RecordEntry(steps: v.0, km: v.1, label: labels.month(first, calendar))
+            return RecordEntry(steps: v.steps, km: v.km, label: labels.month(first, calendar))
         }
-        let year = years.max(by: { $0.value.0 < $1.value.0 }).map { k, v in
-            RecordEntry(steps: v.0, km: v.1, label: String(k))
+        let year = yearTotals.max(by: { $0.value.steps < $1.value.steps }).map { k, v in
+            RecordEntry(steps: v.steps, km: v.km, label: String(k))
         }
         return PersonalRecords(day: day, week: week, month: month, year: year)
     }

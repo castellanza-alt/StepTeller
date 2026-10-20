@@ -2,14 +2,14 @@ import Foundation
 import StepTellerCore
 
 extension HistoryLabels {
-    /// Etichette dello Storico nella lingua del telefono: in italiano quelle di sempre (`italian`), nelle altre
-    /// lingue nomi dei mesi, iniziali e intervalli di date scritti da iOS.
+    /// History labels in the phone's language: in Italian the usual ones (`italian`), in the other languages
+    /// month names, initials and date ranges written by iOS.
     static let current: HistoryLabels = LocalFormat.isItalian ? .italian : system(locale: .current)
 
     static func system(locale: Locale) -> HistoryLabels {
         var cal = Calendar.current
         cal.locale = locale
-        let weekdays = cal.veryShortStandaloneWeekdaySymbols          // da domenica
+        let weekdays = cal.veryShortStandaloneWeekdaySymbols          // starts on Sunday
         return HistoryLabels(
             weekdayLetters: Array(weekdays[1...] + weekdays[..<1]),
             monthLetters: cal.veryShortStandaloneMonthSymbols,
@@ -41,8 +41,8 @@ extension HistoryLabels {
     }
 }
 
-/// Formattatori riusati per (modello, lingua, calendario): crearne uno costa 0,1–0,25 ms e un body dello Storico ne
-/// chiede 6–8. Un `NSLock` perché le etichette sono closure `@Sendable`; i formattatori di Foundation sono thread-safe.
+/// Formatters reused per (template, language, calendar): creating one costs 0.1–0.25 ms and one History body
+/// asks for 6–8. An `NSLock` because the labels are `@Sendable` closures; Foundation formatters are thread-safe.
 private final class FormatterCache: @unchecked Sendable {
     static let shared = FormatterCache()
     private let lock = NSLock()

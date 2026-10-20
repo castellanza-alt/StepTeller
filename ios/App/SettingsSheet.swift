@@ -1,15 +1,15 @@
 import SwiftUI
 import StepTellerCore
 
-/// Impostazioni: obiettivo giornaliero, promemoria serale, streak e Jolly, link a privacy e supporto,
-/// «Rivedi l'introduzione» e versione.
+/// Settings: daily goal, evening reminder, streak and Jollies, privacy and support links,
+/// «Replay the introduction» and version.
 struct SettingsSheet: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.dismiss) private var dismiss
     @FocusState private var goalFocused: Bool
     @State private var showRules = false
     @AppStorage(ThemeMode.storageKey) private var themeMode = ThemeMode.system.rawValue
-    /// «Rivedi l'introduzione»: chiude le Impostazioni e la mostra di nuovo.
+    /// «Replay the introduction»: closes Settings and shows it again.
     var onReplayIntro: () -> Void = {}
 
     var body: some View {
@@ -119,12 +119,12 @@ struct SettingsSheet: View {
         .presentationDetents([.large])
     }
 
-    /// Regole, una per riga con il punto elenco.
+    /// Rules, one per line with a bullet.
     private var rules: String {
         (1...5).map { "• " + L10n.text("set.rules.\($0)") }.joined(separator: "\n")
     }
 
-    /// Data d'inizio della serie nella lingua del telefono («8 ottobre 2026», «October 8, 2026»).
+    /// Start date of the streak in the phone's language («8 ottobre 2026», «October 8, 2026»).
     private var startText: String { Self.startFormatter.string(from: store.history.streakStart) }
 
     private static let startFormatter: DateFormatter = {
@@ -155,7 +155,7 @@ struct SettingsSheet: View {
         .buttonStyle(.plain)
     }
 
-    /// Riga sottile tra le voci di una scheda.
+    /// Thin line between the rows of a card.
     private var rowDivider: some View { Divider().overlay(Theme.ink.opacity(0.08)) }
 
     private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
@@ -179,14 +179,14 @@ struct SettingsSheet: View {
 }
 
 private extension View {
-    /// Scheda delle Impostazioni: fondo in vetro con bordo sottile, angoli continui.
+    /// Settings card: glass background with a thin border, continuous corners.
     func glassCard() -> some View {
         background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
             .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
     }
 }
 
-/// Etichetta di sezione delle Impostazioni: 11 pt, semibold, maiuscolo spaziato, colore tenue.
+/// Settings section label: 11 pt, semibold, spaced uppercase, muted color.
 struct SectionLabel: View {
     let text: String
     var tracking: CGFloat = 0.24

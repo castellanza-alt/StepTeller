@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-"""Genera i String Catalog di NEAT dal foglio delle traduzioni.
+"""Generates the NEAT String Catalogs from the translation sheet.
 
-Fonte: localizzazione/NEAT_testi_tradotti.xlsx, foglio «Testi» (una riga per testo, ID stabile, una colonna
-per lingua). Uscita (da non modificare a mano: si rigenerano):
-  App/Localizable.xcstrings       testi dell'app
-  Shared/Widget.xcstrings         testi del widget (tabella «Widget», nell'app e nell'estensione)
-  App/InfoPlist.xcstrings         permessi di Salute dell'app
-  LiveActivity/InfoPlist.xcstrings  permesso di Salute del widget
+Source: localizzazione/NEAT_testi_tradotti.xlsx, sheet «Testi» (one row per text, stable ID, one column
+per language). Output (never edit by hand: regenerated):
+  App/Localizable.xcstrings       app texts
+  Shared/Widget.xcstrings         widget texts (table «Widget», in the app and in the extension)
+  App/InfoPlist.xcstrings         Health permissions of the app
+  LiveActivity/InfoPlist.xcstrings  Health permission of the widget
 
-Regole:
-  - la chiave è l'ID del foglio, il commento è il «Contesto» del foglio;
-  - {segnaposto} → %@ (più segnaposto: %1$@, %2$@… nell'ordine di PARAMS, che è quello del codice);
-  - righe .one/.other → una chiave con le varianti di plurale (%lld); nell'«one» l'1 scritto diventa il numero;
-  - frasi composte da più righe (notifica con avviso, VoiceOver del widget): una stringa per lingua.
+Rules:
+  - the key is the sheet ID, the comment is the sheet «Contesto»;
+  - {placeholder} → %@ (several placeholders: %1$@, %2$@… in the order of PARAMS, which is the code order);
+  - .one/.other rows → one key with plural variants (%lld); in «one» the written 1 becomes the number;
+  - sentences made of several rows (notification with warning, widget VoiceOver): one string per language.
 
-Uso: python3 scripts/cataloghi.py   (serve openpyxl: pip install openpyxl)
+Usage: python3 scripts/cataloghi.py   (needs openpyxl: pip install openpyxl)
 """
 import json
 import re
@@ -26,7 +26,7 @@ import openpyxl
 ROOT = Path(__file__).resolve().parent.parent
 SHEET = ROOT / "localizzazione" / "NEAT_testi_tradotti.xlsx"
 
-# colonna del foglio → codice lingua (il primo è la lingua di sviluppo)
+# sheet column → language code (the first is the development language)
 LANGUAGES = [
     ("Italiano", "it"),
     ("Inglese (EN)", "en"),
@@ -39,10 +39,10 @@ LANGUAGES = [
     ("Cinese semplificato (ZH-Hans)", "zh-Hans"),
     ("Cinese tradizionale (ZH-Hant)", "zh-Hant"),
 ]
-# categorie di plurale usate da iOS (CLDR) per lingua
+# plural categories used by iOS (CLDR) per language
 PLURAL_CATEGORIES = {"ja": ["other"], "ko": ["other"], "zh-Hans": ["other"], "zh-Hant": ["other"]}
 
-# Ordine dei parametri come li passa il codice (`L10n.format`). Chiavi senza voce: nessun parametro.
+# Parameter order as the code passes them (`L10n.format`). Keys without an entry: no parameters.
 PARAMS = {
     "intro.page.vo": ["n", "tot"],
     "home.steps.of": ["obiettivo"],
@@ -73,15 +73,15 @@ PARAMS = {
     "w.inline": ["passi"],
     "w.vo.steps": ["passi", "obiettivo"],
     "n.body": ["min", "velocita", "obiettivo", "mancano"],
-    # composte
+    # composed
     "n.body.jolly": ["min", "velocita", "obiettivo", "mancano", "n"],
     "n.body.lose": ["min", "velocita", "obiettivo", "mancano", "n"],
     "w.vo.summary.done": ["passi", "obiettivo", "n", "jolly"],
     "w.vo.summary.left": ["passi", "obiettivo", "min", "km", "n", "jolly"],
 }
 
-# Frasi intere fatte di più righe del foglio. Il separatore dipende dalla lingua solo dove la riga non porta
-# già la sua punteggiatura iniziale (notifica: frase dopo frase).
+# Whole sentences made of several sheet rows. The separator depends on the language only where the row
+# does not carry its own leading punctuation (notification: sentence after sentence).
 def sentence_gap(lang):
     return "" if lang in ("ja", "zh-Hans", "zh-Hant") else " "
 
@@ -93,7 +93,7 @@ COMPOSED = {
     "w.vo.summary.left": (["w.vo.steps", "w.vo.left", "w.vo.streak"], lambda _: "",
                           "VoiceOver del widget con minuti e km che mancano (w.vo.steps + w.vo.left + w.vo.streak)."),
 }
-# righe usate solo dentro le frasi composte
+# rows used only inside composed sentences
 ONLY_COMPOSED = {"n.jolly", "n.lose", "w.vo.done", "w.vo.left", "w.vo.streak"}
 
 INFO_PLIST = {
@@ -124,7 +124,7 @@ def placeholders(text):
 
 
 def to_format(key, text, params, lang):
-    """{nome} → %@ / %N$@ secondo l'ordine di PARAMS."""
+    """{name} → %@ / %N$@ following the order of PARAMS."""
     found = placeholders(text)
     if sorted(found) != sorted(params):
         sys.exit(f"{key} [{lang}]: segnaposto {found}, attesi {params}")
@@ -141,7 +141,7 @@ def unit(value):
 
 
 def plural_value(key, one, other, lang):
-    """Varianti di plurale sul primo argomento (%lld). Nell'«one» l'1 scritto diventa il numero."""
+    """Plural variants on the first argument (%lld). In «one» the written 1 becomes the number."""
     def arg(text, form):
         if "{n}" in text:
             if placeholders(text) != ["n"]:
@@ -174,12 +174,12 @@ def comment(row):
 def build():
     rows = load_rows()
     app, widget, info_app, info_widget = {}, {}, {}, {}
-    used = set()                    # righe già messe (plurali e permessi)
+    used = set()                    # rows already placed (plurals and permissions)
 
     def target(key):
         return widget if key.startswith("w.") else app
 
-    # plurali
+    # plurals
     for key in sorted({k.rsplit(".", 1)[0] for k in rows if k.endswith((".one", ".other"))}):
         one, other = rows[f"{key}.one"], rows[f"{key}.other"]
         used |= {f"{key}.one", f"{key}.other"}
@@ -188,7 +188,7 @@ def build():
             "extractionState": "manual",
             "localizations": {lang: plural_value(key, one[col], other[col], lang) for col, lang in LANGUAGES},
         }
-    # frasi composte
+    # composed sentences
     for key, (parts, gap, note) in COMPOSED.items():
         locs = {}
         for col, lang in LANGUAGES:
@@ -196,7 +196,7 @@ def build():
             text = sep.join(rows[p][col].strip() if sep else rows[p][col] for p in parts)
             locs[lang] = unit(to_format(key, text, PARAMS[key], lang))
         target(key)[key] = {"comment": note, "extractionState": "manual", "localizations": locs}
-    # permessi
+    # permissions
     for key, (where, plist_key) in INFO_PLIST.items():
         used.add(key)
         row = rows[key]
@@ -206,7 +206,7 @@ def build():
             "extractionState": "manual",
             "localizations": {lang: unit(row[col].strip()) for col, lang in LANGUAGES},
         }
-    # tutte le altre righe
+    # all the other rows
     for key, row in rows.items():
         if key in used or key in ONLY_COMPOSED:
             continue
@@ -225,7 +225,7 @@ def build():
 
 def write(path, strings):
     catalog = {"sourceLanguage": "it", "strings": strings, "version": "1.0"}
-    # stesso formato con cui Xcode salva i cataloghi, così non li riscrive all'apertura
+    # same format Xcode uses to save catalogs, so it does not rewrite them on opening
     text = json.dumps(catalog, ensure_ascii=False, indent=2, sort_keys=True, separators=(",", " : "))
     (ROOT / path).write_text(text + "\n", encoding="utf-8")
     print(f"{path}: {len(strings)} chiavi")

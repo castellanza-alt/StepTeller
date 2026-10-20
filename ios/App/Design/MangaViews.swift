@@ -1,10 +1,10 @@
 import SwiftUI
 import CoreText
 
-// MARK: - Tela 390 pt
+// MARK: - 390 pt canvas
 
-/// Disegna `content` su una tela larga 390 pt (coordinate del handoff) e la scala alla larghezza
-/// disponibile. `height` è l'altezza della tela in punti del handoff.
+/// Draws `content` on a 390 pt wide canvas (handoff coordinates) and scales it to the available
+/// width. `height` is the canvas height in handoff points.
 struct MangaCanvas<Content: View>: View {
     let width: CGFloat
     let height: CGFloat
@@ -20,8 +20,8 @@ struct MangaCanvas<Content: View>: View {
 }
 
 extension View {
-    /// Posiziona la vista con l'angolo in alto a sinistra in (x, y) della tela (come `left/top` del CSS).
-    /// `offset` non cambia l'impaginazione: ogni figlio resta indipendente dagli altri.
+    /// Places the view with its top-left corner at (x, y) on the canvas (like CSS `left/top`).
+    /// `offset` does not affect layout: every child stays independent of the others.
     func at(_ x: CGFloat, _ y: CGFloat) -> some View {
         fixedSize()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -29,7 +29,7 @@ extension View {
     }
 }
 
-/// Contenitore a coordinate assolute: i figli si piazzano con `.at(x, y)`.
+/// Absolute-coordinates container: children are placed with `.at(x, y)`.
 struct Board<Content: View>: View {
     @ViewBuilder var content: () -> Content
     var body: some View {
@@ -38,10 +38,10 @@ struct Board<Content: View>: View {
     }
 }
 
-// MARK: - Trasformazioni CSS
+// MARK: - CSS transforms
 
-/// `transform: rotate(r) skewX(k) scaleX(sx)` attorno a `anchor` (il `transform-origin` del CSS).
-/// Non cambia l'ingombro, come nel CSS.
+/// `transform: rotate(r) skewX(k) scaleX(sx)` around `anchor` (the CSS `transform-origin`).
+/// Does not change the footprint, as in CSS.
 struct MangaTransform: GeometryEffect {
     var rotation: Double
     var skew: Double
@@ -65,12 +65,12 @@ extension View {
     }
 }
 
-// MARK: - Testo
+// MARK: - Text
 
-/// Testo Anton con `font: size/lineHeight` e `letter-spacing` in em, come nel CSS: la riga è alta
-/// `size × lineHeight` e il testo è centrato in verticale (mezza interlinea).
-/// Con `minScale` il testo si rimpicciolisce fino a quella scala se non entra nella larghezza offerta
-/// (traduzioni più lunghe); se entra resta identico.
+/// Anton text with `font: size/lineHeight` and `letter-spacing` in em, as in CSS: the line is
+/// `size × lineHeight` tall and the text is centered vertically (half leading).
+/// With `minScale` the text shrinks down to that scale if it does not fit the offered width
+/// (longer translations); if it fits it stays identical.
 struct AntonText: View {
     let text: String
     let size: CGFloat
@@ -99,7 +99,7 @@ struct AntonText: View {
     }
 }
 
-/// Testo come tracciato (CoreText), per i numeri con contorno (`-webkit-text-stroke`) e ombra netta.
+/// Text as a path (CoreText), for outlined numbers (`-webkit-text-stroke`) and hard shadows.
 struct GlyphText: View {
     let text: String
     let size: CGFloat
@@ -108,7 +108,7 @@ struct GlyphText: View {
     var fill: Color
     var stroke: Color? = nil
     var strokeWidth: CGFloat = 0
-    /// Ombra netta (`text-shadow: dx dy 0 colore`).
+    /// Hard shadow (`text-shadow: dx dy 0 color`).
     var shadow: (color: Color, dx: CGFloat, dy: CGFloat)? = nil
 
     var body: some View {
@@ -134,8 +134,8 @@ struct GlyphText: View {
         .accessibilityLabel(text)
     }
 
-    /// Tracciati già calcolati. Le chiavi includono numeri che cambiano (passi di oggi, record): oltre un certo numero
-    /// di voci si svuota, così la memoria resta limitata nelle sessioni lunghe. Solo dal body, quindi sul main actor.
+    /// Paths already computed. Keys include numbers that change (today's steps, records): beyond a certain
+    /// number of entries it is cleared, so memory stays bounded in long sessions. Body only, hence main actor.
     @MainActor private static var cache: [String: (path: CGPath, width: CGFloat)] = [:]
     private static let cacheLimit = 128
 
@@ -151,9 +151,9 @@ struct GlyphText: View {
         let line = CTLineCreateWithAttributedString(attr)
         let out = CGMutablePath()
         for run in (CTLineGetGlyphRuns(line) as? [CTRun]) ?? [] {
-            // ogni tratto con il suo font: Anton, il font asiatico in cascata o quello di ripiego di iOS
+            // each run with its own font: Anton, the cascaded Asian font or the iOS fallback
             let attributes = CTRunGetAttributes(run) as NSDictionary
-            // `as? CTFont` non esiste per i tipi CoreFoundation: si controlla il tipo prima della conversione
+            // `as? CTFont` does not exist for CoreFoundation types: the type is checked before converting
             let value = attributes[kCTFontAttributeName as String] as CFTypeRef?
             let runFont = value.map { CFGetTypeID($0) == CTFontGetTypeID() } == true ? (value as! CTFont) : font
             let n = CTRunGetGlyphCount(run)
@@ -173,7 +173,7 @@ struct GlyphText: View {
     }
 }
 
-/// Etichetta su fondo pieno (es. «PASSI» su `ink`).
+/// Label on a solid background (e.g. «PASSI» on `ink`).
 struct TagText: View {
     let text: String
     let size: CGFloat

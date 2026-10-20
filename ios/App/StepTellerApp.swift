@@ -9,7 +9,7 @@ struct StepTellerApp: App {
         WindowGroup {
             #if DEBUG
             if UserDefaults.standard.object(forKey: "stepteller.debugWidget") != nil {
-                WidgetPreviewScreen()          // solo Debug: anteprima del widget per gli screenshot
+                WidgetPreviewScreen()          // Debug only: widget preview for the screenshots
             } else {
                 root
             }
@@ -23,12 +23,12 @@ struct StepTellerApp: App {
 
     @MainActor
     private static func makeStore() -> StepsStore {
-        // Prima di creare lo store: riconosce chi aveva già l'app dalle chiavi salvate.
+        // Before creating the store: recognizes who already had the app from the saved keys.
         Onboarding.resolveAtLaunch()
         #if DEBUG
-        // Solo Debug (screenshot/test sul simulatore): `-stepteller.debugSteps 7200`.
+        // Debug only (simulator screenshots/tests): `-stepteller.debugSteps 7200`.
         if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil {
-            // `-stepteller.debugSteps -1`: Salute senza dati (avviso in Home).
+            // `-stepteller.debugSteps -1`: Health without data (warning in Home).
             let raw = UserDefaults.standard.integer(forKey: "stepteller.debugSteps")
             let n = max(0, raw)
             if UserDefaults.standard.object(forKey: "stepteller.debugHistory") != nil {

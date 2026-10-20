@@ -1,29 +1,29 @@
 import Foundation
 
-/// Testo di una notifica.
+/// Text of a notification.
 public struct ReminderContent: Sendable, Equatable {
     public let title: String
     public let body: String
     public init(title: String, body: String) { self.title = title; self.body = body }
 }
 
-/// Cosa dice una notifica, senza testo: il caso e i numeri. Il testo nella lingua del telefono lo compone
-/// l'app con il catalogo (`ReminderScheduler`); `italian` dà quello italiano, usato dai test.
+/// What a notification says, without text: the case and the numbers. The app composes the text in the phone's
+/// language from the catalog (`ReminderScheduler`); `italian` gives the Italian one, used by the tests.
 public enum ReminderMessage: Sendable, Equatable {
-    /// Avviso sulla serie aggiunto al testo preciso.
+    /// Streak warning appended to the precise text.
     public enum Warning: Sendable, Equatable {
-        /// Se l'obiettivo non si chiude stasera si usa un Jolly; `jollyLeft` = quelli che resterebbero.
+        /// If the goal is not reached tonight a Jolly is spent; `jollyLeft` = how many would remain.
         case wouldUseJolly(jollyLeft: Int)
-        /// Senza Jolly la serie di `streak` giorni si interrompe.
+        /// Without a Jolly the `streak`-day streak breaks.
         case wouldBreak(streak: Int)
     }
 
-    /// Oggi: minuti alla velocità scelta per chiudere l'obiettivo.
+    /// Today: minutes at the chosen speed to reach the goal.
     case precise(minutes: Int, speed: Double, goal: Int, remaining: Int, warning: Warning?)
-    /// Giorni futuri, quando i passi non si conoscono ancora.
+    /// Future days, when the steps are not known yet.
     case generic
 
-    /// Testo italiano (lo stesso dell'app in italiano).
+    /// Italian text (the same the app shows in Italian).
     public var italian: ReminderContent {
         switch self {
         case let .precise(minutes, speed, goal, remaining, warning):
@@ -41,18 +41,18 @@ public enum ReminderMessage: Sendable, Equatable {
     }
 }
 
-/// Una notifica da programmare.
+/// A notification to schedule.
 public struct ReminderRequest: Sendable, Equatable {
-    public let id: String          // un identificatore per giorno: `stepteller.reminder.2026-10-08`
+    public let id: String          // one identifier per day: `stepteller.reminder.2026-10-08`
     public let fire: DateComponents
     public let message: ReminderMessage
-    /// Testo italiano.
+    /// Italian text.
     public var content: ReminderContent { message.italian }
 }
 
-/// Promemoria serale: decide cosa programmare. Nessuna dipendenza da UserNotifications (testabile).
+/// Evening reminder: decides what to schedule. No dependency on UserNotifications (testable).
 public enum ReminderPlanner {
-    /// Messaggio preciso con i minuti di stasera; `nil` se l'obiettivo è già chiuso.
+    /// Precise message with tonight's minutes; `nil` if the goal is already reached.
     public static func message(for plan: Plan, streak: StreakState? = nil) -> ReminderMessage? {
         guard !plan.isDone else { return nil }
         var warning: ReminderMessage.Warning?
@@ -63,17 +63,17 @@ public enum ReminderPlanner {
         return .precise(minutes: plan.minutes, speed: plan.speed, goal: plan.goal, remaining: plan.remaining, warning: warning)
     }
 
-    /// Testo italiano preciso; `nil` se l'obiettivo è già chiuso.
+    /// Precise Italian text; `nil` if the goal is already reached.
     public static func content(for plan: Plan, streak: StreakState? = nil) -> ReminderContent? {
         message(for: plan, streak: streak)?.italian
     }
 
-    /// Testo italiano per i giorni futuri, quando i passi non si conoscono ancora.
+    /// Italian text for future days, when the steps are not known yet.
     public static func genericContent() -> ReminderContent { ReminderMessage.generic.italian }
 
-    /// Notifiche da programmare per i prossimi `days` giorni (oggi compreso).
-    /// - Oggi: messaggio preciso, solo se l'ora è ancora nel futuro e l'obiettivo non è chiuso.
-    /// - Giorni successivi: messaggio generico (verrà sostituito dal preciso quando quel giorno sarà «oggi»).
+    /// Notifications to schedule for the next `days` days (today included).
+    /// - Today: precise message, only if the time is still ahead and the goal is not reached.
+    /// - Following days: generic message (replaced by the precise one when that day becomes «today»).
     public static func schedule(now: Date, minutesFromMidnight: Int, plan: Plan, streak: StreakState? = nil,
                                 calendar: Calendar, days: Int = 7) -> [ReminderRequest] {
         let hour = minutesFromMidnight / 60, minute = minutesFromMidnight % 60

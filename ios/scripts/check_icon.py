@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Verifica l'icona dell'app (`App/AppIcon.icon`, Icon Composer): JSON valido, ogni immagine citata esiste,
-i PNG sono 1024×1024. Xcode ne ricava le immagini per App Store e per iOS 17–18."""
+"""Checks the app icon (`App/AppIcon.icon`, Icon Composer): valid JSON, every referenced image exists,
+PNGs are 1024×1024. Xcode derives the App Store and iOS 17–18 images from it."""
 import json
 import struct
 from pathlib import Path

@@ -1,22 +1,22 @@
 import Foundation
 
-/// Etichette di date dello Storico: titoli dei periodi, lettere sotto le barre, date dei record.
-/// `italian` è scritta a mano e dà lo stesso risultato su Linux, macOS e iOS (test golden); per le altre
-/// lingue l'app ne costruisce una con i formattatori di sistema e la lingua del telefono.
+/// Date labels of the History screen: period titles, letters under the bars, record dates.
+/// `italian` is hand-written and gives the same result on Linux, macOS and iOS (golden tests); for the other
+/// languages the app builds one with the system formatters and the phone's language.
 public struct HistoryLabels: Sendable {
-    /// Iniziali dei giorni, da lunedì a domenica.
+    /// Weekday initials, Monday to Sunday.
     public var weekdayLetters: [String]
-    /// Iniziali dei mesi, da gennaio a dicembre.
+    /// Month initials, January to December.
     public var monthLetters: [String]
-    /// Titolo di una settimana: «19 – 25 ottobre», «29 set – 5 ott».
+    /// Title of a week: «19 – 25 ottobre», «29 set – 5 ott».
     public var week: @Sendable (_ start: Date, _ end: Date, _ calendar: Calendar) -> String
-    /// Mese e anno: «Ottobre 2026».
+    /// Month and year: «Ottobre 2026».
     public var month: @Sendable (_ date: Date, _ calendar: Calendar) -> String
-    /// Un giorno: «17 giu 2026».
+    /// One day: «17 giu 2026».
     public var day: @Sendable (_ date: Date, _ calendar: Calendar) -> String
-    /// Settimana dei record: «8 – 14 giu 2026», «29 giu – 5 lug 2026».
+    /// Week of a record: «8 – 14 giu 2026», «29 giu – 5 lug 2026».
     public var weekRange: @Sendable (_ start: Date, _ end: Date, _ calendar: Calendar) -> String
-    /// Intervallo di giorni (serie più lunga): «3 – 17 ott 2026», «giu – set 2024», «dic 2025 – feb 2026».
+    /// Range of days (longest streak): «3 – 17 ott 2026», «giu – set 2024», «dic 2025 – feb 2026».
     public var span: @Sendable (_ start: Date, _ end: Date, _ calendar: Calendar) -> String
 
     public init(weekdayLetters: [String], monthLetters: [String],
@@ -38,7 +38,7 @@ public struct HistoryLabels: Sendable {
                              "agosto", "settembre", "ottobre", "novembre", "dicembre"]
     static let shortMonths = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"]
 
-    /// Italiano, indipendente dalle impostazioni del dispositivo.
+    /// Italian, independent of the device settings.
     public static let italian = HistoryLabels(
         weekdayLetters: ["L", "M", "M", "G", "V", "S", "D"],
         monthLetters: ["G", "F", "M", "A", "M", "G", "L", "A", "S", "O", "N", "D"],

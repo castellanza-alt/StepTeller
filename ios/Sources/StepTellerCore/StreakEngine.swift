@@ -1,51 +1,51 @@
 import Foundation
 
-/// Esito di un giorno nel calcolo della streak.
+/// Outcome of one day in the streak computation.
 public enum DayStatus: Sendable, Equatable {
-    case reached       // obiettivo raggiunto
-    case saved         // mancato ma salvato da un Jolly
-    case missed        // mancato (streak interrotta, o niente da salvare)
-    case inProgress    // oggi, obiettivo non ancora raggiunto
+    case reached       // goal reached
+    case saved         // missed but saved by a Jolly
+    case missed        // missed (streak broken, or nothing to save)
+    case inProgress    // today, goal not reached yet
 }
 
 public struct StreakState: Sendable, Equatable {
-    /// Giorni consecutivi a obiettivo (oggi incluso se già raggiunto).
+    /// Consecutive days at goal (today included once reached).
     public var streak = 0
-    /// Streak più lunga dall'inizio del conteggio.
+    /// Longest streak since counting started.
     public var longest = 0
-    /// Primo e ultimo giorno riuscito della streak più lunga (la più recente, a parità).
+    /// First and last successful day of the longest streak (the most recent one on ties).
     public var longestStart: Date?
     public var longestEnd: Date?
-    /// Jolly disponibili.
+    /// Jollies available.
     public var jolly = 0
     public var jollyEarned = 0
     public var jollyUsed = 0
-    /// Giorni riusciti consecutivi dall'ultimo Jolly maturato o speso (0…14).
+    /// Consecutive successful days since the last Jolly earned or spent (0…14).
     public var counter = 0
     public var statuses: [Date: DayStatus] = [:]
     public var todayReached = false
-    /// Oggi non ancora riuscito e c'è una streak da salvare: a mezzanotte parte un Jolly.
+    /// Today not reached yet and a streak to save: at midnight a Jolly is spent.
     public var todayWouldUseJolly = false
-    /// Oggi non ancora riuscito, c'è una streak e nessun Jolly: a mezzanotte si interrompe.
+    /// Today not reached yet, a streak and no Jolly: at midnight it breaks.
     public var todayWouldBreak = false
 
     public var daysToNextJolly: Int { StreakEngine.jollyEvery - counter }
     public init() {}
 }
 
-/// Regole (decise con Will, 8 ottobre 2026):
-/// - un giorno è riuscito se i passi ≥ obiettivo di quel giorno; oggi non rompe mai la streak;
-/// - ogni 15 giorni riusciti consecutivi matura 1 Jolly (nessun tetto);
-/// - un giorno mancato con streak > 0 consuma 1 Jolly, se disponibile: la streak resta, **non cresce**
-///   e il conto verso il prossimo Jolly riparte da 0;
-/// - un giorno mancato senza Jolly azzera la streak (e il conto); il record resta.
-/// Nessun Jolly viene speso quando la streak è 0: non c'è nulla da salvare.
+/// Rules (agreed with Will, 8 October 2026):
+/// - a day succeeds if steps ≥ that day's goal; today never breaks the streak;
+/// - every 15 consecutive successful days earn 1 Jolly (no cap);
+/// - a missed day with streak > 0 spends 1 Jolly, if available: the streak stays, **does not grow**
+///   and the count towards the next Jolly restarts from 0;
+/// - a missed day without a Jolly resets the streak (and the count); the record stays.
+/// No Jolly is spent while the streak is 0: there is nothing to save.
 public enum StreakEngine {
     public static let jollyEvery = 15
 
     /// - Parameters:
-    ///   - start: primo giorno del conteggio (inizio del giorno).
-    ///   - steps: passi per giorno (chiave = inizio del giorno); giorni assenti = 0.
+    ///   - start: first day of the count (start of day).
+    ///   - steps: steps per day (key = start of day); missing days = 0.
     public static func compute(start: Date, initialJolly: Int = 3, steps: [Date: Int],
                                goals: GoalHistory, now: Date, calendar: Calendar) -> StreakState {
         var s = StreakState()
@@ -85,7 +85,7 @@ public enum StreakEngine {
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
             day = next
         }
-        // oggi: provvisorio
+        // today: provisional
         if (steps[today] ?? 0) >= goals.goal(on: today) {
             apply(reached: true, day: today)
             s.todayReached = true

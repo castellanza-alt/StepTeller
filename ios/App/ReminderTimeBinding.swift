@@ -1,8 +1,8 @@
 import SwiftUI
 
 extension Binding where Value == Date {
-    /// Ora del promemoria (minuti da mezzanotte) come `Date` di oggi per il `DatePicker`: contano solo ora e minuti.
-    /// Usata dalle Impostazioni e dall'introduzione.
+    /// Reminder time (minutes from midnight) as today's `Date` for the `DatePicker`: only hour and minute matter.
+    /// Used by Settings and by the introduction.
     static func reminderTime(_ minutes: Binding<Int>) -> Binding<Date> {
         Binding<Date> {
             Calendar.current.date(bySettingHour: minutes.wrappedValue / 60, minute: minutes.wrappedValue % 60,

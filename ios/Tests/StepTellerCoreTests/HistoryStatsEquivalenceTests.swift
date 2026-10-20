@@ -1,14 +1,14 @@
 import XCTest
 @testable import StepTellerCore
 
-/// `HistoryStats` somma settimane, mesi e anni una volta sola e calcola `maxOffset` in chiuso: qui si confronta
-/// con l'implementazione precedente (ricalcolo a ogni chiamata) su storici casuali di più anni, con buchi e cambi
-/// di obiettivo. Stessi risultati, al bit.
+/// `HistoryStats` sums weeks, months and years once and computes `maxOffset` in closed form: here it is compared
+/// with the previous implementation (recomputed at every call) on random histories spanning several years, with
+/// gaps and goal changes. Same results, bit for bit.
 final class HistoryStatsEquivalenceTests: XCTestCase {
     var cal = Calendar(identifier: .gregorian)
     override func setUp() { cal.timeZone = TimeZone(identifier: "Europe/Rome")! }
 
-    /// Generatore deterministico (LCG) per storici riproducibili.
+    /// Deterministic generator (LCG) for reproducible histories.
     struct Random {
         var seed: UInt64
         mutating func next() -> Double {
@@ -30,7 +30,7 @@ final class HistoryStatsEquivalenceTests: XCTestCase {
         var records: [DayRecord] = []
         var d = start
         while d <= today {
-            if rnd.next() > 0.2 {                                  // 20% di giorni senza dati
+            if rnd.next() > 0.2 {                                  // 20% of days without data
                 let steps = rnd.int(0...20_000)
                 records.append(DayRecord(day: d.addingTimeInterval(Double(rnd.int(0...80_000))),
                                          steps: steps, km: Double(steps) * (0.0006 + rnd.next() * 0.0003)))
@@ -82,7 +82,7 @@ final class HistoryStatsEquivalenceTests: XCTestCase {
     }
 }
 
-/// Copia dell'implementazione precedente di `HistoryStats` (0.6.x): riscorre i record a ogni chiamata.
+/// Copy of the previous `HistoryStats` implementation (0.6.x): scans the records at every call.
 private struct LegacyStats {
     let stats: HistoryStats
     var records: [DayRecord] { stats.records }

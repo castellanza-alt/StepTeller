@@ -1,9 +1,9 @@
 import SwiftUI
 import StepTellerCore
 
-/// Festa «Obiettivo raggiunto»: la prima volta che si apre l'app dopo aver chiuso l'obiettivo del
-/// giorno, in stile manga: raggi, esplosione a stella con i passi e scintille rosse e nere; si chiude
-/// da sola dopo qualche secondo o con un tocco. Con «Riduci movimento» niente scintille né scatti.
+/// «Goal reached» celebration: the first time the app opens after reaching the daily goal, manga style:
+/// rays, star burst with the steps, red and black sparks; it closes by itself after a few seconds or on tap.
+/// With «Reduce Motion» no sparks and no bounce.
 struct GoalCelebration: View {
     let steps: Int
     let goal: Int
@@ -107,8 +107,8 @@ struct GoalCelebration: View {
     }
 }
 
-/// Scintille: due scoppi dal centro dell'arco, con gravità leggera e dissolvenza. Deterministiche
-/// (stesso disegno a ogni festa), nei colori della palette.
+/// Sparks: two bursts from the center of the burst, light gravity and fade-out. Deterministic
+/// (same drawing at every celebration), in the palette colors.
 private enum Sparks {
     private struct Spark {
         let angle, speed, size, delay, spin: Double
@@ -129,15 +129,15 @@ private enum Sparks {
         }
     }()
 
-    /// `origin`: centro dell'arco, nello spazio della festa.
+    /// `origin`: center of the burst, in the celebration coordinate space.
     static func draw(_ ctx: inout GraphicsContext, origin: CGPoint, t: Double, colors: [Color]) {
         for s in sparks {
             let life = t - s.delay
             guard life > 0, life < 1.8 else { continue }
-            let drag = 1 - exp(-2.6 * life)                       // rallenta come nell'aria
+            let drag = 1 - exp(-2.6 * life)                       // slows down like in air
             let dist = s.speed * drag / 2.6
             let x = origin.x + cos(s.angle) * dist
-            let y = origin.y + sin(s.angle) * dist + 120 * life * life   // gravità
+            let y = origin.y + sin(s.angle) * dist + 120 * life * life   // gravity
             let alpha = min(1, life * 6) * max(0, 1 - life / 1.8)
             var c = ctx
             c.opacity = alpha

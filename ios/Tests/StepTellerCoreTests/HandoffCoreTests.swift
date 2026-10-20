@@ -1,7 +1,7 @@
 import XCTest
 @testable import StepTellerCore
 
-/// Nucleo del redesign «Dan Dan Dan»: tracciato del cursore, medie giornaliere, date della streak più lunga.
+/// Core of the «Dan Dan Dan» redesign: slider path, daily averages, dates of the longest streak.
 final class SpeedTrackTests: XCTestCase {
     let track = SpeedTrack.road
 
@@ -10,7 +10,7 @@ final class SpeedTrackTests: XCTestCase {
         let end = track.point(atFraction: 1)
         XCTAssertEqual(end.x, 600, accuracy: 0.001)
         XCTAssertEqual(end.y, 1380, accuracy: 0.001)
-        XCTAssertEqual(track.totalLength, 883.8, accuracy: 1)   // getTotalLength() del prototipo
+        XCTAssertEqual(track.totalLength, 883.8, accuracy: 1)   // the prototype's getTotalLength()
     }
 
     func testSpeedMapping() {
@@ -34,11 +34,11 @@ final class SpeedTrackTests: XCTestCase {
     }
 
     func testProjectionOfPointOffTheRoad() {
-        // 30 px sotto l'inizio della strada: si proietta vicino all'inizio, a circa 30 px
+        // 30 px below the start of the road: projects near the start, about 30 px away
         let n = track.nearest(to: SpeedTrack.Point(60, 1727))
         XCTAssertLessThan(n.fraction, 0.05)
         XCTAssertEqual(n.distance, 30, accuracy: 6)
-        // lontano (in alto a sinistra): distanza grande, la vista lo rifiuta
+        // far away (top left): large distance, the view rejects it
         XCTAssertGreaterThan(track.nearest(to: SpeedTrack.Point(100, 300)).distance, 1000)
     }
 
@@ -77,24 +77,24 @@ final class HistoryAverageTests: XCTestCase {
 
     func testAveragesExcludeToday() {
         let st = stats()
-        XCTAssertEqual(st.dailyAverage(.week).steps, 10_977)    // 19–23 ottobre, oggi (24) escluso
-        XCTAssertEqual(st.dailyAverage(.month).steps, 2_386)    // 1–23 ottobre, giorni senza dati = 0
-        XCTAssertEqual(st.dailyAverage(.all).steps, 614)        // dal 17 giugno (primo dato) al 23 ottobre
+        XCTAssertEqual(st.dailyAverage(.week).steps, 10_977)    // 19–23 October, today (24) excluded
+        XCTAssertEqual(st.dailyAverage(.month).steps, 2_386)    // 1–23 October, days without data = 0
+        XCTAssertEqual(st.dailyAverage(.all).steps, 614)        // from 17 June (first data) to 23 October
     }
 
     func testYearAndAllBarsAreDailyAverages() {
         let st = stats()
         let year = st.averageBars(.year)
         XCTAssertEqual(year.count, 12)
-        XCTAssertEqual(year[5].steps, 1_737)                    // giugno: dal 17 al 30, 14 giorni
-        XCTAssertEqual(year[9].steps, 2_386)                    // ottobre
+        XCTAssertEqual(year[5].steps, 1_737)                    // June: 17th to 30th, 14 days
+        XCTAssertEqual(year[9].steps, 2_386)                    // October
         XCTAssertTrue(year[9].isCurrent)
-        XCTAssertEqual(year[0].steps, 0)                        // prima dei dati
+        XCTAssertEqual(year[0].steps, 0)                        // before the data
         let all = st.averageBars(.all)
         XCTAssertEqual(all.map(\.label), ["26"])
         XCTAssertEqual(all[0].steps, 614)
         XCTAssertEqual(st.title(.all), "2026")
-        // settimana e mese restano i passi del giorno
+        // week and month keep the day's steps
         XCTAssertEqual(st.averageBars(.week).map(\.steps), st.bars(.week).map(\.steps))
     }
 
@@ -122,12 +122,12 @@ final class HistoryAverageTests: XCTestCase {
 
     func testLongestStreakRange() {
         var steps: [Date: Int] = [:]
-        for d in 1...5 { steps[day(d)] = 11_000 }     // streak di 5
-        steps[day(6)] = 0                             // Jolly speso: la streak resta 5
+        for d in 1...5 { steps[day(d)] = 11_000 }     // streak of 5
+        steps[day(6)] = 0                             // Jolly spent: the streak stays 5
         for d in 7...9 { steps[day(d)] = 11_000 }     // 8
         let s = StreakEngine.compute(start: day(1), initialJolly: 1, steps: steps, goals: GoalHistory(),
                                      now: day(12), calendar: cal)
-        // 10 mancato senza Jolly: azzera; oggi (12) in corso
+        // the 10th missed without a Jolly: reset; today (12) in progress
         XCTAssertEqual(s.longest, 8)
         XCTAssertEqual(s.longestStart, day(1))
         XCTAssertEqual(s.longestEnd, day(9))

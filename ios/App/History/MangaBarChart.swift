@@ -1,7 +1,7 @@
 import SwiftUI
 import StepTellerCore
 
-/// Una barra dell'istogramma dello Storico.
+/// One bar of the History histogram.
 struct MangaBar: Identifiable, Equatable {
     enum Style { case hit, miss, current, future }
     let id: Int
@@ -12,16 +12,16 @@ struct MangaBar: Identifiable, Equatable {
     let style: Style
 }
 
-/// Istogramma a parallelogrammi (handoff, punto 9): rosso pieno = obiettivo raggiunto, tratteggio
-/// `ink` = mancato, tratteggio rosso = oggi / periodo in corso. Linea tratteggiata all'obiettivo.
-/// Tocco su una barra: mostra/nasconde il valore.
+/// Parallelogram histogram (handoff, point 9): solid red = goal reached, `ink` hatching = missed,
+/// red hatching = today / current period. Dashed line at the goal.
+/// Tap on a bar: shows/hides the value.
 struct MangaBarChart: View {
     let bars: [MangaBar]
-    /// Obiettivo (nella stessa unità delle barre); nil = niente linea.
+    /// Goal (same unit as the bars); nil = no line.
     let goal: Double?
     let goalLabel: String
     @Binding var selected: Int?
-    /// 0 → 1: crescita dal basso al cambio di tab.
+    /// 0 → 1: growth from the bottom on tab change.
     let grow: CGFloat
     @Environment(\.manga) private var c
 
@@ -88,7 +88,7 @@ struct MangaBarChart: View {
         .frame(height: max(0, height))
     }
 
-    /// Valore della barra toccata: tag rosso 6 pt sopra la barra, sopra anche alla linea dell'obiettivo.
+    /// Value of the tapped bar: red tag 6 pt above the bar, above the goal line too.
     private func tooltips(heights: [CGFloat], gap: CGFloat) -> some View {
         HStack(alignment: .bottom, spacing: gap) {
             ForEach(Array(bars.enumerated()), id: \.element.id) { i, b in

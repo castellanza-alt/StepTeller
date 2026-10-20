@@ -2,14 +2,14 @@ import SwiftUI
 import WidgetKit
 import StepTellerCore
 
-/// Dati mostrati dal widget: piano di oggi (nil = Salute non disponibile), serie e Jolly dall'app.
+/// Data shown by the widget: today's plan (nil = Health unavailable), streak and Jollies from the app.
 struct WidgetSnapshot {
     let plan: Plan?
     let streak: Int
     let jolly: Int
 }
 
-/// Tema del widget: segue l'aspetto del sistema (chiaro = giorno, scuro = notte).
+/// Widget theme: follows the system appearance (light = day, dark = night).
 struct WidgetThemed<Content: View>: View {
     @Environment(\.colorScheme) private var scheme
     @ViewBuilder var content: () -> Content
@@ -18,16 +18,16 @@ struct WidgetThemed<Content: View>: View {
     }
 }
 
-/// Sfondo `paper` del tema corrente.
+/// `paper` background of the current theme.
 struct WidgetPaper: View {
     @Environment(\.colorScheme) private var scheme
     var body: some View { (scheme == .dark ? MangaPalette.night : MangaPalette.day).paper }
 }
 
-// MARK: - Piccolo (170 × 170)
+// MARK: - Small (170 × 170)
 
-/// Widget piccolo: suola in basso a destra che sfuma, serie in alto, passi inclinati, barra di avanzamento.
-/// Disegnato nello spazio 170 × 170 del handoff e scalato alla misura reale.
+/// Small widget: fading sole bottom right, streak on top, slanted steps, progress bar.
+/// Drawn in the handoff's 170 × 170 space and scaled to the real size.
 struct WidgetSmallView: View {
     let data: WidgetSnapshot
     @Environment(\.manga) private var c
@@ -50,7 +50,7 @@ struct WidgetSmallView: View {
         .accessibilityLabel(WidgetText.summary(data))
     }
 
-    /// Arte 160 × 160 sbordante di 34 pt in basso a destra, con maschera radiale (78 %, 78 %).
+    /// 160 × 160 art bleeding 34 pt bottom right, with a radial mask (78 %, 78 %).
     private var art: some View {
         Image(c.theme == .night ? "WidgetSmallNight" : "WidgetSmallDay")
             .resizable()
@@ -79,10 +79,10 @@ struct WidgetSmallView: View {
     }
 }
 
-// MARK: - Medio (364 × 170)
+// MARK: - Medium (364 × 170)
 
-/// Widget medio: tavola a sinistra che sfuma, serie e Jolly in alto a destra, passi con ombra rossa,
-/// minuti e km che mancano alla velocità scelta in Home, barra di avanzamento.
+/// Medium widget: fading board on the left, streak and Jollies top right, steps with a red shadow,
+/// minutes and km left at the speed chosen in Home, progress bar.
 struct WidgetMediumView: View {
     let data: WidgetSnapshot
     @Environment(\.manga) private var c
@@ -157,9 +157,9 @@ struct WidgetMediumView: View {
     }
 }
 
-// MARK: - Blocco schermo (monocromatici)
+// MARK: - Lock screen (monochrome)
 
-/// Blocco schermo, tondo: anello (traccia 30 %, spessore 6) con i passi in Anton al centro.
+/// Lock screen, circular: ring (30 % track, 6 thick) with the steps in Anton at the center.
 struct LockCircular: View {
     let plan: Plan?
     var body: some View {
@@ -183,7 +183,7 @@ struct LockCircular: View {
     }
 }
 
-/// Blocco schermo, rettangolare: serie, passi grandi inclinati, minuti e km che mancano.
+/// Lock screen, rectangular: streak, big slanted steps, minutes and km left.
 struct LockRectangular: View {
     let data: WidgetSnapshot
     var body: some View {
@@ -209,9 +209,9 @@ struct LockRectangular: View {
     }
 }
 
-// MARK: - Pezzi comuni
+// MARK: - Shared pieces
 
-/// Barra di avanzamento: fondo `paper`, bordo 1,5 `ink`, riempimento `red` con lo stesso bordo.
+/// Progress bar: `paper` background, 1.5 `ink` border, `red` fill with the same border.
 struct WidgetProgressBar: View {
     let progress: Double
     let width: CGFloat
@@ -233,14 +233,14 @@ struct WidgetProgressBar: View {
 enum WidgetText {
     static func steps(_ plan: Plan?) -> String { plan.map { LocalFormat.integer($0.steps) } ?? "—" }
 
-    /// Passi compatti per il tondo del blocco schermo: da 10.000 in su «10,4K» (suffisso dal catalogo).
+    /// Compact steps for the lock-screen circle: from 10.000 up «10,4K» (suffix from the catalog).
     static func compactSteps(_ plan: Plan?) -> String {
         guard let s = plan?.steps else { return "—" }
         return s >= 10_000 ? LocalFormat.number(Double(s) / 1000, decimals: 1) + L10n.text("w.thousands", table: L10n.widget)
                            : LocalFormat.integer(s)
     }
 
-    /// Frase VoiceOver intera (una stringa per lingua, con i parametri).
+    /// Whole VoiceOver sentence (one string per language, with parameters).
     static func summary(_ d: WidgetSnapshot) -> String {
         guard let p = d.plan else { return L10n.text("w.vo.none", table: L10n.widget) }
         let steps = LocalFormat.integer(p.steps), goal = LocalFormat.integer(p.goal)

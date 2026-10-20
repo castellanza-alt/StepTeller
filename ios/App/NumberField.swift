@@ -1,19 +1,19 @@
 import SwiftUI
 import StepTellerCore
 
-/// Campo numerico con il formato della lingua (`10.000`, `10,000`): accetta qualsiasi separatore. Mostra `value`; chiama `onEdit` solo quando
-/// è Will a digitare (non quando il valore cambia perché Salute si aggiorna).
+/// Numeric field in the language's format (`10.000`, `10,000`): accepts any separator. Shows `value`; calls
+/// `onEdit` only when the user types (not when the value changes because Health updates).
 struct NumberField: View {
     let value: Int
     var placeholder = "0"
-    /// Con 0 mostra il segnaposto invece di «0» (passi di oggi).
+    /// With 0 shows the placeholder instead of «0» (today's steps).
     var emptyWhenZero = false
     var alignment: TextAlignment = .trailing
     let onEdit: (Int) -> Void
     var isFocused: FocusState<Bool>.Binding
 
     @State private var text = ""
-    @State private var skipNext = false   // il cambio di testo fatto dal codice non è una modifica di Will
+    @State private var skipNext = false   // a text change made by code is not an edit by the user
 
     var body: some View {
         TextField(placeholder, text: $text)
@@ -33,7 +33,7 @@ struct NumberField: View {
             }
             .onChange(of: isFocused.wrappedValue) { _, focused in
                 if focused {
-                    if !text.isEmpty { skipNext = true; text = "" }   // si digita il nuovo numero da zero
+                    if !text.isEmpty { skipNext = true; text = "" }   // the new number is typed from scratch
                 } else {
                     text = format(value)
                 }

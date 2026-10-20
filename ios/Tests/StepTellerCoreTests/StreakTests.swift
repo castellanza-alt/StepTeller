@@ -8,7 +8,7 @@ final class StreakTests: XCTestCase {
     func at(_ d: Int, hour: Int = 22) -> Date { cal.date(from: DateComponents(year: 2026, month: 10, day: d, hour: hour))! }
     let goals = GoalHistory(initialGoal: 10_000)
 
-    /// steps[giorno 1...] come lista; giorni oltre la lista = 0
+    /// steps[day 1...] as a list; days beyond the list = 0
     func run(_ list: [Int], start: Int = 1, today: Int, todaySteps: Int? = nil, initialJolly: Int = 3) -> StreakState {
         var steps: [Date: Int] = [:]
         for (i, v) in list.enumerated() { steps[day(start + i)] = v }
@@ -18,16 +18,16 @@ final class StreakTests: XCTestCase {
     }
 
     func testRulesExampleFromWill() {
-        // giorni 1–15 riusciti (matura 1 Jolly), 16 mancato (Jolly speso), 17–23 riusciti, oggi 24 in corso
+        // days 1–15 reached (1 Jolly earned), 16 missed (Jolly spent), 17–23 reached, today 24 in progress
         var list = Array(repeating: 11_000, count: 15)
         list.append(7_900)
         list += Array(repeating: 10_500, count: 7)
         let s = run(list, today: 24, todaySteps: 7_200)
         XCTAssertEqual(s.streak, 22)
-        XCTAssertEqual(s.jolly, 3)           // 3 iniziali + 1 maturato − 1 speso
+        XCTAssertEqual(s.jolly, 3)           // 3 initial + 1 earned − 1 spent
         XCTAssertEqual(s.jollyEarned, 1)
         XCTAssertEqual(s.jollyUsed, 1)
-        XCTAssertEqual(s.counter, 7)         // riparte da 0 dopo il Jolly speso, poi 7 giorni
+        XCTAssertEqual(s.counter, 7)         // restarts from 0 after the spent Jolly, then 7 days
         XCTAssertEqual(s.daysToNextJolly, 8)
         XCTAssertEqual(s.statuses[day(16)], .saved)
         XCTAssertEqual(s.statuses[day(24)], .inProgress)
@@ -47,7 +47,7 @@ final class StreakTests: XCTestCase {
     func testMissWithoutJollyResetsStreakKeepsRecord() {
         let s = run([10_000, 10_000, 10_000, 100, 10_000], today: 6, todaySteps: 0, initialJolly: 0)
         XCTAssertEqual(s.statuses[day(4)], .missed)
-        XCTAssertEqual(s.streak, 1)          // solo il giorno 5
+        XCTAssertEqual(s.streak, 1)          // day 5 only
         XCTAssertEqual(s.longest, 3)
         XCTAssertTrue(s.todayWouldUseJolly == false)
         XCTAssertTrue(s.todayWouldBreak)
@@ -55,9 +55,9 @@ final class StreakTests: XCTestCase {
 
     func testConsecutiveMissesSpendOneJollyEach() {
         let s = run([10_000, 0, 0, 0, 0, 10_000], today: 7, todaySteps: 0)
-        XCTAssertEqual(s.jollyUsed, 3)       // 3 Jolly iniziali: giorni 2, 3, 4
-        XCTAssertEqual(s.statuses[day(5)], .missed)   // finiti: la streak si interrompe
-        XCTAssertEqual(s.streak, 1)          // solo il giorno 6
+        XCTAssertEqual(s.jollyUsed, 3)       // 3 initial Jollies: days 2, 3, 4
+        XCTAssertEqual(s.statuses[day(5)], .missed)   // none left: the streak breaks
+        XCTAssertEqual(s.streak, 1)          // day 6 only
     }
 
     func testNoJollySpentWhenStreakIsZero() {
@@ -77,7 +77,7 @@ final class StreakTests: XCTestCase {
         for d in 1...3 { steps[day(d)] = 10_000 }
         for d in 4...6 { steps[day(d)] = 9_000 }
         let s = StreakEngine.compute(start: day(1), steps: steps, goals: g, now: at(7), calendar: cal)
-        XCTAssertEqual(s.statuses[day(4)], .saved)   // 9.000 < 10.000 col vecchio obiettivo
+        XCTAssertEqual(s.statuses[day(4)], .saved)   // 9.000 < 10.000 with the old goal
         XCTAssertEqual(s.statuses[day(5)], .reached) // 9.000 ≥ 8.000
     }
 }
@@ -88,7 +88,7 @@ final class HistoryStatsTests: XCTestCase {
     func day(_ d: Int, month: Int = 10, year: Int = 2026) -> Date { cal.date(from: DateComponents(year: year, month: month, day: d))! }
 
     func records() -> [DayRecord] {
-        // settimana 19–25 ott 2026 (oggi = sabato 24)
+        // week 19–25 Oct 2026 (today = Saturday 24)
         let w: [(Int, Int, Double)] = [(19, 11_240, 8.8), (20, 10_480, 8.2), (21, 12_015, 9.4), (22, 10_200, 8.0),
                                        (23, 10_950, 8.5), (24, 7_200, 5.6)]
         return w.map { DayRecord(day: day($0.0), steps: $0.1, km: $0.2) }
@@ -125,6 +125,6 @@ final class HistoryStatsTests: XCTestCase {
     func testPreviousWeekAndMaxOffset() {
         let st = HistoryStats(records: records(), goals: GoalHistory(), now: day(24), calendar: cal)
         XCTAssertEqual(st.title(.week, offset: 1), "12 – 18 ottobre")
-        XCTAssertEqual(st.maxOffset(.week), 18)   // dalla settimana del 17 giugno
+        XCTAssertEqual(st.maxOffset(.week), 18)   // from the week of 17 June
     }
 }

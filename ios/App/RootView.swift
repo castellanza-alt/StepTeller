@@ -132,7 +132,7 @@ struct RootView: View {
         .onChange(of: scenePhase) { _, phase in
             Task {
                 if phase == .active { await store.becameActive() }
-                else if phase == .background { store.becameInactive() }
+                else if phase == .background { await store.becameInactive() }
             }
             if phase == .active { activeSince = Date(); celebrateIfNeeded() }
         }

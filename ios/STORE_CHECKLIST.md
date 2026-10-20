@@ -107,16 +107,15 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 
 ### 4b. Lingue asiatiche e font — fatto, PR [#18](https://github.com/castellanza-alt/StepTeller/pull/18)
 - [x] Font scelto da Will tra le prove: OFL ridotti (Dela Gothic One, Black Han Sans, Noto Sans SC/TC Black)
-- [ ] Sottoinsieme che copre anche date e mesi scritti da iOS (年月日, 월/년/일, giorni della settimana) e un controllo automatico
+- [x] Sottoinsieme che copre anche date e mesi scritti da iOS (年月日, 월/년/일, giorni della settimana) e un controllo automatico
 - [x] Implementazione: un solo punto in MangaTokens (Anton + font asiatico in cascata), paragrafi in grassetto di sistema,
       +0,6 MB; 44 test, 0 avvisi; IT/EN/DE identici
 - [x] Storico: scritte sotto il «22» staccate in JA/KO/ZH (`TitleFont.gap`, 0 nelle altre lingue); anche Home e widget medio
 - [x] Controllo della chat di coordinamento: 44 test, 0 avvisi; Storico e Home rifotografati in JA, KO, ZH-Hant
 - [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `6ca7909`)
-- [ ] JA, KO, ZH-Hans, ZH-Hant dal foglio
-- [ ] Layout controllati
+- [x] JA, KO, ZH-Hans, ZH-Hant dal foglio
+- [x] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)
-- [ ] Controllo della chat di coordinamento
 
 ## 5. Scheda App Store Connect
 - [ ] Nome, sottotitolo, descrizione, parole chiave, testo promozionale in 10 lingue

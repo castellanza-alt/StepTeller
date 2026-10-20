@@ -1,9 +1,9 @@
 import SwiftUI
 import StepTellerCore
 
-/// Home («Oggi»): illustrazione a tutto schermo, passi di oggi, minuti mancanti e il cursore della
-/// velocità che scorre sulla strada. Tela 390 × 844 pt del handoff, scalata in larghezza (o in altezza se lo
-/// schermo è più basso del riferimento).
+/// Home («Today»): full-screen illustration, today's steps, minutes left and the speed slider running
+/// on the road. 390 × 844 pt handoff canvas, scaled to the width (or to the height if the screen is
+/// shorter than the reference).
 struct HomeView: View {
     let size: CGSize
     @Environment(StepsStore.self) private var store
@@ -17,8 +17,8 @@ struct HomeView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        // Di norma la tela si scala in larghezza; sui telefoni bassi (es. SE, 375 × 667) si adatta
-        // all'altezza, così strada e cursore restano sullo schermo (ai lati resta il fondo `paper`).
+        // Normally the canvas scales to the width; on short phones (e.g. SE, 375 × 667) it fits the height,
+        // so road and slider stay on screen (the `paper` background shows on the sides).
         let s = min(size.width / Manga.frameWidth, size.height / Manga.frameHeight)
         MangaCanvas(width: Manga.frameWidth * s, height: size.height / s) {
             Board {
@@ -71,15 +71,15 @@ struct HomeView: View {
         }
     }
 
-    /// Parallasse solo con l'app in primo piano e senza «Riduci movimento».
+    /// Parallax only with the app in the foreground and without «Reduce Motion».
     private func updateMotion() {
         if scenePhase == .active, !reduceMotion { motion.start() } else { motion.stop() }
     }
 
-    // MARK: passi di oggi
+    // MARK: today's steps
 
-    /// «PASSI DI OGGI» / numero / «SU 10.000»: colonna centrata, ruotata −15° e inclinata −10° dall'angolo
-    /// in alto a sinistra. Un tocco sul numero apre la correzione manuale.
+    /// «PASSI DI OGGI» / number / «SU 10.000»: centered column, rotated −15° and skewed −10° from the
+    /// top-left corner. A tap on the number opens the manual correction.
     private var stepsBlock: some View {
         VStack(spacing: 0) {
             AntonText(L10n.text("home.steps.label"), 27, tracking: 0.01)
@@ -102,7 +102,7 @@ struct HomeView: View {
         .accessibilityAddTraits(.isButton)
     }
 
-    /// Correzione manuale attiva («USA SALUTE») e avviso quando Salute non dà dati.
+    /// Manual correction active («USA SALUTE») and warning when Health gives no data.
     @ViewBuilder private var notices: some View {
         VStack(alignment: .leading, spacing: 8) {
             if store.hasOverride {
@@ -130,7 +130,7 @@ struct HomeView: View {
         .manga(rotate: -6, skew: -8, anchor: .topLeading)
     }
 
-    // MARK: minuti mancanti
+    // MARK: minutes left
 
     private var minutesBlock: some View {
         let p = store.plan
@@ -151,10 +151,10 @@ struct HomeView: View {
                                         LocalFormat.number(p.km, decimals: 1)))
     }
 
-    // MARK: obiettivo raggiunto
+    // MARK: goal reached
 
-    /// «OBIETTIVO / RAGGIUNTO / FATTO! / +729 PASSI» in una vignetta storta come quelle dello Storico:
-    /// il fondo `paper` stacca il testo da gamba e lacci dell'illustrazione.
+    /// «OBIETTIVO / RAGGIUNTO / FATTO! / +729 PASSI» in a slanted panel like those of the History screen:
+    /// the `paper` background separates the text from the leg and laces of the illustration.
     private var doneBlock: some View {
         Vignette(shape: .panelA) {
             VStack(alignment: .leading, spacing: 0) {

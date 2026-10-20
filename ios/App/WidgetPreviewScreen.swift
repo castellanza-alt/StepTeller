@@ -2,9 +2,9 @@
 import SwiftUI
 import StepTellerCore
 
-/// Solo build Debug: mostra i widget (piccolo, medio e blocco schermo) per verificarli negli screenshot
-/// del simulatore. Argomenti di avvio: `-stepteller.debugWidget 1 -stepteller.debugSteps 3465`
-/// (senza `debugSteps`: stato «dato non disponibile»), tema con `-stepteller.themeMode day|night`.
+/// Debug builds only: shows the widgets (small, medium and lock screen) to check them in the simulator
+/// screenshots. Launch arguments: `-stepteller.debugWidget 1 -stepteller.debugSteps 3465`
+/// (without `debugSteps`: «data unavailable» state), theme with `-stepteller.themeMode day|night`.
 struct WidgetPreviewScreen: View {
     var body: some View {
         let d = UserDefaults.standard

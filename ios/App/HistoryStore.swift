@@ -3,8 +3,8 @@ import Observation
 import WidgetKit
 import StepTellerCore
 
-/// Storico giornaliero, streak e Jolly. Tutto è **calcolato** dai dati di Salute (nessun archivio
-/// proprio dei passi): si salvano solo l'inizio del conteggio e lo storico degli obiettivi.
+/// Daily history, streak and Jollies. Everything is **computed** from Health data (no step archive of its
+/// own): only the start of the count and the goal history are saved.
 @MainActor
 @Observable
 final class HistoryStore {
@@ -13,20 +13,20 @@ final class HistoryStore {
     private var records: [DayRecord] = []
     private var goals: GoalHistory
     private(set) var stats: HistoryStats
-    /// Record personali di `stats`, calcolati una volta per aggiornamento (lo Storico li legge a ogni body).
+    /// Personal records of `stats`, computed once per update (the History screen reads them at every body).
     private(set) var personalRecords: PersonalRecords
     private(set) var streak = StreakState()
-    /// Fine dell'ultima rilettura da Salute: la festa aspetta uno storico letto dopo l'apertura.
+    /// End of the last reread from Health: the celebration waits for a history read after the app came up.
     private(set) var refreshedAt: Date?
-    /// Primo giorno del conteggio della streak (primo avvio di questa versione).
+    /// First day of the streak count (first launch of this version).
     let streakStart: Date
 
     @ObservationIgnored private let provider: (any HistoryProvider)?
     @ObservationIgnored private let defaults: UserDefaults
-    /// Segue il fuso del telefono (vedi `StepsStore`).
+    /// Follows the phone's time zone (see `StepsStore`).
     @ObservationIgnored private let calendar = Calendar.autoupdatingCurrent
     @ObservationIgnored private var lastRefresh: Date?
-    /// Passi di oggi letti dall'app (vedi `updateToday`); vale solo per il giorno in corso.
+    /// Today's steps as read by the app (see `updateToday`); valid for the current day only.
     @ObservationIgnored private var todayLive: (day: Date, steps: Int)?
 
     private enum Keys {
@@ -56,7 +56,7 @@ final class HistoryStore {
         recompute()
     }
 
-    /// Rilegge lo storico da Salute (al massimo ogni `minInterval` secondi).
+    /// Rereads the history from Health (at most every `minInterval` seconds).
     func refresh(minInterval: TimeInterval = 0) async {
         guard let provider else { return }
         if minInterval > 0, let last = lastRefresh, Date().timeIntervalSince(last) < minInterval { return }
@@ -67,8 +67,8 @@ final class HistoryStore {
         refreshedAt = Date()
     }
 
-    /// Passi di oggi già letti dall'app: la streak scatta appena si supera l'obiettivo, senza
-    /// aspettare la rilettura dello storico (che è più lenta e limitata a una ogni 20 s).
+    /// Today's steps already read by the app: the streak updates as soon as the goal is passed, without
+    /// waiting for the history reread (slower and limited to one every 20 s).
     func updateToday(steps: Int) {
         let day = calendar.startOfDay(for: Date())
         if let live = todayLive, live.day == day, live.steps == steps { return }
@@ -76,7 +76,7 @@ final class HistoryStore {
         recompute()
     }
 
-    /// Il nuovo obiettivo vale da oggi.
+    /// The new goal applies from today.
     func recordGoal(_ goal: Int) {
         goals.set(goal, from: calendar.startOfDay(for: Date()))
         if let data = try? JSONEncoder().encode(goals) { defaults.set(data, forKey: Keys.goals) }
@@ -93,7 +93,7 @@ final class HistoryStore {
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
         if SharedStore.streak != streak.streak || SharedStore.jolly != streak.jolly {
-            SharedStore.streak = streak.streak            // serie e Jolly per il widget
+            SharedStore.streak = streak.streak            // streak and Jollies for the widget
             SharedStore.jolly = streak.jolly
             WidgetCenter.shared.reloadAllTimelines()
         }

@@ -1,9 +1,9 @@
 import SwiftUI
 import StepTellerCore
 
-/// Barra superiore fissa (non scorre mai): bottone rosso di navigazione a sinistra, al centro serie e
-/// Jolly (solo in Home), impostazioni in vetro a destra.
-/// Disegnata sulla tela 390; `rowTop` è la y della riga dei bottoni (sotto la status bar reale).
+/// Fixed top bar (never scrolls): red navigation button on the left, streak and Jollies in the middle
+/// (Home only), glass settings button on the right.
+/// Drawn on the 390 canvas; `rowTop` is the y of the button row (below the real status bar).
 struct TopBar: View {
     let screen: AppScreen
     let streak: Int
@@ -16,7 +16,7 @@ struct TopBar: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             if screen == .history {
-                // velo: paper pieno fino al 62%, 85% all'80%, poi trasparente
+                // veil: full paper up to 62%, 85% at 80%, then transparent
                 LinearGradient(stops: [.init(color: c.paper, location: 0),
                                        .init(color: c.paper, location: 0.62),
                                        .init(color: c.paper.opacity(0.85), location: 0.8),
@@ -46,7 +46,7 @@ struct TopBar: View {
         .frame(width: Manga.frameWidth, alignment: .topLeading)
     }
 
-    /// Serie e Jolly: ruotati −3°, inclinati −8°.
+    /// Streak and Jollies: rotated −3°, skewed −8°.
     private var streakGroup: some View {
         HStack(spacing: 16) {
             HStack(spacing: 5) {
@@ -68,7 +68,7 @@ struct TopBar: View {
     }
 }
 
-/// Mini-istogramma bianco (3 barre parallelogramma + linea di base), 28 × 28.
+/// White mini histogram (3 parallelogram bars + baseline), 28 × 28.
 struct HistogramIcon: View {
     var body: some View {
         ZStack {
@@ -82,7 +82,7 @@ struct HistogramIcon: View {
     }
 }
 
-/// Due impronte bianche in diagonale, 30 × 30.
+/// Two white footprints on a diagonal, 30 × 30.
 struct FootprintsIcon: View {
     var body: some View {
         SVGShape(path: MangaPaths.footprints, viewBox: CGSize(width: 30, height: 30))

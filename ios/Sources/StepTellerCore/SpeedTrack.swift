@@ -1,8 +1,8 @@
 import Foundation
 
-/// Tracciato del cursore della velocità: la linea tratteggiata della strada nell'illustrazione della Home.
-/// Le coordinate sono **pixel dell'illustrazione** (881 × 1786); la vista le converte in punti.
-/// Inizio del tracciato = `minSpeed`, fine = `maxSpeed`, lineare sulla lunghezza dell'arco.
+/// Path of the speed slider: the dashed line of the road in the Home illustration.
+/// Coordinates are **illustration pixels** (881 × 1786); the view converts them to points.
+/// Path start = `minSpeed`, end = `maxSpeed`, linear along the arc length.
 public struct SpeedTrack: Sendable {
     public struct Point: Sendable, Equatable {
         public var x: Double
@@ -16,7 +16,7 @@ public struct SpeedTrack: Sendable {
     public static let defaultSpeed = 4.0
 
     /// `M 50 1697 C 170 1664, 310 1630, 480 1604 C 590 1586, 660 1560, 690 1530
-    ///  C 715 1500, 712 1450, 690 1420 C 670 1395, 630 1385, 600 1380` (dal handoff).
+    ///  C 715 1500, 712 1450, 690 1420 C 670 1395, 630 1385, 600 1380` (from the handoff).
     public static let road = SpeedTrack(start: Point(50, 1697), curves: [
         (Point(170, 1664), Point(310, 1630), Point(480, 1604)),
         (Point(590, 1586), Point(660, 1560), Point(690, 1530)),
@@ -24,7 +24,7 @@ public struct SpeedTrack: Sendable {
         (Point(670, 1395), Point(630, 1385), Point(600, 1380)),
     ])
 
-    /// Punti campionati lungo il tracciato e lunghezza cumulata fino a ciascuno.
+    /// Points sampled along the path and cumulative length up to each one.
     public let samples: [Point]
     public let lengths: [Double]
     public var totalLength: Double { lengths.last ?? 0 }
@@ -47,7 +47,7 @@ public struct SpeedTrack: Sendable {
         lengths = lens
     }
 
-    /// Punto a una frazione 0…1 della lunghezza.
+    /// Point at a fraction 0…1 of the length.
     public func point(atFraction f: Double) -> Point {
         let target = min(1, max(0, f)) * totalLength
         var lo = 0, hi = lengths.count - 1
@@ -61,7 +61,7 @@ public struct SpeedTrack: Sendable {
         return Point(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t)
     }
 
-    /// Proiezione sul tracciato: frazione del punto più vicino e distanza da esso (stesse unità dei punti).
+    /// Projection onto the path: fraction of the nearest point and its distance (same units as the points).
     public func nearest(to p: Point) -> (fraction: Double, distance: Double) {
         var best = (fraction: 0.0, distance: Double.infinity)
         for i in 1..<samples.count {
@@ -79,17 +79,17 @@ public struct SpeedTrack: Sendable {
         return best
     }
 
-    /// Velocità (arrotondata a `step`) per una frazione del tracciato.
+    /// Speed (rounded to `step`) for a fraction of the path.
     public static func speed(forFraction f: Double) -> Double {
         snap(minSpeed + min(1, max(0, f)) * (maxSpeed - minSpeed))
     }
 
-    /// Frazione del tracciato per una velocità.
+    /// Fraction of the path for a speed.
     public static func fraction(forSpeed v: Double) -> Double {
         (min(maxSpeed, max(minSpeed, v)) - minSpeed) / (maxSpeed - minSpeed)
     }
 
-    /// Velocità nell'intervallo e arrotondata al passo (0,5).
+    /// Speed clamped to the range and rounded to the step (0.5).
     public static func snap(_ v: Double) -> Double {
         min(maxSpeed, max(minSpeed, (v / step).rounded() * step))
     }

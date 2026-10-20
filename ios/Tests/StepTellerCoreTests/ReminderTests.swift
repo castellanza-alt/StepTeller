@@ -33,7 +33,7 @@ final class ReminderTests: XCTestCase {
         XCTAssertTrue(ReminderPlanner.content(for: plan, streak: st)!.body.hasSuffix("la streak di 22 giorni si interrompe."))
     }
 
-    /// Il nucleo dà caso e numeri: l'app compone il testo nella lingua del telefono.
+    /// The core gives case and numbers: the app composes the text in the phone's language.
     func testMessageCarriesNumbers() {
         let plan = Plan(goal: 10_000, steps: 7_200, speed: 8.3)
         var st = StreakState(); st.streak = 22; st.jolly = 3; st.todayWouldUseJolly = true

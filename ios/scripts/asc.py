@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Client minimo per l'API di App Store Connect (schema di briciola., ridotto).
+"""Minimal client for the App Store Connect API.
 
-Comandi
--------
-bootstrap   Verifica la chiave API, registra il Bundle ID `it.castellanza.stepteller` con la
-            capability HealthKit se manca e controlla che esista il record dell'app.
-certs       Revoca i certificati creati dalla firma automatica via API («Created via API»): su un runner
-            effimero la chiave privata si perde a fine job, quindi non servono più e Apple ne ammette pochi.
-distribute  Dopo l'upload: aspetta che Apple elabori la build in BUILD_NUMBER, imposta la
-            conformità crittografica se serve e aggiunge la build al gruppo interno «Personale».
+Commands
+--------
+bootstrap   Checks the API key, registers the Bundle ID `it.castellanza.stepteller` with the
+            HealthKit capability if missing and checks that the app record exists.
+certs       Revokes the certificates created by automatic signing through the API («Created via API»): on an
+            ephemeral runner the private key is lost at the end of the job, so they are useless and Apple allows few.
+distribute  After the upload: waits for Apple to process the build in BUILD_NUMBER, sets the encryption
+            compliance if needed and adds the build to the internal group «Personale».
 
-Sicurezza: nessun segreto nei log (solo ID pubblici, date, stati). Dipendenza: `cryptography`.
+Security: no secrets in the logs (public IDs, dates and states only). Dependency: `cryptography`.
 """
 import base64
 import json
@@ -32,7 +32,7 @@ def _b64(data: bytes) -> str:
 
 
 def token() -> str:
-    """JWT ES256 valido 15 minuti."""
+    """ES256 JWT valid for 15 minutes."""
     from cryptography.hazmat.primitives import hashes, serialization
     from cryptography.hazmat.primitives.asymmetric import ec
     from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
@@ -76,7 +76,7 @@ def app_record():
 
 def bootstrap():
     lines = ['## Preparazione Apple']
-    # 1. chiave valida (una GET qualunque basta)
+    # 1. valid key (any GET will do)
     call('GET', '/v1/apps', params={'limit': 1})
     lines.append('- ✅ Chiave API App Store Connect valida')
     # 2. Bundle ID + HealthKit
@@ -94,9 +94,9 @@ def bootstrap():
     if 'HEALTH_KIT' in caps:
         lines.append('- ✅ Capability HealthKit già attiva')
     else:
-        # HealthKit non è tra i tipi di capability dell'API: si abilita dal portale oppure la
-        # sincronizza Xcode (firma automatica) dall'entitlement. Qui si tenta e, se l'API rifiuta,
-        # si segnala senza fermarsi.
+        # HealthKit is not among the capability types of the API: it is enabled from the portal or synced by
+        # Xcode (automatic signing) from the entitlement. Here we try and, if the API refuses, report
+        # without stopping.
         try:
             call('POST', '/v1/bundleIdCapabilities', body={'data': {
                 'type': 'bundleIdCapabilities', 'attributes': {'capabilityType': 'HEALTH_KIT'},
@@ -105,7 +105,7 @@ def bootstrap():
         except RuntimeError:
             lines.append('- ⚠️ HealthKit non attivabile via API: la firma automatica prova ad abilitarla; '
                          'se la build si ferma qui, va spuntata a mano nel portale (App ID → HealthKit).')
-    # 3. record dell'app (si crea solo dal sito web)
+    # 3. app record (created only from the website)
     if app_record():
         lines.append(f'- ✅ Record app «{APP_NAME}» presente in App Store Connect')
         summary('\n'.join(lines))
@@ -117,7 +117,7 @@ def bootstrap():
 
 
 def certs():
-    """Libera i certificati di Xcode creati via API (mai quelli creati a mano o da un Mac)."""
+    """Frees the Xcode certificates created via the API (never those created by hand or from a Mac)."""
     revoked, kept = 0, 0
     while True:
         data = call('GET', '/v1/certificates', params={'limit': 200})['data']

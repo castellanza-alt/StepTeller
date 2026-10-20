@@ -1,7 +1,7 @@
 import SwiftUI
 import WidgetKit
 
-/// Punto di ingresso dell'estensione: widget «Passi di oggi» (piccolo, medio e blocco schermo).
+/// Entry point of the extension: «Today's steps» widget (small, medium and lock screen).
 @main
 struct StepTellerWidgets: WidgetBundle {
     var body: some Widget {

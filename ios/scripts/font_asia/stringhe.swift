@@ -1,7 +1,7 @@
-// Stampa i testi che iOS genera nell'app per la lingua di avvio (-AppleLanguages/-AppleLocale): date delle
-// Impostazioni e dei record, titoli dei periodi, nomi e iniziali di mesi e giorni, numeri. Usa gli stessi
-// formattatori dell'app (`HistoryLabels.current`, `LocalFormat`, `DateFormatter`). Lo compila `font_asia.py`
-// insieme al nucleo, a `Shared/Localization.swift` e ad `App/HistoryLabels+System.swift`.
+// Prints the texts iOS generates in the app for the launch language (-AppleLanguages/-AppleLocale): Settings
+// and record dates, period titles, month and weekday names and initials, numbers. Uses the same formatters
+// as the app (`HistoryLabels.current`, `LocalFormat`, `DateFormatter`). Compiled by `font_asia.py` together
+// with the core, `Shared/Localization.swift` and `App/HistoryLabels+System.swift`.
 import Foundation
 
 var cal = Calendar.current

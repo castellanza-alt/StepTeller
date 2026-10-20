@@ -3,8 +3,8 @@ import SwiftUI
 import WidgetKit
 import StepTellerCore
 
-/// Widget «Passi di oggi» nello stile «Dan Dan Dan»: piccolo e medio in Home (tema giorno/notte secondo
-/// l'aspetto del sistema) e, sul blocco schermo, tondo, rettangolare e in linea. Un tocco apre la Home.
+/// «Today's steps» widget in the «Dan Dan Dan» style: small and medium on the Home Screen (day/night theme
+/// following the system appearance) and, on the lock screen, circular, rectangular and inline. A tap opens Home.
 struct StepsWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StepsWidget", provider: StepsTimelineProvider()) { entry in
@@ -18,7 +18,7 @@ struct StepsWidget: Widget {
     }
 }
 
-/// Sceglie la grafica in base al formato.
+/// Picks the drawing for the widget family.
 struct StepsWidgetEntryView: View {
     @Environment(\.widgetFamily) private var family
     let data: WidgetSnapshot
@@ -60,25 +60,25 @@ struct StepsTimelineProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<StepsEntry>) -> Void) {
         Task {
             let e = await entry()
-            // iOS decide quando aggiornare davvero (circa ogni 15–60 minuti): è solo un suggerimento.
+            // iOS decides when to really refresh (about every 15–60 minutes): this is only a hint.
             completion(Timeline(entries: [e], policy: .after(Date().addingTimeInterval(15 * 60))))
         }
     }
 
-    /// Passi da Salute; a telefono bloccato Salute non risponde e si usa l'ultimo valore salvato dall'app.
+    /// Steps from Health; with the phone locked Health does not answer and the last value saved by the app is used.
     private func entry() async -> StepsEntry {
         let now = Date()
         var steps = await WidgetHealth.todaySteps(now: now)
         if let s = steps { SharedStore.saveSteps(s, now: now) } else { steps = SharedStore.cachedStepsToday(now: now) }
         let plan = steps.map {
-            // stessa velocità del cursore in Home e stesso modello di cadenza tarato dell'app
+            // same speed as the Home slider and the same calibrated cadence model as the app
             Plan(goal: SharedStore.goal, steps: $0, speed: SharedStore.speed, model: SharedStore.calibration.model)
         }
         return StepsEntry(date: now, data: WidgetSnapshot(plan: plan, streak: SharedStore.streak, jolly: SharedStore.jolly))
     }
 }
 
-/// Lettura dei passi di oggi (solo lettura, stessa somma statistica dell'app).
+/// Today's steps (read only, same statistical sum as the app).
 enum WidgetHealth {
     static func todaySteps(now: Date, calendar: Calendar = .current) async -> Int? {
         guard HKHealthStore.isHealthDataAvailable() else { return nil }

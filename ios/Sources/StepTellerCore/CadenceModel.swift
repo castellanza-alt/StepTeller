@@ -1,12 +1,12 @@
 import Foundation
 
-/// Andatura: sotto `CadenceModel.runFrom` si cammina, da lì si corre.
+/// Gait: below `CadenceModel.runFrom` you walk, from there you run.
 public enum Gait: String, Sendable {
     case walk
     case run
 }
 
-/// Punto di taratura: velocità (km/h) e cadenza misurata (passi/min).
+/// Calibration point: speed (km/h) and measured cadence (steps/min).
 public struct CalibrationPoint: Sendable, Equatable {
     public let speed: Double
     public let cadence: Double
@@ -16,31 +16,31 @@ public struct CalibrationPoint: Sendable, Equatable {
     }
 }
 
-/// Punti di taratura personali. **È l'unico posto dove aggiungerne.**
-/// Quando arriva un export di camminata: aggiungere qui un punto a `walk`
-/// (es. `CalibrationPoint(speed: 5.0, cadence: 112.0)`).
+/// Personal calibration points. **The only place to add them.**
+/// When a walking export arrives, add a point to `walk` here
+/// (e.g. `CalibrationPoint(speed: 5.0, cadence: 112.0)`).
 public enum Calibration {
-    /// Camminata: nessun punto, rapporto 1 (curva standard).
+    /// Walking: no points, ratio 1 (standard curve).
     public static let walk: [CalibrationPoint] = []
-    /// Corsa: media di due uscite HealthFit (13 set 2026: 8,28 km/h · 154,8 spm;
-    /// 15 set 2026: 8,31 km/h · 152,2 spm).
+    /// Running: average of two HealthFit runs (13 Sep 2026: 8.28 km/h · 154.8 spm;
+    /// 15 Sep 2026: 8.31 km/h · 152.2 spm).
     public static let run: [CalibrationPoint] = [CalibrationPoint(speed: 8.3, cadence: 153.5)]
 }
 
-/// Modello di cadenza: `passi = cadenza(v) × minuti`.
+/// Cadence model: `steps = cadence(v) × minutes`.
 public struct CadenceModel: Sendable {
     public typealias Curve = [(Double, Double)]
 
-    /// Da questa velocità (inclusa) si corre.
+    /// From this speed (inclusive) you run.
     public static let runFrom = 7.1
-    /// Velocità valide per la taratura automatica (gli allenamenti fuori da qui si ignorano).
-    /// Il cursore dell'app va oltre (fino a `SpeedTrack.maxSpeed`): la curva si estrapola.
+    /// Speeds accepted by the automatic calibration (workouts outside are ignored).
+    /// The app's slider goes further (up to `SpeedTrack.maxSpeed`): the curve is extrapolated.
     public static let minSpeed = 3.0
     public static let maxSpeed = 12.0
 
-    /// Cammino: letteratura, uomo ~178 cm (Inferred).
+    /// Walking: literature, man ~178 cm (inferred).
     static let defaultWalk: Curve = [(2, 75), (3, 90), (4, 101), (5, 110), (6, 119), (7, 129), (8, 138)]
-    /// Corsa: letteratura.
+    /// Running: literature.
     static let defaultRun: Curve = [(6, 152), (7, 156), (8, 159), (9, 162), (10, 165), (12, 170), (14, 176)]
 
     private let walkPoints: [CalibrationPoint]
@@ -52,24 +52,24 @@ public struct CadenceModel: Sendable {
         runPoints = runCalibration
     }
 
-    /// Modello con la taratura reale di Will.
+    /// Model with Will's real calibration.
     public static let standard = CadenceModel()
 
     public func gait(at speed: Double) -> Gait { speed >= Self.runFrom ? .run : .walk }
 
-    /// Cadenza della curva standard (senza taratura) alla velocità `speed`.
+    /// Cadence of the standard curve (no calibration) at `speed`.
     static func baseCadence(at speed: Double) -> Double {
         Self.interp(speed >= runFrom ? defaultRun : defaultWalk, speed)
     }
 
-    /// Cadenza in passi/min alla velocità `speed` (km/h).
+    /// Cadence in steps/min at `speed` (km/h).
     public func cadence(at speed: Double) -> Double {
         let g = gait(at: speed)
         let curve = g == .run ? Self.defaultRun : Self.defaultWalk
         return Self.interp(curve, speed) * ratio(gait: g, speed: speed)
     }
 
-    /// Interpolazione lineare a tratti; fuori dai punti si estrapola sul primo/ultimo segmento.
+    /// Piecewise linear interpolation; outside the points it extrapolates on the first/last segment.
     static func interp(_ p: Curve, _ v: Double) -> Double {
         var i = 0
         while i < p.count - 2 && v > p[i + 1].0 { i += 1 }
@@ -77,8 +77,8 @@ public struct CadenceModel: Sendable {
         return y0 + (y1 - y0) * (v - x0) / (x1 - x0)
     }
 
-    /// Rapporto misurato/standard: 0 punti → 1; 1 punto → costante;
-    /// 2+ punti → interpolato, costante oltre gli estremi.
+    /// Measured/standard ratio: 0 points → 1; 1 point → constant;
+    /// 2+ points → interpolated, constant beyond the extremes.
     private func ratio(gait g: Gait, speed v: Double) -> Double {
         let curve = g == .run ? Self.defaultRun : Self.defaultWalk
         let cal = g == .run ? runPoints : walkPoints

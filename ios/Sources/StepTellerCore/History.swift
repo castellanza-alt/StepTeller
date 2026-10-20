@@ -1,8 +1,8 @@
 import Foundation
 
-/// Passi e distanza di un giorno (valori aggregati da Salute).
+/// Steps and distance of one day (aggregate values from Health).
 public struct DayRecord: Sendable, Equatable {
-    /// Inizio del giorno (calendario del dispositivo).
+    /// Start of the day (device calendar).
     public let day: Date
     public let steps: Int
     public let km: Double
@@ -13,14 +13,14 @@ public struct DayRecord: Sendable, Equatable {
     }
 }
 
-/// Fornitore dello storico giornaliero (in app: HealthKit; nei test e negli screenshot: finto).
+/// Source of the daily history (app: HealthKit; tests and screenshots: fake).
 public protocol HistoryProvider: Sendable {
-    /// Tutti i giorni con dati, dal primo disponibile a `now`.
+    /// Every day with data, from the first available to `now`.
     func dailyRecords(until now: Date) async -> [DayRecord]
 }
 
-/// Obiettivo giornaliero nel tempo: cambiare l'obiettivo vale **da oggi**, i giorni passati
-/// restano valutati con l'obiettivo che c'era allora.
+/// Daily goal over time: changing the goal applies **from today**; past days
+/// stay judged against the goal in force back then.
 public struct GoalHistory: Codable, Equatable, Sendable {
     public struct Entry: Codable, Equatable, Sendable {
         public var from: Date
@@ -34,12 +34,12 @@ public struct GoalHistory: Codable, Equatable, Sendable {
         entries = [Entry(from: .distantPast, goal: max(0, initialGoal))]
     }
 
-    /// Obiettivo valido nel giorno `day`.
+    /// Goal in force on `day`.
     public func goal(on day: Date) -> Int {
         entries.last(where: { $0.from <= day })?.goal ?? entries.first?.goal ?? 10_000
     }
 
-    /// Imposta un nuovo obiettivo a partire dal giorno `day` (ignora se uguale a quello in vigore).
+    /// Sets a new goal starting on `day` (ignored if equal to the one in force).
     public mutating func set(_ newGoal: Int, from day: Date) {
         let value = max(0, newGoal)
         if goal(on: day) == value { return }

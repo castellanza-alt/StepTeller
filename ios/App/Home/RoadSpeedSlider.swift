@@ -1,9 +1,9 @@
 import SwiftUI
 import StepTellerCore
 
-/// Cursore della velocità che scorre **sulla linea tratteggiata della strada** (`SpeedTrack.road`).
-/// Vive nello spazio dell'illustrazione (390 × 790 pt). Si prende con un tocco o un trascinamento entro
-/// 20 pt dal tracciato; il dito si proietta sul punto più vicino e la velocità va a scatti di 0,5.
+/// Speed slider running **on the dashed line of the road** (`SpeedTrack.road`).
+/// Lives in the illustration space (390 × 790 pt). Grabbed with a tap or a drag within
+/// 20 pt of the path; the finger is projected onto the nearest point and the speed snaps to 0.5.
 struct RoadSpeedSlider: View {
     @Binding var speed: Double
     @Environment(\.manga) private var c
@@ -42,7 +42,7 @@ struct RoadSpeedSlider: View {
         }
     }
 
-    // MARK: pallino e valore
+    // MARK: knob and value
 
     @ViewBuilder private func knobAndLabel(flip: Bool) -> some View {
         HStack(spacing: Manga.knobLabelGap) {
@@ -77,10 +77,10 @@ struct RoadSpeedSlider: View {
         .manga(rotate: -4, skew: -8)
     }
 
-    // MARK: scia
+    // MARK: trail
 
-    /// Tre triangoli rastremati dietro il pallino, ruotati −8°: nero 4 pt, rosso 6 pt, nero 3 pt.
-    /// Lunghezze: rosso 18 + f·120, neri 12 + f·90 (f = (v − 3) / 13).
+    /// Three tapered triangles behind the knob, rotated −8°: black 4 pt, red 6 pt, black 3 pt.
+    /// Lengths: red 18 + f·120, black 12 + f·90 (f = (v − 3) / 13).
     private func trail(at p: CGPoint, f: Double) -> some View {
         let black = (12 + f * 90).rounded(), red = (18 + f * 120).rounded()
         return ZStack(alignment: .topLeading) {
@@ -100,7 +100,7 @@ struct RoadSpeedSlider: View {
     }
 }
 
-/// `clip-path: polygon(0 50%, 100% 0, 100% 100%)`: punta a sinistra, base a destra.
+/// `clip-path: polygon(0 50%, 100% 0, 100% 100%)`: tip on the left, base on the right.
 private struct TrailTriangle: Shape {
     func path(in r: CGRect) -> Path {
         var p = Path()
@@ -112,7 +112,7 @@ private struct TrailTriangle: Shape {
     }
 }
 
-/// Zona sensibile: il tracciato ingrossato di `width` pt (20 pt per lato).
+/// Hit area: the path thickened by `width` pt (20 pt per side).
 private struct TrackHitShape: Shape {
     let track: SpeedTrack
     let scale: CGFloat

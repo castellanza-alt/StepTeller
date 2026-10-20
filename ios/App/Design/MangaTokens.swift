@@ -1,23 +1,23 @@
 import SwiftUI
 import CoreText
 
-/// Design token dello stile «Dan Dan Dan» (handoff Home + Storico). **Unico posto** per colori,
-/// font, misure e angoli: le viste non scrivono colori a mano.
+/// Design tokens of the «Dan Dan Dan» style (Home + History handoff). **The only place** for colors,
+/// fonts, sizes and angles: views never write colors by hand.
 ///
-/// Le misure sono in punti sul frame di riferimento 390 × 844; le schermate disegnano su questa tela
-/// e la scalano in larghezza (`MangaCanvas`).
+/// Sizes are in points on the 390 × 844 reference frame; the screens draw on this canvas
+/// and scale it to the width (`MangaCanvas`).
 
-// MARK: - Tema
+// MARK: - Theme
 
 enum MangaTheme: String { case day, night }
 
-/// Scelta del tema nelle Impostazioni. Predefinito: segue il sistema (chiaro = giorno, scuro = notte).
+/// Theme choice in Settings. Default: follows the system (light = day, dark = night).
 enum ThemeMode: String, CaseIterable, Identifiable {
     case system, clock, day, night
     var id: String { rawValue }
 
     static let storageKey = "stepteller.themeMode"
-    /// Con «Orario»: giorno dalle 7:00 alle 18:59.
+    /// With «Clock»: day from 7:00 to 18:59.
     static let dayHours = 7..<19
 
     var label: String {
@@ -39,27 +39,27 @@ enum ThemeMode: String, CaseIterable, Identifiable {
     }
 }
 
-// MARK: - Colori
+// MARK: - Colors
 
 struct MangaPalette: Equatable {
     let theme: MangaTheme
-    /// Sfondo.
+    /// Background.
     let paper: Color
-    /// Testo e tratti.
+    /// Text and strokes.
     let ink: Color
-    /// Unico accento (non personalizzabile: è dipinto nelle illustrazioni).
+    /// The only accent (not customizable: it is painted in the illustrations).
     let red: Color
 
-    /// Gradiente radiale di bottone rosso e pallino: chiaro → `red` → scuro (uguale nei due temi).
+    /// Radial gradient of the red button and the knob: light → `red` → dark (same in both themes).
     static let redHighlight = Color(hex: 0xFF6A5E)
     static let redDeep = Color(hex: 0xB5140E)
-    /// Ombra del bottone rosso: `rgba(229,35,27,.35)`.
+    /// Red button shadow: `rgba(229,35,27,.35)`.
     static let redButtonShadow = Color(hex: 0xE5231B, opacity: 0.35)
-    /// Alone del pallino: `rgba(255,59,48,.45)`.
+    /// Knob glow: `rgba(255,59,48,.45)`.
     static let knobGlow = Color(hex: 0xFF3B30, opacity: 0.45)
-    /// Ombra del bottone in vetro: `rgba(0,0,0,.18)`.
+    /// Glass button shadow: `rgba(0,0,0,.18)`.
     static let glassShadow = Color.black.opacity(0.18)
-    /// Icone dentro il bottone rosso.
+    /// Icons inside the red button.
     static let onRed = Color.white
 
     static let day = MangaPalette(theme: .day, paper: Color(hex: 0xFFFFFF), ink: Color(hex: 0x141414), red: Color(hex: 0xE5231B))
@@ -69,9 +69,9 @@ struct MangaPalette: Equatable {
 
     var colorScheme: ColorScheme { theme == .night ? .dark : .light }
 
-    // Illustrazioni (asset catalog)
+    // Illustrations (asset catalog)
     var homeArt: String { theme == .night ? "HomeArtNight" : "HomeArtDay" }
-    /// Scarpa e gamba scontornate, sopra `homeArt` per la parallasse.
+    /// Shoe and leg cut out, above `homeArt` for the parallax.
     var homeLeg: String { theme == .night ? "HomeLegNight" : "HomeLegDay" }
     var hill: String { theme == .night ? "HillNight" : "HillDay" }
     var horizon: String { theme == .night ? "HorizonNight" : "HorizonDay" }
@@ -95,14 +95,14 @@ extension Color {
     }
 }
 
-// MARK: - Misure
+// MARK: - Sizes
 
 enum Manga {
-    /// Frame di riferimento del handoff.
+    /// Reference frame of the handoff.
     static let frameWidth: CGFloat = 390
     static let frameHeight: CGFloat = 844
 
-    // Barra superiore fissa
+    // Fixed top bar
     static let statusBarHeight: CGFloat = 50
     static let topBarHeight: CGFloat = 122
     static let barPadding: CGFloat = 18
@@ -110,57 +110,57 @@ enum Manga {
     static let buttonSize: CGFloat = 54
     static let navButtonRotation: Double = -6
 
-    // Illustrazione della Home: 881 × 1786 px mostrata a 390 × 790 pt da y = 54.
+    // Home illustration: 881 × 1786 px shown at 390 × 790 pt from y = 54.
     static let artTop: CGFloat = 54
     static let artSize = CGSize(width: 390, height: 790)
-    /// Pixel dell'illustrazione (e del tracciato `SpeedTrack.road`).
+    /// Pixels of the illustration (and of the `SpeedTrack.road` path).
     static let artPixelSize = CGSize(width: 881, height: 1786)
     /// px → pt (390 / 881).
     static let artScale: CGFloat = artSize.width / artPixelSize.width
-    /// Scarpa e gamba (`homeLeg`): stessa tela dell'illustrazione più 24 px ripetuti su ogni lato.
+    /// Shoe and leg (`homeLeg`): same canvas as the illustration plus 24 px repeated on every side.
     static let legPadding: CGFloat = 24
-    /// Spostamento massimo di scarpa e gamba inclinando il telefono (pt).
+    /// Maximum shift of shoe and leg when tilting the phone (pt).
     static let parallaxMax: CGFloat = 8
 
-    // Cursore
+    // Slider
     static let knobSize: CGFloat = 34
     static let knobBorder: CGFloat = 2.5
     static let knobRing: CGFloat = 1.5
     static let knobLabelGap: CGFloat = 14
-    /// Oltre questa x il valore passa a sinistra del pallino.
+    /// Beyond this x the value moves to the left of the knob.
     static let knobFlipX: CGFloat = 230
-    /// Distanza massima dal tracciato per prendere il cursore (pt).
+    /// Maximum distance from the path to grab the slider (pt).
     static let trackTouchRadius: CGFloat = 20
 
-    // Storico
+    // History
     static let historyHeight: CGFloat = 2020
-    static let jollyTicks = 15          // StreakEngine.jollyEvery (decisione: 15 come l'app, non 14)
+    static let jollyTicks = 15          // StreakEngine.jollyEvery (decision: 15 like the app, not 14)
 
-    // Animazioni
+    // Animations
     static let navDuration = 0.35
 }
 
-// MARK: - Tipografia
+// MARK: - Typography
 
 extension Font {
-    /// Anton (OFL), unico font display. Corpo fisso come nel handoff. In giapponese, coreano e cinese i caratteri
-    /// che Anton non ha li disegna il font di `TitleFont` (cifre e lettere restano Anton).
+    /// Anton (OFL), the only display font. Fixed size as in the handoff. In Japanese, Korean and Chinese the
+    /// characters Anton lacks are drawn by the `TitleFont` font (digits and letters stay Anton).
     static func anton(_ size: CGFloat) -> Font {
         TitleFont.asian == nil ? .custom("Anton-Regular", fixedSize: size) : Font(TitleFont.ctFont(size))
     }
 
-    /// Testo corrente in Anton (paragrafi dell'introduzione, righe dei controlli). In JA/KO/ZH un font da titolo
-    /// così spesso non si legge in un paragrafo: si usa il grassetto di sistema.
+    /// Running text in Anton (introduction paragraphs, control rows). In JA/KO/ZH such a heavy display font
+    /// is unreadable in a paragraph: the system bold is used instead.
     static func antonText(_ size: CGFloat) -> Font {
         TitleFont.asian == nil ? .custom("Anton-Regular", fixedSize: size) : .system(size: size, weight: .bold)
     }
 }
 
-/// Carattere dei titoli secondo la lingua dell'app: **unico punto** che lo decide (testo SwiftUI e `GlyphText`, app e
-/// widget). Anton ha solo l'alfabeto latino; per JA/KO/ZH un font OFL spesso, ridotto ai caratteri usati
-/// (`scripts/font_asia.py`), entra in cascata dopo Anton. Le altre lingue restano solo Anton.
+/// Title typeface by app language: **the single point** deciding it (SwiftUI text and `GlyphText`, app and
+/// widget). Anton only has the Latin alphabet; for JA/KO/ZH a heavy OFL font, subset to the characters in use
+/// (`scripts/font_asia.py`), cascades after Anton. The other languages stay Anton only.
 enum TitleFont {
-    /// Nome PostScript del font asiatico per la lingua dell'app (`nil` = solo Anton).
+    /// PostScript name of the Asian font for the app language (`nil` = Anton only).
     static let asian: String? = {
         switch Bundle.main.preferredLocalizations.first {
         case "ja": "DelaGothicOne-Regular"
@@ -171,7 +171,7 @@ enum TitleFont {
         }
     }()
 
-    /// Anton con, in JA/KO/ZH, il font asiatico in cascata.
+    /// Anton with, in JA/KO/ZH, the Asian font in cascade.
     static func ctFont(_ size: CGFloat) -> CTFont {
         guard let asian else { return CTFontCreateWithName("Anton-Regular" as CFString, size, nil) }
         let cascade = [CTFontDescriptorCreateWithNameAndSize(asian as CFString, size)]
@@ -182,17 +182,17 @@ enum TitleFont {
         return CTFontCreateWithFontDescriptor(descriptor, size, nil)
     }
 
-    /// Spaziatura (in em) per la lingua: quella larga pensata per le maiuscole di Anton separa troppo gli ideogrammi
-    /// e i caratteri coreani, quindi in JA/KO/ZH si ferma a 0,02 em. Quella negativa (cifre) resta.
+    /// Tracking (in em) by language: the wide one meant for Anton's capitals spreads ideograms and Korean
+    /// characters too far, so in JA/KO/ZH it stops at 0.02 em. The negative one (digits) stays.
     static func tracking(_ em: CGFloat) -> CGFloat { asian == nil ? em : min(em, 0.02) }
 
-    /// Spazio in più tra una scritta e un numero gigante attaccato. Anton ha molto spazio sopra le maiuscole e
-    /// le righe sono alte quanto il corpo; i caratteri asiatici riempiono tutto il quadrato e finirebbero sul
-    /// numero. In JA/KO/ZH un terzo del corpo della scritta, altrove 0 (layout invariato).
+    /// Extra space between a caption and a huge number right below it. Anton has a lot of room above its capitals
+    /// and its lines are as tall as the size; Asian characters fill the whole square and would touch the
+    /// number. In JA/KO/ZH a third of the caption size, elsewhere 0 (layout unchanged).
     static func gap(_ size: CGFloat) -> CGFloat { asian == nil ? 0 : (size * 0.33).rounded() }
 }
 
-/// Metriche di Anton (hhea, per em) per riprodurre il `line-height` del CSS.
+/// Anton metrics (hhea, per em) to reproduce the CSS `line-height`.
 enum AntonMetrics {
     static let ascent: CGFloat = 117.626953125 / 100
     static let descent: CGFloat = 32.91015625 / 100

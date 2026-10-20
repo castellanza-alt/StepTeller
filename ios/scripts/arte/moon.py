@@ -1,5 +1,5 @@
-"""Toglie i raggi intorno alla luna nell'illustrazione notturna: il cielo nella zona dei raggi
-viene ricostruito liscio dai pixel puliti vicini; luna, stelle, montagne e scie lontane restano."""
+"""Removes the rays around the moon in the night illustration: the sky in the ray area is
+rebuilt smooth from the clean pixels nearby; moon, stars, mountains and distant trails stay."""
 import sys, numpy as np
 from PIL import Image
 from scipy import ndimage as nd
@@ -15,13 +15,13 @@ hx = [0, 30, 100, 165, 200, 222, 228, 240, 252, 262, 270, 282, 287, 295, 300, 36
 hy = [722, 722, 726, 721, 733, 733, 716, 716, 700, 700, 694, 694, 714, 736, 736, 742, 742]
 horizon = np.interp(xx, hx, hy)
 above = yy < horizon - 2
-R0, R1 = 285, 305                      # raggio della zona e sfumatura del bordo
+R0, R1 = 285, 305                      # radius of the area and edge fade
 zone = above & ~moon & (rad < R1)
 bg = nd.median_filter(lum, size=17)
 cand = zone & (lum - bg > 5)
 r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
 red = (r > b + 30) & (r > g + 30)
-# stelle: componenti compatte e tonde (non allineate a un raggio)
+# stars: compact, round components (not aligned with a ray)
 strong = zone & (lum - bg > 9) & ~red
 lab, n = nd.label(strong, structure=np.ones((3, 3)))
 stars = np.zeros_like(strong)

@@ -2,7 +2,7 @@ import Foundation
 import HealthKit
 import StepTellerCore
 
-/// Allenamenti di camminata e corsa degli ultimi giorni, come valori aggregati.
+/// Walking and running workouts of the last days, as aggregate values.
 extension HealthKitStepsProvider: WorkoutsProvider {
     func workouts(since: Date) async -> [WorkoutSample] {
         guard isAvailable else { return [] }

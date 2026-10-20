@@ -10,7 +10,7 @@ final class AutoCalibrationTests: XCTestCase {
     }
 
     func testTwoRunsGiveOnePointAndMatchManualExample() {
-        // 13 e 15 settembre 2026: 8,28 km/h · 154,8 spm e 8,31 km/h · 152,2 spm
+        // 13 and 15 September 2026: 8.28 km/h · 154.8 spm and 8.31 km/h · 152.2 spm
         let r = AutoCalibration.compute(from: [
             sample(km: 8.28 * 0.5, minutes: 30, cadence: 154.8),
             sample(km: 8.31 * 0.5, minutes: 30, cadence: 152.2),

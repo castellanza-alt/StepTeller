@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Tab segmentati: celle inclinate −14°, bordo interno 2 pt `ink`; attiva `ink` su `paper` invertito.
-/// L'intero gruppo è ruotato −1,5°.
+/// Segmented tabs: cells skewed −14°, 2 pt inner `ink` border; the active one inverted, `ink` on `paper`.
+/// The whole group is rotated −1.5°.
 struct MangaTabs<Value: Hashable>: View {
     let items: [(Value, String)]
     @Binding var selection: Value
@@ -37,8 +37,8 @@ struct MangaTabs<Value: Hashable>: View {
     }
 }
 
-/// Vignetta: bordo `ink` 3 pt ottenuto da due poligoni storti, interno `paper`.
-/// Senza `width` si adatta al contenuto (Home a obiettivo raggiunto).
+/// Panel: 3 pt `ink` border made of two slanted polygons, `paper` inside.
+/// Without `width` it fits the content (Home with the goal reached).
 struct Vignette<Content: View>: View {
     let shape: PercentPolygon
     var width: CGFloat? = nil
@@ -57,7 +57,7 @@ struct Vignette<Content: View>: View {
     }
 }
 
-/// Titolo di sezione con la pennellata rossa sotto («I MIEI PASSI», «IL MIO MEGLIO»).
+/// Section title with the red brush stroke below («I MIEI PASSI», «IL MIO MEGLIO»).
 struct BrushTitle: View {
     let text: String
     let brushWidth: CGFloat

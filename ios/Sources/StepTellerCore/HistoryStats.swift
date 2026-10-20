@@ -4,13 +4,13 @@ public enum HistoryPeriod: String, Sendable, CaseIterable {
     case week, month, year, all
 }
 
-/// Una barra del grafico.
+/// One bar of the chart.
 public struct HistoryBar: Sendable, Equatable, Identifiable {
     public let id: Int
     public let label: String
     public let steps: Int
     public let km: Double
-    /// Obiettivo del giorno (solo per i grafici a giorni; 0 per mesi/anni).
+    /// Goal of the day (day charts only; 0 for months/years).
     public let goal: Int
     public let isCurrent: Bool
     public let isFuture: Bool
@@ -20,7 +20,7 @@ public struct HistoryBar: Sendable, Equatable, Identifiable {
 public struct PeriodSummary: Sendable, Equatable {
     public let steps: Int
     public let km: Double
-    /// Giorni trascorsi nel periodo, oggi compreso.
+    /// Days elapsed in the period, today included.
     public let elapsedDays: Int
     public let averageSteps: Int
     public let daysAtGoal: Int
@@ -29,7 +29,7 @@ public struct PeriodSummary: Sendable, Equatable {
 public struct RecordEntry: Sendable, Equatable {
     public let steps: Int
     public let km: Double
-    /// Etichetta del giorno/periodo («17 giu 2026», «8 – 14 giu 2026», «Marzo 2026», «2025»).
+    /// Label of the day/period («17 giu 2026», «8 – 14 giu 2026», «Marzo 2026», «2025»).
     public let label: String
 }
 
@@ -40,20 +40,20 @@ public struct PersonalRecords: Sendable, Equatable {
     public let year: RecordEntry?
 }
 
-/// Statistiche sullo storico giornaliero. Settimana lunedì–domenica.
+/// Statistics over the daily history. Weeks run Monday–Sunday.
 public struct HistoryStats: Sendable {
     public let records: [DayRecord]
     public let goals: GoalHistory
     public let now: Date
     public let calendar: Calendar
-    /// Etichette delle date (italiano se non indicato).
+    /// Date labels (Italian unless given).
     public let labels: HistoryLabels
-    /// Record per inizio del giorno (il primo, se un giorno compare due volte).
+    /// Record per start of day (the first one, if a day appears twice).
     public let byDay: [Date: DayRecord]
-    /// Primo giorno con dati (inizio del giorno); `nil` senza record.
+    /// First day with data (start of day); `nil` without records.
     public let firstDay: Date?
-    // Totali per settimana (chiave: inizio), mese (anno × 100 + mese) e anno, sommati una volta sola
-    // nell'ordine dei record: grafici e record li leggono senza riscorrere lo storico.
+    // Totals per week (key: week start), month (year × 100 + month) and year, summed once in record order:
+    // charts and records read them instead of scanning the whole history again.
     private let weekTotals: [Date: Total]
     private let monthTotals: [Int: Total]
     private let yearTotals: [Int: Total]
@@ -66,6 +66,7 @@ public struct HistoryStats: Sendable {
 
     public init(records: [DayRecord], goals: GoalHistory, now: Date, calendar: Calendar, labels: HistoryLabels = .italian) {
         var cal = calendar
+        // ISO weeks: Monday first, the week holding 4 January is week 1 (same rule on every platform).
         cal.firstWeekday = 2
         cal.minimumDaysInFirstWeek = 4
         self.calendar = cal
@@ -94,9 +95,9 @@ public struct HistoryStats: Sendable {
 
     public var today: Date { calendar.startOfDay(for: now) }
 
-    // MARK: intervalli
+    // MARK: intervals
 
-    /// Intervallo `[start, end]` (giorni inclusi) del periodo, `offset` periodi indietro (0 = corrente).
+    /// `[start, end]` interval (days included) of the period, `offset` periods back (0 = current).
     public func interval(_ period: HistoryPeriod, offset: Int = 0) -> (start: Date, end: Date) {
         switch period {
         case .week:
@@ -118,7 +119,7 @@ public struct HistoryStats: Sendable {
         }
     }
 
-    /// Numero massimo di periodi indietro con dati: periodi interi tra quello del primo record e quello di oggi.
+    /// Maximum number of periods back with data: whole periods between the first record's and today's.
     public func maxOffset(_ period: HistoryPeriod) -> Int {
         guard period != .all, let first = firstDay else { return 0 }
         let unit: Calendar.Component = period == .week ? .weekOfYear : period == .month ? .month : .year
@@ -142,7 +143,7 @@ public struct HistoryStats: Sendable {
         }
     }
 
-    // MARK: barre
+    // MARK: bars
 
     public func bars(_ period: HistoryPeriod, offset: Int = 0) -> [HistoryBar] {
         let i = interval(period, offset: offset)
@@ -188,10 +189,10 @@ public struct HistoryStats: Sendable {
         return (t?.steps ?? 0, t?.km ?? 0)
     }
 
-    // MARK: medie giornaliere
+    // MARK: daily averages
 
-    /// Barre di Anno e Sempre come **media giornaliera** (passi/giorno) di ogni mese o anno, così
-    /// l'obiettivo giornaliero resta confrontabile in tutti i grafici. Regola delle medie: `dailyAverage`.
+    /// Year and All bars as the **daily average** (steps/day) of each month or year, so the daily goal
+    /// stays comparable in every chart. Averaging rule: `dailyAverage`.
     public func averageBars(_ period: HistoryPeriod, offset: Int = 0) -> [HistoryBar] {
         let base = bars(period, offset: offset)
         guard period == .year || period == .all else { return base }
@@ -212,9 +213,9 @@ public struct HistoryStats: Sendable {
         }
     }
 
-    /// Media dei totali giornalieri tra `start` ed `end` (inclusi). Conta i giorni **conclusi**
-    /// (oggi escluso, perché a metà giornata abbasserebbe la media) a partire dal primo giorno con dati;
-    /// i giorni senza dati valgono 0. Se nel periodo c'è solo oggi, la media è il valore di oggi.
+    /// Average of the daily totals between `start` and `end` (inclusive). Counts **completed** days
+    /// (today excluded: half a day would pull the average down) from the first day with data;
+    /// days without data count as 0. If the period only holds today, the average is today's value.
     public func dailyAverage(from start: Date, to end: Date) -> (steps: Int, km: Double) {
         guard let first = firstDay else { return (0, 0) }
         let from = max(calendar.startOfDay(for: start), first)
@@ -237,19 +238,19 @@ public struct HistoryStats: Sendable {
         return (Int((Double(steps) / Double(n)).rounded()), km / Double(n))
     }
 
-    /// Media giornaliera di un periodo (stessa regola di `dailyAverage`).
+    /// Daily average of a period (same rule as `dailyAverage`).
     public func dailyAverage(_ period: HistoryPeriod, offset: Int = 0) -> (steps: Int, km: Double) {
         let i = interval(period, offset: offset)
         return dailyAverage(from: i.start, to: i.end)
     }
 
-    /// Etichetta di un intervallo di giorni (es. la streak più lunga): «3 – 17 ott 2026»,
-    /// «giu – ott 2024», «dic 2025 – feb 2026», o il solo giorno.
+    /// Label of a range of days (e.g. the longest streak): «3 – 17 ott 2026»,
+    /// «giu – ott 2024», «dic 2025 – feb 2026», or the single day.
     public func rangeLabel(from start: Date, to end: Date) -> String {
         labels.span(start, end, calendar)
     }
 
-    // MARK: riepilogo
+    // MARK: summary
 
     public func summary(_ period: HistoryPeriod, offset: Int = 0) -> PeriodSummary {
         let i = interval(period, offset: offset)
@@ -270,7 +271,7 @@ public struct HistoryStats: Sendable {
                              daysAtGoal: atGoal)
     }
 
-    // MARK: record
+    // MARK: records
 
     public func personalRecords() -> PersonalRecords {
         func fmt(_ d: Date) -> String { labels.day(d, calendar) }

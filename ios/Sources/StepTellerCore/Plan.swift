@@ -1,23 +1,23 @@
 import Foundation
 
-/// Risultato del calcolo per una velocità, un obiettivo e i passi di oggi.
+/// Result of the computation for a speed, a goal and today's steps.
 public struct Plan: Sendable, Equatable {
     public let goal: Int
     public let steps: Int
     public let speed: Double
     public let cadence: Double
     public let gait: Gait
-    /// Passi mancanti all'obiettivo (mai negativi).
+    /// Steps missing to the goal (never negative).
     public let remaining: Int
-    /// Minuti di tappeto (0 se l'obiettivo è chiuso).
+    /// Treadmill minutes (0 once the goal is reached).
     public let minutes: Int
     public let km: Double
 
-    /// Obiettivo chiuso: stato «Fatto».
+    /// Goal reached: «Done» state.
     public var isDone: Bool { remaining == 0 }
-    /// Avanzamento 0…1 (obiettivo 0 ⇒ 1).
+    /// Progress 0…1 (goal 0 ⇒ 1).
     public var progress: Double { goal > 0 ? min(1, Double(steps) / Double(goal)) : 1 }
-    /// Velocità di riferimento del widget: camminata normale, solo per dare un'idea di massima.
+    /// Ordinary walking pace, a rough reference used by the tests (the widget uses the Home slider speed).
     public static let glanceSpeed = 4.0
 
     public init(goal: Int, steps: Int, speed: Double, model: CadenceModel = .standard) {

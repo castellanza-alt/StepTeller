@@ -1,9 +1,9 @@
 import HealthKit
 
-/// Letture di Salute comuni ad app e widget. **Solo lettura.**
+/// Health reads shared by app and widget. **Read only.**
 enum HealthKitQueries {
-    /// Somma statistica dei passi tra `start` ed `end` (`nil` = nessun dato o errore). `HKStatisticsQuery` con
-    /// `.cumulativeSum`: Salute deduplica iPhone e Watch, quindi non si sommano mai i campioni a mano.
+    /// Statistical sum of the steps between `start` and `end` (`nil` = no data or error). `HKStatisticsQuery` with
+    /// `.cumulativeSum`: Health deduplicates iPhone and Watch, so samples are never summed by hand.
     static func stepSum(_ store: HKHealthStore, type: HKQuantityType, from start: Date, to end: Date) async -> Int? {
         let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
         return await withCheckedContinuation { continuation in

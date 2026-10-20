@@ -5,8 +5,8 @@ enum StepsMetric { case steps, km }
 
 enum BestTab: CaseIterable { case day, week, month, year, streak }
 
-/// Storico: serie e Jolly, «I MIEI PASSI» (settimana · mese · anno · sempre) e «IL MIO MEGLIO».
-/// Tela 390 × 2020 del handoff, scalata in larghezza; scorre sotto la barra fissa.
+/// History: streak and Jollies, «I MIEI PASSI» (week · month · year · all) and «IL MIO MEGLIO».
+/// 390 × 2020 handoff canvas, scaled to the width; scrolls under the fixed bar.
 struct HistoryView: View {
     let size: CGSize
     @Environment(StepsStore.self) private var store
@@ -20,7 +20,7 @@ struct HistoryView: View {
     @State private var grow: CGFloat = 1
     @State private var punch: CGFloat = 1
     @State private var jollyWidth: CGFloat = 200
-    /// Solo Debug (screenshot): `-stepteller.debugScroll 0.5` apre lo Storico già scorso (0 = in alto, 1 = in fondo).
+    /// Debug only (screenshots): `-stepteller.debugScroll 0.5` opens the History already scrolled (0 = top, 1 = bottom).
     private let initialAnchor: UnitPoint?
 
     init(size: CGSize) {
@@ -63,7 +63,7 @@ struct HistoryView: View {
         .onChange(of: metric) { _, _ in selectedBar = nil; replayBars() }
     }
 
-    /// Cambio di tab: le barre ricrescono dal basso (molla leggera) e il numero grande fa un piccolo «punch».
+    /// Tab change: the bars regrow from the bottom (light spring) and the big number gets a small «punch».
     private func replayBars() {
         var t = Transaction(); t.disablesAnimations = true
         withTransaction(t) { grow = 0; punch = 1.06 }
@@ -72,7 +72,7 @@ struct HistoryView: View {
         }
     }
 
-    // MARK: - Serie e Jolly
+    // MARK: - Streak and Jollies
 
     @ViewBuilder private var streakSection: some View {
         let st = store.history.streak
@@ -85,7 +85,7 @@ struct HistoryView: View {
         Image(c.hill).resizable().scaledToFit().frame(width: 200)
             .accessibilityHidden(true)
             .at(-10, 560)
-        // fiamma grande
+        // big flame
         ZStack {
             SVGShape(MangaPaths.flame, viewBox: MangaPaths.flameBox).fill(c.red)
             SVGShape(MangaPaths.flame, viewBox: MangaPaths.flameBox)
@@ -109,7 +109,7 @@ struct HistoryView: View {
         jollyGroup(st.jolly)
             .manga(rotate: -6)
             .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { jollyWidth = $0 }
-            .at(min(196, Manga.frameWidth - 8 - jollyWidth), 316 + TitleFont.gap(44))   // sotto la scritta della serie, abbassata in JA/KO/ZH
+            .at(min(196, Manga.frameWidth - 8 - jollyWidth), 316 + TitleFont.gap(44))   // under the streak caption, lowered in JA/KO/ZH
         Vignette(shape: .panelA, width: 220) {
             VStack(alignment: .leading, spacing: 2) {
                 AntonText(L10n.text("st.longest.title"), 14, tracking: 0.08)
@@ -168,7 +168,7 @@ struct HistoryView: View {
         .accessibilityLabel(L10n.format("st.jolly.vo", "\(jolly)"))
     }
 
-    // MARK: - I miei passi
+    // MARK: - My steps
 
     @ViewBuilder private var stepsSection: some View {
         let stats = store.history.stats
@@ -217,7 +217,7 @@ struct HistoryView: View {
         .buttonStyle(.plain)
     }
 
-    /// Numero grande: settimana = **somma** del periodo; mese/anno/sempre = **media giornaliera**.
+    /// Big number: week = **sum** of the period; month/year/all = **daily average**.
     private func bigNumber(_ stats: HistoryStats) -> some View {
         let isWeek = tabSteps == .week
         let sum = stats.summary(tabSteps, offset: periodOffset)
@@ -244,7 +244,7 @@ struct HistoryView: View {
         .accessibilityLabel(L10n.format("st.big.vo", text, label.lowercased()))
     }
 
-    /// Settimana: «MEDIA … AL GIORNO»; altri tab: «TOTALE … NEL PERIODO».
+    /// Week: «MEDIA … AL GIORNO»; other tabs: «TOTALE … NEL PERIODO».
     private func secondaryRow(_ stats: HistoryStats) -> some View {
         let isWeek = tabSteps == .week
         let value: String
@@ -269,8 +269,8 @@ struct HistoryView: View {
                                                : (metric == .steps ? "st.second.vo.totSteps" : "st.second.vo.totKm"), value))
     }
 
-    /// Barre del periodo. Settimana: 7 giorni (i futuri vuoti); mese e anno in corso: fino a oggi.
-    /// Anno e Sempre: media giornaliera di mese/anno, così l'obiettivo vale in tutti i tab.
+    /// Bars of the period. Week: 7 days (future ones empty); current month and year: up to today.
+    /// Year and All: daily average of month/year, so the goal applies in every tab.
     private func chartBars(_ stats: HistoryStats) -> [MangaBar] {
         var bars = stats.averageBars(tabSteps, offset: periodOffset)
         if periodOffset == 0 && tabSteps != .week { bars = bars.filter { !$0.isFuture } }
@@ -294,7 +294,7 @@ struct HistoryView: View {
         return stats.bars(tabSteps, offset: periodOffset).last(where: { !$0.isFuture })?.goal ?? store.goal
     }
 
-    // MARK: - Il mio meglio
+    // MARK: - My best
 
     @ViewBuilder private var bestSection: some View {
         let best = bestValue()
@@ -357,7 +357,7 @@ struct HistoryView: View {
 
     private static func km(_ v: Double) -> String { LocalFormat.number(v, decimals: v >= 100 ? 0 : 1) }
 
-    // MARK: - Disegni fissi (stessi semi del prototipo)
+    // MARK: - Fixed drawings (same seeds as the prototype)
 
     private static let burst = KineticLines.rays(cx: 150, cy: 250, count: 80, innerMin: 110, innerMax: 170, outer: 520, seed: 5, redEvery: 9)
     private static let speedLines = KineticLines.rays(cx: 195, cy: 100, count: 60, innerMin: 120, innerMax: 160, outer: 330, seed: 9)

@@ -1,6 +1,6 @@
 import Foundation
 
-/// Un allenamento di camminata o corsa letto da Salute (solo valori aggregati).
+/// A walking or running workout read from Health (aggregate values only).
 public struct WorkoutSample: Sendable, Equatable {
     public let date: Date
     public let distanceKm: Double
@@ -14,18 +14,18 @@ public struct WorkoutSample: Sendable, Equatable {
         self.steps = steps
     }
 
-    /// Velocità media in km/h.
+    /// Average speed in km/h.
     public var speedKmh: Double { durationMinutes > 0 ? distanceKm / (durationMinutes / 60) : 0 }
-    /// Cadenza media in passi/min.
+    /// Average cadence in steps/min.
     public var cadence: Double { durationMinutes > 0 ? Double(steps) / durationMinutes : 0 }
 }
 
-/// Fornitore degli allenamenti recenti (in app: HealthKit; nei test: finto).
+/// Source of recent workouts (app: HealthKit; tests: fake).
 public protocol WorkoutsProvider: Sendable {
     func workouts(since: Date) async -> [WorkoutSample]
 }
 
-/// Esito della taratura automatica.
+/// Result of the automatic calibration.
 public struct CalibrationResult: Sendable, Equatable, Codable {
     public struct Point: Sendable, Equatable, Codable {
         public let speed: Double
@@ -34,7 +34,7 @@ public struct CalibrationResult: Sendable, Equatable, Codable {
     }
     public var walk: [Point]
     public var run: [Point]
-    /// Allenamenti usati (dopo aver scartato quelli anomali).
+    /// Workouts used (after discarding outliers).
     public var walkWorkouts: Int
     public var runWorkouts: Int
 
@@ -43,7 +43,7 @@ public struct CalibrationResult: Sendable, Equatable, Codable {
         self.walk = walk; self.run = run; self.walkWorkouts = walkWorkouts; self.runWorkouts = runWorkouts
     }
 
-    /// Modello di cadenza: taratura automatica se c'è, altrimenti quella manuale di `Calibration`.
+    /// Cadence model: the automatic calibration when available, otherwise the manual points in `Calibration`.
     public var model: CadenceModel {
         CadenceModel(walkCalibration: walk.isEmpty ? Calibration.walk : walkPoints,
                      runCalibration: run.isEmpty ? Calibration.run : runPoints)
@@ -53,16 +53,16 @@ public struct CalibrationResult: Sendable, Equatable, Codable {
     public var runPoints: [CalibrationPoint] { run.map { CalibrationPoint(speed: $0.speed, cadence: $0.cadence) } }
 }
 
-/// Taratura automatica: dagli allenamenti degli ultimi 90 giorni ricava punti di cadenza per andatura.
+/// Automatic calibration: derives cadence points per gait from the workouts of the last 90 days.
 ///
-/// Regole (tutte testate):
-/// - contano solo allenamenti ≥ 10 min, con distanza e passi, velocità media 3–12 km/h e cadenza plausibile;
-/// - l'andatura si decide dalla velocità media (da 7,1 km/h in su è corsa);
-/// - per andatura si scartano gli allenamenti che si discostano più del 12% dal rapporto mediano
-///   rispetto alla curva standard (pause, camminate con cane, GPS sbagliato…);
-/// - servono almeno 2 allenamenti buoni per andatura, altrimenti nessun punto (resta la taratura manuale);
-/// - con ≥ 2 fasce di velocità da 1 km/h con almeno 2 allenamenti ciascuna → un punto per fascia (max 4);
-///   altrimenti un solo punto (mediane di velocità e cadenza).
+/// Rules (all tested):
+/// - only workouts ≥ 10 min with distance and steps, average speed 3–12 km/h and a plausible cadence count;
+/// - the gait follows the average speed (from 7.1 km/h up it is running);
+/// - per gait, workouts whose cadence/standard-curve ratio is more than 12% off the median ratio are
+///   discarded (pauses, walks with the dog, bad GPS…);
+/// - at least 2 good workouts per gait are needed, otherwise no point (manual calibration stays);
+/// - with ≥ 2 speed buckets of 1 km/h holding at least 2 workouts each → one point per bucket (max 4);
+///   otherwise a single point (medians of speed and cadence).
 public enum AutoCalibration {
     public static let windowDays = 90
     public static let minMinutes = 10.0

@@ -1,23 +1,23 @@
 import SwiftUI
 import StepTellerCore
 
-/// Stato dell'introduzione al primo avvio (UserDefaults).
+/// State of the first-launch introduction (UserDefaults).
 enum Onboarding {
     static let doneKey = "stepteller.onboarding.done"
-    /// Permesso di Salute già chiesto (dall'introduzione o, per chi aveva già l'app, dal vecchio avvio).
+    /// Health permission already asked (by the introduction or, for existing users, by the old launch).
     static let healthAskedKey = "stepteller.onboarding.healthAsked"
     static let pageCount = 4
 
-    /// Chiavi che l'app salva da sempre: se ce n'è almeno una, l'app era già installata.
+    /// Keys the app has always saved: if at least one exists, the app was already installed.
     private static let existingUserKeys = [
         "stepteller.goal", "stepteller.goalHistory", "stepteller.streak.start", "stepteller.speed",
         "stepteller.reminder.on", "stepteller.reminder.minutes", "stepteller.calibration.v1",
         ThemeMode.storageKey, "stepteller.celebratedDay",
     ]
 
-    /// Da chiamare all'avvio **prima** di creare `StepsStore` (che salva subito l'inizio della serie).
-    /// La prima volta decide una volta per tutte: utente esistente → introduzione già fatta, senza mostrarla.
-    /// Guarda solo i valori salvati, non gli argomenti di avvio.
+    /// Call at launch **before** creating `StepsStore` (which saves the streak start right away).
+    /// The first time it decides once and for all: existing user → introduction already done, never shown.
+    /// Looks at saved values only, not at launch arguments.
     static func resolveAtLaunch(_ defaults: UserDefaults = .standard) {
         guard defaults.object(forKey: doneKey) == nil else { return }
         let saved = Bundle.main.bundleIdentifier.flatMap { defaults.persistentDomain(forName: $0) } ?? [:]
@@ -27,8 +27,8 @@ enum Onboarding {
     }
 }
 
-/// Introduzione: benvenuto, Salute, obiettivo, promemoria. Le richieste di sistema partono qui, al
-/// momento giusto; obiettivo e promemoria si salvano solo se l'utente li cambia.
+/// Introduction: welcome, Health, goal, reminder. The system prompts start here, at the right
+/// moment; goal and reminder are saved only if the user changes them.
 struct OnboardingView: View {
     let isReplay: Bool
     let onFinish: () -> Void
@@ -76,12 +76,12 @@ struct OnboardingView: View {
         }
         .onChange(of: page) { old, new in
             goalFocused = false
-            // Salute: si chiede lasciando la sua pagina, con «Continua» o con uno swipe.
+            // Health: asked when leaving its page, with «Continue» or with a swipe.
             if old == 1, new > 1 { askHealthIfNeeded() }
         }
     }
 
-    // MARK: - Pagine
+    // MARK: - Pages
 
     private func welcome(_ compact: Bool) -> some View {
         PageLayout(compact: compact) {
@@ -131,7 +131,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Controlli
+    // MARK: - Controls
 
     private var goalControl: some View {
         HStack {
@@ -179,7 +179,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Barra in basso
+    // MARK: - Bottom bar
 
     private var isLast: Bool { page == Onboarding.pageCount - 1 }
 
@@ -213,7 +213,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Permessi e salvataggio
+    // MARK: - Permissions and saving
 
     private func askHealthIfNeeded() {
         guard !healthAsked else { return }
@@ -225,11 +225,11 @@ struct OnboardingView: View {
         guard !finishing else { return }
         finishing = true
         Task {
-            // Salute non chiesta se si è arrivati qui senza passare dalla sua pagina (es. debug).
+            // Health not asked if we got here without passing through its page (e.g. debug).
             if !healthAsked { healthAsked = true; await store.requestHealthAccess() }
-            // Notifiche: solo con il promemoria acceso, e iOS non le richiede se sono già state chieste.
+            // Notifications: only with the reminder on; iOS does not ask again if already asked.
             if reminderOn { await store.requestReminderPermission() }
-            // Si salva solo ciò che è cambiato: rivedere l'introduzione non tocca obiettivo e promemoria.
+            // Only what changed is saved: replaying the introduction leaves goal and reminder untouched.
             if goal != store.goal { store.goal = max(500, goal) }
             if reminderMinutes != store.reminderMinutes { store.reminderMinutes = reminderMinutes }
             if reminderOn != store.reminderEnabled { store.reminderEnabled = reminderOn }
@@ -238,9 +238,9 @@ struct OnboardingView: View {
     }
 }
 
-// MARK: - Impaginazione
+// MARK: - Layout
 
-/// Illustrazione in alto (altezza flessibile) e testo sotto, allineato a sinistra.
+/// Illustration on top (flexible height) and text below, left-aligned.
 private struct PageLayout<Art: View, Content: View>: View {
     let compact: Bool
     @ViewBuilder var art: () -> Art
@@ -262,7 +262,7 @@ private struct PageLayout<Art: View, Content: View>: View {
     }
 }
 
-/// Etichetta rossa sopra il titolo.
+/// Red label above the title.
 private struct Kicker: View {
     let text: String
     init(_ text: String) { self.text = text }
@@ -273,7 +273,7 @@ private struct Kicker: View {
     }
 }
 
-/// Titolo Anton su più righe, inclinato come quelli dello Storico.
+/// Multi-line Anton title, slanted like those of the History screen.
 private struct TitleText: View {
     let text: String
     let compact: Bool
@@ -291,7 +291,7 @@ private struct TitleText: View {
     }
 }
 
-/// Paragrafo in Anton (testo normale o nota più tenue).
+/// Paragraph in Anton (regular text or a more muted note).
 private struct Paragraph: ViewModifier {
     var note = false
     @Environment(\.manga) private var c
@@ -302,7 +302,7 @@ private struct Paragraph: ViewModifier {
     }
 }
 
-/// Indicatore di pagina: parallelogrammi, quello attuale rosso e più lungo.
+/// Page indicator: parallelograms, the current one red and longer.
 private struct PageDots: View {
     let count: Int
     let current: Int
@@ -320,9 +320,9 @@ private struct PageDots: View {
     }
 }
 
-// MARK: - Illustrazioni
+// MARK: - Illustrations
 
-/// Strada e scarpa della Home (sfondo + livello della gamba), ritagliate sulla parte bassa.
+/// Road and shoe of the Home (background + leg layer), cropped to the lower part.
 private struct WelcomeArt: View {
     @Environment(\.manga) private var c
     var body: some View {
@@ -336,7 +336,7 @@ private struct WelcomeArt: View {
                 Image(c.homeLeg).resizable().frame(width: legW, height: legW * (px.height + 2 * pad) / (px.width + 2 * pad))
                     .offset(x: -w * pad / px.width, y: -w * pad / px.width)
             }
-            // si mostra la zona della scarpa (circa dal 48% al 92% dell'illustrazione)
+            // shows the shoe area (about 48% to 92% of the illustration)
             .offset(y: -(artH * 0.70 - g.size.height / 2))
             .frame(width: w, height: g.size.height, alignment: .topLeading)
         }
@@ -345,7 +345,7 @@ private struct WelcomeArt: View {
     }
 }
 
-/// Obiettivo nell'esplosione a stella, come nella festa.
+/// Goal in the star burst, as in the celebration.
 private struct GoalBurst: View {
     let goal: Int
     @Environment(\.manga) private var c
@@ -372,6 +372,6 @@ private struct GoalBurst: View {
 }
 
 extension PercentPolygon {
-    /// Bottone dell'introduzione: parallelogramma leggermente storto.
+    /// Introduction button: slightly slanted parallelogram.
     static let button = PercentPolygon(points: [CGPoint(x: 0.05, y: 0), CGPoint(x: 1, y: 0.06), CGPoint(x: 0.95, y: 1), CGPoint(x: 0, y: 0.94)])
 }

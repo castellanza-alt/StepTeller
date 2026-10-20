@@ -3,8 +3,8 @@ import StepTellerCore
 
 enum AppScreen { case home, history }
 
-/// Radice dell'app: tema (giorno/notte), la schermata scelta (Home ↔ Storico con transizione
-/// orizzontale), la barra superiore fissa e la festa dell'obiettivo.
+/// Root of the app: theme (day/night), the chosen screen (Home ↔ History with a horizontal transition),
+/// the fixed top bar and the goal celebration.
 struct RootView: View {
     @Environment(StepsStore.self) private var store
     @Environment(\.scenePhase) private var scenePhase
@@ -12,17 +12,17 @@ struct RootView: View {
     @AppStorage(ThemeMode.storageKey) private var themeModeRaw = ThemeMode.system.rawValue
     @State private var screen: AppScreen
     @State private var showSettings: Bool
-    /// Giorno (yyyy-MM-dd) dell'ultima festa «Obiettivo raggiunto»: una sola al giorno.
+    /// Day (yyyy-MM-dd) of the last «Goal reached» celebration: one per day.
     @AppStorage("stepteller.celebratedDay") private var celebratedDay = ""
     @State private var celebrating = false
-    /// Ultima apertura (o ritorno in primo piano): la festa aspetta uno storico riletto da allora,
-    /// altrimenti la serie mostrerebbe solo oggi («1 giorno di fila»).
+    /// Last launch (or return to the foreground): the celebration waits for a history reread since then,
+    /// otherwise the streak would show today only («1 day in a row»).
     @State private var activeSince = Date()
-    /// Introduzione: al primo avvio finché non è conclusa; poi solo se richiesta dalle Impostazioni.
+    /// Introduction: at first launch until completed; afterwards only when asked from Settings.
     @AppStorage(Onboarding.doneKey) private var onboardingDone = false
     @State private var replayingIntro = false
     @State private var introStartPage = 0
-    /// Solo Debug: con i passi finti (screenshot) l'introduzione non compare, salvo `debugOnboarding`.
+    /// Debug only: with fake steps (screenshots) the introduction does not show, unless `debugOnboarding`.
     private let skipIntro: Bool
 
     init() {
@@ -35,12 +35,12 @@ struct RootView: View {
         let d = UserDefaults.standard
         if d.string(forKey: "stepteller.debugTab") != nil { s = .history }
         sheet = d.object(forKey: "stepteller.debugSheet") != nil
-        // Screenshot: `-stepteller.debugOnboarding 1…4` apre l'introduzione su quella pagina.
+        // Screenshots: `-stepteller.debugOnboarding 1…4` opens the introduction on that page.
         if d.object(forKey: "stepteller.debugOnboarding") != nil {
             intro = true
             introPage = min(max(d.integer(forKey: "stepteller.debugOnboarding"), 1), Onboarding.pageCount) - 1
         } else if ProcessInfo.processInfo.arguments.contains("-stepteller.debugSteps") {
-            skip = true                    // anche con `-1`, che UserDefaults non legge come valore
+            skip = true                    // also with `-1`, which UserDefaults does not read as a value
         }
         #endif
         _screen = State(initialValue: s)
@@ -68,13 +68,13 @@ struct RootView: View {
                     Group {
                         switch screen {
                         case .home:
-                            // i gesti dei figli (cursore sulla strada) hanno la precedenza sullo swipe
+                            // child gestures (slider on the road) take precedence over the swipe
                             HomeView(size: size)
                                 .contentShape(Rectangle())
                                 .gesture(swipe(to: .history))
                                 .transition(.move(edge: .leading))
                         case .history:
-                            // simultaneo, altrimenti blocca lo scorrimento verticale
+                            // simultaneous, otherwise it blocks vertical scrolling
                             HistoryView(size: size)
                                 .simultaneousGesture(swipe(to: .home))
                                 .transition(.move(edge: .trailing))
@@ -98,7 +98,7 @@ struct RootView: View {
                 .ignoresSafeArea()
             }
             .overlay {
-                // fuori dalla tela a tutto schermo: rispetta aree sicure e tastiera
+                // outside the full-screen canvas: respects safe areas and keyboard
                 if showsIntro {
                     OnboardingView(startPage: introStartPage, isReplay: onboardingDone) {
                         withAnimation(.easeInOut(duration: Manga.navDuration)) {
@@ -122,11 +122,11 @@ struct RootView: View {
             }
         }
         .onOpenURL { url in
-            // widget: `stepteller://oggi` apre la Home
+            // widget: `stepteller://oggi` opens Home
             guard url.scheme == "stepteller", url.host == "oggi", screen != .home else { return }
             navigate()
         }
-        // Salute, osservazione e promemoria partono solo a introduzione conclusa.
+        // Health, observation and reminders start only once the introduction is done.
         .task(id: showsIntro) { if !showsIntro { await store.start() } }
         .onAppear { celebrateIfNeeded() }
         .onChange(of: scenePhase) { _, phase in
@@ -147,8 +147,8 @@ struct RootView: View {
         }
     }
 
-    /// Swipe orizzontale: verso sinistra dalla Home allo Storico, verso destra dallo Storico alla Home.
-    /// Basta uno spostamento deciso o un colpo veloce, purché più orizzontale che verticale.
+    /// Horizontal swipe: leftwards from Home to History, rightwards from History to Home.
+    /// A decided move or a quick flick is enough, as long as it is more horizontal than vertical.
     private func swipe(to target: AppScreen) -> some Gesture {
         DragGesture(minimumDistance: 24).onEnded { v in
             guard screen != target else { return }
@@ -161,15 +161,15 @@ struct RootView: View {
 }
 
 extension RootView {
-    /// Festa alla prima apertura dopo aver chiuso l'obiettivo del giorno (solo con i passi di Salute,
-    /// non con una correzione manuale).
+    /// Celebration at the first launch after reaching the day's goal (only with Health steps,
+    /// not with a manual correction).
     private func celebrateIfNeeded() {
         #if DEBUG
         if UserDefaults.standard.object(forKey: "stepteller.debugCelebrate") != nil, !celebrating {
             celebrating = true; return
         }
         #endif
-        // solo con una lettura di oggi: al risveglio il numero può essere ancora quello di ieri
+        // only with a read of today: on wake-up the number may still be yesterday's
         guard scenePhase == .active, !celebrating, store.goal > 0, store.plan.isDone, store.origin == .health,
               let read = store.lastUpdate, Calendar.current.isDateInToday(read),
               let history = store.history.refreshedAt, history >= activeSince

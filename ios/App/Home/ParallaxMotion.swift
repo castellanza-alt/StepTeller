@@ -2,8 +2,8 @@ import CoreMotion
 import Observation
 import SwiftUI
 
-/// Inclinazione del telefono per la parallasse della Home: −1…1 su x e y rispetto a come lo si tiene
-/// (il riferimento segue lentamente la posizione, così a telefono fermo tutto torna al centro).
+/// Phone tilt for the Home parallax: −1…1 on x and y relative to how the phone is held
+/// (the reference slowly follows the position, so with the phone still everything returns to the center).
 @MainActor
 @Observable
 final class ParallaxMotion {
@@ -12,11 +12,11 @@ final class ParallaxMotion {
     @ObservationIgnored private let manager = CMMotionManager()
     @ObservationIgnored private var base: CMAcceleration?
 
-    /// Variazione di gravità (≈ 9°) che porta la parallasse a fondo corsa.
+    /// Gravity change (≈ 9°) that takes the parallax to full travel.
     private static let range = 0.15
-    /// Quanto il riferimento insegue la posizione a ogni campione (60 Hz → ~1,5 s).
+    /// How much the reference chases the position at every sample (60 Hz → ~1.5 s).
     private static let follow = 0.012
-    /// Smorzamento del movimento a ogni campione.
+    /// Motion damping at every sample.
     private static let smoothing = 0.18
 
     func start() {
@@ -46,9 +46,9 @@ final class ParallaxMotion {
     }
 }
 
-/// Scarpa e gamba sopra lo sfondo: si spostano con l'inclinazione (lato destro giù → a destra,
-/// cima indietro → in su), come se stessero più vicine allo schermo. Solo questa vista si ridisegna
-/// a ogni campione.
+/// Shoe and leg above the background: they shift with the tilt (right side down → right,
+/// top backwards → up), as if closer to the screen. Only this view redraws
+/// at every sample.
 struct ParallaxLeg: View {
     let image: String
     let motion: ParallaxMotion

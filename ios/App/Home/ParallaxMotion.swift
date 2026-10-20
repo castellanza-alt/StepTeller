@@ -54,11 +54,12 @@ struct ParallaxLeg: View {
     let motion: ParallaxMotion
 
     var body: some View {
-        let kx = Manga.artSize.width / 881, ky = Manga.artSize.height / 1786
+        let px = Manga.artPixelSize
+        let kx = Manga.artSize.width / px.width, ky = Manga.artSize.height / px.height
         let pad = Manga.legPadding
         Image(image)
             .resizable()
-            .frame(width: (881 + 2 * pad) * kx, height: (1786 + 2 * pad) * ky)
+            .frame(width: (px.width + 2 * pad) * kx, height: (px.height + 2 * pad) * ky)
             .offset(x: -pad * kx + motion.tilt.width * Manga.parallaxMax,
                     y: -pad * ky - motion.tilt.height * Manga.parallaxMax)
             .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)

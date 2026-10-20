@@ -78,20 +78,11 @@ struct StepsTimelineProvider: TimelineProvider {
     }
 }
 
-/// Lettura dei passi di oggi (solo lettura, somma statistica come nell'app).
+/// Lettura dei passi di oggi (solo lettura, stessa somma statistica dell'app).
 enum WidgetHealth {
     static func todaySteps(now: Date, calendar: Calendar = .current) async -> Int? {
         guard HKHealthStore.isHealthDataAvailable() else { return nil }
-        let store = HKHealthStore()
-        let type = HKQuantityType(.stepCount)
-        let predicate = HKQuery.predicateForSamples(withStart: calendar.startOfDay(for: now), end: now, options: .strictStartDate)
-        return await withCheckedContinuation { continuation in
-            let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate,
-                                          options: .cumulativeSum) { _, statistics, _ in
-                let value = statistics?.sumQuantity()?.doubleValue(for: .count())
-                continuation.resume(returning: value.map { Int($0.rounded()) })
-            }
-            store.execute(query)
-        }
+        return await HealthKitQueries.stepSum(HKHealthStore(), type: HKQuantityType(.stepCount),
+                                              from: calendar.startOfDay(for: now), to: now)
     }
 }

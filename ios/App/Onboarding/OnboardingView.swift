@@ -170,21 +170,12 @@ struct OnboardingView: View {
             .tint(c.red)
             .padding(.vertical, 8)
             Rectangle().fill(c.ink.opacity(0.15)).frame(height: 1.5)
-            DatePicker(selection: timeBinding, displayedComponents: .hourAndMinute) {
+            DatePicker(selection: .reminderTime($reminderMinutes), displayedComponents: .hourAndMinute) {
                 Text(L10n.text("reminder.time")).font(.antonText(20)).foregroundStyle(c.ink)
             }
             .tint(c.red)
             .disabled(!reminderOn).opacity(reminderOn ? 1 : 0.4)
             .padding(.vertical, 8)
-        }
-    }
-
-    private var timeBinding: Binding<Date> {
-        Binding {
-            Calendar.current.date(bySettingHour: reminderMinutes / 60, minute: reminderMinutes % 60, second: 0, of: Date()) ?? Date()
-        } set: { date in
-            let c = Calendar.current.dateComponents([.hour, .minute], from: date)
-            reminderMinutes = (c.hour ?? 20) * 60 + (c.minute ?? 30)
         }
     }
 
@@ -337,12 +328,13 @@ private struct WelcomeArt: View {
     var body: some View {
         GeometryReader { g in
             let w = g.size.width
-            let artH = w * 1786 / 881
-            let legW = w * 929 / 881
+            let px = Manga.artPixelSize, pad = Manga.legPadding
+            let artH = w * px.height / px.width
+            let legW = w * (px.width + 2 * pad) / px.width
             ZStack(alignment: .topLeading) {
                 Image(c.homeArt).resizable().frame(width: w, height: artH)
-                Image(c.homeLeg).resizable().frame(width: legW, height: legW * 1834 / 929)
-                    .offset(x: -w * 24 / 881, y: -w * 24 / 881)
+                Image(c.homeLeg).resizable().frame(width: legW, height: legW * (px.height + 2 * pad) / (px.width + 2 * pad))
+                    .offset(x: -w * pad / px.width, y: -w * pad / px.width)
             }
             // si mostra la zona della scarpa (circa dal 48% al 92% dell'illustrazione)
             .offset(y: -(artH * 0.70 - g.size.height / 2))

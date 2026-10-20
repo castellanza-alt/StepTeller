@@ -38,8 +38,7 @@ struct SettingsSheet: View {
                         roundButton("plus", L10n.text("goal.plus.vo")) { store.goal += 500 }
                     }
                     .padding(.horizontal, 16).padding(.vertical, 12)
-                    .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
-                    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
+                    .glassCard()
                     note(L10n.text("set.goal.note"))
                 }
 
@@ -47,13 +46,12 @@ struct SettingsSheet: View {
                     VStack(spacing: 0) {
                         Toggle(L10n.text("reminder.toggle"), isOn: $store.reminderEnabled).tint(Theme.accent)
                             .padding(.horizontal, 16).padding(.vertical, 10)
-                        Divider().overlay(Theme.ink.opacity(0.08))
-                        DatePicker(L10n.text("reminder.time"), selection: timeBinding, displayedComponents: .hourAndMinute)
+                        rowDivider
+                        DatePicker(L10n.text("reminder.time"), selection: .reminderTime($store.reminderMinutes), displayedComponents: .hourAndMinute)
                             .disabled(!store.reminderEnabled).opacity(store.reminderEnabled ? 1 : 0.4)
                             .padding(.horizontal, 16).padding(.vertical, 8)
                     }
-                    .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
-                    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
+                    .glassCard()
                     note(L10n.text("set.reminder.note"))
                 }
 
@@ -73,7 +71,7 @@ struct SettingsSheet: View {
                             Text(L10n.format("set.streak.startValue", startText, "\(HistoryStore.initialJolly)")).foregroundStyle(Theme.ink.opacity(0.62))
                         }
                         .font(.system(size: 15)).padding(.horizontal, 16).padding(.vertical, 14)
-                        Divider().overlay(Theme.ink.opacity(0.08))
+                        rowDivider
                         Button { withAnimation { showRules.toggle() } } label: {
                             HStack {
                                 Text(L10n.text("set.streak.how")).foregroundStyle(Theme.ink)
@@ -90,16 +88,15 @@ struct SettingsSheet: View {
                                 .padding(.horizontal, 16).padding(.bottom, 14)
                         }
                     }
-                    .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
-                    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
+                    .glassCard()
                 }
 
                 section(L10n.text("set.info.section")) {
                     VStack(spacing: 0) {
                         linkRow(L10n.text("set.info.privacy"), Self.privacyURL)
-                        Divider().overlay(Theme.ink.opacity(0.08))
+                        rowDivider
                         linkRow(L10n.text("set.info.support"), Self.supportURL)
-                        Divider().overlay(Theme.ink.opacity(0.08))
+                        rowDivider
                         Button { goalFocused = false; onReplayIntro() } label: {
                             HStack {
                                 Text(L10n.text("set.info.intro")).foregroundStyle(Theme.ink)
@@ -112,8 +109,7 @@ struct SettingsSheet: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    .background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
-                    .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
+                    .glassCard()
                     note(L10n.format("set.version", appVersion))
                 }
             }
@@ -159,6 +155,9 @@ struct SettingsSheet: View {
         .buttonStyle(.plain)
     }
 
+    /// Riga sottile tra le voci di una scheda.
+    private var rowDivider: some View { Divider().overlay(Theme.ink.opacity(0.08)) }
+
     private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             SectionLabel(title)
@@ -177,15 +176,13 @@ struct SettingsSheet: View {
         }
         .accessibilityLabel(label)
     }
+}
 
-    /// Ora del promemoria come `Date` (solo ora e minuti contano).
-    private var timeBinding: Binding<Date> {
-        Binding {
-            Calendar.current.date(bySettingHour: store.reminderMinutes / 60, minute: store.reminderMinutes % 60, second: 0, of: Date()) ?? Date()
-        } set: { date in
-            let c = Calendar.current.dateComponents([.hour, .minute], from: date)
-            store.reminderMinutes = (c.hour ?? 20) * 60 + (c.minute ?? 30)
-        }
+private extension View {
+    /// Scheda delle Impostazioni: fondo in vetro con bordo sottile, angoli continui.
+    func glassCard() -> some View {
+        background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))
+            .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.glassLine, lineWidth: 1))
     }
 }
 

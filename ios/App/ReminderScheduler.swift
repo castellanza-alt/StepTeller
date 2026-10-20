@@ -20,8 +20,7 @@ struct ReminderScheduler {
 
     /// Sostituisce tutte le notifiche del promemoria con quelle calcolate.
     func apply(_ requests: [ReminderRequest]) async {
-        let pending = await center.pendingNotificationRequests()
-        center.removePendingNotificationRequests(withIdentifiers: pending.map(\.identifier).filter { $0.hasPrefix(Self.prefix) })
+        await removePending()
         let settings = await center.notificationSettings()
         guard [.authorized, .provisional, .ephemeral].contains(settings.authorizationStatus) else { return }
         for r in requests {
@@ -56,7 +55,10 @@ struct ReminderScheduler {
         }
     }
 
-    func cancelAll() async {
+    func cancelAll() async { await removePending() }
+
+    /// Toglie solo le notifiche del promemoria (prefisso `stepteller.reminder.`), non altre eventuali.
+    private func removePending() async {
         let pending = await center.pendingNotificationRequests()
         center.removePendingNotificationRequests(withIdentifiers: pending.map(\.identifier).filter { $0.hasPrefix(Self.prefix) })
     }

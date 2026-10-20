@@ -124,7 +124,9 @@ promesse su salute/calorie; il significato di NEAT (Non-Exercise Activity Thermo
 Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `PROMPT_CHATGPT_STORE.md`.
 - [x] Italiano approvato: nome «NEAT - ogni passo conta», sottotitolo «Il tuo obiettivo. Raggiungilo.»,
       promozionale, descrizione (655 car.), parole chiave
-- [ ] ChatGPT: testi dello store nelle 9 lingue
+- [ ] Anteprima italiana con Claude Design (pagina App Store + 6 screenshot con didascalie): prompt in
+      `PROMPT_CLAUDE_DESIGN.md`, materiale in `localizzazione/design/` (non versionato); approvata da Will
+- [ ] ChatGPT: testi dello store e didascalie degli screenshot nelle 9 lingue
 - [ ] Controllo della chat di coordinamento: limiti (30/30/170/100), glossario, nessuna promessa sanitaria
 - [ ] Lingua principale della scheda: inglese (così i paesi senza traduzione vedono l'inglese, non l'italiano);
       copie per en-GB/en-AU/en-CA, es-MX, fr-CA dove servono

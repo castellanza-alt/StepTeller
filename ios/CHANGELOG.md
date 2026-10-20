@@ -28,6 +28,8 @@
   record) usano il font giusto. Italiano e le altre lingue invariati. L'app cresce di circa 0,5 MB (268 KB di font
   nell'app e altrettanti nel widget).
 - Nuova icona: suola rossa e scarpa bianca su fondo nero, vettoriale, in Liquid Glass (Icon Composer).
+- Apertura senza «0»: la Home mostra subito gli ultimi passi di oggi e la serie salvati, poi si aggiorna con Salute
+  (prima compariva 0 per qualche secondo, anche nel widget).
 
 ## 0.6.3 — 19 ottobre 2026
 - Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).

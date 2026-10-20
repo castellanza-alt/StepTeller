@@ -28,6 +28,9 @@ final class HistoryStore {
     @ObservationIgnored private var lastRefresh: Date?
     /// Today's steps as read by the app (see `updateToday`); valid for the current day only.
     @ObservationIgnored private var todayLive: (day: Date, steps: Int)?
+    /// Until the first read from Health the streak shown is the one saved by the previous launch: computing
+    /// it from an empty history would flash 0 (and push 0 to the widget).
+    @ObservationIgnored private var showsCachedStreak = false
 
     private enum Keys {
         static let goals = "stepteller.goalHistory"
@@ -53,7 +56,15 @@ final class HistoryStore {
         let empty = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
         stats = empty
         personalRecords = empty.personalRecords()
-        recompute()
+        if provider != nil, let cached = SharedStore.cachedStreak {
+            var seeded = StreakState()
+            seeded.streak = cached.streak
+            seeded.jolly = cached.jolly
+            streak = seeded
+            showsCachedStreak = true
+        } else {
+            recompute()
+        }
     }
 
     /// Rereads the history from Health (at most every `minInterval` seconds).
@@ -63,6 +74,7 @@ final class HistoryStore {
         lastRefresh = Date()
         let result = await provider.dailyRecords(until: Date())
         records = result
+        showsCachedStreak = false
         recompute()
         refreshedAt = Date()
     }
@@ -87,6 +99,7 @@ final class HistoryStore {
         let now = Date()
         stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar, labels: .current)
         personalRecords = stats.personalRecords()
+        guard !showsCachedStreak else { return }
         var steps = stats.byDay.mapValues(\.steps)
         let today = calendar.startOfDay(for: now)
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }

@@ -77,6 +77,14 @@ final class StepsStore {
         #endif
         // Calibration computed earlier (aggregate points only, no raw Health data).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
+        // Today's last known count (saved for the widget): the Home opens on it, not on 0, while Health is read.
+        var seedSteps = true
+        #if DEBUG
+        if defaults.object(forKey: "stepteller.debugSteps") != nil { seedSteps = false }   // deterministic screenshots
+        #endif
+        if seedSteps, let cached = SharedStore.cachedStepsToday(now: Date(), calendar: controller.calendar) {
+            state.seed(cachedSteps: cached)
+        }
         SharedStore.goal = goal              // the widget reads goal, calibration and speed from the App Group
         SharedStore.speed = speed
         SharedStore.calibration = calibration

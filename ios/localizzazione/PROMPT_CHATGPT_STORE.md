@@ -1,12 +1,12 @@
 # Prompt per ChatGPT — testi della scheda App Store di NEAT
 
 Da incollare nella **stessa chat di ChatGPT che ha tradotto l'app** (conosce già app e glossario), allegando
-`NEAT_store_da_tradurre.xlsx`. Se usi una chat nuova, allega anche `NEAT_testi_tradotti.xlsx` (glossario) e gli
+`NEAT_store_da_tradurre.xlsx` e le 6 immagini di `design/claude-design-IT/` (per vedere dove stanno le didascalie). Se usi una chat nuova, allega anche `NEAT_testi_tradotti.xlsx` (glossario) e gli
 screenshot.
 
 ---
 
-Ora traduciamo i testi della **pagina di NEAT sull'App Store**, nelle stesse 9 lingue dell'app: inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato e cinese tradizionale. Ti allego **NEAT_store_da_tradurre.xlsx**: il foglio «Store» ha 5 righe (nome, sottotitolo, testo promozionale, descrizione, parole chiave).
+Ora traduciamo i testi della **pagina di NEAT sull'App Store**, nelle stesse 9 lingue dell'app: inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato e cinese tradizionale. Ti allego **NEAT_store_da_tradurre.xlsx**: il foglio «Store» ha 20 righe: i 5 testi della scheda (nome, sottotitolo, testo promozionale, descrizione, parole chiave) e le 15 didascalie dei 6 screenshot (righe `shot*`: titolo, sottotitolo e, per il sesto, tre etichette).
 
 ## Il messaggio (deciso, non cambiarlo)
 
@@ -32,6 +32,11 @@ Lo stile è quello delle schede delle migliori app: pochi messaggi, chiari, fras
    - Usa tutti i 100 caratteri, se servono.
 6. **Niente promesse sulla salute:** calorie, peso, longevità o prevenzione. Apple le rifiuta.
 7. **Cinese tradizionale:** variante di Taiwan.
+8. **Didascalie degli screenshot** (righe `shot*`):
+   - i titoli sono grandi, in MAIUSCOLO e su due righe, nello stile delle onomatopee dei fumetti;
+   - contano ritmo e brevità, non la traduzione letterale;
+   - le prime tre sono le tre domande dell'app e devono restare domande;
+   - il titolo della sesta è la stessa promessa del testo promozionale: usa le stesse parole.
 
 ## Consegna
 

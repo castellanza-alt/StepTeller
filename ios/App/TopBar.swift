@@ -15,7 +15,7 @@ struct TopBar: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            if screen == .storico {
+            if screen == .history {
                 // velo: paper pieno fino al 62%, 85% all'80%, poi trasparente
                 LinearGradient(stops: [.init(color: c.paper, location: 0),
                                        .init(color: c.paper, location: 0.62),

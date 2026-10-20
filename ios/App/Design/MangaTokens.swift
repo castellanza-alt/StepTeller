@@ -131,7 +131,7 @@ enum Manga {
     static let trackTouchRadius: CGFloat = 20
 
     // Storico
-    static let storicoHeight: CGFloat = 2020
+    static let historyHeight: CGFloat = 2020
     static let jollyTicks = 15          // StreakEngine.jollyEvery (decisione: 15 come l'app, non 14)
 
     // Animazioni

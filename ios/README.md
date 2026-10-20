@@ -9,7 +9,7 @@ La web app resta in radice al repository (non toccata).
 |---|---|
 | `Sources/StepTellerCore/` | Nucleo (solo Foundation): cadenza e taratura, calcolo, formato e date italiane (test golden), testi del promemoria come dati, logica sorgente passi |
 | `Tests/StepTellerCoreTests/` | Test del nucleo (valori golden della web app v4.0) — `swift test` anche su Linux |
-| `App/` | App SwiftUI: `RootView` (tema e navigazione), `TopBar`, `Home/` (Home e cursore sulla strada), `Storico/`, `StepsStore`, `HealthKitStepsProvider` |
+| `App/` | App SwiftUI: `RootView` (tema e navigazione), `TopBar`, `Home/` (Home e cursore sulla strada), `History/` (Storico), `StepsStore`, `HealthKitStepsProvider` |
 | `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
 | `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |

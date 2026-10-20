@@ -20,6 +20,7 @@ prima tra Will e la chat di coordinamento.
 | Lingue | Italiano, inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato, cinese tradizionale |
 | Unità di misura | km e km/h per tutte le lingue nella 1.0 (miglia eventualmente in una versione successiva) |
 | Termini chiave | Glossario (Jolly, serie, tappeto, obiettivo…) approvato da Will prima di tradurre |
+| Icona | Nuova (20 ottobre): suola rossa e scarpa bianca su nero, vettoriale, Liquid Glass — PR [#19](https://github.com/castellanza-alt/StepTeller/pull/19) |
 | Font lingue asiatiche | Font OFL ridotti ai caratteri usati: Dela Gothic One (JA), Black Han Sans (KO), Noto Sans SC/TC Black (ZH), ~270 KB |
 
 ## Da decidere

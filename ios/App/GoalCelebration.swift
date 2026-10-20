@@ -52,7 +52,7 @@ struct GoalCelebration: View {
                 .frame(width: 320, height: 180)
                 .scaleEffect(pop)
                 .background(GeometryReader { g in
-                    let f = g.frame(in: .named("festa"))
+                    let f = g.frame(in: .named("celebration"))
                     Color.clear
                         .onAppear { sparkOrigin = CGPoint(x: f.midX, y: f.midY) }
                         .onChange(of: f) { _, f in sparkOrigin = CGPoint(x: f.midX, y: f.midY) }
@@ -72,7 +72,7 @@ struct GoalCelebration: View {
             .scaleEffect(closing ? 0.96 : 1)
         }
         .ignoresSafeArea()
-        .coordinateSpace(name: "festa")
+        .coordinateSpace(name: "celebration")
         .opacity(closing ? 0 : 1)
         .contentShape(Rectangle())
         .onTapGesture { close() }

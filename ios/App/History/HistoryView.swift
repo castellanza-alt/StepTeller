@@ -7,7 +7,7 @@ enum BestTab: CaseIterable { case day, week, month, year, streak }
 
 /// Storico: serie e Jolly, «I MIEI PASSI» (settimana · mese · anno · sempre) e «IL MIO MEGLIO».
 /// Tela 390 × 2020 del handoff, scalata in larghezza; scorre sotto la barra fissa.
-struct StoricoView: View {
+struct HistoryView: View {
     let size: CGSize
     @Environment(StepsStore.self) private var store
     @Environment(\.manga) private var c
@@ -46,7 +46,7 @@ struct StoricoView: View {
 
     var body: some View {
         ScrollView {
-            MangaCanvas(width: size.width, height: Manga.storicoHeight) {
+            MangaCanvas(width: size.width, height: Manga.historyHeight) {
                 Board {
                     streakSection
                     stepsSection
@@ -309,7 +309,7 @@ struct StoricoView: View {
             .mask(LinearGradient(stops: [.init(color: .clear, location: 0), .init(color: .black, location: 0.45)],
                                  startPoint: .top, endPoint: .bottom))
             .accessibilityHidden(true)
-            .at(-8, Manga.storicoHeight + 6 - 406 * 330 / 500)
+            .at(-8, Manga.historyHeight + 6 - 406 * 330 / 500)
         Canvas { ctx, _ in
             ctx.fill(Self.starOuter, with: .color(c.ink))
             ctx.fill(Self.starInner, with: .color(c.red))

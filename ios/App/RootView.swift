@@ -1,7 +1,7 @@
 import SwiftUI
 import StepTellerCore
 
-enum AppScreen { case home, storico }
+enum AppScreen { case home, history }
 
 /// Radice dell'app: tema (giorno/notte), la schermata scelta (Home ↔ Storico con transizione
 /// orizzontale), la barra superiore fissa e la festa dell'obiettivo.
@@ -33,7 +33,7 @@ struct RootView: View {
         var skip = false
         #if DEBUG
         let d = UserDefaults.standard
-        if d.string(forKey: "stepteller.debugTab") != nil { s = .storico }
+        if d.string(forKey: "stepteller.debugTab") != nil { s = .history }
         sheet = d.object(forKey: "stepteller.debugSheet") != nil
         // Screenshot: `-stepteller.debugOnboarding 1…4` apre l'introduzione su quella pagina.
         if d.object(forKey: "stepteller.debugOnboarding") != nil {
@@ -71,11 +71,11 @@ struct RootView: View {
                             // i gesti dei figli (cursore sulla strada) hanno la precedenza sullo swipe
                             HomeView(size: size)
                                 .contentShape(Rectangle())
-                                .gesture(swipe(to: .storico))
+                                .gesture(swipe(to: .history))
                                 .transition(.move(edge: .leading))
-                        case .storico:
+                        case .history:
                             // simultaneo, altrimenti blocca lo scorrimento verticale
-                            StoricoView(size: size)
+                            HistoryView(size: size)
                                 .simultaneousGesture(swipe(to: .home))
                                 .transition(.move(edge: .trailing))
                         }
@@ -143,7 +143,7 @@ struct RootView: View {
 
     private func navigate() {
         withAnimation(.easeInOut(duration: Manga.navDuration)) {
-            screen = screen == .home ? .storico : .home
+            screen = screen == .home ? .history : .home
         }
     }
 
@@ -152,8 +152,8 @@ struct RootView: View {
     private func swipe(to target: AppScreen) -> some Gesture {
         DragGesture(minimumDistance: 24).onEnded { v in
             guard screen != target else { return }
-            let dx = target == .storico ? -v.translation.width : v.translation.width
-            let flick = target == .storico ? -v.predictedEndTranslation.width : v.predictedEndTranslation.width
+            let dx = target == .history ? -v.translation.width : v.translation.width
+            let flick = target == .history ? -v.predictedEndTranslation.width : v.predictedEndTranslation.width
             guard abs(v.translation.width) > abs(v.translation.height) * 1.5, dx > 70 || flick > 160 else { return }
             navigate()
         }

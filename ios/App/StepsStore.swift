@@ -8,11 +8,24 @@ import StepTellerCore
 @MainActor
 @Observable
 final class StepsStore {
-    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); SharedStore.goal = goal; history.recordGoal(goal); WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
-    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); SharedStore.speed = speed; WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
+    var goal: Int {
+        didSet {
+            defaults.set(goal, forKey: Keys.goal)
+            SharedStore.goal = goal
+            history.recordGoal(goal)
+            deferSync(reloadWidget: true)
+        }
+    }
+    var speed: Double {
+        didSet {
+            defaults.set(speed, forKey: Keys.speed)
+            SharedStore.speed = speed
+            deferSync(reloadWidget: true)
+        }
+    }
     /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
-    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
+    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); deferSync(reloadWidget: false) } }
     private(set) var state = StepsState()
     /// Storico, streak e Jolly.
     let history: HistoryStore
@@ -26,6 +39,12 @@ final class StepsStore {
     @ObservationIgnored private var lastCalibration: Date?
     @ObservationIgnored private var observing = false
     @ObservationIgnored private var started = false
+    /// Lavoro rinviato (ricarico dei widget, riprogrammazione dei promemoria) dopo una raffica di modifiche.
+    @ObservationIgnored private var syncTask: Task<Void, Never>?
+    @ObservationIgnored private var pendingWidgetReload = false
+    @ObservationIgnored private var pendingReminders = false
+    /// Applicazioni dei promemoria in fila, una alla volta.
+    @ObservationIgnored private var reminderQueue: Task<Void, Never>?
 
     private enum Keys {
         static let goal = "stepteller.goal"
@@ -102,10 +121,41 @@ final class StepsStore {
         startDayWatcher()
     }
 
-    func becameInactive() {
-        WidgetCenter.shared.reloadAllTimelines()
+    /// App in background: il lavoro rinviato parte subito (chi trascina il cursore e chiude l'app deve trovare
+    /// widget e promemoria aggiornati), poi un ricarico dei widget con lo stato finale.
+    func becameInactive() async {
+        pendingWidgetReload = true
+        await flushSync()
         dayTask?.cancel()
         dayTask = nil
+    }
+
+    // MARK: aggiornamenti coalizzati
+
+    /// Cursore e campi delle Impostazioni cambiano decine di volte al secondo: widget e promemoria si aggiornano
+    /// una volta sola, mezzo secondo dopo l'ultima modifica, con i valori finali (o subito, andando in background).
+    private func deferSync(reloadWidget: Bool) {
+        pendingWidgetReload = pendingWidgetReload || reloadWidget
+        pendingReminders = true
+        syncTask?.cancel()
+        syncTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(500))
+            guard !Task.isCancelled, let self else { return }
+            await self.flushSync()
+        }
+    }
+
+    private func flushSync() async {
+        syncTask?.cancel()
+        syncTask = nil
+        if pendingWidgetReload {
+            pendingWidgetReload = false
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        if pendingReminders {
+            pendingReminders = false
+            await updateReminders()
+        }
     }
 
     /// Un solo osservatore per tutta la vita dell'app: in primo piano aggiorna il numero, in
@@ -128,10 +178,13 @@ final class StepsStore {
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
         if let value {
-            SharedStore.saveSteps(value)                  // copia per il widget a telefono bloccato
+            // copia per il widget a telefono bloccato; il widget si ricarica solo se il numero è cambiato
+            if SharedStore.cachedStepsToday(now: now) != value {
+                SharedStore.saveSteps(value, now: now)
+                WidgetCenter.shared.reloadAllTimelines()
+            }
             history.updateToday(steps: value)             // la streak scatta subito, non alla rilettura dello storico
         }
-        WidgetCenter.shared.reloadAllTimelines()
         await history.refresh(minInterval: 20)       // oggi nello storico e nella streak
         await updateReminders()
     }
@@ -187,11 +240,22 @@ final class StepsStore {
     }
 
     /// Riprogramma le notifiche con i minuti attuali (oggi preciso, giorni successivi generici).
+    /// Le scritture nel centro notifiche sono in fila, nell'ordine delle richieste: due aggiornamenti
+    /// vicini non si intrecciano e l'ultimo piano calcolato è anche l'ultimo scritto.
     func updateReminders() async {
-        guard reminderEnabled else { await scheduler.cancelAll(); return }
-        let requests = ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
-                                                plan: plan, streak: history.streak, calendar: controller.calendar)
-        await scheduler.apply(requests)
+        let enabled = reminderEnabled
+        let requests = enabled
+            ? ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
+                                       plan: plan, streak: history.streak, calendar: controller.calendar)
+            : []
+        let previous = reminderQueue
+        let scheduler = scheduler
+        let task = Task {
+            await previous?.value
+            if enabled { await scheduler.apply(requests) } else { await scheduler.cancelAll() }
+        }
+        reminderQueue = task
+        await task.value
     }
 
     // MARK: cambio di giorno

@@ -81,21 +81,25 @@ final class StepsStore {
         guard !started else { return }
         started = true
         await controller.provider.requestAccess()
-        await refresh()
+        await activate()
         await startObserving()
-        startDayWatcher()
         await refreshCalibration(force: true)
-        await history.refresh()
         if reminderEnabled { _ = await scheduler.requestIfNeeded() }
         await updateReminders()
     }
 
     /// App in primo piano (anche ritorno da background).
     func becameActive() async {
+        await activate()
+        await refreshCalibration(force: false)
+    }
+
+    /// Storico riletto per intero (la festa aspetta uno storico letto dopo l'attivazione), poi i passi di
+    /// oggi: la rilettura limitata a 20 s dentro `refresh()` viene così saltata, una sola lettura per attivazione.
+    private func activate() async {
+        await history.refresh()
         await refresh()
         startDayWatcher()
-        await refreshCalibration(force: false)
-        await history.refresh()
     }
 
     func becameInactive() {

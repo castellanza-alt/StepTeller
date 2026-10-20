@@ -110,6 +110,25 @@ Obiettivo, taratura, velocità del cursore, serie e Jolly arrivano dall'app via 
 i minuti usano lo stesso modello tarato dell'app. Tocco → `stepteller://oggi`. In Debug `WidgetPreviewScreen` mostra i widget
 per gli screenshot (`-stepteller.debugWidget 1`).
 
+## Animazione di apertura
+
+`App/SplashView.swift`, versione «Pestone» scelta da Will (ottobre 2026): sul nero dell'icona la scarpa cade e pesta
+(0,24 s: stella rossa al 65% dietro la scarpa, linee cinetiche, `sensoryFeedback` leggero), «NEAT» (`GlyphText`)
+sbatte giù con l'ombra rossa, da 0,86 s un taglio rosso a −14° sale e scopre la Home. Durata 1,2 s, `KeyframeTimeline`
+(iOS 17) letto da un `TimelineView`. Arte: `rosso.svg` e `bianco.svg` dell'icona copiati nel catalogo
+(`SplashSole`, `SplashShoe`, vettoriali), rasterizzati una volta fuori dal thread principale, già all'avvio dell'app. Colori `MangaPalette.icon*`,
+misure `Manga.splash*` in `MangaTokens.swift`.
+
+- Sta sopra `RootView` (overlay in `StepTellerApp`): Salute, storico e introduzione partono sotto come prima.
+- Solo all'apertura a freddo (lo stato vive quanto il processo); il tempo scorre solo in primo piano. Uscendo
+  dall'app durante l'animazione questa si chiude: al ritorno c'è la Home.
+- Schermata di avvio fissa: `UILaunchScreen` → `UIColorName` `LaunchBackground` (#0C0C0C, il fondo dell'icona), uguale
+  al primo fotogramma. Il tempo parte dopo qualche fotogramma regolare (al massimo 0,6 s di nero): i primi fotogrammi
+  disegnano la Home sotto. Un fotogramma lento ferma l'animazione invece di farle saltare un pezzo.
+- Un tocco la salta (dissolvenza di 0,15 s). Con «Riduci movimento»: dissolvenza dell'immagine finale, 0,7 s.
+- Debug: `-stepteller.skipSplash 1` la toglie, `0` la forza; qualunque opzione `-stepteller.debug…` la toglie da sola
+  (screenshot invariati). `-stepteller.splashSlow 3` la rallenta tre volte (video).
+
 ## Icona
 
 `App/AppIcon.icon` (Icon Composer, Liquid Glass): fondo nero pieno, livello «Suola» (`rosso.svg`, vetro con riflessi) e

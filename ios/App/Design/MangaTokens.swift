@@ -62,6 +62,13 @@ struct MangaPalette: Equatable {
     /// Icons inside the red button.
     static let onRed = Color.white
 
+    // App icon colors (`App/AppIcon.icon`): the opening animation, the same in both themes.
+    /// Icon background. Same value as the `LaunchBackground` color asset of the static iOS launch screen
+    /// (`UILaunchScreen` in Info.plist): the first frame of the animation must match it exactly.
+    static let iconBlack = Color(hex: 0x0C0C0C)
+    static let iconRed = Color(hex: 0xE5231B)
+    static let iconWhite = Color.white
+
     static let day = MangaPalette(theme: .day, paper: Color(hex: 0xFFFFFF), ink: Color(hex: 0x141414), red: Color(hex: 0xE5231B))
     static let night = MangaPalette(theme: .night, paper: Color(hex: 0x0E1430), ink: Color(hex: 0xE2EAFF), red: Color(hex: 0xFF3B30))
 
@@ -138,6 +145,14 @@ enum Manga {
 
     // Animations
     static let navDuration = 0.35
+
+    // Opening animation (`SplashView`): icon art 1.25 × the frame width, bleeding off the top.
+    static let splashArtSide: CGFloat = 488
+    static let splashArtTop: CGFloat = -24
+    static let splashTitleSize: CGFloat = 150
+    static let splashTitleRotation: Double = -7
+    static let splashTitleSkew: Double = -10
+    static let splashShadow: CGFloat = 8
 }
 
 // MARK: - Typography

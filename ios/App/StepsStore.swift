@@ -59,7 +59,8 @@ final class StepsStore {
          defaults: UserDefaults = .standard) {
         self.defaults = defaults
         self.workouts = workouts
-        controller = StepsController(provider: provider)
+        // Calendario che segue il fuso del telefono: dopo un viaggio «oggi» resta il giorno giusto senza riavviare.
+        controller = StepsController(provider: provider, calendar: .autoupdatingCurrent)
         // `integer/double(forKey:)` leggono anche i valori passati come argomenti di avvio (stringhe).
         let initialGoal = max(0, defaults.object(forKey: Keys.goal) != nil ? defaults.integer(forKey: Keys.goal) : 10_000)
         goal = initialGoal

@@ -1,12 +1,16 @@
 # Prompt per Claude Design — pagina App Store di NEAT (italiano)
 
-Da incollare in Claude Design, allegando i file della cartella `ios/localizzazione/design/`:
-- `icona-1024.png`: l'icona dell'app;
-- gli screenshot dell'app in italiano (`*.png`, iPhone 1290 × 2796).
+Da incollare in Claude Design, allegando i file dello zip `NEAT_design_materiale.zip`:
+- `icona-1024.png`: l'icona dell'app (nuova, ottobre 2026);
+- `screenshot/`: gli screenshot dell'app in italiano (iPhone, 1290 × 2796), di giorno e di notte:
+  `home-4kmh-day` (passi di oggi, 65 minuti a 4 km/h), `home-16kmh-day` / `home-16kmh-night` (stessa giornata a 16 km/h),
+  `home-fatto-day` (obiettivo raggiunto), `storico-sett-day` (serie e Jolly), `storico-sett-grafico-day` (grafico della
+  settimana), `storico-anno-meglio-day` (record), `widget-parziale` / `widget-parziale-night` (widget Home e blocco
+  schermo), `intro-1-day`, `intro-2-day` / `intro-2-night` (introduzione: benvenuto e Salute).
 
 ---
 
-Disegna l'anteprima della **pagina App Store in italiano** di NEAT, un'app per iPhone gratuita, e i **6 screenshot per lo store** che la accompagnano. Mi serve per approvare l'italiano prima di tradurre tutto in altre 9 lingue: testi e immagini devono quindi essere definitivi, non segnaposto.
+Disegna l'anteprima della **pagina App Store in italiano** di NEAT, un'app per iPhone gratuita, e i **6 screenshot per lo store** che la accompagnano. Allegati trovi l'icona e gli screenshot veri dell'app (elenco in fondo). Mi serve per approvare l'italiano prima di tradurre tutto in altre 9 lingue: testi e immagini devono quindi essere definitivi, non segnaposto.
 
 ## L'app in breve
 
@@ -79,3 +83,15 @@ Le didascalie qui sopra sono una base. Proponi tu la versione migliore in italia
 3. L'**elenco finale delle didascalie** in testo, così posso approvarle e farle tradurre.
 
 Quando qualcosa non è chiaro, scegli la soluzione più semplice e dimmelo nelle note.
+
+## File allegati
+
+- `icona-1024.png`: icona dell'app (fondo nero, suola rossa, scarpa bianca).
+- `screenshot/home-4kmh-day.jpg`: Home, 3.465 passi su 10.000, 65 minuti mancanti a 4 km/h.
+- `screenshot/home-16kmh-day.jpg`, `home-16kmh-night.jpg`: stessa Home con il cursore a 16 km/h (meno minuti).
+- `screenshot/home-fatto-day.jpg`: obiettivo raggiunto, vignetta «FATTO!».
+- `screenshot/storico-sett-day.jpg`: Storico, serie di 22 giorni, Jolly, record della serie.
+- `screenshot/storico-sett-grafico-day.jpg`: grafico della settimana.
+- `screenshot/storico-anno-meglio-day.jpg`: «IL MIO MEGLIO», i record.
+- `screenshot/widget-parziale.jpg`, `widget-parziale-night.jpg`: widget piccolo, medio e blocco schermo.
+- `screenshot/intro-1-day.jpg`, `intro-2-day.jpg`, `intro-2-night.jpg`: introduzione (benvenuto, Salute in sola lettura).

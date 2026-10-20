@@ -153,7 +153,7 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
       `NEAT_lingue_per_Claude_Design.zip` con didascalie per lingua
 - [x] Claude Design: 6 immagini per ciascuna delle 9 lingue (`design/claude-design-lingue/`, 54 PNG 1320×2868, didascalie
       identiche al foglio, controllate tutte)
-- [ ] EN 02: «kilometres» → «kilometers» (inglese americano, come nell'app) da rifare in Claude Design
+- [x] EN 02: «kilometers» (inglese americano), immagine rifatta da Claude Design
 - [x] ChatGPT: testi dello store e 15 didascalie degli screenshot nelle 9 lingue → `NEAT_store_tradotto.xlsx`
 - [x] Controllo della chat di coordinamento: limiti (30/30/170/100) rispettati, a capo «/» in tutti i titoli, nessuna
       promessa sanitaria; serie in JA/KO/ZH riallineata al glossario dell'app (連続記録/연속 기록/连续记录/連續紀錄)

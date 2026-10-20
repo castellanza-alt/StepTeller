@@ -112,7 +112,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       +0,6 MB; 44 test, 0 avvisi; IT/EN/DE identici
 - [x] Storico: scritte sotto il «22» staccate in JA/KO/ZH (`TitleFont.gap`, 0 nelle altre lingue); anche Home e widget medio
 - [x] Controllo della chat di coordinamento: 44 test, 0 avvisi; Storico e Home rifotografati in JA, KO, ZH-Hant
-- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
+- [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, `6ca7909`)
 - [ ] JA, KO, ZH-Hans, ZH-Hant dal foglio
 - [ ] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)

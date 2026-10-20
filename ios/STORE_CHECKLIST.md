@@ -148,8 +148,11 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Claude Design: le 3 didascalie corrette nelle immagini (06: sottotitolo da tornare a «Nessun dato lascia il telefono»)
 - [ ] Screenshot dell'app nelle 9 lingue per Claude Design (`design/app-lingue/`, generati dalla chat di coordinamento)
 - [ ] Claude Design: 6 immagini per ciascuna delle 9 lingue
-- [ ] ChatGPT: testi dello store e 15 didascalie degli screenshot nelle 9 lingue (foglio con 20 righe)
-- [ ] Controllo della chat di coordinamento: limiti (30/30/170/100), glossario, nessuna promessa sanitaria
+- [x] ChatGPT: testi dello store e 15 didascalie degli screenshot nelle 9 lingue → `NEAT_store_tradotto.xlsx`
+- [x] Controllo della chat di coordinamento: limiti (30/30/170/100) rispettati, a capo «/» in tutti i titoli, nessuna
+      promessa sanitaria; serie in JA/KO/ZH riallineata al glossario dell'app (連続記録/연속 기록/连续记录/連續紀錄)
+- [ ] Parole chiave JA/KO/ZH: 42–60 caratteri ma 102–146 byte; verificare in App Store Connect se il limite di 100 è in
+      caratteri o in byte, e accorciarle se serve
 - [ ] Lingua principale della scheda: inglese (così i paesi senza traduzione vedono l'inglese, non l'italiano);
       copie per en-GB/en-AU/en-CA, es-MX, fr-CA dove servono
 - [ ] Categoria Salute e fitness (seconda: Stile di vita), età 4+, privacy «Dati non raccolti»

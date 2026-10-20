@@ -4,7 +4,7 @@ import StepTellerCore
 extension HistoryLabels {
     /// Etichette dello Storico nella lingua del telefono: in italiano quelle di sempre (`italian`), nelle altre
     /// lingue nomi dei mesi, iniziali e intervalli di date scritti da iOS.
-    static var current: HistoryLabels { LocalFormat.isItalian ? .italian : system(locale: .current) }
+    static let current: HistoryLabels = LocalFormat.isItalian ? .italian : system(locale: .current)
 
     static func system(locale: Locale) -> HistoryLabels {
         var cal = Calendar.current
@@ -28,25 +28,56 @@ extension HistoryLabels {
     }
 
     private static func formatDate(_ date: Date, template: String, locale: Locale, calendar: Calendar) -> String {
-        let f = DateFormatter()
-        f.locale = locale
-        f.calendar = calendar
-        f.timeZone = calendar.timeZone
-        f.setLocalizedDateFormatFromTemplate(template)
-        return f.string(from: date)
+        FormatterCache.shared.date(template: template, locale: locale, calendar: calendar).string(from: date)
     }
 
     private static func interval(_ start: Date, _ end: Date, template: String, locale: Locale, calendar: Calendar) -> String {
-        let f = DateIntervalFormatter()
-        f.locale = locale
-        f.calendar = calendar
-        f.timeZone = calendar.timeZone
-        f.dateTemplate = template
-        return f.string(from: start, to: end)
+        FormatterCache.shared.interval(template: template, locale: locale, calendar: calendar).string(from: start, to: end)
     }
 
     private static func capitalizedFirst(_ text: String, _ locale: Locale) -> String {
         guard let first = text.first else { return text }
         return String(first).uppercased(with: locale) + text.dropFirst()
+    }
+}
+
+/// Formattatori riusati per (modello, lingua, calendario): crearne uno costa 0,1–0,25 ms e un body dello Storico ne
+/// chiede 6–8. Un `NSLock` perché le etichette sono closure `@Sendable`; i formattatori di Foundation sono thread-safe.
+private final class FormatterCache: @unchecked Sendable {
+    static let shared = FormatterCache()
+    private let lock = NSLock()
+    private var dates: [String: DateFormatter] = [:]
+    private var intervals: [String: DateIntervalFormatter] = [:]
+
+    private func key(_ template: String, _ locale: Locale, _ calendar: Calendar) -> String {
+        "\(template)|\(locale.identifier)|\(calendar.identifier)|\(calendar.timeZone.identifier)|\(calendar.firstWeekday)"
+    }
+
+    func date(template: String, locale: Locale, calendar: Calendar) -> DateFormatter {
+        let k = key(template, locale, calendar)
+        return lock.withLock {
+            if let f = dates[k] { return f }
+            let f = DateFormatter()
+            f.locale = locale
+            f.calendar = calendar
+            f.timeZone = calendar.timeZone
+            f.setLocalizedDateFormatFromTemplate(template)
+            dates[k] = f
+            return f
+        }
+    }
+
+    func interval(template: String, locale: Locale, calendar: Calendar) -> DateIntervalFormatter {
+        let k = key(template, locale, calendar)
+        return lock.withLock {
+            if let f = intervals[k] { return f }
+            let f = DateIntervalFormatter()
+            f.locale = locale
+            f.calendar = calendar
+            f.timeZone = calendar.timeZone
+            f.dateTemplate = template
+            intervals[k] = f
+            return f
+        }
     }
 }

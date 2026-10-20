@@ -26,9 +26,15 @@ prima tra Will e la chat di coordinamento.
 ## Da decidere
 
 
-- [ ] Ramo di uscita: `ia/versione-0.6.2` (base attuale) e `ios-nativa` (10 commit 0.5.5–0.6.1 fatti dal Mac, non
-      presenti nel ramo attuale) sono divergenti. Il workflow TestFlight parte da `ios-nativa`. Decidere quale ramo
-      porta la 1.0 prima della chat 7.
+- [x] Ramo di uscita (deciso da Will, 20 ottobre: «Git pulito e ordinato»): la 1.0 parte da `ia/versione-0.6.2`.
+      TestFlight e verifica partono da `main` e da `ia/versione-0.6.2` (non più da `ios-nativa`). La vecchia
+      `ios-nativa` (0.5.5–0.6.1, design «carta e matita») è salvata in `archivio/ios-nativa-0.6.1`.
+
+### Riordino di Git (alla chiusura, dopo l'ok di Will sulla 1.0)
+- [ ] `ia/versione-0.6.2` unito in `main` (pubblica anche Pages: web app invariata, pagine `neat/` già online)
+- [ ] TestFlight solo da `main`; il ramo della 1.0 tolto dai workflow
+- [ ] Rami di lavoro già uniti cancellati (`ia/*`, `ios-nativa`); l'archivio diventa un tag `archivio/0.6.1`
+- [ ] Tag `v1.0` sulla versione inviata ad Apple
 
 ## 0. Finetuning — fatto
 - [x] Modifiche della chat «finetuning» salvate: 0.6.3 (`0aa5c2e`), codice bloccato da qui

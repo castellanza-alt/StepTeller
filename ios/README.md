@@ -118,9 +118,9 @@ trasparente generate da iOS. Anteprima da terminale con `ictool` (dentro Icon Co
 
 ## CI
 
-- `.github/workflows/ios-verifica.yml` — su PR e push a `ios-nativa` quando cambia `ios/**`: `swift test` (Linux),
+- `.github/workflows/ios-verifica.yml` — su PR e push a `main` o `ia/versione-0.6.2` quando cambia `ios/**`: `swift test` (Linux),
   build simulatore + test + screenshot chiaro/scuro (artefatto `screenshot-simulatore`).
-- `.github/workflows/ios-testflight.yml` — con un push su `ios-nativa` il cui messaggio contiene `[apple]` (solo preparazione Apple) o `[testflight]` (build completa); avvio manuale dopo il merge: verifica Apple, firma automatica con
+- `.github/workflows/ios-testflight.yml` — con un push su `main` o `ia/versione-0.6.2` il cui messaggio contiene `[apple]` (solo preparazione Apple) o `[testflight]` (build completa); avvio manuale dopo il merge: verifica Apple, firma automatica con
   chiave API, upload, assegnazione al gruppo «Personale». Numero di build `1.<run_number>.<run_attempt>`.
 
 Segreti Actions (solo nomi): `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`. Il repository è pubblico: **mai**

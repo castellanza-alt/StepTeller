@@ -5,7 +5,7 @@ on:
   pull_request:
     paths: ['ios/**', '.github/workflows/ios-verifica.yml']
   push:
-    branches: [ios-nativa]
+    branches: [main, ia/versione-0.6.2]
     paths: ['ios/**', '.github/workflows/ios-verifica.yml']
 permissions:
   contents: read

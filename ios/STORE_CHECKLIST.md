@@ -145,7 +145,9 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
       promozionale, descrizione (655 car.), parole chiave
 - [x] Anteprima italiana con Claude Design: 6 screenshot 1320×2868 in `localizzazione/design/claude-design-IT/`
       (non versionati); didascalie 1, 3, 6 ritoccate per allinearle ai messaggi (approvate da Will)
-- [ ] Claude Design: le 3 didascalie corrette nelle immagini
+- [x] Claude Design: le 3 didascalie corrette nelle immagini (06: sottotitolo da tornare a «Nessun dato lascia il telefono»)
+- [ ] Screenshot dell'app nelle 9 lingue per Claude Design (`design/app-lingue/`, generati dalla chat di coordinamento)
+- [ ] Claude Design: 6 immagini per ciascuna delle 9 lingue
 - [ ] ChatGPT: testi dello store e 15 didascalie degli screenshot nelle 9 lingue (foglio con 20 righe)
 - [ ] Controllo della chat di coordinamento: limiti (30/30/170/100), glossario, nessuna promessa sanitaria
 - [ ] Lingua principale della scheda: inglese (così i paesi senza traduzione vedono l'inglese, non l'italiano);

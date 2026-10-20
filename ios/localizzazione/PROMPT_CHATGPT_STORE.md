@@ -36,7 +36,8 @@ Lo stile è quello delle schede delle migliori app: pochi messaggi, chiari, fras
    - i titoli sono grandi, in MAIUSCOLO e su due righe, nello stile delle onomatopee dei fumetti;
    - contano ritmo e brevità, non la traduzione letterale;
    - le prime tre sono le tre domande dell'app e devono restare domande;
-   - il titolo della sesta è la stessa promessa del testo promozionale: usa le stesse parole.
+   - il titolo della sesta è la stessa promessa del testo promozionale: usa le stesse parole;
+   - **segna l'a capo dei titoli con « / »** (al massimo 2 righe), per esempio «QUANTI PASSI / HAI FATTO OGGI?». È obbligatorio in giapponese, coreano e cinese.
 
 ## Consegna
 

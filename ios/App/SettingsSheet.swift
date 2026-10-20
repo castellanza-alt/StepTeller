@@ -129,12 +129,14 @@ struct SettingsSheet: View {
     }
 
     /// Data d'inizio della serie nella lingua del telefono («8 ottobre 2026», «October 8, 2026»).
-    private var startText: String {
+    private var startText: String { Self.startFormatter.string(from: store.history.streakStart) }
+
+    private static let startFormatter: DateFormatter = {
         let f = DateFormatter()
         f.locale = .current
         f.setLocalizedDateFormatFromTemplate("dMMMMyyyy")
-        return f.string(from: store.history.streakStart)
-    }
+        return f
+    }()
 
     private static let privacyURL = URL(string: "https://castellanza-alt.github.io/StepTeller/neat/privacy/")!
     private static let supportURL = URL(string: "https://castellanza-alt.github.io/StepTeller/neat/supporto/")!

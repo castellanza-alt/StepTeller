@@ -124,7 +124,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Layout controllati
 - [ ] Rilettura di un madrelingua (facoltativa)
 
-## 4c. Revisione finale del codice (Fable) — PR [#20](https://github.com/castellanza-alt/StepTeller/pull/20), da unire
+## 4c. Revisione finale del codice (Fable) — fatto, PR [#20](https://github.com/castellanza-alt/StepTeller/pull/20)
 - [x] Rapporto di Fase 1 approvato (con precisazioni: E2 senza la motivazione del budget, aggiornamento immediato
       andando in background; D2 con `Calendar.autoupdatingCurrent`; E4 non fatto)
 - [x] 10 commit: residui, una sola rilettura dello storico, widget e promemoria coalizzati (26 → 1, gara delle
@@ -132,8 +132,8 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       fuso orario, rinomine (`HistoryView`), duplicazioni, 704 righe di commenti in inglese
 - [x] Controllo della chat di coordinamento: letti i commit a rischio (E1, E2, D2); il commit dei commenti non cambia
       codice (verifica automatica); chiavi salvate identiche; 48 test, 0 avvisi Release/Debug; Storico rifotografato
-- [ ] Merge della PR in `ia/versione-0.6.2` (ok di Will)
-- [ ] TestFlight 0.99 per la prova di Will
+- [x] Merge della PR in `ia/versione-0.6.2` (ok di Will, 10 commit in fila, ultimo `f918bf2`)
+- [ ] TestFlight 0.99 per la prova di Will (`4b441fc`, versione da riportare a 1.0 prima dell'invio ad Apple)
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

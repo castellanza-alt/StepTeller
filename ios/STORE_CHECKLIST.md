@@ -137,7 +137,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Prova di Will sul telefono (20 ottobre): tutto ok, salvo lo «0» per qualche secondo all'apertura
 - [x] Apertura senza «0»: ultimi passi e serie salvati mostrati fino alla lettura di Salute — PR [#21](https://github.com/castellanza-alt/StepTeller/pull/21) (`ae28edf`)
 - [x] Nuova build 0.99 su TestFlight con la correzione (build 1.68.2, al secondo tentativo: il primo è rimasto senza Mac)
-- [ ] Prova di Will dell'apertura senza «0»
+- [x] Prova di Will dell'apertura senza «0» (build 1.68.2): funziona
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

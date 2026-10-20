@@ -13,6 +13,8 @@ final class HistoryStore {
     private var records: [DayRecord] = []
     private var goals: GoalHistory
     private(set) var stats: HistoryStats
+    /// Record personali di `stats`, calcolati una volta per aggiornamento (lo Storico li legge a ogni body).
+    private(set) var personalRecords: PersonalRecords
     private(set) var streak = StreakState()
     /// Fine dell'ultima rilettura da Salute: la festa aspetta uno storico letto dopo l'apertura.
     private(set) var refreshedAt: Date?
@@ -47,7 +49,9 @@ final class HistoryStore {
             streakStart = cal.startOfDay(for: Date())
             defaults.set(streakStart, forKey: Keys.start)
         }
-        stats = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
+        let empty = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
+        stats = empty
+        personalRecords = empty.personalRecords()
         recompute()
     }
 
@@ -81,7 +85,8 @@ final class HistoryStore {
     private func recompute() {
         let now = Date()
         stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar, labels: .current)
-        var steps = Dictionary(records.map { (calendar.startOfDay(for: $0.day), $0.steps) }, uniquingKeysWith: { a, _ in a })
+        personalRecords = stats.personalRecords()
+        var steps = stats.byDay.mapValues(\.steps)
         let today = calendar.startOfDay(for: now)
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,

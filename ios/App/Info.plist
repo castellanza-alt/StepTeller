@@ -44,6 +44,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Anton-Regular.ttf</string>
+		<string>DelaGothicOne-NEAT.ttf</string>
+		<string>BlackHanSans-NEAT.ttf</string>
+		<string>NotoSansSC-Black-NEAT.ttf</string>
+		<string>NotoSansTC-Black-NEAT.ttf</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict/>

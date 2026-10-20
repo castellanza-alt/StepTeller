@@ -16,11 +16,17 @@
   Salute dal foglio approvato `localizzazione/NEAT_testi_tradotti.xlsx` (String Catalog generati con
   `scripts/cataloghi.py`). Numeri, date, nomi dei mesi e iniziali dei giorni nella lingua del telefono; in italiano
   tutto come prima. Il permesso di scrittura in Salute ora dice «si limita a leggere i dati» (legge anche gli
-  allenamenti). In giapponese, coreano e cinese i caratteri che Anton non ha usano per ora il font di sistema.
+  allenamenti).
 - Lingua di riserva inglese: con il telefono in una lingua non tradotta (es. olandese) l'app è in inglese, non in italiano.
 - Home a obiettivo raggiunto: «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» sta in una vignetta storta col bordo, come
   quelle dello Storico, e non finisce più sopra gamba e lacci della scarpa (si legge in tutte le lingue). Il blocco
   dei minuti, il cursore nascosto e VoiceOver restano come prima.
+- Titoli in giapponese, coreano e cinese nello stile manga: i caratteri che Anton non ha li disegna un font OFL spesso
+  (Dela Gothic One, Black Han Sans, Noto Sans SC Black e TC Black), ridotto ai soli caratteri usati dall'app
+  (`scripts/font_asia.py`, da rilanciare quando cambiano le traduzioni); cifre e lettere restano Anton. Nelle
+  quattro lingue la spaziatura larga delle maiuscole di Anton è ridotta. Anche i numeri con contorno (festa,
+  record) usano il font giusto. Italiano e le altre lingue invariati. L'app cresce di circa 0,5 MB (268 KB di font
+  nell'app e altrettanti nel widget).
 
 ## 0.6.3 — 19 ottobre 2026
 - Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).

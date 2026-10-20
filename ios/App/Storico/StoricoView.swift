@@ -100,7 +100,7 @@ struct StoricoView: View {
             GlyphText(text: "\(st.streak)", size: 200, lineHeight: 0.86, tracking: -0.04, fill: c.ink,
                       stroke: c.ink, strokeWidth: 2, shadow: (c.red, 7, 7))
             AntonText(L10n.format("st.streak", st.streak), 30, tracking: 0.02)
-                .padding(.top, 4).padding(.leading, 6)
+                .padding(.top, 4 + TitleFont.gap(30)).padding(.leading, 6)
         }
         .manga(rotate: -8, skew: -10)
         .accessibilityElement(children: .ignore)
@@ -109,7 +109,7 @@ struct StoricoView: View {
         jollyGroup(st.jolly)
             .manga(rotate: -6)
             .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { jollyWidth = $0 }
-            .at(min(196, Manga.frameWidth - 8 - jollyWidth), 316)
+            .at(min(196, Manga.frameWidth - 8 - jollyWidth), 316 + TitleFont.gap(44))   // sotto la scritta della serie, abbassata in JA/KO/ZH
         Vignette(shape: .panelA, width: 220) {
             VStack(alignment: .leading, spacing: 2) {
                 AntonText(L10n.text("st.longest.title"), 14, tracking: 0.08)

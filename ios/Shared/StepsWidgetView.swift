@@ -130,6 +130,7 @@ struct WidgetMediumView: View {
     private var stepsBlock: some View {
         VStack(alignment: .leading, spacing: 0) {
             AntonText(L10n.text("w.stepsToday", table: L10n.widget), 13, tracking: 0.04)
+                .padding(.bottom, TitleFont.gap(13))
             let text = WidgetText.steps(data.plan)
             ZStack(alignment: .topLeading) {
                 AntonText(text, 64, lineHeight: 0.92, tracking: -0.035, color: c.red).offset(x: 4, y: 4)

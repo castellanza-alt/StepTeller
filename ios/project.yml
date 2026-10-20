@@ -71,6 +71,11 @@ targets:
       - path: App/Design/MangaViews.swift
       - path: App/Design/MangaShapes.swift
       - path: App/Fonts/Anton-Regular.ttf
+      # titoli in JA/KO/ZH (ridotti ai caratteri usati, scripts/font_asia.py)
+      - path: App/Fonts/DelaGothicOne-NEAT.ttf
+      - path: App/Fonts/BlackHanSans-NEAT.ttf
+      - path: App/Fonts/NotoSansSC-Black-NEAT.ttf
+      - path: App/Fonts/NotoSansTC-Black-NEAT.ttf
     dependencies:
       - package: StepTellerCore
         product: StepTellerCore
@@ -84,7 +89,7 @@ targets:
         CFBundleDisplayName: NEAT
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        UIAppFonts: [Anton-Regular.ttf]
+        UIAppFonts: [Anton-Regular.ttf, DelaGothicOne-NEAT.ttf, BlackHanSans-NEAT.ttf, NotoSansSC-Black-NEAT.ttf, NotoSansTC-Black-NEAT.ttf]
         NSHealthShareUsageDescription: Il widget legge i tuoi passi di oggi da Salute per mostrarli e per stimare i minuti a piedi che mancano. Non scrive nulla e non invia dati fuori dal telefono.
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

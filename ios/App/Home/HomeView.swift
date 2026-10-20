@@ -83,11 +83,13 @@ struct HomeView: View {
     private var stepsBlock: some View {
         VStack(spacing: 0) {
             AntonText(L10n.text("home.steps.label"), 27, tracking: 0.01)
+                .padding(.bottom, TitleFont.gap(27))
             AntonText(LocalFormat.integer(store.steps), 108, lineHeight: 0.92, tracking: -0.035)
                 .manga(scaleX: 0.86)
                 .contentTransition(.numericText())
                 .animation(.snappy, value: store.steps)
             AntonText(L10n.format("home.steps.of", LocalFormat.integer(store.goal)), 19, tracking: 0.02)
+                .padding(.top, TitleFont.gap(19))
         }
         .contentShape(Rectangle())
         .onTapGesture {

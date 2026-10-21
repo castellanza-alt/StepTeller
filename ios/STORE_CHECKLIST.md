@@ -162,7 +162,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] TestFlight 0.999 (build 1.81.1, gruppo «Personale»)
 - [x] Prova di Will della 0.999: tutto funziona, splash fluida
 
-## 5. Scheda App Store Connect — compilata via API, PR [#25](https://github.com/castellanza-alt/StepTeller/pull/25) da unire (squash)
+## 5. Scheda App Store Connect — compilata via API, PR [#25](https://github.com/castellanza-alt/StepTeller/pull/25) unita (`c801b4e`)
 Comandi nel commit (prima riga): `[store-prova]`, `[store]`, `[store-invio]` (solo con ok di Will). 12 localizzazioni:
 en-US (principale), it, es-ES, es-MX, fr-FR, fr-CA, de-DE, pt-BR, ja, ko, zh-Hans, zh-Hant. Rilettura via API: nessuna differenza.
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto
@@ -193,7 +193,7 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Note per il revisore e contatto (segreti GitHub), copyright
 - [x] Controllo della chat di coordinamento: workflow (tag solo nella prima riga), nessun dato personale nel repository,
       riepilogo dell'ultima esecuzione (4+, 175 paesi, nessuna differenza)
-- [ ] Merge della #25 con squash e `ia/store-api` tolto dal workflow (ok di Will)
+- [x] Merge della #25 con squash e `ia/store-api` tolto dal workflow (ok di Will)
 
 ## 6. Screenshot per lo store — fatti con Claude Design (vedi sezione 5)
 - [x] Scelta di 6 schermate
@@ -202,7 +202,7 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Controllo della chat di coordinamento
 
 ## 7. Uscita
-- [ ] Build 1.0 su TestFlight, prova completa di Will
+- [ ] Build 1.0 su TestFlight (versione 1.0 in project.yml), prova finale di Will
 - [ ] Invio in revisione
 - [ ] Eventuale rifiuto gestito
 - [ ] Merge su `main` (su richiesta di Will)

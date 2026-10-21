@@ -140,7 +140,12 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Prova di Will dell'apertura senza «0» (build 1.68.2): funziona
 
 ## 4d. Ultime aggiunte per la 0.999
-- [ ] Splash animata (chat dedicata): scelta la A «Pestone» con lampo rosso addolcito — PR da controllare
+- [x] Splash animata — PR [#24](https://github.com/castellanza-alt/StepTeller/pull/24): A «Pestone», 1,2 s, lampo sostituito da una
+      stella rossa al 65% dietro la scarpa, tocco per saltare, «Riduci movimento» = dissolvenza, solo a freddo,
+      schermata di avvio nera identica al primo fotogramma, versione 0.999; controllo della chat di coordinamento:
+      diff letto, 51 test, 0 avvisi in Release, fotogrammi finali visti
+- [ ] Merge della #24 (ok di Will)
+- [ ] Da guardare sul telefono: al primo avvio la scarpa può fermarsi ~0,4 s (visto solo sul simulatore carico)
 - [x] Miglia e mph — PR [#22](https://github.com/castellanza-alt/StepTeller/pull/22): solo visualizzazione (dentro tutto in km),
       automatiche per USA/UK, scelta in Impostazioni, cursore 2–10 mph; 17 testi nuovi nelle 10 lingue nel foglio;
       controllo della chat di coordinamento: 60 test (9 nuovi, golden invariati), cataloghi rigenerati identici,

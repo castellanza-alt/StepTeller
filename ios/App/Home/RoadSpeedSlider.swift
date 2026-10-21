@@ -4,23 +4,25 @@ import StepTellerCore
 /// Speed slider running **on the dashed line of the road** (`SpeedTrack.road`).
 /// Lives in the illustration space (390 × 790 pt). Grabbed with a tap or a drag within
 /// 20 pt of the path; the finger is projected onto the nearest point and the speed snaps to 0.5.
+/// Same road in both units: 3–16 km/h or 2–10 mph; `speed` stays in km/h.
 struct RoadSpeedSlider: View {
     @Binding var speed: Double
+    let unit: DistanceUnit
     @Environment(\.manga) private var c
     private let track = SpeedTrack.road
     private let k = Manga.artScale
 
     var body: some View {
-        let q = track.point(atFraction: SpeedTrack.fraction(forSpeed: speed))
+        let f = unit.fraction(forKmh: speed)
+        let q = track.point(atFraction: f)
         let p = CGPoint(x: q.x * k, y: q.y * k)
-        let f = (speed - SpeedTrack.minSpeed) / (SpeedTrack.maxSpeed - SpeedTrack.minSpeed)
         let flip = p.x > Manga.knobFlipX
         ZStack(alignment: .topLeading) {
             Color.clear
                 .contentShape(TrackHitShape(track: track, scale: k, width: 2 * Manga.trackTouchRadius))
                 .gesture(DragGesture(minimumDistance: 0).onChanged { v in
                     let n = track.nearest(to: SpeedTrack.Point(v.location.x / k, v.location.y / k))
-                    let new = SpeedTrack.speed(forFraction: n.fraction)
+                    let new = unit.kmh(forFraction: n.fraction)
                     if new != speed { speed = new }
                 })
             trail(at: p, f: f)
@@ -32,11 +34,11 @@ struct RoadSpeedSlider: View {
         .sensoryFeedback(.selection, trigger: speed)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(L10n.text("home.speed.vo"))
-        .accessibilityValue(L10n.format("home.speed.value.vo", LocalFormat.number(speed, decimals: 1)))
+        .accessibilityValue(L10n.format(unit.pick("home.speed.value.vo", "home.speed.value.vo.mi"), unit.speedText(kmh: speed)))
         .accessibilityAdjustableAction { direction in
             switch direction {
-            case .increment: speed = SpeedTrack.snap(speed + SpeedTrack.step)
-            case .decrement: speed = SpeedTrack.snap(speed - SpeedTrack.step)
+            case .increment: speed = unit.kmh(speed, steps: 1)
+            case .decrement: speed = unit.kmh(speed, steps: -1)
             @unknown default: break
             }
         }
@@ -68,8 +70,8 @@ struct RoadSpeedSlider: View {
 
     private var label: some View {
         HStack(alignment: .lastTextBaseline, spacing: 3) {
-            AntonText(LocalFormat.number(speed, decimals: 1), 26)
-            AntonText(L10n.text("home.speed.unit"), 15)
+            AntonText(unit.speedText(kmh: speed), 26)
+            AntonText(L10n.text(unit.pick("home.speed.unit", "home.speed.unit.mi")), 15)
         }
         .shadow(color: c.paper, radius: 2)
         .shadow(color: c.paper, radius: 4)
@@ -80,7 +82,7 @@ struct RoadSpeedSlider: View {
     // MARK: trail
 
     /// Three tapered triangles behind the knob, rotated −8°: black 4 pt, red 6 pt, black 3 pt.
-    /// Lengths: red 18 + f·120, black 12 + f·90 (f = (v − 3) / 13).
+    /// Lengths: red 18 + f·120, black 12 + f·90 (f = fraction of the road, (v − 3) / 13 in km/h).
     private func trail(at p: CGPoint, f: Double) -> some View {
         let black = (12 + f * 90).rounded(), red = (18 + f * 120).rounded()
         return ZStack(alignment: .topLeading) {

@@ -1,7 +1,7 @@
 import SwiftUI
 import StepTellerCore
 
-enum StepsMetric { case steps, km }
+enum StepsMetric { case steps, distance }
 
 enum BestTab: CaseIterable { case day, week, month, year, streak }
 
@@ -173,7 +173,8 @@ struct HistoryView: View {
     @ViewBuilder private var stepsSection: some View {
         let stats = store.history.stats
         BrushTitle(text: L10n.text("st.steps.title"), brushWidth: 290).at(18, 790)
-        MangaTabs(items: [(StepsMetric.steps, L10n.text("st.metric.steps")), (.km, L10n.text("st.metric.km"))], selection: $metric,
+        MangaTabs(items: [(StepsMetric.steps, L10n.text("st.metric.steps")),
+                          (.distance, L10n.text(unit.pick("st.metric.km", "st.metric.mi")))], selection: $metric,
                   width: 92, height: 28, fontSize: 13, tracking: 0.04, gap: 3, rotation: -5)
             .at(282, 846)
         MangaTabs(items: [(HistoryPeriod.week, L10n.text("st.tab.week")), (.month, L10n.text("st.tab.month")),
@@ -227,8 +228,8 @@ struct HistoryView: View {
         switch (metric, isWeek) {
         case (.steps, true): text = LocalFormat.integer(sum.steps); label = L10n.text("st.big.steps")
         case (.steps, false): text = LocalFormat.integer(avg.steps); label = L10n.text("st.big.stepsAvg")
-        case (.km, true): text = Self.km(sum.km); label = L10n.text("st.big.km")
-        case (.km, false): text = Self.km(avg.km); label = L10n.text("st.big.kmAvg")
+        case (.distance, true): text = distance(sum.km); label = L10n.text(unit.pick("st.big.km", "st.big.mi"))
+        case (.distance, false): text = distance(avg.km); label = L10n.text(unit.pick("st.big.kmAvg", "st.big.miAvg"))
         }
         let size: CGFloat = [120, 120, 120, 120, 120, 120, 120, 110, 96, 82, 72][min(10, text.count)]
         return VStack(spacing: 0) {
@@ -250,23 +251,24 @@ struct HistoryView: View {
         let value: String
         if isWeek {
             let a = stats.dailyAverage(.week, offset: periodOffset)
-            value = metric == .steps ? LocalFormat.integer(a.steps) : Self.km(a.km)
+            value = metric == .steps ? LocalFormat.integer(a.steps) : distance(a.km)
         } else {
             let t = stats.summary(tabSteps, offset: periodOffset)
-            value = metric == .steps ? LocalFormat.integer(t.steps) : Self.km(t.km)
+            value = metric == .steps ? LocalFormat.integer(t.steps) : distance(t.km)
         }
         let size: CGFloat = isWeek ? 64 : (value.count > 9 ? 40 : 52)
         return HStack(spacing: 10) {
             AntonText(L10n.text(isWeek ? "st.second.avg" : "st.second.total"), 18, tracking: 0.06)
             GlyphText(text: value, size: size, lineHeight: 0.9, tracking: -0.03, fill: c.red, stroke: c.ink, strokeWidth: 1.5)
             VStack(alignment: .leading, spacing: 0) {
-                AntonText(L10n.text(metric == .steps ? "st.big.steps" : "st.big.km"), 16, tracking: 0.04)
+                AntonText(L10n.text(metric == .steps ? "st.big.steps" : unit.pick("st.big.km", "st.big.mi")), 16, tracking: 0.04)
                 AntonText(L10n.text(isWeek ? "st.second.perDay" : "st.second.inPeriod"), 16, tracking: 0.04)
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(L10n.format(isWeek ? (metric == .steps ? "st.second.vo.avgSteps" : "st.second.vo.avgKm")
-                                               : (metric == .steps ? "st.second.vo.totSteps" : "st.second.vo.totKm"), value))
+        .accessibilityLabel(L10n.format(isWeek ? (metric == .steps ? "st.second.vo.avgSteps" : unit.pick("st.second.vo.avgKm", "st.second.vo.avgMi"))
+                                               : (metric == .steps ? "st.second.vo.totSteps" : unit.pick("st.second.vo.totKm", "st.second.vo.totMi")),
+                                        value))
     }
 
     /// Bars of the period. Week: 7 days (future ones empty); current month and year: up to today.
@@ -275,6 +277,7 @@ struct HistoryView: View {
         var bars = stats.averageBars(tabSteps, offset: periodOffset)
         if periodOffset == 0 && tabSteps != .week { bars = bars.filter { !$0.isFuture } }
         let goal = store.goal
+        let suffix = " " + L10n.text(unit.pick("st.big.km", "st.big.mi"))
         return bars.enumerated().map { i, b in
             let target = b.goal > 0 ? b.goal : goal
             let style: MangaBar.Style
@@ -283,8 +286,8 @@ struct HistoryView: View {
             else { style = target > 0 && b.steps >= target ? .hit : .miss }
             let showLabel = tabSteps != .month || i % 5 == 0 || i == bars.count - 1
             return MangaBar(id: b.id, label: b.label, showLabel: showLabel,
-                            value: metric == .steps ? Double(b.steps) : b.km,
-                            display: metric == .steps ? LocalFormat.integer(b.steps) : Self.km(b.km) + " KM",
+                            value: metric == .steps ? Double(b.steps) : unit.value(fromKm: b.km),
+                            display: metric == .steps ? LocalFormat.integer(b.steps) : distance(b.km) + suffix,
                             style: style)
         }
     }
@@ -337,9 +340,9 @@ struct HistoryView: View {
         let stats = store.history.stats
         let r = store.history.personalRecords
         func entry(_ e: RecordEntry?) -> (String, String, String) {
-            let unit = L10n.text(metric == .steps ? "st.best.unit.steps" : "st.big.km")
-            guard let e else { return ("—", unit, L10n.text("st.best.noData")) }
-            return (metric == .steps ? LocalFormat.integer(e.steps) : Self.km(e.km), unit, e.label.uppercased())
+            let label = L10n.text(metric == .steps ? "st.best.unit.steps" : unit.pick("st.big.km", "st.big.mi"))
+            guard let e else { return ("—", label, L10n.text("st.best.noData")) }
+            return (metric == .steps ? LocalFormat.integer(e.steps) : distance(e.km), label, e.label.uppercased())
         }
         switch tabBest {
         case .day: return entry(r.day)
@@ -355,7 +358,13 @@ struct HistoryView: View {
         }
     }
 
-    private static func km(_ v: Double) -> String { LocalFormat.number(v, decimals: v >= 100 ? 0 : 1) }
+    private var unit: DistanceUnit { store.unit }
+
+    /// Distance in km or miles: 1 decimal, none from 100 up.
+    private func distance(_ km: Double) -> String {
+        let v = unit.value(fromKm: km)
+        return LocalFormat.number(v, decimals: v >= 100 ? 0 : 1)
+    }
 
     // MARK: - Fixed drawings (same seeds as the prototype)
 

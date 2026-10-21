@@ -1,7 +1,7 @@
 import SwiftUI
 import StepTellerCore
 
-/// Settings: daily goal, evening reminder, streak and Jollies, privacy and support links,
+/// Settings: daily goal, evening reminder, theme, units, streak and Jollies, privacy and support links,
 /// «Replay the introduction» and version.
 struct SettingsSheet: View {
     @Environment(StepsStore.self) private var store
@@ -61,6 +61,16 @@ struct SettingsSheet: View {
                     }
                     .pickerStyle(.segmented)
                     note(L10n.text("set.theme.note"))
+                }
+
+                section(L10n.text("set.units.section")) {
+                    Picker(L10n.text("set.units.section"), selection: $store.unitPreference) {
+                        Text(L10n.text("set.units.auto")).tag(UnitPreference.automatic)
+                        Text(L10n.text("set.units.km")).tag(UnitPreference.kilometers)
+                        Text(L10n.text("set.units.mi")).tag(UnitPreference.miles)
+                    }
+                    .pickerStyle(.segmented)
+                    note(L10n.text("set.units.note"))
                 }
 
                 section(L10n.text("set.streak.section")) {

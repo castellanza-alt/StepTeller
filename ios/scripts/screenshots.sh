@@ -4,6 +4,7 @@
 # Usage: screenshots.sh APP OUTPUT [language] [day]
 #   language: it (default), en, es, fr, de, pt-BR, ja, ko, zh-Hans, zh-Hant → -AppleLanguages and -AppleLocale
 #   day: day theme only (Settings included), to check a language faster
+#   NEAT_LOCALE=en_GB: another region for the language (e.g. miles with en_GB, km with en_IE)
 set -euo pipefail
 APP="$1"; OUT="$2"; LINGUA="${3:-it}"; MODO="${4:-completo}"; mkdir -p "$OUT"
 case "$LINGUA" in
@@ -11,6 +12,7 @@ case "$LINGUA" in
   pt-BR) LOCALE=pt_BR ;; ja) LOCALE=ja_JP ;; ko) LOCALE=ko_KR ;; zh-Hans) LOCALE=zh_CN ;; zh-Hant) LOCALE=zh_TW ;;
   *) echo "lingua sconosciuta: $LINGUA"; exit 1 ;;
 esac
+LOCALE="${NEAT_LOCALE:-$LOCALE}"
 LOC=(-AppleLanguages "($LINGUA)" -AppleLocale "$LOCALE")
 THEMES="day night"; SHEET_THEME=night
 if [ "$MODO" = giorno ]; then THEMES=day; SHEET_THEME=day; fi

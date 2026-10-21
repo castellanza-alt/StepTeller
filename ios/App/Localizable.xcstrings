@@ -1123,6 +1123,72 @@
         }
       }
     },
+    "home.minutes.mi" : {
+      "comment" : "Come home.minutes.km, con le miglia (es. «≈ 4,2 MI»). {mi} = numero. MI resta MI. Limite: ≤ 10.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ MI"
+          }
+        }
+      }
+    },
     "home.minutes.unit" : {
       "comment" : "Unità accanto al numero dei minuti (abbreviazione di minuti). Limite: ≤ 4.",
       "extractionState" : "manual",
@@ -1251,6 +1317,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "以每小時%2$@公里的速度，還需%1$@分鐘，約%3$@公里"
+          }
+        }
+      }
+    },
+    "home.minutes.vo.mi" : {
+      "comment" : "Come home.minutes.vo, con le miglia. {min}, {velocita}, {mi} = numeri.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch %1$@ Minuten bei %2$@ Meilen pro Stunde, etwa %3$@ Meilen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have %1$@ minutes left at %2$@ miles per hour, about %3$@ miles"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te quedan %1$@ minutos a %2$@ millas por hora, unas %3$@ millas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te reste %1$@ minutes à %2$@ miles par heure, soit environ %3$@ miles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mancano %1$@ minuti a %2$@ miglia orarie, circa %3$@ miglia"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時速%2$@マイルであと%1$@分、約%3$@マイルです"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시속 %2$@마일로 %1$@분 더 걸으면 됩니다. 약 %3$@마일입니다"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faltam %1$@ minutos a %2$@ milhas por hora, cerca de %3$@ milhas"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以每小时%2$@英里的速度，还需%1$@分钟，约%3$@英里"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以每小時%2$@英里的速度，還需%1$@分鐘，約%3$@英里"
           }
         }
       }
@@ -1519,6 +1651,72 @@
         }
       }
     },
+    "home.speed.unit.mi" : {
+      "comment" : "Unità accanto alla velocità in miglia. Resta mph in tutte le lingue. Limite: ≤ 5.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mph"
+          }
+        }
+      }
+    },
     "home.speed.value.vo" : {
       "comment" : "Valore del cursore. {velocita} = numero, es. 4,0.",
       "extractionState" : "manual",
@@ -1581,6 +1779,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "每小時%@公里"
+          }
+        }
+      }
+    },
+    "home.speed.value.vo.mi" : {
+      "comment" : "Valore del cursore in miglia orarie. {velocita} = numero, es. 2,5.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Meilen pro Stunde"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ miles per hour"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ millas por hora"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ miles par heure"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ miglia orarie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時速%@マイル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시속 %@마일"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ milhas por hora"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每小时%@英里"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每小時%@英里"
           }
         }
       }
@@ -3433,6 +3697,72 @@
         }
       }
     },
+    "n.body.jolly.mi" : {
+      "comment" : "Come n.body.jolly, con la velocità in mph (n.body.mi + n.jolly).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@). Erreichst du dein Ziel nicht, wird heute ein Joker genutzt (%5$@ übrig)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left). Miss your goal tonight and a Joker will be used (%5$@ left)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@). Si no alcanzas tu objetivo, esta noche se usará un Comodín (quedarán %5$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@). Sans atteindre ton objectif, un Joker sera utilisé ce soir (il en restera %5$@)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@). Se non chiudi, stasera usi un Jolly (ne restano %5$@)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。目標未達成なら今夜おまもりを1個使うよ（残り%5$@個）。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요. 목표를 달성하지 못하면 오늘 밤 지킴이 1개가 사용돼요. %5$@개가 남아요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@). Se não atingir sua meta, um Coringa será usado esta noite (restarão %5$@)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。若未达成目标，今晚将使用1枚护身符（剩余%5$@枚）。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。若未達成目標，今晚將使用1枚護身符（剩餘%5$@枚）。"
+          }
+        }
+      }
+    },
     "n.body.lose" : {
       "comment" : "Corpo della notifica con l'avviso sulla serie (n.body + n.lose).",
       "extractionState" : "manual",
@@ -3495,6 +3825,138 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。沒有護身符，%5$@天的連續紀錄將中斷。"
+          }
+        }
+      }
+    },
+    "n.body.lose.mi" : {
+      "comment" : "Come n.body.lose, con la velocità in mph (n.body.mi + n.lose).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@). Ohne Joker endet deine Serie von %5$@ Tagen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left). Without a Joker, your %5$@-day streak ends."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@). Sin Comodines, tu racha de %5$@ días se interrumpe."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@). Sans Joker, ta série de %5$@ jours s’arrête."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@). Senza Jolly, la streak di %5$@ giorni si interrompe."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。おまもりがないため、%5$@日間の連続記録が途切れるよ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요. 지킴이가 없으면 %5$@일의 연속 기록이 끊겨요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@). Sem Coringas, sua sequência de %5$@ dias será interrompida."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。没有护身符，%5$@天的连续记录将中断。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。沒有護身符，%5$@天的連續紀錄將中斷。"
+          }
+        }
+      }
+    },
+    "n.body.mi" : {
+      "comment" : "Come n.body, con la velocità in mph. {min} = minuti, {velocita} = mph, {obiettivo} = passi obiettivo, {mancano} = passi mancanti. Limite: ≤ 140.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。"
           }
         }
       }
@@ -6005,6 +6467,336 @@
         }
       }
     },
+    "set.units.auto" : {
+      "comment" : "Opzione: segue il paese del telefono. 3 opzioni affiancate: corte. Limite: ≤ 12.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automáticas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiques"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automáticas"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動"
+          }
+        }
+      }
+    },
+    "set.units.km" : {
+      "comment" : "Opzione: sempre chilometri. Limite: ≤ 12.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilometer"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilometers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilómetros"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilomètres"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chilometri"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キロメートル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "킬로미터"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quilômetros"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "公里"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "公里"
+          }
+        }
+      }
+    },
+    "set.units.mi" : {
+      "comment" : "Opzione: sempre miglia. Limite: ≤ 12.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meilen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miles"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Millas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miles"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miglia"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マイル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마일"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Milhas"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "英里"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "英里"
+          }
+        }
+      }
+    },
+    "set.units.note" : {
+      "comment" : "Nota sotto le unità. Limite: ≤ 120.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch: Meilen, wenn dein Handy US- oder UK-Einheiten nutzt, sonst Kilometer."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic: miles if your phone uses US or UK units, kilometers otherwise."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automáticas: millas si tu teléfono usa unidades de EE. UU. o Reino Unido; si no, kilómetros."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiques : miles si ton téléphone utilise les unités des États-Unis ou du Royaume-Uni, sinon kilomètres."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiche: miglia se il telefono usa le unità di USA o Regno Unito, altrimenti chilometri."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動：スマホが米国または英国の単位ならマイル、それ以外はキロメートル。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동: 휴대폰이 미국 또는 영국 단위를 쓰면 마일, 그 외에는 킬로미터."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automáticas: milhas se o celular usa unidades dos EUA ou do Reino Unido; caso contrário, quilômetros."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动：手机使用美国或英国单位时显示英里，否则显示公里。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動：手機使用美國或英國單位時顯示英里，否則顯示公里。"
+          }
+        }
+      }
+    },
+    "set.units.section" : {
+      "comment" : "Titolo di sezione: chilometri o miglia. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einheiten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Units"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unidades"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unités"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unità di misura"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "単位"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단위"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unidades"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "单位"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "單位"
+          }
+        }
+      }
+    },
     "set.version" : {
       "comment" : "Nota in fondo. {versione} = es. 1.0. Limite: ≤ 16.",
       "extractionState" : "manual",
@@ -7055,6 +7847,138 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "每日KM · 平均"
+          }
+        }
+      }
+    },
+    "st.big.mi" : {
+      "comment" : "Come st.big.km, in miglia (anche unità dei record e del grafico). Resta MI. Limite: ≤ 22.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        }
+      }
+    },
+    "st.big.miAvg" : {
+      "comment" : "Come st.big.kmAvg, in miglia. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI AM TAG · MITTEL"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI PER DAY · AVERAGE"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI AL DÍA · MEDIA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI PAR JOUR · MOYENNE"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI AL GIORNO · MEDIA"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1日のMI・平均"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 MI · 평균"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI POR DIA · MÉDIA"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日MI · 平均"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日MI · 平均"
           }
         }
       }
@@ -8243,6 +9167,72 @@
         }
       }
     },
+    "st.metric.mi" : {
+      "comment" : "Interruttore metrica in miglia. Resta MI. Limite: ≤ 4.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MI"
+          }
+        }
+      }
+    },
     "st.metric.steps" : {
       "comment" : "Interruttore metrica, MAIUSCOLO. Limite: ≤ 6.",
       "extractionState" : "manual",
@@ -8969,6 +9959,72 @@
         }
       }
     },
+    "st.second.vo.avgMi" : {
+      "comment" : "{valore} = numero (miglia).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durchschnittlich %@ Meilen pro Tag"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average %@ miles per day"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media de %@ millas al día"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moyenne de %@ miles par jour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media %@ miglia al giorno"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1日の平均距離は%@マイルです"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하루 평균 %@마일"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Média de %@ milhas por dia"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均每天%@英里"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均每天%@英里"
+          }
+        }
+      }
+    },
     "st.second.vo.avgSteps" : {
       "comment" : "{valore} = numero.",
       "extractionState" : "manual",
@@ -9097,6 +10153,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "該時段共%@公里"
+          }
+        }
+      }
+    },
+    "st.second.vo.totMi" : {
+      "comment" : "{valore} = numero (miglia).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insgesamt %@ Meilen in diesem Zeitraum"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total %@ miles in this period"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de %@ millas en este periodo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de %@ miles sur cette période"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Totale %@ miglia nel periodo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この期間の合計距離は%@マイルです"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "해당 기간 총 %@마일"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de %@ milhas no período"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该时段共%@英里"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "該時段共%@英里"
           }
         }
       }

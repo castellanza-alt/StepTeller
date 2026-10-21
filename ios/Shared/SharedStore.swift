@@ -2,7 +2,7 @@ import Foundation
 import StepTellerCore
 
 /// Data shared between app and widget through the App Group: goal, calibration, speed chosen in Home,
-/// streak and Jollies, last step count (used by the widget only when Health is locked, i.e. with the
+/// units, streak and Jollies, last step count (used by the widget only when Health is locked, i.e. with the
 /// phone locked). Everything stays on the phone.
 enum SharedStore {
     static let suite = "group.it.castellanza.stepteller"
@@ -16,12 +16,19 @@ enum SharedStore {
         static let speed = "speed"
         static let streak = "streak"
         static let jolly = "jolly"
+        static let units = "units"
     }
 
     /// Speed of the Home slider (km/h): the widget computes its minutes with the same one.
     static var speed: Double {
         get { defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed }
         set { defaults.set(newValue, forKey: Keys.speed) }
+    }
+
+    /// Units chosen in Settings (`Units.current` resolves «automatic» with the phone's region).
+    static var unitPreference: UnitPreference {
+        get { defaults.string(forKey: Keys.units).flatMap(UnitPreference.init(rawValue:)) ?? .automatic }
+        set { defaults.set(newValue.rawValue, forKey: Keys.units) }
     }
 
     /// Streak and Jollies as the app computes them (the widget does not read the history).

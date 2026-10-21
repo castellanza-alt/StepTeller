@@ -2,11 +2,13 @@ import SwiftUI
 import WidgetKit
 import StepTellerCore
 
-/// Data shown by the widget: today's plan (nil = Health unavailable), streak and Jollies from the app.
+/// Data shown by the widget: today's plan (nil = Health unavailable), streak and Jollies from the app,
+/// unit chosen in the app (km or miles).
 struct WidgetSnapshot {
     let plan: Plan?
     let streak: Int
     let jolly: Int
+    let unit: DistanceUnit
 }
 
 /// Widget theme: follows the system appearance (light = day, dark = night).
@@ -82,7 +84,7 @@ struct WidgetSmallView: View {
 // MARK: - Medium (364 × 170)
 
 /// Medium widget: fading board on the left, streak and Jollies top right, steps with a red shadow,
-/// minutes and km left at the speed chosen in Home, progress bar.
+/// minutes and distance left at the speed chosen in Home, progress bar.
 struct WidgetMediumView: View {
     let data: WidgetSnapshot
     @Environment(\.manga) private var c
@@ -148,7 +150,8 @@ struct WidgetMediumView: View {
                 } else {
                     AntonText(L10n.text("w.left", table: L10n.widget), 13)
                     AntonText(LocalFormat.integer(p.minutes), 24, color: c.red)
-                    AntonText(L10n.format("w.minKm", table: L10n.widget, LocalFormat.number(p.km, decimals: 1)), 13)
+                    AntonText(L10n.format(data.unit.pick("w.minKm", "w.minMi"), table: L10n.widget,
+                                          data.unit.distanceText(km: p.km)), 13)
                 }
             } else {
                 AntonText(L10n.text("w.openApp", table: L10n.widget), 13)
@@ -183,7 +186,7 @@ struct LockCircular: View {
     }
 }
 
-/// Lock screen, rectangular: streak, big slanted steps, minutes and km left.
+/// Lock screen, rectangular: streak, big slanted steps, minutes and distance left.
 struct LockRectangular: View {
     let data: WidgetSnapshot
     var body: some View {
@@ -205,7 +208,8 @@ struct LockRectangular: View {
     private var line: String {
         guard let p = data.plan else { return L10n.text("w.openApp", table: L10n.widget) }
         if p.isDone { return L10n.text("w.lock.goalDone", table: L10n.widget) }
-        return L10n.format("w.lock.left", table: L10n.widget, "\(p.minutes)", LocalFormat.number(p.km, decimals: 1))
+        return L10n.format(data.unit.pick("w.lock.left", "w.lock.left.mi"), table: L10n.widget, "\(p.minutes)",
+                           data.unit.distanceText(km: p.km))
     }
 }
 
@@ -247,7 +251,7 @@ enum WidgetText {
         if p.isDone {
             return L10n.format("w.vo.summary.done", table: L10n.widget, steps, goal, "\(d.streak)", "\(d.jolly)")
         }
-        return L10n.format("w.vo.summary.left", table: L10n.widget, steps, goal, "\(p.minutes)",
-                           LocalFormat.number(p.km, decimals: 1), "\(d.streak)", "\(d.jolly)")
+        return L10n.format(d.unit.pick("w.vo.summary.left", "w.vo.summary.left.mi"), table: L10n.widget, steps, goal,
+                           "\(p.minutes)", d.unit.distanceText(km: p.km), "\(d.streak)", "\(d.jolly)")
     }
 }

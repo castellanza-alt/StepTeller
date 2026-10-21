@@ -3,7 +3,7 @@ import Observation
 import WidgetKit
 import StepTellerCore
 
-/// App state: goal, speed, reminder and calibration (persisted in UserDefaults) and today's steps
+/// App state: goal, speed, units, reminder and calibration (persisted in UserDefaults) and today's steps
 /// (never persisted: reread from Health).
 @MainActor
 @Observable
@@ -20,6 +20,16 @@ final class StepsStore {
         didSet {
             defaults.set(speed, forKey: Keys.speed)
             SharedStore.speed = speed
+            deferSync(reloadWidget: true)
+        }
+    }
+    /// Units chosen in Settings. Changing them moves the speed to the nearest step of the new unit
+    /// (4 km/h → 2.5 mph): the speed itself stays in km/h.
+    var unitPreference: UnitPreference {
+        didSet {
+            defaults.set(unitPreference.rawValue, forKey: Keys.units)
+            SharedStore.unitPreference = unitPreference
+            speed = unit.snapKmh(speed)
             deferSync(reloadWidget: true)
         }
     }
@@ -49,6 +59,7 @@ final class StepsStore {
     private enum Keys {
         static let goal = "stepteller.goal"
         static let speed = "stepteller.speed"
+        static let units = "stepteller.units"
         static let reminderOn = "stepteller.reminder.on"
         static let reminderTime = "stepteller.reminder.minutes"
         static let calibration = "stepteller.calibration.v1"
@@ -66,9 +77,12 @@ final class StepsStore {
         goal = initialGoal
         history = HistoryStore(provider: historyProvider, currentGoal: initialGoal, defaults: defaults,
                                streakStartOverride: streakStartOverride)
-        // Slider on the road: 3–16 km/h in 0.5 steps (an old value like 8.3 becomes 8.5).
+        // Launch argument `-stepteller.units miles` too (screenshots).
+        let preference = defaults.string(forKey: Keys.units).flatMap(UnitPreference.init(rawValue:)) ?? .automatic
+        unitPreference = preference
+        // Slider on the road: 3–16 km/h or 2–10 mph in 0.5 steps (an old value like 8.3 becomes 8.5).
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed
-        speed = SpeedTrack.snap(v)
+        speed = preference.resolved(regionUsesMiles: Units.regionUsesMiles).snapKmh(v)
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         #if DEBUG
@@ -85,8 +99,9 @@ final class StepsStore {
         if seedSteps, let cached = SharedStore.cachedStepsToday(now: Date(), calendar: controller.calendar) {
             state.seed(cachedSteps: cached)
         }
-        SharedStore.goal = goal              // the widget reads goal, calibration and speed from the App Group
+        SharedStore.goal = goal              // the widget reads goal, calibration, speed and units from the App Group
         SharedStore.speed = speed
+        SharedStore.unitPreference = unitPreference
         SharedStore.calibration = calibration
     }
 
@@ -94,6 +109,8 @@ final class StepsStore {
 
     /// Cadence model: the automatic calibration when available, otherwise the manual points in `Calibration`.
     var model: CadenceModel { calibration.model }
+    /// Unit shown: the choice in Settings, «automatic» from the phone's region.
+    var unit: DistanceUnit { unitPreference.resolved(regionUsesMiles: Units.regionUsesMiles) }
     var steps: Int { state.steps }
     var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
@@ -259,9 +276,10 @@ final class StepsStore {
             : []
         let previous = reminderQueue
         let scheduler = scheduler
+        let unit = unit
         let task = Task {
             await previous?.value
-            if enabled { await scheduler.apply(requests) } else { await scheduler.cancelAll() }
+            if enabled { await scheduler.apply(requests, unit: unit) } else { await scheduler.cancelAll() }
         }
         reminderQueue = task
         await task.value

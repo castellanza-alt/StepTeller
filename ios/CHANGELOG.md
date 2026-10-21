@@ -1,6 +1,11 @@
 # Changelog
 
 ## 1.0 — 19 ottobre 2026
+- Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,
+  cursore, Storico con la scheda MI, widget, blocco schermo, promemoria, VoiceOver); negli altri paesi km e km/h come
+  prima. Impostazioni → «Unità di misura»: Automatiche (predefinito), Chilometri, Miglia. Il cursore in miglia va da
+  2 a 10 mph a scatti di 0,5 sulla stessa strada; cambiando unità la velocità passa allo scatto più vicino. I calcoli
+  restano in km/h. Testi nuovi in tutte le 10 lingue nel foglio delle traduzioni.
 - Preparazione per l'App Store, nessuna modifica visibile: privacy manifest (`PrivacyInfo.xcprivacy`) nell'app e
   nel widget, avvisi del compilatore azzerati, tolto codice non più usato (colori del vecchio tappeto illustrato,
   funzioni senza chiamanti).

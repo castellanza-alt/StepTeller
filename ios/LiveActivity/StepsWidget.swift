@@ -49,7 +49,7 @@ struct StepsEntry: TimelineEntry {
 struct StepsTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> StepsEntry {
         StepsEntry(date: Date(), data: WidgetSnapshot(plan: Plan(goal: 10_000, steps: 3_465, speed: SpeedTrack.defaultSpeed),
-                                                      streak: 14, jolly: 2))
+                                                      streak: 14, jolly: 2, unit: Units.current))
     }
 
     func getSnapshot(in context: Context, completion: @escaping (StepsEntry) -> Void) {
@@ -74,7 +74,8 @@ struct StepsTimelineProvider: TimelineProvider {
             // same speed as the Home slider and the same calibrated cadence model as the app
             Plan(goal: SharedStore.goal, steps: $0, speed: SharedStore.speed, model: SharedStore.calibration.model)
         }
-        return StepsEntry(date: now, data: WidgetSnapshot(plan: plan, streak: SharedStore.streak, jolly: SharedStore.jolly))
+        return StepsEntry(date: now, data: WidgetSnapshot(plan: plan, streak: SharedStore.streak, jolly: SharedStore.jolly,
+                                                          unit: Units.current))
     }
 }
 

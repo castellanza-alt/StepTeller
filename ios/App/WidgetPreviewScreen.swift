@@ -9,10 +9,10 @@ struct WidgetPreviewScreen: View {
     var body: some View {
         let d = UserDefaults.standard
         let plan: Plan? = d.object(forKey: "stepteller.debugSteps") != nil
-            ? Plan(goal: 10_000, steps: d.integer(forKey: "stepteller.debugSteps"), speed: SpeedTrack.defaultSpeed,
+            ? Plan(goal: 10_000, steps: d.integer(forKey: "stepteller.debugSteps"), speed: Units.current.snapKmh(SpeedTrack.defaultSpeed),
                    model: CalibrationResult.empty.model)
             : nil
-        let data = WidgetSnapshot(plan: plan, streak: 14, jolly: 2)
+        let data = WidgetSnapshot(plan: plan, streak: 14, jolly: 2, unit: Units.current)
         let palette: MangaPalette = d.string(forKey: ThemeMode.storageKey) == "night" ? .night : .day
         ZStack {
             LinearGradient(colors: palette.theme == .night ? [Color(hex: 0x1B2350), Color(hex: 0x0A0D1E)]

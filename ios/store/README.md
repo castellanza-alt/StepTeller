@@ -16,11 +16,13 @@ Commit senza modifiche, solo per lanciare: `git commit --allow-empty -m "ios: sc
 
 ## Cosa imposta
 
-- Lingua principale **en-US**; lingue: en-US, it, es-ES, fr-FR, de-DE, pt-BR, ja, ko, zh-Hans, zh-Hant, più copie
-  identiche (testi e screenshot) per en-GB, en-AU, en-CA (inglese), es-MX (spagnolo), fr-CA (francese).
+- Lingua principale **en-US** (la vedono anche Regno Unito, Australia e Canada inglese); 12 lingue: en-US, it, es-ES,
+  fr-FR, de-DE, pt-BR, ja, ko, zh-Hans, zh-Hant, più copie identiche (testi e screenshot) per es-MX (spagnolo) e
+  fr-CA (francese).
 - Per lingua: nome, sottotitolo, URL privacy (App Information); descrizione, parole chiave, testo promozionale,
   URL di supporto (versione 1.0, creata se manca); 6 screenshot in ordine 01…06 (sostituiscono quelli esistenti).
-- Categorie Salute e fitness / Stile di vita; età 4+ (tutte le risposte «no/nessuno»); dichiarazione «nessun
+- Categorie Salute e fitness / Stile di vita; età: «sì» solo ad «argomenti di salute o benessere»
+  (scelta di Will), tutto il resto «no/nessuno»; il riepilogo mostra la classificazione calcolata da Apple; dichiarazione «nessun
   contenuto di terzi»; prezzo gratuito; disponibile in tutti i paesi, anche i nuovi.
 - Note per il revisore (`note_revisore.txt`, in inglese) e contatto, copyright: dai segreti.
 - Se Apple rifiuta un nome (già usato), lo script si ferma e lo riporta.

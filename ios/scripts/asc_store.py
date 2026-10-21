@@ -31,7 +31,7 @@ PRIMARY_LOCALE = 'en-US'
 LOCALES = {
     'en-US': 'en', 'it': 'it', 'es-ES': 'es', 'fr-FR': 'fr', 'de-DE': 'de', 'pt-BR': 'pt-BR',
     'ja': 'ja', 'ko': 'ko', 'zh-Hans': 'zh-Hans', 'zh-Hant': 'zh-Hant',
-    'en-GB': 'en', 'en-AU': 'en', 'en-CA': 'en', 'es-MX': 'es', 'fr-CA': 'fr',
+    'es-MX': 'es', 'fr-CA': 'fr',
 }
 PRIVACY_URL = 'https://castellanza-alt.github.io/StepTeller/neat/privacy/'
 SUPPORT_URL = 'https://castellanza-alt.github.io/StepTeller/neat/supporto/'
@@ -41,14 +41,18 @@ CONTENT_RIGHTS = 'DOES_NOT_USE_THIRD_PARTY_CONTENT'
 DISPLAY_TYPE = 'APP_IPHONE_67'
 SCREENSHOTS = 6
 
-# Age rating: every question answered «none» / «no» (→ 4+). Only the keys the API returns are sent.
+# Age rating: every question «none» / «no», except AGE_YES (Will: a daily step goal is a wellness topic, be honest
+# with Apple). Only the keys the API returns are sent.
 AGE_NONE = ['alcoholTobaccoOrDrugUseOrReferences', 'contests', 'gamblingSimulated', 'gunsOrOtherWeapons',
             'horrorOrFearThemes', 'matureOrSuggestiveThemes', 'medicalOrTreatmentInformation',
             'profanityOrCrudeHumor', 'sexualContentGraphicAndNudity', 'sexualContentOrNudity',
             'violenceCartoonOrFantasy', 'violenceRealistic', 'violenceRealisticProlongedGraphicOrSadistic']
-AGE_NO = ['advertising', 'ageAssurance', 'gambling', 'healthOrWellnessTopics', 'lootBox', 'messagingAndChat',
+AGE_YES = ['healthOrWellnessTopics']
+AGE_NO = ['advertising', 'ageAssurance', 'gambling', 'lootBox', 'messagingAndChat',
           'parentalControls', 'socialMedia', 'unrestrictedWebAccess', 'userGeneratedContent']
 # follow-ups of a «yes» (socialMediaAgeRestricted) or set by Apple / per country: left as they are
+# ratings approved by Will: after saving the questionnaire, [store] stops if Apple computes anything else
+AGE_ALLOWED = {'FOUR_PLUS'}
 AGE_UNTOUCHED = {'kidsAgeBand', 'ageRatingOverride', 'ageRatingOverrideV2', 'koreaAgeRatingOverride',
                  'developerAgeRatingInfoUrl', 'seventeenPlus', 'socialMediaAgeRestricted',
                  'gracRatingClassificationNumber'}
@@ -238,6 +242,7 @@ def app_info_section(report, app_id, metadata):
     if not editable:
         raise Stop('Nessuna «App Information» modificabile su App Store Connect')
     info = editable[0]
+    age_rating_section(report, info)   # first: a rating Will did not approve stops before anything else
     existing, _ = get_all(f"/v1/appInfos/{info['id']}/appInfoLocalizations", {'limit': 50})
     wanted = {locale: {'name': metadata[lang]['name'], 'subtitle': metadata[lang]['subtitle'],
                        'privacyPolicyUrl': PRIVACY_URL} for locale, lang in LOCALES.items()}
@@ -260,14 +265,19 @@ def app_info_section(report, app_id, metadata):
     if changed and report.apply:
         update('appInfos', info['id'], relationships=changed)
 
-    area = 'Classificazione per età (tutto «no/nessuno» → 4+)'
+
+def age_rating_section(report, info):
+    area = 'Classificazione per età («sì» solo a salute e benessere)'
+    rating = info['attributes'].get('appStoreAgeRating')
+    report.note(area, f'Classificazione calcolata ora da Apple: {rating or "nessuna (questionario non salvato)"}')
     declaration = get_optional(f"/v1/appInfos/{info['id']}/ageRatingDeclaration")
     if declaration is None:
         report.note(area, '⚠️ Dichiarazione non leggibile via API: compilarla dal sito')
-        return
+        return info
     attrs = declaration['attributes']
     wanted = {k: 'NONE' for k in AGE_NONE if k in attrs}
     wanted.update({k: False for k in AGE_NO if k in attrs})
+    wanted.update({k: True for k in AGE_YES if k in attrs})
     changed = {k: v for k, v in wanted.items() if attrs.get(k) != v}
     for field, value in changed.items():
         report.change(area, 'Questionario', field, attrs.get(field), value)
@@ -276,6 +286,16 @@ def app_info_section(report, app_id, metadata):
         report.note(area, f'⚠️ Domande nuove non gestite dallo script (lasciate): {", ".join(unknown)}')
     if changed and report.apply:
         update('ageRatingDeclarations', declaration['id'], changed)
+        rating = get(f"/v1/appInfos/{info['id']}")['data']['attributes'].get('appStoreAgeRating')
+        report.note(area, f'Classificazione calcolata da Apple dopo il salvataggio: {rating}')
+        if rating not in AGE_ALLOWED:
+            raise Stop(f'Apple calcola {rating}, non approvata ({", ".join(sorted(AGE_ALLOWED))}): '
+                       'solo il questionario è stato salvato; chiedere a Will prima di proseguire')
+    elif rating and rating not in AGE_ALLOWED:
+        if report.apply:
+            raise Stop(f'Apple calcola {rating}, non approvata: chiedere a Will prima di proseguire')
+        report.note(area, f'⚠️ {rating} non è tra le classificazioni approvate ({", ".join(sorted(AGE_ALLOWED))})')
+    return info
 
 
 def version_section(report, app_id, metadata, notes, secrets):
@@ -502,8 +522,8 @@ def sync(apply: bool) -> Report:
         raise Stop(f'App non trovata per il Bundle ID {asc.BUNDLE}')
     report.note('App', f"Record trovato per {asc.BUNDLE} (id {app['id']}, lingua principale ora "
                        f"{app['attributes'].get('primaryLocale')})")
+    app_info_section(report, app['id'], metadata)   # first: age rating and names can stop before the rest
     app_section(report, app)
-    app_info_section(report, app['id'], metadata)   # first: a refused name stops before the rest
     _, localization_ids = version_section(report, app['id'], metadata, notes, secrets)
     primary_locale_section(report, app)             # after the en-US localizations exist
     price_section(report, app['id'])

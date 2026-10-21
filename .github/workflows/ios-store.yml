@@ -1,0 +1,48 @@
+# Scheda App Store via API (ios/scripts/asc.py, comandi store-*; dettagli in ios/store/README.md).
+# Si avvia con un push su `main` o `ia/versione-0.6.2` la cui PRIMA RIGA del messaggio di commit contiene:
+#   [store-prova]  legge App Store Connect e mostra cosa cambierebbe, per lingua (nessuna scrittura)
+#   [store]        applica testi, screenshot, categorie, età, prezzo, paesi e note, poi rilegge tutto
+#   [store-invio]  collega la build 1.0 e invia in revisione: SOLO dopo l'ok esplicito di Will
+# `ia/store-api` è nell'elenco solo per le prove prima del merge: da togliere quando la PR è unita.
+# Il riepilogo è nella pagina dell'esecuzione (Summary). Nessun segreto viene stampato.
+name: iOS App Store
+on:
+  push:
+    branches: [main, ia/versione-0.6.2, ia/store-api]
+permissions:
+  contents: read
+concurrency:
+  group: stepteller-store
+  cancel-in-progress: false
+jobs:
+  scheda:
+    name: Scheda App Store
+    if: contains(github.event.head_commit.message, '[store-prova]') || contains(github.event.head_commit.message, '[store]') || contains(github.event.head_commit.message, '[store-invio]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install --quiet cryptography
+      - name: Scheda App Store
+        env:
+          MESSAGE: ${{ github.event.head_commit.message }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          ASC_REVIEW_FIRST_NAME: ${{ secrets.ASC_REVIEW_FIRST_NAME }}
+          ASC_REVIEW_LAST_NAME: ${{ secrets.ASC_REVIEW_LAST_NAME }}
+          ASC_REVIEW_PHONE: ${{ secrets.ASC_REVIEW_PHONE }}
+          ASC_REVIEW_EMAIL: ${{ secrets.ASC_REVIEW_EMAIL }}
+          ASC_COPYRIGHT: ${{ secrets.ASC_COPYRIGHT }}
+        run: |
+          # only the first line counts: a tag quoted in the body must not start anything.
+          # One command per push; [store-invio] wins and refuses by itself if the listing is not aligned.
+          subject=$(printf '%s\n' "$MESSAGE" | head -n 1)
+          case "$subject" in
+            *"[store-invio]"*) command=store-invio ;;
+            *"[store]"*)       command=store ;;
+            *"[store-prova]"*) command=store-prova ;;
+            *) echo "Nessun tag [store…] nella prima riga del messaggio: niente da fare"; exit 0 ;;
+          esac
+          echo "Comando: $command"
+          python3 ios/scripts/asc.py "$command"

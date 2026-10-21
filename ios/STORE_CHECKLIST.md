@@ -149,7 +149,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Strada della Home — PR [#23](https://github.com/castellanza-alt/StepTeller/pull/23): trattini fuori serie e ombra sotto la suola
       ridipinti (`scripts/arte/road.py`), giorno e notte; controllo della chat di coordinamento: solo i due sfondi
       cambiano, nella zona della strada; tre trattini nitidi sulla serie anche con la gamba spostata
-- [ ] Merge della #23 (ok di Will)
+- [x] Merge della #23 (ok di Will, `f6ef48d`)
 - [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
       («In walking minutes and distance»)
 - [ ] TestFlight 0.999

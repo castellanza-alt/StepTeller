@@ -190,7 +190,9 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [ ] Privacy «Dati non raccolti» (a mano, guida `ios/store/GUIDA_MANUALE.md`)
 - [x] URL di privacy e supporto
 - [x] Prezzo gratuito, 175 paesi
-- [ ] Dichiarazione non-trader UE e accordi (a mano, guida)
+- [x] Dichiarazione non-trader UE (già presente sul sito: «non si identifica come operatore commerciale»)
+- [ ] Dispositivo medico regolamentato → No (UE/SEE, Regno Unito, USA) — richiesto da Apple per Salute e fitness
+- [ ] Accordi da accettare, se presenti
 - [x] Note per il revisore e contatto (segreti GitHub), copyright
 - [x] Controllo della chat di coordinamento: workflow (tag solo nella prima riga), nessun dato personale nel repository,
       riepilogo dell'ultima esecuzione (4+, 175 paesi, nessuna differenza)

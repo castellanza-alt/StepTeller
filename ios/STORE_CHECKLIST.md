@@ -145,7 +145,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       schermata di avvio nera identica al primo fotogramma, versione 0.999; controllo della chat di coordinamento:
       diff letto, 51 test, 0 avvisi in Release, fotogrammi finali visti
 - [x] Merge della #24 (ok di Will, `58efb5d`)
-- [ ] Da guardare sul telefono: al primo avvio la scarpa può fermarsi ~0,4 s (visto solo sul simulatore carico)
+- [x] Splash sul telefono: nessun blocco (Will, 0.999)
 - [x] Miglia e mph — PR [#22](https://github.com/castellanza-alt/StepTeller/pull/22): solo visualizzazione (dentro tutto in km),
       automatiche per USA/UK, scelta in Impostazioni, cursore 2–10 mph; 17 testi nuovi nelle 10 lingue nel foglio;
       controllo della chat di coordinamento: 60 test (9 nuovi, golden invariati), cataloghi rigenerati identici,
@@ -158,7 +158,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
       («In walking minutes and distance»)
 - [x] TestFlight 0.999 (build 1.81.1, gruppo «Personale»)
-- [ ] Prova di Will della 0.999
+- [x] Prova di Will della 0.999: tutto funziona, splash fluida
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

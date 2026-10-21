@@ -155,8 +155,10 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       ridipinti (`scripts/arte/road.py`), giorno e notte; controllo della chat di coordinamento: solo i due sfondi
       cambiano, nella zona della strada; tre trattini nitidi sulla serie anche con la gamba spostata
 - [x] Merge della #23 (ok di Will, `f6ef48d`)
-- [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
-      («In walking minutes and distance»)
+- [x] Screenshot dell'app rifatti nelle 10 lingue con la versione 0.999 (strada corretta, inglese in miglia):
+      `design/app-lingue-v2/`; didascalia EN 02 neutra «In walking minutes and distance» (foglio aggiornato)
+- [x] Claude Design: 60 immagini definitive (10 lingue × 6, 1320×2868) in `ios/localizzazione/design/store-finali/<lingua>/`
+      (non versionate); controllate: didascalie identiche al foglio, inglese in miglia, strada corretta
 - [x] TestFlight 0.999 (build 1.81.1, gruppo «Personale»)
 - [x] Prova di Will della 0.999: tutto funziona, splash fluida
 

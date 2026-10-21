@@ -187,12 +187,12 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
       copie per en-GB/en-AU/en-CA, es-MX, fr-CA dove servono
 - [x] Categoria Salute e fitness / Stile di vita; età 4+ (Will, 21 ottobre: «no» a salute e benessere, che dava 9+ da iOS 26;
       script allineato)
-- [ ] Privacy «Dati non raccolti» (a mano, guida `ios/store/GUIDA_MANUALE.md`)
+- [x] Privacy «Dati non raccolti» (a mano)
 - [x] URL di privacy e supporto
 - [x] Prezzo gratuito, 175 paesi
 - [x] Dichiarazione non-trader UE (già presente sul sito: «non si identifica come operatore commerciale»)
-- [ ] Dispositivo medico regolamentato → No (UE/SEE, Regno Unito, USA) — richiesto da Apple per Salute e fitness
-- [ ] Accordi da accettare, se presenti
+- [x] Dispositivo medico regolamentato → No (UE/SEE, Regno Unito, USA)
+- [x] Accordi da accettare, se presenti
 - [x] Note per il revisore e contatto (segreti GitHub), copyright
 - [x] Controllo della chat di coordinamento: workflow (tag solo nella prima riga), nessun dato personale nel repository,
       riepilogo dell'ultima esecuzione (4+, 175 paesi, nessuna differenza)
@@ -206,7 +206,7 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 
 ## 7. Uscita
 - [x] Build 1.0 su TestFlight (build 1.88.1, gruppo «Personale»)
-- [ ] Prova finale di Will e passi a mano (privacy, DSA, accordi, età, rilascio manuale)
-- [ ] Invio in revisione
+- [x] Prova finale di Will e passi a mano (privacy, DSA, accordi, età, rilascio manuale)
+- [x] Invio in revisione: build 1.88.1 collegata e inviata da Will dal sito (21 ottobre 2026), rilascio manuale
 - [ ] Eventuale rifiuto gestito
 - [ ] Merge su `main` (su richiesta di Will)

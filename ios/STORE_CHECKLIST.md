@@ -144,7 +144,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       stella rossa al 65% dietro la scarpa, tocco per saltare, «Riduci movimento» = dissolvenza, solo a freddo,
       schermata di avvio nera identica al primo fotogramma, versione 0.999; controllo della chat di coordinamento:
       diff letto, 51 test, 0 avvisi in Release, fotogrammi finali visti
-- [ ] Merge della #24 (ok di Will)
+- [x] Merge della #24 (ok di Will, `58efb5d`)
 - [ ] Da guardare sul telefono: al primo avvio la scarpa può fermarsi ~0,4 s (visto solo sul simulatore carico)
 - [x] Miglia e mph — PR [#22](https://github.com/castellanza-alt/StepTeller/pull/22): solo visualizzazione (dentro tutto in km),
       automatiche per USA/UK, scelta in Impostazioni, cursore 2–10 mph; 17 testi nuovi nelle 10 lingue nel foglio;

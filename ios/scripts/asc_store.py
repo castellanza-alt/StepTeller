@@ -47,9 +47,11 @@ AGE_NONE = ['alcoholTobaccoOrDrugUseOrReferences', 'contests', 'gamblingSimulate
             'profanityOrCrudeHumor', 'sexualContentGraphicAndNudity', 'sexualContentOrNudity',
             'violenceCartoonOrFantasy', 'violenceRealistic', 'violenceRealisticProlongedGraphicOrSadistic']
 AGE_NO = ['advertising', 'ageAssurance', 'gambling', 'healthOrWellnessTopics', 'lootBox', 'messagingAndChat',
-          'parentalControls', 'unrestrictedWebAccess', 'userGeneratedContent']
+          'parentalControls', 'socialMedia', 'unrestrictedWebAccess', 'userGeneratedContent']
+# follow-ups of a «yes» (socialMediaAgeRestricted) or set by Apple / per country: left as they are
 AGE_UNTOUCHED = {'kidsAgeBand', 'ageRatingOverride', 'ageRatingOverrideV2', 'koreaAgeRatingOverride',
-                 'developerAgeRatingInfoUrl', 'seventeenPlus'}
+                 'developerAgeRatingInfoUrl', 'seventeenPlus', 'socialMediaAgeRestricted',
+                 'gracRatingClassificationNumber'}
 
 EDITABLE_VERSION = {'PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'DEVELOPER_REJECTED', 'REJECTED',
                     'METADATA_REJECTED', 'INVALID_BINARY'}

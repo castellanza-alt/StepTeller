@@ -33,6 +33,11 @@
   record) usano il font giusto. Italiano e le altre lingue invariati. L'app cresce di circa 0,5 MB (268 KB di font
   nell'app e altrettanti nel widget).
 - Nuova icona: suola rossa e scarpa bianca su fondo nero, vettoriale, in Liquid Glass (Icon Composer).
+- Animazione di apertura «Pestone» (1,2 s, solo all'apertura a freddo): sul nero dell'icona la scarpa cade e pesta
+  (stella rossa dietro la scarpa, linee cinetiche, vibrazione leggera), «NEAT» sbatte giù con l'ombra rossa, poi un
+  taglio rosso sale e scopre la Home o l'introduzione. Salute e storico si caricano intanto sotto; si salta con un
+  tocco; con «Riduci movimento» è una dissolvenza di 0,7 s. La schermata di avvio fissa di iOS ora è nera come
+  l'icona (prima era bianca o nera secondo il tema), identica al primo fotogramma.
 - Apertura senza «0»: la Home mostra subito gli ultimi passi di oggi e la serie salvati, poi si aggiorna con Salute
   (prima compariva 0 per qualche secondo, anche nel widget).
 

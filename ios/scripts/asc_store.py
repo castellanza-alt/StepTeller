@@ -514,9 +514,9 @@ def wait_screenshots(report, area, pending):
         report.note(area, '❌ Apple ha rifiutato: ' + '; '.join(failed))
 
 
-def sync(apply: bool) -> Report:
+def sync(apply: bool, report: Report = None) -> Report:
     metadata, shots, notes, secrets = load_inputs()
-    report = Report(apply)
+    report = report or Report(apply)
     app = asc.app_record()
     if not app:
         raise Stop(f'App non trovata per il Bundle ID {asc.BUNDLE}')
@@ -539,11 +539,12 @@ def store_prova():
 
 
 def store_applica():
+    report = Report(apply=True)
     try:
-        report = sync(apply=True)
+        sync(apply=True, report=report)
     except Exception:
-        asc.summary('## Scheda App Store — applicazione interrotta\nLe modifiche già fatte restano; '
-                    'rilanciare `[store]` riprende da qui (lo script è idempotente).')
+        asc.summary(report.markdown('Scheda App Store — applicazione interrotta') +
+                    '\n\nLe modifiche elencate sopra restano; rilanciare `[store]` riprende da qui (idempotente).')
         raise
     asc.summary(report.markdown('Scheda App Store — applicata'))
     check = sync(apply=False)

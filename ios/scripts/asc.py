@@ -61,16 +61,22 @@ def call(method: str, path: str, body=None, params=None):
     """`path` is relative to the API host, or a full URL (the `links.next` of a paged response)."""
     url = (path if path.startswith('https://') else API + path) + ('?' + urllib.parse.urlencode(params) if params else '')
     data = json.dumps(body).encode() if body is not None else None
-    request = urllib.request.Request(url, data=data, method=method, headers={
-        'Authorization': 'Bearer ' + token(), 'Content-Type': 'application/json'})
-    try:
-        with urllib.request.urlopen(request, timeout=60) as response:
-            raw = response.read()
-            return json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as error:
-        detail = error.read().decode(errors='replace')[:500]
-        shown = path.replace(API, '').split('?')[0]
-        raise ApiError(f'App Store Connect {method} {shown}: HTTP {error.code} {detail}', error.code, detail) from None
+    # transient server errors are retried, except on POST (a retried create could duplicate)
+    attempts = 1 if method == 'POST' else 4
+    for attempt in range(attempts):
+        request = urllib.request.Request(url, data=data, method=method, headers={
+            'Authorization': 'Bearer ' + token(), 'Content-Type': 'application/json'})
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                raw = response.read()
+                return json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as error:
+            detail = error.read().decode(errors='replace')[:500]
+            if error.code >= 500 and attempt + 1 < attempts:
+                time.sleep(5 * (attempt + 1))
+                continue
+            shown = path.replace(API, '').split('?')[0]
+            raise ApiError(f'App Store Connect {method} {shown}: HTTP {error.code} {detail}', error.code, detail) from None
 
 
 def summary(text: str):

@@ -1,5 +1,5 @@
 # Scheda App Store via API (ios/scripts/asc.py, comandi store-*; dettagli in ios/store/README.md).
-# Si avvia con un push su `main` o `ia/versione-0.6.2` il cui messaggio di commit contiene:
+# Si avvia con un push su `main` o `ia/versione-0.6.2` la cui PRIMA RIGA del messaggio di commit contiene:
 #   [store-prova]  legge App Store Connect e mostra cosa cambierebbe, per lingua (nessuna scrittura)
 #   [store]        applica testi, screenshot, categorie, età, prezzo, paesi e note, poi rilegge tutto
 #   [store-invio]  collega la build 1.0 e invia in revisione: SOLO dopo l'ok esplicito di Will
@@ -35,11 +35,14 @@ jobs:
           ASC_REVIEW_EMAIL: ${{ secrets.ASC_REVIEW_EMAIL }}
           ASC_COPYRIGHT: ${{ secrets.ASC_COPYRIGHT }}
         run: |
-          # one command per push; [store-invio] wins and refuses by itself if the listing is not aligned
-          case "$MESSAGE" in
+          # only the first line counts: a tag quoted in the body must not start anything.
+          # One command per push; [store-invio] wins and refuses by itself if the listing is not aligned.
+          subject=$(printf '%s\n' "$MESSAGE" | head -n 1)
+          case "$subject" in
             *"[store-invio]"*) command=store-invio ;;
             *"[store]"*)       command=store ;;
-            *)                 command=store-prova ;;
+            *"[store-prova]"*) command=store-prova ;;
+            *) echo "Nessun tag [store…] nella prima riga del messaggio: niente da fare"; exit 0 ;;
           esac
           echo "Comando: $command"
           python3 ios/scripts/asc.py "$command"

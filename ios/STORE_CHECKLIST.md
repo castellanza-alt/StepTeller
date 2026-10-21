@@ -185,7 +185,8 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Parole chiave JA/KO/ZH accorciate sotto i 100 byte (limite ufficiale Apple), approvate da Will
 - [x] Lingua principale della scheda: inglese (così i paesi senza traduzione vedono l'inglese, non l'italiano);
       copie per en-GB/en-AU/en-CA, es-MX, fr-CA dove servono
-- [x] Categoria Salute e fitness / Stile di vita; età: «sì» a salute e benessere, Apple calcola 4+ (da ricontrollare sul sito)
+- [x] Categoria Salute e fitness / Stile di vita; età 4+ (Will, 21 ottobre: «no» a salute e benessere, che dava 9+ da iOS 26;
+      script allineato)
 - [ ] Privacy «Dati non raccolti» (a mano, guida `ios/store/GUIDA_MANUALE.md`)
 - [x] URL di privacy e supporto
 - [x] Prezzo gratuito, 175 paesi

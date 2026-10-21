@@ -41,14 +41,14 @@ CONTENT_RIGHTS = 'DOES_NOT_USE_THIRD_PARTY_CONTENT'
 DISPLAY_TYPE = 'APP_IPHONE_67'
 SCREENSHOTS = 6
 
-# Age rating: every question «none» / «no», except AGE_YES (Will: a daily step goal is a wellness topic, be honest
-# with Apple). Only the keys the API returns are sent.
+# Age rating: every question «none» / «no» (Will chose 4+ on 21 October 2026: with «yes» to health or wellness topics
+# Apple shows 9+ on iOS 26 and later). Only the keys the API returns are sent.
 AGE_NONE = ['alcoholTobaccoOrDrugUseOrReferences', 'contests', 'gamblingSimulated', 'gunsOrOtherWeapons',
             'horrorOrFearThemes', 'matureOrSuggestiveThemes', 'medicalOrTreatmentInformation',
             'profanityOrCrudeHumor', 'sexualContentGraphicAndNudity', 'sexualContentOrNudity',
             'violenceCartoonOrFantasy', 'violenceRealistic', 'violenceRealisticProlongedGraphicOrSadistic']
-AGE_YES = ['healthOrWellnessTopics']
-AGE_NO = ['advertising', 'ageAssurance', 'gambling', 'lootBox', 'messagingAndChat',
+AGE_YES: list[str] = []
+AGE_NO = ['healthOrWellnessTopics', 'advertising', 'ageAssurance', 'gambling', 'lootBox', 'messagingAndChat',
           'parentalControls', 'socialMedia', 'unrestrictedWebAccess', 'userGeneratedContent']
 # follow-ups of a «yes» (socialMediaAgeRestricted) or set by Apple / per country: left as they are
 # ratings approved by Will: after saving the questionnaire, [store] stops if Apple computes anything else
@@ -267,7 +267,7 @@ def app_info_section(report, app_id, metadata):
 
 
 def age_rating_section(report, info):
-    area = 'Classificazione per età («sì» solo a salute e benessere)'
+    area = 'Classificazione per età (tutte le risposte «no»)'
     rating = info['attributes'].get('appStoreAgeRating')
     report.note(area, f'Classificazione calcolata ora da Apple: {rating or "nessuna (questionario non salvato)"}')
     declaration = get_optional(f"/v1/appInfos/{info['id']}/ageRatingDeclaration")

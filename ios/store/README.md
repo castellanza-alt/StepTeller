@@ -23,7 +23,7 @@ Commit senza modifiche, solo per lanciare: `git commit --allow-empty -m "ios: sc
   fr-CA (francese).
 - Per lingua: nome, sottotitolo, URL privacy (App Information); descrizione, parole chiave, testo promozionale,
   URL di supporto (versione 1.0, creata se manca); 6 screenshot in ordine 01…06 (sostituiscono quelli esistenti).
-- Categorie Salute e fitness / Stile di vita; età: «sì» solo ad «argomenti di salute o benessere»
+- Categorie Salute e fitness / Stile di vita; età: tutte le risposte «no» → 4+ (con «sì» a salute e benessere Apple mostra 9+ da iOS 26: scelta di Will, 4+)
   (scelta di Will), tutto il resto «no/nessuno»; il riepilogo mostra la classificazione calcolata da Apple; dichiarazione «nessun
   contenuto di terzi»; prezzo gratuito; disponibile in tutti i paesi, anche i nuovi.
 - Note per il revisore (`note_revisore.txt`, in inglese) e contatto, copyright: dai segreti.

@@ -9,6 +9,9 @@ certs       Revokes the certificates created by automatic signing through the AP
             ephemeral runner the private key is lost at the end of the job, so they are useless and Apple allows few.
 distribute  After the upload: waits for Apple to process the build in BUILD_NUMBER, sets the encryption
             compliance if needed and adds the build to the internal group «Personale».
+store-prova App Store listing (asc_store.py): reads App Store Connect and prints what would change, writes nothing.
+store       Same, then applies the changes (idempotent) and reads everything back.
+store-invio Attaches the 1.0 build to the App Store version and submits it for review (only after Will's ok).
 
 Security: no secrets in the logs (public IDs, dates and states only). Dependency: `cryptography`.
 """
@@ -47,8 +50,16 @@ def token() -> str:
     return signing_input + '.' + _b64(r.to_bytes(32, 'big') + s.to_bytes(32, 'big'))
 
 
+class ApiError(RuntimeError):
+    def __init__(self, message: str, status: int, detail: str):
+        super().__init__(message)
+        self.status = status
+        self.detail = detail
+
+
 def call(method: str, path: str, body=None, params=None):
-    url = API + path + ('?' + urllib.parse.urlencode(params) if params else '')
+    """`path` is relative to the API host, or a full URL (the `links.next` of a paged response)."""
+    url = (path if path.startswith('https://') else API + path) + ('?' + urllib.parse.urlencode(params) if params else '')
     data = json.dumps(body).encode() if body is not None else None
     request = urllib.request.Request(url, data=data, method=method, headers={
         'Authorization': 'Bearer ' + token(), 'Content-Type': 'application/json'})
@@ -58,7 +69,8 @@ def call(method: str, path: str, body=None, params=None):
             return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as error:
         detail = error.read().decode(errors='replace')[:500]
-        raise RuntimeError(f'App Store Connect {method} {path}: HTTP {error.code} {detail}') from None
+        shown = path.replace(API, '').split('?')[0]
+        raise ApiError(f'App Store Connect {method} {shown}: HTTP {error.code} {detail}', error.code, detail) from None
 
 
 def summary(text: str):
@@ -173,7 +185,11 @@ def distribute():
 
 if __name__ == '__main__':
     try:
-        {'bootstrap': bootstrap, 'certs': certs, 'distribute': distribute}[sys.argv[1]]()
+        commands = {'bootstrap': bootstrap, 'certs': certs, 'distribute': distribute}
+        if sys.argv[1].startswith('store'):
+            import asc_store
+            commands.update(asc_store.COMMANDS)
+        commands[sys.argv[1]]()
     except Exception as error:  # noqa: BLE001
         print('::error::' + str(error)[:500])
         sys.exit(1)

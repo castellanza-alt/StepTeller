@@ -13,7 +13,8 @@ La web app resta in radice al repository (non toccata).
 | `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
 | `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
-| `scripts/` | `asc.py` (API App Store Connect), `screenshots.sh`, `cataloghi.py` (String Catalog dal foglio), `check_icon.py`, `select_xcode.sh` |
+| `scripts/` | `asc.py` e `asc_store.py` (API App Store Connect: TestFlight e scheda dello store), `store_metadata.py` e `store_screenshots.py` (dati della scheda), `screenshots.sh`, `cataloghi.py` (String Catalog dal foglio), `check_icon.py`, `select_xcode.sh` |
+| `store/` | Scheda App Store: testi per lingua (`metadata.json`, generato dal foglio), screenshot JPEG, note per il revisore, guida ai passi a mano |
 | `localizzazione/` | Foglio delle traduzioni approvate (fonte dei cataloghi), prompt e screenshot usati per tradurre |
 
 Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
@@ -151,7 +152,12 @@ trasparente generate da iOS. Anteprima da terminale con `ictool` (dentro Icon Co
 - `.github/workflows/ios-testflight.yml` — con un push su `main` o `ia/versione-0.6.2` il cui messaggio contiene `[apple]` (solo preparazione Apple) o `[testflight]` (build completa); avvio manuale dopo il merge: verifica Apple, firma automatica con
   chiave API, upload, assegnazione al gruppo «Personale». Numero di build `1.<run_number>.<run_attempt>`.
 
-Segreti Actions (solo nomi): `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`. Il repository è pubblico: **mai**
+- `.github/workflows/ios-store.yml` — scheda App Store via API con un push su `main` o `ia/versione-0.6.2` il cui messaggio
+  contiene `[store-prova]` (solo lettura: cosa cambierebbe), `[store]` (applica e rilegge) o `[store-invio]` (build 1.0 in
+  revisione, solo dopo l'ok di Will). Testi, screenshot e istruzioni in `store/` (`store/README.md`).
+
+Segreti Actions (solo nomi): `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_PRIVATE_KEY`; per la scheda dello store anche
+`ASC_REVIEW_FIRST_NAME`, `ASC_REVIEW_LAST_NAME`, `ASC_REVIEW_PHONE`, `ASC_REVIEW_EMAIL`, `ASC_COPYRIGHT`. Il repository è pubblico: **mai**
 chiavi, profili o certificati nel codice.
 
 ## Distribuzione

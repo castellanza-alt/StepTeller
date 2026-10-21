@@ -202,7 +202,8 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Controllo della chat di coordinamento
 
 ## 7. Uscita
-- [ ] Build 1.0 su TestFlight (versione 1.0 in project.yml), prova finale di Will
+- [x] Build 1.0 su TestFlight (build 1.88.1, gruppo «Personale»)
+- [ ] Prova finale di Will e passi a mano (privacy, DSA, accordi, età, rilascio manuale)
 - [ ] Invio in revisione
 - [ ] Eventuale rifiuto gestito
 - [ ] Merge su `main` (su richiesta di Will)

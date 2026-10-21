@@ -146,7 +146,10 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       controllo della chat di coordinamento: 60 test (9 nuovi, golden invariati), cataloghi rigenerati identici,
       0 avvisi, Home/Impostazioni/widget in miglia (en_US, en_GB) e in km (it)
 - [x] Merge della #22 (ok di Will, `4536d1f`)
-- [ ] Strada della Home: trattini finti nel riempimento sotto la scarpa (chat dedicata, ramo `ia/strada`)
+- [x] Strada della Home — PR [#23](https://github.com/castellanza-alt/StepTeller/pull/23): trattini fuori serie e ombra sotto la suola
+      ridipinti (`scripts/arte/road.py`), giorno e notte; controllo della chat di coordinamento: solo i due sfondi
+      cambiano, nella zona della strada; tre trattini nitidi sulla serie anche con la gamba spostata
+- [ ] Merge della #23 (ok di Will)
 - [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
       («In walking minutes and distance»)
 - [ ] TestFlight 0.999

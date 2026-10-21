@@ -363,8 +363,13 @@ def price_section(report, app_id):
     schedule = get_optional(f'/v1/apps/{app_id}/appPriceSchedule')
     prices = []
     if schedule:
-        manual, included = get_all(f"/v1/appPriceSchedules/{schedule['id']}/manualPrices",
-                                   {'include': 'appPricePoint', 'limit': 200})
+        try:
+            _, included = get_all(f"/v1/appPriceSchedules/{schedule['id']}/manualPrices",
+                                  {'include': 'appPricePoint', 'limit': 200})
+        except asc.ApiError as error:  # an app never priced answers 404 here
+            if error.status != 404:
+                raise
+            included = []
         prices = [float(p['attributes'].get('customerPrice') or 0) for p in included if p['type'] == 'appPricePoints']
     if prices and not any(prices):
         report.note(area, '✅ Gratuita')

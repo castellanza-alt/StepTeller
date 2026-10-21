@@ -157,7 +157,8 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Merge della #23 (ok di Will, `f6ef48d`)
 - [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
       («In walking minutes and distance»)
-- [ ] TestFlight 0.999
+- [x] TestFlight 0.999 (build 1.81.1, gruppo «Personale»)
+- [ ] Prova di Will della 0.999
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

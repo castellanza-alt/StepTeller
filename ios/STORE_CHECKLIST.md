@@ -145,7 +145,7 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
       automatiche per USA/UK, scelta in Impostazioni, cursore 2–10 mph; 17 testi nuovi nelle 10 lingue nel foglio;
       controllo della chat di coordinamento: 60 test (9 nuovi, golden invariati), cataloghi rigenerati identici,
       0 avvisi, Home/Impostazioni/widget in miglia (en_US, en_GB) e in km (it)
-- [ ] Merge della #22 (ok di Will)
+- [x] Merge della #22 (ok di Will, `4536d1f`)
 - [ ] Strada della Home: trattini finti nel riempimento sotto la scarpa (chat dedicata, ramo `ia/strada`)
 - [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
       («In walking minutes and distance»)

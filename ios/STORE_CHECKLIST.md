@@ -18,7 +18,7 @@ prima tra Will e la chat di coordinamento.
 | Email di supporto | castellanza@gmail.com (pubblica su pagina di supporto e store) |
 | Live Activity del tappeto | Tolta (chat 1b): dalla 0.6.0 nessun bottone la avviava |
 | Lingue | Italiano, inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano, cinese semplificato, cinese tradizionale |
-| Unità di misura | km e km/h per tutte le lingue nella 1.0 (miglia eventualmente in una versione successiva) |
+| Unità di misura | Cambiata il 20 ottobre: miglia e mph nella 1.0 (paese USA/UK o scelta in Impostazioni), km altrove |
 | Termini chiave | Glossario (Jolly, serie, tappeto, obiettivo…) approvato da Will prima di tradurre |
 | Icona | Nuova (20 ottobre): suola rossa e scarpa bianca su nero, vettoriale, Liquid Glass — PR [#19](https://github.com/castellanza-alt/StepTeller/pull/19), unita (`adc5cdc`) |
 | Font lingue asiatiche | Font OFL ridotti ai caratteri usati: Dela Gothic One (JA), Black Han Sans (KO), Noto Sans SC/TC Black (ZH), ~270 KB |
@@ -138,6 +138,18 @@ Materiale in `ios/localizzazione/`: `NEAT_testi_tradotti.xlsx` (173 testi + glos
 - [x] Apertura senza «0»: ultimi passi e serie salvati mostrati fino alla lettura di Salute — PR [#21](https://github.com/castellanza-alt/StepTeller/pull/21) (`ae28edf`)
 - [x] Nuova build 0.99 su TestFlight con la correzione (build 1.68.2, al secondo tentativo: il primo è rimasto senza Mac)
 - [x] Prova di Will dell'apertura senza «0» (build 1.68.2): funziona
+
+## 4d. Ultime aggiunte per la 0.999
+- [ ] Splash animata (chat dedicata): scelta la A «Pestone» con lampo rosso addolcito — PR da controllare
+- [x] Miglia e mph — PR [#22](https://github.com/castellanza-alt/StepTeller/pull/22): solo visualizzazione (dentro tutto in km),
+      automatiche per USA/UK, scelta in Impostazioni, cursore 2–10 mph; 17 testi nuovi nelle 10 lingue nel foglio;
+      controllo della chat di coordinamento: 60 test (9 nuovi, golden invariati), cataloghi rigenerati identici,
+      0 avvisi, Home/Impostazioni/widget in miglia (en_US, en_GB) e in km (it)
+- [ ] Merge della #22 (ok di Will)
+- [ ] Strada della Home: trattini finti nel riempimento sotto la scarpa (chat dedicata, ramo `ia/strada`)
+- [ ] Screenshot inglesi dello store da rifare in miglia (app in en_US) e didascalia EN 02 neutra
+      («In walking minutes and distance»)
+- [ ] TestFlight 0.999
 
 ## 5. Scheda App Store Connect
 Messaggio approvato da Will: un obiettivo di passi e tre domande (quanti passi oggi, quanti ne mancano, quanto

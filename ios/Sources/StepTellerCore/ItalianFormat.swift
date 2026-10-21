@@ -1,8 +1,7 @@
 import Foundation
 
-/// Formattazione italiana indipendente dalle impostazioni del dispositivo
-/// (separatore migliaia «.», decimale «,»). Implementata a mano per dare lo stesso
-/// risultato su Linux, macOS e iOS.
+/// Italian formatting independent of the device settings (thousands «.», decimal «,»).
+/// Hand-written so that Linux, macOS and iOS give the same result.
 public enum ItalianFormat {
     /// `10.000`, `67,5`, `8,3`.
     public static func number(_ value: Double, decimals: Int = 0) -> String {
@@ -24,7 +23,7 @@ public enum ItalianFormat {
 
     public static func integer(_ value: Int) -> String { number(Double(value)) }
 
-    /// Estrae le cifre da un testo digitato (`"7.200"` → 7200).
+    /// Digits of a typed text (`"7.200"` → 7200).
     public static func digits(_ text: String) -> Int {
         Int(text.filter(\.isNumber)) ?? 0
     }

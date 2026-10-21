@@ -1,5 +1,60 @@
 # Changelog
 
+## 1.0 — 19 ottobre 2026
+- Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,
+  cursore, Storico con la scheda MI, widget, blocco schermo, promemoria, VoiceOver); negli altri paesi km e km/h come
+  prima. Impostazioni → «Unità di misura»: Automatiche (predefinito), Chilometri, Miglia. Il cursore in miglia va da
+  2 a 10 mph a scatti di 0,5 sulla stessa strada; cambiando unità la velocità passa allo scatto più vicino. I calcoli
+  restano in km/h. Testi nuovi in tutte le 10 lingue nel foglio delle traduzioni.
+- Preparazione per l'App Store, nessuna modifica visibile: privacy manifest (`PrivacyInfo.xcprivacy`) nell'app e
+  nel widget, avvisi del compilatore azzerati, tolto codice non più usato (colori del vecchio tappeto illustrato,
+  funzioni senza chiamanti).
+- Introduzione al primo avvio (benvenuto, Salute, obiettivo, promemoria serale), nello stile «Dan Dan Dan»: i
+  permessi di Salute e notifiche si chiedono lì, al momento giusto, e non più all'apertura. Se Salute viene negata si
+  va avanti lo stesso (passi a mano). Chi aveva già l'app non la vede; si rivede da Impostazioni → Informazioni →
+  «Rivedi l'introduzione».
+- Promemoria serale generico: «Apri NEAT…» invece del vecchio nome «Step Teller».
+- Tolta la Live Activity del tappeto, non più raggiungibile dalla 0.6.0. I widget restano tutti; l'estensione
+  mantiene nome e bundle ID (`StepTellerLiveActivity`, `it.castellanza.stepteller.liveactivity`).
+- Lingue: oltre all'italiano, inglese, spagnolo, francese, tedesco, portoghese (Brasile), giapponese, coreano,
+  cinese semplificato e tradizionale, secondo la lingua del telefono. Testi di app, widget, promemoria e permessi di
+  Salute dal foglio approvato `localizzazione/NEAT_testi_tradotti.xlsx` (String Catalog generati con
+  `scripts/cataloghi.py`). Numeri, date, nomi dei mesi e iniziali dei giorni nella lingua del telefono; in italiano
+  tutto come prima. Il permesso di scrittura in Salute ora dice «si limita a leggere i dati» (legge anche gli
+  allenamenti).
+- Lingua di riserva inglese: con il telefono in una lingua non tradotta (es. olandese) l'app è in inglese, non in italiano.
+- Home a obiettivo raggiunto: «OBIETTIVO RAGGIUNTO / FATTO! / +729 PASSI» sta in una vignetta storta col bordo, come
+  quelle dello Storico, e non finisce più sopra gamba e lacci della scarpa (si legge in tutte le lingue). Il blocco
+  dei minuti, il cursore nascosto e VoiceOver restano come prima.
+- Titoli in giapponese, coreano e cinese nello stile manga: i caratteri che Anton non ha li disegna un font OFL spesso
+  (Dela Gothic One, Black Han Sans, Noto Sans SC Black e TC Black), ridotto ai soli caratteri usati dall'app
+  (`scripts/font_asia.py`, da rilanciare quando cambiano le traduzioni); cifre e lettere restano Anton. Nelle
+  quattro lingue la spaziatura larga delle maiuscole di Anton è ridotta. Anche i numeri con contorno (festa,
+  record) usano il font giusto. Italiano e le altre lingue invariati. L'app cresce di circa 0,5 MB (268 KB di font
+  nell'app e altrettanti nel widget).
+- Nuova icona: suola rossa e scarpa bianca su fondo nero, vettoriale, in Liquid Glass (Icon Composer).
+- Animazione di apertura «Pestone» (1,2 s, solo all'apertura a freddo): sul nero dell'icona la scarpa cade e pesta
+  (stella rossa dietro la scarpa, linee cinetiche, vibrazione leggera), «NEAT» sbatte giù con l'ombra rossa, poi un
+  taglio rosso sale e scopre la Home o l'introduzione. Salute e storico si caricano intanto sotto; si salta con un
+  tocco; con «Riduci movimento» è una dissolvenza di 0,7 s. La schermata di avvio fissa di iOS ora è nera come
+  l'icona (prima era bianca o nera secondo il tema), identica al primo fotogramma.
+- Apertura senza «0»: la Home mostra subito gli ultimi passi di oggi e la serie salvati, poi si aggiorna con Salute
+  (prima compariva 0 per qualche secondo, anche nel widget).
+
+## 0.6.3 — 19 ottobre 2026
+- Home di notte: la luna non ha più i raggi (restano solo intorno al sole di giorno).
+- Swipe tra le schermate: verso sinistra dalla Home allo Storico, verso destra per tornare. Il cursore della
+  velocità sulla strada non fa cambiare schermata.
+- Parallasse: scarpa e gamba si spostano leggermente rispetto allo sfondo inclinando il telefono (al massimo 8 pt,
+  tornano al centro a telefono fermo; spenta con «Riduci movimento»). Livelli ricavati con `scripts/arte/`.
+- Festa «Obiettivo raggiunto»: aspetta lo storico riletto da Salute, così mostra la serie giusta invece di
+  «1 giorno di fila».
+- Storico: scorrendo in giù non compare più la scritta «STORICO» in alto.
+
+## 0.6.2 — 18 ottobre 2026
+- Stesso contenuto della 0.6.0 (NEAT, stile «Dan Dan Dan», icona e widget nuovi), con un numero di versione più
+  alto della 0.6.1 caricata dal Mac: TestFlight mostra in cima la versione più alta, quindi la 0.6.0 restava nascosta.
+
 ## 0.6.0 — 18 ottobre 2026
 - L'app si chiama **NEAT** (nome sotto l'icona, Salute e widget). Bundle ID, dati salvati e link `stepteller://`
   restano quelli di prima.

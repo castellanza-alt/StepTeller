@@ -1,12 +1,12 @@
 import Foundation
 import StepTellerCore
 
-/// Dati condivisi tra app e widget tramite App Group: obiettivo, taratura, velocità scelta in Home,
-/// serie e Jolly, ultimo conteggio passi
-/// (usato dal widget solo quando Salute è bloccata, cioè a telefono bloccato). Tutto resta sul telefono.
+/// Data shared between app and widget through the App Group: goal, calibration, speed chosen in Home,
+/// units, streak and Jollies, last step count (used by the widget only when Health is locked, i.e. with the
+/// phone locked). Everything stays on the phone.
 enum SharedStore {
     static let suite = "group.it.castellanza.stepteller"
-    static var defaults: UserDefaults { UserDefaults(suiteName: suite) ?? .standard }
+    static let defaults = UserDefaults(suiteName: suite) ?? .standard
 
     private enum Keys {
         static let goal = "goal"
@@ -16,15 +16,22 @@ enum SharedStore {
         static let speed = "speed"
         static let streak = "streak"
         static let jolly = "jolly"
+        static let units = "units"
     }
 
-    /// Velocità del cursore in Home (km/h): il widget calcola i minuti con la stessa.
+    /// Speed of the Home slider (km/h): the widget computes its minutes with the same one.
     static var speed: Double {
         get { defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed }
         set { defaults.set(newValue, forKey: Keys.speed) }
     }
 
-    /// Serie e Jolly come li calcola l'app (il widget non rilegge lo storico).
+    /// Units chosen in Settings (`Units.current` resolves «automatic» with the phone's region).
+    static var unitPreference: UnitPreference {
+        get { defaults.string(forKey: Keys.units).flatMap(UnitPreference.init(rawValue:)) ?? .automatic }
+        set { defaults.set(newValue.rawValue, forKey: Keys.units) }
+    }
+
+    /// Streak and Jollies as the app computes them (the widget does not read the history).
     static var streak: Int {
         get { defaults.integer(forKey: Keys.streak) }
         set { defaults.set(newValue, forKey: Keys.streak) }
@@ -33,6 +40,11 @@ enum SharedStore {
     static var jolly: Int {
         get { defaults.integer(forKey: Keys.jolly) }
         set { defaults.set(newValue, forKey: Keys.jolly) }
+    }
+
+    /// Streak and Jollies saved by an earlier launch (`nil` on a fresh install): shown until the history is read.
+    static var cachedStreak: (streak: Int, jolly: Int)? {
+        defaults.object(forKey: Keys.streak) != nil ? (streak, jolly) : nil
     }
 
     static var goal: Int {
@@ -45,13 +57,13 @@ enum SharedStore {
         set { defaults.set(try? JSONEncoder().encode(newValue), forKey: Keys.calibration) }
     }
 
-    /// Ultimo conteggio letto da Salute, con il giorno a cui si riferisce.
+    /// Last count read from Health, with the day it refers to.
     static func saveSteps(_ steps: Int, now: Date = Date(), calendar: Calendar = .current) {
         defaults.set(steps, forKey: Keys.lastSteps)
         defaults.set(calendar.startOfDay(for: now), forKey: Keys.lastStepsDay)
     }
 
-    /// L'ultimo conteggio, solo se è di oggi.
+    /// The last count, only if it is today's.
     static func cachedStepsToday(now: Date = Date(), calendar: Calendar = .current) -> Int? {
         guard let day = defaults.object(forKey: Keys.lastStepsDay) as? Date,
               calendar.isDate(day, inSameDayAs: now),

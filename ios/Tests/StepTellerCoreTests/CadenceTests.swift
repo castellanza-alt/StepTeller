@@ -66,14 +66,14 @@ final class CadenceTests: XCTestCase {
         let one = CadenceModel(walkCalibration: [], runCalibration: [CalibrationPoint(speed: 8, cadence: 150)])
         let r1 = 150.0 / 159.0
         XCTAssertEqual(one.cadence(at: 8.0), 150, accuracy: 0.001)
-        XCTAssertEqual(one.cadence(at: 12.0), 170 * r1, accuracy: 0.001)   // costante
+        XCTAssertEqual(one.cadence(at: 12.0), 170 * r1, accuracy: 0.001)   // constant
         XCTAssertEqual(one.cadence(at: 7.5), 157.5 * r1, accuracy: 0.001)
         let two = CadenceModel(walkCalibration: [], runCalibration: [
             CalibrationPoint(speed: 8, cadence: 159 * 1.0), CalibrationPoint(speed: 10, cadence: 165 * 1.1)])
-        XCTAssertEqual(two.cadence(at: 9.0), 162 * 1.05, accuracy: 0.001)   // interpolato
+        XCTAssertEqual(two.cadence(at: 9.0), 162 * 1.05, accuracy: 0.001)   // interpolated
         XCTAssertEqual(two.cadence(at: 7.2), two.cadence(at: 7.2), accuracy: 0)
-        XCTAssertEqual(two.cadence(at: 7.5), 157.5 * 1.0, accuracy: 0.001)  // costante sotto
-        XCTAssertEqual(two.cadence(at: 12.0), 170 * 1.1, accuracy: 0.001)   // costante sopra
+        XCTAssertEqual(two.cadence(at: 7.5), 157.5 * 1.0, accuracy: 0.001)  // constant below
+        XCTAssertEqual(two.cadence(at: 12.0), 170 * 1.1, accuracy: 0.001)   // constant above
     }
 
     func testItalianFormat() {
@@ -88,7 +88,7 @@ final class CadenceTests: XCTestCase {
     }
 
     func testGlancePlanAtFourKmh() {
-        // widget: camminata a 4 km/h (101 passi/min), 7.200 su 10.000 → 28 min
+        // widget: walking at 4 km/h (101 steps/min), 7.200 of 10.000 → 28 min
         let p = Plan(goal: 10_000, steps: 7_200, speed: Plan.glanceSpeed, model: CalibrationResult.empty.model)
         XCTAssertEqual(p.minutes, 28)
         XCTAssertEqual(p.progress, 0.72, accuracy: 1e-9)

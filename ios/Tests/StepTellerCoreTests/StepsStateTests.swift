@@ -28,7 +28,7 @@ final class StepsStateTests: XCTestCase {
         s.setManual(5_000, at: date(8, 21), calendar: cal)
         XCTAssertEqual(s.steps, 5_000); XCTAssertEqual(s.origin, .manual)
         p.value = 7_500
-        await c.refresh(&s, now: date(8, 22))          // con override Salute non lo cambia
+        await c.refresh(&s, now: date(8, 22))          // with an override Health does not change it
         XCTAssertEqual(s.steps, 5_000)
         s.useHealth()
         XCTAssertEqual(s.steps, 7_500); XCTAssertEqual(s.origin, .health)
@@ -69,5 +69,30 @@ final class StepsStateTests: XCTestCase {
         await c.refresh(&s, now: date(8, 20))
         XCTAssertEqual(s.steps, 1_400)
         XCTAssertNotNil(p.handler)
+    }
+}
+
+final class StepsSeedTests: XCTestCase {
+    func testSeedShowsCachedStepsUntilFirstRead() {
+        var s = StepsState()
+        s.seed(cachedSteps: 4_321)
+        XCTAssertEqual(s.steps, 4_321)
+        XCTAssertFalse(s.showsNoDataWarning)
+        XCTAssertNil(s.lastUpdate)
+        s.applyHealth(5_000, at: Date())
+        XCTAssertEqual(s.steps, 5_000)
+    }
+
+    func testSeedIgnoredAfterARealRead() {
+        var s = StepsState()
+        s.applyHealth(1_200, at: Date())
+        s.seed(cachedSteps: 9_999)
+        XCTAssertEqual(s.steps, 1_200)
+    }
+
+    func testSeedIgnoresZero() {
+        var s = StepsState()
+        s.seed(cachedSteps: 0)
+        XCTAssertEqual(s.steps, 0)
     }
 }

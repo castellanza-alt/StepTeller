@@ -1,0 +1,75 @@
+{
+  "_source": "Generato da scripts/store_metadata.py dal foglio «Store»: non modificare a mano.",
+  "languages": {
+    "it": {
+      "name": "NEAT - ogni passo conta",
+      "subtitle": "Il tuo obiettivo. Raggiungilo.",
+      "promotionalText": "Quanti passi ti mancano oggi? NEAT te lo dice in un colpo d'occhio. I tuoi dati restano sul tuo iPhone.",
+      "description": "Quanti passi ho fatto oggi? Quanti me ne mancano? Quanto devo ancora camminare?\n\nNEAT risponde a queste tre domande, in un colpo d'occhio.\n\n• I passi di oggi, letti da Salute.\n• Quanti ne mancano al tuo obiettivo.\n• Quanti minuti di camminata servono per raggiungerlo, alla velocità che scegli.\n\nOgni giorno a obiettivo allunga la tua serie. Lo storico ti mostra settimane, mesi e record. Un promemoria la sera, se manca ancora qualcosa. E i widget ti tengono aggiornato senza aprire l'app.\n\nI tuoi dati restano sul tuo iPhone. NEAT legge soltanto: niente account, niente pubblicità, niente tracciamento. Nessun dato lascia il telefono.\n\nOgni passo conta.",
+      "keywords": "contapassi,passi,camminata,obiettivo,pedometro,10000,serie,salute,privacy,widget,tapis roulant"
+    },
+    "en": {
+      "name": "NEAT - Every Step Counts",
+      "subtitle": "Set a goal. Reach it.",
+      "promotionalText": "How many steps left today? NEAT shows you at a glance. Your data stays on your iPhone.",
+      "description": "How many steps have I taken today? How many do I have left? How much longer do I need to walk?\n\nNEAT answers these three questions at a glance.\n\n• Today's steps, read from Health.\n• How many steps are left to reach your goal.\n• How many minutes of walking it takes to get there, at the speed you choose.\n\nEach day you reach your goal extends your streak. Your history shows weeks, months and records. An evening reminder if you still have steps to go. And widgets keep you up to date without opening the app.\n\nYour data stays on your iPhone. NEAT only reads: no account, no ads, no tracking. No data leaves your phone.\n\nEvery step counts.",
+      "keywords": "pedometer,walking,steps,counter,daily,distance,minutes,streak,widget,reminder,10000,treadmill"
+    },
+    "es": {
+      "name": "NEAT - Cada paso cuenta",
+      "subtitle": "Fija una meta. Alcánzala.",
+      "promotionalText": "¿Cuántos pasos te faltan hoy? NEAT te lo dice de un vistazo. Tus datos se quedan en tu iPhone.",
+      "description": "¿Cuántos pasos he dado hoy? ¿Cuántos me faltan? ¿Cuánto más tengo que caminar?\n\nNEAT responde a estas tres preguntas de un vistazo.\n\n• Los pasos de hoy, leídos de Salud.\n• Cuántos te faltan para llegar a tu meta.\n• Cuántos minutos necesitas caminar para alcanzarla, a la velocidad que elijas.\n\nCada día que alcanzas tu meta alarga tu racha. El historial te muestra semanas, meses y récords. Un recordatorio por la tarde si aún te faltan pasos. Y los widgets te mantienen al día sin abrir la app.\n\nTus datos se quedan en tu iPhone. NEAT solo lee: sin cuenta, sin anuncios, sin rastreo. Ningún dato sale del teléfono.\n\nCada paso cuenta.",
+      "keywords": "podómetro,pasos,caminar,contador,caminata,diario,distancia,minutos,racha,widget,recordatorio,10000"
+    },
+    "fr": {
+      "name": "NEAT - Chaque pas compte",
+      "subtitle": "Fixe un but. Atteins-le.",
+      "promotionalText": "Combien de pas te reste-t-il aujourd’hui ? NEAT te le dit en un clin d’œil. Tes données restent sur ton iPhone.",
+      "description": "Combien de pas ai-je faits aujourd’hui ? Combien m’en reste-t-il ? Combien de temps dois-je encore marcher ?\n\nNEAT répond à ces trois questions en un clin d’œil.\n\n• Les pas du jour, lus dans Santé.\n• Le nombre de pas restants pour atteindre ton objectif.\n• Les minutes de marche nécessaires pour l’atteindre, à la vitesse de ton choix.\n\nChaque jour où tu atteins ton objectif prolonge ta série. L’historique affiche les semaines, les mois et les records. Un rappel le soir s’il te reste des pas à faire. Et les widgets te tiennent au courant sans ouvrir l’app.\n\nTes données restent sur ton iPhone. NEAT ne fait que lire : aucun compte, aucune pub, aucun suivi. Aucune donnée ne quitte ton téléphone.\n\nChaque pas compte.",
+      "keywords": "podomètre,marche,compteur,objectif,quotidien,distance,minutes,série,widget,rappel,10000,tapis"
+    },
+    "de": {
+      "name": "NEAT - Jeder Schritt zählt",
+      "subtitle": "Setz ein Ziel. Erreiche es.",
+      "promotionalText": "Wie viele Schritte fehlen dir heute? NEAT zeigt es dir auf einen Blick. Deine Daten bleiben auf dem iPhone.",
+      "description": "Wie viele Schritte bin ich heute gegangen? Wie viele fehlen mir noch? Wie lange muss ich noch gehen?\n\nNEAT beantwortet diese drei Fragen auf einen Blick.\n\n• Die heutigen Schritte, aus Health gelesen.\n• Wie viele Schritte dir noch bis zu deinem Ziel fehlen.\n• Wie viele Gehminuten du dafür brauchst, bei deinem gewählten Tempo.\n\nJeder Tag, an dem du dein Ziel erreichst, verlängert deine Serie. Der Verlauf zeigt dir Wochen, Monate und Rekorde. Eine Erinnerung am Abend, wenn noch Schritte fehlen. Und Widgets halten dich auf dem Laufenden, ohne die App zu öffnen.\n\nDeine Daten bleiben auf dem iPhone. NEAT liest nur: kein Konto, keine Werbung, kein Tracking. Keine Daten verlassen dein Telefon.\n\nJeder Schritt zählt.",
+      "keywords": "Schrittzähler,Schritte,gehen,Spaziergang,Tagesziel,Distanz,Gehzeit,Serie,Widget,Erinnerung,10000"
+    },
+    "pt-BR": {
+      "name": "NEAT - Cada passo conta",
+      "subtitle": "Defina uma meta. Alcance-a.",
+      "promotionalText": "Quantos passos faltam hoje? O NEAT mostra num relance. Seus dados ficam no seu iPhone.",
+      "description": "Quantos passos dei hoje? Quantos faltam? Quanto ainda preciso caminhar?\n\nO NEAT responde a essas três perguntas num relance.\n\n• Os passos de hoje, lidos do Saúde.\n• Quantos faltam para alcançar sua meta.\n• Quantos minutos de caminhada são necessários para alcançá-la, na velocidade que você escolher.\n\nCada dia em que você alcança sua meta aumenta sua sequência. O histórico mostra semanas, meses e recordes. Um lembrete à noite, se ainda faltarem passos. E os widgets mantêm você a par sem abrir o app.\n\nSeus dados ficam no seu iPhone. O NEAT só lê: sem conta, sem anúncios, sem rastreamento. Nenhum dado sai do celular.\n\nCada passo conta.",
+      "keywords": "pedômetro,passos,caminhada,contador,caminhar,distância,minutos,sequência,widget,lembrete,10000"
+    },
+    "ja": {
+      "name": "NEAT - 一歩一歩が大切",
+      "subtitle": "目標を決めよう。達成しよう。",
+      "promotionalText": "今日の目標まで、あと何歩？NEATならひと目でわかります。あなたのデータは、あなたのiPhoneの中に。",
+      "description": "今日は何歩歩いた？あと何歩？あとどれくらい歩けばいい？\n\nNEATなら、この3つの答えがひと目でわかります。\n\n• ヘルスケアから読み取った今日の歩数。\n• 目標まであと何歩か。\n• 選んだ速度で、目標達成まであと何分歩けばいいか。\n\n目標を達成するたびに、連続記録が伸びます。履歴では週ごと、月ごとの歩数や記録を確認できます。まだ歩数が足りない日は、夜にリマインダーでお知らせ。ウィジェットなら、アプリを開かずに状況を確認できます。\n\nあなたのデータは、あなたのiPhoneの中に。NEATは読み取り専用。アカウントも、広告も、トラッキングもありません。データがスマートフォンの外に出ることはありません。\n\n一歩一歩が大切。",
+      "keywords": "歩数計,ウォーキング,散歩,歩数,距離,記録,連続達成,ウィジェット,10000歩"
+    },
+    "ko": {
+      "name": "NEAT - 한 걸음 한 걸음이 소중해",
+      "subtitle": "목표를 정해요. 달성해요.",
+      "promotionalText": "오늘 몇 걸음 더 걸어야 할까요? NEAT에서 한눈에 확인하세요. 내 데이터는 내 iPhone에 그대로.",
+      "description": "오늘 몇 걸음 걸었을까? 몇 걸음 남았을까? 얼마나 더 걸어야 할까?\n\nNEAT는 이 세 가지 질문의 답을 한눈에 보여줘요.\n\n• 건강 앱에서 읽어 온 오늘의 걸음 수.\n• 목표까지 남은 걸음 수.\n• 선택한 속도로 목표에 도달하려면 더 걸어야 하는 시간(분).\n\n목표를 달성할 때마다 연속 기록이 늘어나요. 기록에서 주별, 월별 걸음 수와 최고 기록을 확인하세요. 아직 걸음 수가 부족하면 저녁에 알림을 보내요. 위젯으로 앱을 열지 않고도 현황을 확인할 수 있어요.\n\n내 데이터는 내 iPhone에 그대로. NEAT는 읽기만 해요. 계정도, 광고도, 추적도 없어요. 어떤 데이터도 휴대폰 밖으로 나가지 않아요.\n\n한 걸음 한 걸음이 소중해요.",
+      "keywords": "만보기,걷기,산책,걸음수,거리,시간,기록,위젯,알림,만보,연속달성,일일"
+    },
+    "zh-Hans": {
+      "name": "NEAT - 每一步都算数",
+      "subtitle": "定下目标。实现它。",
+      "promotionalText": "今天还差多少步？NEAT让你一目了然。你的数据留在你的iPhone上。",
+      "description": "今天走了多少步？还差多少步？还要走多久？\n\nNEAT让这三个问题的答案一目了然。\n\n• 从健康读取的今日步数。\n• 距离目标还差多少步。\n• 按你选择的速度，还要走多少分钟才能达标。\n\n每达标一天，连续记录就增加一天。历史记录按周、按月显示步数，还能查看最高纪录。如果还没达标，晚上会收到提醒。通过小组件，无需打开App就能查看进度。\n\n你的数据留在你的iPhone上。NEAT只读取数据：无需账号、没有广告、没有跟踪。任何数据都不会离开手机。\n\n每一步都算数。",
+      "keywords": "计步器,步数,走路,散步,步行,万步,每日步数,连续达标,小组件,提醒,10000步"
+    },
+    "zh-Hant": {
+      "name": "NEAT - 每一步都算數",
+      "subtitle": "訂下目標。達成它。",
+      "promotionalText": "今天還差幾步？NEAT讓你一目了然。你的資料留在你的iPhone上。",
+      "description": "今天走了幾步？還差幾步？還要走多久？\n\nNEAT讓這三個問題的答案一目了然。\n\n• 從健康讀取的今日步數。\n• 距離目標還差幾步。\n• 按照你選擇的速度，還要走幾分鐘才能達標。\n\n每達標一天，連續紀錄就增加一天。歷史紀錄按週、按月顯示步數，也能查看最高紀錄。如果還沒達標，晚上會收到提醒。透過小工具，不用打開App就能查看進度。\n\n你的資料留在你的iPhone上。NEAT只讀取資料：不需帳號、沒有廣告、沒有追蹤。任何資料都不會離開手機。\n\n每一步都算數。",
+      "keywords": "計步器,步數,走路,健走,散步,萬步,每日步數,連續達標,小工具,提醒,10000步"
+    }
+  }
+}

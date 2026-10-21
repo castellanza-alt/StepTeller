@@ -1,0 +1,5 @@
+NEAT reads today's step count from Apple Health. Access is read-only: the app never writes to Health, makes no network requests and has no account, so no login or demo account is needed.
+
+If the test device has no step data in Health (or Health access is not granted), the Home screen shows 0 steps with a notice. Steps can then be entered manually by tapping the step number.
+
+The app is free, with no in-app purchases, no ads and no tracking.

@@ -1,10 +1,9 @@
 import Foundation
 
-/// Coordina provider e stato: la logica di aggiornamento senza dipendere da HealthKit.
+/// Coordinates provider and state: the update logic without depending on HealthKit.
 ///
-/// Per non tenere uno `inout` aperto attraverso un `await` (l'interfaccia può modificare lo
-/// stato nel frattempo), l'app usa i tre passi separati `begin` → `read` → `applyHealth`;
-/// `refresh` li riunisce per i test.
+/// To avoid holding an `inout` across an `await` (the UI may change the state meanwhile), the app uses
+/// the three separate steps `begin` → `read` → `applyHealth`; `refresh` chains them for the tests.
 public struct StepsController: Sendable {
     public let provider: any StepsProvider
     public var calendar: Calendar
@@ -14,8 +13,8 @@ public struct StepsController: Sendable {
         self.calendar = calendar
     }
 
-    /// Passo 1 (sincrono): disponibilità di Salute e scadenza della sovrascrittura.
-    /// Restituisce `false` se non c'è nulla da leggere (Salute assente).
+    /// Step 1 (synchronous): Health availability and expiry of the manual override.
+    /// Returns `false` if there is nothing to read (no Health).
     @discardableResult
     public func begin(_ state: inout StepsState, now: Date) -> Bool {
         state.setHealthAvailable(provider.isAvailable)
@@ -23,12 +22,12 @@ public struct StepsController: Sendable {
         return provider.isAvailable
     }
 
-    /// Passo 2: lettura dei passi di oggi (`nil` = nessun dato o errore).
+    /// Step 2: reads today's steps (`nil` = no data or error).
     public func read(now: Date) async -> Int? {
         await provider.steps(from: calendar.startOfDay(for: now), to: now)
     }
 
-    /// Tutti e tre i passi insieme.
+    /// All three steps together.
     public func refresh(_ state: inout StepsState, now: Date = Date()) async {
         guard begin(&state, now: now) else { return }
         let value = await read(now: now)

@@ -1,19 +1,19 @@
 name: StepTeller
 options:
-  # 2.45.1: prima versione che riconosce i pacchetti `.icon` di Icon Composer (icona dell'app).
+  # 2.45.1: first version that recognizes Icon Composer `.icon` packages (app icon).
   minimumXcodeGenVersion: 2.45.1
   deploymentTarget:
-    iOS: "17.0"          # stesso target di briciola.
+    iOS: "17.0"
   developmentLanguage: it
 packages:
   StepTellerCore:
     path: .
 settings:
   base:
-    # Il nucleo è Swift 6; l'app resta in modalità linguaggio 5 (come briciola.) perché HealthKit
-    # e SwiftUI di Xcode 26 danno avvisi di concorrenza che qui non servono.
+    # The core is Swift 6; the app stays in language mode 5 because HealthKit and SwiftUI in Xcode 26
+    # raise concurrency warnings that are not needed here.
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "0.6.0"
+    MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "1"
     COMMIT_SHA: ""
 targets:
@@ -25,6 +25,10 @@ targets:
         excludes:
           - Info.plist
           - StepTeller.entitlements
+          - PrivacyInfo.xcprivacy
+      # Privacy manifest (App Store): no tracking, no data collected, UserDefaults and App Group.
+      - path: App/PrivacyInfo.xcprivacy
+        buildPhase: resources
       - path: Shared
     dependencies:
       - package: StepTellerCore
@@ -34,8 +38,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: it.castellanza.stepteller
         DEVELOPMENT_TEAM: 5E426PLFWN
-        # Icona Liquid Glass (Icon Composer): `App/AppIcon.icon`, varianti giorno, notte, colorata e trasparente.
-        # Xcode 26+ ne ricava da solo le immagini per iOS 17–18.
+        # Liquid Glass icon (Icon Composer): `App/AppIcon.icon`, day, night, tinted and clear variants.
+        # Xcode 26+ derives the iOS 17–18 images by itself.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         TARGETED_DEVICE_FAMILY: "1"
         INFOPLIST_FILE: App/Info.plist
@@ -48,7 +52,8 @@ targets:
       SystemCapabilities:
         com.apple.HealthKit:
           enabled: 1
-  # Estensione WidgetKit: Live Activity del tappeto (Blocco schermo e Dynamic Island).
+  # WidgetKit extension: widgets (Home Screen and lock screen). Target name, folder and bundle ID stay
+  # «LiveActivity»: they are registered on App Store Connect and already installed on phones.
   StepTellerLiveActivity:
     type: app-extension
     platform: iOS
@@ -57,26 +62,34 @@ targets:
         excludes:
           - Info.plist
           - StepTellerWidgets.entitlements
+          - PrivacyInfo.xcprivacy
+      - path: LiveActivity/PrivacyInfo.xcprivacy
+        buildPhase: resources
       - path: Shared
-      - path: App/Theme.swift
-      # Stile «Dan Dan Dan» condiviso con l'app: token, testo Anton, forme.
+      # «Dan Dan Dan» style shared with the app: tokens, Anton text, shapes.
       - path: App/Design/MangaTokens.swift
       - path: App/Design/MangaViews.swift
       - path: App/Design/MangaShapes.swift
       - path: App/Fonts/Anton-Regular.ttf
+      # JA/KO/ZH titles (subset to the characters in use, scripts/font_asia.py)
+      - path: App/Fonts/DelaGothicOne-NEAT.ttf
+      - path: App/Fonts/BlackHanSans-NEAT.ttf
+      - path: App/Fonts/NotoSansSC-Black-NEAT.ttf
+      - path: App/Fonts/NotoSansTC-Black-NEAT.ttf
     dependencies:
       - package: StepTellerCore
         product: StepTellerCore
       - sdk: SwiftUI.framework
       - sdk: WidgetKit.framework
-      - sdk: ActivityKit.framework
     info:
       path: LiveActivity/Info.plist
       properties:
+        # Fallback language: a phone in an untranslated language shows English (source texts stay Italian).
+        CFBundleDevelopmentRegion: en
         CFBundleDisplayName: NEAT
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        UIAppFonts: [Anton-Regular.ttf]
+        UIAppFonts: [Anton-Regular.ttf, DelaGothicOne-NEAT.ttf, BlackHanSans-NEAT.ttf, NotoSansSC-Black-NEAT.ttf, NotoSansTC-Black-NEAT.ttf]
         NSHealthShareUsageDescription: Il widget legge i tuoi passi di oggi da Salute per mostrarli e per stimare i minuti a piedi che mancano. Non scrive nulla e non invia dati fuori dal telefono.
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension

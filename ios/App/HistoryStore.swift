@@ -3,27 +3,34 @@ import Observation
 import WidgetKit
 import StepTellerCore
 
-/// Storico giornaliero, streak e Jolly. Tutto è **calcolato** dai dati di Salute (nessun archivio
-/// proprio dei passi): si salvano solo l'inizio del conteggio e lo storico degli obiettivi.
+/// Daily history, streak and Jollies. Everything is **computed** from Health data (no step archive of its
+/// own): only the start of the count and the goal history are saved.
 @MainActor
 @Observable
 final class HistoryStore {
     static let initialJolly = 3
 
-    private(set) var records: [DayRecord] = []
-    private(set) var goals: GoalHistory
+    private var records: [DayRecord] = []
+    private var goals: GoalHistory
     private(set) var stats: HistoryStats
+    /// Personal records of `stats`, computed once per update (the History screen reads them at every body).
+    private(set) var personalRecords: PersonalRecords
     private(set) var streak = StreakState()
-    private(set) var loaded = false
-    /// Primo giorno del conteggio della streak (primo avvio di questa versione).
+    /// End of the last reread from Health: the celebration waits for a history read after the app came up.
+    private(set) var refreshedAt: Date?
+    /// First day of the streak count (first launch of this version).
     let streakStart: Date
 
     @ObservationIgnored private let provider: (any HistoryProvider)?
     @ObservationIgnored private let defaults: UserDefaults
-    @ObservationIgnored private let calendar = Calendar.current
+    /// Follows the phone's time zone (see `StepsStore`).
+    @ObservationIgnored private let calendar = Calendar.autoupdatingCurrent
     @ObservationIgnored private var lastRefresh: Date?
-    /// Passi di oggi letti dall'app (vedi `updateToday`); vale solo per il giorno in corso.
+    /// Today's steps as read by the app (see `updateToday`); valid for the current day only.
     @ObservationIgnored private var todayLive: (day: Date, steps: Int)?
+    /// Until the first read from Health the streak shown is the one saved by the previous launch: computing
+    /// it from an empty history would flash 0 (and push 0 to the widget).
+    @ObservationIgnored private var showsCachedStreak = false
 
     private enum Keys {
         static let goals = "stepteller.goalHistory"
@@ -34,7 +41,7 @@ final class HistoryStore {
          streakStartOverride: Date? = nil) {
         self.provider = provider
         self.defaults = defaults
-        let cal = Calendar.current
+        let cal = Calendar.autoupdatingCurrent
         let loadedGoals = defaults.data(forKey: Keys.goals).flatMap { try? JSONDecoder().decode(GoalHistory.self, from: $0) }
             ?? GoalHistory(initialGoal: currentGoal)
         goals = loadedGoals
@@ -46,23 +53,34 @@ final class HistoryStore {
             streakStart = cal.startOfDay(for: Date())
             defaults.set(streakStart, forKey: Keys.start)
         }
-        stats = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal)
-        recompute()
+        let empty = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
+        stats = empty
+        personalRecords = empty.personalRecords()
+        if provider != nil, let cached = SharedStore.cachedStreak {
+            var seeded = StreakState()
+            seeded.streak = cached.streak
+            seeded.jolly = cached.jolly
+            streak = seeded
+            showsCachedStreak = true
+        } else {
+            recompute()
+        }
     }
 
-    /// Rilegge lo storico da Salute (al massimo ogni `minInterval` secondi).
+    /// Rereads the history from Health (at most every `minInterval` seconds).
     func refresh(minInterval: TimeInterval = 0) async {
         guard let provider else { return }
         if minInterval > 0, let last = lastRefresh, Date().timeIntervalSince(last) < minInterval { return }
         lastRefresh = Date()
         let result = await provider.dailyRecords(until: Date())
         records = result
-        loaded = true
+        showsCachedStreak = false
         recompute()
+        refreshedAt = Date()
     }
 
-    /// Passi di oggi già letti dall'app: la streak scatta appena si supera l'obiettivo, senza
-    /// aspettare la rilettura dello storico (che è più lenta e limitata a una ogni 20 s).
+    /// Today's steps already read by the app: the streak updates as soon as the goal is passed, without
+    /// waiting for the history reread (slower and limited to one every 20 s).
     func updateToday(steps: Int) {
         let day = calendar.startOfDay(for: Date())
         if let live = todayLive, live.day == day, live.steps == steps { return }
@@ -70,7 +88,7 @@ final class HistoryStore {
         recompute()
     }
 
-    /// Il nuovo obiettivo vale da oggi.
+    /// The new goal applies from today.
     func recordGoal(_ goal: Int) {
         goals.set(goal, from: calendar.startOfDay(for: Date()))
         if let data = try? JSONEncoder().encode(goals) { defaults.set(data, forKey: Keys.goals) }
@@ -79,14 +97,16 @@ final class HistoryStore {
 
     private func recompute() {
         let now = Date()
-        stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar)
-        var steps = Dictionary(records.map { (calendar.startOfDay(for: $0.day), $0.steps) }, uniquingKeysWith: { a, _ in a })
+        stats = HistoryStats(records: records, goals: goals, now: now, calendar: calendar, labels: .current)
+        personalRecords = stats.personalRecords()
+        guard !showsCachedStreak else { return }
+        var steps = stats.byDay.mapValues(\.steps)
         let today = calendar.startOfDay(for: now)
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
         if SharedStore.streak != streak.streak || SharedStore.jolly != streak.jolly {
-            SharedStore.streak = streak.streak            // serie e Jolly per il widget
+            SharedStore.streak = streak.streak            // streak and Jollies for the widget
             SharedStore.jolly = streak.jolly
             WidgetCenter.shared.reloadAllTimelines()
         }

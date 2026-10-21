@@ -6,3 +6,10 @@ DerivedData/
 *.p12
 *.mobileprovision
 LiveActivity/Info.plist
+localizzazione/design/
+localizzazione/NEAT_design_materiale.zip
+__pycache__/
+.DS_Store
+localizzazione/NEAT_lingue_per_Claude_Design.zip
+localizzazione/NEAT_lingue_parte*.zip
+localizzazione/NEAT_v2_parte*.zip

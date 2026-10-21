@@ -1,5 +1,5 @@
 // swift-tools-version: 6.0
-// Pacchetto locale con tutta la logica testabile senza iPhone (solo Foundation).
+// Local package with all the logic testable without an iPhone (Foundation only).
 import PackageDescription
 
 let package = Package(

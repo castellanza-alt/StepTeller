@@ -2,9 +2,8 @@
 import Foundation
 import StepTellerCore
 
-/// Fornitore finto, **solo build Debug** (screenshot sul simulatore, che non ha dati di Salute).
-/// Si attiva con l'argomento di avvio `-stepteller.debugSteps 7200`. Non esiste nelle build
-/// distribuite (Release).
+/// Fake provider, **Debug builds only** (simulator screenshots: the simulator has no Health data).
+/// Enabled by the launch argument `-stepteller.debugSteps 7200`. Absent from shipped (Release) builds.
 final class DebugStepsProvider: StepsProvider, @unchecked Sendable {
     let value: Int?
     init(value: Int?) { self.value = value }
@@ -15,8 +14,8 @@ final class DebugStepsProvider: StepsProvider, @unchecked Sendable {
     func stopObserving() async {}
 }
 
-/// Storico finto per gli screenshot (solo Debug): ultimi 24 giorni come nei mockup
-/// (streak 22 con 1 Jolly speso), prima circa 2 anni di dati verosimili.
+/// Fake history for the screenshots (Debug only): the last 24 days as in the mockups
+/// (streak 22 with 1 Jolly spent), before that about 2 years of plausible data.
 final class DebugHistoryProvider: HistoryProvider, @unchecked Sendable {
     let todaySteps: Int
     init(todaySteps: Int) { self.todaySteps = todaySteps }
@@ -34,9 +33,10 @@ final class DebugHistoryProvider: HistoryProvider, @unchecked Sendable {
             guard let day = cal.date(byAdding: .day, value: -back, to: today) else { continue }
             var steps: Int
             if back == 0 { steps = todaySteps }
-            else if back == 8 { steps = 7_900 }                       // il giorno salvato dal Jolly
-            else if back < 24 { steps = 10_300 + Int(rnd() * 2_400) } // streak recente
+            else if back == 8 { steps = 7_900 }                       // the day saved by the Jolly
+            else if back < 24 { steps = 10_300 + Int(rnd() * 2_400) } // recent streak
             else { steps = rnd() < 0.82 ? 10_000 + Int(rnd() * 3_500) : 4_000 + Int(rnd() * 5_500) }
+            // 0.78 m per step: plausible km for the fake history
             out.append(DayRecord(day: day, steps: steps, km: Double(steps) * 0.00078))
         }
         return out

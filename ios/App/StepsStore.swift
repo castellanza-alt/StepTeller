@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import UIKit
 import WidgetKit
 import StepTellerCore
 
@@ -202,6 +203,9 @@ final class StepsStore {
         state = s
         guard canRead else { return }
         let value = await controller.read(now: now)
+        // Phone locked (background delivery): Health is encrypted and the read fails. That is not «0 steps»:
+        // nothing changes, otherwise tonight's reminder would come back with the whole goal still to walk.
+        if value == nil, !UIApplication.shared.isProtectedDataAvailable { return }
         state.applyHealth(value, at: Date())
         if let value {
             // copy for the widget with the phone locked; the widget reloads only if the number changed
@@ -270,9 +274,16 @@ final class StepsStore {
     /// interleave and the last plan computed is also the last one written.
     func updateReminders() async {
         let enabled = reminderEnabled
+        // Steps from Health only grow during the day: the reminder never uses fewer than the last count read
+        // today, so a failed read cannot bring back a reminder already cancelled because the goal was reached.
+        var reminderPlan = plan
+        if origin == .health, let cached = SharedStore.cachedStepsToday(now: Date(), calendar: controller.calendar),
+           cached > steps {
+            reminderPlan = Plan(goal: goal, steps: cached, speed: speed, model: model)
+        }
         let requests = enabled
             ? ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
-                                       plan: plan, streak: history.streak, calendar: controller.calendar)
+                                       plan: reminderPlan, streak: history.streak, calendar: controller.calendar)
             : []
         let previous = reminderQueue
         let scheduler = scheduler

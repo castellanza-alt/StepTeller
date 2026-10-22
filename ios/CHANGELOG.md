@@ -6,6 +6,12 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
+## 1.0.1 — in lavorazione
+- Promemoria serale: non arriva più «mancano 10.000» quando i passi sono già chiusi. Col telefono bloccato Salute non
+  si può leggere e la lettura fallita in background veniva presa per 0 passi, rimettendo il promemoria già tolto. Ora
+  una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo
+  conteggio letto oggi.
+
 ## 1.0 — inviata ad Apple il 21 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,
   cursore, Storico con la scheda MI, widget, blocco schermo, promemoria, VoiceOver); negli altri paesi km e km/h come

@@ -1,7 +1,8 @@
 import SwiftUI
+import UniformTypeIdentifiers
 import StepTellerCore
 
-/// Settings: daily goal, evening reminder, theme, units, streak and Jollies, privacy and support links,
+/// Settings: daily goal, evening reminder, theme, units, streak and Jollies, backup, privacy and support links,
 /// «Replay the introduction» and version.
 struct SettingsSheet: View {
     @Environment(StepsStore.self) private var store
@@ -9,6 +10,11 @@ struct SettingsSheet: View {
     @FocusState private var goalFocused: Bool
     @State private var showRules = false
     @AppStorage(ThemeMode.storageKey) private var themeMode = ThemeMode.system.rawValue
+    @State private var showImporter = false
+    /// Backup read from the file, waiting for the confirmation.
+    @State private var pendingBackup: BackupFile?
+    /// Outcome of the import shown in an alert (done or error text).
+    @State private var importMessage: String?
     /// «Replay the introduction»: closes Settings and shows it again.
     var onReplayIntro: () -> Void = {}
 
@@ -101,6 +107,23 @@ struct SettingsSheet: View {
                     .glassCard()
                 }
 
+                section(L10n.text("set.backup.section")) {
+                    VStack(spacing: 0) {
+                        ShareLink(item: BackupExport(file: store.makeBackup()),
+                                  preview: SharePreview(L10n.text("set.backup.export"))) {
+                            row(L10n.text("set.backup.export"), symbol: "square.and.arrow.up")
+                        }
+                        .buttonStyle(.plain)
+                        rowDivider
+                        Button { goalFocused = false; showImporter = true } label: {
+                            row(L10n.text("set.backup.import"), symbol: "square.and.arrow.down")
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .glassCard()
+                    note(L10n.text("set.backup.note"))
+                }
+
                 section(L10n.text("set.info.section")) {
                     VStack(spacing: 0) {
                         linkRow(L10n.text("set.info.privacy"), Self.privacyURL)
@@ -127,6 +150,49 @@ struct SettingsSheet: View {
         }
         .background(Theme.bg.ignoresSafeArea())
         .presentationDetents([.large])
+        .fileImporter(isPresented: $showImporter, allowedContentTypes: [.json]) { readBackup($0) }
+        .alert(L10n.text("set.backup.confirm.title"), isPresented: Binding(
+            get: { pendingBackup != nil }, set: { if !$0 { pendingBackup = nil } }
+        ), presenting: pendingBackup) { file in
+            Button(L10n.text("common.cancel"), role: .cancel) {}
+            Button(L10n.text("set.backup.confirm.ok")) {
+                store.importBackup(file)
+                importMessage = L10n.text("set.backup.done")
+            }
+        } message: { file in
+            Text(L10n.format("set.backup.confirm.body", Self.startFormatter.string(from: file.exportedAt)))
+        }
+        .alert(importMessage ?? "", isPresented: Binding(
+            get: { importMessage != nil }, set: { if !$0 { importMessage = nil } }
+        )) {
+            Button(L10n.text("set.backup.ok"), role: .cancel) {}
+        }
+    }
+
+    /// Reads the chosen file (outside the app's sandbox: security-scoped access) and asks for confirmation.
+    private func readBackup(_ result: Result<URL, Error>) {
+        guard case let .success(url) = result else { return }
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        do {
+            pendingBackup = try BackupFile.decode(Data(contentsOf: url))
+        } catch BackupFile.ReadError.newerVersion {
+            importMessage = L10n.text("set.backup.error.newer")
+        } catch {
+            importMessage = L10n.text("set.backup.error")
+        }
+    }
+
+    /// Row of a card with a symbol on the right.
+    private func row(_ title: String, symbol: String) -> some View {
+        HStack {
+            Text(title).foregroundStyle(Theme.ink)
+            Spacer()
+            Image(systemName: symbol)
+                .font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.ink.opacity(0.4))
+        }
+        .font(.system(size: 15)).padding(.horizontal, 16).padding(.vertical, 14)
+        .contentShape(Rectangle())
     }
 
     /// Rules, one per line with a bullet.
@@ -205,5 +271,25 @@ struct SectionLabel: View {
         Text(text.uppercased())
             .font(.system(size: 11, weight: .semibold)).tracking(11 * tracking)
             .foregroundStyle(Theme.soft)
+    }
+}
+
+/// Backup file for the share sheet (Save to Files, AirDrop, Mail…): `NEAT-backup-2026-10-22.json`.
+private struct BackupExport: Transferable {
+    let file: BackupFile
+
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(exportedContentType: .json) { item in
+            let url = FileManager.default.temporaryDirectory.appendingPathComponent(item.fileName)
+            try item.file.encoded().write(to: url, options: .atomic)
+            return SentTransferredFile(url)
+        }
+    }
+
+    private var fileName: String {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.dateFormat = "yyyy-MM-dd"
+        return "NEAT-backup-\(f.string(from: file.exportedAt)).json"
     }
 }

@@ -13,6 +13,12 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   streak riparte dal giorno giusto (vale il più vecchio tra telefono e iCloud). L'introduzione si rivede comunque,
   perché i permessi di Salute e notifiche vanno richiesti di nuovo. Mai dati di Salute in iCloud, nessun server
   nostro. Capacità iCloud (solo chiave-valore) nell'App ID; pagina privacy da aggiornare alla pubblicazione.
+- Impostazioni → «Backup»: «Esporta backup» crea il file `NEAT-backup-AAAA-MM-GG.json` (inizio streak, storico
+  obiettivi, impostazioni, taratura; mai dati di Salute) da salvare in File, AirDrop, Mail…; «Importa backup» lo
+  rilegge dopo una conferma con la data del backup. I valori del file sostituiscono quelli attuali, l'inizio della
+  streak tiene il più vecchio. File non validi o di una versione più nuova vengono rifiutati con un avviso. Formato
+  e regole in `BackupFile` (core, con test). Testi nuovi in 10 lingue nel foglio: traduzioni bozza di Claude, da
+  confermare con ChatGPT.
 - Promemoria serale: non arriva più «mancano 10.000» quando i passi sono già chiusi. Col telefono bloccato Salute non
   si può leggere e la lettura fallita in background veniva presa per 0 passi, rimettendo il promemoria già tolto. Ora
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo

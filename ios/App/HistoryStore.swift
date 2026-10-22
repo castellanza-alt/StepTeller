@@ -11,7 +11,7 @@ final class HistoryStore {
     static let initialJolly = 3
 
     private var records: [DayRecord] = []
-    private var goals: GoalHistory
+    private(set) var goals: GoalHistory
     private(set) var stats: HistoryStats
     /// Personal records of `stats`, computed once per update (the History screen reads them at every body).
     private(set) var personalRecords: PersonalRecords
@@ -96,6 +96,15 @@ final class HistoryStore {
         }
         if let saved = defaults.object(forKey: Keys.start) as? Date { streakStart = saved }
         recompute()
+    }
+
+    /// Manual backup import: the file's goal history replaces this one, the streak start keeps the earliest.
+    func importBackup(goals imported: GoalHistory?, streakStart importedStart: Date?) {
+        if let imported, let data = try? JSONEncoder().encode(imported) { defaults.set(data, forKey: Keys.goals) }
+        if let start = BackupFile.mergedStreakStart(current: streakStart, imported: importedStart) {
+            defaults.set(start, forKey: Keys.start)
+        }
+        reloadSaved()
     }
 
     /// The new goal applies from today.

@@ -235,6 +235,41 @@ final class StepsStore {
         deferSync(reloadWidget: true)
     }
 
+    // MARK: manual backup
+
+    /// Settings → Backup → Export: everything the app keeps besides Health.
+    func makeBackup(now: Date = Date()) -> BackupFile {
+        var file = BackupFile(exportedAt: now)
+        file.goal = goal
+        file.speed = speed
+        file.units = unitPreference.rawValue
+        file.reminderOn = reminderEnabled
+        file.reminderMinutes = reminderMinutes
+        file.theme = defaults.string(forKey: ThemeMode.storageKey)
+        file.streakStart = history.streakStart
+        file.goalHistory = history.goals
+        if calibration != .empty { file.calibration = calibration }
+        return file
+    }
+
+    /// Settings → Backup → Import: values in the file replace these, missing ones stay. History first, so the
+    /// goal set afterwards matches its last entry and adds nothing.
+    func importBackup(_ file: BackupFile) {
+        history.importBackup(goals: file.goalHistory, streakStart: file.streakStart)
+        if let value = file.goal { goal = max(0, value) }
+        if let raw = file.units, let units = UnitPreference(rawValue: raw) { unitPreference = units }
+        if let value = file.speed { speed = unit.snapKmh(value) }
+        if let value = file.reminderOn { reminderEnabled = value }
+        if let value = file.reminderMinutes, (0..<24 * 60).contains(value) { reminderMinutes = value }
+        if let raw = file.theme, ThemeMode(rawValue: raw) != nil { defaults.set(raw, forKey: ThemeMode.storageKey) }
+        if let saved = file.calibration {
+            calibration = saved
+            SharedStore.calibration = saved
+            if let data = try? JSONEncoder().encode(saved) { defaults.set(data, forKey: Keys.calibration) }
+        }
+        deferSync(reloadWidget: true)
+    }
+
     // MARK: manual steps
 
     func setManualSteps(_ value: Int) {

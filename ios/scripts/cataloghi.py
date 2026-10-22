@@ -58,6 +58,7 @@ PARAMS = {
     "st.longest.vo": ["n"],
     "st.nextJolly.vo": ["n", "fatti", "tot"],
     "st.jolly.vo": ["n"],
+    "set.backup.confirm.body": ["data"],
     "st.big.vo": ["valore", "etichetta"],
     "st.second.vo.avgSteps": ["valore"],
     "st.second.vo.avgKm": ["valore"],

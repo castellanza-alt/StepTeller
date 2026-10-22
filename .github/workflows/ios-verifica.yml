@@ -1,5 +1,7 @@
-# Verifica iOS: nucleo su Linux (gratuito), poi build per simulatore su macOS con test e screenshot.
+# Verifica iOS: registro delle versioni e nucleo su Linux (gratuito), poi build per simulatore su macOS con test e screenshot.
 # Parte solo se cambia ios/** (la web app in radice non la avvia). Nessun segreto, nessuna firma.
+# Il registro (ios/CHANGELOG.md, regole in ios/RILASCIO.md): su PR, una modifica al codice dell'app senza la sua riga
+# nella versione «in lavorazione» fa fallire la verifica.
 name: iOS verifica
 on:
   pull_request:
@@ -13,6 +15,24 @@ concurrency:
   group: ios-verifica-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  registro:
+    name: Registro delle versioni (CHANGELOG.md e project.yml)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Regole del registro (ios/RILASCIO.md)
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python3 ios/scripts/registro.py --pr "origin/$BASE_REF"
+          else
+            python3 ios/scripts/registro.py
+          fi
+
   nucleo:
     name: Nucleo (Linux, swift test)
     runs-on: ubuntu-latest
@@ -29,7 +49,7 @@ jobs:
 
   build:
     name: Build simulatore e screenshot (macOS)
-    needs: nucleo
+    needs: [registro, nucleo]
     runs-on: macos-15
     timeout-minutes: 40
     steps:

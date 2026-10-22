@@ -3,11 +3,16 @@
 store-prova  Reads the current listing and prints, per area and per language, what would change. Writes nothing.
 store        Applies the same changes, then reads everything back and checks that nothing is left to change.
              Idempotent: a second run finds the listing aligned and only reads.
-store-invio  Attaches the 1.0 build (latest VALID, or BUILD_NUMBER) and submits the version for review.
-             Refuses if the listing still differs from the repository. Only after Will's explicit ok.
+store-invio  Attaches the build of the current version (latest VALID, or BUILD_NUMBER) and submits it for review.
+             Refuses if the listing still differs from the repository, if the «What's New» texts of the version are
+             missing (except for the very first version) or if CHANGELOG.md still says «in lavorazione».
+             Only after Will's explicit ok.
 
-Sources in the repository: store/metadata.json (texts, generated from the sheet by scripts/store_metadata.py),
-store/screenshots/<language>/01…06.jpg (scripts/store_screenshots.py), store/note_revisore.txt.
+The version is MARKETING_VERSION in project.yml (read through registro.py, which also validates CHANGELOG.md).
+Sources in the repository: store/metadata.json (texts and whatsNew per version, generated from the sheets by
+scripts/store_metadata.py), store/screenshots/<language>/01…06.jpg (scripts/store_screenshots.py), store/note_revisore.txt.
+«What's New» per version: the row of the version, or the fixed «correzioni» row for MAJOR.MINOR.FIX versions; the
+first version of the app on App Store Connect gets none (Apple has no such field for it). Rules in RILASCIO.md.
 Contact for the reviewer and copyright come only from the environment (GitHub secrets ASC_REVIEW_FIRST_NAME,
 ASC_REVIEW_LAST_NAME, ASC_REVIEW_PHONE, ASC_REVIEW_EMAIL, ASC_COPYRIGHT) and are never printed.
 
@@ -21,11 +26,12 @@ import urllib.request
 from pathlib import Path
 
 import asc
+import registro
 
 IOS = Path(__file__).resolve().parent.parent
 STORE = IOS / 'store'
 
-VERSION = '1.0'
+VERSION = registro.marketing_version()
 PRIMARY_LOCALE = 'en-US'
 # App Store locale → language in metadata.json and screenshot folder (the copies share texts and images)
 LOCALES = {
@@ -62,6 +68,7 @@ EDITABLE_VERSION = {'PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'DEVELOPER_REJ
 LIVE_INFO = {'READY_FOR_DISTRIBUTION', 'READY_FOR_SALE', 'REPLACED_WITH_NEW_INFO'}
 SECRET_FIELDS = {'contactFirstName', 'contactLastName', 'contactPhone', 'contactEmail', 'copyright'}
 LIMITS = {'name': 30, 'subtitle': 30, 'promotionalText': 170, 'description': 4000}
+WHATS_NEW_LIMIT = 4000
 
 
 class Stop(RuntimeError):
@@ -179,6 +186,29 @@ class Report:
 
 
 # ---------------------------------------------------------------------------------------------- inputs
+
+def whats_new_texts():
+    """{language: text} of the «What's New» for VERSION, or None if the sheet has no row for it.
+
+    A MAJOR.MINOR.FIX version without its own row uses the fixed «correzioni» row."""
+    news = json.loads((STORE / 'metadata.json').read_text(encoding='utf-8')).get('whatsNew', {})
+    texts = news.get(VERSION)
+    if texts is None and VERSION.count('.') == 2:
+        texts = news.get('correzioni')
+    if texts is None:
+        return None
+    problems = [f'{lang}: manca il testo' for lang in set(LOCALES.values()) if not texts.get(lang)]
+    problems += [f'{lang}: {len(text)} caratteri > {WHATS_NEW_LIMIT}' for lang, text in texts.items()
+                 if len(text) > WHATS_NEW_LIMIT]
+    if problems:
+        raise Stop(f'Novità della versione {VERSION} non valide in metadata.json:\n' + '\n'.join('- ' + p for p in problems))
+    return texts
+
+
+def is_first_version(versions) -> bool:
+    """True when App Store Connect has no version other than VERSION (the first release has no «What's New»)."""
+    return not any(v['attributes'].get('versionString') != VERSION for v in versions)
+
 
 def load_inputs():
     metadata = json.loads((STORE / 'metadata.json').read_text(encoding='utf-8'))['languages']
@@ -328,12 +358,22 @@ def version_section(report, app_id, metadata, notes, secrets):
         report.note(area, '⚠️ Segreto ASC_COPYRIGHT assente: copyright non impostato')
     version_id = version['id'] if version else None
 
-    area = 'Testi della versione (descrizione, parole chiave, promozionale, supporto)'
+    area = 'Testi della versione (descrizione, parole chiave, promozionale, novità, supporto)'
     existing = get_all(f'/v1/appStoreVersions/{version_id}/appStoreVersionLocalizations', {'limit': 50})[0] \
         if version_id else []
     wanted = {locale: {'description': metadata[lang]['description'], 'keywords': metadata[lang]['keywords'],
                        'promotionalText': metadata[lang]['promotionalText'], 'supportUrl': SUPPORT_URL}
               for locale, lang in LOCALES.items()}
+    if is_first_version(versions):
+        report.note(area, f'Prima versione dell\'app ({VERSION}): nessun testo «Novità» (Apple non lo prevede)')
+    else:
+        news = whats_new_texts()
+        if news is None:
+            report.note(area, f'⚠️ Novità della versione {VERSION} assenti (foglio NEAT_novita.xlsx, riga novita.{VERSION}): '
+                              'testo «Novità» lasciato com\'è; [store-invio] si rifiuterà')
+        else:
+            for locale, lang in LOCALES.items():
+                wanted[locale]['whatsNew'] = news[lang]
     if version_id is None:
         for locale, fields in wanted.items():
             for field, value in fields.items():
@@ -554,13 +594,20 @@ def store_applica():
 
 
 def store_invio():
+    top = registro.top_section()   # also validates CHANGELOG.md against project.yml
+    if top['state'] not in ('testflight', 'inviata'):
+        raise Stop(f"CHANGELOG.md dice «{top['heading']}»: si invia solo una versione già su TestFlight e provata da Will. "
+                   f'Aggiornare l\'intestazione a «## {VERSION} — su TestFlight, build N»')
     check = sync(apply=False)
     if check.changes:
         asc.summary(check.markdown('Invio rifiutato: la scheda non corrisponde al repository'))
         raise Stop('Lanciare prima [store] e controllare la rilettura')
     app = asc.app_record()
-    versions, _ = get_all(f"/v1/apps/{app['id']}/appStoreVersions",
-                          {'filter[platform]': 'IOS', 'filter[versionString]': VERSION, 'limit': 5})
+    all_versions, _ = get_all(f"/v1/apps/{app['id']}/appStoreVersions", {'filter[platform]': 'IOS', 'limit': 50})
+    if not is_first_version(all_versions) and whats_new_texts() is None:
+        raise Stop(f'Novità della versione {VERSION} assenti: compilare la riga novita.{VERSION} in '
+                   'localizzazione/NEAT_novita.xlsx, rigenerare metadata.json e lanciare [store]')
+    versions = [v for v in all_versions if v['attributes'].get('versionString') == VERSION]
     if not versions:
         raise Stop(f'Versione {VERSION} non trovata')
     version = versions[0]
@@ -573,7 +620,7 @@ def store_invio():
     builds = get('/v1/builds', params)['data']
     if not builds:
         raise Stop(f'Nessuna build {VERSION} valida su App Store Connect' + (f' con numero {wanted}' if wanted else '') +
-                   ': serve una build con MARKETING_VERSION 1.0 caricata con [testflight]')
+                   f': serve una build con MARKETING_VERSION {VERSION} caricata con [testflight]')
     build = builds[0]
     number = build['attributes'].get('version')
     if build['attributes'].get('usesNonExemptEncryption') is None:

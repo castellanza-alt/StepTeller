@@ -1,6 +1,12 @@
 # Changelog
 
-## 1.0 — 19 ottobre 2026
+Registro interno di NEAT per iOS, in italiano, anche tecnico. Una sezione per versione, la più recente in cima; la prima
+sezione è sempre la versione di `project.yml` e il suo stato dice la verità sul codice: `in lavorazione`,
+`su TestFlight, build N`, `inviata ad Apple il D mese AAAA, build N`, `pubblicata il D mese AAAA, build N`. Ogni PR che
+tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
+numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
+
+## 1.0 — inviata ad Apple il 21 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,
   cursore, Storico con la scheda MI, widget, blocco schermo, promemoria, VoiceOver); negli altri paesi km e km/h come
   prima. Impostazioni → «Unità di misura»: Automatiche (predefinito), Chilometri, Miglia. Il cursore in miglia va da

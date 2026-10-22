@@ -75,13 +75,13 @@
   "whatsNew": {
     "correzioni": {
       "it": "Correzioni e piccoli miglioramenti.",
-      "en": "Bug fixes and small improvements.",
-      "es": "Correcciones y pequeñas mejoras.",
-      "fr": "Corrections et petites améliorations.",
+      "en": "Bug fixes and minor improvements.",
+      "es": "Corrección de errores y pequeñas mejoras.",
+      "fr": "Corrections de bugs et petites améliorations.",
       "de": "Fehlerbehebungen und kleine Verbesserungen.",
-      "pt-BR": "Correções e pequenas melhorias.",
+      "pt-BR": "Correções de bugs e pequenas melhorias.",
       "ja": "不具合の修正と細かな改善。",
-      "ko": "버그 수정 및 작은 개선.",
+      "ko": "버그 수정 및 소소한 개선 사항.",
       "zh-Hans": "错误修复与小幅改进。",
       "zh-Hant": "錯誤修正與小幅改進。"
     }

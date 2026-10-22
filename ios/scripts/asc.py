@@ -4,7 +4,7 @@
 Commands
 --------
 bootstrap   Checks the API key, registers the Bundle ID `it.castellanza.stepteller` with the
-            HealthKit capability if missing and checks that the app record exists.
+            HealthKit and iCloud capabilities if missing and checks that the app record exists.
 certs       Revokes the certificates created by automatic signing through the API («Created via API»): on an
             ephemeral runner the private key is lost at the end of the job, so they are useless and Apple allows few.
 distribute  After the upload: waits for Apple to process the build in BUILD_NUMBER, sets the encryption
@@ -123,7 +123,20 @@ def bootstrap():
         except RuntimeError:
             lines.append('- ⚠️ HealthKit non attivabile via API: la firma automatica prova ad abilitarla; '
                          'se la build si ferma qui, va spuntata a mano nel portale (App ID → HealthKit).')
-    # 3. app record (created only from the website)
+    # 3. iCloud (key-value store only, `CloudBackup`): without it the 1.1 cannot be signed
+    if 'ICLOUD' in caps:
+        lines.append('- ✅ Capability iCloud già attiva')
+    else:
+        try:
+            call('POST', '/v1/bundleIdCapabilities', body={'data': {
+                'type': 'bundleIdCapabilities', 'attributes': {'capabilityType': 'ICLOUD', 'settings': [
+                    {'key': 'ICLOUD_VERSION', 'options': [{'key': 'XCODE_6'}]}]},
+                'relationships': {'bundleId': {'data': {'type': 'bundleIds', 'id': bundle['id']}}}}})
+            lines.append('- ✅ Capability iCloud abilitata ora')
+        except RuntimeError:
+            lines.append('- ⚠️ iCloud non attivabile via API: la firma automatica prova ad abilitarla; '
+                         'se la build si ferma qui, va spuntata a mano nel portale (App ID → iCloud).')
+    # 4. app record (created only from the website)
     if app_record():
         lines.append(f'- ✅ Record app «{APP_NAME}» presente in App Store Connect')
         summary('\n'.join(lines))

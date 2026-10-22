@@ -219,6 +219,22 @@ final class StepsStore {
         await updateReminders()
     }
 
+    /// Settings brought back from iCloud after a reinstall (see `CloudBackup`): history first, so the goal
+    /// set afterwards matches its last entry and adds nothing.
+    func reloadSaved() {
+        history.reloadSaved()
+        if defaults.object(forKey: Keys.goal) != nil { goal = max(0, defaults.integer(forKey: Keys.goal)) }
+        if let raw = defaults.string(forKey: Keys.units), let units = UnitPreference(rawValue: raw) { unitPreference = units }
+        if defaults.object(forKey: Keys.speed) != nil { speed = unit.snapKmh(defaults.double(forKey: Keys.speed)) }
+        if defaults.object(forKey: Keys.reminderOn) != nil { reminderEnabled = defaults.bool(forKey: Keys.reminderOn) }
+        if defaults.object(forKey: Keys.reminderTime) != nil { reminderMinutes = defaults.integer(forKey: Keys.reminderTime) }
+        if let saved = defaults.data(forKey: Keys.calibration).flatMap({ try? JSONDecoder().decode(CalibrationResult.self, from: $0) }) {
+            calibration = saved
+            SharedStore.calibration = saved
+        }
+        deferSync(reloadWidget: true)
+    }
+
     // MARK: manual steps
 
     func setManualSteps(_ value: Int) {

@@ -6,7 +6,13 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
-## 1.0.1 — in lavorazione
+## 1.1 — in lavorazione
+- Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e
+  orario), taratura e tema giorno/notte si salvano anche nell'iCloud dell'utente (archivio chiave-valore di Apple,
+  `CloudBackup`). Disinstallando e reinstallando, o su un iPhone nuovo con lo stesso account, tornano da soli e la
+  streak riparte dal giorno giusto (vale il più vecchio tra telefono e iCloud). L'introduzione si rivede comunque,
+  perché i permessi di Salute e notifiche vanno richiesti di nuovo. Mai dati di Salute in iCloud, nessun server
+  nostro. Capacità iCloud (solo chiave-valore) nell'App ID; pagina privacy da aggiornare alla pubblicazione.
 - Promemoria serale: non arriva più «mancano 10.000» quando i passi sono già chiusi. Col telefono bloccato Salute non
   si può leggere e la lettura fallita in background veniva presa per 0 passi, rimettendo il promemoria già tolto. Ora
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo

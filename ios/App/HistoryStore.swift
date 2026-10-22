@@ -18,8 +18,8 @@ final class HistoryStore {
     private(set) var streak = StreakState()
     /// End of the last reread from Health: the celebration waits for a history read after the app came up.
     private(set) var refreshedAt: Date?
-    /// First day of the streak count (first launch of this version).
-    let streakStart: Date
+    /// First day of the streak count (first launch of this version, or the one kept in iCloud).
+    private(set) var streakStart: Date
 
     @ObservationIgnored private let provider: (any HistoryProvider)?
     @ObservationIgnored private let defaults: UserDefaults
@@ -50,8 +50,9 @@ final class HistoryStore {
         } else if let saved = defaults.object(forKey: Keys.start) as? Date {
             streakStart = saved
         } else {
-            streakStart = cal.startOfDay(for: Date())
-            defaults.set(streakStart, forKey: Keys.start)
+            let today = cal.startOfDay(for: Date())
+            streakStart = today
+            defaults.set(today, forKey: Keys.start)
         }
         let empty = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
         stats = empty
@@ -85,6 +86,15 @@ final class HistoryStore {
         let day = calendar.startOfDay(for: Date())
         if let live = todayLive, live.day == day, live.steps == steps { return }
         todayLive = (day, steps)
+        recompute()
+    }
+
+    /// Goal history and streak start brought back from iCloud after a reinstall (see `CloudBackup`).
+    func reloadSaved() {
+        if let saved = defaults.data(forKey: Keys.goals).flatMap({ try? JSONDecoder().decode(GoalHistory.self, from: $0) }) {
+            goals = saved
+        }
+        if let saved = defaults.object(forKey: Keys.start) as? Date { streakStart = saved }
         recompute()
     }
 

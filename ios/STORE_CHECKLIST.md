@@ -3,6 +3,9 @@
 Documento di coordinamento. Lo aggiorna solo la chat di coordinamento, dopo aver controllato il lavoro di ogni
 chat dedicata; le chat dedicate non lo modificano.
 
+Questa checklist vale per la 1.0. Dalla versione successiva si segue `RILASCIO.md` (regola dei numeri, registro
+`CHANGELOG.md` con stati, Novità dello store in 10 lingue), definito il 22 ottobre 2026.
+
 **Regola:** dalla 0.6.3 il comportamento e l'aspetto dell'app sono bloccati. Ogni modifica visibile va concordata
 prima tra Will e la chat di coordinamento.
 

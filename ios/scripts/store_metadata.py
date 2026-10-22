@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Exports the App Store texts from the store sheet to store/metadata.json (read by `asc.py store-*`).
+"""Exports the App Store texts from the sheets to store/metadata.json (read by `asc.py store-*`).
 
-Source: localizzazione/NEAT_store_tradotto.xlsx, sheet «Store», rows store.name, store.subtitle, store.promo,
-store.description, store.keywords (Italian + 9 languages). The sheet is only read. The JSON is regenerated, never
-edited by hand: CI reads it so that it needs no spreadsheet library.
+Sources (only read; the JSON is regenerated, never edited by hand: CI reads it so that it needs no spreadsheet library):
+  localizzazione/NEAT_store_tradotto.xlsx, sheet «Store»: rows store.name, store.subtitle, store.promo,
+    store.description, store.keywords (Italian + 9 languages) → "languages";
+  localizzazione/NEAT_novita.xlsx, sheet «Novità»: one row per version (novita.1.1) plus the fixed novita.correzioni
+    row for fix-only versions → "whatsNew" (≤ 4000 characters per language, no empty cell). See RILASCIO.md.
 
 Keywords: Apple documents the field as «up to 100 bytes» (UTF-8). The Japanese, Korean and Chinese rows of the sheet
 are 102–146 bytes, so KEYWORD_OVERRIDES holds shorter versions proposed to Will (whole words removed, none cut).
@@ -11,12 +13,14 @@ are 102–146 bytes, so KEYWORD_OVERRIDES holds shorter versions proposed to Wil
 Usage: python3 scripts/store_metadata.py   (needs openpyxl: pip install openpyxl)
 """
 import json
+import re
 from pathlib import Path
 
 import openpyxl
 
 ROOT = Path(__file__).resolve().parent.parent
 SHEET = ROOT / "localizzazione" / "NEAT_store_tradotto.xlsx"
+NEWS_SHEET = ROOT / "localizzazione" / "NEAT_novita.xlsx"
 OUT = ROOT / "store" / "metadata.json"
 
 # sheet column → language code (same codes as the screenshot folders)
@@ -56,6 +60,46 @@ KEYWORD_OVERRIDES = {
 
 LIMITS = {"name": 30, "subtitle": 30, "promotionalText": 170, "description": 4000}
 KEYWORD_BYTES = 100
+WHATS_NEW_LIMIT = 4000
+WHATS_NEW_PREFIX = "novita."
+VERSION_RE = re.compile(r"^\d+\.\d+(\.\d+)?$")
+
+
+def read_whats_new():
+    """Sheet «Novità» → {version or "correzioni": {language: text}}; stops on empty cells, bad IDs or long texts."""
+    sheet = openpyxl.load_workbook(NEWS_SHEET, read_only=True, data_only=True)["Novità"]
+    rows = list(sheet.iter_rows(values_only=True))
+    header = [str(c).strip() if c else "" for c in rows[0]]
+    columns = {code: header.index(title) for title, code in LANGUAGES}
+    news, problems = {}, []
+    for row in rows[1:]:
+        identifier = str(row[0] or "").strip()
+        if not identifier:
+            continue
+        if not identifier.startswith(WHATS_NEW_PREFIX):
+            problems.append(f"Novità: ID «{identifier}» non inizia con {WHATS_NEW_PREFIX}")
+            continue
+        key = identifier[len(WHATS_NEW_PREFIX):]
+        if key != "correzioni" and not VERSION_RE.match(key):
+            problems.append(f"Novità: ID «{identifier}» non è novita.<versione> (es. novita.1.1) né novita.correzioni")
+            continue
+        if key in news:
+            problems.append(f"Novità: riga {identifier} ripetuta")
+            continue
+        texts = {}
+        for code, index in columns.items():
+            value = str(row[index] or "").strip().replace("\r\n", "\n")
+            if not value:
+                problems.append(f"Novità {identifier} / {code}: cella vuota")
+            elif len(value) > WHATS_NEW_LIMIT:
+                problems.append(f"Novità {identifier} / {code}: {len(value)} caratteri > {WHATS_NEW_LIMIT}")
+            texts[code] = value
+        news[key] = texts
+    if "correzioni" not in news:
+        problems.append("Novità: manca la riga fissa novita.correzioni")
+    if problems:
+        raise SystemExit("\n".join(problems))
+    return news
 
 
 def main():
@@ -88,11 +132,13 @@ def main():
             problems.append(f"{code} keywords: {size} byte > {KEYWORD_BYTES}")
     if problems:
         raise SystemExit("\n".join(problems))
+    news = read_whats_new()
     OUT.parent.mkdir(exist_ok=True)
-    data = {"_source": "Generato da scripts/store_metadata.py dal foglio «Store»: non modificare a mano.",
-            "languages": texts}
+    data = {"_source": "Generato da scripts/store_metadata.py dai fogli «Store» e «Novità»: non modificare a mano.",
+            "languages": texts, "whatsNew": news}
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"{OUT.relative_to(ROOT)}: {len(texts)} lingue")
+    versions = ", ".join(k for k in news if k != "correzioni") or "nessuna versione"
+    print(f"{OUT.relative_to(ROOT)}: {len(texts)} lingue; Novità: {versions} + correzioni")
     for code, fields in texts.items():
         print(f"  {code:8} nome {len(fields['name']):2}  sottotitolo {len(fields['subtitle']):2}  "
               f"promo {len(fields['promotionalText']):3}  descrizione {len(fields['description']):4}  "

@@ -10,4 +10,8 @@
 - Non toccare i file in radice (web app) né il repo `diario-alimentare` (briciola.).
 - Streak, Jolly e statistiche sono funzioni pure in `StepTellerCore` (`StreakEngine`, `HistoryStats`, `GoalHistory`): si calcolano dai dati di Salute, non si salvano. Regole in `StreakEngine.swift`.
 - Il merge su `main` pubblica anche su Pages: chiederlo a Will, una volta, dopo la sua prova.
+- Versioni e registro: `RILASCIO.md`. Ogni PR che tocca il codice aggiunge la sua riga alla sezione in cima di
+  `CHANGELOG.md`, che deve essere «in lavorazione» e uguale a `MARKETING_VERSION`; se è chiusa, si apre la versione
+  successiva nella stessa PR. La CI (`scripts/registro.py`) rifiuta le PR senza riga. Novità dello store in 10 lingue
+  nel foglio `localizzazione/NEAT_novita.xlsx`, italiano approvato da Will prima di tradurre.
 - Salute: solo lettura passi, mai scrittura né rete. Il provider finto è solo `#if DEBUG`.

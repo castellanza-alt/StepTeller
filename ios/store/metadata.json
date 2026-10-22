@@ -1,5 +1,5 @@
 {
-  "_source": "Generato da scripts/store_metadata.py dal foglio «Store»: non modificare a mano.",
+  "_source": "Generato da scripts/store_metadata.py dai fogli «Store» e «Novità»: non modificare a mano.",
   "languages": {
     "it": {
       "name": "NEAT - ogni passo conta",
@@ -70,6 +70,20 @@
       "promotionalText": "今天還差幾步？NEAT讓你一目了然。你的資料留在你的iPhone上。",
       "description": "今天走了幾步？還差幾步？還要走多久？\n\nNEAT讓這三個問題的答案一目了然。\n\n• 從健康讀取的今日步數。\n• 距離目標還差幾步。\n• 按照你選擇的速度，還要走幾分鐘才能達標。\n\n每達標一天，連續紀錄就增加一天。歷史紀錄按週、按月顯示步數，也能查看最高紀錄。如果還沒達標，晚上會收到提醒。透過小工具，不用打開App就能查看進度。\n\n你的資料留在你的iPhone上。NEAT只讀取資料：不需帳號、沒有廣告、沒有追蹤。任何資料都不會離開手機。\n\n每一步都算數。",
       "keywords": "計步器,步數,走路,健走,散步,萬步,每日步數,連續達標,小工具,提醒,10000步"
+    }
+  },
+  "whatsNew": {
+    "correzioni": {
+      "it": "Correzioni e piccoli miglioramenti.",
+      "en": "Bug fixes and small improvements.",
+      "es": "Correcciones y pequeñas mejoras.",
+      "fr": "Corrections et petites améliorations.",
+      "de": "Fehlerbehebungen und kleine Verbesserungen.",
+      "pt-BR": "Correções e pequenas melhorias.",
+      "ja": "不具合の修正と細かな改善。",
+      "ko": "버그 수정 및 작은 개선.",
+      "zh-Hans": "错误修复与小幅改进。",
+      "zh-Hant": "錯誤修正與小幅改進。"
     }
   }
 }

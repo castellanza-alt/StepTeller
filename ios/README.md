@@ -163,4 +163,8 @@ chiavi, profili o certificati nel codice.
 ## Distribuzione
 
 Commit con `[testflight]` sul ramo → build su TestFlight → Will aggiorna dall'app TestFlight. La versione di marketing è in
-`project.yml` (`MARKETING_VERSION`).
+`project.yml` (`MARKETING_VERSION`) e coincide con la prima sezione di `CHANGELOG.md`.
+
+Versioni, registro e Novità dello store seguono `RILASCIO.md`: numeri `MAGGIORE.MINORE.CORREZIONE`, una riga nel
+registro per ogni PR che tocca il codice (la CI la pretende, `scripts/registro.py`), Novità in 10 lingue dal foglio
+`localizzazione/NEAT_novita.xlsx`.

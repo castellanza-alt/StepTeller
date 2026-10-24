@@ -61,7 +61,7 @@ struct StepsTimelineProvider: TimelineProvider {
         Task {
             let e = await entry()
             // iOS decides when to really refresh (about every 15–60 minutes): this is only a hint.
-            completion(Timeline(entries: [e], policy: .after(Date().addingTimeInterval(15 * 60))))
+            completion(Timeline(entries: [e], policy: .after(WidgetReminder.nextRefresh(now: Date()))))
         }
     }
 
@@ -69,7 +69,12 @@ struct StepsTimelineProvider: TimelineProvider {
     private func entry() async -> StepsEntry {
         let now = Date()
         var steps = await WidgetHealth.todaySteps(now: now)
-        if let s = steps { SharedStore.saveSteps(s, now: now) } else { steps = SharedStore.cachedStepsToday(now: now) }
+        if let s = steps {
+            SharedStore.saveSteps(s, now: now)
+            await WidgetReminder.update(freshSteps: s, now: now)     // tonight's notification follows the count
+        } else {
+            steps = SharedStore.cachedStepsToday(now: now)
+        }
         let plan = steps.map {
             // same speed as the Home slider and the same calibrated cadence model as the app
             Plan(goal: SharedStore.goal, steps: $0, speed: SharedStore.speed, model: SharedStore.calibration.model)
@@ -82,6 +87,10 @@ struct StepsTimelineProvider: TimelineProvider {
 /// Today's steps (read only, same statistical sum as the app).
 enum WidgetHealth {
     static func todaySteps(now: Date, calendar: Calendar = .current) async -> Int? {
+        #if DEBUG
+        // Simulator checks of the reminder refresh (no Health data there): `defaults write <app group> debugWidgetSteps -int N`.
+        if let fake = SharedStore.defaults.object(forKey: "debugWidgetSteps") as? Int { return fake }
+        #endif
         guard HKHealthStore.isHealthDataAvailable() else { return nil }
         return await HealthKitQueries.stepSum(HKHealthStore(), type: HKQuantityType(.stepCount),
                                               from: calendar.startOfDay(for: now), to: now)

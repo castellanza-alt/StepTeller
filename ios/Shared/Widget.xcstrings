@@ -1,6 +1,600 @@
 {
   "sourceLanguage" : "it",
   "strings" : {
+    "n.body" : {
+      "comment" : "Corpo. {min} = minuti, {velocita} = km/h, {obiettivo} = passi obiettivo, {mancano} = passi mancanti. Limite: ≤ 140.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ km/h für %3$@ Schritte (noch %4$@)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ km/h to reach %3$@ steps (%4$@ left)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ km/h para alcanzar %3$@ pasos (faltan %4$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ km/h pour atteindre %3$@ pas (il en manque %4$@)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ km/h per chiudere i %3$@ passi (mancano %4$@)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ km/hで%1$@分必要だよ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ km/h로 %1$@분이 필요해요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ km/h para atingir %3$@ passos (faltam %4$@)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ km/h的速度，需要%1$@分钟。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。"
+          }
+        }
+      }
+    },
+    "n.body.jolly" : {
+      "comment" : "Corpo della notifica con l'avviso sul Jolly (n.body + n.jolly).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ km/h für %3$@ Schritte (noch %4$@). Erreichst du dein Ziel nicht, wird heute ein Joker genutzt (%5$@ übrig)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ km/h to reach %3$@ steps (%4$@ left). Miss your goal tonight and a Joker will be used (%5$@ left)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ km/h para alcanzar %3$@ pasos (faltan %4$@). Si no alcanzas tu objetivo, esta noche se usará un Comodín (quedarán %5$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ km/h pour atteindre %3$@ pas (il en manque %4$@). Sans atteindre ton objectif, un Joker sera utilisé ce soir (il en restera %5$@)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ km/h per chiudere i %3$@ passi (mancano %4$@). Se non chiudi, stasera usi un Jolly (ne restano %5$@)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ km/hで%1$@分必要だよ。目標未達成なら今夜おまもりを1個使うよ（残り%5$@個）。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ km/h로 %1$@분이 필요해요. 목표를 달성하지 못하면 오늘 밤 지킴이 1개가 사용돼요. %5$@개가 남아요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ km/h para atingir %3$@ passos (faltam %4$@). Se não atingir sua meta, um Coringa será usado esta noite (restarão %5$@)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ km/h的速度，需要%1$@分钟。若未达成目标，今晚将使用1枚护身符（剩余%5$@枚）。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。若未達成目標，今晚將使用1枚護身符（剩餘%5$@枚）。"
+          }
+        }
+      }
+    },
+    "n.body.jolly.mi" : {
+      "comment" : "Come n.body.jolly, con la velocità in mph (n.body.mi + n.jolly).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@). Erreichst du dein Ziel nicht, wird heute ein Joker genutzt (%5$@ übrig)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left). Miss your goal tonight and a Joker will be used (%5$@ left)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@). Si no alcanzas tu objetivo, esta noche se usará un Comodín (quedarán %5$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@). Sans atteindre ton objectif, un Joker sera utilisé ce soir (il en restera %5$@)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@). Se non chiudi, stasera usi un Jolly (ne restano %5$@)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。目標未達成なら今夜おまもりを1個使うよ（残り%5$@個）。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요. 목표를 달성하지 못하면 오늘 밤 지킴이 1개가 사용돼요. %5$@개가 남아요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@). Se não atingir sua meta, um Coringa será usado esta noite (restarão %5$@)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。若未达成目标，今晚将使用1枚护身符（剩余%5$@枚）。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。若未達成目標，今晚將使用1枚護身符（剩餘%5$@枚）。"
+          }
+        }
+      }
+    },
+    "n.body.lose" : {
+      "comment" : "Corpo della notifica con l'avviso sulla serie (n.body + n.lose).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ km/h für %3$@ Schritte (noch %4$@). Ohne Joker endet deine Serie von %5$@ Tagen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ km/h to reach %3$@ steps (%4$@ left). Without a Joker, your %5$@-day streak ends."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ km/h para alcanzar %3$@ pasos (faltan %4$@). Sin Comodines, tu racha de %5$@ días se interrumpe."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ km/h pour atteindre %3$@ pas (il en manque %4$@). Sans Joker, ta série de %5$@ jours s’arrête."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ km/h per chiudere i %3$@ passi (mancano %4$@). Senza Jolly, la streak di %5$@ giorni si interrompe."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ km/hで%1$@分必要だよ。おまもりがないため、%5$@日間の連続記録が途切れるよ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ km/h로 %1$@분이 필요해요. 지킴이가 없으면 %5$@일의 연속 기록이 끊겨요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ km/h para atingir %3$@ passos (faltam %4$@). Sem Coringas, sua sequência de %5$@ dias será interrompida."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ km/h的速度，需要%1$@分钟。没有护身符，%5$@天的连续记录将中断。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。沒有護身符，%5$@天的連續紀錄將中斷。"
+          }
+        }
+      }
+    },
+    "n.body.lose.mi" : {
+      "comment" : "Come n.body.lose, con la velocità in mph (n.body.mi + n.lose).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@). Ohne Joker endet deine Serie von %5$@ Tagen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left). Without a Joker, your %5$@-day streak ends."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@). Sin Comodines, tu racha de %5$@ días se interrumpe."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@). Sans Joker, ta série de %5$@ jours s’arrête."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@). Senza Jolly, la streak di %5$@ giorni si interrompe."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。おまもりがないため、%5$@日間の連続記録が途切れるよ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요. 지킴이가 없으면 %5$@일의 연속 기록이 끊겨요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@). Sem Coringas, sua sequência de %5$@ dias será interrompida."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。没有护身符，%5$@天的连续记录将中断。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。沒有護身符，%5$@天的連續紀錄將中斷。"
+          }
+        }
+      }
+    },
+    "n.body.mi" : {
+      "comment" : "Come n.body, con la velocità in mph. {min} = minuti, {velocita} = mph, {obiettivo} = passi obiettivo, {mancano} = passi mancanti. Limite: ≤ 140.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@)."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。"
+          }
+        }
+      }
+    },
+    "n.generic.body" : {
+      "comment" : "Corpo per i giorni futuri. Limite: ≤ 80.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffne NEAT und sieh, wie viele Minuten du heute Abend brauchst."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open NEAT to see how many minutes you need tonight."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre NEAT para ver cuántos minutos necesitas esta noche."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvre NEAT pour voir combien de minutes il te faut ce soir."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri NEAT per vedere quanti minuti ti servono stasera."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEATを開いて、今夜あと何分必要か見てみよう。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT를 열어 오늘 저녁 몇 분이 필요한지 확인해 보세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abra o NEAT para ver quantos minutos você precisa esta noite."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开NEAT，看看今晚还需要多少分钟。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打開NEAT，看看今晚還需要幾分鐘。"
+          }
+        }
+      }
+    },
+    "n.generic.title" : {
+      "comment" : "Titolo per i giorni futuri (passi non ancora noti). Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit fürs Laufband?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time for the treadmill?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Hora de la cinta de correr?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’heure du tapis de course ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È ora del tappeto?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トレッドミルの時間？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝머신 탈 시간인가요?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hora da esteira?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该上跑步机了吗？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "該上跑步機了嗎？"
+          }
+        }
+      }
+    },
+    "n.title" : {
+      "comment" : "Titolo della notifica del promemoria (giorno di oggi). Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minuten auf dem Laufband"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutes on the treadmill"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutos en la cinta de correr"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutes sur tapis de course"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minuti sul tappeto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トレッドミルの時間"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝머신에서 필요한 시간"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minutos na esteira"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跑步机所需分钟数"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跑步機所需分鐘數"
+          }
+        }
+      }
+    },
     "w.done" : {
       "comment" : "Seconda riga, MAIUSCOLO. Limite: ≤ 8.",
       "extractionState" : "manual",

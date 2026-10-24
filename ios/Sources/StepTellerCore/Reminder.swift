@@ -54,13 +54,38 @@ public struct ReminderRequest: Sendable, Equatable {
 public enum ReminderPlanner {
     /// Precise message with tonight's minutes; `nil` if the goal is already reached.
     public static func message(for plan: Plan, streak: StreakState? = nil) -> ReminderMessage? {
+        message(for: plan, warning: streak.flatMap(warning(for:)))
+    }
+
+    /// Same, with the streak warning already decided (the widget keeps the one the app saved: it depends on
+    /// the past days, not on today's count).
+    public static func message(for plan: Plan, warning: ReminderMessage.Warning?) -> ReminderMessage? {
         guard !plan.isDone else { return nil }
-        var warning: ReminderMessage.Warning?
-        if let streak {
-            if streak.todayWouldUseJolly { warning = .wouldUseJolly(jollyLeft: streak.jolly - 1) }
-            else if streak.todayWouldBreak { warning = .wouldBreak(streak: streak.streak) }
-        }
         return .precise(minutes: plan.minutes, speed: plan.speed, goal: plan.goal, remaining: plan.remaining, warning: warning)
+    }
+
+    /// Streak warning for tonight, if any.
+    public static func warning(for streak: StreakState) -> ReminderMessage.Warning? {
+        if streak.todayWouldUseJolly { return .wouldUseJolly(jollyLeft: streak.jolly - 1) }
+        if streak.todayWouldBreak { return .wouldBreak(streak: streak.streak) }
+        return nil
+    }
+
+    /// Identifier of the notification of a day: `stepteller.reminder.2026-10-08` (app and widget use the same).
+    public static func identifier(for day: Date, calendar: Calendar) -> String {
+        let parts = calendar.dateComponents([.year, .month, .day], from: day)
+        return String(format: "stepteller.reminder.%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)
+    }
+
+    /// Next time the reminder fires: today if still ahead, otherwise tomorrow.
+    public static func nextFire(now: Date, minutesFromMidnight: Int, calendar: Calendar) -> Date? {
+        let hour = minutesFromMidnight / 60, minute = minutesFromMidnight % 60
+        for offset in 0...1 {
+            guard let day = calendar.date(byAdding: .day, value: offset, to: now),
+                  let fire = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: day) else { continue }
+            if fire > now { return fire }
+        }
+        return nil
     }
 
     /// Precise Italian text; `nil` if the goal is already reached.
@@ -85,8 +110,7 @@ public enum ReminderPlanner {
             let message = offset == 0 ? Self.message(for: plan, streak: streak) : .generic
             guard let message else { continue }
             let parts = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
-            let id = String(format: "stepteller.reminder.%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)
-            result.append(ReminderRequest(id: id, fire: parts, message: message))
+            result.append(ReminderRequest(id: identifier(for: fire, calendar: calendar), fire: parts, message: message))
         }
         return result
     }

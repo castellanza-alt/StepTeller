@@ -35,8 +35,20 @@ final class StepsStore {
         }
     }
     /// Evening reminder on (default yes) and time in minutes from midnight (default 20:30).
-    var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
-    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); deferSync(reloadWidget: false) } }
+    var reminderEnabled: Bool {
+        didSet {
+            defaults.set(reminderEnabled, forKey: Keys.reminderOn)
+            SharedStore.reminderOn = reminderEnabled
+            Task { await reminderSettingsChanged() }
+        }
+    }
+    var reminderMinutes: Int {
+        didSet {
+            defaults.set(reminderMinutes, forKey: Keys.reminderTime)
+            SharedStore.reminderMinutes = reminderMinutes
+            deferSync(reloadWidget: false)
+        }
+    }
     private(set) var state = StepsState()
     /// History, streak and Jollies.
     let history: HistoryStore
@@ -104,6 +116,8 @@ final class StepsStore {
         SharedStore.speed = speed
         SharedStore.unitPreference = unitPreference
         SharedStore.calibration = calibration
+        SharedStore.reminderOn = reminderEnabled      // the widget refreshes tonight's reminder (WidgetReminder)
+        SharedStore.reminderMinutes = reminderMinutes
     }
 
     // MARK: derived
@@ -336,6 +350,9 @@ final class StepsStore {
             ? ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
                                        plan: reminderPlan, streak: history.streak, calendar: controller.calendar)
             : []
+        // tonight's streak warning for the widget, which rewrites the numbers but not this
+        SharedStore.reminderWarning = ReminderPlanner.warning(for: history.streak)
+        scheduleReminderRefresh()
         let previous = reminderQueue
         let scheduler = scheduler
         let unit = unit
@@ -345,6 +362,17 @@ final class StepsStore {
         }
         reminderQueue = task
         await task.value
+    }
+
+    /// Background wake-up before the next reminder (see `ReminderRefreshTask`); none if the reminder is off.
+    func scheduleReminderRefresh() {
+        #if DEBUG
+        if defaults.object(forKey: "stepteller.debugSteps") != nil { return }
+        #endif
+        let fire = reminderEnabled
+            ? ReminderPlanner.nextFire(now: Date(), minutesFromMidnight: reminderMinutes, calendar: controller.calendar)
+            : nil
+        ReminderRefreshTask.schedule(before: fire)
     }
 
     // MARK: day change

@@ -17,6 +17,9 @@ enum SharedStore {
         static let streak = "streak"
         static let jolly = "jolly"
         static let units = "units"
+        static let reminderOn = "reminderOn"
+        static let reminderMinutes = "reminderMinutes"
+        static let reminderWarning = "reminderWarning"
     }
 
     /// Speed of the Home slider (km/h): the widget computes its minutes with the same one.
@@ -55,6 +58,39 @@ enum SharedStore {
     static var calibration: CalibrationResult {
         get { defaults.data(forKey: Keys.calibration).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty }
         set { defaults.set(try? JSONEncoder().encode(newValue), forKey: Keys.calibration) }
+    }
+
+    // MARK: evening reminder (for the widget, see WidgetReminder)
+
+    /// Reminder on and its time (minutes from midnight), as in Settings.
+    static var reminderOn: Bool {
+        get { defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true }
+        set { defaults.set(newValue, forKey: Keys.reminderOn) }
+    }
+
+    static var reminderMinutes: Int {
+        get { defaults.object(forKey: Keys.reminderMinutes) != nil ? defaults.integer(forKey: Keys.reminderMinutes) : 20 * 60 + 30 }
+        set { defaults.set(newValue, forKey: Keys.reminderMinutes) }
+    }
+
+    /// Streak warning of tonight's notification, decided by the app from the past days (`jolly:2`, `break:5`).
+    static var reminderWarning: ReminderMessage.Warning? {
+        get {
+            let parts = (defaults.string(forKey: Keys.reminderWarning) ?? "").split(separator: ":")
+            guard parts.count == 2, let n = Int(parts[1]) else { return nil }
+            switch parts[0] {
+            case "jolly": return .wouldUseJolly(jollyLeft: n)
+            case "break": return .wouldBreak(streak: n)
+            default: return nil
+            }
+        }
+        set {
+            switch newValue {
+            case let .wouldUseJolly(n)?: defaults.set("jolly:\(n)", forKey: Keys.reminderWarning)
+            case let .wouldBreak(n)?: defaults.set("break:\(n)", forKey: Keys.reminderWarning)
+            case nil: defaults.removeObject(forKey: Keys.reminderWarning)
+            }
+        }
     }
 
     /// Last count read from Health, with the day it refers to.

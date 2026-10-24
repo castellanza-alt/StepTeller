@@ -19,6 +19,17 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   streak tiene il più vecchio. File non validi o di una versione più nuova vengono rifiutati con un avviso. Formato
   e regole in `BackupFile` (core, con test). Testi nuovi in 10 lingue nel foglio: traduzioni bozza di Claude, da
   confermare con ChatGPT.
+- Promemoria serale aggiornato all'ultimo momento. Il testo della notifica lo scrive l'app in anticipo e iOS la
+  sveglia in sottofondo al massimo una volta all'ora, mai a telefono bloccato: sabato 24 alle 20:30 diceva «mancano
+  497» con 13.096 passi già fatti. Due rimedi che si sommano: (1) il widget, che iOS aggiorna molto più spesso e legge
+  Salute da solo, 10 minuti prima del promemoria controlla la notifica di stasera e, con un conteggio fresco, la
+  cancella se l'obiettivo è chiuso o ne riscrive i numeri (`WidgetReminder`; verificato che un'estensione può
+  modificare le notifiche in attesa dell'app); (2) l'app chiede a iOS un risveglio in sottofondo 25 minuti prima
+  del promemoria per rifare il conto (`ReminderRefreshTask`, BGAppRefreshTask, modalità «fetch»). Nessuna garanzia
+  da iOS, ma il caso si riduce a chi non dà all'app né al widget alcuna occasione per ore. I testi delle notifiche
+  passano nella tabella «Widget», condivisa da app ed estensione (`ReminderText`); nel Gruppo App ora ci sono anche
+  orario e stato del promemoria e l'avviso streak/Jolly di stasera. Diagnostica in Console: sottosistema
+  `it.castellanza.stepteller`, categoria `reminder`.
 - Promemoria serale: non arriva più «mancano 10.000» quando i passi sono già chiusi. Col telefono bloccato Salute non
   si può leggere e la lettura fallita in background veniva presa per 0 passi, rimettendo il promemoria già tolto. Ora
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo

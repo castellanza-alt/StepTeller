@@ -29,6 +29,14 @@ struct StepTellerApp: App {
 
     @MainActor
     private static func makeStore() -> StepsStore {
+        let store = createStore()
+        // Background wake-up before the evening reminder: registered here, while the app is still launching.
+        ReminderRefreshTask.register { store }
+        return store
+    }
+
+    @MainActor
+    private static func createStore() -> StepsStore {
         // Before creating the store: recognizes who already had the app from the saved keys.
         Onboarding.resolveAtLaunch()
         #if DEBUG

@@ -31,6 +31,7 @@ struct StepTellerApp: App {
     private static func makeStore() -> StepsStore {
         // Before creating the store: recognizes who already had the app from the saved keys.
         Onboarding.resolveAtLaunch()
+        WatchSync.shared.start()           // Apple Watch link (nothing happens without a paired watch)
         #if DEBUG
         // Debug only (simulator screenshots/tests): `-stepteller.debugSteps 7200`.
         if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil {

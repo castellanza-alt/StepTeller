@@ -138,6 +138,7 @@ final class StepsStore {
     func becameActive() async {
         await activate()
         await refreshCalibration(force: false)
+        WatchSync.shared.push()            // a watch app installed meanwhile gets the settings
     }
 
     /// Whole history reread first (the celebration waits for a history read after activation), then
@@ -178,6 +179,7 @@ final class StepsStore {
         if pendingWidgetReload {
             pendingWidgetReload = false
             WidgetCenter.shared.reloadAllTimelines()
+            WatchSync.shared.push()        // goal, speed and units to the Apple Watch
         }
         if pendingReminders {
             pendingReminders = false
@@ -297,6 +299,7 @@ final class StepsStore {
         calibration = result
         SharedStore.calibration = result
         WidgetCenter.shared.reloadAllTimelines()
+        WatchSync.shared.push()
         if let data = try? JSONEncoder().encode(result) { defaults.set(data, forKey: Keys.calibration) }
         await updateReminders()
     }

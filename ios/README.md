@@ -11,13 +11,16 @@ La web app resta in radice al repository (non toccata).
 | `Tests/StepTellerCoreTests/` | Test del nucleo (valori golden della web app v4.0) — `swift test` anche su Linux |
 | `App/` | App SwiftUI: `RootView` (tema e navigazione), `TopBar`, `Home/` (Home e cursore sulla strada), `History/` (Storico), `StepsStore`, `HealthKitStepsProvider` |
 | `App/Design/` | Stile «Dan Dan Dan»: **token** (`MangaTokens.swift`, unico posto per colori, font, misure), testo Anton, trasformazioni, forme, effetti |
+| `Watch/` | App per Apple Watch (1.2): `WatchApp`, `WatchHomeView` (una schermata, palette notte), `WatchStore`, `WatchHealth` (passi da Salute sull'orologio), `WatchSync` (riceve le impostazioni dal telefono) |
+| `WatchWidgets/` | Estensione delle complicazioni: solo Info.plist, entitlements e privacy; il codice è quello del widget (`LiveActivity/StepsWidget.swift`, `Shared/StepsWidgetView.swift`) compilato per watchOS |
+| `Shared/` | Codice compilato in app, widget e orologio: lettura Salute, `SharedStore` (App Group), unità, viste del widget, `WatchPayload` (cosa viaggia tra telefono e orologio) |
 | `App/Fonts/` | `Anton-Regular.ttf` (SIL OFL, licenza accanto) |
 | `project.yml` | Progetto XcodeGen (nessun `.xcodeproj` versionato) |
 | `scripts/` | `asc.py` e `asc_store.py` (API App Store Connect: TestFlight e scheda dello store), `store_metadata.py` e `store_screenshots.py` (dati della scheda), `screenshots.sh`, `cataloghi.py` (String Catalog dal foglio), `check_icon.py`, `select_xcode.sh` |
 | `store/` | Scheda App Store: testi per lingua (`metadata.json`, generato dal foglio), screenshot JPEG, note per il revisore, guida ai passi a mano |
 | `localizzazione/` | Foglio delle traduzioni approvate (fonte dei cataloghi), prompt e screenshot usati per tradurre |
 
-Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+.
+Bundle ID `it.castellanza.stepteller` · Team `5E426PLFWN` · iOS 17+ · Apple Watch `…watchkitapp` e `…watchkitapp.widgets`, watchOS 10+.
 
 ## Dove si aggiungono i punti di taratura
 
@@ -119,6 +122,37 @@ dell'app; arte in `Shared/WidgetAssets.xcassets`.
 Obiettivo, taratura, velocità del cursore, unità di misura, serie e Jolly arrivano dall'app via App Group (`Shared/SharedStore.swift`);
 i minuti usano lo stesso modello tarato dell'app. Tocco → `stepteller://oggi`. In Debug `WidgetPreviewScreen` mostra i widget
 per gli screenshot (`-stepteller.debugWidget 1`).
+
+## Apple Watch (1.2)
+
+Target `StepTellerWatch` (app, incorporata nell'app iPhone: si installa dall'app Watch del telefono) e
+`StepTellerWatchWidgets` (complicazioni), entrambi in `project.yml`. Il nucleo `StepTellerCore` compila anche per
+watchOS (`Package.swift`).
+
+- **Schermata** (`Watch/WatchHomeView.swift`): serie e Jolly, passi di oggi con l'ombra rossa, «SU 10.000», barra,
+  «ANCORA 45 MIN · 3,0 KM» oppure «OBIETTIVO RAGGIUNTO». Palette notte fissa (`MangaPalette.night`), token e font
+  dell'app; disegnata per la cassa da 41 mm (176 pt) e scalata alla larghezza reale. Senza dati da Salute: «—» e
+  «NIENTE DATI DA SALUTE» (`w.watch.nodata`, VoiceOver `w.watch.nodata.vo`).
+- **Passi**: letti da Salute **sull'orologio** (`Watch/WatchHealth.swift`, stessa somma statistica dell'app, solo
+  lettura); il permesso è condiviso con l'app iPhone. Osservatore solo in primo piano; le complicazioni si
+  aggiornano con la loro timeline e ogni volta che si usa l'app.
+- **Impostazioni dal telefono**: obiettivo, velocità del cursore, unità, serie, Jolly e taratura viaggiano con
+  WatchConnectivity come «application context» (`Shared/WatchPayload.swift`: chiavi stabili, mai rinominate).
+  Il telefono le manda a ogni cambiamento (`App/WatchSync.swift`, chiamato dove si ricarica il widget) e quando
+  torna in primo piano; l'orologio le salva nel suo App Group (`SharedStore`, lo stesso codice del widget iPhone) e
+  le usa anche con il telefono lontano o spento (`Watch/WatchSync.swift`). Nulla torna indietro; nessun dato di
+  Salute in viaggio. Al primo avvio dell'app Watch, prima che il telefono abbia mandato qualcosa, valgono i
+  predefiniti (10.000 passi, 4 km/h).
+- **Complicazioni**: `StepsWidget` compilato per watchOS con `#if os(watchOS)`: famiglie tondo, rettangolo, riga
+  (le viste del blocco schermo) e angolo (`WatchCorner`: passi compatti e barra curva). Descrizione nella galleria
+  `w.watch.gallery.desc`.
+- **Testi**: tabella `Widget` (`w.watch.*`), permessi in `Watch/InfoPlist.xcstrings` (`p.health.watch`,
+  `p.health.write`) e `WatchWidgets/InfoPlist.xcstrings` (`p.health.widget`), generati da `scripts/cataloghi.py`.
+- **Simulatore**: coppia `NEAT-Watch-iPhone` (iPhone 17) + `NEAT-Watch` (Series 11, 46 mm), runtime watchOS 27.
+  Salute nel simulatore Watch non ha passi: la schermata mostra «—».
+- **Store**: l'app Watch viaggia dentro quella iPhone (stesso archivio e invio); la firma automatica registra i due
+  bundle ID con HealthKit e App Group. Alla pubblicazione servono gli screenshot dell'Apple Watch e la pagina
+  privacy aggiornata.
 
 ## Animazione di apertura
 

@@ -1780,6 +1780,204 @@
           }
         }
       }
+    },
+    "w.watch.gallery.desc" : {
+      "comment" : "Descrizione delle complicazioni nella scelta del quadrante dell'Apple Watch (al posto di w.gallery.desc, che parla del blocco schermo). Limite: ≤ 70.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritte, übrige Minuten und Serie, direkt auf dem Zifferblatt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps, minutes left and your streak, right on your watch face."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasos, minutos restantes y racha, en la esfera del reloj."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas, minutes restantes et série, sur le cadran."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passi, minuti che mancano e serie, sul quadrante."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "歩数、残り時間、連続記録を文字盤でチェック。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시계 페이스에서 걸음 수, 남은 시간, 연속 기록을 확인해요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passos, minutos restantes e sequência, no mostrador do relógio."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "步数、剩余分钟数和连续记录，表盘上就能看。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "步數、剩餘分鐘數和連續紀錄，錶面上就能看。"
+          }
+        }
+      }
+    },
+    "w.watch.nodata" : {
+      "comment" : "App per Apple Watch: riga sotto la barra quando Salute non dà passi (permesso negato o nessun dato), al posto dei minuti che mancano, MAIUSCOLO. Limite: ≤ 22.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "KEINE HEALTH-DATEN"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NO HEALTH DATA"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SIN DATOS DE SALUD"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PAS DE DONNÉES SANTÉ"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NIENTE DATI DA SALUTE"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘルスケアのデータなし"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 데이터 없음"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SEM DADOS DO SAÚDE"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无“健康”数据"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無「健康」資料"
+          }
+        }
+      }
+    },
+    "w.watch.nodata.vo" : {
+      "comment" : "Descrizione letta ad alta voce nello stesso caso: dice dove controllare il permesso.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Daten aus Health. Prüfe die Berechtigungen von NEAT in der Health-App auf dem iPhone."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data from Health. Check NEAT's permissions in the Health app on your iPhone."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay datos de Salud. Revisa los permisos de NEAT en la app Salud del iPhone."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune donnée de Santé. Vérifie les autorisations de NEAT dans l’app Santé de l’iPhone."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun dato da Salute. Controlla i permessi di NEAT nell'app Salute del telefono."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘルスケアのデータがありません。iPhoneのヘルスケアアプリでNEATのアクセス権を確認してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 앱 데이터가 없어요. iPhone의 건강 앱에서 NEAT의 권한을 확인해 주세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem dados do Saúde. Verifique as permissões do NEAT no app Saúde do iPhone."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有来自“健康”的数据。请在 iPhone 的“健康”App 中检查 NEAT 的权限。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有來自「健康」的資料。請在 iPhone 的「健康」App 中檢查 NEAT 的權限。"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

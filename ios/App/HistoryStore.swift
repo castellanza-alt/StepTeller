@@ -125,9 +125,10 @@ final class HistoryStore {
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
         if SharedStore.streak != streak.streak || SharedStore.jolly != streak.jolly {
-            SharedStore.streak = streak.streak            // streak and Jollies for the widget
+            SharedStore.streak = streak.streak            // streak and Jollies for the widget and the watch
             SharedStore.jolly = streak.jolly
             WidgetCenter.shared.reloadAllTimelines()
+            WatchSync.shared.push()
         }
     }
 }

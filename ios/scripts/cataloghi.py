@@ -7,6 +7,8 @@ per language). Output (never edit by hand: regenerated):
   Shared/Widget.xcstrings         widget texts (table «Widget», in the app and in the extension)
   App/InfoPlist.xcstrings         Health permissions of the app
   LiveActivity/InfoPlist.xcstrings  Health permission of the widget
+  Watch/InfoPlist.xcstrings       Health permissions of the Apple Watch app
+  WatchWidgets/InfoPlist.xcstrings  Health permission of the watch complications
 
 Rules:
   - the key is the sheet ID, the comment is the sheet «Contesto»;
@@ -114,11 +116,15 @@ COMPOSED = {
 # rows used only inside composed sentences
 ONLY_COMPOSED = {"n.jolly", "n.lose", "w.vo.done", "w.vo.left", "w.vo.left.mi", "w.vo.streak"}
 
-INFO_PLIST = {
-    "p.health.read": ("app", "NSHealthShareUsageDescription"),
-    "p.health.write": ("app", "NSHealthUpdateUsageDescription"),
-    "p.health.widget": ("widget", "NSHealthShareUsageDescription"),
-}
+# (sheet row, catalog, Info.plist key): a row can serve more than one bundle
+INFO_PLIST = [
+    ("p.health.read", "App/InfoPlist.xcstrings", "NSHealthShareUsageDescription"),
+    ("p.health.write", "App/InfoPlist.xcstrings", "NSHealthUpdateUsageDescription"),
+    ("p.health.widget", "LiveActivity/InfoPlist.xcstrings", "NSHealthShareUsageDescription"),
+    ("p.health.watch", "Watch/InfoPlist.xcstrings", "NSHealthShareUsageDescription"),
+    ("p.health.write", "Watch/InfoPlist.xcstrings", "NSHealthUpdateUsageDescription"),
+    ("p.health.widget", "WatchWidgets/InfoPlist.xcstrings", "NSHealthShareUsageDescription"),
+]
 
 
 def load_rows():
@@ -191,7 +197,8 @@ def comment(row):
 
 def build():
     rows = load_rows()
-    app, widget, info_app, info_widget = {}, {}, {}, {}
+    app, widget = {}, {}
+    info = {}                       # catalog path → Info.plist strings
     used = set()                    # rows already placed (plurals and permissions)
 
     def target(key):
@@ -215,11 +222,10 @@ def build():
             locs[lang] = unit(to_format(key, text, PARAMS[key], lang))
         target(key)[key] = {"comment": note, "extractionState": "manual", "localizations": locs}
     # permissions
-    for key, (where, plist_key) in INFO_PLIST.items():
+    for key, path, plist_key in INFO_PLIST:
         used.add(key)
         row = rows[key]
-        table = info_app if where == "app" else info_widget
-        table[plist_key] = {
+        info.setdefault(path, {})[plist_key] = {
             "comment": f"{key}: {comment(row)}",
             "extractionState": "manual",
             "localizations": {lang: unit(row[col].strip()) for col, lang in LANGUAGES},
@@ -237,8 +243,7 @@ def build():
     missing = set(PARAMS) - set(app) - set(widget)
     if missing:
         sys.exit(f"chiavi in PARAMS senza riga: {sorted(missing)}")
-    return {"App/Localizable.xcstrings": app, "Shared/Widget.xcstrings": widget,
-            "App/InfoPlist.xcstrings": info_app, "LiveActivity/InfoPlist.xcstrings": info_widget}
+    return {"App/Localizable.xcstrings": app, "Shared/Widget.xcstrings": widget, **info}
 
 
 def write(path, strings):

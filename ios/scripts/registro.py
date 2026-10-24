@@ -33,7 +33,8 @@ CHANGELOG = IOS / 'CHANGELOG.md'
 PROJECT = IOS / 'project.yml'
 
 # files whose change is a change of the app (relative to the repository root)
-CODE_PATHS = ('ios/App/', 'ios/Shared/', 'ios/LiveActivity/', 'ios/Sources/', 'ios/project.yml', 'ios/Package.swift')
+CODE_PATHS = ('ios/App/', 'ios/Shared/', 'ios/LiveActivity/', 'ios/Watch/', 'ios/WatchWidgets/', 'ios/Sources/',
+              'ios/project.yml', 'ios/Package.swift')
 
 MONTHS = 'gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre'
 DATE = rf'\d{{1,2}} (?:{MONTHS}) \d{{4}}'

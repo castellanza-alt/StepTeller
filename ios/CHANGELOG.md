@@ -6,6 +6,20 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
+## 1.2 — in lavorazione
+- App per Apple Watch (ramo `ia/1.2-watch`, in parallelo alla 1.1 che aspetta la pubblicazione; eccezione alla regola
+  «una versione aperta alla volta» di `RILASCIO.md`, decisa da Will il 24 ottobre 2026). Sull'orologio una schermata
+  nello stile «Dan Dan Dan» (palette notte): serie e Jolly, passi di oggi letti da Salute sull'orologio stesso,
+  obiettivo, barra e minuti che mancano alla velocità scelta nella Home del telefono; a obiettivo raggiunto
+  «OBIETTIVO RAGGIUNTO». Complicazioni per il quadrante (tondo, rettangolo, riga e angolo) con lo stesso codice del
+  blocco schermo. Obiettivo, velocità, unità, serie, Jolly e taratura arrivano dal telefono con WatchConnectivity
+  (`Shared/WatchPayload.swift`, `App/WatchSync.swift` → `Watch/WatchSync.swift`) e restano sull'orologio anche con il
+  telefono lontano; mai dati di Salute in viaggio, niente rete. Target `StepTellerWatch` e `StepTellerWatchWidgets`
+  in `project.yml` (bundle `…watchkitapp` e `…watchkitapp.widgets`, watchOS 10+), nucleo compilato anche per
+  watchOS. Testi nuovi in 10 lingue nel foglio (`w.watch.*`, `p.health.watch`): bozze di Claude, da confermare con
+  ChatGPT. Alla pubblicazione servono gli screenshot dell'Apple Watch nella scheda e l'aggiornamento della pagina
+  privacy (i dati passano dal telefono all'orologio, sempre e solo sui dispositivi dell'utente).
+
 ## 1.1 — in lavorazione
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e
   orario), taratura e tema giorno/notte si salvano anche nell'iCloud dell'utente (archivio chiave-valore di Apple,

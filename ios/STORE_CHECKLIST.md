@@ -6,6 +6,11 @@ chat dedicata; le chat dedicate non lo modificano.
 Questa checklist vale per la 1.0. Dalla versione successiva si segue `RILASCIO.md` (regola dei numeri, registro
 `CHANGELOG.md` con stati, Novità dello store in 10 lingue), definito il 22 ottobre 2026.
 
+Promemoria per la 1.2 (app Apple Watch): prima dell'invio servono gli **screenshot dell'Apple Watch** nella scheda
+(Apple li richiede quando il binario contiene un'app watchOS) e l'aggiornamento della **pagina privacy** (le
+impostazioni passano dal telefono all'orologio, sempre e solo sui dispositivi dell'utente; nessun dato di Salute
+in viaggio).
+
 **Regola:** dalla 0.6.3 il comportamento e l'aspetto dell'app sono bloccati. Ogni modifica visibile va concordata
 prima tra Will e la chat di coordinamento.
 

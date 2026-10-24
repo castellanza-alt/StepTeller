@@ -1,0 +1,138 @@
+{
+  "sourceLanguage" : "it",
+  "strings" : {
+    "NSHealthShareUsageDescription" : {
+      "comment" : "p.health.watch: Testo mostrato quando l'app per Apple Watch chiede di leggere i passi da Salute. Tono formale-chiaro, controllato da Apple. Limite: ≤ 200.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT liest heutige Schritte aus Health, um sie auf der Uhr anzuzeigen und die übrigen Minuten zu schätzen. Schreibt nichts und sendet keine Daten von der Uhr."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT reads today's steps from Health to show them on your watch and estimate the minutes left. It writes nothing and sends no data off your watch."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT lee tus pasos de hoy de Salud para mostrarlos en el reloj y estimar los minutos que faltan. No escribe nada ni envía datos fuera del reloj."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT lit tes pas du jour dans Santé pour les afficher sur la montre et estimer les minutes restantes. Aucune écriture ni envoi de données hors de la montre."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT legge i tuoi passi di oggi da Salute per mostrarli sull'orologio e stimare i minuti che mancano. Non scrive nulla e non invia dati fuori dall'orologio."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEATはヘルスケアから今日の歩数を読み取ってApple Watchに表示し、残りの時間を推定します。データの書き込みや外部への送信は行いません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT는 건강 앱에서 오늘 걸음 수를 읽어 시계에 표시하고 남은 시간을 추정합니다. 데이터를 쓰거나 시계 밖으로 보내지 않습니다."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O NEAT lê seus passos de hoje no Saúde para mostrá-los no relógio e estimar os minutos restantes. Não grava nada nem envia dados para fora do relógio."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT从“健康”读取今日步数，在手表上显示并估算剩余分钟数。不写入任何内容，也不向手表外发送数据。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT從「健康」讀取今日步數，在手錶上顯示並估算剩餘分鐘數。不寫入任何內容，也不向手錶外傳送資料。"
+          }
+        }
+      }
+    },
+    "NSHealthUpdateUsageDescription" : {
+      "comment" : "p.health.write: Testo obbligatorio per Apple anche se l'app non scrive. Limite: ≤ 200.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT schreibt nichts in Health, sondern liest nur Daten. Apple verlangt diese Erklärung für Apps mit Health-Zugriff."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT writes nothing to Health: it only reads data. Apple requires this statement for apps with Health access."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT no escribe nada en Salud: solo lee datos. Apple exige esta declaración para las apps con acceso a Salud."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT n’écrit rien dans Santé : l’app se contente de lire les données. Apple exige cette déclaration pour les apps ayant accès à Santé."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT non scrive nulla in Salute: si limita a leggere i dati. Questa dichiarazione è richiesta da Apple per le app con accesso a Salute."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEATはヘルスケアへの書き込みは行わず、データの読み取りのみを行います。この説明は、ヘルスケアにアクセスするアプリにAppleが義務付けているものです。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT는 건강 앱에 아무것도 쓰지 않고 데이터를 읽기만 합니다. Apple은 건강 앱에 접근하는 앱에 이 설명을 요구합니다."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O NEAT não grava nada no Saúde: apenas lê dados. A Apple exige esta declaração para apps com acesso ao Saúde."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT不向“健康”写入任何内容，只读取数据。Apple要求访问“健康”的App提供此声明。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NEAT不向「健康」寫入任何內容，只讀取資料。Apple要求存取「健康」的App提供此聲明。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

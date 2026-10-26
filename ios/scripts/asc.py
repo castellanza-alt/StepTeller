@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-"""Client minimo per l'API di App Store Connect (schema di briciola., ridotto).
+"""Minimal client for the App Store Connect API.
 
-Comandi
--------
-bootstrap   Verifica la chiave API, registra il Bundle ID `it.castellanza.stepteller` con la
-            capability HealthKit se manca e controlla che esista il record dell'app.
-certs       Revoca i certificati creati dalla firma automatica via API («Created via API»): su un runner
-            effimero la chiave privata si perde a fine job, quindi non servono più e Apple ne ammette pochi.
-distribute  Dopo l'upload: aspetta che Apple elabori la build in BUILD_NUMBER, imposta la
-            conformità crittografica se serve e aggiunge la build al gruppo interno «Personale».
+Commands
+--------
+bootstrap   Checks the API key, registers the Bundle ID `it.castellanza.stepteller` with the
+            HealthKit capability if missing and checks that the app record exists.
+certs       Revokes the certificates created by automatic signing through the API («Created via API»): on an
+            ephemeral runner the private key is lost at the end of the job, so they are useless and Apple allows few.
+distribute  After the upload: waits for Apple to process the build in BUILD_NUMBER, sets the encryption
+            compliance if needed and adds the build to the internal group «Personale».
+store-prova App Store listing (asc_store.py): reads App Store Connect and prints what would change, writes nothing.
+store       Same, then applies the changes (idempotent) and reads everything back.
+store-invio Attaches the 1.0 build to the App Store version and submits it for review (only after Will's ok).
 
-Sicurezza: nessun segreto nei log (solo ID pubblici, date, stati). Dipendenza: `cryptography`.
+Security: no secrets in the logs (public IDs, dates and states only). Dependency: `cryptography`.
 """
 import base64
 import json
@@ -32,7 +35,7 @@ def _b64(data: bytes) -> str:
 
 
 def token() -> str:
-    """JWT ES256 valido 15 minuti."""
+    """ES256 JWT valid for 15 minutes."""
     from cryptography.hazmat.primitives import hashes, serialization
     from cryptography.hazmat.primitives.asymmetric import ec
     from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
@@ -47,18 +50,33 @@ def token() -> str:
     return signing_input + '.' + _b64(r.to_bytes(32, 'big') + s.to_bytes(32, 'big'))
 
 
+class ApiError(RuntimeError):
+    def __init__(self, message: str, status: int, detail: str):
+        super().__init__(message)
+        self.status = status
+        self.detail = detail
+
+
 def call(method: str, path: str, body=None, params=None):
-    url = API + path + ('?' + urllib.parse.urlencode(params) if params else '')
+    """`path` is relative to the API host, or a full URL (the `links.next` of a paged response)."""
+    url = (path if path.startswith('https://') else API + path) + ('?' + urllib.parse.urlencode(params) if params else '')
     data = json.dumps(body).encode() if body is not None else None
-    request = urllib.request.Request(url, data=data, method=method, headers={
-        'Authorization': 'Bearer ' + token(), 'Content-Type': 'application/json'})
-    try:
-        with urllib.request.urlopen(request, timeout=60) as response:
-            raw = response.read()
-            return json.loads(raw) if raw else {}
-    except urllib.error.HTTPError as error:
-        detail = error.read().decode(errors='replace')[:500]
-        raise RuntimeError(f'App Store Connect {method} {path}: HTTP {error.code} {detail}') from None
+    # transient server errors are retried, except on POST (a retried create could duplicate)
+    attempts = 1 if method == 'POST' else 4
+    for attempt in range(attempts):
+        request = urllib.request.Request(url, data=data, method=method, headers={
+            'Authorization': 'Bearer ' + token(), 'Content-Type': 'application/json'})
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                raw = response.read()
+                return json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as error:
+            detail = error.read().decode(errors='replace')[:500]
+            if error.code >= 500 and attempt + 1 < attempts:
+                time.sleep(5 * (attempt + 1))
+                continue
+            shown = path.replace(API, '').split('?')[0]
+            raise ApiError(f'App Store Connect {method} {shown}: HTTP {error.code} {detail}', error.code, detail) from None
 
 
 def summary(text: str):
@@ -76,7 +94,7 @@ def app_record():
 
 def bootstrap():
     lines = ['## Preparazione Apple']
-    # 1. chiave valida (una GET qualunque basta)
+    # 1. valid key (any GET will do)
     call('GET', '/v1/apps', params={'limit': 1})
     lines.append('- ✅ Chiave API App Store Connect valida')
     # 2. Bundle ID + HealthKit
@@ -94,9 +112,9 @@ def bootstrap():
     if 'HEALTH_KIT' in caps:
         lines.append('- ✅ Capability HealthKit già attiva')
     else:
-        # HealthKit non è tra i tipi di capability dell'API: si abilita dal portale oppure la
-        # sincronizza Xcode (firma automatica) dall'entitlement. Qui si tenta e, se l'API rifiuta,
-        # si segnala senza fermarsi.
+        # HealthKit is not among the capability types of the API: it is enabled from the portal or synced by
+        # Xcode (automatic signing) from the entitlement. Here we try and, if the API refuses, report
+        # without stopping.
         try:
             call('POST', '/v1/bundleIdCapabilities', body={'data': {
                 'type': 'bundleIdCapabilities', 'attributes': {'capabilityType': 'HEALTH_KIT'},
@@ -105,7 +123,7 @@ def bootstrap():
         except RuntimeError:
             lines.append('- ⚠️ HealthKit non attivabile via API: la firma automatica prova ad abilitarla; '
                          'se la build si ferma qui, va spuntata a mano nel portale (App ID → HealthKit).')
-    # 3. record dell'app (si crea solo dal sito web)
+    # 3. app record (created only from the website)
     if app_record():
         lines.append(f'- ✅ Record app «{APP_NAME}» presente in App Store Connect')
         summary('\n'.join(lines))
@@ -117,7 +135,7 @@ def bootstrap():
 
 
 def certs():
-    """Libera i certificati di Xcode creati via API (mai quelli creati a mano o da un Mac)."""
+    """Frees the Xcode certificates created via the API (never those created by hand or from a Mac)."""
     revoked, kept = 0, 0
     while True:
         data = call('GET', '/v1/certificates', params={'limit': 200})['data']
@@ -173,7 +191,11 @@ def distribute():
 
 if __name__ == '__main__':
     try:
-        {'bootstrap': bootstrap, 'certs': certs, 'distribute': distribute}[sys.argv[1]]()
+        commands = {'bootstrap': bootstrap, 'certs': certs, 'distribute': distribute}
+        if sys.argv[1].startswith('store'):
+            import asc_store
+            commands.update(asc_store.COMMANDS)
+        commands[sys.argv[1]]()
     except Exception as error:  # noqa: BLE001
         print('::error::' + str(error)[:500])
         sys.exit(1)

@@ -1,5 +1,5 @@
 # Firma, carica su TestFlight e assegna la build al gruppo «Personale».
-# Si avvia con un push su `ios-nativa` il cui messaggio di commit contiene:
+# Si avvia con un push su `main` o sul ramo della 1.0 (`ia/versione-0.6.2`) il cui messaggio di commit contiene:
 #   [apple]       solo preparazione Apple (chiave, Bundle ID, HealthKit, record app)
 #   [testflight]  preparazione + build + upload + assegnazione a «Personale»
 # oppure a mano (workflow_dispatch, disponibile dopo il merge su main).
@@ -8,7 +8,7 @@
 name: iOS TestFlight
 on:
   push:
-    branches: [ios-nativa]
+    branches: [main, ia/versione-0.6.2]
   workflow_dispatch:
 permissions:
   contents: read

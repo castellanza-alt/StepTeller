@@ -4,13 +4,13 @@ public enum HistoryPeriod: String, Sendable, CaseIterable {
     case week, month, year, all
 }
 
-/// Una barra del grafico.
+/// One bar of the chart.
 public struct HistoryBar: Sendable, Equatable, Identifiable {
     public let id: Int
     public let label: String
     public let steps: Int
     public let km: Double
-    /// Obiettivo del giorno (solo per i grafici a giorni; 0 per mesi/anni).
+    /// Goal of the day (day charts only; 0 for months/years).
     public let goal: Int
     public let isCurrent: Bool
     public let isFuture: Bool
@@ -20,7 +20,7 @@ public struct HistoryBar: Sendable, Equatable, Identifiable {
 public struct PeriodSummary: Sendable, Equatable {
     public let steps: Int
     public let km: Double
-    /// Giorni trascorsi nel periodo, oggi compreso.
+    /// Days elapsed in the period, today included.
     public let elapsedDays: Int
     public let averageSteps: Int
     public let daysAtGoal: Int
@@ -29,7 +29,7 @@ public struct PeriodSummary: Sendable, Equatable {
 public struct RecordEntry: Sendable, Equatable {
     public let steps: Int
     public let km: Double
-    /// Etichetta italiana del giorno/periodo («17 giu 2026», «8 – 14 giu 2026», «Marzo 2026», «2025»).
+    /// Label of the day/period («17 giu 2026», «8 – 14 giu 2026», «Marzo 2026», «2025»).
     public let label: String
 }
 
@@ -40,36 +40,64 @@ public struct PersonalRecords: Sendable, Equatable {
     public let year: RecordEntry?
 }
 
-/// Statistiche sullo storico giornaliero. Settimana lunedì–domenica.
+/// Statistics over the daily history. Weeks run Monday–Sunday.
 public struct HistoryStats: Sendable {
     public let records: [DayRecord]
     public let goals: GoalHistory
     public let now: Date
     public let calendar: Calendar
-    private let byDay: [Date: DayRecord]
+    /// Date labels (Italian unless given).
+    public let labels: HistoryLabels
+    /// Record per start of day (the first one, if a day appears twice).
+    public let byDay: [Date: DayRecord]
+    /// First day with data (start of day); `nil` without records.
+    public let firstDay: Date?
+    // Totals per week (key: week start), month (year × 100 + month) and year, summed once in record order:
+    // charts and records read them instead of scanning the whole history again.
+    private let weekTotals: [Date: Total]
+    private let monthTotals: [Int: Total]
+    private let yearTotals: [Int: Total]
 
-    static let monthNames = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
-                             "agosto", "settembre", "ottobre", "novembre", "dicembre"]
-    static let shortMonths = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"]
-    static let weekdayLetters = ["L", "M", "M", "G", "V", "S", "D"]
-    static let monthLetters = ["G", "F", "M", "A", "M", "G", "L", "A", "S", "O", "N", "D"]
+    private struct Total: Sendable {
+        var steps = 0
+        var km = 0.0
+        mutating func add(_ r: DayRecord) { steps += r.steps; km += r.km }
+    }
 
-    public init(records: [DayRecord], goals: GoalHistory, now: Date, calendar: Calendar) {
+    public init(records: [DayRecord], goals: GoalHistory, now: Date, calendar: Calendar, labels: HistoryLabels = .italian) {
         var cal = calendar
+        // ISO weeks: Monday first, the week holding 4 January is week 1 (same rule on every platform).
         cal.firstWeekday = 2
         cal.minimumDaysInFirstWeek = 4
         self.calendar = cal
         self.records = records
         self.goals = goals
         self.now = now
-        byDay = Dictionary(records.map { (cal.startOfDay(for: $0.day), $0) }, uniquingKeysWith: { a, _ in a })
+        self.labels = labels
+        var byDay: [Date: DayRecord] = [:]
+        var first: Date?
+        var weeks: [Date: Total] = [:], months: [Int: Total] = [:], years: [Int: Total] = [:]
+        for r in records {
+            let day = cal.startOfDay(for: r.day)
+            if byDay[day] == nil { byDay[day] = r }
+            if first.map({ day < $0 }) ?? true { first = day }
+            let c = cal.dateComponents([.year, .month], from: r.day)
+            months[c.year! * 100 + c.month!, default: Total()].add(r)
+            years[c.year!, default: Total()].add(r)
+            weeks[cal.dateInterval(of: .weekOfYear, for: r.day)?.start ?? r.day, default: Total()].add(r)
+        }
+        self.byDay = byDay
+        firstDay = first
+        weekTotals = weeks
+        monthTotals = months
+        yearTotals = years
     }
 
     public var today: Date { calendar.startOfDay(for: now) }
 
-    // MARK: intervalli
+    // MARK: intervals
 
-    /// Intervallo `[start, end]` (giorni inclusi) del periodo, `offset` periodi indietro (0 = corrente).
+    /// `[start, end]` interval (days included) of the period, `offset` periods back (0 = current).
     public func interval(_ period: HistoryPeriod, offset: Int = 0) -> (start: Date, end: Date) {
         switch period {
         case .week:
@@ -87,34 +115,26 @@ public struct HistoryStats: Sendable {
             let next = calendar.date(byAdding: .year, value: 1, to: start) ?? start
             return (start, calendar.date(byAdding: .day, value: -1, to: next) ?? start)
         case .all:
-            let first = records.map(\.day).min().map { calendar.startOfDay(for: $0) } ?? today
-            return (first, today)
+            return (firstDay ?? today, today)
         }
     }
 
-    /// Numero massimo di periodi indietro con dati.
+    /// Maximum number of periods back with data: whole periods between the first record's and today's.
     public func maxOffset(_ period: HistoryPeriod) -> Int {
-        guard period != .all, let first = records.map(\.day).min() else { return 0 }
-        var offset = 0
-        while offset < 2000 {
-            let i = interval(period, offset: offset + 1)
-            if i.end < calendar.startOfDay(for: first) { break }
-            offset += 1
-        }
-        return offset
+        guard period != .all, let first = firstDay else { return 0 }
+        let unit: Calendar.Component = period == .week ? .weekOfYear : period == .month ? .month : .year
+        let from = calendar.dateInterval(of: unit, for: first)?.start ?? first
+        let to = calendar.dateInterval(of: unit, for: today)?.start ?? today
+        return max(0, calendar.dateComponents([unit], from: from, to: to).value(for: unit) ?? 0)
     }
 
     public func title(_ period: HistoryPeriod, offset: Int = 0) -> String {
         let i = interval(period, offset: offset)
         switch period {
         case .week:
-            let a = calendar.dateComponents([.day, .month], from: i.start)
-            let b = calendar.dateComponents([.day, .month], from: i.end)
-            if a.month == b.month { return "\(a.day!) – \(b.day!) \(Self.monthNames[b.month! - 1])" }
-            return "\(a.day!) \(Self.shortMonths[a.month! - 1]) – \(b.day!) \(Self.shortMonths[b.month! - 1])"
+            return labels.week(i.start, i.end, calendar)
         case .month:
-            let c = calendar.dateComponents([.year, .month], from: i.start)
-            return Self.monthNames[c.month! - 1].capitalized + " \(c.year!)"
+            return labels.month(i.start, calendar)
         case .year:
             return String(calendar.component(.year, from: i.start))
         case .all:
@@ -123,7 +143,7 @@ public struct HistoryStats: Sendable {
         }
     }
 
-    // MARK: barre
+    // MARK: bars
 
     public func bars(_ period: HistoryPeriod, offset: Int = 0) -> [HistoryBar] {
         let i = interval(period, offset: offset)
@@ -135,7 +155,7 @@ public struct HistoryStats: Sendable {
             while day <= i.end {
                 let rec = byDay[day]
                 let label = period == .week
-                    ? Self.weekdayLetters[n % 7]
+                    ? labels.weekdayLetters[n % 7]
                     : String(calendar.component(.day, from: day))
                 result.append(HistoryBar(id: n, label: label, steps: rec?.steps ?? 0, km: rec?.km ?? 0,
                                          goal: goals.goal(on: day), isCurrent: day == today, isFuture: day > today))
@@ -151,7 +171,7 @@ public struct HistoryStats: Sendable {
                 let (s, km) = sum(year: year, month: m)
                 let future = year > thisMonth.year! || (year == thisMonth.year! && m > thisMonth.month!)
                 let current = year == thisMonth.year! && m == thisMonth.month!
-                return HistoryBar(id: m - 1, label: Self.monthLetters[m - 1], steps: s, km: km, goal: 0,
+                return HistoryBar(id: m - 1, label: labels.monthLetters[m - 1], steps: s, km: km, goal: 0,
                                   isCurrent: current, isFuture: future)
             }
         case .all:
@@ -165,18 +185,14 @@ public struct HistoryStats: Sendable {
     }
 
     private func sum(year: Int, month: Int?) -> (Int, Double) {
-        var steps = 0, km = 0.0
-        for r in records {
-            let c = calendar.dateComponents([.year, .month], from: r.day)
-            if c.year == year && (month == nil || c.month == month) { steps += r.steps; km += r.km }
-        }
-        return (steps, km)
+        let t = month.map { monthTotals[year * 100 + $0] } ?? yearTotals[year]
+        return (t?.steps ?? 0, t?.km ?? 0)
     }
 
-    // MARK: medie giornaliere
+    // MARK: daily averages
 
-    /// Barre di Anno e Sempre come **media giornaliera** (passi/giorno) di ogni mese o anno, così
-    /// l'obiettivo giornaliero resta confrontabile in tutti i grafici. Regola delle medie: `dailyAverage`.
+    /// Year and All bars as the **daily average** (steps/day) of each month or year, so the daily goal
+    /// stays comparable in every chart. Averaging rule: `dailyAverage`.
     public func averageBars(_ period: HistoryPeriod, offset: Int = 0) -> [HistoryBar] {
         let base = bars(period, offset: offset)
         guard period == .year || period == .all else { return base }
@@ -197,11 +213,11 @@ public struct HistoryStats: Sendable {
         }
     }
 
-    /// Media dei totali giornalieri tra `start` ed `end` (inclusi). Conta i giorni **conclusi**
-    /// (oggi escluso, perché a metà giornata abbasserebbe la media) a partire dal primo giorno con dati;
-    /// i giorni senza dati valgono 0. Se nel periodo c'è solo oggi, la media è il valore di oggi.
+    /// Average of the daily totals between `start` and `end` (inclusive). Counts **completed** days
+    /// (today excluded: half a day would pull the average down) from the first day with data;
+    /// days without data count as 0. If the period only holds today, the average is today's value.
     public func dailyAverage(from start: Date, to end: Date) -> (steps: Int, km: Double) {
-        guard let first = records.map(\.day).min().map({ calendar.startOfDay(for: $0) }) else { return (0, 0) }
+        guard let first = firstDay else { return (0, 0) }
         let from = max(calendar.startOfDay(for: start), first)
         let yesterday = calendar.date(byAdding: .day, value: -1, to: today) ?? today
         let to = min(calendar.startOfDay(for: end), yesterday)
@@ -222,26 +238,19 @@ public struct HistoryStats: Sendable {
         return (Int((Double(steps) / Double(n)).rounded()), km / Double(n))
     }
 
-    /// Media giornaliera di un periodo (stessa regola di `dailyAverage`).
+    /// Daily average of a period (same rule as `dailyAverage`).
     public func dailyAverage(_ period: HistoryPeriod, offset: Int = 0) -> (steps: Int, km: Double) {
         let i = interval(period, offset: offset)
         return dailyAverage(from: i.start, to: i.end)
     }
 
-    /// Etichetta di un intervallo di giorni (es. la streak più lunga): «3 – 17 ott 2026»,
-    /// «giu – ott 2024», «dic 2025 – feb 2026», o il solo giorno.
+    /// Label of a range of days (e.g. the longest streak): «3 – 17 ott 2026»,
+    /// «giu – ott 2024», «dic 2025 – feb 2026», or the single day.
     public func rangeLabel(from start: Date, to end: Date) -> String {
-        let a = calendar.dateComponents([.day, .month, .year], from: start)
-        let b = calendar.dateComponents([.day, .month, .year], from: end)
-        let ma = Self.shortMonths[a.month! - 1], mb = Self.shortMonths[b.month! - 1]
-        if a.year == b.year && a.month == b.month {
-            return a.day == b.day ? "\(b.day!) \(mb) \(b.year!)" : "\(a.day!) – \(b.day!) \(mb) \(b.year!)"
-        }
-        if a.year == b.year { return "\(ma) – \(mb) \(b.year!)" }
-        return "\(ma) \(a.year!) – \(mb) \(b.year!)"
+        labels.span(start, end, calendar)
     }
 
-    // MARK: riepilogo
+    // MARK: summary
 
     public func summary(_ period: HistoryPeriod, offset: Int = 0) -> PeriodSummary {
         let i = interval(period, offset: offset)
@@ -262,44 +271,23 @@ public struct HistoryStats: Sendable {
                              daysAtGoal: atGoal)
     }
 
-    // MARK: record
+    // MARK: records
 
     public func personalRecords() -> PersonalRecords {
-        func fmt(_ d: Date) -> String {
-            let c = calendar.dateComponents([.day, .month, .year], from: d)
-            return "\(c.day!) \(Self.shortMonths[c.month! - 1]) \(c.year!)"
-        }
+        func fmt(_ d: Date) -> String { labels.day(d, calendar) }
         let day = records.max(by: { $0.steps < $1.steps }).flatMap { r -> RecordEntry? in
             r.steps > 0 ? RecordEntry(steps: r.steps, km: r.km, label: fmt(r.day)) : nil
         }
-        // settimane
-        var weeks: [Date: (Int, Double)] = [:]
-        for r in records {
-            let w = calendar.dateInterval(of: .weekOfYear, for: r.day)?.start ?? r.day
-            let v = weeks[w] ?? (0, 0)
-            weeks[w] = (v.0 + r.steps, v.1 + r.km)
-        }
-        let week = weeks.max(by: { $0.value.0 < $1.value.0 }).map { start, v -> RecordEntry in
+        let week = weekTotals.max(by: { $0.value.steps < $1.value.steps }).map { start, v -> RecordEntry in
             let end = calendar.date(byAdding: .day, value: 6, to: start) ?? start
-            let a = calendar.dateComponents([.day, .month, .year], from: start)
-            let b = calendar.dateComponents([.day, .month, .year], from: end)
-            let label = a.month == b.month ? "\(a.day!) – \(b.day!) \(Self.shortMonths[b.month! - 1]) \(b.year!)"
-                                           : "\(a.day!) \(Self.shortMonths[a.month! - 1]) – \(fmt(end))"
-            return RecordEntry(steps: v.0, km: v.1, label: label)
+            return RecordEntry(steps: v.steps, km: v.km, label: labels.weekRange(start, end, calendar))
         }
-        // mesi e anni
-        var months: [Int: (Int, Double)] = [:], years: [Int: (Int, Double)] = [:]
-        for r in records {
-            let c = calendar.dateComponents([.year, .month], from: r.day)
-            let mk = c.year! * 100 + c.month!
-            let m = months[mk] ?? (0, 0); months[mk] = (m.0 + r.steps, m.1 + r.km)
-            let y = years[c.year!] ?? (0, 0); years[c.year!] = (y.0 + r.steps, y.1 + r.km)
+        let month = monthTotals.max(by: { $0.value.steps < $1.value.steps }).map { k, v in
+            let first = calendar.date(from: DateComponents(year: k / 100, month: k % 100, day: 1)) ?? now
+            return RecordEntry(steps: v.steps, km: v.km, label: labels.month(first, calendar))
         }
-        let month = months.max(by: { $0.value.0 < $1.value.0 }).map { k, v in
-            RecordEntry(steps: v.0, km: v.1, label: Self.monthNames[k % 100 - 1].capitalized + " \(k / 100)")
-        }
-        let year = years.max(by: { $0.value.0 < $1.value.0 }).map { k, v in
-            RecordEntry(steps: v.0, km: v.1, label: String(k))
+        let year = yearTotals.max(by: { $0.value.steps < $1.value.steps }).map { k, v in
+            RecordEntry(steps: v.steps, km: v.km, label: String(k))
         }
         return PersonalRecords(day: day, week: week, month: month, year: year)
     }

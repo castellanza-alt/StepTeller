@@ -4,29 +4,37 @@ import StepTellerCore
 @main
 struct StepTellerApp: App {
     @State private var store = StepTellerApp.makeStore()
+    /// Opening animation: the scene is created once per process, so only at a cold launch.
+    @State private var splash = Splash.prepareAtLaunch()
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                #if DEBUG
-                if UserDefaults.standard.object(forKey: "stepteller.debugWidget") != nil {
-                    WidgetPreviewScreen()          // solo Debug: anteprima del widget per gli screenshot
-                } else {
-                    RootView().environment(store)
-                }
-                #else
-                RootView().environment(store)
-                #endif
+            #if DEBUG
+            if UserDefaults.standard.object(forKey: "stepteller.debugWidget") != nil {
+                WidgetPreviewScreen()          // Debug only: widget preview for the screenshots
+            } else {
+                root
             }
+            #else
+            root
+            #endif
         }
+    }
+
+    // The splash lies above the app, which starts Health and the history underneath meanwhile.
+    private var root: some View {
+        RootView().environment(store)
+            .overlay { if splash { SplashView { splash = false } } }
     }
 
     @MainActor
     private static func makeStore() -> StepsStore {
+        // Before creating the store: recognizes who already had the app from the saved keys.
+        Onboarding.resolveAtLaunch()
         #if DEBUG
-        // Solo Debug (screenshot/test sul simulatore): `-stepteller.debugSteps 7200`.
+        // Debug only (simulator screenshots/tests): `-stepteller.debugSteps 7200`.
         if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil {
-            // `-stepteller.debugSteps -1`: Salute senza dati (avviso in Home).
+            // `-stepteller.debugSteps -1`: Health without data (warning in Home).
             let raw = UserDefaults.standard.integer(forKey: "stepteller.debugSteps")
             let n = max(0, raw)
             if UserDefaults.standard.object(forKey: "stepteller.debugHistory") != nil {

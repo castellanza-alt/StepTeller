@@ -1,8 +1,8 @@
 import SwiftUI
 
-// MARK: - Bottoni
+// MARK: - Buttons
 
-/// Bottone primario rosso: cerchio 54, gradiente radiale, ombra rossa, filo di luce in alto, −6°.
+/// Red primary button: 54 circle, radial gradient, red shadow, thin highlight on top, −6°.
 struct RedNavButton<Icon: View>: View {
     let label: String
     let action: () -> Void
@@ -27,7 +27,7 @@ struct RedNavButton<Icon: View>: View {
     }
 }
 
-/// Bottone impostazioni in vetro: `paper` 72% + sfocatura, bordo interno `ink`, ombra.
+/// Glass settings button: `paper` 72% + blur, inner `ink` border, shadow.
 struct GlassButton: View {
     let action: () -> Void
     @Environment(\.manga) private var c
@@ -44,7 +44,7 @@ struct GlassButton: View {
                 .contentShape(Circle())
         }
         .buttonStyle(PressScale())
-        .accessibilityLabel("Impostazioni")
+        .accessibilityLabel(L10n.text("top.settings.vo"))
     }
 }
 
@@ -57,7 +57,7 @@ struct PressScale: ButtonStyle {
 }
 
 enum RedGradient {
-    /// `radial-gradient(circle at cx cy, #FF6A5E 0, red mid, #B5140E 100%)` (raggio all'angolo più lontano).
+    /// `radial-gradient(circle at cx cy, #FF6A5E 0, red mid, #B5140E 100%)` (radius to the farthest corner).
     static func fill(red: Color, center: UnitPoint, size: CGFloat, mid: CGFloat) -> RadialGradient {
         let fx = max(center.x, 1 - center.x), fy = max(center.y, 1 - center.y)
         return RadialGradient(stops: [.init(color: MangaPalette.redHighlight, location: 0),
@@ -67,9 +67,9 @@ enum RedGradient {
     }
 }
 
-// MARK: - Linee cinetiche
+// MARK: - Kinetic lines
 
-/// Generatore pseudo-casuale del prototipo (`r = (r·9301 + 49297) mod 233280`): stesso disegno.
+/// The prototype's pseudo-random generator (`r = (r·9301 + 49297) mod 233280`): same drawing.
 struct ProtoRandom {
     var r: Int
     mutating func next() -> Int { r = (r * 9301 + 49297) % 233280; return r }
@@ -78,7 +78,7 @@ struct ProtoRandom {
 enum KineticLines {
     struct Ray { let points: [CGPoint]; let red: Bool }
 
-    /// Raggi triangolari dal centro (port di `lines()` del prototipo): punta all'interno, base all'esterno.
+    /// Triangular rays from the center (port of the prototype's `lines()`): tip inside, base outside.
     static func rays(cx: CGFloat, cy: CGFloat, count: Int, innerMin: Int, innerMax: Int, outer: CGFloat,
                      seed: Int, redEvery: Int? = nil) -> [Ray] {
         var g = ProtoRandom(r: seed)
@@ -95,7 +95,7 @@ enum KineticLines {
         }
     }
 
-    /// Esplosione a stella (port di `star()`): `n` punte, ellisse 1,5 : 1.
+    /// Star burst (port of `star()`): `n` points, 1.5 : 1 ellipse.
     static func star(cx: CGFloat, cy: CGFloat, points n: Int, outer: CGFloat, inner: CGFloat, rotation: Double) -> Path {
         var g = ProtoRandom(r: 3)
         var p = Path()
@@ -111,7 +111,7 @@ enum KineticLines {
     }
 }
 
-/// Raggi disegnati in un Canvas.
+/// Rays drawn in a Canvas.
 struct RaysView: View {
     let rays: [KineticLines.Ray]
     @Environment(\.manga) private var c
@@ -127,9 +127,9 @@ struct RaysView: View {
     }
 }
 
-// MARK: - Tratteggi
+// MARK: - Hatching
 
-/// `repeating-linear-gradient(-55deg, colore 0 2px, paper 2px periodo)`.
+/// `repeating-linear-gradient(-55deg, color 0 2px, paper 2px period)`.
 struct Hatch: View {
     let color: Color
     let period: CGFloat
@@ -139,10 +139,10 @@ struct Hatch: View {
     var body: some View {
         Canvas { ctx, size in
             ctx.fill(Path(CGRect(origin: .zero, size: size)), with: .color(c.paper))
-            // il gradiente va verso −55° (in alto a sinistra); le righe sono perpendicolari
+            // the gradient runs towards −55° (top left); the lines are perpendicular to it
             let a = -55.0 * .pi / 180
-            let dir = CGVector(dx: sin(a), dy: -cos(a))           // direzione del gradiente
-            let along = CGVector(dx: -dir.dy, dy: dir.dx)          // direzione delle righe
+            let dir = CGVector(dx: sin(a), dy: -cos(a))           // gradient direction
+            let along = CGVector(dx: -dir.dy, dy: dir.dx)          // line direction
             let diag = (size.width * size.width + size.height * size.height).squareRoot()
             let center = CGPoint(x: size.width / 2, y: size.height / 2)
             var k = -diag

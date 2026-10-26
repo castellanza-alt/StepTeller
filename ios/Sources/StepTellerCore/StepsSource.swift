@@ -1,36 +1,36 @@
 import Foundation
 
-/// Fornitore dei passi di oggi. In app è HealthKit; nei test e negli screenshot è finto.
+/// Source of today's steps. HealthKit in the app; fake in tests and screenshots.
 public protocol StepsProvider: Sendable {
-    /// `false` se il dispositivo non ha Salute: si resta in modalità manuale, senza errori.
+    /// `false` if the device has no Health: manual mode, no errors.
     var isAvailable: Bool { get }
-    /// Chiede il permesso di lettura (idempotente).
+    /// Asks for read permission (idempotent).
     func requestAccess() async
-    /// Passi dall'inizio di `day` fino a `now`. `nil` = nessun campione o errore
-    /// (iOS non distingue «nessun dato» da «permesso negato»).
+    /// Steps from the start of `day` up to `now`. `nil` = no samples or error
+    /// (iOS does not tell «no data» from «permission denied»).
     func steps(from startOfDay: Date, to now: Date) async -> Int?
-    /// Chiamata ogni volta che Salute riceve nuovi passi, anche con l'app in background
-    /// (Salute risveglia l'app al massimo ogni ora). L'adattatore segnala a iOS la fine del lavoro
-    /// solo dopo che `onChange` è terminata.
+    /// Called whenever Health receives new steps, also with the app in the background
+    /// (Health wakes the app at most hourly). The adapter tells iOS the work is done
+    /// only after `onChange` has finished.
     func observe(_ onChange: @escaping @Sendable () async -> Void) async
     func stopObserving() async
 }
 
-/// Origine del numero mostrato.
+/// Where the shown number comes from.
 public enum StepsOrigin: Equatable, Sendable {
     case health
     case manual
 }
 
-/// Stato puro (testabile) della sorgente dei passi.
-/// Regole: Salute → manuale → «Usa Salute»; la sovrascrittura scade al cambio di giorno;
-/// nessun dato/errore ⇒ 0 passi, fonte «manuale» e avviso.
+/// Pure (testable) state of the steps source.
+/// Rules: Health → manual → «Use Health»; the override expires when the day changes;
+/// no data/error ⇒ 0 steps, «manual» origin and a warning.
 public struct StepsState: Equatable, Sendable {
     public private(set) var healthSteps: Int = 0
     public private(set) var override: Int?
     public private(set) var overrideDay: Date?
     public private(set) var lastUpdate: Date?
-    /// Salute non ha restituito dati (vuoto, negato o errore): mostra l'avviso.
+    /// Health returned no data (empty, denied or error): show the warning.
     public private(set) var noHealthData = false
     public private(set) var healthAvailable = true
 
@@ -40,13 +40,15 @@ public struct StepsState: Equatable, Sendable {
         override != nil || noHealthData || !healthAvailable ? .manual : .health
     }
     public var steps: Int { override ?? (noHealthData ? 0 : healthSteps) }
-    /// Avviso «Nessun dato da Salute…» solo se Salute esiste e non ha risposto.
+    /// «No data from Health…» warning only if Health exists and did not answer.
     public var showsNoDataWarning: Bool { healthAvailable && noHealthData }
 
     public mutating func setHealthAvailable(_ value: Bool) { healthAvailable = value }
 
-    /// Esito di una lettura da Salute (`nil` = nessun dato o errore).
+    /// Outcome of a Health read (`nil` = no data or error).
     public mutating func applyHealth(_ value: Int?, at date: Date) {
+        // 0 counts as «no data»: without samples Health answers nil, not 0, and a denied permission looks
+        // the same (documented rule: 0 steps, manual origin, warning).
         if let value, value > 0 {
             healthSteps = value
             noHealthData = false
@@ -57,21 +59,29 @@ public struct StepsState: Equatable, Sendable {
         lastUpdate = date
     }
 
-    /// Sovrascrittura manuale di Will, valida per il giorno di `date`.
+    /// Last count known from a previous launch (today only), shown until the first Health read so the app
+    /// never opens on 0. It does not set `lastUpdate`: the real read replaces it as usual.
+    public mutating func seed(cachedSteps value: Int) {
+        guard value > 0, lastUpdate == nil else { return }
+        healthSteps = value
+        noHealthData = false
+    }
+
+    /// Manual override typed by the user, valid for the day of `date`.
     public mutating func setManual(_ value: Int, at date: Date, calendar: Calendar) {
         override = max(0, value)
         overrideDay = calendar.startOfDay(for: date)
         lastUpdate = date
     }
 
-    /// «Usa Salute»: toglie la sovrascrittura.
+    /// «Use Health»: drops the override.
     public mutating func useHealth() {
         override = nil
         overrideDay = nil
     }
 
-    /// Cambio di giorno: la sovrascrittura scade e i passi di ieri non valgono.
-    /// Restituisce `true` se qualcosa è cambiato.
+    /// Day change: the override expires and yesterday's steps no longer count.
+    /// Returns `true` if something changed.
     @discardableResult
     public mutating func rollDay(now: Date, calendar: Calendar) -> Bool {
         guard let day = overrideDay, day != calendar.startOfDay(for: now) else { return false }

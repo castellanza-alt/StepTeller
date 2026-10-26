@@ -2,17 +2,17 @@
 import SwiftUI
 import StepTellerCore
 
-/// Solo build Debug: mostra i widget (piccolo, medio e blocco schermo) per verificarli negli screenshot
-/// del simulatore. Argomenti di avvio: `-stepteller.debugWidget 1 -stepteller.debugSteps 3465`
-/// (senza `debugSteps`: stato «dato non disponibile»), tema con `-stepteller.themeMode day|night`.
+/// Debug builds only: shows the widgets (small, medium and lock screen) to check them in the simulator
+/// screenshots. Launch arguments: `-stepteller.debugWidget 1 -stepteller.debugSteps 3465`
+/// (without `debugSteps`: «data unavailable» state), theme with `-stepteller.themeMode day|night`.
 struct WidgetPreviewScreen: View {
     var body: some View {
         let d = UserDefaults.standard
         let plan: Plan? = d.object(forKey: "stepteller.debugSteps") != nil
-            ? Plan(goal: 10_000, steps: d.integer(forKey: "stepteller.debugSteps"), speed: SpeedTrack.defaultSpeed,
+            ? Plan(goal: 10_000, steps: d.integer(forKey: "stepteller.debugSteps"), speed: Units.current.snapKmh(SpeedTrack.defaultSpeed),
                    model: CalibrationResult.empty.model)
             : nil
-        let data = WidgetSnapshot(plan: plan, streak: 14, jolly: 2)
+        let data = WidgetSnapshot(plan: plan, streak: 14, jolly: 2, unit: Units.current)
         let palette: MangaPalette = d.string(forKey: ThemeMode.storageKey) == "night" ? .night : .day
         ZStack {
             LinearGradient(colors: palette.theme == .night ? [Color(hex: 0x1B2350), Color(hex: 0x0A0D1E)]

@@ -1,16 +1,13 @@
 import SwiftUI
 import StepTellerCore
 
-enum AppScreen { case home, storico }
-
-/// Barra superiore fissa (non scorre mai): bottone rosso di navigazione a sinistra, al centro serie e
-/// Jolly (Home) o «STORICO» (Storico, quando si è scorso), impostazioni in vetro a destra.
-/// Disegnata sulla tela 390; `rowTop` è la y della riga dei bottoni (sotto la status bar reale).
+/// Fixed top bar (never scrolls): red navigation button on the left, streak and Jollies in the middle
+/// (Home only), glass settings button on the right.
+/// Drawn on the 390 canvas; `rowTop` is the y of the button row (below the real status bar).
 struct TopBar: View {
     let screen: AppScreen
     let streak: Int
     let jolly: Int
-    let storicoScrolled: Bool
     let rowTop: CGFloat
     let onNav: () -> Void
     let onSettings: () -> Void
@@ -18,8 +15,8 @@ struct TopBar: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            if screen == .storico {
-                // velo: paper pieno fino al 62%, 85% all'80%, poi trasparente
+            if screen == .history {
+                // veil: full paper up to 62%, 85% at 80%, then transparent
                 LinearGradient(stops: [.init(color: c.paper, location: 0),
                                        .init(color: c.paper, location: 0.62),
                                        .init(color: c.paper.opacity(0.85), location: 0.8),
@@ -30,22 +27,14 @@ struct TopBar: View {
                     .transition(.opacity)
             }
             HStack(spacing: Manga.barGap) {
-                RedNavButton(label: screen == .home ? "Storico" : "Torna a oggi", action: onNav) {
+                RedNavButton(label: L10n.text(screen == .home ? "top.storico.vo" : "top.home.vo"), action: onNav) {
                     ZStack {
                         if screen == .home { HistogramIcon().transition(.opacity) }
                         else { FootprintsIcon().transition(.opacity) }
                     }
                 }
-                ZStack(alignment: .leading) {
-                    if screen == .home {
-                        streakGroup.transition(.opacity)
-                    } else {
-                        AntonText("STORICO", 20, tracking: 0.06)
-                            .manga(rotate: -3, skew: -10)
-                            .opacity(storicoScrolled ? 1 : 0)
-                            .animation(.easeInOut(duration: Manga.titleFade), value: storicoScrolled)
-                            .accessibilityHidden(!storicoScrolled)
-                    }
+                if screen == .home {
+                    streakGroup.transition(.opacity)
                 }
                 Spacer(minLength: 0)
                 GlassButton(action: onSettings)
@@ -57,7 +46,7 @@ struct TopBar: View {
         .frame(width: Manga.frameWidth, alignment: .topLeading)
     }
 
-    /// Serie e Jolly: ruotati −3°, inclinati −8°.
+    /// Streak and Jollies: rotated −3°, skewed −8°.
     private var streakGroup: some View {
         HStack(spacing: 16) {
             HStack(spacing: 5) {
@@ -65,21 +54,21 @@ struct TopBar: View {
                 AntonText("\(streak)", 20)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Serie: \(streak) \(streak == 1 ? "giorno" : "giorni")")
+            .accessibilityLabel(L10n.format("top.streak.vo", streak))
             HStack(spacing: 5) {
                 FlameIcon(kind: .jolly).frame(width: 16, height: 20)
                 AntonText("\(jolly)", 20)
-                AntonText("JOLLY", 12, tracking: 0.06)
+                AntonText(L10n.text("top.jolly"), 12, tracking: 0.06)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Jolly disponibili: \(jolly)")
+            .accessibilityLabel(L10n.format("top.jolly.vo", "\(jolly)"))
         }
         .contentTransition(.numericText())
         .manga(rotate: -3, skew: -8)
     }
 }
 
-/// Mini-istogramma bianco (3 barre parallelogramma + linea di base), 28 × 28.
+/// White mini histogram (3 parallelogram bars + baseline), 28 × 28.
 struct HistogramIcon: View {
     var body: some View {
         ZStack {
@@ -93,7 +82,7 @@ struct HistogramIcon: View {
     }
 }
 
-/// Due impronte bianche in diagonale, 30 × 30.
+/// Two white footprints on a diagonal, 30 × 30.
 struct FootprintsIcon: View {
     var body: some View {
         SVGShape(path: MangaPaths.footprints, viewBox: CGSize(width: 30, height: 30))

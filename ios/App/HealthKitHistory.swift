@@ -2,8 +2,8 @@ import Foundation
 import HealthKit
 import StepTellerCore
 
-/// Storico giornaliero (passi e distanza) da Salute: una `HKStatisticsCollectionQuery` per tipo,
-/// con somma statistica (iPhone e Watch deduplicati). Solo lettura.
+/// Daily history (steps and distance) from Health: one `HKStatisticsCollectionQuery` per type,
+/// statistical sum (iPhone and Watch deduplicated). Read only.
 extension HealthKitStepsProvider: HistoryProvider {
     func dailyRecords(until now: Date) async -> [DayRecord] {
         guard isAvailable, let first = await firstStepDate() else { return [] }
@@ -30,6 +30,7 @@ extension HealthKitStepsProvider: HistoryProvider {
     private func dailyTotals(_ type: HKQuantityType, unit: HKUnit, from start: Date, to end: Date) async -> [Date: Double] {
         await withCheckedContinuation { continuation in
             let calendar = Calendar.current
+            // strictStartDate: a sample counts in the day it starts in, so day totals never overlap
             let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
             let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate,
                                                     options: .cumulativeSum, anchorDate: start,

@@ -3,35 +3,63 @@ import Observation
 import WidgetKit
 import StepTellerCore
 
-/// Stato dell'app: obiettivo, velocità, promemoria e taratura (persistiti in UserDefaults) e passi
-/// di oggi (mai persistiti: si rileggono da Salute).
+/// App state: goal, speed, units, reminder and calibration (persisted in UserDefaults) and today's steps
+/// (never persisted: reread from Health).
 @MainActor
 @Observable
 final class StepsStore {
-    var goal: Int { didSet { defaults.set(goal, forKey: Keys.goal); SharedStore.goal = goal; history.recordGoal(goal); WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders() } } }
-    var speed: Double { didSet { defaults.set(speed, forKey: Keys.speed); SharedStore.speed = speed; WidgetCenter.shared.reloadAllTimelines(); Task { await updateReminders(); await syncActivity() } } }
-    /// Promemoria serale acceso (default sì) e ora in minuti da mezzanotte (default 20:30).
+    var goal: Int {
+        didSet {
+            defaults.set(goal, forKey: Keys.goal)
+            SharedStore.goal = goal
+            history.recordGoal(goal)
+            deferSync(reloadWidget: true)
+        }
+    }
+    var speed: Double {
+        didSet {
+            defaults.set(speed, forKey: Keys.speed)
+            SharedStore.speed = speed
+            deferSync(reloadWidget: true)
+        }
+    }
+    /// Units chosen in Settings. Changing them moves the speed to the nearest step of the new unit
+    /// (4 km/h → 2.5 mph): the speed itself stays in km/h.
+    var unitPreference: UnitPreference {
+        didSet {
+            defaults.set(unitPreference.rawValue, forKey: Keys.units)
+            SharedStore.unitPreference = unitPreference
+            speed = unit.snapKmh(speed)
+            deferSync(reloadWidget: true)
+        }
+    }
+    /// Evening reminder on (default yes) and time in minutes from midnight (default 20:30).
     var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
-    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); Task { await updateReminders() } } }
+    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); deferSync(reloadWidget: false) } }
     private(set) var state = StepsState()
-    /// Storico, streak e Jolly.
+    /// History, streak and Jollies.
     let history: HistoryStore
     private(set) var calibration: CalibrationResult
-    /// Live Activity del tappeto in corso.
-    private(set) var treadmillActive = false
 
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let controller: StepsController
     @ObservationIgnored private let workouts: (any WorkoutsProvider)?
     @ObservationIgnored private let scheduler = ReminderScheduler()
-    @ObservationIgnored private let liveActivity = LiveActivityController()
     @ObservationIgnored private var dayTask: Task<Void, Never>?
     @ObservationIgnored private var lastCalibration: Date?
     @ObservationIgnored private var observing = false
+    @ObservationIgnored private var started = false
+    /// Deferred work (widget reload, reminder rescheduling) after a burst of changes.
+    @ObservationIgnored private var syncTask: Task<Void, Never>?
+    @ObservationIgnored private var pendingWidgetReload = false
+    @ObservationIgnored private var pendingReminders = false
+    /// Reminder applications queued, one at a time.
+    @ObservationIgnored private var reminderQueue: Task<Void, Never>?
 
     private enum Keys {
         static let goal = "stepteller.goal"
         static let speed = "stepteller.speed"
+        static let units = "stepteller.units"
         static let reminderOn = "stepteller.reminder.on"
         static let reminderTime = "stepteller.reminder.minutes"
         static let calibration = "stepteller.calibration.v1"
@@ -42,33 +70,47 @@ final class StepsStore {
          defaults: UserDefaults = .standard) {
         self.defaults = defaults
         self.workouts = workouts
-        controller = StepsController(provider: provider)
-        // `integer/double(forKey:)` leggono anche i valori passati come argomenti di avvio (stringhe).
+        // Calendar that follows the phone's time zone: after a trip «today» stays right without relaunching.
+        controller = StepsController(provider: provider, calendar: .autoupdatingCurrent)
+        // `integer/double(forKey:)` also read values passed as launch arguments (strings).
         let initialGoal = max(0, defaults.object(forKey: Keys.goal) != nil ? defaults.integer(forKey: Keys.goal) : 10_000)
         goal = initialGoal
         history = HistoryStore(provider: historyProvider, currentGoal: initialGoal, defaults: defaults,
                                streakStartOverride: streakStartOverride)
-        // Cursore sulla strada: 3–16 km/h a scatti di 0,5 (un valore vecchio come 8,3 diventa 8,5).
+        // Launch argument `-stepteller.units miles` too (screenshots).
+        let preference = defaults.string(forKey: Keys.units).flatMap(UnitPreference.init(rawValue:)) ?? .automatic
+        unitPreference = preference
+        // Slider on the road: 3–16 km/h or 2–10 mph in 0.5 steps (an old value like 8.3 becomes 8.5).
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed
-        speed = SpeedTrack.snap(v)
+        speed = preference.resolved(regionUsesMiles: Units.regionUsesMiles).snapKmh(v)
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         #if DEBUG
-        // Screenshot sul simulatore: niente richiesta di permesso notifiche sopra l'interfaccia.
+        // Simulator screenshots: no notification permission prompt over the UI.
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
         #endif
-        treadmillActive = liveActivity.isRunning
-        // Taratura calcolata in precedenza (solo punti aggregati, non dati di Salute grezzi).
+        // Calibration computed earlier (aggregate points only, no raw Health data).
         calibration = (defaults.data(forKey: Keys.calibration)).flatMap { try? JSONDecoder().decode(CalibrationResult.self, from: $0) } ?? .empty
-        SharedStore.goal = goal              // il widget legge obiettivo, taratura e velocità dall'App Group
+        // Today's last known count (saved for the widget): the Home opens on it, not on 0, while Health is read.
+        var seedSteps = true
+        #if DEBUG
+        if defaults.object(forKey: "stepteller.debugSteps") != nil { seedSteps = false }   // deterministic screenshots
+        #endif
+        if seedSteps, let cached = SharedStore.cachedStepsToday(now: Date(), calendar: controller.calendar) {
+            state.seed(cachedSteps: cached)
+        }
+        SharedStore.goal = goal              // the widget reads goal, calibration, speed and units from the App Group
         SharedStore.speed = speed
+        SharedStore.unitPreference = unitPreference
         SharedStore.calibration = calibration
     }
 
-    // MARK: derivati
+    // MARK: derived
 
-    /// Modello di cadenza: taratura automatica se disponibile, altrimenti quella manuale di `Calibration`.
+    /// Cadence model: the automatic calibration when available, otherwise the manual points in `Calibration`.
     var model: CadenceModel { calibration.model }
+    /// Unit shown: the choice in Settings, «automatic» from the phone's region.
+    var unit: DistanceUnit { unitPreference.resolved(regionUsesMiles: Units.regionUsesMiles) }
     var steps: Int { state.steps }
     var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
@@ -76,47 +118,74 @@ final class StepsStore {
     var hasOverride: Bool { state.override != nil }
     var lastUpdate: Date? { state.lastUpdate }
 
-    /// Riga finale: da dove viene la curva usata per l'andatura corrente.
-    var calibrationNote: String {
-        if plan.gait == .run {
-            if calibration.runWorkouts > 0 { return "corsa tarata su \(calibration.runWorkouts) tue uscite · ultimi 90 giorni" }
-            return Calibration.run.isEmpty ? "corsa · curva standard" : "corsa tarata sulle tue corse · set 2026"
-        }
-        if calibration.walkWorkouts > 0 { return "cammino tarato su \(calibration.walkWorkouts) tue uscite · ultimi 90 giorni" }
-        return Calibration.walk.isEmpty ? "cammino · curva standard" : "cammino tarato sulle tue camminate"
-    }
+    // MARK: lifecycle
 
-    // MARK: ciclo di vita
-
-    /// Primo avvio: permesso Salute, lettura, osservazione, taratura, promemoria.
+    /// Start (once the introduction is done, once only): Health permission (already asked by the introduction:
+    /// iOS does not show it again), read, observation, calibration, reminders.
     func start() async {
+        guard !started else { return }
+        started = true
         await controller.provider.requestAccess()
-        await refresh()
+        await activate()
         await startObserving()
-        startDayWatcher()
         await refreshCalibration(force: true)
-        await history.refresh()
-        await updateReminders()
         if reminderEnabled { _ = await scheduler.requestIfNeeded() }
         await updateReminders()
     }
 
-    /// App in primo piano (anche ritorno da background).
+    /// App in the foreground (also back from the background).
     func becameActive() async {
-        await refresh()
-        startDayWatcher()
+        await activate()
         await refreshCalibration(force: false)
-        await history.refresh()
     }
 
-    func becameInactive() {
-        WidgetCenter.shared.reloadAllTimelines()
+    /// Whole history reread first (the celebration waits for a history read after activation), then
+    /// today's steps: the 20 s-limited reread inside `refresh()` is skipped, one read per activation.
+    private func activate() async {
+        await history.refresh()
+        await refresh()
+        startDayWatcher()
+    }
+
+    /// App in the background: the deferred work runs now (whoever drags the slider and closes the app must
+    /// find widget and reminders up to date), then one widget reload with the final state.
+    func becameInactive() async {
+        pendingWidgetReload = true
+        await flushSync()
         dayTask?.cancel()
         dayTask = nil
     }
 
-    /// Un solo osservatore per tutta la vita dell'app: in primo piano aggiorna il numero, in
-    /// background (consegna oraria di Salute) ricalcola il promemoria.
+    // MARK: coalesced updates
+
+    /// The slider and the Settings fields change dozens of times per second: widget and reminders update
+    /// once, half a second after the last change, with the final values (or right away when going to the background).
+    private func deferSync(reloadWidget: Bool) {
+        pendingWidgetReload = pendingWidgetReload || reloadWidget
+        pendingReminders = true
+        syncTask?.cancel()
+        syncTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(500))
+            guard !Task.isCancelled, let self else { return }
+            await self.flushSync()
+        }
+    }
+
+    private func flushSync() async {
+        syncTask?.cancel()
+        syncTask = nil
+        if pendingWidgetReload {
+            pendingWidgetReload = false
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        if pendingReminders {
+            pendingReminders = false
+            await updateReminders()
+        }
+    }
+
+    /// One observer for the whole life of the app: in the foreground it updates the number, in the
+    /// background (hourly Health delivery) it recomputes the reminder.
     private func startObserving() async {
         guard !observing else { return }
         observing = true
@@ -125,7 +194,7 @@ final class StepsStore {
         }
     }
 
-    /// Rilegge Salute. Tre passi separati: nessuno stato resta «preso» durante l'attesa.
+    /// Rereads Health. Three separate steps: no state stays «taken» while waiting.
     func refresh() async {
         let now = Date()
         var s = state
@@ -135,16 +204,18 @@ final class StepsStore {
         let value = await controller.read(now: now)
         state.applyHealth(value, at: Date())
         if let value {
-            SharedStore.saveSteps(value)                  // copia per il widget a telefono bloccato
-            history.updateToday(steps: value)             // la streak scatta subito, non alla rilettura dello storico
+            // copy for the widget with the phone locked; the widget reloads only if the number changed
+            if SharedStore.cachedStepsToday(now: now) != value {
+                SharedStore.saveSteps(value, now: now)
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+            history.updateToday(steps: value)             // the streak updates now, not at the history reread
         }
-        WidgetCenter.shared.reloadAllTimelines()
-        await history.refresh(minInterval: 20)       // oggi nello storico e nella streak
+        await history.refresh(minInterval: 20)       // today in the history and in the streak
         await updateReminders()
-        await syncActivity()
     }
 
-    // MARK: passi manuali
+    // MARK: manual steps
 
     func setManualSteps(_ value: Int) {
         state.setManual(value, at: Date(), calendar: controller.calendar)
@@ -156,16 +227,16 @@ final class StepsStore {
         await refresh()
     }
 
-    // MARK: taratura automatica
+    // MARK: automatic calibration
 
-    /// Ricalcola i punti dagli allenamenti degli ultimi 90 giorni (al massimo una volta all'ora).
+    /// Recomputes the points from the workouts of the last 90 days (at most once an hour).
     func refreshCalibration(force: Bool) async {
         guard let workouts else { return }
         if !force, let last = lastCalibration, Date().timeIntervalSince(last) < 3600 { return }
         lastCalibration = Date()
         let since = Date().addingTimeInterval(-Double(AutoCalibration.windowDays) * 86_400)
         let samples = await workouts.workouts(since: since)
-        // Nessun allenamento letto (permesso negato o vuoto): si tiene la taratura precedente.
+        // No workouts read (permission denied or none): the previous calibration stays.
         guard !samples.isEmpty else { return }
         let result = AutoCalibration.compute(from: samples, now: Date())
         calibration = result
@@ -175,45 +246,48 @@ final class StepsStore {
         await updateReminders()
     }
 
-    // MARK: Live Activity
+    // MARK: permissions (introduction)
 
-    var liveActivityAvailable: Bool { liveActivity.isAvailable }
-
-    /// «Avvia» / «Ferma» sul Blocco schermo.
-    func toggleTreadmill() async {
-        if liveActivity.isRunning {
-            await liveActivity.end(plan: nil)
-        } else {
-            liveActivity.start(plan: plan)
-        }
-        treadmillActive = liveActivity.isRunning
+    /// System prompt for Health (read only). iOS shows it once.
+    func requestHealthAccess() async {
+        await controller.provider.requestAccess()
     }
 
-    /// Tiene la Live Activity allineata a passi e velocità; la chiude a obiettivo chiuso.
-    private func syncActivity() async {
-        guard liveActivity.isRunning else { treadmillActive = false; return }
-        await liveActivity.update(plan: plan)
-        treadmillActive = liveActivity.isRunning
+    /// System prompt for notifications, only if never asked.
+    func requestReminderPermission() async {
+        _ = await scheduler.requestIfNeeded()
     }
 
-    // MARK: promemoria serale
+    // MARK: evening reminder
 
     private func reminderSettingsChanged() async {
         if reminderEnabled { _ = await scheduler.requestIfNeeded() }
         await updateReminders()
     }
 
-    /// Riprogramma le notifiche con i minuti attuali (oggi preciso, giorni successivi generici).
+    /// Reschedules the notifications with the current minutes (today precise, following days generic).
+    /// Writes to the notification center are queued in request order: two close updates do not
+    /// interleave and the last plan computed is also the last one written.
     func updateReminders() async {
-        guard reminderEnabled else { await scheduler.cancelAll(); return }
-        let requests = ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
-                                                plan: plan, streak: history.streak, calendar: controller.calendar)
-        await scheduler.apply(requests)
+        let enabled = reminderEnabled
+        let requests = enabled
+            ? ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
+                                       plan: plan, streak: history.streak, calendar: controller.calendar)
+            : []
+        let previous = reminderQueue
+        let scheduler = scheduler
+        let unit = unit
+        let task = Task {
+            await previous?.value
+            if enabled { await scheduler.apply(requests, unit: unit) } else { await scheduler.cancelAll() }
+        }
+        reminderQueue = task
+        await task.value
     }
 
-    // MARK: cambio di giorno
+    // MARK: day change
 
-    /// Con l'app aperta oltre mezzanotte: rilegge subito dopo la mezzanotte.
+    /// With the app open past midnight: rereads right after midnight.
     private func startDayWatcher() {
         dayTask?.cancel()
         dayTask = Task { [weak self] in

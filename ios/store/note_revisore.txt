@@ -16,14 +16,15 @@ NEAT is a simple daily step-goal app for anyone who wants to walk more, outdoors
 - Tap the step number to enter today's steps by hand. Tap USE HEALTH to go back to Health data.
 - If Health returns no step data (no data on the device, or access not granted), Home shows "NO DATA FROM HEALTH" and an OPEN SETTINGS button. The app keeps working with manual entry.
 - Top bar: the red button on the left (chart icon) opens History and, from History, goes back to Home. The button on the right opens Settings.
-- Settings: daily goal, evening reminder, Streak & Jokers rules, units (Automatic / Kilometers / Miles), theme, and in About: Privacy, Support and Replay introduction.
+- Settings: daily goal, evening reminder, Streak & Jokers rules, units (Automatic / Kilometers / Miles), theme, Backup (Export backup / Import backup: a JSON file the user saves and opens through the system share sheet and file picker), and in About: Privacy, Support and Replay introduction.
 - Widgets: Home Screen (small and medium) and Lock Screen. Long-press the Home Screen, tap Edit > Add Widget, and choose NEAT.
 
 4. EXTERNAL SERVICES
 - Apple HealthKit, read-only: step count, walking + running distance, and walking/running workouts. Workouts are used only on the device, to adjust the estimate of walking minutes to the user's real pace. NEAT never writes to Health.
 - Local notifications for the optional evening reminder (scheduled on the device, no push server).
 - WidgetKit, with an App Group shared between the app and its widgets.
-No servers, network requests, analytics, ads, AI services, sign-in services or payment providers. No data leaves the device. The only links in the app (Privacy and Support in Settings) open our web pages in the browser.
+- iCloud key-value storage (NSUbiquitousKeyValueStore), in the user's own iCloud account: goal and goal history, streak start date, speed, units, reminder settings, theme and cadence calibration, so they come back after a reinstall or on a new iPhone. No Health data is stored in iCloud. The developer has no access to it.
+No servers of our own, analytics, ads, AI services, sign-in services or payment providers. No data is sent to the developer. The only links in the app (Privacy and Support in Settings) open our web pages in the browser.
 
 5. REGIONAL DIFFERENCES
 The app works the same in all regions. The only differences are the language (10 localizations, English as the fallback) and the distance unit: miles and mph by default when the iPhone uses US or UK units, kilometers elsewhere. Users can change the unit in Settings.

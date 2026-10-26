@@ -216,5 +216,10 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
       con un video dal telefono e il testo ora in `store/note_revisore.txt`, copiato anche nelle Note della scheda
 - [x] Approvata e pubblicata il 26 ottobre 2026 (build 1.88.1)
 - [x] Tag `v1.0` e merge su `main` (26 ottobre, ok di Will)
-- [ ] Per la 1.1: con la copia in iCloud, «No data leaves the device» non è più vero. Da aggiornare insieme note per
-      il revisore, descrizione dello store, privacy policy e scheda privacy di App Store Connect
+- [x] Per la 1.1: con la copia in iCloud, «No data leaves the device» non è più vero. Testi approvati da Will il 26
+      ottobre: note per il revisore, privacy e supporto (IT+EN) aggiornati; scheda privacy di App Store Connect invariata
+      («Dati non raccolti»: lo sviluppatore non legge la copia in iCloud)
+- [ ] Per la 1.1: traduzioni di ChatGPT (`PROMPT_CHATGPT_1.1.md`) per Novità, promozionale e descrizione dello store,
+      testi del Backup; poi `python3 scripts/store_metadata.py`
+- [ ] Per la 1.1: screenshot 6 («I TUOI DATI RESTANO SUL TUO IPHONE / Nessun dato lascia il telefono») da decidere
+- [ ] Per la 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud, da verificare sul telefono (privacy)

@@ -35,8 +35,9 @@ prima tra Will e la chat di coordinamento.
 
 ### Riordino di Git (alla chiusura, dopo l'ok di Will sulla 1.0)
 - [x] `ia/versione-0.6.2` unito in `main` (26 ottobre, `af935a4`) (pubblica anche Pages: web app invariata, pagine `neat/` già online)
-- [ ] TestFlight solo da `main`; il ramo della 1.0 tolto dai workflow
-- [ ] Rami di lavoro già uniti cancellati (`ia/*`, `ios-nativa`); l'archivio diventa un tag `archivio/0.6.1`
+- [x] TestFlight solo da `main`; il ramo della 1.0 tolto dai workflow (26 ottobre, su `main` e sulla 1.1)
+- [x] Rami di lavoro già uniti cancellati (`ia/*`, `ios-nativa`); l'archivio diventa un tag `archivio/0.6.1` (26 ottobre;
+      restano `main`, `ia/1.0.1-promemoria` (1.1), `ia/1.2-watch` (1.2) e `ia/rilascio` (PR #26 aperta))
 - [x] Tag `v1.0` sulla versione inviata ad Apple (`8959a9b`, build 1.88.1)
 
 ## 0. Finetuning — fatto

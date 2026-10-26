@@ -147,12 +147,12 @@ trasparente generate da iOS. Anteprima da terminale con `ictool` (dentro Icon Co
 
 ## CI
 
-- `.github/workflows/ios-verifica.yml` — su PR e push a `main` o `ia/versione-0.6.2` quando cambia `ios/**`: `swift test` (Linux),
+- `.github/workflows/ios-verifica.yml` — su PR e push a `main` quando cambia `ios/**`: `swift test` (Linux),
   build simulatore + test + screenshot chiaro/scuro (artefatto `screenshot-simulatore`).
-- `.github/workflows/ios-testflight.yml` — con un push su `main` o `ia/versione-0.6.2` il cui messaggio contiene `[apple]` (solo preparazione Apple) o `[testflight]` (build completa); avvio manuale dopo il merge: verifica Apple, firma automatica con
+- `.github/workflows/ios-testflight.yml` — con un push su `main` il cui messaggio contiene `[apple]` (solo preparazione Apple) o `[testflight]` (build completa); avvio manuale dopo il merge: verifica Apple, firma automatica con
   chiave API, upload, assegnazione al gruppo «Personale». Numero di build `1.<run_number>.<run_attempt>`.
 
-- `.github/workflows/ios-store.yml` — scheda App Store via API con un push su `main` o `ia/versione-0.6.2` il cui messaggio
+- `.github/workflows/ios-store.yml` — scheda App Store via API con un push su `main` il cui messaggio
   contiene `[store-prova]` (solo lettura: cosa cambierebbe), `[store]` (applica e rilegge) o `[store-invio]` (build 1.0 in
   revisione, solo dopo l'ok di Will). Testi, screenshot e istruzioni in `store/` (`store/README.md`).
 

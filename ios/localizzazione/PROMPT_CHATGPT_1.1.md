@@ -31,10 +31,10 @@ Testo «Novità di questa versione» per l'App Store. L'italiano è approvato. T
   paragrafo.
 - Massimo 4000 caratteri per lingua (qui ne bastano circa 500).
 
-## 2. `NEAT_store_tradotto.xlsx`, foglio «Store», due righe: `store.promo` e `store.description`
+## 2. `NEAT_store_tradotto.xlsx`, foglio «Store», quattro righe: `store.promo`, `store.description`, `shot6.title`, `shot6.sub`
 
-Le traduzioni ci sono già. In italiano è cambiata solo una frase per riga: **cambia solo la frase corrispondente** in
-ogni lingua e lascia il resto com'è, parola per parola.
+Le traduzioni ci sono già. In promozionale e descrizione è cambiata solo una frase: **cambia solo la frase
+corrispondente** in ogni lingua e lascia il resto com'è, parola per parola. Le due didascalie cambiano per intero.
 
 **`store.promo`** (limite rigido: 170 caratteri)
 - Prima: «I tuoi dati restano sul tuo iPhone.»
@@ -46,14 +46,30 @@ ogni lingua e lascia il resto com'è, parola per parola.
 - Ora: «I tuoi dati sono solo tuoi. NEAT legge soltanto: niente account, niente pubblicità, niente tracciamento. Serie
   e impostazioni si salvano nel tuo iCloud, mai su server di altri. Cambi iPhone? Ritrovi la tua serie.»
 
-«i tuoi dati sono solo tuoi» deve suonare naturale e uguale nelle due righe (es. EN «Your data is yours alone.»).
-«iCloud» e «iPhone» restano così. La nota della colonna «Note del traduttore» che dice «Promessa identica a shot6.title»
-**non vale più** per `store.promo`: aggiornala.
+«i tuoi dati sono solo tuoi» deve suonare naturale e uguale in tutte e tre le righe (es. EN «Your data is yours
+alone.»). «iCloud» e «iPhone» restano così.
 
-## 3. `NEAT_testi_tradotti.xlsx`, foglio «Testi», le 11 righe `set.backup.*`
+**`shot6.title` e `shot6.sub`**: le didascalie del sesto screenshot (verrà rifatto)
+- Titolo (≤ 36, MAIUSCOLO, a capo segnato con « / », al massimo 2 righe; obbligatorio in giapponese, coreano e cinese)
+  - prima: «I TUOI DATI RESTANO SUL TUO IPHONE»
+  - ora: «I TUOI DATI SONO SOLO TUOI», con le stesse parole di `store.promo` (salvo maiuscole e punto finale)
+- Sottotitolo (≤ 34)
+  - prima: «Nessun dato lascia il telefono»
+  - ora: «Nessuno li vede, nemmeno noi» (= nemmeno chi ha fatto l'app)
 
-Sono i testi della nuova sezione Backup delle Impostazioni. Le traduzioni sono **bozze di Claude** (nota «Bozza di Claude
-(1.1), da confermare con ChatGPT»): **controllale e correggile** come hai fatto per il resto dell'app.
+Le tre etichette `shot6.tag*` restano uguali. Aggiorna le note di `store.promo`, `shot6.title` e `shot6.sub` che parlano
+della vecchia promessa.
+
+## 3. `NEAT_testi_tradotti.xlsx`, foglio «Testi», 12 righe: le 11 `set.backup.*` e `intro.2.p2`
+
+Le traduzioni sono **bozze di Claude** (nota «Bozza di Claude (1.1), da confermare con ChatGPT»): **controllale e
+correggile** come hai fatto per il resto dell'app.
+
+- `set.backup.*`: i testi della nuova sezione Backup delle Impostazioni.
+- `intro.2.p2`: la frase della pagina Salute dell'introduzione, sotto il titolo «I TUOI PASSI, SOLO DA LEGGERE». Prima
+  era «Non scrive niente e nessun dato esce dal telefono.», ora è «I tuoi dati non lasciano mai il tuo account.».
+  «account» è l'account Apple dell'utente (quello di iCloud): NEAT non ha account suoi. Usa la parola che Apple usa
+  per l'account Apple nella lingua. Massimo 70 caratteri.
 
 - Rispetta il limite di caratteri della colonna «Limite» e i segnaposto tra graffe (`{data}` resta identico).
 - «streak» nella nota e nella conferma = la serie del glossario (racha, série, Serie, sequência, 連続記録, 연속 기록, 连续记录,
@@ -76,6 +92,6 @@ Sono i testi della nuova sezione Backup delle Impostazioni. Le traduzioni sono *
 
 1. Restituiscimi i **tre file .xlsx** compilati, con la stessa struttura e lo stesso nome.
 2. Aggiungi un breve riepilogo:
-   - per lo store, la nuova frase in ogni lingua;
-   - per il Backup, le righe che hai corretto e perché;
+   - per lo store, le frasi nuove e le didascalie in ogni lingua, con i conteggi;
+   - per il Backup e l'introduzione, le righe che hai corretto e perché;
    - i dubbi da far vedere a un madrelingua.

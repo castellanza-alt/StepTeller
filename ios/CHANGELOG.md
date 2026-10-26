@@ -34,6 +34,8 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   si può leggere e la lettura fallita in background veniva presa per 0 passi, rimettendo il promemoria già tolto. Ora
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo
   conteggio letto oggi.
+- Introduzione, pagina Salute: «Non scrive niente e nessun dato esce dal telefono» diventa «I tuoi dati non lasciano
+  mai il tuo account», vero anche con la copia in iCloud. Traduzioni bozza di Claude, da confermare con ChatGPT.
 
 ## 1.0 — pubblicata il 26 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,

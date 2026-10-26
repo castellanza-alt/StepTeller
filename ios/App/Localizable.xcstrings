@@ -2708,67 +2708,67 @@
       }
     },
     "intro.2.p2" : {
-      "comment" : "Pagina 2. Paragrafo: rassicurazione sulla privacy. Limite: ≤ 70.",
+      "comment" : "Pagina 2. Paragrafo: rassicurazione sulla privacy. «account» = l'account Apple dell'utente (iCloud), non un account di NEAT, che non esiste. Limite: ≤ 70.",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schreibt nichts. Keine Daten verlassen dein Handy."
+            "value" : "Deine Daten verlassen nie deinen Account."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It writes nothing. No data leaves your phone."
+            "value" : "Your data never leaves your account."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No escribe nada y ningún dato sale del teléfono."
+            "value" : "Tus datos nunca salen de tu cuenta."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L’app n’écrit rien. Aucune donnée ne quitte ton téléphone."
+            "value" : "Tes données ne quittent jamais ton compte."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non scrive niente e nessun dato esce dal telefono."
+            "value" : "I tuoi dati non lasciano mai il tuo account."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "書き込みはせず、データはスマホの外に送らないよ。"
+            "value" : "データがあなたのアカウントの外に出ることはないよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "아무것도 쓰지 않고, 데이터를 휴대폰 밖으로 보내지 않아요."
+            "value" : "데이터는 내 계정 밖으로 나가지 않아요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não grava nada. Nenhum dado sai do celular."
+            "value" : "Seus dados nunca saem da sua conta."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不写入任何内容，也不向手机外发送数据。"
+            "value" : "你的数据从不离开你的账户。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不寫入任何內容，也不向手機外傳送資料。"
+            "value" : "你的資料絕不會離開你的帳號。"
           }
         }
       }

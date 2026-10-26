@@ -1,5 +1,5 @@
 # Scheda App Store via API (ios/scripts/asc.py, comandi store-*; dettagli in ios/store/README.md).
-# Si avvia con un push su `main` o `ia/versione-0.6.2` la cui PRIMA RIGA del messaggio di commit contiene:
+# Si avvia con un push su `main` la cui PRIMA RIGA del messaggio di commit contiene:
 #   [store-prova]  legge App Store Connect e mostra cosa cambierebbe, per lingua (nessuna scrittura)
 #   [store]        applica testi, screenshot, categorie, età, prezzo, paesi e note, poi rilegge tutto
 #   [store-invio]  collega la build 1.0 e invia in revisione: SOLO dopo l'ok esplicito di Will
@@ -7,7 +7,7 @@
 name: iOS App Store
 on:
   push:
-    branches: [main, ia/versione-0.6.2]
+    branches: [main]
 permissions:
   contents: read
 concurrency:

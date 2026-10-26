@@ -4,7 +4,7 @@ La scheda di NEAT su App Store Connect si compila da qui, con l'API ufficiale, d
 (`.github/workflows/ios-store.yml` → `scripts/asc.py store-*`, codice in `scripts/asc_store.py`).
 L'app si cerca per Bundle ID (`it.castellanza.stepteller`), non per nome.
 
-## Comandi (nella prima riga del messaggio di un commit spinto su `main` o `ia/versione-0.6.2`)
+## Comandi (nella prima riga del messaggio di un commit spinto su `main`
 
 Solo la prima riga conta: un tag citato nel corpo del messaggio non avvia niente.
 

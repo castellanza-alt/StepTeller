@@ -35,7 +35,7 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo
   conteggio letto oggi.
 
-## 1.0 — inviata ad Apple il 21 ottobre 2026, build 1.88.1
+## 1.0 — pubblicata il 26 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,
   cursore, Storico con la scheda MI, widget, blocco schermo, promemoria, VoiceOver); negli altri paesi km e km/h come
   prima. Impostazioni → «Unità di misura»: Automatiche (predefinito), Chilometri, Miglia. Il cursore in miglia va da

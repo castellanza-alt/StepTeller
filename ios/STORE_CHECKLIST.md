@@ -211,5 +211,9 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Build 1.0 su TestFlight (build 1.88.1, gruppo «Personale»)
 - [x] Prova finale di Will e passi a mano (privacy, DSA, accordi, età, rilascio manuale)
 - [x] Invio in revisione: build 1.88.1 collegata e inviata da Will dal sito (21 ottobre 2026), rilascio manuale
-- [ ] Eventuale rifiuto gestito
-- [ ] Merge su `main` (su richiesta di Will)
+- [x] Rifiuto gestito: il 22 ottobre Apple ha chiesto informazioni (Guideline 2.1, account nuovo). Will ha risposto
+      con un video dal telefono e il testo ora in `store/note_revisore.txt`, copiato anche nelle Note della scheda
+- [x] Approvata e pubblicata il 26 ottobre 2026 (build 1.88.1)
+- [ ] Tag `v1.0` e merge su `main` (su richiesta di Will, vedi «Riordino di Git»)
+- [ ] Per la 1.1: con la copia in iCloud, «No data leaves the device» non è più vero. Da aggiornare insieme note per
+      il revisore, descrizione dello store, privacy policy e scheda privacy di App Store Connect

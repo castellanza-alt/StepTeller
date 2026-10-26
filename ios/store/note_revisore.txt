@@ -1,5 +1,38 @@
-NEAT reads today's step count from Apple Health. Access is read-only: the app never writes to Health, makes no network requests and has no account, so no login or demo account is needed.
+Hello,
 
-If the test device has no step data in Health (or Health access is not granted), the Home screen shows 0 steps with a notice. Steps can then be entered manually by tapping the step number.
+Thank you for reviewing NEAT - Every Step Counts. Below is the information you requested.
 
-The app is free, with no in-app purchases, no ads and no tracking.
+1. SCREEN RECORDING
+Attached. It starts by launching the app from the Home Screen and shows: the Home screen, changing the walking speed, entering steps by hand, the History screen, Settings, the 4-page introduction (Welcome, Health, daily goal, evening reminder; opened from Settings > Replay introduction) and the widgets. The app was already set up on this iPhone, so the system permission prompts do not appear again. On a new install they appear during the introduction (see point 3).
+NEAT has no account, login, user-generated content or paid content.
+
+2. PURPOSE AND TARGET AUDIENCE
+NEAT is a simple daily step-goal app for anyone who wants to walk more, outdoors or on a treadmill. It answers three questions at a glance: how many steps have I taken today, how many are left to reach my goal, and how many minutes I still need to walk at the speed I choose. Each day the goal is reached extends a streak. Every 15 days in a row the user earns a "Joker" that saves the streak if a day is missed. The History screen shows totals and averages by week, month, year and all time, plus personal records. An optional evening reminder and widgets help users stay on track. NEAT makes no medical or health claims.
+
+3. HOW TO USE THE APP
+- No login, account or demo credentials are needed.
+- First launch: a 4-page introduction. Page 2 asks for read-only access to Apple Health (no data is written). Page 3 sets the daily step goal. Page 4 turns the evening reminder on or off. Notification permission is requested only when the user taps START with the reminder turned on.
+- Home: today's steps, the steps left to reach the goal, and the walking minutes needed. Tap or drag along the dashed line of the road to change the walking speed.
+- Tap the step number to enter today's steps by hand. Tap USE HEALTH to go back to Health data.
+- If Health returns no step data (no data on the device, or access not granted), Home shows "NO DATA FROM HEALTH" and an OPEN SETTINGS button. The app keeps working with manual entry.
+- Top bar: the red button on the left (chart icon) opens History and, from History, goes back to Home. The button on the right opens Settings.
+- Settings: daily goal, evening reminder, Streak & Jokers rules, units (Automatic / Kilometers / Miles), theme, and in About: Privacy, Support and Replay introduction.
+- Widgets: Home Screen (small and medium) and Lock Screen. Long-press the Home Screen, tap Edit > Add Widget, and choose NEAT.
+
+4. EXTERNAL SERVICES
+- Apple HealthKit, read-only: step count, walking + running distance, and walking/running workouts. Workouts are used only on the device, to adjust the estimate of walking minutes to the user's real pace. NEAT never writes to Health.
+- Local notifications for the optional evening reminder (scheduled on the device, no push server).
+- WidgetKit, with an App Group shared between the app and its widgets.
+No servers, network requests, analytics, ads, AI services, sign-in services or payment providers. No data leaves the device. The only links in the app (Privacy and Support in Settings) open our web pages in the browser.
+
+5. REGIONAL DIFFERENCES
+The app works the same in all regions. The only differences are the language (10 localizations, English as the fallback) and the distance unit: miles and mph by default when the iPhone uses US or UK units, kilometers elsewhere. Users can change the unit in Settings.
+
+6. REGULATED INDUSTRY / THIRD-PARTY MATERIAL
+Not applicable. NEAT is not a medical device and makes no diagnostic or treatment claims. It contains no protected third-party material. The fonts used are licensed under the SIL Open Font License.
+
+7. IN-APP PURCHASES
+None. NEAT is free, with no in-app purchases, subscriptions or ads.
+
+Best regards,
+William Della Vedova

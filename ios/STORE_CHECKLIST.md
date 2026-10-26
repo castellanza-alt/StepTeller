@@ -34,10 +34,10 @@ prima tra Will e la chat di coordinamento.
       `ios-nativa` (0.5.5–0.6.1, design «carta e matita») è salvata in `archivio/ios-nativa-0.6.1`.
 
 ### Riordino di Git (alla chiusura, dopo l'ok di Will sulla 1.0)
-- [ ] `ia/versione-0.6.2` unito in `main` (pubblica anche Pages: web app invariata, pagine `neat/` già online)
+- [x] `ia/versione-0.6.2` unito in `main` (26 ottobre, `af935a4`) (pubblica anche Pages: web app invariata, pagine `neat/` già online)
 - [ ] TestFlight solo da `main`; il ramo della 1.0 tolto dai workflow
 - [ ] Rami di lavoro già uniti cancellati (`ia/*`, `ios-nativa`); l'archivio diventa un tag `archivio/0.6.1`
-- [ ] Tag `v1.0` sulla versione inviata ad Apple
+- [x] Tag `v1.0` sulla versione inviata ad Apple (`8959a9b`, build 1.88.1)
 
 ## 0. Finetuning — fatto
 - [x] Modifiche della chat «finetuning» salvate: 0.6.3 (`0aa5c2e`), codice bloccato da qui
@@ -214,6 +214,6 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Rifiuto gestito: il 22 ottobre Apple ha chiesto informazioni (Guideline 2.1, account nuovo). Will ha risposto
       con un video dal telefono e il testo ora in `store/note_revisore.txt`, copiato anche nelle Note della scheda
 - [x] Approvata e pubblicata il 26 ottobre 2026 (build 1.88.1)
-- [ ] Tag `v1.0` e merge su `main` (su richiesta di Will, vedi «Riordino di Git»)
+- [x] Tag `v1.0` e merge su `main` (26 ottobre, ok di Will)
 - [ ] Per la 1.1: con la copia in iCloud, «No data leaves the device» non è più vero. Da aggiornare insieme note per
       il revisore, descrizione dello store, privacy policy e scheda privacy di App Store Connect

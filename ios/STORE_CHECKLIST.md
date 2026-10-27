@@ -219,10 +219,11 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Per la 1.1: con la copia in iCloud, «No data leaves the device» non è più vero. Testi approvati da Will il 26
       ottobre: note per il revisore, privacy e supporto (IT+EN) aggiornati; scheda privacy di App Store Connect invariata
       («Dati non raccolti»: lo sviluppatore non legge la copia in iCloud)
-- [ ] Per la 1.1: traduzioni di ChatGPT (`PROMPT_CHATGPT_1.1.md`) per Novità, promozionale e descrizione dello store,
-      testi del Backup; poi `python3 scripts/store_metadata.py`
+- [x] Per la 1.1: traduzioni di ChatGPT (`PROMPT_CHATGPT_1.1.md`) per Novità, scheda, screenshot 6, introduzione e
+      Backup, controllate e inserite il 27 ottobre; `store/metadata.json` rigenerato
 - [x] Per la 1.1: screenshot 6 da rifare (Will, 26 ottobre): «I TUOI DATI SONO SOLO TUOI / Nessuno li vede, nemmeno
       noi», stessa pagina Salute dell'introduzione con la frase nuova «I tuoi dati non lasciano mai il tuo account»
-- [ ] Per la 1.1: dopo ChatGPT, schermate `intro-2-day` in 10 lingue dal simulatore, zip e
-      `PROMPT_CLAUDE_DESIGN_06.md` per Claude Design; poi `scripts/store_screenshots.py` (solo le 06)
+- [x] Per la 1.1: schermate `intro-2-day` in 10 lingue dal simulatore e zip `NEAT_06_per_Claude_Design.zip`
+      (con `PROMPT.md`, non versionato), 27 ottobre
+- [ ] Per la 1.1: Claude Design rifà le 10 immagini 06; poi `scripts/store_screenshots.py` (solo le 06)
 - [ ] Per la 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud, da verificare sul telefono (privacy)

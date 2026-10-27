@@ -35,8 +35,8 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo
   conteggio letto oggi.
 - Introduzione, pagina Salute: «Non scrive niente e nessun dato esce dal telefono» diventa «I tuoi dati non lasciano
-  mai il tuo account», vero anche con la copia in iCloud. Nelle traduzioni ChatGPT ha scritto il nome ufficiale
-  dell'account Apple (Apple Account, cuenta de Apple, compte Apple…).
+  mai il tuo account Apple», vero anche con la copia in iCloud. In ogni lingua il nome ufficiale dell'account
+  Apple (Apple Account, cuenta de Apple, compte Apple…).
 - Tolto l'inserimento dei passi a mano (scelta di Will): il numero dei passi in Home non si tocca più, niente finestra
   «Passi di oggi» e niente bottone «USA SALUTE». I passi arrivano solo da Salute; senza dati restano 0 con l'avviso
   e il bottone per le Impostazioni. Tolta anche la correzione manuale dal core (`StepsState`, origine `.unavailable`

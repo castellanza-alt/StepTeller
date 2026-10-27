@@ -67,72 +67,6 @@
         }
       }
     },
-    "common.save" : {
-      "comment" : "Bottone della finestrella. Limite: ≤ 10.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sichern"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrer"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salva"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "저장"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvar"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "儲存"
-          }
-        }
-      }
-    },
     "goal.field.vo" : {
       "comment" : "Campo numerico dell'obiettivo.",
       "extractionState" : "manual",
@@ -723,204 +657,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "目標達成"
-          }
-        }
-      }
-    },
-    "home.edit.message" : {
-      "comment" : "Messaggio nella finestrella. «Usa Salute» è il nome del bottone home.useHealth (stessa traduzione, non maiuscola). Limite: ≤ 110.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Korrigiere heutige Schritte von Hand. Mit „Health nutzen“ kehrst du zu den Health-Daten zurück."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit today's steps by hand. Tap “Use Health” to return to Health data."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Corrige tus pasos de hoy a mano. Con «Usar Salud» vuelves a los datos de Salud."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Corrige tes pas du jour à la main. « Utiliser Santé » rétablit les données de Santé."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Correggi a mano i passi di oggi. Con «Usa Salute» torni ai dati di Salute."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の歩数を手入力で修正。「ヘルスケアを使う」でヘルスケアのデータに戻せるよ。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "오늘 걸음 수를 직접 수정해요. ‘건강 앱 사용’을 누르면 건강 앱의 데이터로 돌아가요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Corrija os passos de hoje à mão. “Usar Saúde” volta aos dados do Saúde."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手动修改今日步数。选择“使用健康”可恢复使用“健康”中的数据。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手動修改今日步數。選擇「使用健康」可恢復使用「健康」中的資料。"
-          }
-        }
-      }
-    },
-    "home.edit.placeholder" : {
-      "comment" : "Testo grigio dentro il campo numerico vuoto. Limite: ≤ 10.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schritte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Steps"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pasos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passi"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "歩数"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "걸음 수"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passos"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "步数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "步數"
-          }
-        }
-      }
-    },
-    "home.edit.title" : {
-      "comment" : "Titolo della finestrella per correggere a mano i passi di oggi. Limite: ≤ 24.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Heutige Schritte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today's steps"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pasos de hoy"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas du jour"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passi di oggi"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の歩数"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "오늘 걸음 수"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passos de hoje"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日步数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日步數"
           }
         }
       }
@@ -1915,72 +1651,6 @@
         }
       }
     },
-    "home.steps.hint.vo" : {
-      "comment" : "Suggerimento VoiceOver: cosa succede toccando il numero.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Doppeltippen, um die Schritte von Hand zu korrigieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to edit manually"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para corregirlos a mano"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touche deux fois pour corriger à la main"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tocca due volte per correggere a mano"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ダブルタップして手入力で修正"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "두 번 탭하여 직접 수정"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toque duas vezes para corrigir à mão"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "轻点两下以手动修改"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "點兩下以手動修改"
-          }
-        }
-      }
-    },
     "home.steps.label" : {
       "comment" : "In alto a sinistra, sopra il numero grande dei passi. MAIUSCOLO. Limite: ≤ 16.",
       "extractionState" : "manual",
@@ -2175,138 +1845,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今日步數：%1$@步，目標%2$@步"
-          }
-        }
-      }
-    },
-    "home.useHealth" : {
-      "comment" : "Bottone piccolo MAIUSCOLO, compare dopo una correzione a mano: torna ai passi di Salute. Limite: ≤ 14.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HEALTH NUTZEN"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USE HEALTH"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USAR SALUD"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "UTILISER SANTÉ"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USA SALUTE"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヘルスケアを使う"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "건강 앱 사용"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USAR SAÚDE"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用健康"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用健康"
-          }
-        }
-      }
-    },
-    "home.useHealth.vo" : {
-      "comment" : "Descrizione del bottone «USA SALUTE».",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zu den aus Health gelesenen Schritten zurückkehren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Return to steps read from Health"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volver a los pasos leídos de Salud"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Revenir aux pas lus dans Santé"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Torna ai passi letti da Salute"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヘルスケアから読み取った歩数に戻す"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "건강 앱에서 읽은 걸음 수로 돌아가기"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voltar aos passos lidos do Saúde"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "恢复使用从“健康”读取的步数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "恢復使用從「健康」讀取的步數"
           }
         }
       }
@@ -2582,61 +2120,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auch ohne Datenfreigabe funktioniert die App: Gib deine Schritte von Hand ein."
+            "value" : "Wenn du sie nicht teilst, kannst du das jederzeit in den Einstellungen ändern."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If you don't share your data, the app still works: enter your steps by hand."
+            "value" : "If you choose not to share, you can change your mind anytime in Settings."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si no compartes tus datos, la app sigue funcionando: introduce tus pasos a mano."
+            "value" : "Si no los compartes, puedes cambiar de idea cuando quieras en Ajustes."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sans partage de données, l’app fonctionne aussi : saisis tes pas à la main."
+            "value" : "Si tu ne les partages pas, tu peux changer d’avis à tout moment dans Réglages."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se scegli di non condividerli, l'app funziona lo stesso: inserisci i passi a mano."
+            "value" : "Se scegli di non condividerli, puoi cambiare idea quando vuoi da Impostazioni."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "データを共有しなくても大丈夫。歩数を手入力すれば使えるよ。"
+            "value" : "共有しない場合も、あとから設定でいつでも変更できるよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "데이터를 공유하지 않아도 괜찮아요. 걸음 수를 직접 입력하면 돼요."
+            "value" : "공유하지 않기로 해도 설정에서 언제든 바꿀 수 있어요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se não compartilhar os dados, o app funciona mesmo assim: insira os passos à mão."
+            "value" : "Se não compartilhar, você pode mudar de ideia quando quiser nos Ajustes."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不共享数据也能使用：手动输入步数就好。"
+            "value" : "如果选择不共享，之后随时可以在设置中更改。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不共享資料也能使用：手動輸入步數就好。"
+            "value" : "如果選擇不共享，之後隨時可以在設定中更改。"
           }
         }
       }
@@ -2714,25 +2252,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deine Daten verlassen nie deinen Account."
+            "value" : "Deine Daten verlassen nie deinen Apple Account."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your data never leaves your account."
+            "value" : "Your data never leaves your Apple Account."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tus datos nunca salen de tu cuenta."
+            "value" : "Tus datos nunca salen de tu cuenta de Apple."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tes données ne quittent jamais ton compte."
+            "value" : "Tes données ne quittent jamais ton compte Apple."
           }
         },
         "it" : {
@@ -2744,31 +2282,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "データがあなたのアカウントの外に出ることはないよ。"
+            "value" : "データがあなたのApple Accountの外に出ることはないよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "데이터는 내 계정 밖으로 나가지 않아요."
+            "value" : "데이터는 내 Apple 계정 밖으로 나가지 않아요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seus dados nunca saem da sua conta."
+            "value" : "Seus dados nunca saem da sua Conta Apple."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你的数据从不离开你的账户。"
+            "value" : "你的数据不会离开你的 Apple 账户。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你的資料絕不會離開你的帳號。"
+            "value" : "你的資料不會離開你的 Apple 帳號。"
           }
         }
       }
@@ -4374,7 +3912,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Importar la copia?"
+            "value" : "¿Importar la copia de seguridad?"
           }
         },
         "fr" : {
@@ -4440,7 +3978,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copia importada."
+            "value" : "Copia de seguridad importada."
           }
         },
         "fr" : {
@@ -4506,7 +4044,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Este archivo no es una copia de NEAT."
+            "value" : "Este archivo no es una copia de seguridad de NEAT."
           }
         },
         "fr" : {
@@ -4572,7 +4110,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esta copia es de una versión más reciente de NEAT. Actualiza la app y vuelve a intentarlo."
+            "value" : "Esta copia de seguridad se creó con una versión más reciente de NEAT. Actualiza la app y vuelve a intentarlo."
           }
         },
         "fr" : {
@@ -4590,7 +4128,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このバックアップは新しいバージョンのNEATで作成されています。アプリをアップデートしてもう一度お試しください。"
+            "value" : "このバックアップはより新しいバージョンのNEATで作成されています。アプリをアップデートしてもう一度お試しください。"
           }
         },
         "ko" : {
@@ -4638,7 +4176,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Exportar copia"
+            "value" : "Exportar copia de seguridad"
           }
         },
         "fr" : {
@@ -4704,7 +4242,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Importar copia"
+            "value" : "Importar copia de seguridad"
           }
         },
         "fr" : {
@@ -4764,13 +4302,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A file with your streak start, goal history and settings, to save wherever you like. Steps aren't included: they stay in Health. If you use iCloud, a copy is also saved there automatically."
+            "value" : "A file with your streak’s start date, goal history and settings, to save wherever you like. Steps aren't included: they stay in Health. If you use iCloud, a copy is also saved there automatically."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un archivo con el inicio de tu racha, el historial de objetivos y los ajustes, para guardarlo donde quieras. Los pasos no se incluyen: se quedan en Salud. Si usas iCloud, también se guarda una copia allí automáticamente."
+            "value" : "Un archivo con la fecha de inicio de tu racha, el historial de objetivos y los ajustes, para guardarlo donde quieras. Los pasos no se incluyen: se quedan en Salud. Si usas iCloud, también se guarda una copia allí automáticamente."
           }
         },
         "fr" : {
@@ -4794,7 +4332,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "연속 기록 시작일, 목표 기록, 설정이 담긴 파일로 원하는 곳에 저장할 수 있어요. 걸음 수는 포함되지 않고 건강 앱에 그대로 남아요. iCloud를 사용하면 iCloud에도 사본이 자동으로 저장돼요."
+            "value" : "연속 기록 시작일, 목표 이력, 설정이 담긴 파일로 원하는 곳에 저장할 수 있어요. 걸음 수는 포함되지 않고 건강 앱에 그대로 남아요. iCloud를 사용하면 iCloud에도 사본이 자동으로 저장돼요."
           }
         },
         "pt-BR" : {
@@ -4806,13 +4344,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "包含连续记录开始日期、目标历史和设置的文件，可保存到任意位置。步数不包含在内，仍保留在“健康”中。如果你使用 iCloud，副本也会自动保存在 iCloud 中。"
+            "value" : "包含连续记录开始日期、目标历史记录和设置的文件，可保存到任意位置。步数不包含在内，仍保留在“健康”中。如果你使用 iCloud，副本也会自动保存在 iCloud 中。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "包含連續紀錄開始日期、目標歷史和設定的檔案，可儲存到任何位置。步數不包含在內，仍保留在「健康」中。如果你使用 iCloud，副本也會自動儲存在 iCloud 中。"
+            "value" : "包含連續紀錄開始日期、目標歷史紀錄和設定的檔案，可儲存到任何位置。步數不包含在內，仍保留在「健康」中。如果你使用 iCloud，副本也會自動儲存在 iCloud 中。"
           }
         }
       }

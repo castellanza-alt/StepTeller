@@ -10,7 +10,7 @@ Claude prepara lo zip `NEAT_06_per_Claude_Design.zip` con, per ogni lingua:
 - `intro-2-day_<lingua>.png`: la schermata nuova dell'app;
 - `didascalie.txt`: titolo (con « / » dove va a capo), sottotitolo e le tre etichette, uguali al foglio.
 
-La tabella delle didascalie in fondo la compila Claude con i testi tornati da ChatGPT.
+La tabella delle didascalie in fondo è compilata con i testi tornati da ChatGPT il 27 ottobre 2026.
 
 ---
 
@@ -23,8 +23,8 @@ che è il **riferimento da rispettare** in tutto, tranne tre cose.
 1. **Titolo:** al posto di «I TUOI DATI RESTANO SUL TUO IPHONE» va **«I TUOI DATI SONO SOLO TUOI»** (traduzioni sotto).
 2. **Sottotitolo** (etichetta nera sotto il titolo): al posto di «Nessun dato lascia il telefono» va **«Nessuno li vede,
    nemmeno noi»** (traduzioni sotto).
-3. **Schermata nel telefono:** la pagina «Salute» dell'introduzione è cambiata. La frase sotto il paragrafo ora dice «I
-   tuoi dati non lasciano mai il tuo account.». Usa la schermata nuova allegata (`intro-2-day_<lingua>.png`) al posto di
+3. **Schermata nel telefono:** la pagina «Salute» dell'introduzione è cambiata: la frase sotto il paragrafo e la nota
+   piccola in grigio hanno testi nuovi. Usa la schermata nuova allegata (`intro-2-day_<lingua>.png`) al posto di
    quella dentro `06_attuale.jpg`.
 
 ## Cosa resta identico
@@ -49,12 +49,12 @@ che è il **riferimento da rispettare** in tutto, tranne tre cose.
 | Lingua | Titolo (« / » = a capo) | Sottotitolo |
 |---|---|---|
 | it | I TUOI DATI / SONO SOLO TUOI | Nessuno li vede, nemmeno noi |
-| en | *(da ChatGPT)* | *(da ChatGPT)* |
-| es | *(da ChatGPT)* | *(da ChatGPT)* |
-| fr | *(da ChatGPT)* | *(da ChatGPT)* |
-| de | *(da ChatGPT)* | *(da ChatGPT)* |
-| pt-BR | *(da ChatGPT)* | *(da ChatGPT)* |
-| ja | *(da ChatGPT)* | *(da ChatGPT)* |
-| ko | *(da ChatGPT)* | *(da ChatGPT)* |
-| zh-Hans | *(da ChatGPT)* | *(da ChatGPT)* |
-| zh-Hant | *(da ChatGPT)* | *(da ChatGPT)* |
+| en | YOUR DATA / IS YOURS ALONE | No one sees it, not even us |
+| es | TUS DATOS / SON SOLO TUYOS | Nadie los ve, ni siquiera nosotros |
+| fr | TES DONNÉES, / RIEN QU’À TOI | Personne ne les voit, nous inclus |
+| de | DEINE DATEN / GEHÖREN NUR DIR | Keiner sieht sie, auch wir nicht |
+| pt-BR | SEUS DADOS / SÃO SÓ SEUS | Ninguém vê, nem mesmo nós |
+| ja | あなたのデータは、 / あなただけのもの | 誰も見ません。私たち開発者も |
+| ko | 내 데이터는 / 나만의 것 | 아무도 보지 않아요. 저희도요 |
+| zh-Hans | 你的数据 / 只属于你 | 没人能看到，连我们也不能 |
+| zh-Hant | 你的資料 / 只屬於你 | 沒有人看得到，連我們也不行 |

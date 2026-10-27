@@ -17,8 +17,8 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   obiettivi, impostazioni, taratura; mai dati di Salute) da salvare in File, AirDrop, Mail…; «Importa backup» lo
   rilegge dopo una conferma con la data del backup. I valori del file sostituiscono quelli attuali, l'inizio della
   streak tiene il più vecchio. File non validi o di una versione più nuova vengono rifiutati con un avviso. Formato
-  e regole in `BackupFile` (core, con test). Testi nuovi in 10 lingue nel foglio: traduzioni bozza di Claude, da
-  confermare con ChatGPT.
+  e regole in `BackupFile` (core, con test). Testi nuovi in 10 lingue nel foglio, confermati da ChatGPT (27 ottobre;
+  in spagnolo «copia de seguridad» per esteso).
 - Promemoria serale aggiornato all'ultimo momento. Il testo della notifica lo scrive l'app in anticipo e iOS la
   sveglia in sottofondo al massimo una volta all'ora, mai a telefono bloccato: sabato 24 alle 20:30 diceva «mancano
   497» con 13.096 passi già fatti. Due rimedi che si sommano: (1) il widget, che iOS aggiorna molto più spesso e legge
@@ -35,11 +35,14 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo
   conteggio letto oggi.
 - Introduzione, pagina Salute: «Non scrive niente e nessun dato esce dal telefono» diventa «I tuoi dati non lasciano
-  mai il tuo account», vero anche con la copia in iCloud. Traduzioni bozza di Claude, da confermare con ChatGPT.
+  mai il tuo account», vero anche con la copia in iCloud. Nelle traduzioni ChatGPT ha scritto il nome ufficiale
+  dell'account Apple (Apple Account, cuenta de Apple, compte Apple…).
 - Tolto l'inserimento dei passi a mano (scelta di Will): il numero dei passi in Home non si tocca più, niente finestra
   «Passi di oggi» e niente bottone «USA SALUTE». I passi arrivano solo da Salute; senza dati restano 0 con l'avviso
   e il bottone per le Impostazioni. Tolta anche la correzione manuale dal core (`StepsState`, origine `.unavailable`
-  al posto di `.manual`). Testi da togliere dal foglio e nota dell'introduzione da riscrivere al ritorno da ChatGPT.
+  al posto di `.manual`). Tolti dal foglio i 7 testi della finestra e del bottone. Nella pagina Salute
+  dell'introduzione la nota «…l'app funziona lo stesso: inserisci i passi a mano» diventa «Se scegli di non
+  condividerli, puoi cambiare idea quando vuoi da Impostazioni» (approvata da Will, tradotta da ChatGPT).
 
 ## 1.0 — pubblicata il 26 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,

@@ -13,12 +13,11 @@ public struct StepsController: Sendable {
         self.calendar = calendar
     }
 
-    /// Step 1 (synchronous): Health availability and expiry of the manual override.
+    /// Step 1 (synchronous): Health availability.
     /// Returns `false` if there is nothing to read (no Health).
     @discardableResult
     public func begin(_ state: inout StepsState, now: Date) -> Bool {
         state.setHealthAvailable(provider.isAvailable)
-        state.rollDay(now: now, calendar: calendar)
         return provider.isAvailable
     }
 

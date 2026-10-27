@@ -130,7 +130,6 @@ final class StepsStore {
     var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
     var showsNoDataWarning: Bool { state.showsNoDataWarning }
-    var hasOverride: Bool { state.override != nil }
     var lastUpdate: Date? { state.lastUpdate }
 
     // MARK: lifecycle
@@ -282,18 +281,6 @@ final class StepsStore {
             if let data = try? JSONEncoder().encode(saved) { defaults.set(data, forKey: Keys.calibration) }
         }
         deferSync(reloadWidget: true)
-    }
-
-    // MARK: manual steps
-
-    func setManualSteps(_ value: Int) {
-        state.setManual(value, at: Date(), calendar: controller.calendar)
-        Task { await updateReminders() }
-    }
-
-    func useHealth() async {
-        state.useHealth()
-        await refresh()
     }
 
     // MARK: automatic calibration

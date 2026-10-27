@@ -3,7 +3,7 @@ Hello,
 Thank you for reviewing NEAT - Every Step Counts. Below is the information you requested.
 
 1. SCREEN RECORDING
-Attached. It starts by launching the app from the Home Screen and shows: the Home screen, changing the walking speed, entering steps by hand, the History screen, Settings, the 4-page introduction (Welcome, Health, daily goal, evening reminder; opened from Settings > Replay introduction) and the widgets. The app was already set up on this iPhone, so the system permission prompts do not appear again. On a new install they appear during the introduction (see point 3).
+Attached. It starts by launching the app from the Home Screen and shows: the Home screen, changing the walking speed, the History screen, Settings, the 4-page introduction (Welcome, Health, daily goal, evening reminder; opened from Settings > Replay introduction) and the widgets. The app was already set up on this iPhone, so the system permission prompts do not appear again. On a new install they appear during the introduction (see point 3).
 NEAT has no account, login, user-generated content or paid content.
 
 2. PURPOSE AND TARGET AUDIENCE
@@ -13,8 +13,7 @@ NEAT is a simple daily step-goal app for anyone who wants to walk more, outdoors
 - No login, account or demo credentials are needed.
 - First launch: a 4-page introduction. Page 2 asks for read-only access to Apple Health (no data is written). Page 3 sets the daily step goal. Page 4 turns the evening reminder on or off. Notification permission is requested only when the user taps START with the reminder turned on.
 - Home: today's steps, the steps left to reach the goal, and the walking minutes needed. Tap or drag along the dashed line of the road to change the walking speed.
-- Tap the step number to enter today's steps by hand. Tap USE HEALTH to go back to Health data.
-- If Health returns no step data (no data on the device, or access not granted), Home shows "NO DATA FROM HEALTH" and an OPEN SETTINGS button. The app keeps working with manual entry.
+- If Health returns no step data (no data on the device, or access not granted), Home shows 0 steps, "NO DATA FROM HEALTH" and an OPEN SETTINGS button. Steps come only from Health; goal, walking minutes, speed, History, Settings and widgets keep working.
 - Top bar: the red button on the left (chart icon) opens History and, from History, goes back to Home. The button on the right opens Settings.
 - Settings: daily goal, evening reminder, Streak & Jokers rules, units (Automatic / Kilometers / Miles), theme, Backup (Export backup / Import backup: a JSON file the user saves and opens through the system share sheet and file picker), and in About: Privacy, Support and Replay introduction.
 - Widgets: Home Screen (small and medium) and Lock Screen. Long-press the Home Screen, tap Edit > Add Widget, and choose NEAT.

@@ -36,6 +36,10 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   conteggio letto oggi.
 - Introduzione, pagina Salute: «Non scrive niente e nessun dato esce dal telefono» diventa «I tuoi dati non lasciano
   mai il tuo account», vero anche con la copia in iCloud. Traduzioni bozza di Claude, da confermare con ChatGPT.
+- Tolto l'inserimento dei passi a mano (scelta di Will): il numero dei passi in Home non si tocca più, niente finestra
+  «Passi di oggi» e niente bottone «USA SALUTE». I passi arrivano solo da Salute; senza dati restano 0 con l'avviso
+  e il bottone per le Impostazioni. Tolta anche la correzione manuale dal core (`StepsState`, origine `.unavailable`
+  al posto di `.manual`). Testi da togliere dal foglio e nota dell'introduzione da riscrivere al ritorno da ChatGPT.
 
 ## 1.0 — pubblicata il 26 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,

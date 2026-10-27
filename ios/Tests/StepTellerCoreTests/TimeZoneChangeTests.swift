@@ -21,21 +21,18 @@ final class TimeZoneChangeTests: XCTestCase {
         return cal
     }
 
-    func testManualOverrideExpiresAndTodayFollowsTheNewTimeZone() async {
+    func testTodayFollowsTheNewTimeZone() async {
         let rome = calendar("Europe/Rome"), tokyo = calendar("Asia/Tokyo")
         // 20 October 2026, 23:30 in Rome = 21 October, 06:30 in Tokyo
         let instant = rome.date(from: DateComponents(year: 2026, month: 10, day: 20, hour: 23, minute: 30))!
         let provider = RecordingProvider(); provider.value = 500
         var controller = StepsController(provider: provider, calendar: rome)
         var state = StepsState()
-        state.setManual(9_000, at: instant, calendar: rome)
         await controller.refresh(&state, now: instant)
-        XCTAssertEqual(state.steps, 9_000, "a Roma è ancora il 20: la correzione manuale vale")
-        XCTAssertEqual(provider.lastRange?.from, rome.startOfDay(for: instant))
+        XCTAssertEqual(provider.lastRange?.from, rome.startOfDay(for: instant), "a Roma è ancora il 20")
 
         controller.calendar = tokyo                       // the phone changes zone: in Tokyo it is already the 21st
         await controller.refresh(&state, now: instant)
-        XCTAssertNil(state.override, "la correzione del 20 scade: è un altro giorno")
         XCTAssertEqual(state.steps, 500)
         XCTAssertEqual(provider.lastRange?.from, tokyo.startOfDay(for: instant))
         XCTAssertEqual(tokyo.component(.day, from: provider.lastRange!.from), 21)

@@ -10,8 +10,6 @@ struct HomeView: View {
     @Environment(\.manga) private var c
     @State private var minutesWidth: CGFloat = 96
     @State private var doneWidth: CGFloat = 130
-    @State private var editing = false
-    @State private var editText = ""
     @State private var motion = ParallaxMotion()
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -62,13 +60,6 @@ struct HomeView: View {
         .onDisappear { motion.stop() }
         .onChange(of: scenePhase) { _, _ in updateMotion() }
         .onChange(of: reduceMotion) { _, _ in updateMotion() }
-        .alert(L10n.text("home.edit.title"), isPresented: $editing) {
-            TextField(L10n.text("home.edit.placeholder"), text: $editText).keyboardType(.numberPad)
-            Button(L10n.text("common.save")) { store.setManualSteps(LocalFormat.digits(editText)) }
-            Button(L10n.text("common.cancel"), role: .cancel) {}
-        } message: {
-            Text(L10n.text("home.edit.message"))
-        }
     }
 
     /// Parallax only with the app in the foreground and without «Reduce Motion».
@@ -79,7 +70,7 @@ struct HomeView: View {
     // MARK: today's steps
 
     /// «PASSI DI OGGI» / number / «SU 10.000»: centered column, rotated −15° and skewed −10° from the
-    /// top-left corner. A tap on the number opens the manual correction.
+    /// top-left corner.
     private var stepsBlock: some View {
         VStack(spacing: 0) {
             AntonText(L10n.text("home.steps.label"), 27, tracking: 0.01)
@@ -91,28 +82,13 @@ struct HomeView: View {
             AntonText(L10n.format("home.steps.of", LocalFormat.integer(store.goal)), 19, tracking: 0.02)
                 .padding(.top, TitleFont.gap(19))
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            editText = store.steps > 0 ? String(store.steps) : ""
-            editing = true
-        }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(L10n.format("home.steps.vo", LocalFormat.integer(store.steps), LocalFormat.integer(store.goal)))
-        .accessibilityHint(L10n.text("home.steps.hint.vo"))
-        .accessibilityAddTraits(.isButton)
     }
 
-    /// Manual correction active («USA SALUTE») and warning when Health gives no data.
+    /// Warning when Health gives no data.
     @ViewBuilder private var notices: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if store.hasOverride {
-                Button { Task { await store.useHealth() } } label: {
-                    TagText(text: L10n.text("home.useHealth"), size: 15, tracking: 0.06, foreground: c.paper, background: c.red,
-                            padding: EdgeInsets(top: 5, leading: 9, bottom: 5, trailing: 9))
-                }
-                .buttonStyle(PressScale())
-                .accessibilityHint(L10n.text("home.useHealth.vo"))
-            }
             if store.showsNoDataWarning {
                 VStack(alignment: .leading, spacing: 6) {
                     TagText(text: L10n.text("home.noData.title"), size: 14, tracking: 0.06, foreground: c.paper, background: c.ink)

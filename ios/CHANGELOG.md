@@ -6,7 +6,7 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
-## 1.1 — in lavorazione
+## 1.1 — su TestFlight, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e
   orario), taratura e tema giorno/notte si salvano anche nell'iCloud dell'utente (archivio chiave-valore di Apple,
   `CloudBackup`). Disinstallando e reinstallando, o su un iPhone nuovo con lo stesso account, tornano da soli e la

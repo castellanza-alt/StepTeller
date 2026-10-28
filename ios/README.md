@@ -103,7 +103,8 @@ screenshot e controllo delle lunghezze.
 
 Solo lettura di `stepCount`, `HKStatisticsQuery` `.cumulativeSum` da mezzanotte (deduplica iPhone/Watch),
 `HKObserverQuery` in primo piano. Se non arrivano dati (vuoto, negato o errore: iOS non li distingue) l'app mostra
-0 passi, fonte «manuale» e l'avviso con il pulsante per le Impostazioni. I passi non vengono mai salvati.
+0 passi e l'avviso con il pulsante per le Impostazioni. I passi non si inseriscono a mano (tolto nella 1.1) e non
+vengono mai salvati.
 Il fornitore finto (`DebugStepsProvider`) esiste **solo in Debug** per gli screenshot.
 
 Privacy manifest: `App/PrivacyInfo.xcprivacy` e `LiveActivity/PrivacyInfo.xcprivacy` (inclusi da `project.yml`).
@@ -163,4 +164,8 @@ chiavi, profili o certificati nel codice.
 ## Distribuzione
 
 Commit con `[testflight]` sul ramo → build su TestFlight → Will aggiorna dall'app TestFlight. La versione di marketing è in
-`project.yml` (`MARKETING_VERSION`).
+`project.yml` (`MARKETING_VERSION`) e coincide con la prima sezione di `CHANGELOG.md`.
+
+Versioni, registro e Novità dello store seguono `RILASCIO.md`: numeri `MAGGIORE.MINORE.CORREZIONE`, una riga nel
+registro per ogni PR che tocca il codice (la CI la pretende, `scripts/registro.py`), Novità in 10 lingue dal foglio
+`localizzazione/NEAT_novita.xlsx`.

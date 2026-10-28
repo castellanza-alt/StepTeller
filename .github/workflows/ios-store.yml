@@ -1,8 +1,9 @@
 # Scheda App Store via API (ios/scripts/asc.py, comandi store-*; dettagli in ios/store/README.md).
 # Si avvia con un push su `main` la cui PRIMA RIGA del messaggio di commit contiene:
 #   [store-prova]  legge App Store Connect e mostra cosa cambierebbe, per lingua (nessuna scrittura)
-#   [store]        applica testi, screenshot, categorie, età, prezzo, paesi e note, poi rilegge tutto
-#   [store-invio]  collega la build 1.0 e invia in revisione: SOLO dopo l'ok esplicito di Will
+#   [store]        applica testi (anche le «Novità» della versione), screenshot, categorie, età, prezzo, paesi e note, poi rilegge tutto
+#   [store-invio]  collega la build della versione di project.yml e invia in revisione: SOLO dopo l'ok esplicito di Will.
+#                  Si rifiuta senza le «Novità» tradotte o se ios/CHANGELOG.md dice ancora «in lavorazione» (ios/RILASCIO.md).
 # Il riepilogo è nella pagina dell'esecuzione (Summary). Nessun segreto viene stampato.
 name: iOS App Store
 on:

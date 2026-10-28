@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import UIKit
 import WidgetKit
 import StepTellerCore
 
@@ -34,8 +35,20 @@ final class StepsStore {
         }
     }
     /// Evening reminder on (default yes) and time in minutes from midnight (default 20:30).
-    var reminderEnabled: Bool { didSet { defaults.set(reminderEnabled, forKey: Keys.reminderOn); Task { await reminderSettingsChanged() } } }
-    var reminderMinutes: Int { didSet { defaults.set(reminderMinutes, forKey: Keys.reminderTime); deferSync(reloadWidget: false) } }
+    var reminderEnabled: Bool {
+        didSet {
+            defaults.set(reminderEnabled, forKey: Keys.reminderOn)
+            SharedStore.reminderOn = reminderEnabled
+            Task { await reminderSettingsChanged() }
+        }
+    }
+    var reminderMinutes: Int {
+        didSet {
+            defaults.set(reminderMinutes, forKey: Keys.reminderTime)
+            SharedStore.reminderMinutes = reminderMinutes
+            deferSync(reloadWidget: false)
+        }
+    }
     private(set) var state = StepsState()
     /// History, streak and Jollies.
     let history: HistoryStore
@@ -103,6 +116,8 @@ final class StepsStore {
         SharedStore.speed = speed
         SharedStore.unitPreference = unitPreference
         SharedStore.calibration = calibration
+        SharedStore.reminderOn = reminderEnabled      // the widget refreshes tonight's reminder (WidgetReminder)
+        SharedStore.reminderMinutes = reminderMinutes
     }
 
     // MARK: derived
@@ -115,7 +130,6 @@ final class StepsStore {
     var plan: Plan { Plan(goal: goal, steps: steps, speed: speed, model: model) }
     var origin: StepsOrigin { state.origin }
     var showsNoDataWarning: Bool { state.showsNoDataWarning }
-    var hasOverride: Bool { state.override != nil }
     var lastUpdate: Date? { state.lastUpdate }
 
     // MARK: lifecycle
@@ -202,6 +216,9 @@ final class StepsStore {
         state = s
         guard canRead else { return }
         let value = await controller.read(now: now)
+        // Phone locked (background delivery): Health is encrypted and the read fails. That is not «0 steps»:
+        // nothing changes, otherwise tonight's reminder would come back with the whole goal still to walk.
+        if value == nil, !UIApplication.shared.isProtectedDataAvailable { return }
         state.applyHealth(value, at: Date())
         if let value {
             // copy for the widget with the phone locked; the widget reloads only if the number changed
@@ -215,16 +232,55 @@ final class StepsStore {
         await updateReminders()
     }
 
-    // MARK: manual steps
-
-    func setManualSteps(_ value: Int) {
-        state.setManual(value, at: Date(), calendar: controller.calendar)
-        Task { await updateReminders() }
+    /// Settings brought back from iCloud after a reinstall (see `CloudBackup`): history first, so the goal
+    /// set afterwards matches its last entry and adds nothing.
+    func reloadSaved() {
+        history.reloadSaved()
+        if defaults.object(forKey: Keys.goal) != nil { goal = max(0, defaults.integer(forKey: Keys.goal)) }
+        if let raw = defaults.string(forKey: Keys.units), let units = UnitPreference(rawValue: raw) { unitPreference = units }
+        if defaults.object(forKey: Keys.speed) != nil { speed = unit.snapKmh(defaults.double(forKey: Keys.speed)) }
+        if defaults.object(forKey: Keys.reminderOn) != nil { reminderEnabled = defaults.bool(forKey: Keys.reminderOn) }
+        if defaults.object(forKey: Keys.reminderTime) != nil { reminderMinutes = defaults.integer(forKey: Keys.reminderTime) }
+        if let saved = defaults.data(forKey: Keys.calibration).flatMap({ try? JSONDecoder().decode(CalibrationResult.self, from: $0) }) {
+            calibration = saved
+            SharedStore.calibration = saved
+        }
+        deferSync(reloadWidget: true)
     }
 
-    func useHealth() async {
-        state.useHealth()
-        await refresh()
+    // MARK: manual backup
+
+    /// Settings → Backup → Export: everything the app keeps besides Health.
+    func makeBackup(now: Date = Date()) -> BackupFile {
+        var file = BackupFile(exportedAt: now)
+        file.goal = goal
+        file.speed = speed
+        file.units = unitPreference.rawValue
+        file.reminderOn = reminderEnabled
+        file.reminderMinutes = reminderMinutes
+        file.theme = defaults.string(forKey: ThemeMode.storageKey)
+        file.streakStart = history.streakStart
+        file.goalHistory = history.goals
+        if calibration != .empty { file.calibration = calibration }
+        return file
+    }
+
+    /// Settings → Backup → Import: values in the file replace these, missing ones stay. History first, so the
+    /// goal set afterwards matches its last entry and adds nothing.
+    func importBackup(_ file: BackupFile) {
+        history.importBackup(goals: file.goalHistory, streakStart: file.streakStart)
+        if let value = file.goal { goal = max(0, value) }
+        if let raw = file.units, let units = UnitPreference(rawValue: raw) { unitPreference = units }
+        if let value = file.speed { speed = unit.snapKmh(value) }
+        if let value = file.reminderOn { reminderEnabled = value }
+        if let value = file.reminderMinutes, (0..<24 * 60).contains(value) { reminderMinutes = value }
+        if let raw = file.theme, ThemeMode(rawValue: raw) != nil { defaults.set(raw, forKey: ThemeMode.storageKey) }
+        if let saved = file.calibration {
+            calibration = saved
+            SharedStore.calibration = saved
+            if let data = try? JSONEncoder().encode(saved) { defaults.set(data, forKey: Keys.calibration) }
+        }
+        deferSync(reloadWidget: true)
     }
 
     // MARK: automatic calibration
@@ -270,10 +326,20 @@ final class StepsStore {
     /// interleave and the last plan computed is also the last one written.
     func updateReminders() async {
         let enabled = reminderEnabled
+        // Steps from Health only grow during the day: the reminder never uses fewer than the last count read
+        // today, so a failed read cannot bring back a reminder already cancelled because the goal was reached.
+        var reminderPlan = plan
+        if origin == .health, let cached = SharedStore.cachedStepsToday(now: Date(), calendar: controller.calendar),
+           cached > steps {
+            reminderPlan = Plan(goal: goal, steps: cached, speed: speed, model: model)
+        }
         let requests = enabled
             ? ReminderPlanner.schedule(now: Date(), minutesFromMidnight: reminderMinutes,
-                                       plan: plan, streak: history.streak, calendar: controller.calendar)
+                                       plan: reminderPlan, streak: history.streak, calendar: controller.calendar)
             : []
+        // tonight's streak warning for the widget, which rewrites the numbers but not this
+        SharedStore.reminderWarning = ReminderPlanner.warning(for: history.streak)
+        scheduleReminderRefresh()
         let previous = reminderQueue
         let scheduler = scheduler
         let unit = unit
@@ -283,6 +349,17 @@ final class StepsStore {
         }
         reminderQueue = task
         await task.value
+    }
+
+    /// Background wake-up before the next reminder (see `ReminderRefreshTask`); none if the reminder is off.
+    func scheduleReminderRefresh() {
+        #if DEBUG
+        if defaults.object(forKey: "stepteller.debugSteps") != nil { return }
+        #endif
+        let fire = reminderEnabled
+            ? ReminderPlanner.nextFire(now: Date(), minutesFromMidnight: reminderMinutes, calendar: controller.calendar)
+            : nil
+        ReminderRefreshTask.schedule(before: fire)
     }
 
     // MARK: day change

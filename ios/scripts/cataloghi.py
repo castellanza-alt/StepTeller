@@ -4,7 +4,7 @@
 Source: localizzazione/NEAT_testi_tradotti.xlsx, sheet «Testi» (one row per text, stable ID, one column
 per language). Output (never edit by hand: regenerated):
   App/Localizable.xcstrings       app texts
-  Shared/Widget.xcstrings         widget texts (table «Widget», in the app and in the extension)
+  Shared/Widget.xcstrings         widget and notification texts (table «Widget», in the app and in the extension)
   App/InfoPlist.xcstrings         Health permissions of the app
   LiveActivity/InfoPlist.xcstrings  Health permission of the widget
 
@@ -58,6 +58,7 @@ PARAMS = {
     "st.longest.vo": ["n"],
     "st.nextJolly.vo": ["n", "fatti", "tot"],
     "st.jolly.vo": ["n"],
+    "set.backup.confirm.body": ["data"],
     "st.big.vo": ["valore", "etichetta"],
     "st.second.vo.avgSteps": ["valore"],
     "st.second.vo.avgKm": ["valore"],
@@ -194,7 +195,9 @@ def build():
     used = set()                    # rows already placed (plurals and permissions)
 
     def target(key):
-        return widget if key.startswith("w.") else app
+        # «w.» widget texts and «n.» notification texts: table «Widget», in the app and in the extension
+        # (the widget refreshes tonight's notification with the fresh count, see WidgetReminder)
+        return widget if key.startswith(("w.", "n.")) else app
 
     # plurals
     for key in sorted({k.rsplit(".", 1)[0] for k in rows if k.endswith((".one", ".other"))}):

@@ -5,6 +5,8 @@
 # oppure a mano (workflow_dispatch, disponibile dopo il merge su main).
 # I segreti sono usati solo qui; mai su pull request. Il repository è pubblico: nessun
 # segreto, profilo o chiave deve entrare nel codice.
+# Prima di tutto si controlla il registro (ios/CHANGELOG.md, regole in ios/RILASCIO.md): la versione in cima deve essere
+# quella di project.yml e stare «in lavorazione» o «su TestFlight»; una versione inviata o pubblicata non si ricostruisce.
 name: iOS TestFlight
 on:
   push:
@@ -23,6 +25,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Registro delle versioni (ios/RILASCIO.md)
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[testflight]')
+        run: python3 ios/scripts/registro.py --testflight
       - run: python3 -m pip install --quiet cryptography
       - name: Chiave, Bundle ID, HealthKit, record app
         env:

@@ -3,6 +3,9 @@
 Documento di coordinamento. Lo aggiorna solo la chat di coordinamento, dopo aver controllato il lavoro di ogni
 chat dedicata; le chat dedicate non lo modificano.
 
+Questa checklist vale per la 1.0. Dalla versione successiva si segue `RILASCIO.md` (regola dei numeri, registro
+`CHANGELOG.md` con stati, Novità dello store in 10 lingue), definito il 22 ottobre 2026.
+
 **Regola:** dalla 0.6.3 il comportamento e l'aspetto dell'app sono bloccati. Ogni modifica visibile va concordata
 prima tra Will e la chat di coordinamento.
 
@@ -31,10 +34,11 @@ prima tra Will e la chat di coordinamento.
       `ios-nativa` (0.5.5–0.6.1, design «carta e matita») è salvata in `archivio/ios-nativa-0.6.1`.
 
 ### Riordino di Git (alla chiusura, dopo l'ok di Will sulla 1.0)
-- [ ] `ia/versione-0.6.2` unito in `main` (pubblica anche Pages: web app invariata, pagine `neat/` già online)
-- [ ] TestFlight solo da `main`; il ramo della 1.0 tolto dai workflow
-- [ ] Rami di lavoro già uniti cancellati (`ia/*`, `ios-nativa`); l'archivio diventa un tag `archivio/0.6.1`
-- [ ] Tag `v1.0` sulla versione inviata ad Apple
+- [x] `ia/versione-0.6.2` unito in `main` (26 ottobre, `af935a4`) (pubblica anche Pages: web app invariata, pagine `neat/` già online)
+- [x] TestFlight solo da `main`; il ramo della 1.0 tolto dai workflow (26 ottobre, su `main` e sulla 1.1)
+- [x] Rami di lavoro già uniti cancellati (`ia/*`, `ios-nativa`); l'archivio diventa un tag `archivio/0.6.1` (26 ottobre;
+      restano `main`, `ia/1.0.1-promemoria` (1.1), `ia/1.2-watch` (1.2) e `ia/rilascio` (PR #26 aperta))
+- [x] Tag `v1.0` sulla versione inviata ad Apple (`8959a9b`, build 1.88.1)
 
 ## 0. Finetuning — fatto
 - [x] Modifiche della chat «finetuning» salvate: 0.6.3 (`0aa5c2e`), codice bloccato da qui
@@ -208,5 +212,19 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
 - [x] Build 1.0 su TestFlight (build 1.88.1, gruppo «Personale»)
 - [x] Prova finale di Will e passi a mano (privacy, DSA, accordi, età, rilascio manuale)
 - [x] Invio in revisione: build 1.88.1 collegata e inviata da Will dal sito (21 ottobre 2026), rilascio manuale
-- [ ] Eventuale rifiuto gestito
-- [ ] Merge su `main` (su richiesta di Will)
+- [x] Rifiuto gestito: il 22 ottobre Apple ha chiesto informazioni (Guideline 2.1, account nuovo). Will ha risposto
+      con un video dal telefono e il testo ora in `store/note_revisore.txt`, copiato anche nelle Note della scheda
+- [x] Approvata e pubblicata il 26 ottobre 2026 (build 1.88.1)
+- [x] Tag `v1.0` e merge su `main` (26 ottobre, ok di Will)
+- [x] Per la 1.1: con la copia in iCloud, «No data leaves the device» non è più vero. Testi approvati da Will il 26
+      ottobre: note per il revisore, privacy e supporto (IT+EN) aggiornati; scheda privacy di App Store Connect invariata
+      («Dati non raccolti»: lo sviluppatore non legge la copia in iCloud)
+- [x] Per la 1.1: traduzioni di ChatGPT (`PROMPT_CHATGPT_1.1.md`) per Novità, scheda, screenshot 6, introduzione e
+      Backup, controllate e inserite il 27 ottobre; `store/metadata.json` rigenerato
+- [x] Per la 1.1: screenshot 6 da rifare (Will, 26 ottobre): «I TUOI DATI SONO SOLO TUOI / Nessuno li vede, nemmeno
+      noi», stessa pagina Salute dell'introduzione con la frase nuova «I tuoi dati non lasciano mai il tuo account»
+- [x] Per la 1.1: schermate `intro-2-day` in 10 lingue dal simulatore e zip `NEAT_06_per_Claude_Design.zip`
+      (con `PROMPT.md`, non versionato), 27 ottobre
+- [x] Per la 1.1: Claude Design ha rifatto le 10 immagini 06 (28 ottobre, PNG in `localizzazione/design/claude-design-1.1/`,
+      non versionati), controllate tutte; convertite in `store/screenshots/<lingua>/06.jpg` (le altre 5 invariate)
+- [ ] Per la 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud, da verificare sul telefono (privacy)

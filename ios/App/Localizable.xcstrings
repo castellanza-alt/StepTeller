@@ -67,72 +67,6 @@
         }
       }
     },
-    "common.save" : {
-      "comment" : "Bottone della finestrella. Limite: ≤ 10.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sichern"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrer"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salva"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "저장"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvar"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "儲存"
-          }
-        }
-      }
-    },
     "goal.field.vo" : {
       "comment" : "Campo numerico dell'obiettivo.",
       "extractionState" : "manual",
@@ -723,204 +657,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "目標達成"
-          }
-        }
-      }
-    },
-    "home.edit.message" : {
-      "comment" : "Messaggio nella finestrella. «Usa Salute» è il nome del bottone home.useHealth (stessa traduzione, non maiuscola). Limite: ≤ 110.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Korrigiere heutige Schritte von Hand. Mit „Health nutzen“ kehrst du zu den Health-Daten zurück."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit today's steps by hand. Tap “Use Health” to return to Health data."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Corrige tus pasos de hoy a mano. Con «Usar Salud» vuelves a los datos de Salud."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Corrige tes pas du jour à la main. « Utiliser Santé » rétablit les données de Santé."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Correggi a mano i passi di oggi. Con «Usa Salute» torni ai dati di Salute."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の歩数を手入力で修正。「ヘルスケアを使う」でヘルスケアのデータに戻せるよ。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "오늘 걸음 수를 직접 수정해요. ‘건강 앱 사용’을 누르면 건강 앱의 데이터로 돌아가요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Corrija os passos de hoje à mão. “Usar Saúde” volta aos dados do Saúde."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手动修改今日步数。选择“使用健康”可恢复使用“健康”中的数据。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手動修改今日步數。選擇「使用健康」可恢復使用「健康」中的資料。"
-          }
-        }
-      }
-    },
-    "home.edit.placeholder" : {
-      "comment" : "Testo grigio dentro il campo numerico vuoto. Limite: ≤ 10.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schritte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Steps"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pasos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passi"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "歩数"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "걸음 수"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passos"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "步数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "步數"
-          }
-        }
-      }
-    },
-    "home.edit.title" : {
-      "comment" : "Titolo della finestrella per correggere a mano i passi di oggi. Limite: ≤ 24.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Heutige Schritte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today's steps"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pasos de hoy"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas du jour"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passi di oggi"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の歩数"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "오늘 걸음 수"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passos de hoje"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日步数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日步數"
           }
         }
       }
@@ -1915,72 +1651,6 @@
         }
       }
     },
-    "home.steps.hint.vo" : {
-      "comment" : "Suggerimento VoiceOver: cosa succede toccando il numero.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Doppeltippen, um die Schritte von Hand zu korrigieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to edit manually"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para corregirlos a mano"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touche deux fois pour corriger à la main"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tocca due volte per correggere a mano"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ダブルタップして手入力で修正"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "두 번 탭하여 직접 수정"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toque duas vezes para corrigir à mão"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "轻点两下以手动修改"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "點兩下以手動修改"
-          }
-        }
-      }
-    },
     "home.steps.label" : {
       "comment" : "In alto a sinistra, sopra il numero grande dei passi. MAIUSCOLO. Limite: ≤ 16.",
       "extractionState" : "manual",
@@ -2175,138 +1845,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今日步數：%1$@步，目標%2$@步"
-          }
-        }
-      }
-    },
-    "home.useHealth" : {
-      "comment" : "Bottone piccolo MAIUSCOLO, compare dopo una correzione a mano: torna ai passi di Salute. Limite: ≤ 14.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HEALTH NUTZEN"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USE HEALTH"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USAR SALUD"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "UTILISER SANTÉ"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USA SALUTE"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヘルスケアを使う"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "건강 앱 사용"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "USAR SAÚDE"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用健康"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用健康"
-          }
-        }
-      }
-    },
-    "home.useHealth.vo" : {
-      "comment" : "Descrizione del bottone «USA SALUTE».",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zu den aus Health gelesenen Schritten zurückkehren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Return to steps read from Health"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volver a los pasos leídos de Salud"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Revenir aux pas lus dans Santé"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Torna ai passi letti da Salute"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヘルスケアから読み取った歩数に戻す"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "건강 앱에서 읽은 걸음 수로 돌아가기"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voltar aos passos lidos do Saúde"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "恢复使用从“健康”读取的步数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "恢復使用從「健康」讀取的步數"
           }
         }
       }
@@ -2582,61 +2120,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auch ohne Datenfreigabe funktioniert die App: Gib deine Schritte von Hand ein."
+            "value" : "Wenn du sie nicht teilst, kannst du das jederzeit in den Einstellungen ändern."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If you don't share your data, the app still works: enter your steps by hand."
+            "value" : "If you choose not to share, you can change your mind anytime in Settings."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si no compartes tus datos, la app sigue funcionando: introduce tus pasos a mano."
+            "value" : "Si no los compartes, puedes cambiar de idea cuando quieras en Ajustes."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sans partage de données, l’app fonctionne aussi : saisis tes pas à la main."
+            "value" : "Si tu ne les partages pas, tu peux changer d’avis à tout moment dans Réglages."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se scegli di non condividerli, l'app funziona lo stesso: inserisci i passi a mano."
+            "value" : "Se scegli di non condividerli, puoi cambiare idea quando vuoi da Impostazioni."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "データを共有しなくても大丈夫。歩数を手入力すれば使えるよ。"
+            "value" : "共有しない場合も、あとから設定でいつでも変更できるよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "데이터를 공유하지 않아도 괜찮아요. 걸음 수를 직접 입력하면 돼요."
+            "value" : "공유하지 않기로 해도 설정에서 언제든 바꿀 수 있어요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se não compartilhar os dados, o app funciona mesmo assim: insira os passos à mão."
+            "value" : "Se não compartilhar, você pode mudar de ideia quando quiser nos Ajustes."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不共享数据也能使用：手动输入步数就好。"
+            "value" : "如果选择不共享，之后随时可以在设置中更改。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不共享資料也能使用：手動輸入步數就好。"
+            "value" : "如果選擇不共享，之後隨時可以在設定中更改。"
           }
         }
       }
@@ -2708,67 +2246,67 @@
       }
     },
     "intro.2.p2" : {
-      "comment" : "Pagina 2. Paragrafo: rassicurazione sulla privacy. Limite: ≤ 70.",
+      "comment" : "Pagina 2. Paragrafo: rassicurazione sulla privacy. «account» = l'account Apple dell'utente (iCloud), non un account di NEAT, che non esiste. Limite: ≤ 70.",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schreibt nichts. Keine Daten verlassen dein Handy."
+            "value" : "Deine Daten verlassen nie deinen Apple Account."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "It writes nothing. No data leaves your phone."
+            "value" : "Your data never leaves your Apple Account."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No escribe nada y ningún dato sale del teléfono."
+            "value" : "Tus datos nunca salen de tu cuenta de Apple."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L’app n’écrit rien. Aucune donnée ne quitte ton téléphone."
+            "value" : "Tes données ne quittent jamais ton compte Apple."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non scrive niente e nessun dato esce dal telefono."
+            "value" : "I tuoi dati non lasciano mai il tuo account Apple."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "書き込みはせず、データはスマホの外に送らないよ。"
+            "value" : "データがあなたのApple Accountの外に出ることはないよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "아무것도 쓰지 않고, 데이터를 휴대폰 밖으로 보내지 않아요."
+            "value" : "데이터는 내 Apple 계정 밖으로 나가지 않아요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Não grava nada. Nenhum dado sai do celular."
+            "value" : "Seus dados nunca saem da sua Conta Apple."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不写入任何内容，也不向手机外发送数据。"
+            "value" : "你的数据不会离开你的 Apple 账户。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不寫入任何內容，也不向手機外傳送資料。"
+            "value" : "你的資料不會離開你的 Apple 帳號。"
           }
         }
       }
@@ -3565,600 +3103,6 @@
         }
       }
     },
-    "n.body" : {
-      "comment" : "Corpo. {min} = minuti, {velocita} = km/h, {obiettivo} = passi obiettivo, {mancano} = passi mancanti. Limite: ≤ 140.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du brauchst %1$@ min bei %2$@ km/h für %3$@ Schritte (noch %4$@)."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You need %1$@ min at %2$@ km/h to reach %3$@ steps (%4$@ left)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesitas %1$@ min a %2$@ km/h para alcanzar %3$@ pasos (faltan %4$@)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il te faut %1$@ min à %2$@ km/h pour atteindre %3$@ pas (il en manque %4$@)."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ti servono %1$@ min a %2$@ km/h per chiudere i %3$@ passi (mancano %4$@)."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ km/hで%1$@分必要だよ。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ km/h로 %1$@분이 필요해요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você precisa de %1$@ min a %2$@ km/h para atingir %3$@ passos (faltam %4$@)."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还差%4$@步即可达到%3$@步。以%2$@ km/h的速度，需要%1$@分钟。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。"
-          }
-        }
-      }
-    },
-    "n.body.jolly" : {
-      "comment" : "Corpo della notifica con l'avviso sul Jolly (n.body + n.jolly).",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du brauchst %1$@ min bei %2$@ km/h für %3$@ Schritte (noch %4$@). Erreichst du dein Ziel nicht, wird heute ein Joker genutzt (%5$@ übrig)."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You need %1$@ min at %2$@ km/h to reach %3$@ steps (%4$@ left). Miss your goal tonight and a Joker will be used (%5$@ left)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesitas %1$@ min a %2$@ km/h para alcanzar %3$@ pasos (faltan %4$@). Si no alcanzas tu objetivo, esta noche se usará un Comodín (quedarán %5$@)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il te faut %1$@ min à %2$@ km/h pour atteindre %3$@ pas (il en manque %4$@). Sans atteindre ton objectif, un Joker sera utilisé ce soir (il en restera %5$@)."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ti servono %1$@ min a %2$@ km/h per chiudere i %3$@ passi (mancano %4$@). Se non chiudi, stasera usi un Jolly (ne restano %5$@)."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ km/hで%1$@分必要だよ。目標未達成なら今夜おまもりを1個使うよ（残り%5$@個）。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ km/h로 %1$@분이 필요해요. 목표를 달성하지 못하면 오늘 밤 지킴이 1개가 사용돼요. %5$@개가 남아요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você precisa de %1$@ min a %2$@ km/h para atingir %3$@ passos (faltam %4$@). Se não atingir sua meta, um Coringa será usado esta noite (restarão %5$@)."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还差%4$@步即可达到%3$@步。以%2$@ km/h的速度，需要%1$@分钟。若未达成目标，今晚将使用1枚护身符（剩余%5$@枚）。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。若未達成目標，今晚將使用1枚護身符（剩餘%5$@枚）。"
-          }
-        }
-      }
-    },
-    "n.body.jolly.mi" : {
-      "comment" : "Come n.body.jolly, con la velocità in mph (n.body.mi + n.jolly).",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@). Erreichst du dein Ziel nicht, wird heute ein Joker genutzt (%5$@ übrig)."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left). Miss your goal tonight and a Joker will be used (%5$@ left)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@). Si no alcanzas tu objetivo, esta noche se usará un Comodín (quedarán %5$@)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@). Sans atteindre ton objectif, un Joker sera utilisé ce soir (il en restera %5$@)."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@). Se non chiudi, stasera usi un Jolly (ne restano %5$@)."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。目標未達成なら今夜おまもりを1個使うよ（残り%5$@個）。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요. 목표를 달성하지 못하면 오늘 밤 지킴이 1개가 사용돼요. %5$@개가 남아요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@). Se não atingir sua meta, um Coringa será usado esta noite (restarão %5$@)."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。若未达成目标，今晚将使用1枚护身符（剩余%5$@枚）。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。若未達成目標，今晚將使用1枚護身符（剩餘%5$@枚）。"
-          }
-        }
-      }
-    },
-    "n.body.lose" : {
-      "comment" : "Corpo della notifica con l'avviso sulla serie (n.body + n.lose).",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du brauchst %1$@ min bei %2$@ km/h für %3$@ Schritte (noch %4$@). Ohne Joker endet deine Serie von %5$@ Tagen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You need %1$@ min at %2$@ km/h to reach %3$@ steps (%4$@ left). Without a Joker, your %5$@-day streak ends."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesitas %1$@ min a %2$@ km/h para alcanzar %3$@ pasos (faltan %4$@). Sin Comodines, tu racha de %5$@ días se interrumpe."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il te faut %1$@ min à %2$@ km/h pour atteindre %3$@ pas (il en manque %4$@). Sans Joker, ta série de %5$@ jours s’arrête."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ti servono %1$@ min a %2$@ km/h per chiudere i %3$@ passi (mancano %4$@). Senza Jolly, la streak di %5$@ giorni si interrompe."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ km/hで%1$@分必要だよ。おまもりがないため、%5$@日間の連続記録が途切れるよ。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ km/h로 %1$@분이 필요해요. 지킴이가 없으면 %5$@일의 연속 기록이 끊겨요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você precisa de %1$@ min a %2$@ km/h para atingir %3$@ passos (faltam %4$@). Sem Coringas, sua sequência de %5$@ dias será interrompida."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还差%4$@步即可达到%3$@步。以%2$@ km/h的速度，需要%1$@分钟。没有护身符，%5$@天的连续记录将中断。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "還差%4$@步即可達到%3$@步。以%2$@ km/h的速度，需要%1$@分鐘。沒有護身符，%5$@天的連續紀錄將中斷。"
-          }
-        }
-      }
-    },
-    "n.body.lose.mi" : {
-      "comment" : "Come n.body.lose, con la velocità in mph (n.body.mi + n.lose).",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@). Ohne Joker endet deine Serie von %5$@ Tagen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left). Without a Joker, your %5$@-day streak ends."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@). Sin Comodines, tu racha de %5$@ días se interrumpe."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@). Sans Joker, ta série de %5$@ jours s’arrête."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@). Senza Jolly, la streak di %5$@ giorni si interrompe."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。おまもりがないため、%5$@日間の連続記録が途切れるよ。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요. 지킴이가 없으면 %5$@일의 연속 기록이 끊겨요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@). Sem Coringas, sua sequência de %5$@ dias será interrompida."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。没有护身符，%5$@天的连续记录将中断。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。沒有護身符，%5$@天的連續紀錄將中斷。"
-          }
-        }
-      }
-    },
-    "n.body.mi" : {
-      "comment" : "Come n.body, con la velocità in mph. {min} = minuti, {velocita} = mph, {obiettivo} = passi obiettivo, {mancano} = passi mancanti. Limite: ≤ 140.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du brauchst %1$@ min bei %2$@ mph für %3$@ Schritte (noch %4$@)."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You need %1$@ min at %2$@ mph to reach %3$@ steps (%4$@ left)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesitas %1$@ min a %2$@ mph para alcanzar %3$@ pasos (faltan %4$@)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il te faut %1$@ min à %2$@ mph pour atteindre %3$@ pas (il en manque %4$@)."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ti servono %1$@ min a %2$@ mph per chiudere i %3$@ passi (mancano %4$@)."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標の%3$@歩まで、あと%4$@歩。%2$@ mphで%1$@分必要だよ。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "목표 %3$@걸음까지 %4$@걸음 남았어요. %2$@ mph로 %1$@분이 필요해요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Você precisa de %1$@ min a %2$@ mph para atingir %3$@ passos (faltam %4$@)."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "还差%4$@步即可达到%3$@步。以%2$@ mph的速度，需要%1$@分钟。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "還差%4$@步即可達到%3$@步。以%2$@ mph的速度，需要%1$@分鐘。"
-          }
-        }
-      }
-    },
-    "n.generic.body" : {
-      "comment" : "Corpo per i giorni futuri. Limite: ≤ 80.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Öffne NEAT und sieh, wie viele Minuten du heute Abend brauchst."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open NEAT to see how many minutes you need tonight."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abre NEAT para ver cuántos minutos necesitas esta noche."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvre NEAT pour voir combien de minutes il te faut ce soir."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apri NEAT per vedere quanti minuti ti servono stasera."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NEATを開いて、今夜あと何分必要か見てみよう。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "NEAT를 열어 오늘 저녁 몇 분이 필요한지 확인해 보세요."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abra o NEAT para ver quantos minutos você precisa esta noite."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打开NEAT，看看今晚还需要多少分钟。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "打開NEAT，看看今晚還需要幾分鐘。"
-          }
-        }
-      }
-    },
-    "n.generic.title" : {
-      "comment" : "Titolo per i giorni futuri (passi non ancora noti). Limite: ≤ 30.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeit fürs Laufband?"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time for the treadmill?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Hora de la cinta de correr?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L’heure du tapis de course ?"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "È ora del tappeto?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トレッドミルの時間？"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "러닝머신 탈 시간인가요?"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hora da esteira?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "该上跑步机了吗？"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "該上跑步機了嗎？"
-          }
-        }
-      }
-    },
-    "n.title" : {
-      "comment" : "Titolo della notifica del promemoria (giorno di oggi). Limite: ≤ 30.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minuten auf dem Laufband"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minutes on the treadmill"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minutos en la cinta de correr"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minutes sur tapis de course"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minuti sul tappeto"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トレッドミルの時間"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "러닝머신에서 필요한 시간"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minutos na esteira"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跑步机所需分钟数"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "跑步機所需分鐘數"
-          }
-        }
-      }
-    },
     "party.close.vo" : {
       "comment" : "Suggerimento: come chiuderla.",
       "extractionState" : "manual",
@@ -4813,6 +3757,732 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "晚上提醒我"
+          }
+        }
+      }
+    },
+    "set.backup.confirm.body" : {
+      "comment" : "Testo dell'avviso di conferma. {data} = data del backup nel formato della lingua (es. 22 ottobre 2026).",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Ziele und Einstellungen werden durch die aus dem Backup vom %@ ersetzt. Deine Serie wird nicht kürzer."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your goals and settings will be replaced with those from the %@ backup. Your streak won't get shorter."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus objetivos y ajustes se sustituirán por los de la copia del %@. Tu racha no se acortará."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tes objectifs et réglages seront remplacés par ceux de la sauvegarde du %@. Ta série ne raccourcira pas."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivi e impostazioni verranno sostituiti con quelli del backup (%@). La streak non si accorcia."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標と設定が%@のバックアップの内容に置き換わります。連続記録が短くなることはありません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표와 설정이 %@ 백업의 내용으로 바뀌어요. 연속 기록은 줄어들지 않아요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suas metas e ajustes serão substituídos pelos do backup de %@. Sua sequência não vai diminuir."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标和设置将替换为 %@ 备份中的内容。连续记录不会缩短。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標和設定將替換為 %@ 備份中的內容。連續紀錄不會縮短。"
+          }
+        }
+      }
+    },
+    "set.backup.confirm.ok" : {
+      "comment" : "Bottone dell'avviso che conferma l'importazione. Limite: ≤ 14.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importa"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "読み込む"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가져오기"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "匯入"
+          }
+        }
+      }
+    },
+    "set.backup.confirm.title" : {
+      "comment" : "Titolo dell'avviso di conferma prima di importare. Limite: ≤ 32.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup importieren?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import backup?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Importar la copia de seguridad?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer la sauvegarde ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importare il backup?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "バックアップを読み込みますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백업을 가져올까요?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar backup?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入备份？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "匯入備份？"
+          }
+        }
+      }
+    },
+    "set.backup.done" : {
+      "comment" : "Avviso dopo l'importazione riuscita.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup importiert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup imported."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia de seguridad importada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegarde importée."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup importato."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "バックアップを読み込みました。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백업을 가져왔어요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup importado."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "备份已导入。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "備份已匯入。"
+          }
+        }
+      }
+    },
+    "set.backup.error" : {
+      "comment" : "Avviso se il file scelto non è un backup di NEAT.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Datei ist kein NEAT-Backup."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This file isn't a NEAT backup."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este archivo no es una copia de seguridad de NEAT."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce fichier n’est pas une sauvegarde NEAT."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo file non è un backup di NEAT."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このファイルはNEATのバックアップではありません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 파일은 NEAT 백업이 아니에요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este arquivo não é um backup do NEAT."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此文件不是 NEAT 备份。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此檔案不是 NEAT 備份。"
+          }
+        }
+      }
+    },
+    "set.backup.error.newer" : {
+      "comment" : "Avviso se il backup è stato fatto da una versione più nuova dell'app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Backup stammt aus einer neueren Version von NEAT. Aktualisiere die App und versuche es erneut."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This backup is from a newer version of NEAT. Update the app and try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta copia de seguridad se creó con una versión más reciente de NEAT. Actualiza la app y vuelve a intentarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette sauvegarde vient d’une version plus récente de NEAT. Mets l’app à jour et réessaie."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo backup viene da una versione più nuova di NEAT. Aggiorna l'app e riprova."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このバックアップはより新しいバージョンのNEATで作成されています。アプリをアップデートしてもう一度お試しください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 백업은 더 새로운 버전의 NEAT에서 만들어졌어요. 앱을 업데이트한 후 다시 시도해 주세요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este backup é de uma versão mais nova do NEAT. Atualize o app e tente de novo."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此备份来自更新版本的 NEAT。请更新 App 后重试。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此備份來自較新版本的 NEAT。請更新 App 後再試一次。"
+          }
+        }
+      }
+    },
+    "set.backup.export" : {
+      "comment" : "Riga che apre il foglio di condivisione per salvare il file di backup (File, AirDrop, Mail…). Limite: ≤ 28.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup exportieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export backup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar copia de seguridad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporter la sauvegarde"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esporta backup"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "バックアップを書き出す"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백업 내보내기"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar backup"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出备份"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "匯出備份"
+          }
+        }
+      }
+    },
+    "set.backup.import" : {
+      "comment" : "Riga che apre la scelta di un file di backup da importare. Limite: ≤ 28.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup importieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import backup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar copia de seguridad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer une sauvegarde"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importa backup"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "バックアップを読み込む"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백업 가져오기"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar backup"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入备份"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "匯入備份"
+          }
+        }
+      }
+    },
+    "set.backup.note" : {
+      "comment" : "Nota sotto il backup: cosa contiene il file, che i passi restano in Salute e che c'è anche la copia automatica in iCloud.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine Datei mit dem Start deiner Serie, dem Zielverlauf und den Einstellungen. Speichere sie, wo du willst. Schritte sind nicht enthalten: Sie bleiben in Health. Wenn du iCloud nutzt, wird dort automatisch auch eine Kopie gespeichert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A file with your streak’s start date, goal history and settings, to save wherever you like. Steps aren't included: they stay in Health. If you use iCloud, a copy is also saved there automatically."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un archivo con la fecha de inicio de tu racha, el historial de objetivos y los ajustes, para guardarlo donde quieras. Los pasos no se incluyen: se quedan en Salud. Si usas iCloud, también se guarda una copia allí automáticamente."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un fichier avec le début de ta série, l’historique des objectifs et les réglages, à enregistrer où tu veux. Les pas n’y sont pas : ils restent dans Santé. Si tu utilises iCloud, une copie y est aussi enregistrée automatiquement."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un file con inizio della streak, storico degli obiettivi e impostazioni, da salvare dove vuoi. I passi non ci sono: restano in Salute. Se usi iCloud, una copia si salva anche lì da sola."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連続記録の開始日、目標の履歴、設定をまとめたファイルです。好きな場所に保存できます。歩数は含まれず、ヘルスケアに残ります。iCloudを使っている場合は、iCloudにも自動でコピーが保存されます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연속 기록 시작일, 목표 이력, 설정이 담긴 파일로 원하는 곳에 저장할 수 있어요. 걸음 수는 포함되지 않고 건강 앱에 그대로 남아요. iCloud를 사용하면 iCloud에도 사본이 자동으로 저장돼요."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um arquivo com o início da sua sequência, o histórico de metas e os ajustes, para salvar onde quiser. Os passos não entram: ficam no Saúde. Se você usa o iCloud, uma cópia também é salva lá automaticamente."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "包含连续记录开始日期、目标历史记录和设置的文件，可保存到任意位置。步数不包含在内，仍保留在“健康”中。如果你使用 iCloud，副本也会自动保存在 iCloud 中。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "包含連續紀錄開始日期、目標歷史紀錄和設定的檔案，可儲存到任何位置。步數不包含在內，仍保留在「健康」中。如果你使用 iCloud，副本也會自動儲存在 iCloud 中。"
+          }
+        }
+      }
+    },
+    "set.backup.ok" : {
+      "comment" : "Bottone che chiude l'avviso di esito. Limite: ≤ 10.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好"
+          }
+        }
+      }
+    },
+    "set.backup.section" : {
+      "comment" : "Titolo di sezione: copia manuale dei dati dell'app in un file. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia de seguridad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegarde"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "バックアップ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백업"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "备份"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "備份"
           }
         }
       }

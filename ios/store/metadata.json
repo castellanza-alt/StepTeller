@@ -1,75 +1,101 @@
 {
-  "_source": "Generato da scripts/store_metadata.py dal foglio «Store»: non modificare a mano.",
+  "_source": "Generato da scripts/store_metadata.py dai fogli «Store» e «Novità»: non modificare a mano.",
   "languages": {
     "it": {
       "name": "NEAT - ogni passo conta",
       "subtitle": "Il tuo obiettivo. Raggiungilo.",
-      "promotionalText": "Quanti passi ti mancano oggi? NEAT te lo dice in un colpo d'occhio. I tuoi dati restano sul tuo iPhone.",
-      "description": "Quanti passi ho fatto oggi? Quanti me ne mancano? Quanto devo ancora camminare?\n\nNEAT risponde a queste tre domande, in un colpo d'occhio.\n\n• I passi di oggi, letti da Salute.\n• Quanti ne mancano al tuo obiettivo.\n• Quanti minuti di camminata servono per raggiungerlo, alla velocità che scegli.\n\nOgni giorno a obiettivo allunga la tua serie. Lo storico ti mostra settimane, mesi e record. Un promemoria la sera, se manca ancora qualcosa. E i widget ti tengono aggiornato senza aprire l'app.\n\nI tuoi dati restano sul tuo iPhone. NEAT legge soltanto: niente account, niente pubblicità, niente tracciamento. Nessun dato lascia il telefono.\n\nOgni passo conta.",
+      "promotionalText": "Quanti passi ti mancano oggi? NEAT te lo dice in un colpo d'occhio. I tuoi dati sono solo tuoi.",
+      "description": "Quanti passi ho fatto oggi? Quanti me ne mancano? Quanto devo ancora camminare?\n\nNEAT risponde a queste tre domande, in un colpo d'occhio.\n\n• I passi di oggi, letti da Salute.\n• Quanti ne mancano al tuo obiettivo.\n• Quanti minuti di camminata servono per raggiungerlo, alla velocità che scegli.\n\nOgni giorno a obiettivo allunga la tua serie. Lo storico ti mostra settimane, mesi e record. Un promemoria la sera, se manca ancora qualcosa. E i widget ti tengono aggiornato senza aprire l'app.\n\nI tuoi dati sono solo tuoi. NEAT legge soltanto: niente account, niente pubblicità, niente tracciamento. Serie e impostazioni si salvano nel tuo iCloud, mai su server di altri. Cambi iPhone? Ritrovi la tua serie.\n\nOgni passo conta.",
       "keywords": "contapassi,passi,camminata,obiettivo,pedometro,10000,serie,salute,privacy,widget,tapis roulant"
     },
     "en": {
       "name": "NEAT - Every Step Counts",
       "subtitle": "Set a goal. Reach it.",
-      "promotionalText": "How many steps left today? NEAT shows you at a glance. Your data stays on your iPhone.",
-      "description": "How many steps have I taken today? How many do I have left? How much longer do I need to walk?\n\nNEAT answers these three questions at a glance.\n\n• Today's steps, read from Health.\n• How many steps are left to reach your goal.\n• How many minutes of walking it takes to get there, at the speed you choose.\n\nEach day you reach your goal extends your streak. Your history shows weeks, months and records. An evening reminder if you still have steps to go. And widgets keep you up to date without opening the app.\n\nYour data stays on your iPhone. NEAT only reads: no account, no ads, no tracking. No data leaves your phone.\n\nEvery step counts.",
+      "promotionalText": "How many steps left today? NEAT shows you at a glance. Your data is yours alone.",
+      "description": "How many steps have I taken today? How many do I have left? How much longer do I need to walk?\n\nNEAT answers these three questions at a glance.\n\n• Today's steps, read from Health.\n• How many steps are left to reach your goal.\n• How many minutes of walking it takes to get there, at the speed you choose.\n\nEach day you reach your goal extends your streak. Your history shows weeks, months and records. An evening reminder if you still have steps to go. And widgets keep you up to date without opening the app.\n\nYour data is yours alone. NEAT only reads: no account, no ads, no tracking. Your streak and settings are saved in your iCloud, never on other servers. Switching to another iPhone? Your streak is still there.\n\nEvery step counts.",
       "keywords": "pedometer,walking,steps,counter,daily,distance,minutes,streak,widget,reminder,10000,treadmill"
     },
     "es": {
       "name": "NEAT - Cada paso cuenta",
       "subtitle": "Fija una meta. Alcánzala.",
-      "promotionalText": "¿Cuántos pasos te faltan hoy? NEAT te lo dice de un vistazo. Tus datos se quedan en tu iPhone.",
-      "description": "¿Cuántos pasos he dado hoy? ¿Cuántos me faltan? ¿Cuánto más tengo que caminar?\n\nNEAT responde a estas tres preguntas de un vistazo.\n\n• Los pasos de hoy, leídos de Salud.\n• Cuántos te faltan para llegar a tu meta.\n• Cuántos minutos necesitas caminar para alcanzarla, a la velocidad que elijas.\n\nCada día que alcanzas tu meta alarga tu racha. El historial te muestra semanas, meses y récords. Un recordatorio por la tarde si aún te faltan pasos. Y los widgets te mantienen al día sin abrir la app.\n\nTus datos se quedan en tu iPhone. NEAT solo lee: sin cuenta, sin anuncios, sin rastreo. Ningún dato sale del teléfono.\n\nCada paso cuenta.",
+      "promotionalText": "¿Cuántos pasos te faltan hoy? NEAT te lo dice de un vistazo. Tus datos son solo tuyos.",
+      "description": "¿Cuántos pasos he dado hoy? ¿Cuántos me faltan? ¿Cuánto más tengo que caminar?\n\nNEAT responde a estas tres preguntas de un vistazo.\n\n• Los pasos de hoy, leídos de Salud.\n• Cuántos te faltan para llegar a tu meta.\n• Cuántos minutos necesitas caminar para alcanzarla, a la velocidad que elijas.\n\nCada día que alcanzas tu meta alarga tu racha. El historial te muestra semanas, meses y récords. Un recordatorio por la tarde si aún te faltan pasos. Y los widgets te mantienen al día sin abrir la app.\n\nTus datos son solo tuyos. NEAT solo lee: sin cuenta, sin anuncios, sin rastreo. Tu racha y tus ajustes se guardan en tu iCloud, nunca en otros servidores. ¿Cambias de iPhone? Recuperas tu racha.\n\nCada paso cuenta.",
       "keywords": "podómetro,pasos,caminar,contador,caminata,diario,distancia,minutos,racha,widget,recordatorio,10000"
     },
     "fr": {
       "name": "NEAT - Chaque pas compte",
       "subtitle": "Fixe un but. Atteins-le.",
-      "promotionalText": "Combien de pas te reste-t-il aujourd’hui ? NEAT te le dit en un clin d’œil. Tes données restent sur ton iPhone.",
-      "description": "Combien de pas ai-je faits aujourd’hui ? Combien m’en reste-t-il ? Combien de temps dois-je encore marcher ?\n\nNEAT répond à ces trois questions en un clin d’œil.\n\n• Les pas du jour, lus dans Santé.\n• Le nombre de pas restants pour atteindre ton objectif.\n• Les minutes de marche nécessaires pour l’atteindre, à la vitesse de ton choix.\n\nChaque jour où tu atteins ton objectif prolonge ta série. L’historique affiche les semaines, les mois et les records. Un rappel le soir s’il te reste des pas à faire. Et les widgets te tiennent au courant sans ouvrir l’app.\n\nTes données restent sur ton iPhone. NEAT ne fait que lire : aucun compte, aucune pub, aucun suivi. Aucune donnée ne quitte ton téléphone.\n\nChaque pas compte.",
+      "promotionalText": "Combien de pas te reste-t-il aujourd’hui ? NEAT te le dit en un clin d’œil. Tes données, rien qu’à toi.",
+      "description": "Combien de pas ai-je faits aujourd’hui ? Combien m’en reste-t-il ? Combien de temps dois-je encore marcher ?\n\nNEAT répond à ces trois questions en un clin d’œil.\n\n• Les pas du jour, lus dans Santé.\n• Le nombre de pas restants pour atteindre ton objectif.\n• Les minutes de marche nécessaires pour l’atteindre, à la vitesse de ton choix.\n\nChaque jour où tu atteins ton objectif prolonge ta série. L’historique affiche les semaines, les mois et les records. Un rappel le soir s’il te reste des pas à faire. Et les widgets te tiennent au courant sans ouvrir l’app.\n\nTes données, rien qu’à toi. NEAT ne fait que lire : aucun compte, aucune pub, aucun suivi. Ta série et tes réglages sont enregistrés dans ton iCloud, jamais sur d’autres serveurs. Tu changes d’iPhone ? Tu retrouves ta série.\n\nChaque pas compte.",
       "keywords": "podomètre,marche,compteur,objectif,quotidien,distance,minutes,série,widget,rappel,10000,tapis"
     },
     "de": {
       "name": "NEAT - Jeder Schritt zählt",
       "subtitle": "Setz ein Ziel. Erreiche es.",
-      "promotionalText": "Wie viele Schritte fehlen dir heute? NEAT zeigt es dir auf einen Blick. Deine Daten bleiben auf dem iPhone.",
-      "description": "Wie viele Schritte bin ich heute gegangen? Wie viele fehlen mir noch? Wie lange muss ich noch gehen?\n\nNEAT beantwortet diese drei Fragen auf einen Blick.\n\n• Die heutigen Schritte, aus Health gelesen.\n• Wie viele Schritte dir noch bis zu deinem Ziel fehlen.\n• Wie viele Gehminuten du dafür brauchst, bei deinem gewählten Tempo.\n\nJeder Tag, an dem du dein Ziel erreichst, verlängert deine Serie. Der Verlauf zeigt dir Wochen, Monate und Rekorde. Eine Erinnerung am Abend, wenn noch Schritte fehlen. Und Widgets halten dich auf dem Laufenden, ohne die App zu öffnen.\n\nDeine Daten bleiben auf dem iPhone. NEAT liest nur: kein Konto, keine Werbung, kein Tracking. Keine Daten verlassen dein Telefon.\n\nJeder Schritt zählt.",
+      "promotionalText": "Wie viele Schritte fehlen dir heute? NEAT zeigt es dir auf einen Blick. Deine Daten gehören nur dir.",
+      "description": "Wie viele Schritte bin ich heute gegangen? Wie viele fehlen mir noch? Wie lange muss ich noch gehen?\n\nNEAT beantwortet diese drei Fragen auf einen Blick.\n\n• Die heutigen Schritte, aus Health gelesen.\n• Wie viele Schritte dir noch bis zu deinem Ziel fehlen.\n• Wie viele Gehminuten du dafür brauchst, bei deinem gewählten Tempo.\n\nJeder Tag, an dem du dein Ziel erreichst, verlängert deine Serie. Der Verlauf zeigt dir Wochen, Monate und Rekorde. Eine Erinnerung am Abend, wenn noch Schritte fehlen. Und Widgets halten dich auf dem Laufenden, ohne die App zu öffnen.\n\nDeine Daten gehören nur dir. NEAT liest nur: kein Konto, keine Werbung, kein Tracking. Deine Serie und Einstellungen werden in deiner iCloud gesichert, nie auf anderen Servern. Du wechselst dein iPhone? Deine Serie ist wieder da.\n\nJeder Schritt zählt.",
       "keywords": "Schrittzähler,Schritte,gehen,Spaziergang,Tagesziel,Distanz,Gehzeit,Serie,Widget,Erinnerung,10000"
     },
     "pt-BR": {
       "name": "NEAT - Cada passo conta",
       "subtitle": "Defina uma meta. Alcance-a.",
-      "promotionalText": "Quantos passos faltam hoje? O NEAT mostra num relance. Seus dados ficam no seu iPhone.",
-      "description": "Quantos passos dei hoje? Quantos faltam? Quanto ainda preciso caminhar?\n\nO NEAT responde a essas três perguntas num relance.\n\n• Os passos de hoje, lidos do Saúde.\n• Quantos faltam para alcançar sua meta.\n• Quantos minutos de caminhada são necessários para alcançá-la, na velocidade que você escolher.\n\nCada dia em que você alcança sua meta aumenta sua sequência. O histórico mostra semanas, meses e recordes. Um lembrete à noite, se ainda faltarem passos. E os widgets mantêm você a par sem abrir o app.\n\nSeus dados ficam no seu iPhone. O NEAT só lê: sem conta, sem anúncios, sem rastreamento. Nenhum dado sai do celular.\n\nCada passo conta.",
+      "promotionalText": "Quantos passos faltam hoje? O NEAT mostra num relance. Seus dados são só seus.",
+      "description": "Quantos passos dei hoje? Quantos faltam? Quanto ainda preciso caminhar?\n\nO NEAT responde a essas três perguntas num relance.\n\n• Os passos de hoje, lidos do Saúde.\n• Quantos faltam para alcançar sua meta.\n• Quantos minutos de caminhada são necessários para alcançá-la, na velocidade que você escolher.\n\nCada dia em que você alcança sua meta aumenta sua sequência. O histórico mostra semanas, meses e recordes. Um lembrete à noite, se ainda faltarem passos. E os widgets mantêm você a par sem abrir o app.\n\nSeus dados são só seus. O NEAT só lê: sem conta, sem anúncios, sem rastreamento. Sua sequência e seus ajustes são salvos no seu iCloud, nunca em outros servidores. Vai trocar de iPhone? Sua sequência está lá.\n\nCada passo conta.",
       "keywords": "pedômetro,passos,caminhada,contador,caminhar,distância,minutos,sequência,widget,lembrete,10000"
     },
     "ja": {
       "name": "NEAT - 一歩一歩が大切",
       "subtitle": "目標を決めよう。達成しよう。",
-      "promotionalText": "今日の目標まで、あと何歩？NEATならひと目でわかります。あなたのデータは、あなたのiPhoneの中に。",
-      "description": "今日は何歩歩いた？あと何歩？あとどれくらい歩けばいい？\n\nNEATなら、この3つの答えがひと目でわかります。\n\n• ヘルスケアから読み取った今日の歩数。\n• 目標まであと何歩か。\n• 選んだ速度で、目標達成まであと何分歩けばいいか。\n\n目標を達成するたびに、連続記録が伸びます。履歴では週ごと、月ごとの歩数や記録を確認できます。まだ歩数が足りない日は、夜にリマインダーでお知らせ。ウィジェットなら、アプリを開かずに状況を確認できます。\n\nあなたのデータは、あなたのiPhoneの中に。NEATは読み取り専用。アカウントも、広告も、トラッキングもありません。データがスマートフォンの外に出ることはありません。\n\n一歩一歩が大切。",
+      "promotionalText": "今日の目標まで、あと何歩？NEATならひと目でわかります。あなたのデータは、あなただけのもの。",
+      "description": "今日は何歩歩いた？あと何歩？あとどれくらい歩けばいい？\n\nNEATなら、この3つの答えがひと目でわかります。\n\n• ヘルスケアから読み取った今日の歩数。\n• 目標まであと何歩か。\n• 選んだ速度で、目標達成まであと何分歩けばいいか。\n\n目標を達成するたびに、連続記録が伸びます。履歴では週ごと、月ごとの歩数や記録を確認できます。まだ歩数が足りない日は、夜にリマインダーでお知らせ。ウィジェットなら、アプリを開かずに状況を確認できます。\n\nあなたのデータは、あなただけのもの。NEATは読み取り専用。アカウントも、広告も、トラッキングもありません。連続記録と設定はあなたのiCloudに保存され、ほかのサーバーには保存されません。iPhoneを替えても、連続記録を引き継げます。\n\n一歩一歩が大切。",
       "keywords": "歩数計,ウォーキング,散歩,歩数,距離,記録,連続達成,ウィジェット,10000歩"
     },
     "ko": {
       "name": "NEAT - 한 걸음 한 걸음이 소중해",
       "subtitle": "목표를 정해요. 달성해요.",
-      "promotionalText": "오늘 몇 걸음 더 걸어야 할까요? NEAT에서 한눈에 확인하세요. 내 데이터는 내 iPhone에 그대로.",
-      "description": "오늘 몇 걸음 걸었을까? 몇 걸음 남았을까? 얼마나 더 걸어야 할까?\n\nNEAT는 이 세 가지 질문의 답을 한눈에 보여줘요.\n\n• 건강 앱에서 읽어 온 오늘의 걸음 수.\n• 목표까지 남은 걸음 수.\n• 선택한 속도로 목표에 도달하려면 더 걸어야 하는 시간(분).\n\n목표를 달성할 때마다 연속 기록이 늘어나요. 기록에서 주별, 월별 걸음 수와 최고 기록을 확인하세요. 아직 걸음 수가 부족하면 저녁에 알림을 보내요. 위젯으로 앱을 열지 않고도 현황을 확인할 수 있어요.\n\n내 데이터는 내 iPhone에 그대로. NEAT는 읽기만 해요. 계정도, 광고도, 추적도 없어요. 어떤 데이터도 휴대폰 밖으로 나가지 않아요.\n\n한 걸음 한 걸음이 소중해요.",
+      "promotionalText": "오늘 몇 걸음 더 걸어야 할까요? NEAT에서 한눈에 확인하세요. 내 데이터는 나만의 것.",
+      "description": "오늘 몇 걸음 걸었을까? 몇 걸음 남았을까? 얼마나 더 걸어야 할까?\n\nNEAT는 이 세 가지 질문의 답을 한눈에 보여줘요.\n\n• 건강 앱에서 읽어 온 오늘의 걸음 수.\n• 목표까지 남은 걸음 수.\n• 선택한 속도로 목표에 도달하려면 더 걸어야 하는 시간(분).\n\n목표를 달성할 때마다 연속 기록이 늘어나요. 기록에서 주별, 월별 걸음 수와 최고 기록을 확인하세요. 아직 걸음 수가 부족하면 저녁에 알림을 보내요. 위젯으로 앱을 열지 않고도 현황을 확인할 수 있어요.\n\n내 데이터는 나만의 것. NEAT는 읽기만 해요. 계정도, 광고도, 추적도 없어요. 연속 기록과 설정은 내 iCloud에 저장되고, 다른 서버에는 저장되지 않아요. iPhone을 바꿔도 연속 기록을 되찾을 수 있어요.\n\n한 걸음 한 걸음이 소중해요.",
       "keywords": "만보기,걷기,산책,걸음수,거리,시간,기록,위젯,알림,만보,연속달성,일일"
     },
     "zh-Hans": {
       "name": "NEAT - 每一步都算数",
       "subtitle": "定下目标。实现它。",
-      "promotionalText": "今天还差多少步？NEAT让你一目了然。你的数据留在你的iPhone上。",
-      "description": "今天走了多少步？还差多少步？还要走多久？\n\nNEAT让这三个问题的答案一目了然。\n\n• 从健康读取的今日步数。\n• 距离目标还差多少步。\n• 按你选择的速度，还要走多少分钟才能达标。\n\n每达标一天，连续记录就增加一天。历史记录按周、按月显示步数，还能查看最高纪录。如果还没达标，晚上会收到提醒。通过小组件，无需打开App就能查看进度。\n\n你的数据留在你的iPhone上。NEAT只读取数据：无需账号、没有广告、没有跟踪。任何数据都不会离开手机。\n\n每一步都算数。",
+      "promotionalText": "今天还差多少步？NEAT让你一目了然。你的数据只属于你。",
+      "description": "今天走了多少步？还差多少步？还要走多久？\n\nNEAT让这三个问题的答案一目了然。\n\n• 从健康读取的今日步数。\n• 距离目标还差多少步。\n• 按你选择的速度，还要走多少分钟才能达标。\n\n每达标一天，连续记录就增加一天。历史记录按周、按月显示步数，还能查看最高纪录。如果还没达标，晚上会收到提醒。通过小组件，无需打开App就能查看进度。\n\n你的数据只属于你。NEAT只读取数据：无需账号、没有广告、没有跟踪。连续记录和设置会保存在你的iCloud中，不会存到其他服务器。换了iPhone？你的连续记录还在。\n\n每一步都算数。",
       "keywords": "计步器,步数,走路,散步,步行,万步,每日步数,连续达标,小组件,提醒,10000步"
     },
     "zh-Hant": {
       "name": "NEAT - 每一步都算數",
       "subtitle": "訂下目標。達成它。",
-      "promotionalText": "今天還差幾步？NEAT讓你一目了然。你的資料留在你的iPhone上。",
-      "description": "今天走了幾步？還差幾步？還要走多久？\n\nNEAT讓這三個問題的答案一目了然。\n\n• 從健康讀取的今日步數。\n• 距離目標還差幾步。\n• 按照你選擇的速度，還要走幾分鐘才能達標。\n\n每達標一天，連續紀錄就增加一天。歷史紀錄按週、按月顯示步數，也能查看最高紀錄。如果還沒達標，晚上會收到提醒。透過小工具，不用打開App就能查看進度。\n\n你的資料留在你的iPhone上。NEAT只讀取資料：不需帳號、沒有廣告、沒有追蹤。任何資料都不會離開手機。\n\n每一步都算數。",
+      "promotionalText": "今天還差幾步？NEAT讓你一目了然。你的資料只屬於你。",
+      "description": "今天走了幾步？還差幾步？還要走多久？\n\nNEAT讓這三個問題的答案一目了然。\n\n• 從健康讀取的今日步數。\n• 距離目標還差幾步。\n• 按照你選擇的速度，還要走幾分鐘才能達標。\n\n每達標一天，連續紀錄就增加一天。歷史紀錄按週、按月顯示步數，也能查看最高紀錄。如果還沒達標，晚上會收到提醒。透過小工具，不用打開App就能查看進度。\n\n你的資料只屬於你。NEAT只讀取資料：不需帳號、沒有廣告、沒有追蹤。連續紀錄和設定會儲存在你的iCloud中，不會存到其他伺服器。換了iPhone？你的連續紀錄還在。\n\n每一步都算數。",
       "keywords": "計步器,步數,走路,健走,散步,萬步,每日步數,連續達標,小工具,提醒,10000步"
+    }
+  },
+  "whatsNew": {
+    "1.1": {
+      "it": "I tuoi progressi non si perdono più. Serie, obiettivi e impostazioni si salvano anche nel tuo iCloud: se cambi iPhone o reinstalli NEAT, ritrovi tutto, compresa la serie. Nulla però esce dal tuo account: i tuoi dati restano solo tuoi.\n\n• Nuovo in Impostazioni: «Backup». Salva i tuoi dati in un file e ricaricali quando vuoi.\n• Corretto il promemoria della sera: usa i passi più recenti e non arriva più se l'obiettivo è già raggiunto.\n• Piccole correzioni.",
+      "en": "You won't lose your progress anymore. Your streak, goals and settings are also saved in your iCloud: if you switch to another iPhone or reinstall NEAT, you get everything back, including your streak. Nothing leaves your Apple Account: your data is yours alone.\n\n• New in Settings: “Backup”. Save your data to a file and load it again whenever you want.\n• Fixed the evening reminder: it uses the latest step count and no longer arrives if you've already reached your goal.\n• Minor fixes.",
+      "es": "Tus progresos ya no se pierden. Tu racha, tus objetivos y tus ajustes también se guardan en tu iCloud: si cambias de iPhone o reinstalas NEAT, lo recuperas todo, incluida tu racha. Nada sale de tu cuenta de Apple: tus datos siguen siendo solo tuyos.\n\n• Nuevo en Ajustes: «Copia de seguridad». Guarda tus datos en un archivo y vuelve a cargarlos cuando quieras.\n• Corregido el recordatorio nocturno: usa los pasos más recientes y ya no llega si has alcanzado tu objetivo.\n• Pequeñas correcciones.",
+      "fr": "Tes progrès ne se perdent plus. Ta série, tes objectifs et tes réglages sont aussi enregistrés dans ton iCloud : si tu changes d’iPhone ou réinstalles NEAT, tu retrouves tout, y compris ta série. Rien ne sort de ton compte Apple. Tes données, rien qu’à toi.\n\n• Nouveau dans Réglages : « Sauvegarde ». Enregistre tes données dans un fichier et recharge-les quand tu veux.\n• Le rappel du soir a été corrigé : il utilise les pas les plus récents et n’arrive plus si ton objectif est déjà atteint.\n• Petites corrections.",
+      "de": "Deine Fortschritte gehen nicht mehr verloren. Deine Serie, Ziele und Einstellungen werden auch in deiner iCloud gesichert: Wenn du dein iPhone wechselst oder NEAT neu installierst, ist alles wieder da, auch deine Serie. Dabei verlässt nichts deinen Apple Account: Deine Daten gehören nur dir.\n\n• Neu in den Einstellungen: „Backup“. Speichere deine Daten in einer Datei und lade sie wieder, wann du willst.\n• Die Abenderinnerung wurde korrigiert: Sie nutzt die neuesten Schrittzahlen und kommt nicht mehr, wenn dein Ziel schon erreicht ist.\n• Kleine Fehlerbehebungen.",
+      "pt-BR": "Seus progressos não se perdem mais. Sua sequência, metas e ajustes também são salvos no seu iCloud: se você trocar de iPhone ou reinstalar o NEAT, recupera tudo, inclusive sua sequência. Nada sai da sua Conta Apple: seus dados continuam sendo só seus.\n\n• Novo nos Ajustes: “Backup”. Salve seus dados em um arquivo e carregue-os de novo quando quiser.\n• O lembrete noturno foi corrigido: usa os passos mais recentes e não chega mais se você já atingiu sua meta.\n• Pequenas correções.",
+      "ja": "これまでの記録が失われなくなりました。連続記録、目標、設定があなたのiCloudにも保存されるようになりました。iPhoneを替えたりNEATを再インストールしたりしても、連続記録を含めてすべて元に戻ります。データがあなたのApple Accountの外に出ることはありません。あなたのデータは、あなただけのもの。\n\n• 設定に「バックアップ」を追加。データをファイルに保存して、いつでも読み込めます。\n• 夜のリマインダーを修正。最新の歩数を使い、目標を達成しているときは届かなくなりました。\n• 細かな不具合を修正。",
+      "ko": "이제 기록을 잃지 않아요. 연속 기록, 목표, 설정이 내 iCloud에도 저장돼요. iPhone을 바꾸거나 NEAT를 다시 설치해도 연속 기록을 포함해 모두 되찾을 수 있어요. 데이터는 내 Apple 계정 밖으로 나가지 않아요. 내 데이터는 나만의 것.\n\n• 설정에 ‘백업’이 생겼어요. 데이터를 파일로 저장하고 언제든 다시 불러올 수 있어요.\n• 저녁 알림을 수정했어요. 최신 걸음 수를 사용하고, 이미 목표를 달성했다면 더 이상 알림이 오지 않아요.\n• 사소한 오류를 수정했어요.",
+      "zh-Hans": "你的进度不会再丢失了。连续记录、目标和设置也会保存在你的iCloud中：更换iPhone或重新安装NEAT后，就能找回所有内容，包括连续记录。数据不会离开你的 Apple 账户，你的数据只属于你。\n\n• 设置中新增“备份”。将数据保存为文件，随时重新导入。\n• 修复了晚间提醒：使用最新步数，目标已达成时不再发送提醒。\n• 修复了一些小问题。",
+      "zh-Hant": "你的進度不會再遺失了。連續紀錄、目標和設定也會儲存在你的iCloud中：更換iPhone或重新安裝NEAT後，就能找回所有內容，包括連續紀錄。資料不會離開你的 Apple 帳號，你的資料只屬於你。\n\n• 設定中新增「備份」。將資料儲存為檔案，隨時重新匯入。\n• 修正了晚間提醒：使用最新步數，目標已達成時不再傳送提醒。\n• 修正了一些小問題。"
+    },
+    "correzioni": {
+      "it": "Correzioni e piccoli miglioramenti.",
+      "en": "Bug fixes and minor improvements.",
+      "es": "Corrección de errores y pequeñas mejoras.",
+      "fr": "Corrections de bugs et petites améliorations.",
+      "de": "Fehlerbehebungen und kleine Verbesserungen.",
+      "pt-BR": "Correções de bugs e pequenas melhorias.",
+      "ja": "不具合の修正と細かな改善。",
+      "ko": "버그 수정 및 소소한 개선 사항.",
+      "zh-Hans": "错误修复与小幅改进。",
+      "zh-Hant": "錯誤修正與小幅改進。"
     }
   }
 }

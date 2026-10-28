@@ -29,6 +29,14 @@ struct StepTellerApp: App {
 
     @MainActor
     private static func makeStore() -> StepsStore {
+        let store = createStore()
+        // Background wake-up before the evening reminder: registered here, while the app is still launching.
+        ReminderRefreshTask.register { store }
+        return store
+    }
+
+    @MainActor
+    private static func createStore() -> StepsStore {
         // Before creating the store: recognizes who already had the app from the saved keys.
         Onboarding.resolveAtLaunch()
         #if DEBUG
@@ -45,7 +53,13 @@ struct StepTellerApp: App {
             return StepsStore(provider: DebugStepsProvider(value: raw < 0 ? nil : n))
         }
         #endif
+        // After the introduction check (a reinstall must ask the permissions again) and before the store:
+        // streak start, goal history and settings come back from iCloud.
+        var created: StepsStore?
+        CloudBackup.start { created?.reloadSaved() }
         let health = HealthKitStepsProvider()
-        return StepsStore(provider: health, workouts: health, historyProvider: health)
+        let store = StepsStore(provider: health, workouts: health, historyProvider: health)
+        created = store
+        return store
     }
 }

@@ -161,8 +161,7 @@ struct RootView: View {
 }
 
 extension RootView {
-    /// Celebration at the first launch after reaching the day's goal (only with Health steps,
-    /// not with a manual correction).
+    /// Celebration at the first launch after reaching the day's goal (only with Health steps).
     private func celebrateIfNeeded() {
         #if DEBUG
         if UserDefaults.standard.object(forKey: "stepteller.debugCelebrate") != nil, !celebrating {

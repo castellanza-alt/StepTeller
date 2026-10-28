@@ -24,35 +24,13 @@ struct ReminderScheduler {
         let settings = await center.notificationSettings()
         guard [.authorized, .provisional, .ephemeral].contains(settings.authorizationStatus) else { return }
         for r in requests {
-            let text = Self.text(r.message, unit: unit)
+            let text = ReminderText.content(r.message, unit: unit)
             let content = UNMutableNotificationContent()
             content.title = text.title
             content.body = text.body
             content.sound = .default
             let trigger = UNCalendarNotificationTrigger(dateMatching: r.fire, repeats: false)
             try? await center.add(UNNotificationRequest(identifier: r.id, content: content, trigger: trigger))
-        }
-    }
-
-    /// Notification text in the phone's language: one whole sentence from the catalog per case,
-    /// speed in km/h or mph.
-    static func text(_ message: ReminderMessage, unit: DistanceUnit) -> ReminderContent {
-        switch message {
-        case let .precise(minutes, speed, goal, remaining, warning):
-            let args: [CVarArg] = ["\(minutes)", unit.speedText(kmh: speed),
-                                   LocalFormat.integer(goal), LocalFormat.integer(remaining)]
-            let body: String
-            switch warning {
-            case let .wouldUseJolly(left)?:
-                body = L10n.format(unit.pick("n.body.jolly", "n.body.jolly.mi"), arguments: args + ["\(left)"])
-            case let .wouldBreak(streak)?:
-                body = L10n.format(unit.pick("n.body.lose", "n.body.lose.mi"), arguments: args + ["\(streak)"])
-            case nil:
-                body = L10n.format(unit.pick("n.body", "n.body.mi"), arguments: args)
-            }
-            return ReminderContent(title: L10n.text("n.title"), body: body)
-        case .generic:
-            return ReminderContent(title: L10n.text("n.generic.title"), body: L10n.text("n.generic.body"))
         }
     }
 

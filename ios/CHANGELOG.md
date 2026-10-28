@@ -1,6 +1,50 @@
 # Changelog
 
-## 1.0 — 19 ottobre 2026
+Registro interno di NEAT per iOS, in italiano, anche tecnico. Una sezione per versione, la più recente in cima; la prima
+sezione è sempre la versione di `project.yml` e il suo stato dice la verità sul codice: `in lavorazione`,
+`su TestFlight, build N`, `inviata ad Apple il D mese AAAA, build N`, `pubblicata il D mese AAAA, build N`. Ogni PR che
+tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
+numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
+
+## 1.1 — in lavorazione
+- Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e
+  orario), taratura e tema giorno/notte si salvano anche nell'iCloud dell'utente (archivio chiave-valore di Apple,
+  `CloudBackup`). Disinstallando e reinstallando, o su un iPhone nuovo con lo stesso account, tornano da soli e la
+  streak riparte dal giorno giusto (vale il più vecchio tra telefono e iCloud). L'introduzione si rivede comunque,
+  perché i permessi di Salute e notifiche vanno richiesti di nuovo. Mai dati di Salute in iCloud, nessun server
+  nostro. Capacità iCloud (solo chiave-valore) nell'App ID; pagina privacy da aggiornare alla pubblicazione.
+- Impostazioni → «Backup»: «Esporta backup» crea il file `NEAT-backup-AAAA-MM-GG.json` (inizio streak, storico
+  obiettivi, impostazioni, taratura; mai dati di Salute) da salvare in File, AirDrop, Mail…; «Importa backup» lo
+  rilegge dopo una conferma con la data del backup. I valori del file sostituiscono quelli attuali, l'inizio della
+  streak tiene il più vecchio. File non validi o di una versione più nuova vengono rifiutati con un avviso. Formato
+  e regole in `BackupFile` (core, con test). Testi nuovi in 10 lingue nel foglio, confermati da ChatGPT (27 ottobre;
+  in spagnolo «copia de seguridad» per esteso).
+- Promemoria serale aggiornato all'ultimo momento. Il testo della notifica lo scrive l'app in anticipo e iOS la
+  sveglia in sottofondo al massimo una volta all'ora, mai a telefono bloccato: sabato 24 alle 20:30 diceva «mancano
+  497» con 13.096 passi già fatti. Due rimedi che si sommano: (1) il widget, che iOS aggiorna molto più spesso e legge
+  Salute da solo, 10 minuti prima del promemoria controlla la notifica di stasera e, con un conteggio fresco, la
+  cancella se l'obiettivo è chiuso o ne riscrive i numeri (`WidgetReminder`; verificato che un'estensione può
+  modificare le notifiche in attesa dell'app); (2) l'app chiede a iOS un risveglio in sottofondo 25 minuti prima
+  del promemoria per rifare il conto (`ReminderRefreshTask`, BGAppRefreshTask, modalità «fetch»). Nessuna garanzia
+  da iOS, ma il caso si riduce a chi non dà all'app né al widget alcuna occasione per ore. I testi delle notifiche
+  passano nella tabella «Widget», condivisa da app ed estensione (`ReminderText`); nel Gruppo App ora ci sono anche
+  orario e stato del promemoria e l'avviso streak/Jolly di stasera. Diagnostica in Console: sottosistema
+  `it.castellanza.stepteller`, categoria `reminder`.
+- Promemoria serale: non arriva più «mancano 10.000» quando i passi sono già chiusi. Col telefono bloccato Salute non
+  si può leggere e la lettura fallita in background veniva presa per 0 passi, rimettendo il promemoria già tolto. Ora
+  una lettura fallita a telefono bloccato non cambia nulla, e il promemoria non usa mai meno passi dell'ultimo
+  conteggio letto oggi.
+- Introduzione, pagina Salute: «Non scrive niente e nessun dato esce dal telefono» diventa «I tuoi dati non lasciano
+  mai il tuo account Apple», vero anche con la copia in iCloud. In ogni lingua il nome ufficiale dell'account
+  Apple (Apple Account, cuenta de Apple, compte Apple…).
+- Tolto l'inserimento dei passi a mano (scelta di Will): il numero dei passi in Home non si tocca più, niente finestra
+  «Passi di oggi» e niente bottone «USA SALUTE». I passi arrivano solo da Salute; senza dati restano 0 con l'avviso
+  e il bottone per le Impostazioni. Tolta anche la correzione manuale dal core (`StepsState`, origine `.unavailable`
+  al posto di `.manual`). Tolti dal foglio i 7 testi della finestra e del bottone. Nella pagina Salute
+  dell'introduzione la nota «…l'app funziona lo stesso: inserisci i passi a mano» diventa «Se scegli di non
+  condividerli, puoi cambiare idea quando vuoi da Impostazioni» (approvata da Will, tradotta da ChatGPT).
+
+## 1.0 — pubblicata il 26 ottobre 2026, build 1.88.1
 - Miglia: con il telefono impostato su USA o Regno Unito distanze in miglia (MI) e velocità in mph, ovunque (Home,
   cursore, Storico con la scheda MI, widget, blocco schermo, promemoria, VoiceOver); negli altri paesi km e km/h come
   prima. Impostazioni → «Unità di misura»: Automatiche (predefinito), Chilometri, Miglia. Il cursore in miglia va da

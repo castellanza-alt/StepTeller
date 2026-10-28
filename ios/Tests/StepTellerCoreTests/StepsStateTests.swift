@@ -19,44 +19,31 @@ final class StepsStateTests: XCTestCase {
         cal.date(from: DateComponents(year: 2026, month: 10, day: d, hour: h))!
     }
 
-    func testHealthThenManualThenUseHealth() async {
+    func testHealthStepsFollowEachRead() async {
         let p = FakeProvider(); p.value = 7_200
         let c = StepsController(provider: p, calendar: cal)
         var s = StepsState()
         await c.refresh(&s, now: date(8, 21))
         XCTAssertEqual(s.steps, 7_200); XCTAssertEqual(s.origin, .health)
-        s.setManual(5_000, at: date(8, 21), calendar: cal)
-        XCTAssertEqual(s.steps, 5_000); XCTAssertEqual(s.origin, .manual)
         p.value = 7_500
-        await c.refresh(&s, now: date(8, 22))          // with an override Health does not change it
-        XCTAssertEqual(s.steps, 5_000)
-        s.useHealth()
+        await c.refresh(&s, now: date(8, 22))
         XCTAssertEqual(s.steps, 7_500); XCTAssertEqual(s.origin, .health)
     }
 
-    func testOverrideExpiresNextDay() async {
-        let p = FakeProvider(); p.value = 100
-        let c = StepsController(provider: p, calendar: cal)
-        var s = StepsState()
-        s.setManual(9_000, at: date(8, 23), calendar: cal)
-        await c.refresh(&s, now: date(9, 1))
-        XCTAssertNil(s.override); XCTAssertEqual(s.steps, 100); XCTAssertEqual(s.origin, .health)
-    }
-
-    func testNoDataMeansManualWithWarning() async {
+    func testNoDataMeansZeroWithWarning() async {
         let p = FakeProvider(); p.value = nil
         let c = StepsController(provider: p, calendar: cal)
         var s = StepsState()
         await c.refresh(&s, now: date(8, 9))
-        XCTAssertEqual(s.steps, 0); XCTAssertEqual(s.origin, .manual); XCTAssertTrue(s.showsNoDataWarning)
+        XCTAssertEqual(s.steps, 0); XCTAssertEqual(s.origin, .unavailable); XCTAssertTrue(s.showsNoDataWarning)
     }
 
-    func testHealthUnavailableIsManualWithoutWarning() async {
+    func testHealthUnavailableWithoutWarning() async {
         let p = FakeProvider(); p.available = false
         let c = StepsController(provider: p, calendar: cal)
         var s = StepsState()
         await c.refresh(&s, now: date(8, 9))
-        XCTAssertEqual(s.origin, .manual); XCTAssertFalse(s.showsNoDataWarning)
+        XCTAssertEqual(s.origin, .unavailable); XCTAssertFalse(s.showsNoDataWarning)
     }
 
     func testObserverUpdate() async {

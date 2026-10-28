@@ -44,4 +44,23 @@ final class ReminderTests: XCTestCase {
                        "Ti servono 19 min a 8,3 km/h per chiudere i 10.000 passi (mancano 2.800). Senza Jolly, la streak di 22 giorni si interrompe.")
         XCTAssertNil(ReminderPlanner.message(for: Plan(goal: 10_000, steps: 10_500, speed: 6)))
     }
+
+    func testIdentifierAndNextFire() {
+        let r = ReminderPlanner.schedule(now: date(8, 18), minutesFromMidnight: 20 * 60 + 30,
+                                         plan: Plan(goal: 10_000, steps: 4_000, speed: 4), calendar: cal)
+        XCTAssertEqual(r[0].id, ReminderPlanner.identifier(for: date(8, 18), calendar: cal))
+        XCTAssertEqual(r[0].id, "stepteller.reminder.2026-10-08")
+        // 18:00 → tonight at 20:30; 21:00 → tomorrow at 20:30
+        XCTAssertEqual(ReminderPlanner.nextFire(now: date(8, 18), minutesFromMidnight: 1230, calendar: cal), date(8, 20, 30))
+        XCTAssertEqual(ReminderPlanner.nextFire(now: date(8, 21), minutesFromMidnight: 1230, calendar: cal), date(9, 20, 30))
+    }
+
+    func testWarningFromStreak() {
+        var st = StreakState()
+        st.streak = 22; st.jolly = 0; st.todayWouldBreak = true
+        XCTAssertEqual(ReminderPlanner.warning(for: st), .wouldBreak(streak: 22))
+        let plan = Plan(goal: 10_000, steps: 9_000, speed: 4)
+        XCTAssertEqual(ReminderPlanner.message(for: plan, warning: nil),
+                       .precise(minutes: plan.minutes, speed: 4, goal: 10_000, remaining: 1_000, warning: nil))
+    }
 }

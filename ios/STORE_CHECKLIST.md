@@ -225,5 +225,6 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
       noi», stessa pagina Salute dell'introduzione con la frase nuova «I tuoi dati non lasciano mai il tuo account»
 - [x] Per la 1.1: schermate `intro-2-day` in 10 lingue dal simulatore e zip `NEAT_06_per_Claude_Design.zip`
       (con `PROMPT.md`, non versionato), 27 ottobre
-- [ ] Per la 1.1: Claude Design rifà le 10 immagini 06; poi `scripts/store_screenshots.py` (solo le 06)
+- [x] Per la 1.1: Claude Design ha rifatto le 10 immagini 06 (28 ottobre, PNG in `localizzazione/design/claude-design-1.1/`,
+      non versionati), controllate tutte; convertite in `store/screenshots/<lingua>/06.jpg` (le altre 5 invariate)
 - [ ] Per la 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud, da verificare sul telefono (privacy)

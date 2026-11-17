@@ -41,6 +41,8 @@ targets:
         # Liquid Glass icon (Icon Composer): `App/AppIcon.icon`, day, night, tinted and clear variants.
         # Xcode 26+ derives the iOS 17–18 images by itself.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Seasonal icon (D-037): `App/AppIconNatale.icon`, chosen with `setAlternateIconName` (SeasonIcon).
+        ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: AppIconNatale
         TARGETED_DEVICE_FAMILY: "1"
         INFOPLIST_FILE: App/Info.plist
         CODE_SIGN_ENTITLEMENTS: App/StepTeller.entitlements
@@ -73,6 +75,7 @@ targets:
       - path: App/Design/MangaTokens.swift
       - path: App/Design/MangaViews.swift
       - path: App/Design/MangaShapes.swift
+      - path: App/Design/SeasonDecor.swift
       - path: App/Fonts/Anton-Regular.ttf
       # JA/KO/ZH titles (subset to the characters in use, scripts/font_asia.py)
       - path: App/Fonts/DelaGothicOne-NEAT.ttf

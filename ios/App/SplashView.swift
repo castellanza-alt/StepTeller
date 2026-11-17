@@ -132,6 +132,9 @@ struct SplashView: View {
             ZStack {
                 Image(uiImage: bitmaps.sole).resizable()
                 Image(uiImage: bitmaps.shoe).resizable()
+                if let hat = bitmaps.hat {
+                    Image(uiImage: hat).resizable()      // seasonal theme: the hat falls and lands with the shoe
+                }
             }
             .frame(width: Self.side, height: Self.side)
         }
@@ -264,12 +267,20 @@ struct SplashView: View {
 private struct SplashArt {
     let sole: UIImage
     let shoe: UIImage
+    /// The season's accessory on the same canvas as the icon (`SplashHat`), only in season.
+    let hat: UIImage?
 
-    /// The two layers in parallel.
+    /// The layers in parallel.
     init() async {
+        let inSeason = SeasonalTheme.active() != nil
         async let sole = Self.render("SplashSole")
         async let shoe = Self.render("SplashShoe")
-        (self.sole, self.shoe) = await (sole, shoe)
+        async let hat = Self.render("SplashHat", if: inSeason)
+        (self.sole, self.shoe, self.hat) = await (sole, shoe, hat)
+    }
+
+    @concurrent private static func render(_ name: String, if wanted: Bool) async -> UIImage? {
+        wanted ? await render(name) : nil
     }
 
     @concurrent private static func render(_ name: String) async -> UIImage {

@@ -38,6 +38,7 @@ struct WidgetPreviewScreen: View {
                 .background(RoundedRectangle(cornerRadius: 22).fill(Color.black.opacity(0.28)))
             }
             .environment(\.manga, palette)
+            .environment(\.season, SeasonalTheme.active())
         }
     }
 }

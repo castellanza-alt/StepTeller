@@ -19,6 +19,15 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   (campo nuovo `eventNotificationsOn`). Pop-up e testi provvisori: forma e parole finali da T-005; nel foglio le
   righe nuove (`n.goal.*`, `n.earned.*`, `n.used.*`, `pop.*`, `events.toggle`, `set.events.note`) hanno l'italiano
   in tutte le lingue, da tradurre dopo l'ok di William.
+- Tema di Natale (T-010, D-037, specifica `docs/design/T-004-natale.md`): dal 1° dicembre al 6 gennaio, ora locale,
+  neve che cade in Home (ferma con «Riduci movimento»), 14 luci lampeggianti lungo la strada sotto la gamba, cappello
+  sul pomello della velocità, sulla vignetta «FATTO!», sulla fiamma dello Storico (con neve ferma) e sulla stella
+  della festa (scintille anche verdi e oro), cappello che cade con la scarpa nello splash, neve ferma nei widget
+  piccolo e medio, icona di Natale (`AppIconNatale.icon`, cambiata con `setAlternateIconName` dopo lo splash, con
+  l'avviso di iOS; torna normale a fine periodo o a interruttore spento). Un solo meccanismo per le stagioni:
+  `Season` nel nucleo (date, con test), `SeasonPalette` (token `snow`, `gold`, `pine` giorno/notte) e `SeasonLook`
+  nell'app. Interruttore «Temi stagionali» nella sezione Tema, acceso di serie, in iCloud e nel Backup (campo nuovo
+  `seasonalThemes`); testi `set.season.*` in bozza. Debug: `-stepteller.season christmas|none`.
 
 ## 1.1 — inviata ad Apple il 17 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

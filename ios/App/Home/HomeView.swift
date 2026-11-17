@@ -13,6 +13,7 @@ struct HomeView: View {
     @State private var motion = ParallaxMotion()
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.season) private var season
 
     var body: some View {
         // Normally the canvas scales to the width; on short phones (e.g. SE, 375 × 667) it fits the height,
@@ -25,11 +26,21 @@ struct HomeView: View {
                         .resizable()
                         .frame(width: Manga.artSize.width, height: Manga.artSize.height)
                         .accessibilityHidden(true)
+                    if let season {
+                        RoadLights(palette: SeasonPalette.of(season, c.theme))     // under the leg
+                    }
                     ParallaxLeg(image: c.homeLeg, motion: motion)
                 }
                 .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
                 .clipped()
                 .at(0, Manga.artTop)
+                if let season {
+                    // above illustration and leg, below every text, the slider and the top bar
+                    let look = SeasonLook.of(season)
+                    SnowLayer(count: c.theme == .night ? look.flakesNight : look.flakesDay,
+                              color: SeasonPalette.of(season, c.theme).snow)
+                        .at(0, 0)
+                }
                 stepsBlock
                     .manga(rotate: -15, skew: -10, anchor: .topLeading)
                     .at(14, Manga.artTop + 112)
@@ -145,6 +156,9 @@ struct HomeView: View {
             }
             .manga(skew: -9)
             .padding(.trailing, 4)
+        }
+        .overlay(alignment: .topLeading) {
+            if season != nil { SeasonAccessory(width: 44, rotation: -20).offset(x: 18, y: 2) }
         }
         .rotationEffect(.degrees(-5))
         .accessibilityElement(children: .ignore)

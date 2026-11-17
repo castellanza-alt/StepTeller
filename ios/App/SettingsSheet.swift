@@ -70,6 +70,10 @@ struct SettingsSheet: View {
                         ForEach(ThemeMode.allCases) { Text($0.label).tag($0.rawValue) }
                     }
                     .pickerStyle(.segmented)
+                    Toggle(L10n.text("set.season.toggle"), isOn: $store.seasonalThemesOn).tint(Theme.accent)
+                        .padding(.horizontal, 16).padding(.vertical, 10)
+                        .glassCard()
+                    note(L10n.text("set.season.note"))
                     note(L10n.text("set.theme.note"))
                 }
 

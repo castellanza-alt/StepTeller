@@ -11,6 +11,7 @@ struct HistoryView: View {
     let size: CGSize
     @Environment(StepsStore.self) private var store
     @Environment(\.manga) private var c
+    @Environment(\.season) private var season
 
     @State private var tabSteps: HistoryPeriod
     @State private var periodOffset = 0
@@ -82,6 +83,12 @@ struct HistoryView: View {
                                          .init(color: .white.opacity(0.2), location: 1)],
                                  center: UnitPoint(x: 150.0 / 390, y: 250.0 / 520), startRadius: 0, endRadius: 300))
             .at(0, 0)
+        if let season {
+            // still snow in the streak area (the page scrolls: no animation), under the number and the texts
+            StaticSnow(flakes: StaticSnow.history, color: SeasonPalette.of(season, c.theme).snow,
+                       size: CGSize(width: Manga.frameWidth, height: 560))
+                .at(0, 0)
+        }
         Image(c.hill).resizable().scaledToFit().frame(width: 200)
             .accessibilityHidden(true)
             .at(-10, 560)
@@ -93,6 +100,9 @@ struct HistoryView: View {
             SVGShape(MangaPaths.flameCore, viewBox: MangaPaths.flameBox).fill(c.paper)
         }
         .frame(width: 150, height: 184)
+        .overlay(alignment: .topLeading) {
+            if season != nil { SeasonAccessory(width: 72, rotation: -10).offset(x: 75, y: 30) }
+        }
         .rotationEffect(.degrees(-12))
         .accessibilityHidden(true)
         .at(30, 138)

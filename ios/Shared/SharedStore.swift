@@ -23,6 +23,8 @@ enum SharedStore {
         static let eventsOn = "eventsOn"
         static let eventLedger = "eventLedger"
         static let jollyOnReach = "jollyOnReach"
+        static let seasonal = "stepteller.seasonal"
+        static let forcedSeason = "debugSeason"
     }
 
     /// Speed of the Home slider (km/h): the widget computes its minutes with the same one.
@@ -117,6 +119,22 @@ enum SharedStore {
         get { defaults.string(forKey: Keys.jollyOnReach) }
         set { defaults.set(newValue, forKey: Keys.jollyOnReach) }
     }
+
+    // MARK: seasonal themes (see SeasonalTheme)
+
+    /// «Seasonal themes» switch, as in Settings (default yes).
+    static var seasonalOn: Bool {
+        get { defaults.object(forKey: Keys.seasonal) != nil ? defaults.bool(forKey: Keys.seasonal) : true }
+        set { defaults.set(newValue, forKey: Keys.seasonal) }
+    }
+
+    #if DEBUG
+    /// Season forced by the launch argument `-stepteller.season` (Debug only), for the widget too.
+    static var forcedSeason: String? {
+        get { defaults.string(forKey: Keys.forcedSeason) }
+        set { defaults.set(newValue, forKey: Keys.forcedSeason) }
+    }
+    #endif
 
     /// Last count read from Health, with the day it refers to.
     static func saveSteps(_ steps: Int, now: Date = Date(), calendar: Calendar = .current) {

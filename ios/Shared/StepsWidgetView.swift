@@ -17,6 +17,7 @@ struct WidgetThemed<Content: View>: View {
     @ViewBuilder var content: () -> Content
     var body: some View {
         content().environment(\.manga, scheme == .dark ? .night : .day)
+            .environment(\.season, SeasonalTheme.active())       // switch and period from the App Group
     }
 }
 
@@ -33,11 +34,17 @@ struct WidgetPaper: View {
 struct WidgetSmallView: View {
     let data: WidgetSnapshot
     @Environment(\.manga) private var c
+    @Environment(\.season) private var season
 
     var body: some View {
         GeometryReader { geo in
             Board {
                 art
+                if let season {        // still snow above the illustration, below the texts
+                    StaticSnow(flakes: StaticSnow.widgetSmall, color: SeasonPalette.of(season, c.theme).snow,
+                               size: CGSize(width: 170, height: 170))
+                        .at(0, 0)
+                }
                 streakTag.manga(rotate: -4).at(14, 14)
                 steps.manga(rotate: -10, skew: -10, anchor: .topLeading).at(10, 40)
                 WidgetProgressBar(progress: data.plan?.progress ?? 0, width: 92, height: 9)
@@ -88,6 +95,7 @@ struct WidgetSmallView: View {
 struct WidgetMediumView: View {
     let data: WidgetSnapshot
     @Environment(\.manga) private var c
+    @Environment(\.season) private var season
 
     var body: some View {
         GeometryReader { geo in
@@ -98,6 +106,11 @@ struct WidgetMediumView: View {
                     .mask(LinearGradient(stops: [.init(color: .black, location: 0.32), .init(color: .clear, location: 0.58)],
                                          startPoint: .leading, endPoint: .trailing))
                     .at(-60, 0)
+                if let season {
+                    StaticSnow(flakes: StaticSnow.widgetMedium, color: SeasonPalette.of(season, c.theme).snow,
+                               size: CGSize(width: 364, height: 170))
+                        .at(0, 0)
+                }
                 counters
                     .manga(rotate: -3, skew: -8)
                     .frame(width: 364 - 28, alignment: .trailing)

@@ -9,6 +9,7 @@ struct RoadSpeedSlider: View {
     @Binding var speed: Double
     let unit: DistanceUnit
     @Environment(\.manga) private var c
+    @Environment(\.season) private var season
     private let track = SpeedTrack.road
     private let k = Manga.artScale
 
@@ -30,6 +31,10 @@ struct RoadSpeedSlider: View {
                 .frame(width: 0, height: 0, alignment: flip ? .trailing : .leading)
                 .offset(x: p.x + (flip ? Manga.knobSize / 2 : -Manga.knobSize / 2), y: p.y)
                 .allowsHitTesting(false)
+            if season != nil {
+                // the season's accessory rides on the knob: attach point 15 pt above its center
+                SeasonAccessory(width: 30, rotation: -15).offset(x: p.x, y: p.y - 15)
+            }
         }
         .sensoryFeedback(.selection, trigger: speed)
         .accessibilityElement(children: .ignore)

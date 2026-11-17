@@ -29,11 +29,15 @@ final class DebugHistoryProvider: HistoryProvider, @unchecked Sendable {
             seed = seed &* 6364136223846793005 &+ 1442695040888963407
             return Double((seed >> 33) % 10_000) / 10_000
         }
+        // `-stepteller.debugMissedDay 1`: the Jolly is spent yesterday (pop-up «Jolly used»); `15`: reaching
+        // today's goal earns one (pop-up «Jolly earned»). Default 8, as in the screenshots.
+        let d = UserDefaults.standard
+        let missedDay = d.object(forKey: "stepteller.debugMissedDay") != nil ? d.integer(forKey: "stepteller.debugMissedDay") : 8
         for back in stride(from: 700, through: 0, by: -1) {
             guard let day = cal.date(byAdding: .day, value: -back, to: today) else { continue }
             var steps: Int
             if back == 0 { steps = todaySteps }
-            else if back == 8 { steps = 7_900 }                       // the day saved by the Jolly
+            else if back == missedDay { steps = 7_900 }               // the day saved by the Jolly
             else if back < 24 { steps = 10_300 + Int(rnd() * 2_400) } // recent streak
             else { steps = rnd() < 0.82 ? 10_000 + Int(rnd() * 3_500) : 4_000 + Int(rnd() * 5_500) }
             // 0.78 m per step: plausible km for the fake history

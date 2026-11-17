@@ -59,6 +59,10 @@ struct SettingsSheet: View {
                     }
                     .glassCard()
                     note(L10n.text("set.reminder.note"))
+                    Toggle(L10n.text("events.toggle"), isOn: $store.eventNotificationsOn).tint(Theme.accent)
+                        .padding(.horizontal, 16).padding(.vertical, 10)
+                        .glassCard()
+                    note(L10n.text("set.events.note"))
                 }
 
                 section(L10n.text("set.theme.section")) {

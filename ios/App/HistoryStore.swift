@@ -20,6 +20,9 @@ final class HistoryStore {
     private(set) var refreshedAt: Date?
     /// First day of the streak count (first launch of this version, or the one kept in iCloud).
     private(set) var streakStart: Date
+    /// The last reread from Health returned days: the streak is real and its events can be announced. With the
+    /// phone locked Health answers nothing, and an empty history would look like days missed (Jollies spent).
+    private(set) var eventsReady = false
 
     @ObservationIgnored private let provider: (any HistoryProvider)?
     @ObservationIgnored private let defaults: UserDefaults
@@ -75,6 +78,7 @@ final class HistoryStore {
         lastRefresh = Date()
         let result = await provider.dailyRecords(until: Date())
         records = result
+        eventsReady = !result.isEmpty
         showsCachedStreak = false
         recompute()
         refreshedAt = Date()
@@ -124,6 +128,11 @@ final class HistoryStore {
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
+        if eventsReady {
+            // the widget announces the Jolly earned by reaching today's goal (see WidgetEvents)
+            let reachDay = streak.todayWouldEarnJolly ? DayKey.of(now, calendar: calendar) : nil
+            if SharedStore.jollyOnReachDay != reachDay { SharedStore.jollyOnReachDay = reachDay }
+        }
         if SharedStore.streak != streak.streak || SharedStore.jolly != streak.jolly {
             SharedStore.streak = streak.streak            // streak and Jollies for the widget
             SharedStore.jolly = streak.jolly

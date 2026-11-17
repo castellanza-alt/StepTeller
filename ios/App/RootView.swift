@@ -91,6 +91,12 @@ struct RootView: View {
                         }
                         .transition(.opacity)
                         .zIndex(1)
+                    } else if let popup = store.popups.first {
+                        // Jolly earned or used: after the goal celebration, one at a time
+                        JollyPopup(item: popup) { withAnimation(.easeOut(duration: 0.2)) { store.dismissPopup() } }
+                            .id(popup.id)
+                            .transition(.opacity)
+                            .zIndex(1)
                     }
                     }
                 }

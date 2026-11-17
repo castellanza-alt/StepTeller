@@ -20,6 +20,9 @@ enum SharedStore {
         static let reminderOn = "reminderOn"
         static let reminderMinutes = "reminderMinutes"
         static let reminderWarning = "reminderWarning"
+        static let eventsOn = "eventsOn"
+        static let eventLedger = "eventLedger"
+        static let jollyOnReach = "jollyOnReach"
     }
 
     /// Speed of the Home slider (km/h): the widget computes its minutes with the same one.
@@ -91,6 +94,28 @@ enum SharedStore {
             case nil: defaults.removeObject(forKey: Keys.reminderWarning)
             }
         }
+    }
+
+    // MARK: goal and Jolly notifications (see EventNotifier)
+
+    /// Notifications of goal and Jollies on, as in Settings (default yes).
+    static var eventsOn: Bool {
+        get { defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true }
+        set { defaults.set(newValue, forKey: Keys.eventsOn) }
+    }
+
+    /// Events already announced, shared by app and widget (`EventLedger`).
+    static var eventLedger: EventLedger? {
+        get { EventLedger.decoded(defaults.data(forKey: Keys.eventLedger)) }
+        set { defaults.set(newValue?.encoded(), forKey: Keys.eventLedger) }
+    }
+
+    /// Day (`DayKey`) on which reaching the goal earns a Jolly (15th day in a row), as computed by the app; `nil`
+    /// otherwise. The widget, which does not read the history, announces it together with the goal, only on
+    /// that day (a value left from yesterday means nothing today).
+    static var jollyOnReachDay: String? {
+        get { defaults.string(forKey: Keys.jollyOnReach) }
+        set { defaults.set(newValue, forKey: Keys.jollyOnReach) }
     }
 
     /// Last count read from Health, with the day it refers to.

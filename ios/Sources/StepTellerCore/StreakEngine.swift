@@ -28,6 +28,11 @@ public struct StreakState: Sendable, Equatable {
     public var todayWouldUseJolly = false
     /// Today not reached yet, a streak and no Jolly: at midnight it breaks.
     public var todayWouldBreak = false
+    /// Today not reached yet and reaching it would earn a Jolly (the 15th day in a row).
+    public var todayWouldEarnJolly = false
+    /// Days on which a Jolly was earned (start of day, oldest first). The days a Jolly was spent are the
+    /// `.saved` ones in `statuses`. Used to announce the events once (`StreakEvents`).
+    public var jollyEarnedDays: [Date] = []
 
     public var daysToNextJolly: Int { StreakEngine.jollyEvery - counter }
     public init() {}
@@ -66,7 +71,7 @@ public enum StreakEngine {
                     s.longestEnd = day
                 }
                 s.statuses[day] = .reached
-                if s.counter == jollyEvery { s.jolly += 1; s.jollyEarned += 1; s.counter = 0 }
+                if s.counter == jollyEvery { s.jolly += 1; s.jollyEarned += 1; s.counter = 0; s.jollyEarnedDays.append(day) }
             } else if s.streak > 0 && s.jolly > 0 {
                 s.jolly -= 1
                 s.jollyUsed += 1
@@ -93,6 +98,7 @@ public enum StreakEngine {
             s.statuses[today] = .inProgress
             s.todayWouldUseJolly = s.streak > 0 && s.jolly > 0
             s.todayWouldBreak = s.streak > 0 && s.jolly == 0
+            s.todayWouldEarnJolly = s.counter == jollyEvery - 1
         }
         return s
     }

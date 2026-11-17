@@ -10,7 +10,7 @@ enum CloudBackup {
     static let keys = [
         "stepteller.goal", "stepteller.goalHistory", "stepteller.streak.start", "stepteller.speed",
         "stepteller.units", "stepteller.reminder.on", "stepteller.reminder.minutes", "stepteller.calibration.v1",
-        ThemeMode.storageKey,
+        ThemeMode.storageKey, "stepteller.events.on",
     ]
     private static let streakStartKey = "stepteller.streak.start"
 

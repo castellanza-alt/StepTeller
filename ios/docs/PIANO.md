@@ -31,7 +31,7 @@ miglia/km, 10 lingue, introduzione al primo avvio, copia in iCloud e Backup manu
 | 3 | 1.1: classificazione per età. La 1.0 è 4+ (William, 21/10: «no» a salute e benessere, che dava 9+); da confermare per la 1.1 | in attesa di William | — |
 | 4 | 1.1: invio ad Apple (Novità in 10 lingue già pronte, `RILASCIO.md`) | provata il 17/11: manca solo l'età (3) | Director |
 | 7 | 1.2 «Natale»: notifica a obiettivo raggiunto, Jolly guadagnato/usato (notifica e pop-up), tema stagionale di Natale con icona, disattivabile (D-036) | in lavorazione, da inviare ad Apple entro il 1° dicembre | T-004…T-006 |
-| 8 | Versione «NASTY» che insulta l'utente, alla Carrot Weather | in attesa dei limiti da William (età, parolacce) | — |
+| 8 | Versione «NASTY» che insulta l'utente, alla Carrot Weather | limiti decisi (D-039); prima la voce in italiano | T-008 |
 | 5 | 1.3 (era 1.2, D-036): app per Apple Watch, ramo `ia/1.2-watch` (601c235, 24/10) partito da `74fb221`, prima della 1.1: in conflitto con `main`, provata solo sul Simulatore. Non va in `main` prima che la 1.1 sia pubblicata (`main` = 1.1 per le build) | da riportare su `main` | T-002, T-003 |
 
 Fatto e tolto dall'elenco: la pagina privacy (`neat/privacy`, IT+EN) parla già della copia in iCloud, online dal merge
@@ -47,6 +47,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-005 Pop-up e testi di obiettivo e Jolly (specifica) | Designer | `design/T-005-popup-jolly` | assegnato 17/11, dopo T-004 |
 | T-006 Notifiche e pop-up di obiettivo e Jolly | Developer | `task/T-006-notifiche` | assegnato 17/11 |
 | T-007 Collaudo dell'Apple Watch (PR #28) | QA | `qa/T-007` | assegnato 17/11 |
+| T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | assegnato 17/11, dopo T-005 |
 
 ## 6. Dove si prova cosa
 - **Linux / cloud:** `swift test` del core (`Sources/StepTellerCore`).

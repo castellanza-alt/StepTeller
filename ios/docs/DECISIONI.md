@@ -6,7 +6,6 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
 
 ## Scelte aperte
 - Classificazione per età della 1.1 (4+ o 9+).
-- Limiti della versione «NASTY» (parolacce sì/no, classificazione per età).
 
 ## Prodotto e processo (già in vigore, riportate qui)
 - **D-001** Salute solo in lettura (passi), mai scrittura né rete; nessun dato di Salute in iCloud. William.
@@ -30,6 +29,13 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   mai durante la notte e mai doppia con il promemoria; Jolly guadagnato e usato: una notifica per evento e un pop-up
   alla prima apertura dopo l'evento, mai ripetuto. Si usano i meccanismi già presenti (consegna in sottofondo di Salute,
   widget, risveglio in sottofondo), Salute sempre in sola lettura, nessuna rete. Si possono spegnere in Impostazioni.
+- **D-039 NASTY (17/11/2026, William).** «Cattiva ma senza parolacce, lo scopo è umiliare con humor inglese, non
+  offendere in modo facile con insulti. L'utente deve ridere ma anche sentirsi incentivato a fare i passi. Questo deve
+  essere vero in ogni aspetto, anche quando imposta il target dei passi.» Regole del Director che ne seguono: niente
+  parolacce, niente insulti facili; mai corpo, peso, aspetto, salute, età, genere o altre caratteristiche personali
+  (anche per le linee guida di Apple): si prende in giro solo il comportamento (pigrizia, divano, scuse, obiettivi
+  bassi). Ogni battuta chiude con una spinta a muoversi. È una voce che si sceglie, non quella di serie. Esce dopo la
+  1.2 «Natale».
 
 ## Team (17/11/2026, William: «stessa struttura di Briciola»)
 - **D-030 Organizzazione.** Quattro ruoli: **Director** (unico che parla con William, scrive i compiti, decide le

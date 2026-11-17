@@ -29,3 +29,15 @@ Non toccare il codice Swift. Non tradurre (le traduzioni passano dall'italiano a
 Non scrivere a William.
 
 ## Esito
+
+**17/11/2026, Designer.** Specifica `ios/docs/design/T-008-nasty.md`, anteprima ferma https://claude.ai/artifact/VoQCuAcpUoGyEzCnnbPGeC.
+- Carattere: due personaggi con 3 battute ciascuno (A. Hargreaves, maggiordomo inglese; B. Professoressa di Oxford);
+  proposto A, con i motivi. Registro (Lei, understatement, finta cortesia), divieti di D-039 più uno nuovo: nessun
+  aggettivo o participio che riveli il genere di chi legge. Ogni battuta chiude con un invito a muoversi.
+- Testi: 107 proposte in italiano per tutti i punti (obiettivo per fasce e ritocchi, Home in 6 fasce, Storico, serie
+  e Jolly, festa, promemoria, notifiche T-006, introduzione, widget, Impostazioni), con limite di caratteri per punto
+  e regola di rotazione delle varianti.
+- Grafica: un solo componente nuovo, il fumetto di Hargreaves (Home e Storico); scelta «Normale / NASTY» in una nuova
+  sezione «Voce» di Impostazioni, Normale di serie.
+- Aperto: evento «serie persa» da aggiungere a T-006 se approvato; nome del personaggio da confermare.
+

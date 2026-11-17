@@ -82,14 +82,12 @@ PARAMS = {
     "w.vo.steps": ["passi", "obiettivo"],
     "n.body": ["min", "velocita", "obiettivo", "mancano"],
     "n.body.mi": ["min", "velocita", "obiettivo", "mancano"],
-    "n.goal.body": ["passi", "obiettivo"],
-    "n.earned.body": ["serie", "n"],
-    "n.used.body": ["serie", "n"],
-    "pop.earned.many": ["n"],
-    "pop.used.many": ["n"],
-    "pop.earned.body": ["serie"],
-    "pop.used.body": ["serie"],
-    "pop.jolly.left": ["n"],
+    "notif.goal.body": ["passi", "obiettivo"],
+    "notif.jollyEarned.body": ["serie", "n"],
+    "notif.jollyUsed.body": ["serie", "n"],
+    "notif.jollyUsed.body.none": ["serie"],
+    "jolly.earned.vo": ["serie", "n"],
+    "jolly.used.vo": ["serie", "n"],
     # composed
     "n.body.jolly": ["min", "velocita", "obiettivo", "mancano", "n"],
     "n.body.lose": ["min", "velocita", "obiettivo", "mancano", "n"],
@@ -203,9 +201,9 @@ def build():
     used = set()                    # rows already placed (plurals and permissions)
 
     def target(key):
-        # «w.» widget texts and «n.» notification texts: table «Widget», in the app and in the extension
+        # «w.» widget texts, «n.» and «notif.» notification texts: table «Widget», in the app and in the extension
         # (the widget refreshes tonight's notification with the fresh count, see WidgetReminder)
-        return widget if key.startswith(("w.", "n.")) else app
+        return widget if key.startswith(("w.", "n.", "notif.")) else app
 
     # plurals
     for key in sorted({k.rsplit(".", 1)[0] for k in rows if k.endswith((".one", ".other"))}):

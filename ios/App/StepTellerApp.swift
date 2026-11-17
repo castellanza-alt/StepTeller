@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 import StepTellerCore
 
 @main
@@ -36,6 +37,9 @@ struct StepTellerApp: App {
         let store = createStore()
         // Background wake-up before the evening reminder: registered here, while the app is still launching.
         ReminderRefreshTask.register { store }
+        // A tapped notification opens the Home (set before launch ends, so a cold launch from a tap counts too).
+        UNUserNotificationCenter.current().delegate = NotificationRouter.shared
+        NotificationRouter.shared.onOpen = { store.homeRequests += 1 }
         return store
     }
 

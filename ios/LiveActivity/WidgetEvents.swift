@@ -9,10 +9,14 @@ enum WidgetEvents {
         let goal = SharedStore.goal
         guard goal > 0, freshSteps >= goal else { return }
         let today = DayKey.of(now, calendar: calendar)
-        var events = [StreakEvent(kind: .goalReached, day: today, streak: SharedStore.streak, jolly: SharedStore.jolly)]
-        if SharedStore.jollyOnReachDay == today {
-            // the app saved the streak without today: reaching it adds the day and the Jolly
-            events.append(StreakEvent(kind: .jollyEarned, day: today, streak: SharedStore.streak + 1, jolly: SharedStore.jolly + 1))
+        // numbers after reaching the goal, computed by the app for today; without them (app not run today) the
+        // last streak plus today
+        let reach = SharedStore.goalReach.flatMap { $0.day == today ? $0 : nil }
+        let streak = reach?.streak ?? SharedStore.streak + 1
+        let jolly = reach?.jolly ?? SharedStore.jolly
+        var events = [StreakEvent(kind: .goalReached, day: today, streak: streak, jolly: jolly)]
+        if reach?.earnsJolly == true {
+            events.append(StreakEvent(kind: .jollyEarned, day: today, streak: streak, jolly: jolly))
         }
         let due = StreakEvents.toNotify(events, ledger: EventNotifier.ledger(now: now, calendar: calendar), now: now, calendar: calendar)
         await EventNotifier.notify(due, steps: freshSteps, goal: goal, appActive: false, now: now, calendar: calendar)

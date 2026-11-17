@@ -28,6 +28,15 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   `Season` nel nucleo (date, con test), `SeasonPalette` (token `snow`, `gold`, `pine` giorno/notte) e `SeasonLook`
   nell'app. Interruttore «Temi stagionali» nella sezione Tema, acceso di serie, in iCloud e nel Backup (campo nuovo
   `seasonalThemes`); testi `set.season.*` in bozza. Debug: `-stepteller.season christmas|none`.
+- Pop-up e notifiche di obiettivo e Jolly nella forma finale (T-011, specifica `docs/design/T-005-popup-jolly.md`):
+  vignetta inclinata con la fiamma del Jolly e «+N» / «−N», raggi e scintille per il Jolly guadagnato, fiamma che
+  trema per quello usato, aptica, cappello a Natale; resta finché si tocca «OK» o lo schermo. Ordine: Jolly usato,
+  Jolly guadagnato, poi la festa dell'obiettivo, 0,3 s tra l'uno e l'altro. Notifiche con i testi della specifica
+  (streak nel corpo dell'obiettivo, «Jolly finiti» quando non ne restano); tra le 22 e le 8 ogni notifica, anche
+  quella dell'obiettivo, aspetta le 8 (Director). Toccando una notifica si apre la Home (`NotificationRouter`).
+  Sezione «Notifiche» in Impostazioni (già «Promemoria serale»). 22 testi della specifica al posto delle bozze di
+  T-006, italiano in tutte le lingue in attesa dell'ok di William e della traduzione; il widget prende streak e
+  Jolly dopo l'obiettivo dall'app (`StreakEvents.Reach`).
 
 ## 1.1 — inviata ad Apple il 17 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

@@ -31,7 +31,7 @@ enum EventNotifier {
 
     /// Tells the events not told yet. Every event is marked as told even when no notification goes out:
     /// switched off in Settings, notifications not allowed, app on screen (the celebration and the pop-up tell
-    /// it there), goal at night. A Jolly event at night is scheduled for 08:00.
+    /// it there). Nothing sounds at night: an event between 22:00 and 08:00 is scheduled for 08:00 (Director).
     /// - Parameters: `steps` and `goal`: today's count and goal, for the goal text.
     static func notify(_ candidates: [StreakEvent], steps: Int, goal: Int, appActive: Bool,
                        now: Date = Date(), calendar: Calendar = .current) async {
@@ -57,13 +57,10 @@ enum EventNotifier {
             guard !pending.contains(id), !delivered.contains(id) else { continue }
             var trigger: UNNotificationTrigger?
             if event.kind == .goalReached {
-                guard !StreakEvents.isNight(now, calendar: calendar) else {
-                    log.notice("events: \(event.id) at night, not sent")
-                    continue
-                }
                 // tonight's reminder is not needed any more: never goal and reminder together
                 center.removePendingNotificationRequests(withIdentifiers: [ReminderPlanner.identifier(for: now, calendar: calendar)])
-            } else if let morning = StreakEvents.morningDelivery(after: now, calendar: calendar) {
+            }
+            if let morning = StreakEvents.morningDelivery(after: now, calendar: calendar) {
                 trigger = UNCalendarNotificationTrigger(dateMatching: morning, repeats: false)
             }
             let text = EventText.notification(event, steps: steps, goal: goal)
@@ -108,21 +105,31 @@ enum EventNotifier {
     }
 }
 
-/// Texts of the goal and Jolly notifications in the phone's language («Widget» table: app and widget).
-/// Provisional drafts (T-006): the final texts come from the design (T-005).
+/// Texts of the goal and Jolly notifications in the phone's language («Widget» table: app and widget), from the
+/// design (T-005 §2).
 enum EventText {
     static func notification(_ event: StreakEvent, steps: Int, goal: Int) -> ReminderContent {
         let t = L10n.widget
+        let s = LocalFormat.integer(event.streak), j = LocalFormat.integer(event.jolly)
         switch event.kind {
         case .goalReached:
-            return ReminderContent(title: L10n.text("n.goal.title", table: t),
-                                   body: L10n.format("n.goal.body", table: t, LocalFormat.integer(steps), LocalFormat.integer(goal)))
+            // «10.240 passi su 10.000.» + «Streak: 15 giorni di fila.» (plural on the streak)
+            let first = L10n.format("notif.goal.body", table: t, LocalFormat.integer(steps), LocalFormat.integer(goal))
+            let second = L10n.format("notif.goal.streak", table: t, event.streak)
+            return ReminderContent(title: L10n.text("notif.goal.title", table: t), body: first + gap + second)
         case .jollyEarned:
-            return ReminderContent(title: L10n.text("n.earned.title", table: t),
-                                   body: L10n.format("n.earned.body", table: t, "\(event.streak)", "\(event.jolly)"))
+            return ReminderContent(title: L10n.text("notif.jollyEarned.title", table: t),
+                                   body: L10n.format("notif.jollyEarned.body", table: t, s, j))
         case .jollyUsed:
-            return ReminderContent(title: L10n.text("n.used.title", table: t),
-                                   body: L10n.format("n.used.body", table: t, "\(event.streak)", "\(event.jolly)"))
+            let body = event.jolly > 0 ? L10n.format("notif.jollyUsed.body", table: t, s, j)
+                                       : L10n.format("notif.jollyUsed.body.none", table: t, s)
+            return ReminderContent(title: L10n.text("notif.jollyUsed.title", table: t), body: body)
         }
+    }
+
+    /// Between two sentences: a space, none in Japanese and Chinese.
+    private static var gap: String {
+        let code = Locale.current.language.languageCode
+        return code == .japanese || code == .chinese ? "" : " "
     }
 }

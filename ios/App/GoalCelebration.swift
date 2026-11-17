@@ -120,7 +120,7 @@ struct GoalCelebration: View {
 
 /// Sparks: two bursts from the center of the burst, light gravity and fade-out. Deterministic
 /// (same drawing at every celebration), in the palette colors.
-private enum Sparks {
+enum Sparks {
     private struct Spark {
         let angle, speed, size, delay, spin: Double
         let color: Int

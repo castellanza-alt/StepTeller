@@ -22,7 +22,7 @@ enum SharedStore {
         static let reminderWarning = "reminderWarning"
         static let eventsOn = "eventsOn"
         static let eventLedger = "eventLedger"
-        static let jollyOnReach = "jollyOnReach"
+        static let goalReach = "goalReach"
         static let seasonal = "stepteller.seasonal"
         static let forcedSeason = "debugSeason"
     }
@@ -112,12 +112,11 @@ enum SharedStore {
         set { defaults.set(newValue?.encoded(), forKey: Keys.eventLedger) }
     }
 
-    /// Day (`DayKey`) on which reaching the goal earns a Jolly (15th day in a row), as computed by the app; `nil`
-    /// otherwise. The widget, which does not read the history, announces it together with the goal, only on
-    /// that day (a value left from yesterday means nothing today).
-    static var jollyOnReachDay: String? {
-        get { defaults.string(forKey: Keys.jollyOnReach) }
-        set { defaults.set(newValue, forKey: Keys.jollyOnReach) }
+    /// What reaching today's goal means (streak, Jollies, a Jolly earned on the 15th day), as computed by the app
+    /// with its day: the widget, which does not read the history, tells it with these numbers, only on that day.
+    static var goalReach: StreakEvents.Reach? {
+        get { StreakEvents.Reach(encoded: defaults.string(forKey: Keys.goalReach)) }
+        set { defaults.set(newValue?.encoded, forKey: Keys.goalReach) }
     }
 
     // MARK: seasonal themes (see SeasonalTheme)

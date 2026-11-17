@@ -15,6 +15,8 @@ struct RootView: View {
     /// Day (yyyy-MM-dd) of the last «Goal reached» celebration: one per day.
     @AppStorage("stepteller.celebratedDay") private var celebratedDay = ""
     @State private var celebrating = false
+    /// 0.3 s between one pop-up and the next (T-005 §1.1).
+    @State private var popupPause = false
     /// Last launch (or return to the foreground): the celebration waits for a history reread since then,
     /// otherwise the streak would show today only («1 day in a row»).
     @State private var activeSince = Date()
@@ -94,10 +96,10 @@ struct RootView: View {
                         }
                         .transition(.opacity)
                         .zIndex(1)
-                    } else if let popup = store.popups.first, scenePhase == .active, !showSettings {
-                        // Jolly earned or used: after the goal celebration, one at a time, only when it can be seen
-                        // (taken away by Settings or the background, it comes back: its timer does not close it)
-                        JollyPopup(item: popup) { withAnimation(.easeOut(duration: 0.2)) { store.dismissPopup() } }
+                    } else if let popup = store.popups.first, scenePhase == .active, !showSettings, !popupPause {
+                        // Jolly used, then earned, then the goal celebration; one at a time, only when it can be seen
+                        // (taken away by Settings or the background, it comes back later)
+                        JollyPopup(item: popup) { nextPopup() }
                             .id(popup.id)
                             .transition(.opacity)
                             .zIndex(1)
@@ -151,6 +153,12 @@ struct RootView: View {
         .onChange(of: store.plan.isDone) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.history.refreshedAt) { _, _ in celebrateIfNeeded() }
+        .onChange(of: store.eventsCheckedAt) { _, _ in celebrateIfNeeded() }
+        .onChange(of: store.homeRequests) { _, _ in
+            // a notification was tapped: the Home, where the pop-up of the event shows
+            showSettings = false
+            if screen != .home { navigate() }
+        }
     }
 
     private func navigate() {
@@ -174,6 +182,17 @@ struct RootView: View {
 
 extension RootView {
     /// Celebration at the first launch after reaching the day's goal (only with Health steps).
+    /// The pop-up on screen closed: 0.3 s, then the next one or the celebration.
+    private func nextPopup() {
+        store.dismissPopup()
+        popupPause = true
+        Task {
+            try? await Task.sleep(for: .seconds(0.3))
+            popupPause = false
+            celebrateIfNeeded()
+        }
+    }
+
     private func celebrateIfNeeded() {
         #if DEBUG
         if UserDefaults.standard.object(forKey: "stepteller.debugCelebrate") != nil, !celebrating {
@@ -183,7 +202,9 @@ extension RootView {
         // only with a read of today: on wake-up the number may still be yesterday's
         guard scenePhase == .active, !celebrating, store.goal > 0, store.plan.isDone, store.origin == .health,
               let read = store.lastUpdate, Calendar.current.isDateInToday(read),
-              let history = store.history.refreshedAt, history >= activeSince
+              let history = store.history.refreshedAt, history >= activeSince,
+              // the Jolly pop-ups of this reading come first
+              store.popups.isEmpty, !popupPause, let checked = store.eventsCheckedAt, checked >= activeSince, checked >= read
         else { return }
         let c = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let today = String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)

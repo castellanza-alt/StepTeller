@@ -146,13 +146,45 @@ public enum StreakEvents {
     }
 
     /// Several events found together (the app was closed for days): one pop-up per kind, the latest one with
-    /// how many there were. Oldest kind first: «used» before «earned» only if it happened earlier.
+    /// how many there were. Order of the design (T-005 §1.1): «Jolly used», then «Jolly earned» (the goal
+    /// celebration comes after both).
     public static func popups(_ events: [StreakEvent]) -> [(event: StreakEvent, count: Int)] {
-        var byKind: [StreakEvent.Kind: [StreakEvent]] = [:]
-        for e in events where e.isJolly { byKind[e.kind, default: []].append(e) }
-        return byKind.values
-            .compactMap { list in list.max { $0.day < $1.day }.map { ($0, list.count) } }
-            .sorted { $0.event.day < $1.event.day }
+        let order: [StreakEvent.Kind] = [.jollyUsed, .jollyEarned]
+        return order.compactMap { kind in
+            let list = events.filter { $0.kind == kind }
+            return list.max { $0.day < $1.day }.map { ($0, list.count) }
+        }
+    }
+
+    /// What reaching today's goal means, as the app computes it, for the widget (which does not read the history)
+    /// to tell it: streak and Jollies after reaching it, and whether it earns a Jolly (15th day in a row).
+    public struct Reach: Equatable, Sendable {
+        public let day: String
+        public let streak: Int
+        public let jolly: Int
+        public let earnsJolly: Bool
+
+        public init(day: String, streak: Int, jolly: Int, earnsJolly: Bool) {
+            self.day = day; self.streak = streak; self.jolly = jolly; self.earnsJolly = earnsJolly
+        }
+
+        /// `2026-11-17|23|3|1`, for the App Group.
+        public var encoded: String { "\(day)|\(streak)|\(jolly)|\(earnsJolly ? 1 : 0)" }
+        public init?(encoded: String?) {
+            let p = (encoded ?? "").split(separator: "|").map(String.init)
+            guard p.count == 4, let s = Int(p[1]), let j = Int(p[2]) else { return nil }
+            self.init(day: p[0], streak: s, jolly: j, earnsJolly: p[3] == "1")
+        }
+    }
+
+    public static func reach(_ state: StreakState, now: Date, calendar: Calendar) -> Reach {
+        let today = DayKey.of(now, calendar: calendar)
+        if state.todayReached {
+            let earned = state.jollyEarnedDays.last.map { DayKey.of($0, calendar: calendar) == today } ?? false
+            return Reach(day: today, streak: state.streak, jolly: state.jolly, earnsJolly: earned)
+        }
+        return Reach(day: today, streak: state.streak + 1, jolly: state.jolly + (state.todayWouldEarnJolly ? 1 : 0),
+                     earnsJolly: state.todayWouldEarnJolly)
     }
 
     /// Identifier of the notification of an event.

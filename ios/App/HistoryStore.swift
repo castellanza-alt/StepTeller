@@ -129,9 +129,9 @@ final class HistoryStore {
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
                                       goals: goals, now: now, calendar: calendar)
         if eventsReady {
-            // the widget announces the Jolly earned by reaching today's goal (see WidgetEvents)
-            let reachDay = streak.todayWouldEarnJolly ? DayKey.of(now, calendar: calendar) : nil
-            if SharedStore.jollyOnReachDay != reachDay { SharedStore.jollyOnReachDay = reachDay }
+            // the widget tells «goal reached» (and the Jolly it earns) with these numbers (see WidgetEvents)
+            let reach = StreakEvents.reach(streak, now: now, calendar: calendar)
+            if SharedStore.goalReach != reach { SharedStore.goalReach = reach }
         }
         if SharedStore.streak != streak.streak || SharedStore.jolly != streak.jolly {
             SharedStore.streak = streak.streak            // streak and Jollies for the widget

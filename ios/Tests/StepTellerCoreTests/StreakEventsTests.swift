@@ -74,6 +74,31 @@ final class StreakEventsTests: XCTestCase {
         XCTAssertTrue(StreakEvents.toShow(events, ledger: ledger, now: at(5, 10), calendar: cal).isEmpty)
     }
 
+    func testPopupOrderUsedThenEarned() {
+        let events = [StreakEvent(kind: .jollyEarned, day: "2026-11-02", streak: 15, jolly: 4),
+                      StreakEvent(kind: .jollyUsed, day: "2026-11-09", streak: 21, jolly: 3),
+                      StreakEvent(kind: .jollyUsed, day: "2026-11-08", streak: 21, jolly: 3)]
+        let popups = StreakEvents.popups(events)
+        XCTAssertEqual(popups.map(\.event.kind), [.jollyUsed, .jollyEarned])
+        XCTAssertEqual(popups.map(\.count), [2, 1])
+        XCTAssertEqual(popups.first?.event.day, "2026-11-09")
+    }
+
+    func testReachForTheWidget() {
+        // in progress on the 15th day: reaching it gives streak 15 and a Jolly
+        let before = state(Array(repeating: 10_000, count: 14) + [500], now: at(15, 12))
+        let r = StreakEvents.reach(before, now: at(15, 12), calendar: cal)
+        XCTAssertEqual(r, StreakEvents.Reach(day: "2026-11-15", streak: 15, jolly: 4, earnsJolly: true))
+        // already reached: the same numbers
+        let after = state(Array(repeating: 10_000, count: 15), now: at(15, 19))
+        XCTAssertEqual(StreakEvents.reach(after, now: at(15, 19), calendar: cal), r)
+        // streak broken yesterday without Jollies: reaching today starts from 1
+        let broken = state([10_000, 0, 300], now: at(3, 12), initialJolly: 0)
+        XCTAssertEqual(StreakEvents.reach(broken, now: at(3, 12), calendar: cal).streak, 1)
+        XCTAssertEqual(StreakEvents.Reach(encoded: r.encoded), r)
+        XCTAssertNil(StreakEvents.Reach(encoded: "rotto"))
+    }
+
     // MARK: once
 
     func testNotifiedOnceAcrossLaunches() {

@@ -62,6 +62,11 @@ final class StepsStore {
             SeasonIcon.update()                  // switched off: the normal icon right away (iOS shows its alert)
         }
     }
+    /// End of the last check of the events (`announceEvents`): the goal celebration waits for it, so the Jolly
+    /// pop-ups of the same reading come first (T-005 §1.1).
+    private(set) var eventsCheckedAt: Date?
+    /// A notification was tapped: the Home opens (see `NotificationRouter`).
+    var homeRequests = 0
     /// Jolly pop-ups waiting to be shown (first opening after the event, never repeated), oldest first.
     private(set) var popups: [JollyPopupItem] = []
     var reminderMinutes: Int {
@@ -284,6 +289,7 @@ final class StepsStore {
     /// Tells the events of the streak not told yet: notifications with the app in the background (Health
     /// delivery, wake-up before the reminder), pop-ups with the app on screen. Only after a real Health read.
     func announceEvents() async {
+        defer { eventsCheckedAt = Date() }
         guard history.eventsReady else { return }
         let now = Date()
         let calendar = controller.calendar

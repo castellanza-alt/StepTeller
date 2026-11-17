@@ -6,6 +6,7 @@ struct StepTellerApp: App {
     @State private var store = StepTellerApp.makeStore()
     /// Opening animation: the scene is created once per process, so only at a cold launch.
     @State private var splash = Splash.prepareAtLaunch()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
@@ -25,6 +26,9 @@ struct StepTellerApp: App {
     private var root: some View {
         RootView().environment(store)
             .overlay { if splash { SplashView { splash = false } } }
+            // seasonal icon: after the splash, at every return to the foreground (iOS shows its alert)
+            .onChange(of: splash) { _, showing in if !showing { SeasonIcon.updateSoon() } }
+            .onChange(of: scenePhase) { _, phase in if phase == .active, !splash { SeasonIcon.updateSoon() } }
     }
 
     @MainActor

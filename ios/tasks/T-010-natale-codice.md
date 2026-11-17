@@ -25,3 +25,14 @@ normale, icona compresa; CI verde.
 Non unire, nessuna build TestFlight, nessun tag `[testflight]`/`[apple]`/`[store…]`, nessuna chiave. Non scrivere a William.
 
 ## Esito
+17/11/2026, Developer. PR https://github.com/castellanza-alt/StepTeller/pull/36 (ramo `task/T-010-natale`), non unita.
+- **Fatto:** `Season` nel nucleo (periodo 1/12–6/1, test), `SeasonPalette`/`SeasonLook`, neve, luci, cappello (pomello,
+  «FATTO!», fiamma dello Storico, festa), neve ferma nello Storico e nei widget, cappello nello splash, icona
+  `AppIconNatale` con `setAlternateIconName` (dopo splash + 0,6 s, mai durante l'introduzione), interruttore «Temi
+  stagionali» in iCloud e Backup, testi in bozza, debug `-stepteller.season christmas|none`.
+- **Provato:** `swift test` 90/90, compilazione Debug e Release; Simulatore giorno e notte con e senza stagione
+  (Home, «FATTO!», Storico, festa, widget, splash), icona di Natale e ritorno alla normale con l'avviso di iOS.
+  Revisione indipendente: 3 problemi corretti (avviso dell'icona da iCloud/introduzione, luci con «Riduci movimento»).
+- **Solo sul telefono:** icona sul vero schermo Home (varianti chiara/scura/tinta), widget sul vero schermo Home,
+  fluidità della neve.
+- **Scelta da confermare (Director):** l'avviso dell'icona non compare durante l'introduzione: arriva alla sua fine.

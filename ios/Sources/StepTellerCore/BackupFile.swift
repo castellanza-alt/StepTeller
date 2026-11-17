@@ -25,6 +25,8 @@ public struct BackupFile: Codable, Equatable, Sendable {
     public var calibration: CalibrationResult?
     /// Notifications of goal and Jollies on (1.2). Added field: older files simply lack it.
     public var eventNotificationsOn: Bool?
+    /// Seasonal themes on (1.2). Added field, like the one above.
+    public var seasonalThemes: Bool?
 
     public init(exportedAt: Date) { self.exportedAt = exportedAt }
 

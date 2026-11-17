@@ -6005,6 +6005,138 @@
         }
       }
     },
+    "set.season.note" : {
+      "comment" : "Nota sotto l'interruttore dei temi stagionali. Limite: ≤ 140.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+          }
+        }
+      }
+    },
+    "set.season.toggle" : {
+      "comment" : "Interruttore dei temi stagionali, nella sezione Tema. Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temi stagionali"
+          }
+        }
+      }
+    },
     "set.streak.how" : {
       "comment" : "Riga che apre le regole. Limite: ≤ 22.",
       "extractionState" : "manual",

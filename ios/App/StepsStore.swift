@@ -51,6 +51,17 @@ final class StepsStore {
             else { Task { await EventNotifier.withdrawAllPending() } }
         }
     }
+    /// Seasonal themes (Christmas: snow, lights, hat, icon), default yes (D-037).
+    var seasonalThemesOn: Bool {
+        didSet {
+            // iCloud and Backup reassign it at every restore: only a real change touches widget and icon
+            guard seasonalThemesOn != oldValue else { return }
+            defaults.set(seasonalThemesOn, forKey: Keys.seasonal)
+            SharedStore.seasonalOn = seasonalThemesOn
+            WidgetCenter.shared.reloadAllTimelines()
+            SeasonIcon.update()                  // switched off: the normal icon right away (iOS shows its alert)
+        }
+    }
     /// Jolly pop-ups waiting to be shown (first opening after the event, never repeated), oldest first.
     private(set) var popups: [JollyPopupItem] = []
     var reminderMinutes: Int {
@@ -88,6 +99,7 @@ final class StepsStore {
         static let reminderTime = "stepteller.reminder.minutes"
         static let calibration = "stepteller.calibration.v1"
         static let eventsOn = "stepteller.events.on"
+        static let seasonal = "stepteller.seasonal"
     }
 
     init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
@@ -111,6 +123,7 @@ final class StepsStore {
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         eventNotificationsOn = defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true
+        seasonalThemesOn = defaults.object(forKey: Keys.seasonal) != nil ? defaults.bool(forKey: Keys.seasonal) : true
         #if DEBUG
         // Simulator screenshots: no notification permission prompt over the UI.
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
@@ -132,7 +145,10 @@ final class StepsStore {
         SharedStore.reminderOn = reminderEnabled      // the widget refreshes tonight's reminder (WidgetReminder)
         SharedStore.reminderMinutes = reminderMinutes
         SharedStore.eventsOn = eventNotificationsOn
+        SharedStore.seasonalOn = seasonalThemesOn
         #if DEBUG
+        // `-stepteller.season christmas` / `none`: forces the seasonal theme (screenshots, QA), widget included.
+        SharedStore.forcedSeason = defaults.string(forKey: "stepteller.season")
         // Simulator checks of the pop-ups: `-stepteller.debugEventsSince 7` starts the ledger 7 days ago and
         // forgets what was told, so the Jolly events of the fake history (`-stepteller.debugMissedDay`) show.
         if defaults.object(forKey: "stepteller.debugEventsSince") != nil {
@@ -302,6 +318,7 @@ final class StepsStore {
         if defaults.object(forKey: Keys.reminderOn) != nil { reminderEnabled = defaults.bool(forKey: Keys.reminderOn) }
         if defaults.object(forKey: Keys.reminderTime) != nil { reminderMinutes = defaults.integer(forKey: Keys.reminderTime) }
         if defaults.object(forKey: Keys.eventsOn) != nil { eventNotificationsOn = defaults.bool(forKey: Keys.eventsOn) }
+        if defaults.object(forKey: Keys.seasonal) != nil { seasonalThemesOn = defaults.bool(forKey: Keys.seasonal) }
         if let saved = defaults.data(forKey: Keys.calibration).flatMap({ try? JSONDecoder().decode(CalibrationResult.self, from: $0) }) {
             calibration = saved
             SharedStore.calibration = saved
@@ -320,6 +337,7 @@ final class StepsStore {
         file.reminderOn = reminderEnabled
         file.reminderMinutes = reminderMinutes
         file.eventNotificationsOn = eventNotificationsOn
+        file.seasonalThemes = seasonalThemesOn
         file.theme = defaults.string(forKey: ThemeMode.storageKey)
         file.streakStart = history.streakStart
         file.goalHistory = history.goals
@@ -337,6 +355,7 @@ final class StepsStore {
         if let value = file.reminderOn { reminderEnabled = value }
         if let value = file.reminderMinutes, (0..<24 * 60).contains(value) { reminderMinutes = value }
         if let value = file.eventNotificationsOn { eventNotificationsOn = value }
+        if let value = file.seasonalThemes { seasonalThemesOn = value }
         if let raw = file.theme, ThemeMode(rawValue: raw) != nil { defaults.set(raw, forKey: ThemeMode.storageKey) }
         if let saved = file.calibration {
             calibration = saved

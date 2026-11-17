@@ -57,6 +57,9 @@ struct RootView: View {
     var body: some View {
         TimelineView(.everyMinute) { timeline in
             let palette = MangaPalette.of(themeMode.resolve(systemScheme: systemScheme, now: timeline.date))
+            // read here so a change of the switch redraws (SeasonalTheme reads its App Group copy)
+            let _ = store.seasonalThemesOn
+            let season = SeasonalTheme.active(now: timeline.date)
             GeometryReader { geo in
                 let size = CGSize(width: geo.size.width,
                                   height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom)
@@ -112,11 +115,13 @@ struct RootView: View {
                             onboardingDone = true
                             replayingIntro = false
                         }
+                        SeasonIcon.updateSoon()       // the seasonal icon waits for the end of the introduction
                     }
                     .transition(.opacity)
                 }
             }
             .environment(\.manga, palette)
+            .environment(\.season, season)
             .preferredColorScheme(themeMode == .system ? nil : palette.colorScheme)
             .sheet(isPresented: $showSettings) {
                 SettingsSheet(onReplayIntro: {

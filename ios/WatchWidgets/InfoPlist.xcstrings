@@ -1,0 +1,72 @@
+{
+  "sourceLanguage" : "it",
+  "strings" : {
+    "NSHealthShareUsageDescription" : {
+      "comment" : "p.health.widget: Lo stesso, per il widget. Limite: ≤ 200.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Widget liest heutige Schritte aus Health, um sie anzuzeigen und die übrigen Gehminuten zu schätzen. Schreibt nichts und sendet keine Daten vom Handy."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The widget reads today's steps from Health to display them and estimate the walking minutes left. It writes nothing and sends no data off your phone."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El widget lee tus pasos de hoy de Salud para mostrarlos y estimar los minutos que te quedan andando. No escribe nada ni envía datos fuera del teléfono."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le widget lit tes pas du jour dans Santé pour les afficher et estimer les minutes de marche restantes. Aucune écriture ni envoi de données hors du téléphone."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il widget legge i tuoi passi di oggi da Salute per mostrarli e per stimare i minuti a piedi che mancano. Non scrive nulla e non invia dati fuori dal telefono."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウィジェットはヘルスケアから今日の歩数を読み取って表示し、あと何分歩く必要があるかを推定します。データの書き込みやスマホ外への送信は行いません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위젯은 건강 앱에서 오늘 걸음 수를 읽어 표시하고, 더 걸어야 할 시간을 추정합니다. 데이터를 쓰거나 휴대폰 밖으로 보내지 않습니다."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O widget lê seus passos de hoje no Saúde para mostrá-los e estimar os minutos de caminhada restantes. Não grava nada nem envia dados para fora do celular."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小组件从“健康”读取今日步数，用于显示步数并估算还需步行的分钟数。不写入任何内容，也不向手机外发送数据。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小工具從「健康」讀取今日步數，用於顯示步數並估算還需步行的分鐘數。不寫入任何內容，也不向手機外傳送資料。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -5,15 +5,24 @@ import StepTellerCore
 
 /// «Today's steps» widget in the «Dan Dan Dan» style: small and medium on the Home Screen (day/night theme
 /// following the system appearance) and, on the lock screen, circular, rectangular and inline. A tap opens Home.
+/// On the Apple Watch the same code is the complications: circular, rectangular, inline and corner.
 struct StepsWidget: Widget {
+    #if os(watchOS)
+    static let families: [WidgetFamily] = [.accessoryCircular, .accessoryRectangular, .accessoryInline, .accessoryCorner]
+    static let galleryDescription = "w.watch.gallery.desc"
+    #else
+    static let families: [WidgetFamily] = [.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline]
+    static let galleryDescription = "w.gallery.desc"
+    #endif
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "StepsWidget", provider: StepsTimelineProvider()) { entry in
             StepsWidgetEntryView(data: entry.data)
                 .widgetURL(URL(string: "stepteller://oggi"))
         }
         .configurationDisplayName(L10n.text("w.gallery.name", table: L10n.widget))
-        .description(L10n.text("w.gallery.desc", table: L10n.widget))
-        .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline])
+        .description(L10n.text(Self.galleryDescription, table: L10n.widget))
+        .supportedFamilies(Self.families)
         .contentMarginsDisabled()
     }
 }
@@ -33,13 +42,35 @@ struct StepsWidgetEntryView: View {
             Label(data.plan.map { L10n.format("w.inline", table: L10n.widget, LocalFormat.integer($0.steps)) }
                   ?? L10n.text("w.inline.none", table: L10n.widget), systemImage: "flame.fill")
                 .containerBackground(for: .widget) { Color.clear }
+        #if os(watchOS)
+        case .accessoryCorner:
+            WatchCorner(plan: data.plan).containerBackground(for: .widget) { Color.clear }
+        default:
+            LockCircular(plan: data.plan).containerBackground(for: .widget) { Color.clear }
+        #else
         case .systemMedium:
             WidgetThemed { WidgetMediumView(data: data) }.containerBackground(for: .widget) { WidgetPaper() }
         default:
             WidgetThemed { WidgetSmallView(data: data) }.containerBackground(for: .widget) { WidgetPaper() }
+        #endif
         }
     }
 }
+
+#if os(watchOS)
+/// Watch face corner: compact steps in Anton, the progress as the curved gauge along the edge.
+struct WatchCorner: View {
+    let plan: Plan?
+    var body: some View {
+        AntonText(WidgetText.compactSteps(plan), 20, tracking: -0.02, color: .white, minScale: 0.6)
+            .widgetLabel { Gauge(value: min(1, max(0, plan?.progress ?? 0))) { Text("") } }
+            .widgetAccentable()
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(plan.map { L10n.format("w.vo.steps", table: L10n.widget, LocalFormat.integer($0.steps), LocalFormat.integer($0.goal)) }
+                                ?? L10n.text("w.vo.none.short", table: L10n.widget))
+    }
+}
+#endif
 
 struct StepsEntry: TimelineEntry {
     let date: Date
@@ -61,7 +92,12 @@ struct StepsTimelineProvider: TimelineProvider {
         Task {
             let e = await entry()
             // iOS decides when to really refresh (about every 15–60 minutes): this is only a hint.
+            #if os(watchOS)
+            // On the watch there is no reminder to keep true (it is the iPhone's notification): the usual hint.
+            completion(Timeline(entries: [e], policy: .after(Date().addingTimeInterval(15 * 60))))
+            #else
             completion(Timeline(entries: [e], policy: .after(WidgetReminder.nextRefresh(now: Date()))))
+            #endif
         }
     }
 
@@ -71,7 +107,9 @@ struct StepsTimelineProvider: TimelineProvider {
         var steps = await WidgetHealth.todaySteps(now: now)
         if let s = steps {
             SharedStore.saveSteps(s, now: now)
+            #if !os(watchOS)
             await WidgetReminder.update(freshSteps: s, now: now)     // tonight's notification follows the count
+            #endif
         } else {
             steps = SharedStore.cachedStepsToday(now: now)
         }

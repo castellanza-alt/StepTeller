@@ -28,3 +28,22 @@ tag `[testflight]`/`[apple]`/`[store]` nei commit, nessuna chiave o credenziale.
 specifica arriva da T-003). Non toccare i file in radice (web app). Non scrivere a William.
 
 ## Esito
+17/11/2026, Developer. PR in bozza: https://github.com/castellanza-alt/StepTeller/pull/28 (ramo `task/T-002-watch`,
+non unita).
+- **Fatto:** merge di `origin/ia/1.2-watch` su `main` (poi riallineato a 4c32403). Conflitti: CHANGELOG («1.2 — in
+  lavorazione» in cima, 1.1 identica a `main`) e foglio dei testi (foglio della 1.1 + `w.watch.gallery.desc`,
+  `w.watch.nodata`, `w.watch.nodata.vo`, `p.health.watch`; cataloghi rigenerati con `scripts/cataloghi.py`, uguali al
+  merge automatico). Un solo ritocco di codice: `LiveActivity/StepsWidget.swift`, `WidgetReminder` (promemoria della
+  1.1) escluso su watchOS, dove le complicazioni non lo compilano. Riga nel CHANGELOG 1.2.
+- **Provato sul Mac (Xcode 27.2):** `swift test` 66/66; compilazione Simulatore iPhone (con app Watch incorporata) e
+  watchOS riuscite; coppia di Simulatori iPhone 18 Pro + Watch Series 12 46 mm: con obiettivo 12.345 e 5,5 km/h sul
+  telefono, l'orologio riceve i dati e mostra «7.200 SU 12.345 · ANCORA 45 MIN · 4,1 KM» come la Home (passi finti di
+  debug). Nel Simulatore l'orologio riceve i dati solo se l'app Watch è installata e avviata prima di riaprire
+  l'app del telefono. Revisione indipendente: nessun bug bloccante.
+- **Da provare sul telefono e sull'orologio veri:** Salute vera e permesso sull'orologio, complicazioni sul quadrante,
+  arrivo delle impostazioni dopo un cambio sul telefono, firma/TestFlight con i due bundle nuovi.
+- **Da decidere (Director), già nel ramo Watch e non corretti qui:** reinvio delle impostazioni dopo la
+  reinstallazione dell'app Watch (`App/WatchSync.swift`), sessione avviata solo all'apertura della schermata
+  (`Watch/WatchStore.swift`), testo del permesso delle complicazioni che dice «telefono» (`p.health.widget`), primo
+  punto della 1.2 nel CHANGELOG superato. Dettagli nella PR.
+- Simulatori miei: `NEAT-DEV-iPhone` + `NEAT-DEV-Watch` (accesi, si possono cancellare).

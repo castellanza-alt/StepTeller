@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "StepTellerCore",
-    platforms: [.iOS(.v17), .macOS(.v14)],
+    platforms: [.iOS(.v17), .macOS(.v14), .watchOS(.v10)],
     products: [
         .library(name: "StepTellerCore", targets: ["StepTellerCore"])
     ],

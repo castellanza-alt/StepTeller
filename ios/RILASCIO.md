@@ -97,5 +97,12 @@ Versione ____  (correzione / minore / maggiore)
   funzione.
 - **Correzione urgente mentre la minore è in lavorazione.** Si chiude prima la minore o si rinvia la correzione alla
   minore stessa: un solo ramo di uscita, una sola versione aperta alla volta.
+- **Funzione grande in parallelo** (deciso da Will il 24 ottobre 2026 per l'app Apple Watch, 1.2, mentre la 1.1
+  aspetta la pubblicazione): è l'unica eccezione alla regola sopra. La versione successiva vive su un ramo suo
+  (`ia/1.2-watch`), tagliato dal ramo della versione aperta, con la sua sezione «in lavorazione» sopra quella
+  precedente e `MARKETING_VERSION` già alzata; `registro.py` accetta due sezioni «in lavorazione» una sotto l'altra.
+  La versione nuova **non va su TestFlight** finché la precedente non è almeno «inviata»; quando la precedente
+  cambia stato, il ramo nuovo si riallinea (merge) e la sua sezione resta in cima. Le correzioni continuano a finire
+  nella versione più bassa aperta.
 - **Si cambia idea sul numero** (era 1.0.1, è diventata 1.1): si rinomina l'intestazione e si alza `MARKETING_VERSION`
   nella stessa PR, prima della build TestFlight. Dopo una build no.

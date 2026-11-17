@@ -28,7 +28,7 @@ miglia/km, 10 lingue, introduzione al primo avvio, copia in iCloud e Backup manu
 ## 5. Aperto
 | # | Cosa | Stato | Compito |
 |---|---|---|---|
-| 1 | 1.1: prova di William su TestFlight (promemoria, Backup, copia in iCloud, Home senza passi a mano) | in attesa di William | T-001 prepara l'elenco |
+| 1 | 1.1: prova di William su TestFlight (promemoria, Backup, copia in iCloud, Home senza passi a mano) | in attesa di William, elenco di 9 righe in `comms/qa/T-001.md` | T-001 |
 | 2 | 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud scritti nella privacy, da verificare sul telefono | in attesa di William | T-001 |
 | 3 | 1.1: classificazione per età. La 1.0 è 4+ (William, 21/10: «no» a salute e benessere, che dava 9+); da confermare per la 1.1 | in attesa di William | — |
 | 4 | 1.1: invio ad Apple (Novità in 10 lingue già pronte, `RILASCIO.md`) | dopo 1–3, Director | — |
@@ -40,9 +40,9 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 ## 5b. Compiti
 | Compito | Chi | Ramo | Stato |
 |---|---|---|---|
-| T-001 Collaudo della 1.1 sul Simulatore | QA | `qa/T-001` | assegnato 17/11 |
-| T-002 Apple Watch riportato su `main` aggiornato | Developer | `task/T-002-watch` | assegnato 17/11 |
-| T-003 Specifica grafica dell'Apple Watch | Designer | `design/T-003-watch` | assegnato 17/11 |
+| T-001 Collaudo della 1.1 sul Simulatore | QA | `qa/T-001` | fatto, unito 17/11 (#29): nessun difetto bloccante, rapporto in `comms/qa/T-001.md` |
+| T-002 Apple Watch riportato su `main` aggiornato | Developer | `task/T-002-watch` | PR #28 in bozza, non si unisce prima della 1.1 pubblicata |
+| T-003 Specifica grafica dell'Apple Watch | Designer | `design/T-003-watch` | fatto, unito 17/11 (#27): `docs/design/T-003-watch.md` |
 
 ## 6. Dove si prova cosa
 - **Linux / cloud:** `swift test` del core (`Sources/StepTellerCore`).

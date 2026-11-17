@@ -5,7 +5,6 @@ Numerate, con data, chi ha deciso e perché. Una decisione superata si barra e r
 Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e restano valide.
 
 ## Scelte aperte
-- Classificazione per età della 1.1 (4+ o 9+).
 
 ## Prodotto e processo (già in vigore, riportate qui)
 - **D-001** Salute solo in lettura (passi), mai scrittura né rete; nessun dato di Salute in iCloud. William.
@@ -14,6 +13,7 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
 - **D-004** Repo pubblico: nessun segreto, profilo o chiave nel repo. William.
 - **D-005** Italiano per tutto ciò che William legge; i testi da tradurre passano dall'italiano approvato da William.
 - **D-006** Tolto l'inserimento dei passi a mano (1.1). William.
+- **D-007** Età 4+ anche per la 1.1 (17/11/2026: «si, 4+»), invio ad Apple approvato. William.
 
 ## Versioni dopo la 1.1
 - **D-036 Natale prima dell'orologio (17/11/2026, Director).** La 1.2 è «Natale»: notifica a obiettivo raggiunto, Jolly

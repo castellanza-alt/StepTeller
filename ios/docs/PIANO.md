@@ -28,8 +28,7 @@ miglia/km, 10 lingue, introduzione al primo avvio, copia in iCloud e Backup manu
 ## 5. Aperto
 | # | Cosa | Stato | Compito |
 |---|---|---|---|
-| 3 | 1.1: classificazione per età. La 1.0 è 4+ (William, 21/10: «no» a salute e benessere, che dava 9+); da confermare per la 1.1 | in attesa di William | — |
-| 4 | 1.1: invio ad Apple (Novità in 10 lingue già pronte, `RILASCIO.md`) | provata il 17/11: manca solo l'età (3) | Director |
+| 4 | 1.1: invio ad Apple (Novità in 10 lingue già pronte, `RILASCIO.md`) | età 4+ e ok all'invio di William il 17/11 (D-007): scheda e invio in corso | Director |
 | 7 | 1.2 «Natale»: notifica a obiettivo raggiunto, Jolly guadagnato/usato (notifica e pop-up), tema stagionale di Natale con icona, disattivabile (D-036) | in lavorazione, da inviare ad Apple entro il 1° dicembre | T-004…T-006 |
 | 8 | Versione «NASTY» che insulta l'utente, alla Carrot Weather | limiti decisi (D-039); prima la voce in italiano | T-008 |
 | 5 | 1.3 (era 1.2, D-036): app per Apple Watch, ramo `ia/1.2-watch` (601c235, 24/10) partito da `74fb221`, prima della 1.1: in conflitto con `main`, provata solo sul Simulatore. Non va in `main` prima che la 1.1 sia pubblicata (`main` = 1.1 per le build) | da riportare su `main` | T-002, T-003 |

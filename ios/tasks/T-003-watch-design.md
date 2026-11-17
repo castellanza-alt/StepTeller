@@ -25,3 +25,15 @@ Non toccare il codice Swift. Non unire, nessuna build, nessuna spesa (servizi o 
 Director. Non scrivere a William.
 
 ## Esito
+
+**17/11/2026, Designer.** Specifica in `ios/docs/design/T-003-watch.md`, anteprima ferma prima/dopo: https://claude.ai/artifact/ANTG7eMeBxCghsUBB678ae
+(sorgente `ios/docs/design/T-003-watch-anteprima.html`). Indice di `docs/design/README.md` aggiornato.
+- Schermata: gruppo alto fissato dall'alto e gruppo basso dal basso (misure per 41/45/49 mm e 42/46 mm), nuova
+  etichetta «PASSI DI OGGI», minuti in rosso Anton 24, «OBIETTIVO FATTO!» al posto della riga piccola, targhetta
+  «NIENTE DATI DA SALUTE» con l'obiettivo sempre visibile, animazioni prese dalla Home.
+- Complicazioni: colori notte sui quadranti a colori (`widgetRenderingMode`), tondo con anello 4 e passi compatti da
+  1.000, rettangolo con Jolly e «SU 10.000», angolo con arco rosso; riga invariata. Solo sotto `os(watchOS)`.
+- Solo token esistenti e chiavi di testo già tradotte: nessun token né traduzione nuova.
+- Aperto: misure delle complicazioni da confermare sul Simulatore watchOS (non avviato); campo `goal` in
+  `WidgetSnapshot` anche senza dati (Developer); tocco aptico all'obiettivo non specificato (decide il Director).
+

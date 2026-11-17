@@ -1,0 +1,156 @@
+<title>NEAT Watch T-003</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap">
+<style>
+/* Layout: banco di prova — righe di casse Apple Watch a grandezza 1,6×, prima/dopo affiancati. */
+:root{
+  --bg:#F3F4F8; --fg:#141414; --muted:#5A6075; --line:#D8DCE8; --case:#1B1D22;
+  --w-paper:#0E1430; --w-ink:#E2EAFF; --w-red:#FF3B30; --w-face:#000000;
+  --display:"Anton","Impact","Arial Narrow",sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B0D16;--fg:#E2EAFF;--muted:#8E97B5;--line:#252B44;--case:#2A2D35;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B0D16;--fg:#E2EAFF;--muted:#8E97B5;--line:#252B44;--case:#2A2D35;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:.01em;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.04em;margin:40px 0 6px}
+p.lead{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.row{display:flex;flex-wrap:wrap;gap:28px 32px;align-items:flex-end;margin-top:16px}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+figcaption{font-size:12px;color:var(--muted);text-align:center;max-width:22ch}
+figcaption b{color:var(--fg);font-weight:600;display:block}
+.tag{display:inline-block;font-family:var(--display);font-size:12px;letter-spacing:.08em;padding:1px 7px;border:1.5px solid var(--fg);margin-right:6px}
+.tag.after{background:var(--w-red);border-color:var(--w-red);color:#fff}
+/* cassa */
+.case{background:var(--case);padding:10px;border-radius:calc(var(--k)*44px)}
+.screen{position:relative;overflow:hidden;background:var(--w-paper);color:var(--w-ink);
+  width:calc(var(--k)*var(--W)*1px);height:calc(var(--k)*var(--H)*1px);border-radius:calc(var(--k)*34px)}
+.screen *{font-family:var(--display);font-weight:400;line-height:1;white-space:nowrap}
+.clock{position:absolute;right:calc(var(--k)*14px);top:calc(var(--k)*8px);font-family:var(--body)!important;font-weight:600!important;font-size:calc(var(--k)*15px);color:#fff}
+.abs{position:absolute}
+.flame{display:inline-block;vertical-align:-2px}
+.steps{position:relative}
+.steps .sh{position:absolute;left:0;top:0;color:var(--w-red)}
+.steps .fg{position:relative}
+.bar{position:absolute;border:calc(var(--k)*1.5px) solid var(--w-ink);background:var(--w-paper);box-sizing:border-box}
+.bar i{display:block;height:100%;background:var(--w-red);outline:calc(var(--k)*1.5px) solid var(--w-ink);outline-offset:calc(var(--k)*-1.5px)}
+.chip{background:var(--w-ink);color:var(--w-paper);padding:calc(var(--k)*2px) calc(var(--k)*5px)}
+/* complicazioni */
+.face{background:var(--w-face);border-radius:18px;padding:14px;display:flex;align-items:center;justify-content:center;min-width:120px;min-height:110px}
+.face *{font-family:var(--display);font-weight:400;line-height:1;white-space:nowrap}
+.note{font-size:13px;color:var(--muted);max-width:70ch;margin-top:14px}
+code{font-size:12px}
+</style>
+<div class="wrap">
+  <h1>NEAT su Apple Watch — prima e dopo</h1>
+  <p class="lead">Anteprima ferma della specifica <code>ios/docs/design/T-003-watch.md</code>. Casse a 1,6× la misura in punti, palette notte (#0E1430 / #E2EAFF / #FF3B30). Dati d'esempio: 3.465 passi su 10.000, serie 14, Jolly 2, mancano 37 min · 2,9 km.</p>
+
+  <h2>Schermata principale, 41 mm</h2>
+  <div class="row" id="r1"></div>
+
+  <h2>Dopo, sulle tre casse</h2>
+  <div class="row" id="r2"></div>
+
+  <h2>Complicazioni, quadrante a colori</h2>
+  <div class="row" id="r3"></div>
+  <h2>Complicazioni, quadrante tinto</h2>
+  <div class="row" id="r4"></div>
+  <p class="note">La riga (<code>accessoryInline</code>) non cambia: simbolo fiamma e «3.465 passi» nel font del quadrante. Le misure delle complicazioni sono quelle delle linee guida Apple, da confermare sul Simulatore.</p>
+</div>
+<script>
+const S=1.6;
+const FL='M9 1 C11 6,17 9,16 15 C15 20,11 21,9 21 C5 21,2 18,2 14 C2 10,5 9,6 5 C8 8,8 10,9 11 C11 8,10 5,9 1Z';
+const CORE='M9 10.5 C10.5 13,13 14.5,12.5 17 C12 19.5,10.4 20,9 20 C7 20,5.5 18.6,5.6 16.6 C5.7 15,7 14.3,7.3 12.6 C8.2 14,8.4 14.8,8.9 15.2 C9.6 13.8,9.5 12,9 10.5Z';
+const RED='var(--w-red)',INK='var(--w-ink)';
+function flame(kind,w,h,mono){const c=mono?'#fff':(kind==='s'?RED:INK);
+  return `<svg class="flame" width="${w}" height="${h}" viewBox="0 0 18 22"><path d="${FL}" fill="${c}"/>${kind==='j'&&!mono?`<path d="${CORE}" fill="${RED}"/>`:''}</svg>`}
+const px=(k,n)=>`${(k*n).toFixed(2)}px`;
+// stato: 'run' | 'done' | 'none'
+function after(W,H,state){
+  const k=W/176*S;
+  const steps=state==='run'?'3.465':state==='done'?'10.729':'—';
+  const prog=state==='run'?0.3465:state==='done'?1:0;
+  const counters=`<div class="abs" style="left:${px(k,16)};top:${px(k,12)};transform:rotate(-3deg) skewX(-8deg);transform-origin:left center;font-size:${px(k,15)}">
+    ${flame('s',k*12,k*15)} 14 <span style="display:inline-block;width:${px(k,8)}"></span>${flame('j',k*12,k*15)} 2</div>`;
+  const block=`<div class="abs" style="left:${px(k,12)};top:${px(k,40)};transform:rotate(-6deg) skewX(-10deg);transform-origin:left bottom">
+    <div style="font-size:${px(k,11)};letter-spacing:.06em">PASSI DI OGGI</div>
+    <div class="steps" style="font-size:${px(k,54)};letter-spacing:-.035em;line-height:.92;margin-top:${px(k,2)}">
+      <span class="sh" style="transform:translate(${px(k,3)},${px(k,3)})">${steps}</span><span class="fg">${steps}</span></div>
+    <div style="font-size:${px(k,12)};letter-spacing:.06em;margin-top:${px(k,2)}">SU 10.000</div></div>`;
+  const bar=`<div class="bar" style="left:${px(k,14)};bottom:${px(k,24+24+10)};width:${px(k,148)};height:${px(k,8)};transform:rotate(-1.5deg) skewX(-20deg)"><i style="width:${prog*100}%"></i></div>`;
+  let line;
+  if(state==='run') line=`<span style="font-size:${px(k,12)};letter-spacing:.04em">MANCANO</span> <span style="font-size:${px(k,24)};letter-spacing:-.02em;color:${RED}">37</span> <span style="font-size:${px(k,12)};letter-spacing:.04em">MIN · 2,9 KM</span>`;
+  else if(state==='done') line=`<span style="font-size:${px(k,12)};letter-spacing:.04em">OBIETTIVO</span> <span style="font-size:${px(k,24)};color:${RED}">FATTO!</span>`;
+  else line=`<span class="chip" style="font-size:${px(k,11)};letter-spacing:.06em">NIENTE DATI DA SALUTE</span>`;
+  const bottom=`<div class="abs" style="left:${px(k,12)};bottom:${px(k,24)};display:flex;align-items:baseline;gap:${px(k,4)};transform:rotate(-3deg) skewX(-9deg);transform-origin:left center">${line}</div>`;
+  return screen(W,H,k,counters+block+bar+bottom);
+}
+// prima: come il codice di ia/1.2-watch (area sicura ≈ da y 30, VStack con Spacer)
+function before(W,H,state){
+  const k=W/176*S, top=30;
+  const steps=state==='run'?'3.465':'10.729';
+  const counters=`<div class="abs" style="left:${px(k,10)};top:${px(k,top)};transform:rotate(-3deg) skewX(-8deg);transform-origin:left center;font-size:${px(k,15)}">
+    ${flame('s',k*12,k*15)} 14 <span style="display:inline-block;width:${px(k,8)}"></span>${flame('j',k*12,k*15)} 2</div>`;
+  const block=`<div class="abs" style="left:${px(k,10)};top:${px(k,top+40)};transform:rotate(-6deg) skewX(-10deg);transform-origin:left bottom">
+    <div class="steps" style="font-size:${px(k,54)};letter-spacing:-.035em;line-height:.92">
+      <span class="sh" style="transform:translate(${px(k,3)},${px(k,3)})">${steps}</span><span class="fg">${steps}</span></div>
+    <div style="font-size:${px(k,12)};letter-spacing:.06em;margin-top:${px(k,2)}">SU 10.000</div></div>`;
+  const prog=state==='run'?0.3465:1;
+  const bar=`<div class="bar" style="left:${px(k,10)};bottom:${px(k,4+12+6)};width:${px(k,150)};height:${px(k,8)};transform:skewX(-20deg)"><i style="width:${prog*100}%"></i></div>`;
+  const txt=state==='run'?'ANCORA 37 MIN · 2,9 KM':'OBIETTIVO RAGGIUNTO';
+  const line=`<div class="abs" style="left:${px(k,10)};bottom:${px(k,4)};font-size:${px(k,12)};letter-spacing:.04em;color:${state==='run'?INK:RED}">${txt}</div>`;
+  return screen(W,H,k,counters+block+bar+line);
+}
+function screen(W,H,k,inner){return `<div class="case" style="--k:${k}"><div class="screen" style="--k:${k};--W:${W};--H:${H}"><span class="clock">10:09</span>${inner}</div></div>`}
+function fig(html,title,cap,tag){return `<figure>${html}<figcaption><b>${tag?`<span class="tag ${tag==='DOPO'?'after':''}">${tag}</span>`:''}${title}</b>${cap||''}</figcaption></figure>`}
+
+document.getElementById('r1').innerHTML=[
+  fig(before(176,215,'run'),'In corso','numero «galleggia», riga minuti piccola e tutta chiara','PRIMA'),
+  fig(after(176,215,'run'),'In corso','+ «PASSI DI OGGI», minuti in rosso Anton 24','DOPO'),
+  fig(before(176,215,'done'),'Raggiunto','«OBIETTIVO RAGGIUNTO» Anton 12','PRIMA'),
+  fig(after(176,215,'done'),'Raggiunto','«OBIETTIVO FATTO!», «FATTO!» Anton 24 rosso','DOPO'),
+  fig(after(176,215,'none'),'Niente dati','«—», obiettivo visibile, targhetta','DOPO'),
+].join('');
+document.getElementById('r2').innerHTML=[
+  fig(after(176,215,'run'),'41 mm','176 × 215 pt · k 1,000'),
+  fig(after(198,242,'run'),'45 mm','198 × 242 pt · k 1,125'),
+  fig(after(205,251,'run'),'49 mm Ultra','205 × 251 pt · k 1,165'),
+].join('');
+
+// complicazioni
+function ring(size,stroke,inset,prog,track,fill){const r=(size/2-inset-stroke/2),c=2*Math.PI*r;
+  return `<svg width="${size}" height="${size}" style="position:absolute;left:0;top:0"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/>
+  <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${fill}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c*prog} ${c}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`}
+function circ(mode,ver){const s=44.5*S,k=S;const color=mode==='full';
+  if(ver==='before') return `<div style="position:relative;width:${s}px;height:${s}px;background:rgba(255,255,255,.12);border-radius:50%">${ring(s,6*k,3*k,.3465,'rgba(255,255,255,.3)','#fff')}
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transform:skewX(-10deg)"><span style="font-size:${19*k*0.62}px">3.465</span><span style="font-size:${9*k}px;letter-spacing:.08em;margin-top:2px">PASSI</span></div></div>`;
+  return `<div style="position:relative;width:${s}px;height:${s}px;background:rgba(255,255,255,.12);border-radius:50%">${ring(s,4*k,2*k,.3465,color?'rgba(226,234,255,.25)':'rgba(255,255,255,.3)',color?RED:'#fff')}
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:${color?INK:'#fff'};transform:skewX(-10deg);font-size:${17*k}px;letter-spacing:-.02em">3,5K</div></div>`}
+function rect(mode,ver){const k=S,color=mode==='full';const w=165*k,h=72*k;
+  if(ver==='before') return `<div style="width:${w}px;height:${h}px;color:#fff;display:flex;flex-direction:column;gap:${4*k}px;justify-content:center">
+    <div style="font-size:${12*k}px;letter-spacing:.06em">${flame('s',10*k,12*k,true)} 14 GIORNI</div>
+    <div style="font-size:${30*k}px;letter-spacing:-.03em;line-height:.95;transform:skewX(-10deg);transform-origin:left bottom">3.465</div>
+    <div style="font-size:${12*k}px;letter-spacing:.04em;opacity:.85">ANCORA 37 MIN · 2,9 KM</div></div>`;
+  const ink=color?INK:'#fff';
+  return `<div style="width:${w}px;height:${h}px;color:${ink};display:flex;flex-direction:column;gap:${3*k}px;justify-content:center">
+    <div style="font-size:${12*k}px">${flame('s',10*k,12*k,!color)} 14<span style="display:inline-block;width:${8*k}px"></span>${flame('j',10*k,12*k,!color)} 2</div>
+    <div style="display:flex;align-items:baseline;gap:${5*k}px;transform:skewX(-10deg);transform-origin:left bottom"><span style="font-size:${30*k}px;letter-spacing:-.03em;line-height:.95">3.465</span><span style="font-size:${11*k}px;letter-spacing:.06em">SU 10.000</span></div>
+    <div style="font-size:${12*k}px;letter-spacing:.04em;${color?'':'opacity:.85'}">ANCORA <span style="color:${color?RED:'inherit'}">37</span> MIN · 2,9 KM</div></div>`}
+function corner(mode,ver){const k=S,color=mode==='full';const s=70*k;
+  const arc=(c)=>`<svg width="${s}" height="${s}" style="position:absolute;left:0;top:0"><path d="M ${8*k} ${s-6*k} A ${s-14*k} ${s-14*k} 0 0 1 ${s-6*k} ${8*k}" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="${4*k}" stroke-linecap="round"/>
+    <path d="M ${8*k} ${s-6*k} A ${s-14*k} ${s-14*k} 0 0 1 ${s*0.36} ${s*0.3}" fill="none" stroke="${c}" stroke-width="${4*k}" stroke-linecap="round"/></svg>`;
+  const num=ver==='before'?`<span style="font-size:${20*k*0.8}px;color:#fff">3.465</span>`:`<span style="font-size:${18*k}px;letter-spacing:-.02em;color:${color?INK:'#fff'};display:inline-block;transform:skewX(-10deg)">3,5K</span>`;
+  return `<div style="position:relative;width:${s}px;height:${s}px">${arc(ver==='before'||!color?'#fff':RED)}<div style="position:absolute;right:${6*k}px;bottom:${6*k}px">${num}</div></div>`}
+function comps(mode){const f=(h)=>`<div class="face">${h}</div>`;
+  const out=[];
+  if(mode==='full'){out.push(fig(f(circ(mode,'before')),'Tondo','anello 6, «PASSI» 9 pt, tutto bianco','PRIMA'));}
+  out.push(fig(f(circ(mode,'after')),'Tondo',mode==='full'?'anello 4 rosso, «3,5K» Anton 17':'tinto: bianco, anello accentabile','DOPO'));
+  if(mode==='full'){out.push(fig(f(rect(mode,'before')),'Rettangolo','tutto bianco, solo la serie','PRIMA'));}
+  out.push(fig(f(rect(mode,'after')),'Rettangolo',mode==='full'?'serie + Jolly, «SU 10.000», minuti rossi':'tinto: bianco, riga 3 all’85 %','DOPO'));
+  if(mode==='full'){out.push(fig(f(corner(mode,'before')),'Angolo','«3.465» ridotto, arco bianco','PRIMA'));}
+  out.push(fig(f(corner(mode,'after')),'Angolo',mode==='full'?'«3,5K» Anton 18, arco rosso':'tinto: arco accentabile','DOPO'));
+  return out.join('')}
+document.getElementById('r3').innerHTML=comps('full');
+document.getElementById('r4').innerHTML=comps('tint');
+</script>

@@ -22,3 +22,24 @@ collaudo unico, mirato a ciò che è cambiato.
 Non correggere il codice, non unire, nessuna build TestFlight, nessuna chiave. Non scrivere a William.
 
 ## Esito
+17/11/2026, QA. Rapporto `comms/qa/T-012.md` (ramo `qa/T-012`, PR col solo rapporto, non unita).
+- **Provato (solo Simulatore):**
+  - fuori stagione la 1.2 è identica alla 1.1, confrontata pixel per pixel;
+  - Natale di giorno e di notte: Home, «FATTO!», Storico, festa, splash e widget, anche con Riduci movimento;
+  - icona: cambio e ritorno con l'avviso di iOS, che non compare durante l'introduzione;
+  - pop-up «usato» e «guadagnato» senza ripetizioni;
+  - promemoria che arriva con l'obiettivo aperto e non arriva con l'obiettivo chiuso;
+  - sezione «Notifiche»;
+  - Backup esportato con i due interruttori nuovi;
+  - `swift test` 92/92.
+- **Difetto da correggere:** dopo un pop-up Jolly la festa dell'obiettivo non arriva.
+- **Minori:**
+  - il titolo dei pop-up è tagliato dal bordo;
+  - in stagione l'avviso dell'icona compare sopra la festa a fine introduzione;
+  - in en/ja i testi nuovi sono in italiano e il titolo della sezione è quello vecchio.
+- **Solo sul telefono:**
+  - notifiche vere di obiettivo e Jolly (alle 8, tocco);
+  - interruttore spento in stagione;
+  - importazione del Backup;
+  - icona e widget veri dal 1° dicembre.
+- Provato da William: no.

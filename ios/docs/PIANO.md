@@ -49,7 +49,8 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-009 Scheda dello store dopo una versione pubblicata | Developer | `task/T-009-scheda` | fatto, unito 17/11 (#33) |
 | T-010 Tema di Natale nell'app | Developer | `task/T-010-natale` | fatto, unito 17/11 (#36) |
 | T-011 Pop-up e notifiche nella forma finale | Developer | `task/T-011-popup` | fatto, unito 17/11 (#37); testi italiani da approvare da William |
-| T-012 Collaudo della 1.2 sul Simulatore | QA | `qa/T-012` | assegnato 17/11 |
+| T-012 Collaudo della 1.2 sul Simulatore | QA | `qa/T-012` | fatto, unito 17/11 (#38): 3 difetti → T-013 |
+| T-013 Correzioni dal collaudo della 1.2 | Developer | `task/T-013-correzioni` | assegnato 17/11, urgente |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

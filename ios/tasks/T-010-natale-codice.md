@@ -25,8 +25,7 @@ normale, icona compresa; CI verde.
 Non unire, nessuna build TestFlight, nessun tag `[testflight]`/`[apple]`/`[store…]`, nessuna chiave. Non scrivere a William.
 
 ## Esito
-17/11/2026, Developer. PR verso `main` dal ramo `task/T-010-natale` (link nella PR stessa e nel riepilogo al Director),
-non unita.
+17/11/2026, Developer. PR https://github.com/castellanza-alt/StepTeller/pull/36 (ramo `task/T-010-natale`), non unita.
 - **Fatto:** `Season` nel nucleo (periodo 1/12–6/1, test), `SeasonPalette`/`SeasonLook`, neve, luci, cappello (pomello,
   «FATTO!», fiamma dello Storico, festa), neve ferma nello Storico e nei widget, cappello nello splash, icona
   `AppIconNatale` con `setAlternateIconName` (dopo splash + 0,6 s, mai durante l'introduzione), interruttore «Temi

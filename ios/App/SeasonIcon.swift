@@ -12,8 +12,9 @@ enum SeasonIcon {
 
     static func update() {
         #if DEBUG
-        // screenshots with fake steps: no system alert over the UI
-        if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil { return }
+        // screenshots with fake steps: no system alert over the UI, unless `-stepteller.debugIcon 1` (queue checks)
+        let d = UserDefaults.standard
+        if d.object(forKey: "stepteller.debugSteps") != nil, d.object(forKey: "stepteller.debugIcon") == nil { return }
         #endif
         // not over the introduction (and its permission prompts): it is called again when the introduction ends
         guard UserDefaults.standard.bool(forKey: Onboarding.doneKey) else { return }
@@ -26,11 +27,4 @@ enum SeasonIcon {
         }
     }
 
-    /// The splash ended (or the app came back): 0.6 s later, so the system alert does not cover the animation.
-    static func updateSoon() {
-        Task { @MainActor in
-            try? await Task.sleep(for: .seconds(0.6))
-            update()
-        }
-    }
 }

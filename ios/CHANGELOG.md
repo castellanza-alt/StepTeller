@@ -39,6 +39,12 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   `notif.goal.body` + `notif.goal.streak` per il plurale), italiano in tutte le lingue in attesa dell'ok di William
   e della traduzione; il widget prende streak e Jolly dopo l'obiettivo dall'app (`StreakEvents.Reach`), senza
   quei numeri la notifica dell'obiettivo non dice la streak.
+- Correzioni dal collaudo T-012 (T-013). Dopo «OK» sull'ultimo pop-up Jolly parte la festa dell'obiettivo, se
+  dovuta (la lettura che ha messo in coda i pop-up vale anche per la festa: niente nuovi controlli di tempo). Il titolo
+  dei pop-up non esce più dalla vignetta (16 pt di margine sopra; italiano e giapponese verificati). L'avviso di iOS
+  per il cambio d'icona aspetta che non ci siano festa né pop-up in corso o in arrivo: parte 0,6 s dopo che lo
+  schermo è libero, dopo lo splash, al ritorno in primo piano e a fine introduzione. Debug: `-stepteller.debugPopupClose
+  N` chiude i pop-up da soli, `-stepteller.debugIcon 1` lascia cambiare l'icona anche con i passi finti.
 
 ## 1.1 — inviata ad Apple il 17 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

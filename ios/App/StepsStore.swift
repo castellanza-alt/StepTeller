@@ -67,6 +67,9 @@ final class StepsStore {
     private(set) var eventsCheckedAt: Date?
     /// A notification was tapped: the Home opens (see `NotificationRouter`).
     var homeRequests = 0
+    /// The seasonal icon should be checked (splash ended, back in the foreground): `RootView` does it when the
+    /// screen is free of celebrations and pop-ups.
+    var iconRequests = 0
     /// Jolly pop-ups waiting to be shown (first opening after the event, never repeated), oldest first.
     private(set) var popups: [JollyPopupItem] = []
     var reminderMinutes: Int {

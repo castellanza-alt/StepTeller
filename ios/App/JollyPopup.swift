@@ -78,6 +78,8 @@ struct JollyPopup: View {
     private var panel: some View {
         Vignette(shape: .panelB, width: 318) {
             VStack(alignment: .leading, spacing: 0) {
+                // extra top margin: the slanted title rises to the right, where the panel's top edge drops (T-013)
+                Color.clear.frame(height: Self.titleRoom)
                 AntonText(L10n.text(earned ? "jolly.earned.title" : "jolly.used.title"), 30, tracking: 0.02)
                     .manga(rotate: -5, skew: -10)
                 HStack(spacing: 10) {
@@ -172,6 +174,9 @@ struct JollyPopup: View {
         return [c.red, c.ink, p.pine, p.gold]
     }
 
+    /// Room above the title inside the panel, so the rotated title never touches the top edge.
+    static let titleRoom: CGFloat = 16
+
     private static let rays = KineticLines.rays(cx: 195, cy: 380, count: 90, innerMin: 150, innerMax: 230, outer: 700,
                                                 seed: 7, redEvery: 7)
 
@@ -179,6 +184,11 @@ struct JollyPopup: View {
 
     private func appear() {
         start = Date()
+        #if DEBUG
+        // Simulator checks of the queue (no taps there): `-stepteller.debugPopupClose 2` closes it after 2 s.
+        let auto = UserDefaults.standard.double(forKey: "stepteller.debugPopupClose")
+        if auto > 0 { Task { try? await Task.sleep(for: .seconds(auto)); close() } }
+        #endif
         if reduceMotion {
             pop = 1; tilt = -4; flame = 1
             withAnimation(.easeOut(duration: 0.3)) { shown = true }

@@ -28,8 +28,8 @@ struct StepTellerApp: App {
         RootView().environment(store)
             .overlay { if splash { SplashView { splash = false } } }
             // seasonal icon: after the splash, at every return to the foreground (iOS shows its alert)
-            .onChange(of: splash) { _, showing in if !showing { SeasonIcon.updateSoon() } }
-            .onChange(of: scenePhase) { _, phase in if phase == .active, !splash { SeasonIcon.updateSoon() } }
+            .onChange(of: splash) { _, showing in if !showing { store.iconRequests += 1 } }
+            .onChange(of: scenePhase) { _, phase in if phase == .active, !splash { store.iconRequests += 1 } }
     }
 
     @MainActor

@@ -265,13 +265,37 @@ def sync_localizations(report, area, kind, parent, existing, wanted):
     return ids
 
 
-def app_info_section(report, app_id, metadata):
-    area = 'Informazioni app (nome, sottotitolo, privacy)'
+def editable_app_infos(app_id):
     infos, _ = get_all(f'/v1/apps/{app_id}/appInfos')
-    editable = [i for i in infos if (i['attributes'].get('state') or i['attributes'].get('appStoreState')) not in LIVE_INFO]
-    if not editable:
-        raise Stop('Nessuna «App Information» modificabile su App Store Connect')
-    info = editable[0]
+    live = lambda i: (i['attributes'].get('state') or i['attributes'].get('appStoreState')) in LIVE_INFO
+    return [i for i in infos if not live(i)], [i for i in infos if live(i)]
+
+
+def app_info_section(report, app_id, metadata, version_exists):
+    area = 'Informazioni app (nome, sottotitolo, privacy)'
+    editable, live = editable_app_infos(app_id)
+    if not editable and report.apply and version_exists:
+        # with a version already published Apple opens the editable «App Information» only once the new version
+        # exists: it was just created, give it a moment
+        for _ in range(5):
+            time.sleep(3)
+            editable, live = editable_app_infos(app_id)
+            if editable:
+                break
+    if editable:
+        info = editable[0]
+    elif not report.apply and not version_exists and live:
+        # trial before the new version exists: compared with the published information, read only
+        report.note(area, f'«App Information» modificabile assente: Apple la crea con la versione {VERSION}. '
+                          'Età, nome, sottotitolo e categorie confrontati con quella pubblicata (sola lettura); '
+                          '[store] crea prima la versione e poi li applica')
+        # the current published one, not one already replaced
+        info = next((i for i in live if (i['attributes'].get('state') or i['attributes'].get('appStoreState'))
+                     != 'REPLACED_WITH_NEW_INFO'), live[0])
+    else:
+        raise Stop('Nessuna «App Information» modificabile su App Store Connect' +
+                   (f': la versione {VERSION} esiste, Apple non l\'ha ancora aperta; rilanciare [store] tra qualche minuto'
+                    if version_exists else ''))
     age_rating_section(report, info)   # first: a rating Will did not approve stops before anything else
     existing, _ = get_all(f"/v1/appInfos/{info['id']}/appInfoLocalizations", {'limit': 50})
     wanted = {locale: {'name': metadata[lang]['name'], 'subtitle': metadata[lang]['subtitle'],
@@ -328,8 +352,8 @@ def age_rating_section(report, info):
     return info
 
 
-def version_section(report, app_id, metadata, notes, secrets):
-    """Returns (version id or None, locale → version localization id)."""
+def ensure_version(report, app_id):
+    """Finds or creates (only with apply) the version VERSION. Returns (version or None, all versions)."""
     area = f'Versione {VERSION}'
     versions, _ = get_all(f'/v1/apps/{app_id}/appStoreVersions', {'filter[platform]': 'IOS', 'limit': 50})
     state = lambda v: v['attributes'].get('appVersionState') or v['attributes'].get('appStoreState')
@@ -348,6 +372,12 @@ def version_section(report, app_id, metadata, notes, secrets):
             update('appStoreVersions', version['id'], {'versionString': VERSION})
     if version is not None:
         report.note(area, f"Stato: {state(version) or 'nuova'}")
+    return version, versions
+
+
+def version_section(report, version, versions, metadata, notes, secrets):
+    """Returns (version id or None, locale → version localization id)."""
+    area = f'Versione {VERSION}'
     if secrets['copyright']:
         current = version['attributes'].get('copyright') if version else None
         if current != secrets['copyright']:
@@ -562,9 +592,12 @@ def sync(apply: bool, report: Report = None) -> Report:
         raise Stop(f'App non trovata per il Bundle ID {asc.BUNDLE}')
     report.note('App', f"Record trovato per {asc.BUNDLE} (id {app['id']}, lingua principale ora "
                        f"{app['attributes'].get('primaryLocale')})")
-    app_info_section(report, app['id'], metadata)   # first: age rating and names can stop before the rest
+    # The version first: with a version already published, Apple opens the editable «App Information» only
+    # once the new version exists. Creating it (or renaming an editable draft) writes nothing the user sees.
+    version, versions = ensure_version(report, app['id'])
+    app_info_section(report, app['id'], metadata, version is not None)   # age rating and names can stop the rest
     app_section(report, app)
-    _, localization_ids = version_section(report, app['id'], metadata, notes, secrets)
+    _, localization_ids = version_section(report, version, versions, metadata, notes, secrets)
     primary_locale_section(report, app)             # after the en-US localizations exist
     price_section(report, app['id'])
     availability_section(report, app['id'])

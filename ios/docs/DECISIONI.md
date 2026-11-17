@@ -6,7 +6,7 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
 
 ## Scelte aperte
 - Classificazione per età della 1.1 (4+ o 9+).
-- Quando unire e pubblicare la 1.2 (Apple Watch).
+- Limiti della versione «NASTY» (parolacce sì/no, classificazione per età).
 
 ## Prodotto e processo (già in vigore, riportate qui)
 - **D-001** Salute solo in lettura (passi), mai scrittura né rete; nessun dato di Salute in iCloud. William.
@@ -15,6 +15,21 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
 - **D-004** Repo pubblico: nessun segreto, profilo o chiave nel repo. William.
 - **D-005** Italiano per tutto ciò che William legge; i testi da tradurre passano dall'italiano approvato da William.
 - **D-006** Tolto l'inserimento dei passi a mano (1.1). William.
+
+## Versioni dopo la 1.1
+- **D-036 Natale prima dell'orologio (17/11/2026, Director).** La 1.2 è «Natale»: notifica a obiettivo raggiunto, Jolly
+  guadagnato e usato (notifica e pop-up), tema stagionale di Natale con icona. Va inviata ad Apple entro il 1° dicembre
+  per uscire in tempo. L'app per Apple Watch passa alla 1.3 (PR #28 resta in bozza); la versione «NASTY» viene dopo,
+  con la sua classificazione per età. Perché: il Natale ha una data, l'orologio no, e una versione piccola passa la
+  revisione prima. William può ribaltarla.
+- **D-037 Temi stagionali (17/11/2026, Director).** Un solo meccanismo per tutte le stagioni (date di inizio e fine,
+  palette, decorazioni, icona); si parte da Natale (1° dicembre – 6 gennaio). Interruttore in Impostazioni, acceso di
+  serie. L'icona alternativa si cambia con l'API di iOS, che mostra il suo avviso di sistema: niente trucchi per
+  nasconderlo. I colori passano dai token di `MangaTokens.swift` (giorno e notte), mai scritti nelle viste.
+- **D-038 Notifiche di obiettivo e Jolly (17/11/2026, Director).** Una sola notifica al giorno per l'obiettivo raggiunto,
+  mai durante la notte e mai doppia con il promemoria; Jolly guadagnato e usato: una notifica per evento e un pop-up
+  alla prima apertura dopo l'evento, mai ripetuto. Si usano i meccanismi già presenti (consegna in sottofondo di Salute,
+  widget, risveglio in sottofondo), Salute sempre in sola lettura, nessuna rete. Si possono spegnere in Impostazioni.
 
 ## Team (17/11/2026, William: «stessa struttura di Briciola»)
 - **D-030 Organizzazione.** Quattro ruoli: **Director** (unico che parla con William, scrive i compiti, decide le

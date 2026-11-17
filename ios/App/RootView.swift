@@ -161,7 +161,7 @@ struct RootView: View {
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.history.refreshedAt) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.eventsCheckedAt) { _, _ in celebrateIfNeeded() }
-        .onChange(of: store.iconRequests) { _, _ in iconDue = (Date(), activeSince); watchIcon() }
+        .onChange(of: store.iconRequests) { _, _ in iconDue = (Date(), store.iconCheckAfter); watchIcon() }
         .onChange(of: store.homeRequests) { _, _ in
             // a notification was tapped: the Home, where the pop-up of the event shows
             showSettings = false
@@ -206,8 +206,9 @@ extension RootView {
     private var screenFree: Bool { !celebrating && store.popups.isEmpty && !popupPause }
 
     /// The seasonal icon, with its iOS alert, only on a free screen (T-013): once the events of this activation
-    /// were checked (a celebration or a pop-up could still come) or 5 s after it was due, and after 0.6 s with
-    /// nothing on screen. One watcher at a time, checking every 0.2 s; it gives up after a minute.
+    /// were checked (a celebration or a pop-up could still come) or 20 s after it was due (Health never answered),
+    /// and after 0.6 s with nothing on screen, app in the foreground. One watcher at a time, checking every
+    /// 0.2 s; it gives up after a minute (the next return to the foreground asks again).
     private func watchIcon() {
         guard !iconWatching else { return }
         iconWatching = true
@@ -216,8 +217,10 @@ extension RootView {
             while let due = iconDue {
                 try? await Task.sleep(for: .seconds(0.2))
                 let now = Date()
-                let checked = (store.eventsCheckedAt.map { $0 >= due.checkAfter } ?? false) || now.timeIntervalSince(due.at) >= 5
-                freeSince = scenePhase == .active && screenFree && checked ? (freeSince ?? now) : nil
+                let checked = (store.eventsCheckedAt.map { $0 >= due.checkAfter } ?? false) || now.timeIntervalSince(due.at) >= 20
+                // the live state: `scenePhase` in this copy of the view is the one of when the task started
+                let active = UIApplication.shared.applicationState == .active
+                freeSince = active && screenFree && checked ? (freeSince ?? now) : nil
                 if let since = freeSince, now.timeIntervalSince(since) >= 0.6 {
                     iconDue = nil
                     SeasonIcon.update()
@@ -236,7 +239,9 @@ extension RootView {
         }
         #endif
         // only with a read of today: on wake-up the number may still be yesterday's
-        guard scenePhase == .active, !celebrating, store.goal > 0, store.plan.isDone, store.origin == .health,
+        // live state, not `scenePhase`: this also runs from a task started 0.3 s earlier (`nextPopup`)
+        guard UIApplication.shared.applicationState == .active, !celebrating, store.goal > 0, store.plan.isDone,
+              store.origin == .health,
               let read = store.lastUpdate, Calendar.current.isDateInToday(read),
               store.popups.isEmpty, !popupPause
         else { return }

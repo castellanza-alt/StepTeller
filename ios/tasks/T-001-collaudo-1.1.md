@@ -29,3 +29,11 @@ Non correggere il codice (i difetti vanno nel rapporto, il Director scrive il co
 né il CHANGELOG, nessuna build TestFlight, nessuna chiave o credenziale. Non scrivere a William.
 
 ## Esito
+17/11/2026, QA. Collaudo fatto sul Simulatore (iPhone 17 Pro, iOS 27), rapporto in `comms/qa/T-001.md`.
+Funziona: introduzione con la frase nuova, Home/Storico giorno-notte senza passi a mano, Backup (esporta, importa con
+conferma e data, file non valido, versione più nuova, inizio streak che tiene il più vecchio), promemoria con obiettivo
+non chiuso (arriva, numeri giusti) e chiuso (non arriva), inglese e giapponese. Non provabile sul Simulatore: copia in
+iCloud, telefono bloccato, aggiornamento dal widget e in sottofondo. Nessun difetto bloccante; tre minori nel rapporto
+(luna sopra l'avviso «Nessun dato» di notte; testo di sistema di Salute che dice ancora «non invia dati fuori dal
+telefono»; la build della CI non ha gli entitlement). Elenco di 9 righe per William nel rapporto.
+Provato da William: no.

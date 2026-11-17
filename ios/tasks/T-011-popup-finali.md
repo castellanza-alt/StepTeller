@@ -17,8 +17,8 @@ T-006 ha messo la logica con un pop-up provvisorio. La forma e i testi finali so
 Come in T-010.
 
 ## Esito
-17/11/2026, Developer. PR verso `main` dal ramo `task/T-011-popup`, impilata su T-010 (#36): da ribasare su `main` dopo
-l'unione della #36. Link nel riepilogo al Director.
+17/11/2026, Developer. PR https://github.com/castellanza-alt/StepTeller/pull/37 (ramo `task/T-011-popup`), impilata su T-010
+(#36): da ribasare su `main` dopo l'unione della #36.
 - **Fatto:** pop-up della specifica (vignetta, movimento, aptica, Natale, niente chiusura automatica), coda usato →
   guadagnato → festa con 0,3 s, notifiche con i testi della specifica, notte 22–8 spostata alle 8 anche per
   l'obiettivo, tocco su una notifica che apre la Home, sezione «Notifiche» in Impostazioni, 23 testi in bozza.

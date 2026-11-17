@@ -46,6 +46,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-005 Pop-up e testi di obiettivo e Jolly (specifica) | Designer | `design/T-005-popup-jolly` | assegnato 17/11, dopo T-004 |
 | T-006 Notifiche e pop-up di obiettivo e Jolly | Developer | `task/T-006-notifiche` | assegnato 17/11 |
 | T-007 Collaudo dell'Apple Watch (PR #28) | QA | `qa/T-007` | assegnato 17/11 |
+| T-009 Scheda dello store dopo una versione pubblicata (blocca l'invio della 1.1) | Developer | `task/T-009-scheda` | assegnato 17/11, urgente |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | assegnato 17/11, dopo T-005 |
 
 ## 6. Dove si prova cosa

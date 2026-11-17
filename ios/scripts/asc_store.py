@@ -289,9 +289,13 @@ def app_info_section(report, app_id, metadata, version_exists):
         report.note(area, f'«App Information» modificabile assente: Apple la crea con la versione {VERSION}. '
                           'Età, nome, sottotitolo e categorie confrontati con quella pubblicata (sola lettura); '
                           '[store] crea prima la versione e poi li applica')
-        info = live[0]
+        # the current published one, not one already replaced
+        info = next((i for i in live if (i['attributes'].get('state') or i['attributes'].get('appStoreState'))
+                     != 'REPLACED_WITH_NEW_INFO'), live[0])
     else:
-        raise Stop('Nessuna «App Information» modificabile su App Store Connect')
+        raise Stop('Nessuna «App Information» modificabile su App Store Connect' +
+                   (f': la versione {VERSION} esiste, Apple non l\'ha ancora aperta; rilanciare [store] tra qualche minuto'
+                    if version_exists else ''))
     age_rating_section(report, info)   # first: a rating Will did not approve stops before anything else
     existing, _ = get_all(f"/v1/appInfos/{info['id']}/appInfoLocalizations", {'limit': 50})
     wanted = {locale: {'name': metadata[lang]['name'], 'subtitle': metadata[lang]['subtitle'],
@@ -589,7 +593,7 @@ def sync(apply: bool, report: Report = None) -> Report:
     report.note('App', f"Record trovato per {asc.BUNDLE} (id {app['id']}, lingua principale ora "
                        f"{app['attributes'].get('primaryLocale')})")
     # The version first: with a version already published, Apple opens the editable «App Information» only
-    # once the new version exists. Creating it writes nothing the user sees.
+    # once the new version exists. Creating it (or renaming an editable draft) writes nothing the user sees.
     version, versions = ensure_version(report, app['id'])
     app_info_section(report, app['id'], metadata, version is not None)   # age rating and names can stop the rest
     app_section(report, app)

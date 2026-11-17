@@ -67,6 +67,72 @@
         }
       }
     },
+    "events.toggle" : {
+      "comment" : "Interruttore delle notifiche di obiettivo e Jolly, sotto il promemoria. Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvisi di obiettivo e Jolly"
+          }
+        }
+      }
+    },
     "goal.field.vo" : {
       "comment" : "Campo numerico dell'obiettivo.",
       "extractionState" : "manual",
@@ -3629,6 +3695,468 @@
         }
       }
     },
+    "pop.earned.body" : {
+      "comment" : "Riga sotto il titolo. {serie} = giorni di fila. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ GIORNI DI FILA"
+          }
+        }
+      }
+    },
+    "pop.earned.many" : {
+      "comment" : "Titolo se i Jolly guadagnati da raccontare sono più di uno. {n} = quanti. Limite: ≤ 20.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY GUADAGNATI"
+          }
+        }
+      }
+    },
+    "pop.earned.title" : {
+      "comment" : "Pop-up alla prima apertura dopo aver guadagnato un Jolly. Titolo, MAIUSCOLO. Limite: ≤ 20.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY GUADAGNATO!"
+          }
+        }
+      }
+    },
+    "pop.jolly.left" : {
+      "comment" : "Jolly disponibili ora. {n} = numero. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY DISPONIBILI: %@"
+          }
+        }
+      }
+    },
+    "pop.used.body" : {
+      "comment" : "Riga sotto il titolo. {serie} = giorni di serie salvati. Limite: ≤ 24.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SERIE DI %@ GIORNI SALVA"
+          }
+        }
+      }
+    },
+    "pop.used.many" : {
+      "comment" : "Titolo se i Jolly usati da raccontare sono più di uno. {n} = quanti. Limite: ≤ 20.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ JOLLY USATI"
+          }
+        }
+      }
+    },
+    "pop.used.title" : {
+      "comment" : "Pop-up alla prima apertura dopo che un Jolly ha salvato la serie. Titolo, MAIUSCOLO. Limite: ≤ 20.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY USATO"
+          }
+        }
+      }
+    },
     "reminder.time" : {
       "comment" : "Riga con l'orario del promemoria (es. 20:30). Limite: ≤ 10.",
       "extractionState" : "manual",
@@ -4549,6 +5077,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "完成"
+          }
+        }
+      }
+    },
+    "set.events.note" : {
+      "comment" : "Nota sotto l'interruttore. Limite: ≤ 140.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly."
           }
         }
       }

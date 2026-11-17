@@ -397,6 +397,138 @@
         }
       }
     },
+    "n.earned.body" : {
+      "comment" : "Corpo. {serie} = giorni di fila, {n} = Jolly disponibili ora. Limite: ≤ 100.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ giorni di fila: un Jolly in più. Ora ne hai %2$@."
+          }
+        }
+      }
+    },
+    "n.earned.title" : {
+      "comment" : "Titolo della notifica quando si guadagna un Jolly. Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly guadagnato"
+          }
+        }
+      }
+    },
     "n.generic.body" : {
       "comment" : "Corpo per i giorni futuri. Limite: ≤ 80.",
       "extractionState" : "manual",
@@ -529,6 +661,138 @@
         }
       }
     },
+    "n.goal.body" : {
+      "comment" : "Corpo. {passi} = passi di oggi, {obiettivo} = passi obiettivo. Limite: ≤ 100.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ passi su %2$@: per oggi hai chiuso."
+          }
+        }
+      }
+    },
+    "n.goal.title" : {
+      "comment" : "Titolo della notifica a obiettivo raggiunto. Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obiettivo raggiunto!"
+          }
+        }
+      }
+    },
     "n.title" : {
       "comment" : "Titolo della notifica del promemoria (giorno di oggi). Limite: ≤ 30.",
       "extractionState" : "manual",
@@ -591,6 +855,138 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "跑步機所需分鐘數"
+          }
+        }
+      }
+    },
+    "n.used.body" : {
+      "comment" : "Corpo, dopo un giorno mancato salvato da un Jolly (può arrivare la mattina dopo). {serie} = giorni di serie salvati, {n} = Jolly rimasti. Limite: ≤ 110.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
+          }
+        }
+      }
+    },
+    "n.used.title" : {
+      "comment" : "Titolo della notifica quando un Jolly salva la serie. Limite: ≤ 30.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai usato un Jolly"
           }
         }
       }

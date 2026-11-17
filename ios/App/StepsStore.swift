@@ -42,6 +42,17 @@ final class StepsStore {
             Task { await reminderSettingsChanged() }
         }
     }
+    /// Notifications of goal reached and Jollies earned or spent (default yes, D-038).
+    var eventNotificationsOn: Bool {
+        didSet {
+            defaults.set(eventNotificationsOn, forKey: Keys.eventsOn)
+            SharedStore.eventsOn = eventNotificationsOn
+            if eventNotificationsOn { Task { _ = await scheduler.requestIfNeeded() } }
+            else { Task { await EventNotifier.withdrawAllPending() } }
+        }
+    }
+    /// Jolly pop-ups waiting to be shown (first opening after the event, never repeated), oldest first.
+    private(set) var popups: [JollyPopupItem] = []
     var reminderMinutes: Int {
         didSet {
             defaults.set(reminderMinutes, forKey: Keys.reminderTime)
@@ -76,6 +87,7 @@ final class StepsStore {
         static let reminderOn = "stepteller.reminder.on"
         static let reminderTime = "stepteller.reminder.minutes"
         static let calibration = "stepteller.calibration.v1"
+        static let eventsOn = "stepteller.events.on"
     }
 
     init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
@@ -98,6 +110,7 @@ final class StepsStore {
         speed = preference.resolved(regionUsesMiles: Units.regionUsesMiles).snapKmh(v)
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
+        eventNotificationsOn = defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true
         #if DEBUG
         // Simulator screenshots: no notification permission prompt over the UI.
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
@@ -118,6 +131,15 @@ final class StepsStore {
         SharedStore.calibration = calibration
         SharedStore.reminderOn = reminderEnabled      // the widget refreshes tonight's reminder (WidgetReminder)
         SharedStore.reminderMinutes = reminderMinutes
+        SharedStore.eventsOn = eventNotificationsOn
+        #if DEBUG
+        // Simulator checks of the pop-ups: `-stepteller.debugEventsSince 7` starts the ledger 7 days ago and
+        // forgets what was told, so the Jolly events of the fake history (`-stepteller.debugMissedDay`) show.
+        if defaults.object(forKey: "stepteller.debugEventsSince") != nil {
+            let back = defaults.integer(forKey: "stepteller.debugEventsSince")
+            SharedStore.eventLedger = EventLedger(since: DayKey.of(Date(), minusDays: back, calendar: controller.calendar))
+        }
+        #endif
     }
 
     // MARK: derived
@@ -143,7 +165,12 @@ final class StepsStore {
         await activate()
         await startObserving()
         await refreshCalibration(force: true)
-        if reminderEnabled { _ = await scheduler.requestIfNeeded() }
+        var askNotifications = reminderEnabled || eventNotificationsOn
+        #if DEBUG
+        // Simulator screenshots: no notification permission prompt over the UI.
+        if defaults.object(forKey: "stepteller.debugSteps") != nil { askNotifications = false }
+        #endif
+        if askNotifications { _ = await scheduler.requestIfNeeded() }
         await updateReminders()
     }
 
@@ -188,6 +215,9 @@ final class StepsStore {
     private func flushSync() async {
         syncTask?.cancel()
         syncTask = nil
+        // goal changed with the app open (lowered below today's steps): the celebration tells it here, so it is
+        // marked before the widget reload could notify it
+        if UIApplication.shared.applicationState == .active { await announceEvents() }
         if pendingWidgetReload {
             pendingWidgetReload = false
             WidgetCenter.shared.reloadAllTimelines()
@@ -229,7 +259,37 @@ final class StepsStore {
             history.updateToday(steps: value)             // the streak updates now, not at the history reread
         }
         await history.refresh(minInterval: 20)       // today in the history and in the streak
+        await announceEvents()
         await updateReminders()
+    }
+
+    // MARK: goal and Jolly events (D-038)
+
+    /// Tells the events of the streak not told yet: notifications with the app in the background (Health
+    /// delivery, wake-up before the reminder), pop-ups with the app on screen. Only after a real Health read.
+    func announceEvents() async {
+        guard history.eventsReady else { return }
+        let now = Date()
+        let calendar = controller.calendar
+        let events = StreakEvents.events(in: history.streak, now: now, calendar: calendar)
+        await EventNotifier.withdrawStale(keeping: Set(events.map(\.id)))
+        let active = UIApplication.shared.applicationState == .active
+        let due = StreakEvents.toNotify(events, ledger: EventNotifier.ledger(now: now, calendar: calendar), now: now, calendar: calendar)
+        await EventNotifier.notify(due, steps: steps, goal: goal, appActive: active, now: now, calendar: calendar)
+        guard active else { return }
+        var ledger = EventNotifier.ledger(now: now, calendar: calendar)
+        let show = StreakEvents.toShow(events, ledger: ledger, now: now, calendar: calendar)
+        guard !show.isEmpty else { return }
+        // marked before being seen: never shown twice, also if the app closes meanwhile
+        ledger.shown.formUnion(show.map(\.id))
+        EventNotifier.save(ledger, now: now, calendar: calendar)
+        EventNotifier.withdraw(show)
+        popups += StreakEvents.popups(show).map { JollyPopupItem(event: $0.event, count: $0.count) }
+    }
+
+    /// The pop-up on screen was closed: the next one, if any.
+    func dismissPopup() {
+        if !popups.isEmpty { popups.removeFirst() }
     }
 
     /// Settings brought back from iCloud after a reinstall (see `CloudBackup`): history first, so the goal
@@ -241,6 +301,7 @@ final class StepsStore {
         if defaults.object(forKey: Keys.speed) != nil { speed = unit.snapKmh(defaults.double(forKey: Keys.speed)) }
         if defaults.object(forKey: Keys.reminderOn) != nil { reminderEnabled = defaults.bool(forKey: Keys.reminderOn) }
         if defaults.object(forKey: Keys.reminderTime) != nil { reminderMinutes = defaults.integer(forKey: Keys.reminderTime) }
+        if defaults.object(forKey: Keys.eventsOn) != nil { eventNotificationsOn = defaults.bool(forKey: Keys.eventsOn) }
         if let saved = defaults.data(forKey: Keys.calibration).flatMap({ try? JSONDecoder().decode(CalibrationResult.self, from: $0) }) {
             calibration = saved
             SharedStore.calibration = saved
@@ -258,6 +319,7 @@ final class StepsStore {
         file.units = unitPreference.rawValue
         file.reminderOn = reminderEnabled
         file.reminderMinutes = reminderMinutes
+        file.eventNotificationsOn = eventNotificationsOn
         file.theme = defaults.string(forKey: ThemeMode.storageKey)
         file.streakStart = history.streakStart
         file.goalHistory = history.goals
@@ -274,6 +336,7 @@ final class StepsStore {
         if let value = file.speed { speed = unit.snapKmh(value) }
         if let value = file.reminderOn { reminderEnabled = value }
         if let value = file.reminderMinutes, (0..<24 * 60).contains(value) { reminderMinutes = value }
+        if let value = file.eventNotificationsOn { eventNotificationsOn = value }
         if let raw = file.theme, ThemeMode(rawValue: raw) != nil { defaults.set(raw, forKey: ThemeMode.storageKey) }
         if let saved = file.calibration {
             calibration = saved

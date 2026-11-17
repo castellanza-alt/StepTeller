@@ -17,7 +17,16 @@ final class BackupFileTests: XCTestCase {
         goals.set(12_000, from: day)
         file.goalHistory = goals
         file.calibration = CalibrationResult(walk: [.init(speed: 5, cadence: 110)], run: [], walkWorkouts: 3, runWorkouts: 0)
+        file.eventNotificationsOn = false
         XCTAssertEqual(try BackupFile.decode(file.encoded()), file)
+    }
+
+    func testFileOfVersion11WithoutEventSwitchStillReads() throws {
+        // a 1.1 backup has no `eventNotificationsOn`: it reads, the value stays missing (the setting is not touched)
+        let old = Data(#"{"format":"neat-backup","version":1,"exportedAt":"2026-11-01T10:00:00Z","goal":9000}"#.utf8)
+        let read = try BackupFile.decode(old)
+        XCTAssertEqual(read.goal, 9000)
+        XCTAssertNil(read.eventNotificationsOn)
     }
 
     func testMissingValuesStayMissing() throws {

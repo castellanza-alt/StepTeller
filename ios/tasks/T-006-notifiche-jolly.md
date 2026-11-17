@@ -31,3 +31,12 @@ Non unire, nessuna build TestFlight, nessun tag `[testflight]`/`[apple]`/`[store
 niente rete. Non toccare la PR #28 (Watch) né la radice del repo. Non scrivere a William.
 
 ## Esito
+17/11/2026, Developer. PR https://github.com/castellanza-alt/StepTeller/pull/34 (ramo `task/T-006-notifiche`, non unita).
+- **Fatto:** eventi nel nucleo (`StreakEvents`, `EventLedger`, 19 test), notifiche da widget (obiettivo e Jolly del
+  15° giorno) e da app (tutti, solo dopo una lettura vera di Salute), Jolly di notte alle 08:00 e ritirati se non più
+  veri, pop-up provvisorio, interruttore in Impostazioni con iCloud e Backup, testi in bozza nel foglio, 1.2 aperta.
+- **Provato:** `swift test` 86/86, compilazione Debug e Release; sul Simulatore pop-up «usato» e «guadagnato» con la
+  storia finta, nessuna ripetizione, interruttore visibile. Revisione indipendente: 5 bug trovati e corretti.
+- **Solo sul telefono:** notifiche vere (permesso, widget, consegna in sottofondo, mattino dopo), interruttore
+  spento, importazione di Backup, VoiceOver sul pop-up.
+- **Dopo:** forma e testi finali da T-005; traduzioni dopo l'ok di William.

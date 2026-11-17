@@ -72,6 +72,7 @@ struct StepsTimelineProvider: TimelineProvider {
         if let s = steps {
             SharedStore.saveSteps(s, now: now)
             await WidgetReminder.update(freshSteps: s, now: now)     // tonight's notification follows the count
+            await WidgetEvents.update(freshSteps: s, now: now)       // «goal reached» as soon as the count says so
         } else {
             steps = SharedStore.cachedStepsToday(now: now)
         }

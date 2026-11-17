@@ -23,6 +23,8 @@ public struct BackupFile: Codable, Equatable, Sendable {
     public var streakStart: Date?
     public var goalHistory: GoalHistory?
     public var calibration: CalibrationResult?
+    /// Notifications of goal and Jollies on (1.2). Added field: older files simply lack it.
+    public var eventNotificationsOn: Bool?
 
     public init(exportedAt: Date) { self.exportedAt = exportedAt }
 

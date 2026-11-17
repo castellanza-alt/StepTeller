@@ -6,6 +6,20 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
+## 1.2 — in lavorazione
+- Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai
+  tra le 22 e le 8, toglie il promemoria serale di quel giorno), una quando guadagni un Jolly e una quando un Jolly
+  salva la serie (di notte aspetta le 8; tolta se i passi del giorno arrivano tardi e il Jolly non serviva più). Alla prima apertura dopo un evento Jolly un pop-up, mai ripetuto (più
+  eventi insieme: uno per tipo, con il numero). Gli eventi si ricavano dalla streak (`StreakEvents` nel nucleo, con
+  test); si salva solo quali sono già stati annunciati (`EventLedger` nel Gruppo App, condiviso da app e widget),
+  per giorno di calendario, così un cambio di fuso non li ripete e dopo una reinstallazione il passato non torna.
+  Chi se ne accorge prima li manda: il widget per l'obiettivo e il Jolly che porta (`WidgetEvents`), l'app per tutto
+  (aperta, consegna in sottofondo di Salute, risveglio prima del promemoria), solo dopo una lettura vera di Salute.
+  Interruttore «Avvisi di obiettivo e Jolly» in Impostazioni, acceso di serie, salvato anche in iCloud e nel Backup
+  (campo nuovo `eventNotificationsOn`). Pop-up e testi provvisori: forma e parole finali da T-005; nel foglio le
+  righe nuove (`n.goal.*`, `n.earned.*`, `n.used.*`, `pop.*`, `events.toggle`, `set.events.note`) hanno l'italiano
+  in tutte le lingue, da tradurre dopo l'ok di William.
+
 ## 1.1 — inviata ad Apple il 17 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e
   orario), taratura e tema giorno/notte si salvano anche nell'iCloud dell'utente (archivio chiave-valore di Apple,

@@ -17,6 +17,12 @@ struct RootView: View {
     @State private var celebrating = false
     /// 0.3 s between one pop-up and the next (T-005 §1.1).
     @State private var popupPause = false
+    /// The seasonal icon is due (splash ended, back in the foreground, introduction done): it waits until no
+    /// celebration or pop-up is on screen or about to be (T-013).
+    /// `checkAfter`: the events must have been checked after this instant (the activation, or the end of the
+    /// introduction, when Health is first read).
+    @State private var iconDue: (at: Date, checkAfter: Date)?
+    @State private var iconWatching = false
     /// Last launch (or return to the foreground): the celebration waits for a history reread since then,
     /// otherwise the streak would show today only («1 day in a row»).
     @State private var activeSince = Date()
@@ -117,7 +123,8 @@ struct RootView: View {
                             onboardingDone = true
                             replayingIntro = false
                         }
-                        SeasonIcon.updateSoon()       // the seasonal icon waits for the end of the introduction
+                        iconDue = (Date(), Date())    // the seasonal icon waits for the end of the introduction
+                        watchIcon()
                     }
                     .transition(.opacity)
                 }
@@ -154,6 +161,7 @@ struct RootView: View {
         .onChange(of: store.lastUpdate) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.history.refreshedAt) { _, _ in celebrateIfNeeded() }
         .onChange(of: store.eventsCheckedAt) { _, _ in celebrateIfNeeded() }
+        .onChange(of: store.iconRequests) { _, _ in iconDue = (Date(), store.iconCheckAfter); watchIcon() }
         .onChange(of: store.homeRequests) { _, _ in
             // a notification was tapped: the Home, where the pop-up of the event shows
             showSettings = false
@@ -182,30 +190,67 @@ struct RootView: View {
 
 extension RootView {
     /// Celebration at the first launch after reaching the day's goal (only with Health steps).
-    /// The pop-up on screen closed: 0.3 s, then the next one or the celebration.
+    /// The pop-up on screen closed: 0.3 s, then the next one or, after the last, the goal celebration if it is due.
     private func nextPopup() {
         store.dismissPopup()
         popupPause = true
         Task {
             try? await Task.sleep(for: .seconds(0.3))
             popupPause = false
-            celebrateIfNeeded()
+            // the reading that queued the pop-ups is the one the celebration waited for: no timing checks again
+            celebrateIfNeeded(afterPopups: store.popups.isEmpty)
         }
     }
 
-    private func celebrateIfNeeded() {
+    /// Nothing on screen tells something: no celebration, no pop-up shown or waiting.
+    private var screenFree: Bool { !celebrating && store.popups.isEmpty && !popupPause }
+
+    /// The seasonal icon, with its iOS alert, only on a free screen (T-013): once the events of this activation
+    /// were checked (a celebration or a pop-up could still come) or 20 s after it was due (Health never answered),
+    /// and after 0.6 s with nothing on screen, app in the foreground. One watcher at a time, checking every
+    /// 0.2 s; it gives up after a minute (the next return to the foreground asks again).
+    private func watchIcon() {
+        guard !iconWatching else { return }
+        iconWatching = true
+        Task {
+            var freeSince: Date?
+            while let due = iconDue {
+                try? await Task.sleep(for: .seconds(0.2))
+                let now = Date()
+                let checked = (store.eventsCheckedAt.map { $0 >= due.checkAfter } ?? false) || now.timeIntervalSince(due.at) >= 20
+                // the live state: `scenePhase` in this copy of the view is the one of when the task started
+                let active = UIApplication.shared.applicationState == .active
+                freeSince = active && screenFree && checked ? (freeSince ?? now) : nil
+                if let since = freeSince, now.timeIntervalSince(since) >= 0.6 {
+                    iconDue = nil
+                    SeasonIcon.update()
+                } else if now.timeIntervalSince(due.at) > 60 {
+                    iconDue = nil
+                }
+            }
+            iconWatching = false
+        }
+    }
+
+    private func celebrateIfNeeded(afterPopups: Bool = false) {
         #if DEBUG
         if UserDefaults.standard.object(forKey: "stepteller.debugCelebrate") != nil, !celebrating {
             celebrating = true; return
         }
         #endif
         // only with a read of today: on wake-up the number may still be yesterday's
-        guard scenePhase == .active, !celebrating, store.goal > 0, store.plan.isDone, store.origin == .health,
+        // live state, not `scenePhase`: this also runs from a task started 0.3 s earlier (`nextPopup`)
+        guard UIApplication.shared.applicationState == .active, !celebrating, store.goal > 0, store.plan.isDone,
+              store.origin == .health,
               let read = store.lastUpdate, Calendar.current.isDateInToday(read),
-              let history = store.history.refreshedAt, history >= activeSince,
-              // the Jolly pop-ups of this reading come first
-              store.popups.isEmpty, !popupPause, let checked = store.eventsCheckedAt, checked >= activeSince, checked >= read
+              store.popups.isEmpty, !popupPause
         else { return }
+        if !afterPopups {
+            // a history reread since the app came up, and the Jolly pop-ups of this reading come first
+            guard let history = store.history.refreshedAt, history >= activeSince,
+                  let checked = store.eventsCheckedAt, checked >= activeSince, checked >= read
+            else { return }
+        }
         let c = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         let today = String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)
         guard celebratedDay != today else { return }

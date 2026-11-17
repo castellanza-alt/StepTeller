@@ -67,6 +67,17 @@ final class StepsStore {
     private(set) var eventsCheckedAt: Date?
     /// A notification was tapped: the Home opens (see `NotificationRouter`).
     var homeRequests = 0
+    /// The seasonal icon should be checked (splash ended, back in the foreground): `RootView` does it when the
+    /// screen is free of celebrations and pop-ups, after the events checked since `iconCheckAfter`.
+    private(set) var iconRequests = 0
+    @ObservationIgnored private(set) var iconCheckAfter = Date()
+    @ObservationIgnored let launchedAt = Date()
+
+    /// `since`: the activation the request belongs to (the launch, for the end of the splash).
+    func requestIcon(since: Date) {
+        iconCheckAfter = since
+        iconRequests += 1
+    }
     /// Jolly pop-ups waiting to be shown (first opening after the event, never repeated), oldest first.
     private(set) var popups: [JollyPopupItem] = []
     var reminderMinutes: Int {

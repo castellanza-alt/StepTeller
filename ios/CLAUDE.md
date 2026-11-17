@@ -1,5 +1,14 @@
 # Note per chi subentra (ios/)
 
+## Team di agenti (dal 17/11/2026) — vale prima delle note sotto
+Quattro ruoli come in briciola: **Director** (unico che parla con Will, scrive i compiti, decide le questioni
+tecniche, unisce in `main`, chiede le build), **Designer**, **Developer**, **QA**. Memoria del team, da leggere per
+prima: `docs/PIANO.md` (stato vero), `docs/DECISIONI.md` (D-001…), `comms/feedback.md` (giudizi di Will), `tasks/`
+(un file per compito, con Esito), `comms/qa/` (collaudi), `docs/design/` (specifiche). Dove questa sezione e
+`docs/DECISIONI.md` (D-030…D-035) contrastano con il resto, valgono loro: rami `task/` `design/` `qa/`, nessuno unisce
+tranne il Director, build solo da `main`. «Chat di coordinamento» in `RILASCIO.md` = Director.
+
+## Note
 - Italiano con Will (non programma, lavora da telefono). Prima la conclusione, breve.
 - Il modello di calcolo è in `Sources/StepTellerCore`; i valori golden dei test vengono dalla web app v4.0: non cambiarli
   senza motivo. L'interfaccia segue il handoff «Dan Dan Dan» (Home + Storico, giorno/notte): token in `App/Design/MangaTokens.swift`,

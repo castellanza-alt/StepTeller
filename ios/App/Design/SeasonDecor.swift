@@ -157,13 +157,15 @@ struct StaticSnow: View {
 // MARK: - Lights on the road
 
 /// 14 bulbs along the road (§4.1), in the illustration space (390 × 790, the frame minus `Manga.artTop`): above
-/// the illustration, below the leg. Colors in turn red, gold, pine; a halo at night; blinking 1 ↔ 0.35 (still
-/// with «Reduce Motion»).
+/// the illustration, below the leg. Colors in turn red, gold, pine; a halo at night; blinking 1 ↔ 0.35 in 1.2 s
+/// ease-in-out, delay (i mod 3) × 0.4 s, computed from the time at 30 fps and stopped with the app not active
+/// (still and lit with «Reduce Motion»).
 struct RoadLights: View {
     let palette: SeasonPalette
     @Environment(\.manga) private var c
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var dim = false
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var start = Date()
 
     /// Frame coordinates of the specification.
     static let points: [CGPoint] = [(36.0, 801.5), (63.7, 794.2), (90.1, 787.8), (118.0, 781.5), (145.7, 775.8),
@@ -172,20 +174,27 @@ struct RoadLights: View {
         .map { CGPoint(x: $0.0, y: $0.1) }
 
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            ForEach(Self.points.indices, id: \.self) { i in
-                let color = [c.red, palette.gold, palette.pine][i % 3]
-                bulb(color)
-                    .opacity(reduceMotion || !dim ? 1 : 0.35)
-                    .animation(reduceMotion ? nil : .easeInOut(duration: 1.2).repeatForever(autoreverses: true)
-                        .delay(Double(i % 3) * 0.4), value: dim)
-                    .position(x: Self.points[i].x, y: Self.points[i].y - Manga.artTop)
+        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: reduceMotion || scenePhase != .active)) { timeline in
+            let t = timeline.date.timeIntervalSince(start)
+            ZStack(alignment: .topLeading) {
+                ForEach(Self.points.indices, id: \.self) { i in
+                    bulb([c.red, palette.gold, palette.pine][i % 3])
+                        .opacity(reduceMotion ? 1 : Self.blink(t - Double(i % 3) * 0.4))
+                        .position(x: Self.points[i].x, y: Self.points[i].y - Manga.artTop)
+                }
             }
         }
         .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
         .allowsHitTesting(false)
         .accessibilityHidden(true)
-        .onAppear { dim = true }
+    }
+
+    /// Opacity at `t` seconds: 1 → 0.35 in 1.2 s and back, ease-in-out (lit before its delay).
+    static func blink(_ t: Double) -> Double {
+        guard t > 0 else { return 1 }
+        let x = t.truncatingRemainder(dividingBy: 2.4) / 1.2
+        let p = x <= 1 ? x : 2 - x
+        return 1 - 0.65 * (0.5 - 0.5 * cos(.pi * p))
     }
 
     /// Ellipse 6 × 9 centered on the point, with its 4 × 2.5 `ink` cap right above.

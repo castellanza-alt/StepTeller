@@ -54,6 +54,8 @@ final class StepsStore {
     /// Seasonal themes (Christmas: snow, lights, hat, icon), default yes (D-037).
     var seasonalThemesOn: Bool {
         didSet {
+            // iCloud and Backup reassign it at every restore: only a real change touches widget and icon
+            guard seasonalThemesOn != oldValue else { return }
             defaults.set(seasonalThemesOn, forKey: Keys.seasonal)
             SharedStore.seasonalOn = seasonalThemesOn
             WidgetCenter.shared.reloadAllTimelines()

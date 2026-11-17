@@ -115,6 +115,7 @@ struct RootView: View {
                             onboardingDone = true
                             replayingIntro = false
                         }
+                        SeasonIcon.updateSoon()       // the seasonal icon waits for the end of the introduction
                     }
                     .transition(.opacity)
                 }

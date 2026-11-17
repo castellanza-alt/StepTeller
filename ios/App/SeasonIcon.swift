@@ -15,6 +15,8 @@ enum SeasonIcon {
         // screenshots with fake steps: no system alert over the UI
         if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil { return }
         #endif
+        // not over the introduction (and its permission prompts): it is called again when the introduction ends
+        guard UserDefaults.standard.bool(forKey: Onboarding.doneKey) else { return }
         let app = UIApplication.shared
         guard app.supportsAlternateIcons else { return }
         let wanted = SeasonalTheme.active().map { SeasonLook.of($0).iconName }

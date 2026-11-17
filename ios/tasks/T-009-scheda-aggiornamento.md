@@ -31,3 +31,12 @@ Nessun tag `[store…]`, `[testflight]` o `[apple]` nei commit: li fa solo il Di
 scrivere a William.
 
 ## Esito
+17/11/2026, Developer. PR https://github.com/castellanza-alt/StepTeller/pull/33 (ramo `task/T-009-scheda`, non unita).
+- `asc_store.py`: prima `ensure_version` (trova la versione o, solo con `[store]`, la crea), poi le «App Information»,
+  poi il resto. La prova senza versione confronta età, nome, sottotitolo e categorie con l'informazione pubblicata in
+  sola lettura e non si ferma; la scrittura rilegge le informazioni dopo la creazione (5 tentativi da 3 s) e l'età
+  resta il primo passo su di esse. `[store-invio]` invariato.
+- Provato senza Apple: compilazione, pyflakes, prova offline con chiamate finte (prova senza scritture; scrittura che
+  crea la versione per prima e non tocca l'informazione pubblicata; stop se Apple non apre le informazioni).
+  Revisione indipendente: nessun bug, applicato il suggerimento sull'informazione pubblicata corrente.
+- Da provare: commit `[store-prova]` e poi `[store]` del Director sulla CI.

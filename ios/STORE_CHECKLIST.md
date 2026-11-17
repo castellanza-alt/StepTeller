@@ -229,5 +229,7 @@ Testi italiani in `ios/localizzazione/NEAT_store_da_tradurre.xlsx`, prompt in `P
       non versionati), controllate tutte; convertite in `store/screenshots/<lingua>/06.jpg` (le altre 5 invariate)
 - [x] Per la 1.1: merge su `main` (28 ottobre, `8d5ccfb`, pagine privacy e supporto online) e build 1.1 su TestFlight
       (build 1.97.1, gruppo «Personale»)
-- [ ] Per la 1.1: prova di Will sul telefono (promemoria, Backup, copia in iCloud, Home senza passi a mano)
-- [ ] Per la 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud, da verificare sul telefono (privacy)
+- [x] Per la 1.1: prova di Will sul telefono (17 novembre: «funziona tutto»)
+- [x] Per la 1.1: percorsi di iOS per spegnere e cancellare la copia in iCloud (dentro la prova di Will del 17 novembre)
+- [x] Per la 1.1: età 4+ confermata da Will, scheda scritta, note per il revisore sotto i 4000 caratteri; inviata in
+      revisione il 17 novembre 2026 (build 1.97.1), rilascio manuale

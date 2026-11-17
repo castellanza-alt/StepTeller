@@ -1,0 +1,156 @@
+<title>NEAT NASTY T-008</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&family=Inter:ital@1&display=swap">
+<style>
+/* Layout: confronto dei due personaggi, poi 8 schermate ferme 390 × 844 ridotte a 0,62. */
+:root{
+  --bg:#EEF2F7; --fg:#141414; --muted:#56607A; --frame:#1B1D22; --card:#FFFFFF; --line:#D9DEE8;
+  --day-paper:#FFFFFF; --day-ink:#141414; --day-red:#E5231B;
+  --night-paper:#0E1430; --night-ink:#E2EAFF; --night-red:#FF3B30;
+  --banner:rgba(245,246,250,.94); --banner-fg:#141414; --accent:#E5231B;
+  --display:"Anton","Impact","Arial Narrow",sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0A0D18;--fg:#E2EAFF;--muted:#8E97B5;--frame:#2A2D35;--card:#141A33;--line:#252B44;--banner:rgba(40,42,52,.94);--banner-fg:#F2F4FA;--accent:#FF3B30;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A0D18;--fg:#E2EAFF;--muted:#8E97B5;--frame:#2A2D35;--card:#141A33;--line:#252B44;--banner:rgba(40,42,52,.94);--banner-fg:#F2F4FA;--accent:#FF3B30;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-family:var(--display);font-weight:400;font-size:40px;margin:0}
+h2{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.04em;margin:40px 0 8px}
+.lead{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.who{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.who h3{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.03em;margin:0 0 2px}
+.who .pick{display:inline-block;font-family:var(--display);font-size:11px;letter-spacing:.1em;background:var(--accent);color:#fff;padding:1px 7px;margin-left:6px;vertical-align:3px}
+.who p{margin:4px 0 10px;color:var(--muted);font-size:13px}
+.who q{display:block;font-size:14px;margin:8px 0;padding-left:10px;border-left:2px solid var(--line);quotes:"«" "»"}
+.row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-top:14px}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+figcaption{font-size:12px;color:var(--muted);text-align:center;max-width:30ch}
+figcaption b{display:block;color:var(--fg);font-weight:600}
+.phone{background:var(--frame);padding:8px;border-radius:44px}
+.vp{width:242px;height:523px;overflow:hidden;border-radius:36px;position:relative}
+.cv{position:absolute;left:0;top:0;width:390px;height:844px;transform:scale(.62);transform-origin:0 0;overflow:hidden;background:var(--paper);color:var(--ink)}
+.cv *{font-family:var(--display);font-weight:400;line-height:1}
+.day{--paper:var(--day-paper);--ink:var(--day-ink);--red:var(--day-red)}
+.night{--paper:var(--night-paper);--ink:var(--night-ink);--red:var(--night-red)}
+.a{position:absolute}
+.btn{width:54px;height:54px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.bub{position:absolute;width:230px;transform:rotate(-4deg) skewX(-6deg);transform-origin:0 0}
+.bub .v{background:var(--ink);padding:3px;clip-path:polygon(0 4%,100% 0,97% 100%,2% 94%)}
+.bub .v>div{background:var(--paper);padding:14px 16px 14px 16px;clip-path:polygon(0 4%,100% 0,97% 100%,2% 94%)}
+.bub .t{font-size:15px;letter-spacing:.02em;line-height:1.12;white-space:normal;text-transform:uppercase}
+.bub .s{font-size:12px;color:var(--red);text-align:right;margin-top:4px}
+.bub .tail{position:absolute;left:22px;bottom:-11px;width:16px;height:12px;background:var(--ink);clip-path:polygon(0 0,100% 0,0 100%)}
+.ui{position:absolute;inset:0;padding:70px 18px;font-family:var(--body)!important;background:#F2F3F7;color:#141414}
+.ui *{font-family:var(--body)!important;line-height:1.35}
+.ui .lab{font-family:var(--display)!important;letter-spacing:.2em;font-size:13px;margin:18px 0 6px;color:#141414}
+.ui .card{background:#fff;border-radius:16px;padding:14px 16px;font-size:16px}
+.ui .goal{display:flex;justify-content:space-between;align-items:center}
+.ui .rb{width:36px;height:36px;border-radius:50%;border:1.5px solid #141414;display:flex;align-items:center;justify-content:center;font-size:20px}
+.ui .num{font-size:36px;font-weight:300;letter-spacing:-1px}
+.ui .quote{font-style:italic;font-size:14px;margin:8px 4px 2px}
+.ui .note{font-size:13px;color:#5A6075;margin:6px 4px}
+.ui .seg{display:flex;background:#E4E6ED;border-radius:9px;padding:2px;font-size:14px}
+.ui .seg span{flex:1;text-align:center;padding:6px 0;border-radius:7px}
+.ui .seg .on{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.12);font-weight:600}
+.veil{position:absolute;inset:0;background:var(--paper);opacity:.94}
+.vig{position:absolute;left:36px;width:318px;background:var(--ink);padding:3px;transform:rotate(-4deg);clip-path:polygon(2% 0,100% 6%,98% 100%,0 96%)}
+.vig>div{background:var(--paper);padding:26px 20px 20px 26px;clip-path:polygon(2% 0,100% 6%,98% 100%,0 96%)}
+.banner{width:300px;background:var(--banner);color:var(--banner-fg);border-radius:20px;padding:12px 14px;font-family:var(--body);font-size:14px;line-height:1.35;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.banner b{font-weight:600}
+.banner small{opacity:.6;font-size:12px;float:right}
+.widget{width:364px;height:170px;border-radius:22px;position:relative;overflow:hidden;background:var(--paper);color:var(--ink);transform:scale(.8);transform-origin:0 0}
+.widget *{font-family:var(--display);font-weight:400;line-height:1}
+</style>
+<div class="wrap">
+  <h1>NASTY, la voce di Hargreaves</h1>
+  <p class="lead">Anteprima ferma della specifica <code>ios/docs/design/T-008-nasty.md</code>. Prima i due personaggi da far scegliere a William, poi 8 schermate con il personaggio proposto. Ogni battuta prende in giro solo il comportamento e chiude con un invito a muoversi.</p>
+
+  <h2>I due personaggi</h2>
+  <div class="cmp">
+    <div class="who"><h3>A. Hargreaves, il maggiordomo<span class="pick">PROPOSTO</span></h3><p>Al suo servizio e profondamente deluso, con garbo. Dà del Lei.</p>
+      <q>Il contapassi segna zero. Ho controllato: non è rotto. Si alzi, prego.</q>
+      <q>Obiettivo registrato. Lo farò incorniciare accanto al telecomando. Ora però si cammina.</q>
+      <q>Ho usato un Jolly per coprirla. Non lo dirò a nessuno. Lei però cammini.</q></div>
+    <div class="who"><h3>B. La Professoressa di Oxford</h3><p>Docente severa che dà i voti alla giornata.</p>
+      <q>Zero passi. Voto: non classificato. Si presenti all'appello, in cortile.</q>
+      <q>Quattromila? Un compito svolto con la cura di chi lo copia. Rifaccia, più in alto.</q>
+      <q>Jolly usato. Giustificazione accettata, firmata dal divano. Oggi interrogo io: i passi.</q></div>
+  </div>
+
+  <h2>Schermate</h2>
+  <div class="row" id="screens"></div>
+  <h2>Notifiche e widget</h2>
+  <div class="row" id="more"></div>
+</div>
+<script>
+const FL='M9 1 C11 6,17 9,16 15 C15 20,11 21,9 21 C5 21,2 18,2 14 C2 10,5 9,6 5 C8 8,8 10,9 11 C11 8,10 5,9 1Z';
+const CORE='M9 10.5 C10.5 13,13 14.5,12.5 17 C12 19.5,10.4 20,9 20 C7 20,5.5 18.6,5.6 16.6 C5.7 15,7 14.3,7.3 12.6 C8.2 14,8.4 14.8,8.9 15.2 C9.6 13.8,9.5 12,9 10.5Z';
+const bub=(x,y,t)=>`<div class="bub" style="left:${x}px;top:${y}px"><div class="v"><div><div class="t">${t}</div><div class="s">— H.</div></div></div><span class="tail"></span></div>`;
+function home(theme,steps,label,text,done){
+  const t=theme;
+  return `<div class="cv ${t}"><img class="a" src="img/art-${t}.jpg" style="left:0;top:54px;width:390px;height:790px" alt="">
+   <img class="a" src="img/leg-${t}.png" style="left:-10.6px;top:43.4px;width:411.3px;height:811.9px" alt="">
+   <div class="a btn" style="left:18px;top:56px"></div><div class="a btn" style="right:18px;top:56px"></div>
+   <div class="a" style="left:14px;top:166px;transform:rotate(-15deg) skewX(-10deg);transform-origin:0 0;text-align:center">
+     <div style="font-size:27px">PASSI DI OGGI</div><div style="font-size:108px;letter-spacing:-.035em;line-height:.92;transform:scaleX(.86)">${steps}</div><div style="font-size:19px">SU 10.000</div></div>
+   ${bub(20,340,text)}
+   ${done?`<div class="a" style="left:226px;top:506px;transform:rotate(-5deg)"><div style="background:var(--ink);padding:3px;clip-path:polygon(0 4%,100% 0,97% 100%,2% 94%)"><div style="background:var(--paper);padding:12px 16px;clip-path:polygon(0 4%,100% 0,97% 100%,2% 94%);transform:skewX(-9deg)"><div style="font-size:17px">OBIETTIVO</div><div style="font-size:17px">RAGGIUNTO</div><div style="font-size:68px;color:var(--red)">FATTO!</div></div></div></div>`
+     :`<div class="a" style="left:268px;top:534px;transform:rotate(-5deg) skewX(-9deg)"><div style="font-size:17px">MINUTI</div><div style="font-size:17px">MANCANTI</div><div style="display:flex;align-items:baseline;gap:5px"><span style="font-size:68px">${label}</span><span style="font-size:18px">min</span></div></div>`}
+  </div>`}
+function hist(){return `<div class="cv night">
+  <img class="a" src="img/hill-night.png" style="left:-10px;top:560px;width:200px" alt="">
+  <div class="a" style="left:30px;top:138px;transform:rotate(-12deg)"><svg viewBox="0 0 18 22" width="150" height="184"><path d="${FL}" fill="var(--red)" stroke="var(--ink)" stroke-width=".55"/><path d="${CORE}" fill="var(--paper)"/></svg></div>
+  <div class="a" style="left:112px;top:118px;transform:rotate(-8deg) skewX(-10deg)"><div style="position:relative;font-size:200px;line-height:.86;letter-spacing:-.04em"><span style="position:absolute;left:7px;top:7px;color:var(--red)">41</span><span style="position:relative">41</span></div><div style="font-size:30px;margin:4px 0 0 6px">GIORNI DI FILA!</div></div>
+  <div class="a" style="left:18px;top:440px;background:var(--ink);padding:3px;transform:rotate(-2deg)"><div style="background:var(--paper);padding:12px 14px"><div style="font-size:14px;letter-spacing:.08em">LA MIA SERIE PIÙ LUNGA</div><div style="font-size:22px;color:var(--red);margin-top:4px">41 GIORNI</div></div></div>
+  <div class="a" style="left:150px;top:590px;background:var(--ink);padding:3px;transform:rotate(2deg)"><div style="background:var(--paper);padding:12px 14px"><div style="font-size:14px;letter-spacing:.08em">PROSSIMO JOLLY</div><div style="font-size:15px;margin-top:4px">TRA 4 GIORNI</div></div></div>
+  ${bub(148,704,'Record battuto. Il record precedente, il suo, si dichiara offeso. Rivincita domani.')}
+  <div class="a" style="left:18px;top:790px;font-size:34px">I MIEI PASSI</div></div>`}
+function settings(){return `<div class="cv day"><div class="ui">
+  <div style="font-family:var(--display)!important;letter-spacing:.34em;font-size:15px">IMPOSTAZIONI</div>
+  <div class="lab">OBIETTIVO GIORNALIERO</div>
+  <div class="card goal"><span class="rb">−</span><span><span class="num">4.000</span> <span style="font-size:13px;color:#7A8296">passi</span></span><span class="rb">+</span></div>
+  <div class="quote">«4.000 passi. Ambizione notevole, per una pianta d'appartamento. Proviamo a salire un poco?»</div>
+  <div class="note">Vale da oggi. I giorni passati restano valutati con l'obiettivo che avevi allora, quindi la streak non cambia.</div>
+  <div class="lab">VOCE</div>
+  <div class="seg"><span>Normale</span><span class="on">NASTY</span></div>
+  <div class="note">NASTY: Hargreaves, maggiordomo inglese, commenta i suoi passi. Niente parolacce, solo verità scomode.</div>
+  <div class="quote">Molto bene. Avviso il divano che i tempi sono cambiati.</div>
+  <div class="lab">NOTIFICHE</div><div class="card">Avvisami la sera</div>
+</div></div>`}
+function popup(){return `<div class="cv day"><div class="veil"></div>
+  <div class="vig" style="top:240px"><div>
+   <div style="font-size:30px;transform:rotate(-5deg) skewX(-10deg);transform-origin:left">JOLLY USATO</div>
+   <div style="display:flex;align-items:center;gap:10px;margin-top:12px;transform:rotate(-5deg) skewX(-10deg)"><svg viewBox="0 0 18 22" width="78" height="95"><path d="${FL}" fill="var(--ink)"/><path d="${CORE}" fill="var(--red)"/></svg>
+   <span style="font-size:112px;line-height:.9;color:var(--paper);-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--red)">−1</span></div>
+   <div style="font-size:20px;margin-top:10px;line-height:1.1">HO USATO UN JOLLY PER COPRIRLA. NON LO DIRÒ A NESSUNO.</div>
+   <div style="font-size:20px;margin-top:2px;color:var(--red)">LEI PERÒ CAMMINI.</div>
+   <span style="display:inline-block;background:var(--ink);color:var(--paper);font-size:16px;letter-spacing:.1em;padding:4px 8px;margin-top:12px;transform:rotate(-3deg) skewX(-10deg)">TI RESTANO 2 JOLLY</span>
+   <div style="display:flex;justify-content:flex-end;margin-top:16px"><span style="border:2px solid var(--ink);font-size:20px;letter-spacing:.1em;padding:6px 22px">OK</span></div>
+  </div></div></div>`}
+function party(){return `<div class="cv night"><div class="veil"></div>
+  <div class="a" style="left:0;right:0;top:250px;text-align:center"><div style="font-size:30px;transform:rotate(-5deg) skewX(-10deg)">CONTRO OGNI PREVISIONE!</div>
+  <div style="margin:30px auto 0;width:300px;height:170px;background:var(--red);clip-path:polygon(50% 0,62% 22%,88% 8%,80% 38%,100% 50%,80% 62%,88% 92%,62% 78%,50% 100%,38% 78%,12% 92%,20% 62%,0 50%,20% 38%,12% 8%,38% 22%);display:flex;align-items:center;justify-content:center"><span style="font-size:90px;color:var(--paper);-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill;transform:rotate(-5deg) skewX(-10deg)">10.412</span></div>
+  <div style="display:inline-block;margin-top:22px;background:var(--ink);color:var(--paper);font-size:18px;letter-spacing:.14em;padding:4px 8px">PASSI SU 10.000</div></div></div>`}
+const ph=h=>`<div class="phone"><div class="vp">${h}</div></div>`;
+const fig=(h,b,c)=>`<figure>${ph(h)}<figcaption><b>${b}</b>${c}</figcaption></figure>`;
+document.getElementById('screens').innerHTML=[
+  fig(home('night','0','82','Il contapassi segna zero. Ho controllato: non è rotto. Si alzi, prego.'),'1 · Home a zero, notte','fumetto in (20, 340)'),
+  fig(home('day','8.712','13','Mancano 1.288 passi. Fermarsi qui sarebbe imbarazzante. Per entrambi.'),'2 · Home quasi, giorno','fascia dall’85 %'),
+  fig(home('day','10.412','',`Obiettivo raggiunto. Sono colpito; mi riprenderò presto. Domani si replica.`,true),'3 · Home fatto','fumetto e vignetta «FATTO!»'),
+  fig(party(),'4 · Festa dell’obiettivo','titolo NASTY, 23 caratteri'),
+  fig(hist(),'5 · Storico, record','fumetto in (148, 704)'),
+  fig(settings(),'6 · Impostazioni','battuta sull’obiettivo e scelta della voce'),
+  fig(popup(),'7 · Pop-up Jolly usato','frase di Hargreaves al posto di quella normale'),
+].join('');
+document.getElementById('more').innerHTML=`<figure><div style="display:flex;flex-direction:column;gap:10px">
+  <div class="banner"><b>Una parola, se permette</b><small>NEAT · 20:30</small><br>Mancano 2.140 passi: bastano 21 minuti a 4,5 km/h. Il divano può attendere; ci è abituato.</div>
+  <div class="banner"><b>Obiettivo raggiunto. Davvero.</b><small>NEAT · ora</small><br>10.240 passi su 10.000. Ho controllato due volte. Domani si replica.</div>
+  <div class="banner"><b>Ho coperto la sua assenza</b><small>NEAT · 08:12</small><br>Ieri niente obiettivo: un Jolly ha salvato la serie di 32 giorni. Ne restano 2. Oggi tocca alle scarpe.</div>
+  </div><figcaption><b>8 · Notifiche</b>promemoria serale, obiettivo, Jolly usato</figcaption></figure>
+  <figure><div style="width:292px;height:136px"><div class="widget day"><img class="a" src="img/art-day.jpg" style="left:-60px;top:-120px;width:240px;-webkit-mask:linear-gradient(90deg,#000 50%,transparent 80%);mask:linear-gradient(90deg,#000 50%,transparent 80%)" alt="">
+   <div class="a" style="left:168px;top:34px;transform:rotate(-8deg) skewX(-10deg);transform-origin:0 0"><div style="font-size:13px;letter-spacing:.04em">UN INIZIO TIMIDO.</div><div style="position:relative;font-size:64px;letter-spacing:-.035em"><span style="position:absolute;left:4px;top:4px;color:var(--red)">3.465</span><span style="position:relative">3.465</span></div></div>
+   <div class="a" style="left:184px;top:122px;transform:rotate(-4deg) skewX(-9deg);display:flex;align-items:baseline;gap:5px"><span style="font-size:13px">MANCANO</span><span style="font-size:24px;color:var(--red)">57</span><span style="font-size:13px">MIN · 3,8 KM</span></div>
+  </div></div><figcaption><b>Widget medio</b>l’etichetta «PASSI DI OGGI» diventa la battuta del giorno</figcaption></figure>`;
+</script>

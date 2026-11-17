@@ -42,11 +42,13 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-001 Collaudo della 1.1 sul Simulatore | QA | `qa/T-001` | fatto, unito 17/11 (#29): nessun difetto bloccante, rapporto in `comms/qa/T-001.md` |
 | T-002 Apple Watch riportato su `main` aggiornato | Developer | `task/T-002-watch` | PR #28 in bozza, non si unisce prima della 1.1 pubblicata |
 | T-003 Specifica grafica dell'Apple Watch | Designer | `design/T-003-watch` | fatto, unito 17/11 (#27): `docs/design/T-003-watch.md` |
-| T-004 Tema stagionale di Natale (specifica e icona) | Designer | `design/T-004-natale` | assegnato 17/11 |
+| T-004 Tema stagionale di Natale (specifica e icona) | Designer | `design/T-004-natale` | fatto, unito 17/11 (#30) |
 | T-005 Pop-up e testi di obiettivo e Jolly (specifica) | Designer | `design/T-005-popup-jolly` | assegnato 17/11, dopo T-004 |
 | T-006 Notifiche e pop-up di obiettivo e Jolly | Developer | `task/T-006-notifiche` | assegnato 17/11 |
 | T-007 Collaudo dell'Apple Watch (PR #28) | QA | `qa/T-007` | assegnato 17/11 |
 | T-009 Scheda dello store dopo una versione pubblicata | Developer | `task/T-009-scheda` | fatto, unito 17/11 (#33) |
+| T-010 Tema di Natale nell'app | Developer | `task/T-010-natale` | assegnato 17/11, urgente |
+| T-011 Pop-up e notifiche nella forma finale | Developer | `task/T-011-popup` | assegnato 17/11, dopo T-010 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | assegnato 17/11, dopo T-005 |
 
 ## 6. Dove si prova cosa

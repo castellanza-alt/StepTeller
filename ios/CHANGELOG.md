@@ -9,7 +9,7 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
 ## 1.2 — in lavorazione
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai
   tra le 22 e le 8, toglie il promemoria serale di quel giorno), una quando guadagni un Jolly e una quando un Jolly
-  salva la serie (di notte aspetta le 8). Alla prima apertura dopo un evento Jolly un pop-up, mai ripetuto (più
+  salva la serie (di notte aspetta le 8; tolta se i passi del giorno arrivano tardi e il Jolly non serviva più). Alla prima apertura dopo un evento Jolly un pop-up, mai ripetuto (più
   eventi insieme: uno per tipo, con il numero). Gli eventi si ricavano dalla streak (`StreakEvents` nel nucleo, con
   test); si salva solo quali sono già stati annunciati (`EventLedger` nel Gruppo App, condiviso da app e widget),
   per giorno di calendario, così un cambio di fuso non li ripete e dopo una reinstallazione il passato non torna.

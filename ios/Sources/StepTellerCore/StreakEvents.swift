@@ -2,9 +2,13 @@ import Foundation
 
 /// Day of the device calendar as `yyyy-MM-dd`. Events are named by this key, not by a `Date`: after a change of
 /// time zone the start of the same day is another instant, the key stays the same (no event repeated).
+/// Always Gregorian numbers in the calendar's time zone: a phone set to the Japanese or Buddhist calendar would
+/// otherwise write other years, and changing calendar would make old keys look new.
 public enum DayKey {
     public static func of(_ date: Date, calendar: Calendar) -> String {
-        let c = calendar.dateComponents([.year, .month, .day], from: date)
+        var gregorian = Calendar(identifier: .gregorian)
+        gregorian.timeZone = calendar.timeZone
+        let c = gregorian.dateComponents([.year, .month, .day], from: date)
         return String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)
     }
 

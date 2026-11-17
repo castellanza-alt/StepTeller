@@ -12,10 +12,13 @@ enum EventNotifier {
     /// Console (Mac, filter `subsystem:it.castellanza.stepteller category:events`).
     static let log = Logger(subsystem: "it.castellanza.stepteller", category: "events")
 
-    /// The ledger as saved, started today if it never existed.
+    /// The ledger as saved, started (and saved) today if it never existed: its first day must stay the real one,
+    /// or a Jolly spent on that day would look older than the ledger and never be told.
     static func ledger(now: Date, calendar: Calendar) -> EventLedger {
+        if let saved = SharedStore.eventLedger, saved.since != nil { return saved }
         var ledger = SharedStore.eventLedger ?? EventLedger()
         StreakEvents.start(&ledger, now: now, calendar: calendar)
+        SharedStore.eventLedger = ledger
         return ledger
     }
 
@@ -71,6 +74,27 @@ enum EventNotifier {
             try? await center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
             log.notice("events: \(event.id) sent\(trigger == nil ? "" : " for 08:00")")
         }
+    }
+
+    /// Removes the notifications still waiting (Jollies at night wait for 08:00) whose event is no longer in the
+    /// streak: steps of the missed day arrived late (Watch synced in the morning), so no Jolly was spent after all.
+    /// `current` = identifiers of the events in the streak now, from a real Health read.
+    static func withdrawStale(keeping current: Set<String>) async {
+        let center = UNUserNotificationCenter.current()
+        let stale = await center.pendingNotificationRequests().map(\.identifier).filter {
+            $0.hasPrefix(StreakEvents.notificationPrefix)
+                && !current.contains(String($0.dropFirst(StreakEvents.notificationPrefix.count)))
+        }
+        guard !stale.isEmpty else { return }
+        center.removePendingNotificationRequests(withIdentifiers: stale)
+        log.notice("events: \(stale) withdrawn, no longer true")
+    }
+
+    /// Switch turned off: nothing waiting for the morning goes out any more.
+    static func withdrawAllPending() async {
+        let center = UNUserNotificationCenter.current()
+        let ids = await center.pendingNotificationRequests().map(\.identifier).filter { $0.hasPrefix(StreakEvents.notificationPrefix) }
+        center.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
     /// The pop-up of these events was shown: their notification, if still waiting for the morning or still in

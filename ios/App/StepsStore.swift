@@ -48,6 +48,7 @@ final class StepsStore {
             defaults.set(eventNotificationsOn, forKey: Keys.eventsOn)
             SharedStore.eventsOn = eventNotificationsOn
             if eventNotificationsOn { Task { _ = await scheduler.requestIfNeeded() } }
+            else { Task { await EventNotifier.withdrawAllPending() } }
         }
     }
     /// Jolly pop-ups waiting to be shown (first opening after the event, never repeated), oldest first.
@@ -214,6 +215,9 @@ final class StepsStore {
     private func flushSync() async {
         syncTask?.cancel()
         syncTask = nil
+        // goal changed with the app open (lowered below today's steps): the celebration tells it here, so it is
+        // marked before the widget reload could notify it
+        if UIApplication.shared.applicationState == .active { await announceEvents() }
         if pendingWidgetReload {
             pendingWidgetReload = false
             WidgetCenter.shared.reloadAllTimelines()
@@ -268,6 +272,7 @@ final class StepsStore {
         let now = Date()
         let calendar = controller.calendar
         let events = StreakEvents.events(in: history.streak, now: now, calendar: calendar)
+        await EventNotifier.withdrawStale(keeping: Set(events.map(\.id)))
         let active = UIApplication.shared.applicationState == .active
         let due = StreakEvents.toNotify(events, ledger: EventNotifier.ledger(now: now, calendar: calendar), now: now, calendar: calendar)
         await EventNotifier.notify(due, steps: steps, goal: goal, appActive: active, now: now, calendar: calendar)

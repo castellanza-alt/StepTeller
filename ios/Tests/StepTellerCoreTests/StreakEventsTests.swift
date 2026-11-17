@@ -184,6 +184,13 @@ final class StreakEventsTests: XCTestCase {
                        DateComponents(year: 2026, month: 11, day: 4, hour: 8, minute: 0))
     }
 
+    func testDayKeyIsGregorianWhateverThePhoneCalendar() {
+        var japanese = Calendar(identifier: .japanese); japanese.timeZone = cal.timeZone
+        var buddhist = Calendar(identifier: .buddhist); buddhist.timeZone = cal.timeZone
+        XCTAssertEqual(DayKey.of(at(3, 12), calendar: japanese), "2026-11-03")
+        XCTAssertEqual(DayKey.of(at(3, 12), calendar: buddhist), "2026-11-03")
+    }
+
     func testDayKeyAcrossZones() {
         var tokyo = Calendar(identifier: .gregorian); tokyo.timeZone = TimeZone(identifier: "Asia/Tokyo")!
         let instant = at(3, 23, 30)                     // 3 Nov 23:30 in Rome = 4 Nov 07:30 in Tokyo

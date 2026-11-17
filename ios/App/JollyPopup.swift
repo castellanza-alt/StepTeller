@@ -67,6 +67,8 @@ struct JollyPopup: View {
                 withAnimation(.easeOut(duration: 0.2)) { shown = true }
                 withAnimation(.spring(duration: 0.5, bounce: 0.45).delay(0.05)) { pop = 1 }
             }
+            // with VoiceOver it stays until closed: reading it takes longer than a few seconds
+            guard !UIAccessibility.isVoiceOverRunning else { return }
             try? await Task.sleep(for: .seconds(4))
             // taken off screen meanwhile (the goal celebration came first): it comes back later, not closed
             guard !Task.isCancelled else { return }

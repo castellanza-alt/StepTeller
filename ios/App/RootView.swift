@@ -91,8 +91,9 @@ struct RootView: View {
                         }
                         .transition(.opacity)
                         .zIndex(1)
-                    } else if let popup = store.popups.first {
-                        // Jolly earned or used: after the goal celebration, one at a time
+                    } else if let popup = store.popups.first, scenePhase == .active, !showSettings {
+                        // Jolly earned or used: after the goal celebration, one at a time, only when it can be seen
+                        // (taken away by Settings or the background, it comes back: its timer does not close it)
                         JollyPopup(item: popup) { withAnimation(.easeOut(duration: 0.2)) { store.dismissPopup() } }
                             .id(popup.id)
                             .transition(.opacity)

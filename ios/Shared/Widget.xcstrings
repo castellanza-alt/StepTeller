@@ -860,67 +860,67 @@
       }
     },
     "n.used.body" : {
-      "comment" : "Corpo, la mattina dopo il giorno mancato. {serie} = giorni di serie salvati, {n} = Jolly rimasti. Limite: ≤ 110.",
+      "comment" : "Corpo, dopo un giorno mancato salvato da un Jolly (può arrivare la mattina dopo). {serie} = giorni di serie salvati, {n} = Jolly rimasti. Limite: ≤ 110.",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ieri non hai chiuso: il Jolly salva la serie di %1$@ giorni. Ne restano %2$@."
+            "value" : "Un Jolly ha salvato la tua serie di %1$@ giorni. Ne restano %2$@."
           }
         }
       }

@@ -28,7 +28,7 @@ Strati dal fondo:
 
 | # | Elemento | Specifica |
 |---|---|---|
-| a | Titolo | Anton 30, tracking 0,02, `ink`; `manga(rotate: -5, skew: -10)`. «JOLLY GUADAGNATO!» / «JOLLY USATO» |
+| a | Titolo | Anton 30, tracking 0,02, `ink`; `manga(rotate: -5, skew: -10)`; **padding sopra 16 dentro la vignetta**, altrimenti il titolo ruotato viene tagliato dal bordo (correzione T-013). «JOLLY GUADAGNATO!» / «JOLLY USATO» |
 | b | Fiamma + numero | riga, `spacing` 10, padding sopra 12. `FlameIcon(.jolly)` 78 × 95 (`ink` con anima `red`). Numero `GlyphText` 112, lineHeight 0,9, tracking −0,03: guadagnato «+1» riempito `red`, contorno `ink` 2,5, ombra dura `ink` (5, 5); usato «−1» (segno meno U+2212) riempito `paper`, contorno `ink` 2,5, ombra dura `red` (5, 5). `manga(rotate: -5, skew: -10)` |
 | c | Frase | Anton 20, tracking 0,02, `ink`, padding sopra 10, al massimo 2 righe (`lineLimit(2)`, `minimumScaleFactor` 0,8) |
 | d | Seconda frase (solo «usato») | Anton 20, `red`, padding sopra 2 |

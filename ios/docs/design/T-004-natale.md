@@ -115,9 +115,11 @@ stessi livelli, come per l'icona attuale (che specializza solo la tinta); la tin
 dentro la maschera arrotondata (verificato: margine 18 px su 2048).
 
 Cambio dell'icona (D-037, API di sistema `setAlternateIconName`, con il suo avviso):
-- A ogni ritorno in primo piano, **dopo la fine dello splash + 0,6 s**: se interruttore acceso e data nel periodo e
-  icona attuale ≠ `AppIconNatale` → `setAlternateIconName("AppIconNatale")`. Se fuori periodo o interruttore spento e
-  icona attuale ≠ nessuna → `setAlternateIconName(nil)`.
+- A ogni ritorno in primo piano, il controllo parte solo quando **sullo schermo non ci sono la festa dell'obiettivo né
+  pop-up (T-005) da almeno 0,6 s**, contando dalla fine dello splash; vale anche alla fine dell'introduzione, quindi
+  l'avviso di iOS non si sovrappone mai a una festa o a un pop-up (correzione T-013). Allora: se interruttore acceso e
+  data nel periodo e icona attuale ≠ `AppIconNatale` → `setAlternateIconName("AppIconNatale")`. Se fuori periodo o
+  interruttore spento e icona attuale ≠ nessuna → `setAlternateIconName(nil)`.
 - Spegnendo l'interruttore l'icona torna subito quella normale (iOS mostra l'avviso).
 - Se l'app non si apre dopo il 6 gennaio, l'icona resta natalizia fino alla prima apertura: limite di iOS, accettato.
 

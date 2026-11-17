@@ -19,7 +19,7 @@ Il collaudo T-012 (`comms/qa/T-012.md`, difetti 1–3) ha trovato tre problemi n
 Non unire, nessuna build, nessun tag, nessuna chiave. Non scrivere a William.
 
 ## Esito
-17/11/2026, Developer. PR verso `main` dal ramo `task/T-013-correzioni` (link nel riepilogo al Director), non unita.
+17/11/2026, Developer. PR https://github.com/castellanza-alt/StepTeller/pull/39 (ramo `task/T-013-correzioni`), non unita.
 - **Difetto 1 (festa dopo il pop-up):** dopo «OK» sull'ultimo pop-up la festa parte se dovuta, senza ripetere i
   controlli di tempo (la lettura che ha messo in coda i pop-up vale anche per lei). Non sono riuscito a riprodurre il
   tocco vero sul Simulatore: con `-stepteller.debugPopupClose 2` (nuovo, chiude il pop-up da solo) la sequenza è

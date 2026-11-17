@@ -47,8 +47,8 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-006 Notifiche e pop-up di obiettivo e Jolly | Developer | `task/T-006-notifiche` | fatto, unito 17/11 (#34), apre la 1.2 |
 | T-007 Collaudo dell'Apple Watch (PR #28) | QA | `qa/T-007` | fatto, unito 17/11 (#35): funziona, complicazioni non provate |
 | T-009 Scheda dello store dopo una versione pubblicata | Developer | `task/T-009-scheda` | fatto, unito 17/11 (#33) |
-| T-010 Tema di Natale nell'app | Developer | `task/T-010-natale` | assegnato 17/11, urgente |
-| T-011 Pop-up e notifiche nella forma finale | Developer | `task/T-011-popup` | assegnato 17/11, dopo T-010 |
+| T-010 Tema di Natale nell'app | Developer | `task/T-010-natale` | fatto, unito 17/11 (#36) |
+| T-011 Pop-up e notifiche nella forma finale | Developer | `task/T-011-popup` | PR #37, da ribasare su main |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

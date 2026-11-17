@@ -19,3 +19,12 @@ grafica cambierà con la specifica T-003; prima conviene sapere se i dati e le c
 Non correggere il codice, non unire, nessuna build TestFlight, nessuna chiave. Non scrivere a William.
 
 ## Esito
+17/11/2026, QA. Rapporto `ios/comms/qa/T-007.md` (ramo `qa/T-007`, PR col solo rapporto, non unita).
+- **Funziona sul Simulatore** (codice `task/T-002-watch` 7b8a631): arrivo e aggiornamento di obiettivo, velocità,
+  unità, serie e Jolly, anche ad app chiusa e con il telefono spento; passi dalla Salute dell'orologio; «OBIETTIVO
+  RAGGIUNTO» e «Niente dati»; casse 41/45/49 (e 42/46) mm con le misure di T-003; italiano e giapponese; nel pacchetto
+  solo impostazioni, nessun dato di Salute.
+- **Non provato:** le quattro complicazioni (manca il permesso di toccare l'orologio nel Simulatore), una taratura
+  vera, i passi che salgono con l'app aperta (il Simulatore non sincronizza Salute dopo l'abbinamento).
+- Nessun difetto bloccante; confermato il testo «telefono» nel permesso Salute delle complicazioni.
+- Provato da William: no.

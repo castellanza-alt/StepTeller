@@ -33,10 +33,9 @@ miglia/km, 10 lingue, introduzione al primo avvio, copia in iCloud e Backup manu
 | 3 | 1.1: classificazione per età. La 1.0 è 4+ (William, 21/10: «no» a salute e benessere, che dava 9+); da confermare per la 1.1 | in attesa di William | — |
 | 4 | 1.1: invio ad Apple (Novità in 10 lingue già pronte, `RILASCIO.md`) | dopo 1–3, Director | — |
 | 5 | 1.2: app per Apple Watch, ramo `ia/1.2-watch` (601c235, 24/10) partito da `74fb221`, prima della 1.1: in conflitto con `main`, provata solo sul Simulatore. Non va in `main` prima che la 1.1 sia pubblicata (`main` = 1.1 per le build) | da riportare su `main` | T-002, T-003 |
-| 6 | Rami vecchi: `ia/1.0.1-promemoria` è identico a `main` (105eac8), `ia/rilascio` è tutto in `main` (PR #26 chiusa): si possono cancellare | in attesa dell'ok di William | — |
 
 Fatto e tolto dall'elenco: la pagina privacy (`neat/privacy`, IT+EN) parla già della copia in iCloud, online dal merge
-della 1.1 (28/10, `8d5ccfb`).
+della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già tutti in `main`, cancellati il 17/11 (ok di William).
 
 ## 5b. Compiti
 | Compito | Chi | Ramo | Stato |

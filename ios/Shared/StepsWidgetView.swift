@@ -26,6 +26,7 @@ struct WidgetPaper: View {
     var body: some View { (scheme == .dark ? MangaPalette.night : MangaPalette.day).paper }
 }
 
+#if !os(watchOS)
 // MARK: - Small (170 × 170)
 
 /// Small widget: fading sole bottom right, streak on top, slanted steps, progress bar.
@@ -160,7 +161,9 @@ struct WidgetMediumView: View {
     }
 }
 
-// MARK: - Lock screen (monochrome)
+#endif
+
+// MARK: - Lock screen (monochrome) and watch complications
 
 /// Lock screen, circular: ring (30 % track, 6 thick) with the steps in Anton at the center.
 struct LockCircular: View {

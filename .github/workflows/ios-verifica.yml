@@ -68,8 +68,9 @@ jobs:
         working-directory: ios
         run: |
           set -o pipefail
+          # Niente `-sdk iphonesimulator`: forzerebbe l'SDK iOS anche sull'app Apple Watch incorporata (1.2).
           xcodebuild -project StepTeller.xcodeproj -scheme StepTeller -configuration Debug \
-            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO build > build.log 2>&1 \
             || { echo "::error::Build fallita; errori:"; grep -E "error:" build.log | sort -u | head -30; exit 1; }
       - name: Screenshot chiaro e scuro

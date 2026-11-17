@@ -26,6 +26,8 @@ struct JollyPopup: View {
     @State private var flame: CGFloat = 0
     @State private var shake = 0
     @State private var sparkOrigin = CGPoint.zero
+    /// The sparks last about 2 s: then the timeline stops (the pop-up can stay on screen for a long time).
+    @State private var sparksDone = false
 
     private var earned: Bool { item.event.kind == .jollyEarned }
     private var streak: Int { item.event.streak }
@@ -40,7 +42,7 @@ struct JollyPopup: View {
                     .mask(RadialGradient(stops: [.init(color: .clear, location: 0.2), .init(color: .white, location: 0.5)],
                                          center: UnitPoint(x: 0.5, y: 380 / Manga.frameHeight), startRadius: 0, endRadius: 420))
                     .opacity(shown ? 1 : 0)
-                if !reduceMotion {
+                if !reduceMotion && !sparksDone {
                     TimelineView(.animation) { timeline in
                         Canvas { ctx, _ in
                             Sparks.draw(&ctx, origin: sparkOrigin, t: timeline.date.timeIntervalSince(start) - 0.15,
@@ -186,6 +188,10 @@ struct JollyPopup: View {
         withAnimation(.spring(duration: 0.5, bounce: 0.45).delay(0.05)) { pop = 1; tilt = -4 }
         if earned {
             withAnimation(.spring(duration: 0.45, bounce: 0.5).delay(0.15)) { flame = 1 }
+            Task {
+                try? await Task.sleep(for: .seconds(2.2))
+                sparksDone = true
+            }
         } else {
             shake += 1
         }

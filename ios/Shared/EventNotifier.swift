@@ -78,9 +78,11 @@ enum EventNotifier {
     /// `current` = identifiers of the events in the streak now, from a real Health read.
     static func withdrawStale(keeping current: Set<String>) async {
         let center = UNUserNotificationCenter.current()
-        let stale = await center.pendingNotificationRequests().map(\.identifier).filter {
-            $0.hasPrefix(StreakEvents.notificationPrefix)
-                && !current.contains(String($0.dropFirst(StreakEvents.notificationPrefix.count)))
+        // only Jolly events: «goal reached» exists for today only, and last night's one waits for 08:00
+        let jolly = [StreakEvent.Kind.jollyUsed, .jollyEarned].map { StreakEvents.notificationPrefix + $0.rawValue + "." }
+        let stale = await center.pendingNotificationRequests().map(\.identifier).filter { id in
+            jolly.contains { id.hasPrefix($0) }
+                && !current.contains(String(id.dropFirst(StreakEvents.notificationPrefix.count)))
         }
         guard !stale.isEmpty else { return }
         center.removePendingNotificationRequests(withIdentifiers: stale)
@@ -115,6 +117,8 @@ enum EventText {
         case .goalReached:
             // «10.240 passi su 10.000.» + «Streak: 15 giorni di fila.» (plural on the streak)
             let first = L10n.format("notif.goal.body", table: t, LocalFormat.integer(steps), LocalFormat.integer(goal))
+            // streak unknown (widget without the app's numbers for today): the first sentence only
+            guard event.streak > 0 else { return ReminderContent(title: L10n.text("notif.goal.title", table: t), body: first) }
             let second = L10n.format("notif.goal.streak", table: t, event.streak)
             return ReminderContent(title: L10n.text("notif.goal.title", table: t), body: first + gap + second)
         case .jollyEarned:

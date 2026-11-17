@@ -34,9 +34,11 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   Jolly guadagnato, poi la festa dell'obiettivo, 0,3 s tra l'uno e l'altro. Notifiche con i testi della specifica
   (streak nel corpo dell'obiettivo, «Jolly finiti» quando non ne restano); tra le 22 e le 8 ogni notifica, anche
   quella dell'obiettivo, aspetta le 8 (Director). Toccando una notifica si apre la Home (`NotificationRouter`).
-  Sezione «Notifiche» in Impostazioni (già «Promemoria serale»). 22 testi della specifica al posto delle bozze di
-  T-006, italiano in tutte le lingue in attesa dell'ok di William e della traduzione; il widget prende streak e
-  Jolly dopo l'obiettivo dall'app (`StreakEvents.Reach`).
+  Sezione «Notifiche» in Impostazioni (già «Promemoria serale»: cambiato l'italiano, le altre lingue da ritradurre).
+  I testi della specifica al posto delle bozze di T-006 (23 righe: il corpo dell'obiettivo è diviso in
+  `notif.goal.body` + `notif.goal.streak` per il plurale), italiano in tutte le lingue in attesa dell'ok di William
+  e della traduzione; il widget prende streak e Jolly dopo l'obiettivo dall'app (`StreakEvents.Reach`), senza
+  quei numeri la notifica dell'obiettivo non dice la streak.
 
 ## 1.1 — inviata ad Apple il 17 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

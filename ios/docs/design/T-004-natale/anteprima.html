@@ -1,0 +1,148 @@
+<title>NEAT Natale T-004</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap">
+<style>
+/* Layout: telai 390 × 844 ridotti a 0,62; Home giorno/notte, Storico, icona su una schermata Home di iOS. */
+:root{
+  --bg:#EEF2F7; --fg:#141414; --muted:#56607A; --frame:#1B1D22;
+  --day-paper:#FFFFFF; --day-ink:#141414; --day-red:#E5231B; --day-snow:#AFC0DC; --day-gold:#E09A12; --day-pine:#1D7A4C;
+  --night-paper:#0E1430; --night-ink:#E2EAFF; --night-red:#FF3B30; --night-snow:#FFFFFF; --night-gold:#FFC94A; --night-pine:#46C487;
+  --white:#FFFFFF;
+  --display:"Anton","Impact","Arial Narrow",sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0A0D18;--fg:#E2EAFF;--muted:#8E97B5;--frame:#2A2D35;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A0D18;--fg:#E2EAFF;--muted:#8E97B5;--frame:#2A2D35;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-family:var(--display);font-weight:400;font-size:40px;margin:0;letter-spacing:.01em}
+h2{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.04em;margin:40px 0 6px}
+.lead{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.row{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;margin-top:14px}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+figcaption{font-size:12px;color:var(--muted);text-align:center;max-width:30ch}
+figcaption b{display:block;color:var(--fg);font-weight:600}
+.phone{background:var(--frame);padding:8px;border-radius:44px}
+.vp{width:242px;height:523px;overflow:hidden;border-radius:36px;position:relative}
+.cv{position:absolute;left:0;top:0;width:390px;height:844px;transform:scale(.62);transform-origin:0 0;overflow:hidden}
+.cv *{font-family:var(--display);font-weight:400;line-height:1;white-space:nowrap}
+.day{--paper:var(--day-paper);--ink:var(--day-ink);--red:var(--day-red);--snow:var(--day-snow);--gold:var(--day-gold);--pine:var(--day-pine)}
+.night{--paper:var(--night-paper);--ink:var(--night-ink);--red:var(--night-red);--snow:var(--night-snow);--gold:var(--night-gold);--pine:var(--night-pine)}
+.cv{background:var(--paper);color:var(--ink)}
+.a{position:absolute}
+.btn{width:54px;height:54px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.knob{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FF6A5E,var(--red) 55%,#B5140E);border:2.5px solid var(--paper);box-shadow:0 0 0 1.5px var(--ink),0 0 14px rgba(255,59,48,.45)}
+.bulb{position:absolute;width:6px;height:9px;border-radius:50%}
+.bulb::before{content:"";position:absolute;left:1px;top:-2.5px;width:4px;height:2.5px;background:var(--ink)}
+.night .bulb{box-shadow:0 0 5px currentColor}
+.bulb{background:currentColor;animation:blink 1.2s ease-in-out infinite alternate}
+@keyframes blink{from{opacity:1}to{opacity:.35}}
+@media (prefers-reduced-motion: reduce){.bulb{animation:none}}
+.homescreen{width:242px;height:523px;border-radius:36px;overflow:hidden;position:relative;
+  background:linear-gradient(160deg,#20305A,#0E1430 55%,#3A1420)}
+.grid{position:absolute;left:18px;right:18px;top:70px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px 14px}
+.app{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;color:#fff;font-family:var(--body)}
+.app i{display:block;width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,.18)}
+.app img{width:44px;height:44px;border-radius:11px}
+.big img{width:160px;height:160px;border-radius:36px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.tag{display:inline-block;font-family:var(--display);font-size:12px;letter-spacing:.08em;padding:1px 7px;border:1.5px solid var(--fg)}
+.settings{width:300px;background:var(--day-paper);color:var(--day-ink);border-radius:14px;padding:14px 16px;font-family:var(--body);font-size:14px;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.settings .lab{font-family:var(--display);letter-spacing:.2em;font-size:12px;margin-bottom:8px}
+.settings .r{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid #E3E6EE}
+.sw{width:44px;height:26px;border-radius:13px;background:#E5231B;position:relative}
+.sw::after{content:"";position:absolute;right:2px;top:2px;width:22px;height:22px;border-radius:50%;background:#fff}
+.settings .n{font-size:12px;color:#5A6075;margin-top:6px}
+.seg{display:flex;border:1px solid #D5D9E3;border-radius:8px;overflow:hidden;font-size:12px}
+.seg span{padding:4px 7px}.seg .on{background:#141414;color:#fff}
+</style>
+<div class="wrap">
+  <h1>NEAT a Natale</h1>
+  <p class="lead">Anteprima ferma della specifica <code>ios/docs/design/T-004-natale.md</code>: neve, luci sulla strada, cappello sul pomello e sulla fiamma, icona di Natale. Telai 390 × 844 ridotti a 0,62. Le lampadine lampeggiano come nell'app (ferme con «Riduci movimento»); la neve qui è ferma.</p>
+
+  <h2>Home</h2>
+  <div class="row" id="home"></div>
+  <h2>Storico, zona della serie</h2>
+  <div class="row" id="hist"></div>
+  <h2>Icona</h2>
+  <div class="row">
+    <figure><div class="phone"><div class="homescreen"><div class="grid" id="grid"></div></div></div><figcaption><b>Schermata Home di iOS</b>icona di Natale tra app generiche</figcaption></figure>
+    <figure class="big"><img src="img/icona-natale.png" alt="Icona di Natale: suola rossa con cappello e neve su fondo nero"><figcaption><b>Normale</b>fondo #0C0C0C, cappello davanti, neve dietro</figcaption></figure>
+    <figure class="big"><img src="img/icona-natale-tinta.png" alt="Icona di Natale in versione tinta"><figcaption><b>Tinta (simulazione)</b>rossi a grigio 1,0, bianchi a opacità 0,6</figcaption></figure>
+  </div>
+  <h2>Impostazioni</h2>
+  <div class="row">
+    <figure><div class="settings">
+      <div class="lab">TEMA</div>
+      <div class="seg"><span class="on">Sistema</span><span>Orario</span><span>Giorno</span><span>Notte</span></div>
+      <div class="r" style="margin-top:10px"><span>Temi stagionali</span><span class="sw"></span></div>
+      <div class="n">Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso.</div>
+      <div class="n">Sistema: giorno con l'aspetto chiaro del telefono, notte con quello scuro. Orario: giorno dalle 7 alle 19.</div>
+    </div><figcaption><b>Sezione «Tema»</b>interruttore acceso di serie, due testi nuovi</figcaption></figure>
+  </div>
+</div>
+<script>
+const HAT='<svg viewBox="0 0 40 33" width="100%" height="100%" style="overflow:visible"><path d="M37.1 25.8 C31.1 13.2 22.1 1.8 11.9 0.6 C7.1 0.0 4.1 3.6 4.7 8.7 C8.3 6.3 11.3 9.0 8.3 25.8 Z" fill="var(--red)" stroke="var(--ink)" stroke-width="SW" stroke-linejoin="round"/><circle cx="4.8" cy="8.9" r="4.8" fill="var(--white)" stroke="var(--ink)" stroke-width="SW"/><rect x="4.1" y="23.7" width="36" height="9" rx="4.5" fill="var(--white)" stroke="var(--ink)" stroke-width="SW"/></svg>';
+// cappello: larghezza w, punto di aggancio (22.1, 28.2) del viewBox in (ax, ay), rotazione rot
+function hat(w,ax,ay,rot){const s=w/40;return `<div class="a" style="left:${ax-22.1*s}px;top:${ay-28.2*s}px;width:${w}px;height:${33*s}px;transform:rotate(${rot}deg);transform-origin:${22.1*s}px ${28.2*s}px">${HAT.replaceAll('SW',(1.5/s).toFixed(2))}</div>`}
+function rng(seed){let s=seed>>>0;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296}}
+function flakes(n,seed,w,h){const r=rng(seed),out=[];for(let i=0;i<n;i++){const p=r(),rad=p<.4?1.5:p<.7?2:p<.9?2.5:3.5;out.push([r()*w,r()*h,rad,.55+r()*.4])}return out}
+function flakeSVG(list,w,h){return `<svg class="a" style="left:0;top:0" width="${w}" height="${h}">`+list.map(([x,y,r,o])=>r>3?
+  `<g stroke="var(--snow)" stroke-width="1.2" stroke-linecap="round" opacity="${o}">${[0,60,120].map(a=>`<line x1="${x-3.5*Math.cos(a*Math.PI/180)}" y1="${y-3.5*Math.sin(a*Math.PI/180)}" x2="${x+3.5*Math.cos(a*Math.PI/180)}" y2="${y+3.5*Math.sin(a*Math.PI/180)}"/>`).join('')}</g>`:
+  `<circle cx="${x}" cy="${y}" r="${r}" fill="var(--snow)" opacity="${o}"/>`).join('')+'</svg>'}
+const BULBS=[[36.0,801.5],[63.7,794.2],[90.1,787.8],[118.0,781.5],[145.7,775.8],[173.2,770.6],[200.3,766.0],[227.8,761.3],[254.7,755.1],[281.1,746.2],[304.8,731.9],[313.2,706.1],[303.7,680.6],[278.9,667.8]];
+const COL=['var(--red)','var(--gold)','var(--pine)'];
+function home(theme,done){
+  const t=theme==='day'?'day':'night';
+  const art=`<img class="a" src="img/art-${t}.jpg" style="left:0;top:54px;width:390px;height:790px" alt="">`;
+  const bulbs=BULBS.map(([x,y],i)=>`<span class="bulb" style="left:${x-3}px;top:${y-4.5}px;color:${COL[i%3]};animation-delay:${(i%3)*.4}s"></span>`).join('');
+  const leg=`<img class="a" src="img/leg-${t}.png" style="left:-10.6px;top:43.4px;width:411.3px;height:811.9px" alt="">`;
+  const snow=flakeSVG(flakes(t==='night'?34:26,0x5A17A,390,844),390,844);
+  const bar=`<div class="a btn" style="left:18px;top:56px;transform:rotate(-6deg)"></div><div class="a btn" style="right:18px;top:56px;transform:rotate(-6deg)"></div>`;
+  const steps=`<div class="a" style="left:14px;top:166px;transform:rotate(-15deg) skewX(-10deg);transform-origin:0 0;text-align:center">
+    <div style="font-size:27px;letter-spacing:.01em">PASSI DI OGGI</div>
+    <div style="font-size:108px;letter-spacing:-.035em;line-height:.92;transform:scaleX(.86)">${done?'10.729':'3.465'}</div>
+    <div style="font-size:19px;letter-spacing:.02em">SU 10.000</div></div>`;
+  let mid;
+  if(!done){
+    mid=`<div class="a" style="left:268px;top:534px;transform:rotate(-5deg) skewX(-9deg)"><div style="font-size:17px">MINUTI</div><div style="font-size:17px">MANCANTI</div>
+      <div style="display:flex;align-items:baseline;gap:5px;margin-top:2px"><span style="font-size:68px;letter-spacing:-.02em;line-height:.95">57</span><span style="font-size:18px">min</span></div>
+      <div style="font-size:15px;color:var(--red);margin-top:3px">≈ 3,8 KM</div></div>`;
+    const kx=52,ky=797;
+    mid+=`<div class="a knob" style="left:${kx-17}px;top:${ky-17}px"></div>`+hat(30,kx,ky-15,-15)+
+      `<div class="a" style="left:${kx+14+17}px;top:${ky-12}px;font-size:20px">4 <span style="font-size:13px">km/h</span></div>`;
+  } else {
+    mid=`<div class="a" style="left:226px;top:506px;transform:rotate(-5deg)"><div style="position:relative;background:var(--paper);border:2px solid var(--ink);padding:10px 14px 10px 12px;clip-path:polygon(0 4%,100% 0,97% 100%,2% 94%)">
+      <div style="transform:skewX(-9deg)"><div style="font-size:17px;letter-spacing:.04em">OBIETTIVO</div><div style="font-size:17px;letter-spacing:.04em">RAGGIUNTO</div>
+      <div style="font-size:68px;line-height:.95;letter-spacing:-.02em;color:var(--red);margin-top:2px">FATTO!</div><div style="font-size:15px;color:var(--red);margin-top:3px">+729 PASSI</div></div></div>
+      ${hat(44,18,2,-20)}</div>`;
+  }
+  return `<div class="cv ${t}">${art}${bulbs}${leg}${snow}${bar}${steps}${mid}</div>`;
+}
+function phone(inner){return `<div class="phone"><div class="vp">${inner}</div></div>`}
+function fig(h,b,c){return `<figure>${h}<figcaption><b>${b}</b>${c}</figcaption></figure>`}
+document.getElementById('home').innerHTML=[
+  fig(phone(home('day',false)),'Giorno, in corso','neve #AFC0DC, luci sulla strada, cappello sul pomello'),
+  fig(phone(home('night',false)),'Notte, in corso','neve bianca, luci con alone'),
+  fig(phone(home('night',true)),'Notte, obiettivo raggiunto','cappello sulla vignetta «FATTO!»; le luci restano accese'),
+].join('');
+const HF=[[95,304,2.5],[354,266,1.5],[235,506,3.6],[103,133,3.6],[211,307,3.6],[248,87,2],[336,293,1.5],[260,39,1.5],[119,21,2.5],[185,401,3.6],[277,512,3.6],[282,322,2],[340,58,2],[193,146,3.6],[302,476,3.6],[198,217,2.5],[208,229,2],[349,380,1.5]].map(([x,y,r])=>[x,y,r,.8]);
+function hist(theme){const t=theme;
+  const FL='M9 1 C11 6,17 9,16 15 C15 20,11 21,9 21 C5 21,2 18,2 14 C2 10,5 9,6 5 C8 8,8 10,9 11 C11 8,10 5,9 1Z';
+  const CORE='M9 10.5 C10.5 13,13 14.5,12.5 17 C12 19.5,10.4 20,9 20 C7 20,5.5 18.6,5.6 16.6 C5.7 15,7 14.3,7.3 12.6 C8.2 14,8.4 14.8,8.9 15.2 C9.6 13.8,9.5 12,9 10.5Z';
+  const flame=`<div class="a" style="left:30px;top:138px;width:150px;height:184px;transform:rotate(-12deg)">
+    <svg viewBox="0 0 18 22" width="150" height="184" style="overflow:visible"><path d="${FL}" fill="var(--red)" stroke="var(--ink)" stroke-width=".55" stroke-linejoin="round"/><path d="${CORE}" fill="var(--paper)"/></svg>
+    ${hat(72,75,30,-10)}</div>`;
+  const num=`<div class="a" style="left:112px;top:118px;transform:rotate(-8deg) skewX(-10deg)"><div style="position:relative;font-size:200px;line-height:.86;letter-spacing:-.04em">
+    <span style="position:absolute;left:7px;top:7px;color:var(--red)">14</span><span style="position:relative">14</span></div>
+    <div style="font-size:30px;letter-spacing:.02em;margin:4px 0 0 6px">GIORNI DI FILA!</div></div>`;
+  const hill=`<img class="a" src="img/hill-${t}.png" style="left:-10px;top:560px;width:200px" alt="">`;
+  return `<div class="cv ${t}">${flakeSVG(HF,390,844)}${hill}${flame}${num}
+    <div class="a" style="left:206px;top:372px;transform:rotate(-6deg);font-size:15px;display:flex;align-items:center;gap:6px">
+      <svg viewBox="0 0 18 22" width="22" height="27"><path d="${FL}" fill="var(--ink)"/><path d="${CORE}" fill="var(--red)"/></svg><span style="font-size:30px">2</span> JOLLY</div></div>`}
+document.getElementById('hist').innerHTML=[
+  fig(phone(hist('day')),'Giorno','cappello sulla fiamma, neve ferma'),
+  fig(phone(hist('night')),'Notte','stessa disposizione, palette notte'),
+].join('');
+const names=['Meteo','Note','Mappe','Foto','Musica','Orologio','Calendario','NEAT','Salute','Libri','Podcast','Borsa'];
+document.getElementById('grid').innerHTML=names.map(n=>`<div class="app">${n==='NEAT'?'<img src="img/icona-natale.png" alt="">':'<i></i>'}<span>${n}</span></div>`).join('');
+</script>

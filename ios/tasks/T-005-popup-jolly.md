@@ -22,3 +22,14 @@ Il Developer sostituisce i provvisori senza domande; testi italiani pronti da fa
 Non toccare il codice Swift. Non unire. Non scrivere a William.
 
 ## Esito
+
+**17/11/2026, Designer.** Specifica `ios/docs/design/T-005-popup-jolly.md`, anteprima ferma https://claude.ai/artifact/5qwTXAbVtKCeqQTK3Yximp
+(sorgente `ios/docs/design/T-005-popup-jolly-anteprima.html`).
+- Pop-up «Jolly guadagnato» e «Jolly usato»: vignetta `panelB` 318 pt sopra il velo della festa, fiamma Jolly e
+  «+1»/«−1» in `GlyphText`, molla della festa, aptica success/warning, chiusura con «OK» o tocco (non da solo),
+  Riduci movimento, giorno/notte, variante di Natale (cappello, scintille con `pine`/`gold`). Ordine in coda:
+  usato → guadagnato → festa; più eventi dello stesso tipo uniti.
+- Testi italiani: 12 per i pop-up, 7 per le notifiche (solo eventi di ieri e di oggi), 2 nuovi + 1 cambiato in
+  Impostazioni (la sezione «Promemoria serale» diventa «Notifiche»): 22 in tutto, pronti per l'ok di William.
+- Aperto: fascia oraria del «mai di notte» (Developer con il Director).
+

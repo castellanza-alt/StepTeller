@@ -1,0 +1,117 @@
+<title>NEAT Jolly T-005</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap">
+<style>
+/* Layout: telai 390 × 844 ridotti a 0,62 in fila; sotto, banner delle notifiche e la sezione Impostazioni. */
+:root{
+  --bg:#EEF2F7; --fg:#141414; --muted:#56607A; --frame:#1B1D22;
+  --day-paper:#FFFFFF; --day-ink:#141414; --day-red:#E5231B; --day-gold:#E09A12; --day-pine:#1D7A4C;
+  --night-paper:#0E1430; --night-ink:#E2EAFF; --night-red:#FF3B30; --night-gold:#FFC94A; --night-pine:#46C487;
+  --white:#FFFFFF; --banner:rgba(245,246,250,.92); --banner-fg:#141414;
+  --display:"Anton","Impact","Arial Narrow",sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0A0D18;--fg:#E2EAFF;--muted:#8E97B5;--frame:#2A2D35;--banner:rgba(40,42,52,.92);--banner-fg:#F2F4FA;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A0D18;--fg:#E2EAFF;--muted:#8E97B5;--frame:#2A2D35;--banner:rgba(40,42,52,.92);--banner-fg:#F2F4FA;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-family:var(--display);font-weight:400;font-size:40px;margin:0}
+h2{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.04em;margin:40px 0 6px}
+.lead{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-top:14px}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+figcaption{font-size:12px;color:var(--muted);text-align:center;max-width:30ch}
+figcaption b{display:block;color:var(--fg);font-weight:600}
+.phone{background:var(--frame);padding:8px;border-radius:44px}
+.vp{width:242px;height:523px;overflow:hidden;border-radius:36px;position:relative}
+.cv{position:absolute;left:0;top:0;width:390px;height:844px;transform:scale(.62);transform-origin:0 0;overflow:hidden;background:var(--paper);color:var(--ink)}
+.cv *{font-family:var(--display);font-weight:400;line-height:1}
+.day{--paper:var(--day-paper);--ink:var(--day-ink);--red:var(--day-red);--gold:var(--day-gold);--pine:var(--day-pine)}
+.night{--paper:var(--night-paper);--ink:var(--night-ink);--red:var(--night-red);--gold:var(--night-gold);--pine:var(--night-pine)}
+.under{position:absolute;inset:0;padding:180px 24px;font-size:90px;opacity:.9}
+.veil{position:absolute;inset:0;background:var(--paper);opacity:.94}
+.a{position:absolute}
+.vig{position:absolute;left:36px;width:318px;background:var(--ink);padding:3px;transform:rotate(-4deg);clip-path:polygon(2% 0,100% 6%,98% 100%,0 96%)}
+.vig>div{background:var(--paper);padding:26px 20px 20px 26px;clip-path:polygon(2% 0,100% 6%,98% 100%,0 96%)}
+.title{font-size:30px;letter-spacing:.02em;transform:rotate(-5deg) skewX(-10deg);transform-origin:left center;white-space:nowrap}
+.big{display:flex;align-items:center;gap:10px;margin-top:12px;transform:rotate(-5deg) skewX(-10deg);transform-origin:left center}
+.num{font-size:112px;line-height:.9;letter-spacing:-.03em;-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill}
+.p{font-size:20px;letter-spacing:.02em;margin-top:10px}
+.tag{display:inline-block;background:var(--ink);color:var(--paper);font-size:16px;letter-spacing:.1em;padding:4px 8px;margin-top:12px;transform:rotate(-3deg) skewX(-10deg)}
+.note{font-size:14px;letter-spacing:.04em;opacity:.7;margin-top:10px}
+.ok{display:flex;justify-content:flex-end;margin-top:16px}
+.ok span{border:2px solid var(--ink);background:var(--paper);font-size:20px;letter-spacing:.1em;padding:6px 22px}
+.banner{width:340px;max-width:100%;background:var(--banner);color:var(--banner-fg);border-radius:20px;padding:12px 14px;display:flex;gap:10px;font-family:var(--body);font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.banner img{width:36px;height:36px;border-radius:9px;flex:none;background:#0C0C0C}
+.banner b{font-weight:600}
+.banner .t{display:flex;justify-content:space-between;gap:8px}
+.banner .t small{opacity:.6;font-size:12px}
+.settings{width:320px;max-width:100%;background:var(--day-paper);color:var(--day-ink);border-radius:14px;padding:14px 16px;font-family:var(--body);font-size:14px}
+.settings .lab{font-family:var(--display);letter-spacing:.2em;font-size:12px;margin-bottom:6px}
+.settings .r{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid #E3E6EE}
+.sw{width:44px;height:26px;border-radius:13px;background:#E5231B;position:relative;flex:none}
+.sw::after{content:"";position:absolute;right:2px;top:2px;width:22px;height:22px;border-radius:50%;background:#fff}
+.settings .n{font-size:12px;color:#5A6075;margin:2px 0 8px}
+.new{color:#E5231B;font-weight:600}
+</style>
+<div class="wrap">
+  <h1>Jolly, obiettivo, notifiche</h1>
+  <p class="lead">Anteprima ferma della specifica <code>ios/docs/design/T-005-popup-jolly.md</code>. Pop-up alla prima apertura dopo l'evento, sopra la Home velata; telai 390 × 844 ridotti a 0,62. Esempi: streak 30, Jolly 3 dopo il guadagno; streak 32, Jolly 2 dopo l'uso.</p>
+  <h2>Pop-up</h2>
+  <div class="row" id="pops"></div>
+  <h2>Notifiche</h2>
+  <div class="row" style="flex-direction:column;align-items:flex-start;gap:12px" id="notes"></div>
+  <h2>Impostazioni</h2>
+  <div class="row"><figure><div class="settings">
+    <div class="lab">NOTIFICHE <span class="new" style="font-family:var(--body);letter-spacing:0">(era «Promemoria serale»)</span></div>
+    <div class="r"><span>Avvisami la sera</span><span class="sw"></span></div>
+    <div class="r"><span>Ora</span><span>20:30</span></div>
+    <div class="n">Se l'obiettivo non è chiuso: i minuti che ti servono e, se serve, un avviso sulla streak o sul Jolly.</div>
+    <div class="r"><span class="new">Avvisi di obiettivo e Jolly</span><span class="sw"></span></div>
+    <div class="n">Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano.</div>
+  </div><figcaption><b>Sezione «Notifiche»</b>in rosso le parti nuove</figcaption></figure></div>
+</div>
+<script>
+const FL='M9 1 C11 6,17 9,16 15 C15 20,11 21,9 21 C5 21,2 18,2 14 C2 10,5 9,6 5 C8 8,8 10,9 11 C11 8,10 5,9 1Z';
+const CORE='M9 10.5 C10.5 13,13 14.5,12.5 17 C12 19.5,10.4 20,9 20 C7 20,5.5 18.6,5.6 16.6 C5.7 15,7 14.3,7.3 12.6 C8.2 14,8.4 14.8,8.9 15.2 C9.6 13.8,9.5 12,9 10.5Z';
+const HAT='<svg viewBox="0 0 40 33" width="100%" height="100%" style="overflow:visible"><path d="M37.1 25.8 C31.1 13.2 22.1 1.8 11.9 0.6 C7.1 0.0 4.1 3.6 4.7 8.7 C8.3 6.3 11.3 9.0 8.3 25.8 Z" fill="var(--red)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"/><circle cx="4.8" cy="8.9" r="4.8" fill="var(--white)" stroke="var(--ink)" stroke-width="1.3"/><rect x="4.1" y="23.7" width="36" height="9" rx="4.5" fill="var(--white)" stroke="var(--ink)" stroke-width="1.3"/></svg>';
+function rays(){let s=7,out='';const r=()=>{s=(s*1103515245+12345)%2147483648;return s/2147483648};
+  for(let i=0;i<90;i++){const a=i/90*2*Math.PI+r()*.03,inn=150+r()*80,w=.012+r()*.01;
+    const p=(rad,ang)=>`${195+Math.cos(ang)*rad},${380+Math.sin(ang)*rad}`;
+    out+=`<polygon points="${p(inn,a)} ${p(700,a-w)} ${p(700,a+w)}" fill="${i%7===0?'var(--red)':'var(--ink)'}"/>`}
+  return `<svg class="a" style="left:0;top:0;-webkit-mask:radial-gradient(circle at 195px 380px,transparent 84px,#000 210px);mask:radial-gradient(circle at 195px 380px,transparent 84px,#000 210px)" width="390" height="844">${out}</svg>`}
+function sparks(){let s=11,out='';const r=()=>{s=(s*1103515245+12345)%2147483648;return s/2147483648};const C=['var(--red)','var(--ink)','var(--pine)','var(--gold)'];
+  for(let i=0;i<26;i++){const a=r()*2*Math.PI,d=60+r()*120;out+=`<rect x="${120+Math.cos(a)*d}" y="${400+Math.sin(a)*d}" width="${3+r()*4}" height="${2+r()*2}" fill="${C[i%4]}" transform="rotate(${r()*180} ${120+Math.cos(a)*d} ${400+Math.sin(a)*d})"/>`}
+  return `<svg class="a" style="left:0;top:0" width="390" height="844">${out}</svg>`}
+function flame(xmas){return `<div style="position:relative;width:78px;height:95px;flex:none"><svg viewBox="0 0 18 22" width="78" height="95"><path d="${FL}" fill="var(--ink)"/><path d="${CORE}" fill="var(--red)"/></svg>
+  ${xmas?`<div class="a" style="left:${39-22.1*1.15}px;top:${16-28.2*1.15}px;width:46px;height:${33*1.15}px;transform:rotate(-10deg);transform-origin:${22.1*1.15}px ${28.2*1.15}px">${HAT}</div>`:''}</div>`}
+function pop(theme,kind,xmas){
+  const earned=kind==='earned';
+  const body=earned?`
+    <div class="title">JOLLY GUADAGNATO!</div>
+    <div class="big">${flame(xmas)}<span class="num" style="color:var(--red);text-shadow:5px 5px 0 var(--ink)">+1</span></div>
+    <div class="p">30 GIORNI DI FILA!</div>
+    <span class="tag">ORA HAI 3 JOLLY</span>
+    <div class="note">SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK.</div>`:`
+    <div class="title">JOLLY USATO</div>
+    <div class="big">${flame(xmas)}<span class="num" style="color:var(--paper);text-shadow:5px 5px 0 var(--red)">−1</span></div>
+    <div class="p">IERI NON HAI CHIUSO L'OBIETTIVO.</div>
+    <div class="p" style="color:var(--red);margin-top:2px">LA STREAK DI 32 GIORNI È SALVA.</div>
+    <span class="tag">TI RESTANO 2 JOLLY</span>`;
+  return `<div class="cv ${theme}"><div class="under">PASSI DI OGGI<br>3.465</div><div class="veil"></div>${earned?rays():''}${earned&&xmas?sparks():''}
+    <div class="vig" style="top:${earned?236:226}px"><div>${body}<div class="ok"><span>OK</span></div></div></div></div>`}
+const ph=h=>`<div class="phone"><div class="vp">${h}</div></div>`;
+const fig=(h,b,c)=>`<figure>${ph(h)}<figcaption><b>${b}</b>${c}</figcaption></figure>`;
+document.getElementById('pops').innerHTML=[
+  fig(pop('day','earned'),'Jolly guadagnato, giorno','raggi della festa, «+1» rosso, aptica .success'),
+  fig(pop('night','earned'),'Jolly guadagnato, notte','stessa disposizione'),
+  fig(pop('day','used'),'Jolly usato, giorno','niente raggi, «−1» con ombra rossa, aptica .warning'),
+  fig(pop('night','used'),'Jolly usato, notte',''),
+  fig(pop('night','earned',true),'Natale, notte','cappello sulla fiamma, scintille rosso/inchiostro/pino/oro'),
+].join('');
+const N=[['Obiettivo raggiunto!','10.240 passi su 10.000. Streak: 15 giorni di fila.','ora'],
+ ['Hai guadagnato un Jolly!','30 giorni di fila: ora hai 3 Jolly. Se salti un giorno, salva la streak.','08:12'],
+ ['Jolly usato','Ieri non hai chiuso l’obiettivo: la streak di 32 giorni è salva. Ti restano 2 Jolly.','08:12'],
+ ['Jolly usato','Ieri non hai chiuso l’obiettivo: la streak di 9 giorni è salva. Jolly finiti: oggi non mollare.','08:12']];
+document.getElementById('notes').innerHTML=N.map(([t,b,h])=>`<div class="banner"><img src="data:image/svg+xml,${encodeURIComponent('<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 18 22\'><rect x=\'-3\' y=\'-1\' width=\'24\' height=\'24\' fill=\'#0C0C0C\'/><path d=\''+FL+'\' fill=\'#E5231B\' transform=\'translate(3 2.5) scale(.75)\'/></svg>')}" alt=""><div><div class="t"><b>${t}</b><small>NEAT · ${h}</small></div><div>${b}</div></div></div>`).join('');
+</script>

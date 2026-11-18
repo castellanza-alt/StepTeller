@@ -3,6 +3,13 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **18/11/2026**, tema di Natale (specifica T-004, anteprima, nessuna build): bocciato. «Non mi piace come ha lavorato
+  design […] ha messo un cavolo di cappellino sulla punta della scarpa. Davvero? Questo è il massimo che si può fare?»
+  Nuova direzione: stivale di Babbo Natale con la stessa gamba in parallasse, paesaggio innevato, slitta con le renne al
+  posto del pomello «se ci sta», Jolly regalo alla prima apertura dalla vigilia, niente religione, icona con lo stivale,
+  illustratore con Higgsfield, tutto nella 1.2. → D-040, T-015
+- **18/11/2026**, notifiche di obiettivo e Jolly e pop-up dei Jolly (funzioni della 1.2): «OK». Testi italiani ancora
+  da approvare. Chiesto un agente per le traduzioni → D-041
 - **17/11/2026**, build 1.97.1 (1.1, versione letta da William in Impostazioni): «c'è scritto 1.1 e funziona tutto».
   Poi chiede: notifica a obiettivo raggiunto, pop-up quando guadagna un Jolly, notifica e pop-up quando ne usa uno;
   un reskin per ogni stagione, disattivabile, con icona e grafica stagionali, «si inizia dal nataleeee»; una versione

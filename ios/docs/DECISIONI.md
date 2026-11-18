@@ -37,6 +37,24 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   bassi). Ogni battuta chiude con una spinta a muoversi. È una voce che si sceglie, non quella di serie. Esce dopo la
   1.2 «Natale».
 
+- **D-040 Natale rifatto (18/11/2026, William).** Il primo tema di Natale (cappellini su ogni elemento) è bocciato:
+  «non mi piace come ha lavorato design». Nuova direzione, che sostituisce le decorazioni di D-037 (restano il
+  meccanismo unico, le date 1/12–6/1, l'interruttore e l'icona alternativa):
+  - stessa struttura della Home: gamba in primo piano con parallasse, ma **lo stivale di Babbo Natale** al posto
+    della scarpa da corsa; dietro un **paesaggio innevato**;
+  - il pomello della velocità prova a diventare **la slitta trainata dalle renne**; se non funziona, resta il pomello;
+  - **Jolly regalo**: +1 Jolly alla prima apertura dalla mezzanotte della vigilia (25/12 00:00 ora locale) in poi, così
+    non lo perde chi non apre l'app a Natale; con una scritta speciale. Il Director aggiunge: vale fino al 6/1, ogni
+    anno, una volta per stagione (segnato anche in iCloud e nel Backup, così una reinstallazione non lo ripete);
+  - **nessun riferimento religioso**: solo Natale e regalo;
+  - **icona ridisegnata con lo stivale**;
+  - illustrazioni vere con **Higgsfield** (sì di William alla spesa, entro i crediti già presenti: 39 al 18/11, nessuna
+    ricarica senza un nuovo sì);
+  - **tutto insieme nella 1.2**: niente Natale in un aggiornamento separato, anche a costo di slittare sul 1° dicembre.
+- **D-041 Traduttore (18/11/2026, William).** Quinto membro del team, «NEAT: Traduttore» (worktree
+  `~/Developer/neat-lang`, rami `lang/…`): traduce nelle 10 lingue i testi italiani approvati da William (D-005) e
+  tiene `localizzazione/GLOSSARIO.md`. Sostituisce il giro dei prompt in ChatGPT. Parla solo con il Director.
+
 ## Team (17/11/2026, William: «stessa struttura di Briciola»)
 - **D-030 Organizzazione.** Quattro ruoli: **Director** (unico che parla con William, scrive i compiti, decide le
   questioni tecniche, unisce in `main`, chiede le build), **Designer** (specifiche numeriche in `ios/docs/design/`,

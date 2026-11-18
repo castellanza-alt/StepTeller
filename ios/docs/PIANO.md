@@ -29,7 +29,7 @@ miglia/km, 10 lingue, introduzione al primo avvio, copia in iCloud e Backup manu
 | # | Cosa | Stato | Compito |
 |---|---|---|---|
 | 4 | 1.1: invio ad Apple (Novità in 10 lingue già pronte, `RILASCIO.md`) | fatto: inviata il 17/11, approvata e pubblicata il 18/11 (rilascio automatico, non manuale: impostazione della scheda «dopo l'approvazione»); tag v1.1 su 8d5ccfb | Director |
-| 7 | 1.2 «Natale»: notifica a obiettivo raggiunto, Jolly guadagnato/usato (notifica e pop-up), tema stagionale di Natale con icona, disattivabile (D-036) | in lavorazione, da inviare ad Apple entro il 1° dicembre | T-004…T-006 |
+| 7 | 1.2 «Natale»: notifica a obiettivo raggiunto, Jolly guadagnato/usato (notifica e pop-up), tema stagionale di Natale con icona, disattivabile (D-036) | notifiche e pop-up approvati da William (18/11), testi italiani da approvare; **Natale bocciato il 18/11 e da rifare** (D-040: stivale, neve, slitta, Jolly regalo, icona, illustrazioni Higgsfield), tutto insieme: invio entro il 1° dicembre a rischio | T-004…T-006, T-014, T-015 |
 | 8 | Versione «NASTY» che insulta l'utente, alla Carrot Weather | limiti decisi (D-039); prima la voce in italiano | T-008 |
 | 5 | 1.3 (era 1.2, D-036): app per Apple Watch, ramo `ia/1.2-watch` (601c235, 24/10) partito da `74fb221`, prima della 1.1: in conflitto con `main`, provata solo sul Simulatore. Non va in `main` prima che la 1.1 sia pubblicata (`main` = 1.1 per le build) | da riportare su `main` | T-002, T-003 |
 
@@ -51,6 +51,8 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-011 Pop-up e notifiche nella forma finale | Developer | `task/T-011-popup` | fatto, unito 17/11 (#37); testi italiani da approvare da William |
 | T-012 Collaudo della 1.2 sul Simulatore | QA | `qa/T-012` | fatto, unito 17/11 (#38): 3 difetti → T-013 |
 | T-013 Correzioni dal collaudo della 1.2 | Developer | `task/T-013-correzioni` | fatto, unito 17/11 (#39) |
+| T-014 Glossario e traduzioni in bozza della 1.2 | Traduttore | `lang/T-014-traduzioni-1.2` | PR #41 aperta, in attesa dell'ok di William sui testi italiani |
+| T-015 Natale rifatto (specifica, illustrazioni Higgsfield, tela Design) | Designer | `design/T-015-natale` | assegnato 18/11 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

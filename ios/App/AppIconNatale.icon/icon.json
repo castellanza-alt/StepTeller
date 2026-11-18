@@ -8,7 +8,7 @@
       "layers": [
         {
           "name": "rosso",
-          "image-name": "rosso.png",
+          "image-name": "rosso.svg",
           "glass": true,
           "fill-specializations": [
             {
@@ -17,14 +17,7 @@
                 "solid": "extended-gray:1.00000,1.00000"
               }
             }
-          ],
-          "position": {
-            "scale": 0.5,
-            "translation-in-points": [
-              0,
-              0
-            ]
-          }
+          ]
         }
       ],
       "lighting": "combined",
@@ -43,21 +36,14 @@
       "layers": [
         {
           "name": "bianco",
-          "image-name": "bianco.png",
+          "image-name": "bianco.svg",
           "glass": false,
           "opacity-specializations": [
             {
               "appearance": "tinted",
               "value": 0.6
             }
-          ],
-          "position": {
-            "scale": 0.5,
-            "translation-in-points": [
-              0,
-              0
-            ]
-          }
+          ]
         }
       ],
       "lighting": "combined",

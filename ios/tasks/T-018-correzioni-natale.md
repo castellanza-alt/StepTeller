@@ -75,4 +75,7 @@ in `tasks/T-018/`.
   - la slitta spostata che non saliva con la strada.
 - Da guardare: il blocco dei minuti più in alto di 22 pt anche fuori stagione è un piccolo cambio della Home normale
   (Director o Designer).
+- **Icona, decisione del Director:** gli SVG del Designer (#46) al posto della scala 0,5. `App/AppIconNatale.icon` è
+  copiata da `docs/design/T-015-natale/AppIconNatale.icon/`, senza `position`. Rifatta la verifica: con actool è
+  uguale all'anteprima; sul Simulatore è intera nell'avviso e sulla Home chiara e scura. Screenshot `1-*` aggiornati.
 

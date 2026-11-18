@@ -8,7 +8,7 @@
       "layers": [
         {
           "name": "rosso",
-          "image-name": "rosso.png",
+          "image-name": "rosso.svg",
           "glass": true,
           "fill-specializations": [
             {
@@ -36,7 +36,7 @@
       "layers": [
         {
           "name": "bianco",
-          "image-name": "bianco.png",
+          "image-name": "bianco.svg",
           "glass": false,
           "opacity-specializations": [
             {

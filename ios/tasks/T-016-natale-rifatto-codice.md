@@ -42,7 +42,7 @@ niente rete. Nessuna spesa (Higgsfield è del Designer). Non toccare la PR #28 n
 William.
 
 ## Esito
-**18/11/2026, Developer.** Fatto sul ramo `task/T-016-natale`, PR verso `main` non unita (link sotto).
+**18/11/2026, Developer.** Fatto sul ramo `task/T-016-natale`, PR https://github.com/castellanza-alt/StepTeller/pull/43 verso `main`, non unita.
 - **Tolto il Natale di T-010:**
   - cappelli in Home, Storico, festa, pop-up Jolly e splash;
   - neve che cade, luci, neve ferma in Storico e widget;

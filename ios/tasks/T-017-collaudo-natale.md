@@ -31,3 +31,24 @@ acceso.
 Non correggere il codice, non unire, nessuna build TestFlight, nessuna chiave. Non scrivere a William.
 
 ## Esito
+**18/11/2026, QA.** Collaudo sul Simulatore (iPhone 17 Pro e SE), rapporto `comms/qa/T-017.md` con 18 screenshot in
+`comms/qa/T-017/`, ramo `qa/T-017`.
+- **Funziona**:
+  - Natale come la tela;
+  - Jolly regalo con tutte le date;
+  - coda regalo → usato/guadagnato → festa;
+  - temi spenti: regalo sì, tema no;
+  - «Riduci movimento»;
+  - velocità a 10 km/h e 6 mph;
+  - Backup con 15 km/h che scende a 10;
+  - 112 test del nucleo.
+- **Bloccante per il Natale**: l'icona con lo stivale esce ingrandita, cioè solo un pezzo di suola. Causa probabile: i
+  PNG da 2048 px al posto degli SVG.
+- **Medio**: sull'SE, di giorno, si vedono le bande laterali.
+- **Minori**:
+  - conti dei Jolly nella coda;
+  - pomello che a 10 km/h copre «≈ km»;
+  - «SALUTE» sulla luna di notte;
+  - bordo quadrato del regalo;
+  - slitta fuori dal bordo a 3 km/h.
+- Provato da William: no.

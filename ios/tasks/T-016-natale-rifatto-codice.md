@@ -32,6 +32,13 @@ Regole in D-040 e D-037; la specifica è `ios/docs/design/T-015-natale.md` (sost
    25/12, 6/1, 7/1) e con l'interruttore spento; peso dell'app prima/dopo; revisione indipendente del diff con un
    subagente; PR verso `main` (non bozza), non unirla.
 
+## Aggiunta del 18/11 (D-042, dopo gli screenshot della PR #43)
+9. **Slitta un filo più grande** (circa +30–40%, a tuo giudizio guardando gli screenshot), stessa area di tocco o più
+   grande, senza coprire «MINUTI MANCANTI», i minuti e i km.
+10. **Velocità massima 10 km/h** in tutta l'app (miglia: 6 mph): cursore, strada, nucleo (`SpeedTrack.maxSpeed` e
+    dipendenti), test; le velocità salvate più alte vengono riportate a 10. Riga nel CHANGELOG. Nuovi screenshot
+    della slitta (SE e 17 Pro Max, giorno e notte, a 5,5 e 10 km/h) nella stessa PR.
+
 ## Riuscita
 Home natalizia uguale alla tela, nessun resto dei cappellini, Jolly regalo dato una volta sola e mai perso, CI verde,
 screenshot nella PR, elenco di cosa si vede solo sul telefono.

@@ -12,6 +12,7 @@ cartella `ios/`; la radice è la web app su GitHub Pages e non si tocca. Bundle 
 ## 2. Ultima build
 | Versione | Build | Stato | Provata da William | Note |
 |---|---|---|---|---|
+| 1.2 | 1.147.2 | su TestFlight dal 18/11/2026 (Natale rifatto, notifiche e pop-up; testi nuovi solo in italiano) | no |
 | 1.1 | 1.97.1 | pubblicata il 18/11/2026 (approvata e uscita da sola nella notte) | **sì, 17/11** («funziona tutto») | copia iCloud, Backup, promemoria, niente passi a mano |
 | 1.0 | 1.88.1 | pubblicata sull'App Store il 26/10/2026 | sì | |
 

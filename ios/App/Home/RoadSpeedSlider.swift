@@ -4,7 +4,7 @@ import StepTellerCore
 /// Speed slider running **on the dashed line of the road** (`SpeedTrack.road`).
 /// Lives in the illustration space (390 × 790 pt). Grabbed with a tap or a drag within
 /// 20 pt of the path; the finger is projected onto the nearest point and the speed snaps to 0.5.
-/// Same road in both units: 3–16 km/h or 2–10 mph; `speed` stays in km/h.
+/// Same road in both units: 3–10 km/h or 2–6 mph (D-042); `speed` stays in km/h.
 /// In season a sticker (the Christmas sleigh, T-015 §3) runs instead of the knob: `look` from `SeasonLook`.
 struct RoadSpeedSlider: View {
     @Binding var speed: Double
@@ -123,7 +123,7 @@ struct RoadSpeedSlider: View {
     // MARK: trail
 
     /// Three tapered triangles behind the knob, rotated −8°: black 4 pt, red 6 pt, black 3 pt.
-    /// Lengths: red 18 + f·120, black 12 + f·90 (f = fraction of the road, (v − 3) / 13 in km/h).
+    /// Lengths: red 18 + f·120, black 12 + f·90 (f = fraction of the road, (v − 3) / 7 in km/h).
     private func trail(at p: CGPoint, f: Double) -> some View {
         let black = (12 + f * 90).rounded(), red = (18 + f * 120).rounded()
         return ZStack(alignment: .topLeading) {

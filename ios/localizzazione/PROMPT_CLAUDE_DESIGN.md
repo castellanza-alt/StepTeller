@@ -3,7 +3,7 @@
 Da incollare in Claude Design, allegando i file dello zip `NEAT_design_materiale.zip`:
 - `icona-1024.png`: l'icona dell'app (nuova, ottobre 2026);
 - `screenshot/`: gli screenshot dell'app in italiano (iPhone, 1290 × 2796), di giorno e di notte:
-  `home-4kmh-day` (passi di oggi, 65 minuti a 4 km/h), `home-16kmh-day` / `home-16kmh-night` (stessa giornata a 16 km/h),
+  `home-4kmh-day` (passi di oggi, 65 minuti a 4 km/h), `home-10kmh-day` / `home-10kmh-night` (stessa giornata a 10 km/h),
   `home-fatto-day` (obiettivo raggiunto), `storico-sett-day` (serie e Jolly), `storico-sett-grafico-day` (grafico della
   settimana), `storico-anno-meglio-day` (record), `widget-parziale` / `widget-parziale-night` (widget Home e blocco
   schermo), `intro-1-day`, `intro-2-day` / `intro-2-night` (introduzione: benvenuto e Salute).
@@ -64,8 +64,8 @@ La promessa: **i tuoi dati restano sul tuo iPhone.** L'app legge soltanto, non h
 Per ognuno: una **didascalia in alto** in Anton maiuscolo, al massimo 2 righe e circa 30 caratteri, più una riga piccola facoltativa. Sotto, lo screenshot dell'app dentro la sagoma di un iPhone o in una vignetta. Una sola idea per immagine, nell'ordine dei messaggi:
 
 1. **Quanti passi hai fatto oggi?** Home con i passi (`home-4kmh-day`).
-2. **Quanti te ne mancano?** Home, con l'accento su «MINUTI MANCANTI» (`home-16kmh-day`).
-3. **Quanto devi ancora camminare?** Il cursore della velocità sulla strada e i minuti che cambiano (`home-4kmh` / `home-16kmh`).
+2. **Quanti te ne mancano?** Home, con l'accento su «MINUTI MANCANTI» (`home-10kmh-day`).
+3. **Quanto devi ancora camminare?** Il cursore della velocità sulla strada e i minuti che cambiano (`home-4kmh` / `home-10kmh`).
 4. **Ogni giorno allunga la serie.** Storico con il numero gigante della serie (`storico-sett-day`).
 5. **Sempre sotto gli occhi.** I widget per la schermata Home e il blocco schermo (`widget-parziale`).
 6. **I tuoi dati restano sul tuo iPhone.** Un'immagine dedicata alla privacy, per esempio la pagina «Salute» dell'introduzione (`intro-2-day`) o una vignetta con un lucchetto.
@@ -88,7 +88,7 @@ Quando qualcosa non è chiaro, scegli la soluzione più semplice e dimmelo nelle
 
 - `icona-1024.png`: icona dell'app (fondo nero, suola rossa, scarpa bianca).
 - `screenshot/home-4kmh-day.jpg`: Home, 3.465 passi su 10.000, 65 minuti mancanti a 4 km/h.
-- `screenshot/home-16kmh-day.jpg`, `home-16kmh-night.jpg`: stessa Home con il cursore a 16 km/h (meno minuti).
+- `screenshot/home-10kmh-day.jpg`, `home-10kmh-night.jpg`: stessa Home con il cursore a 10 km/h (meno minuti).
 - `screenshot/home-fatto-day.jpg`: obiettivo raggiunto, vignetta «FATTO!».
 - `screenshot/storico-sett-day.jpg`: Storico, serie di 22 giorni, Jolly, record della serie.
 - `screenshot/storico-sett-grafico-day.jpg`: grafico della settimana.

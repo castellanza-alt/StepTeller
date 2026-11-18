@@ -140,7 +140,8 @@ final class StepsStore {
         let startSpeed = startUnit.snapKmh(v)
         speed = startSpeed
         if let saved = Self.persistentSpeed(defaults), saved > startUnit.km(fromValue: startUnit.maxSpeed) + 1e-9 {
-            defaults.set(startSpeed, forKey: Keys.speed)
+            // the saved value, lowered (not a `-stepteller.speed` launch argument, which `v` may be)
+            defaults.set(startUnit.snapKmh(saved), forKey: Keys.speed)
         }
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30

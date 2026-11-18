@@ -61,3 +61,29 @@ Tutto in Python con PIL e numpy:
 - scontorno del magenta con correzione del bordo viola;
 - gamba di notte ricolorata dalla gamba di giorno (§2.3 della specifica);
 - separazione dell'icona in livello rosso e livello bianco a 2048 px.
+
+## T-019 — Icona di Natale rifatta (18/11/2026)
+
+Tetto rimasto 22,5 crediti (D-040). Saldo verificato con `balance`: **22,5 → 13,5**, cioè **9 crediti spesi**, tutti
+`nano_banana_2_1` 1k da 1,5 crediti.
+
+| # | Id del lavoro | Modello | Crediti | Uso | Esito |
+|---|---|---|---|---|---|
+| 11 | c1789475 | nano_banana_2_1 1k | 1,5 | proposta A: stivale grande di profilo | scelta da William, poi scartata: «la gamba pare unirsi a centro piede» |
+| 12 | 836e457c | nano_banana_2_1 1k | 1,5 | proposta B: suola con pelliccia | scartata: troppo confusa |
+| 13 | 457f1a3e | nano_banana_2_1 1k | 1,5 | proposta C: impronta | scartata: troppo confusa |
+| 14 | 49995e98 | nano_banana_2_1 1k | 1,5 | proposta B semplificata | mostrata sulla tela, non scelta |
+| 15 | 2a621b91 | nano_banana_2_1 1k | 1,5 | proposta C semplificata | mostrata sulla tela, non scelta |
+| 16 | 52184700 | nano_banana_2_1 1k | 1,5 | image-to-image dell'icona normale (`normale.png`) | **asset** `AppIconNatale.icon`, dopo pulizia e ritocco a mano |
+
+Fra la #11 e la #16 ci sono due giri disegnati a mano in SVG, senza crediti, entrambi scartati.
+
+**#16** (testo esatto inviato, con l'icona normale come riferimento):
+> Edit this app icon illustration, keeping EXACTLY the same composition, camera angle, sole size, foreshortening, perspective, flat graphic style and the three flat colors only (pure black background, pure white, red #E5231B). Keep the big sole seen from below in the foreground in the same diagonal, keep the white side wall of the shoe on the right with the same layered white contour lines, keep the speed streaks bottom-left identical. Change only: 1) the running-shoe sole becomes a chunky winter boot sole: thick red lug blocks with deep black grooves and a separate, clearly visible raised heel block at the rear end of the sole, separated from the forefoot by a black gap; 2) the upper becomes a smooth leather boot with no laces at all (remove the red laces), black with white outline; 3) the leg enters the boot at the ankle, right above the heel, in perspective: a visible boot shaft rising from the heel up toward the top right, of credible mid-calf length; 4) at the top of the boot shaft a puffy white fur cuff (Santa Claus boot), with a red trouser leg above it going out of frame top right. Anatomically correct: the leg must connect above the heel, never at mid-foot. Bold flat vector look, no gradients, no texture, no text, nothing religious, readable at small icon size.
+
+Lavoro in locale sulla #16 (Python con numpy, Pillow, OpenCV e potracer):
+- portata a 2048 px e ridotta ai 3 colori esatti, con un filtro mediano per togliere i bordi sporchi;
+- tolte a mano le pieghe bianche sottili dentro lo stivale e le tacche sui tasselli (ogni tassello riempito fino al
+  suo contorno convesso, solo dove la rientranza è piccola: il taglio grande del tacco resta);
+- vettorializzata con potrace in `rosso.svg` e `bianco.svg` (viewBox 2048, 1024 × 1024 pt, solo tracciati pieni);
+- anteprime `icona-natale-1024.png` e `icona-natale-tinta-1024.png` ricavate dai due livelli.

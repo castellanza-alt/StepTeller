@@ -147,6 +147,11 @@ Le differenze:
 - Stessa composizione e stesso stile piatto dell'icona attuale: la suola rossa vista da sotto e le scie in basso a
   sinistra. La scarpa diventa **lo stivale**: tomaia nera con tratti bianchi, **risvolto di pelliccia bianca** in alto a
   destra e un pezzo di pantalone rosso. Niente lacci, niente cappello, niente neve.
+- **T-019 (18/11, scelta da William):** rifatta perché «la gamba pare unirsi a centro piede». Stessi angolo, dimensione
+  e scorcio della suola, stesso fianco a destra e stesse scie; suola da scarpone con **tacco staccato** in basso, la
+  gamba entra nello stivale **sopra il tallone**, gambale fino a metà polpaccio. Tomaia nera: è il colore vero degli
+  stivali di Babbo Natale e lascia il rosso solo a suola e pantalone, che così si staccano. Dall'icona normale con un
+  image-to-image (#16 in `generazioni.md`), poi 3 colori esatti, ritocco a mano (tolte pieghe e tacche) e potrace.
 - Il formato di Icon Composer è lo stesso di `App/AppIcon.icon`:
   - `icon.json` copiato da lì, con il gruppo «Scarpa» rinominato «Stivale»;
   - due livelli SVG (1024 pt, come l'icona normale; T-018): `rosso.svg` (#E5231B, vetro sì, tinta grigio 1,0) e `bianco.svg` (#FFFFFF, vetro no,

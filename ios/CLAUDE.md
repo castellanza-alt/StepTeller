@@ -8,6 +8,13 @@ prima: `docs/PIANO.md` (stato vero), `docs/DECISIONI.md` (D-001…), `comms/feed
 `docs/DECISIONI.md` (D-030…D-035) contrastano con il resto, valgono loro: rami `task/` `design/` `qa/`, nessuno unisce
 tranne il Director, build solo da `main`. «Chat di coordinamento» in `RILASCIO.md` = Director.
 
+## Disco (18/11/2026, William) — vale per tutti
+Si lavora **solo sull'SSD esterno** (`/Volumes/SSD`, sempre collegato), mai sul disco interno. Mappa e regole in
+`/Volumes/SSD/LEGGIMI.md`: progetti e worktree in `/Volumes/SSD/Developer`, build Xcode in `/Volumes/SSD/DerivedData`
+(impostato), simulatori in `/Volumes/SSD/CoreSimulator`, file pesanti (screenshot, video, archivi, build esportate) in
+`/Volumes/SSD/Temp/NEAT/`, cancellati a fine compito. A fine turno nessuna registrazione (`simctl io … recordVideo`),
+simulatore o processo resta acceso. Lo scratchpad delle sessioni solo per file piccoli.
+
 ## Note
 - Italiano con Will (non programma, lavora da telefono). Prima la conclusione, breve.
 - Il modello di calcolo è in `Sources/StepTellerCore`; i valori golden dei test vengono dalla web app v4.0: non cambiarli

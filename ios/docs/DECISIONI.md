@@ -55,6 +55,11 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   piccola, a 15 km/h copre i testi): «farei una slitta un filo più grande. Poi cambiamo il passo dei km/h: arriviamo a
   10, non oltre». Il cursore della velocità arriva a **10 km/h** (in miglia l'equivalente, 6 mph), in tutta l'app e non
   solo a Natale; le velocità salvate più alte (telefono, iCloud, Backup) scendono a 10.
+- **D-043 Disco (18/11/2026, William).** «Da ora in poi non devi usare e far usare il disco interno ma solo quello
+  esterno. Creati delle cartelle ordinate con regole semplici.» Mappa in `/Volumes/SSD/LEGGIMI.md`, regole in
+  `ios/CLAUDE.md` (sezione Disco). Spostati: build Xcode, cache SwiftPM (simulatori e progetti già dal 15/11); le
+  conversazioni e i temporanei di Claude si spostano con l'app chiusa. Motivo: una registrazione del Simulatore
+  dimenticata da una sessione di briciola aveva riempito il disco interno (63 GB).
 - **D-041 Traduttore (18/11/2026, William).** Quinto membro del team, «NEAT: Traduttore» (worktree
   `~/Developer/neat-lang`, rami `lang/…`): traduce nelle 10 lingue i testi italiani approvati da William (D-005) e
   tiene `localizzazione/GLOSSARIO.md`. Sostituisce il giro dei prompt in ChatGPT. Parla solo con il Director.

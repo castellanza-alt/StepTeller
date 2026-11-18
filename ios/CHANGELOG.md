@@ -75,6 +75,10 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   bianca tra la barra di stato e il cielo. Dietro la tela la stessa scena, ferma e sfumata, allargata a tutto lo schermo e
   ripetuta a specchio sopra e sotto l'illustrazione (dietro la barra di stato, in basso e ai lati dell'SE); il bordo
   alto dell'illustrazione sfuma nei primi 20 pt. Strada e cursore invariati; fuori stagione nessun cambiamento.
+- Icona di Natale nuova (T-019, scelta da William il 18/11): stessa composizione dell'icona normale (suola vista da
+  sotto, fianco a destra, scie in basso a sinistra), con suola da scarpone e tacco staccato, stivale nero senza lacci,
+  risvolto di pelliccia e pantalone rosso; la gamba entra nello stivale sopra il tallone. Solo i due livelli SVG di
+  `App/AppIconNatale.icon` (e la copia in `docs/design/T-015-natale/`), `icon.json` invariato.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

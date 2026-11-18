@@ -3,6 +3,8 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **18/11/2026**, nuovo Natale (tela T-015 del Designer, nessuna build): «Mi piace». Approvata così com'è, slitta
+  compresa. → T-016
 - **18/11/2026**, tema di Natale (specifica T-004, anteprima, nessuna build): bocciato. «Non mi piace come ha lavorato
   design […] ha messo un cavolo di cappellino sulla punta della scarpa. Davvero? Questo è il massimo che si può fare?»
   Nuova direzione: stivale di Babbo Natale con la stessa gamba in parallasse, paesaggio innevato, slitta con le renne al

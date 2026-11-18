@@ -2,7 +2,7 @@ import OSLog
 import UIKit
 import StepTellerCore
 
-/// App icon of the season (D-037, §6 of `docs/design/T-004-natale.md`): iOS's own API, which shows its own alert;
+/// App icon of the season (D-037, D-040, §5 of `docs/design/T-015-natale.md`): iOS's own API, which shows its own alert;
 /// nothing hides it. After the splash, at every return to the foreground and at the end of the introduction, but
 /// only on a free screen (no celebration or pop-up, `RootView.watchIcon`), and right away from the switch in
 /// Settings: the season's icon in the period with the switch on, the normal one otherwise. If the app is not opened after the period, the icon stays until the next

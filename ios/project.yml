@@ -75,7 +75,6 @@ targets:
       - path: App/Design/MangaTokens.swift
       - path: App/Design/MangaViews.swift
       - path: App/Design/MangaShapes.swift
-      - path: App/Design/SeasonDecor.swift
       - path: App/Fonts/Anton-Regular.ttf
       # JA/KO/ZH titles (subset to the characters in use, scripts/font_asia.py)
       - path: App/Fonts/DelaGothicOne-NEAT.ttf

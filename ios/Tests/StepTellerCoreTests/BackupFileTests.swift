@@ -19,6 +19,7 @@ final class BackupFileTests: XCTestCase {
         file.calibration = CalibrationResult(walk: [.init(speed: 5, cadence: 110)], run: [], walkWorkouts: 3, runWorkouts: 0)
         file.eventNotificationsOn = false
         file.seasonalThemes = false
+        file.jollyGifts = ["2026": "2026-12-27"]
         XCTAssertEqual(try BackupFile.decode(file.encoded()), file)
     }
 

@@ -1,4 +1,5 @@
 import Foundation
+import StepTellerCore
 
 /// Copy of the app's few saved values in the user's iCloud (key-value store): after deleting and reinstalling
 /// the app, or on a new iPhone with the same Apple Account, streak start, goal history and settings come back.
@@ -10,9 +11,15 @@ enum CloudBackup {
     static let keys = [
         "stepteller.goal", "stepteller.goalHistory", "stepteller.streak.start", "stepteller.speed",
         "stepteller.units", "stepteller.reminder.on", "stepteller.reminder.minutes", "stepteller.calibration.v1",
-        ThemeMode.storageKey, "stepteller.events.on", "stepteller.seasonal",
+        ThemeMode.storageKey, "stepteller.events.on", "stepteller.seasonal", giftsKey,
     ]
     private static let streakStartKey = "stepteller.streak.start"
+    /// Christmas gifts received (`JollyGift.Ledger.days`): merged both ways, a season received anywhere stays.
+    private static let giftsKey = "stepteller.jollyGifts"
+
+    private static func gifts(_ value: Any?) -> JollyGift.Ledger {
+        JollyGift.Ledger(days: value as? [String: String] ?? [:])
+    }
 
     private static let cloud = NSUbiquitousKeyValueStore.default
     private static var observers: [NSObjectProtocol] = []
@@ -58,7 +65,10 @@ enum CloudBackup {
         for key in keys {
             guard let remote = cloud.object(forKey: key) else { continue }
             if let here = local[key] {
-                if key == streakStartKey, let r = remote as? Date, let h = here as? Date, r < h {
+                if key == giftsKey {
+                    let merged = gifts(here).merged(with: gifts(remote))
+                    if merged != gifts(here) { defaults.set(merged.days, forKey: key); changed = true }
+                } else if key == streakStartKey, let r = remote as? Date, let h = here as? Date, r < h {
                     defaults.set(r, forKey: key)
                     changed = true
                 }
@@ -78,6 +88,11 @@ enum CloudBackup {
             let remote = cloud.object(forKey: key)
             if let remote = remote as? NSObject, remote.isEqual(value) { continue }
             if key == streakStartKey, let r = remote as? Date, let v = value as? Date, r < v { continue }
+            if key == giftsKey {
+                let merged = gifts(value).merged(with: gifts(remote))
+                if merged != gifts(remote) { cloud.set(merged.days, forKey: key) }
+                continue
+            }
             cloud.set(value, forKey: key)
         }
     }

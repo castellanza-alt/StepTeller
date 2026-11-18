@@ -24,6 +24,7 @@ enum SharedStore {
         static let eventLedger = "eventLedger"
         static let goalReach = "goalReach"
         static let seasonal = "stepteller.seasonal"
+        static let jollyGifts = "jollyGifts"
         static let forcedSeason = "debugSeason"
     }
 
@@ -125,6 +126,13 @@ enum SharedStore {
     static var seasonalOn: Bool {
         get { defaults.object(forKey: Keys.seasonal) != nil ? defaults.bool(forKey: Keys.seasonal) : true }
         set { defaults.set(newValue, forKey: Keys.seasonal) }
+    }
+
+    /// Christmas gifts received (`JollyGift.Ledger`), copy in the App Group: the main copy is in the app's
+    /// UserDefaults (iCloud, Backup), see `HistoryStore`.
+    static var jollyGifts: JollyGift.Ledger {
+        get { JollyGift.Ledger(days: defaults.dictionary(forKey: Keys.jollyGifts) as? [String: String] ?? [:]) }
+        set { defaults.set(newValue.days, forKey: Keys.jollyGifts) }
     }
 
     #if DEBUG

@@ -21,26 +21,18 @@ struct HomeView: View {
         let s = min(size.width / Manga.frameWidth, size.height / Manga.frameHeight)
         MangaCanvas(width: Manga.frameWidth * s, height: size.height / s) {
             Board {
+                // in season the same scene drawn for it (snow in the picture, the boot as the leg, T-015 §2)
+                let look = season.map(SeasonLook.of)
                 ZStack(alignment: .topLeading) {
-                    Image(c.homeArt)
+                    Image(look?.homeArt(c.theme) ?? c.homeArt)
                         .resizable()
                         .frame(width: Manga.artSize.width, height: Manga.artSize.height)
                         .accessibilityHidden(true)
-                    if let season {
-                        RoadLights(palette: SeasonPalette.of(season, c.theme))     // under the leg
-                    }
-                    ParallaxLeg(image: c.homeLeg, motion: motion)
+                    ParallaxLeg(image: look?.homeLeg(c.theme) ?? c.homeLeg, motion: motion)
                 }
                 .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
                 .clipped()
                 .at(0, Manga.artTop)
-                if let season {
-                    // above illustration and leg, below every text, the slider and the top bar
-                    let look = SeasonLook.of(season)
-                    SnowLayer(count: c.theme == .night ? look.flakesNight : look.flakesDay,
-                              color: SeasonPalette.of(season, c.theme).snow)
-                        .at(0, 0)
-                }
                 stepsBlock
                     .manga(rotate: -15, skew: -10, anchor: .topLeading)
                     .at(14, Manga.artTop + 112)
@@ -57,7 +49,8 @@ struct HomeView: View {
                         .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480)
                 }
                 if !store.plan.isDone {
-                    RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }), unit: store.unit)
+                    RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }), unit: store.unit,
+                                    look: look?.slider ?? .knob)
                         .frame(width: Manga.artSize.width, height: Manga.artSize.height)
                         .at(0, Manga.artTop)
                         .transition(.opacity)
@@ -156,9 +149,6 @@ struct HomeView: View {
             }
             .manga(skew: -9)
             .padding(.trailing, 4)
-        }
-        .overlay(alignment: .topLeading) {
-            if season != nil { SeasonAccessory(width: 44, rotation: -20).offset(x: 18, y: 2) }
         }
         .rotationEffect(.degrees(-5))
         .accessibilityElement(children: .ignore)

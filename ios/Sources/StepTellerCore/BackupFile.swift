@@ -27,6 +27,9 @@ public struct BackupFile: Codable, Equatable, Sendable {
     public var eventNotificationsOn: Bool?
     /// Seasonal themes on (1.2). Added field, like the one above.
     public var seasonalThemes: Bool?
+    /// Christmas gifts received (`JollyGift.Ledger.days`, 1.2): a restore never gives the same season twice.
+    /// Added field, like the ones above.
+    public var jollyGifts: [String: String]?
 
     public init(exportedAt: Date) { self.exportedAt = exportedAt }
 

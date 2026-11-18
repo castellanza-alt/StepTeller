@@ -51,7 +51,7 @@ final class StepsStore {
             else { Task { await EventNotifier.withdrawAllPending() } }
         }
     }
-    /// Seasonal themes (Christmas: snow, lights, hat, icon), default yes (D-037).
+    /// Seasonal themes (Christmas: Home with the boot, the snow and the sleigh, icon), default yes (D-037, D-040).
     var seasonalThemesOn: Bool {
         didSet {
             // iCloud and Backup reassign it at every restore: only a real change touches widget and icon
@@ -302,6 +302,8 @@ final class StepsStore {
     func announceEvents() async {
         defer { eventsCheckedAt = Date() }
         guard history.eventsReady else { return }
+        // after a real Health read: the pop-up shows the Jollies counted with the gift
+        if started, UIApplication.shared.applicationState == .active { claimGift() }
         let now = Date()
         let calendar = controller.calendar
         let events = StreakEvents.events(in: history.streak, now: now, calendar: calendar)
@@ -318,6 +320,14 @@ final class StepsStore {
         EventNotifier.save(ledger, now: now, calendar: calendar)
         EventNotifier.withdraw(show)
         popups += StreakEvents.popups(show).map { JollyPopupItem(event: $0.event, count: $0.count) }
+    }
+
+    /// Christmas gift (D-040): at the first opening from 25/12 to 6/1, one Jolly more, with its pop-up first in
+    /// the queue (gift → used → earned → celebration, T-015 §4.1). Does not depend on the seasonal switch.
+    private func claimGift() {
+        guard history.claimGift(now: AppClock.now()) else { return }
+        // before the Jolly events of this same check (appended right after): a pop-up already on screen stays
+        popups.append(.gift(streak: history.streak.streak, jolly: history.streak.jolly))
     }
 
     /// The pop-up on screen was closed: the next one, if any.
@@ -358,6 +368,7 @@ final class StepsStore {
         file.theme = defaults.string(forKey: ThemeMode.storageKey)
         file.streakStart = history.streakStart
         file.goalHistory = history.goals
+        if !history.gifts.days.isEmpty { file.jollyGifts = history.gifts.days }
         if calibration != .empty { file.calibration = calibration }
         return file
     }
@@ -365,7 +376,7 @@ final class StepsStore {
     /// Settings → Backup → Import: values in the file replace these, missing ones stay. History first, so the
     /// goal set afterwards matches its last entry and adds nothing.
     func importBackup(_ file: BackupFile) {
-        history.importBackup(goals: file.goalHistory, streakStart: file.streakStart)
+        history.importBackup(goals: file.goalHistory, streakStart: file.streakStart, gifts: file.jollyGifts)
         if let value = file.goal { goal = max(0, value) }
         if let raw = file.units, let units = UnitPreference(rawValue: raw) { unitPreference = units }
         if let value = file.speed { speed = unit.snapKmh(value) }

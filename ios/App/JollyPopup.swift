@@ -1,22 +1,43 @@
 import SwiftUI
 import StepTellerCore
 
-/// A Jolly pop-up waiting to be shown: the latest event of its kind and how many were found together.
+/// A Jolly pop-up waiting to be shown: the latest event of its kind and how many were found together, or the
+/// Christmas gift (T-015 §4).
 struct JollyPopupItem: Identifiable, Equatable {
-    let event: StreakEvent
+    enum Kind: Equatable { case used, earned, gift }
+    let kind: Kind
+    /// Streak and Jollies after the event, for the texts.
+    let streak: Int
+    let jolly: Int
     let count: Int
-    var id: String { event.id }
+    let id: String
+
+    init(event: StreakEvent, count: Int) {
+        kind = event.kind == .jollyEarned ? .earned : .used
+        streak = event.streak
+        jolly = event.jolly
+        self.count = count
+        id = event.id
+    }
+
+    private init(kind: Kind, streak: Int, jolly: Int, count: Int, id: String) {
+        self.kind = kind; self.streak = streak; self.jolly = jolly; self.count = count; self.id = id
+    }
+
+    static func gift(streak: Int, jolly: Int) -> JollyPopupItem {
+        JollyPopupItem(kind: .gift, streak: streak, jolly: jolly, count: 1, id: "gift")
+    }
 }
 
 /// «Jolly earned» / «Jolly used» pop-up (D-038, design `docs/design/T-005-popup-jolly.md`): at the first opening
-/// after the event, never repeated, one at a time (used → earned → goal celebration). A slanted panel with the
-/// Jolly flame and «+N» / «−N»; it stays until «OK» or a tap anywhere: it shows once and must be read.
+/// after the event, never repeated, one at a time (gift → used → earned → goal celebration). A slanted panel with
+/// the Jolly flame and «+N» / «−N»; it stays until «OK» or a tap anywhere: it shows once and must be read.
+/// «Jolly in regalo» (T-015 §4.2) is the «earned» panel with the gift illustration and its own texts.
 struct JollyPopup: View {
     let item: JollyPopupItem
     let onClose: () -> Void
 
     @Environment(\.manga) private var c
-    @Environment(\.season) private var season
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var start = Date()
     @State private var shown = false
@@ -29,9 +50,11 @@ struct JollyPopup: View {
     /// The sparks last about 2 s: then the timeline stops (the pop-up can stay on screen for a long time).
     @State private var sparksDone = false
 
-    private var earned: Bool { item.event.kind == .jollyEarned }
-    private var streak: Int { item.event.streak }
-    private var jolly: Int { item.event.jolly }
+    /// «Earned» and «gift» share the panel: red «+N», rays and sparks.
+    private var earned: Bool { item.kind != .used }
+    private var gift: Bool { item.kind == .gift }
+    private var streak: Int { item.streak }
+    private var jolly: Int { item.jolly }
 
     var body: some View {
         ZStack {
@@ -46,7 +69,7 @@ struct JollyPopup: View {
                     TimelineView(.animation) { timeline in
                         Canvas { ctx, _ in
                             Sparks.draw(&ctx, origin: sparkOrigin, t: timeline.date.timeIntervalSince(start) - 0.15,
-                                        colors: sparkColors)
+                                        colors: [c.red, c.ink])
                         }
                     }
                     .allowsHitTesting(false)
@@ -80,9 +103,10 @@ struct JollyPopup: View {
             VStack(alignment: .leading, spacing: 0) {
                 // extra top margin: the slanted title rises to the right, where the panel's top edge drops (T-013)
                 Color.clear.frame(height: Self.titleRoom)
-                AntonText(L10n.text(earned ? "jolly.earned.title" : "jolly.used.title"), 30, tracking: 0.02)
+                AntonText(L10n.text(gift ? "jolly.gift.title" : earned ? "jolly.earned.title" : "jolly.used.title"), 30,
+                          tracking: 0.02)
                     .manga(rotate: -5, skew: -10)
-                HStack(spacing: 10) {
+                HStack(spacing: gift ? 6 : 10) {
                     flameIcon
                     GlyphText(text: (earned ? "+" : "\u{2212}") + LocalFormat.integer(item.count), size: 112,
                               lineHeight: 0.9, tracking: -0.03, fill: earned ? c.red : c.paper, stroke: c.ink,
@@ -90,7 +114,8 @@ struct JollyPopup: View {
                 }
                 .manga(rotate: -5, skew: -10)
                 .padding(.top, 12)
-                sentence(earned ? L10n.format("jolly.earned.days", streak) : L10n.format("jolly.used.missed", item.count),
+                sentence(gift ? L10n.text("jolly.gift.line")
+                            : earned ? L10n.format("jolly.earned.days", streak) : L10n.format("jolly.used.missed", item.count),
                          color: c.ink)
                     .padding(.top, 10)
                 if !earned {
@@ -101,7 +126,7 @@ struct JollyPopup: View {
                     .manga(rotate: -3, skew: -10)
                     .padding(.top, 12)
                 if earned {
-                    Text(L10n.text("jolly.earned.note"))
+                    Text(L10n.text(gift ? "jolly.gift.note" : "jolly.earned.note"))
                         .font(.antonText(14))
                         .tracking(14 * TitleFont.tracking(0.04))
                         .foregroundStyle(c.ink.opacity(0.7))
@@ -123,13 +148,18 @@ struct JollyPopup: View {
         }
     }
 
-    /// Jolly flame 78 × 95: in «earned» it pops in and throws the sparks, in «used» it shakes. In season, the hat.
+    /// Jolly flame 78 × 95: in «earned» it pops in and throws the sparks, in «used» it shakes. The gift: its
+    /// illustration 128 × 126.3, which pops in and shakes too.
+    @ViewBuilder private var picture: some View {
+        if gift {
+            Image("RegaloJolly").resizable().frame(width: 128, height: 126.3)
+        } else {
+            FlameIcon(kind: .jolly).frame(width: 78, height: 95)
+        }
+    }
+
     private var flameIcon: some View {
-        FlameIcon(kind: .jolly)
-            .frame(width: 78, height: 95)
-            .overlay(alignment: .topLeading) {
-                if season != nil { SeasonAccessory(width: 46, rotation: -10).offset(x: 39, y: 16) }
-            }
+        picture
             .scaleEffect(earned ? flame : 1)
             .keyframeAnimator(initialValue: 0.0, trigger: shake) { view, angle in
                 view.rotationEffect(.degrees(angle))
@@ -165,13 +195,8 @@ struct JollyPopup: View {
     }
 
     private var voiceOver: String {
-        L10n.format(earned ? "jolly.earned.vo" : "jolly.used.vo", LocalFormat.integer(streak), LocalFormat.integer(jolly))
-    }
-
-    private var sparkColors: [Color] {
-        guard let season else { return [c.red, c.ink] }
-        let p = SeasonPalette.of(season, c.theme)
-        return [c.red, c.ink, p.pine, p.gold]
+        if gift { return L10n.format("jolly.gift.vo", LocalFormat.integer(jolly)) }
+        return L10n.format(earned ? "jolly.earned.vo" : "jolly.used.vo", LocalFormat.integer(streak), LocalFormat.integer(jolly))
     }
 
     /// Room above the title inside the panel, so the rotated title never touches the top edge.
@@ -198,6 +223,7 @@ struct JollyPopup: View {
         withAnimation(.spring(duration: 0.5, bounce: 0.45).delay(0.05)) { pop = 1; tilt = -4 }
         if earned {
             withAnimation(.spring(duration: 0.45, bounce: 0.5).delay(0.15)) { flame = 1 }
+            if gift { shake += 1 }
             Task {
                 try? await Task.sleep(for: .seconds(2.2))
                 sparksDone = true

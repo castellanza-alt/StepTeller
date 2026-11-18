@@ -3825,6 +3825,270 @@
         }
       }
     },
+    "jolly.gift.line" : {
+      "comment" : "Pop-up del Jolly regalo: frase sotto il «+1», al massimo 2 righe. MAIUSCOLO. Limite: ≤ 50.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+          }
+        }
+      }
+    },
+    "jolly.gift.note" : {
+      "comment" : "Pop-up del Jolly regalo: nota in fondo. MAIUSCOLO. Limite: ≤ 60.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+          }
+        }
+      }
+    },
+    "jolly.gift.title" : {
+      "comment" : "Pop-up del Jolly regalato a Natale (prima apertura dal 25/12 al 6/1). Titolo, MAIUSCOLO. Limite: ≤ 22.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOLLY IN REGALO!"
+          }
+        }
+      }
+    },
+    "jolly.gift.vo" : {
+      "comment" : "Pop-up del Jolly regalo. {n} = Jolly disponibili.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+          }
+        }
+      }
+    },
     "jolly.left" : {
       "comment" : "Targhetta, 1 Jolly rimasto. Limite: ≤ 24. Plurale (jolly.left.one / jolly.left.other).",
       "extractionState" : "manual",
@@ -7322,61 +7586,61 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: neve, luci e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
           }
         }
       }

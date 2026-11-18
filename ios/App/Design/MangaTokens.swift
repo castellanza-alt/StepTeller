@@ -85,36 +85,35 @@ struct MangaPalette: Equatable {
     var horizon: String { theme == .night ? "HorizonNight" : "HorizonDay" }
 }
 
-/// The 3 seasonal tokens (D-037, `docs/design/T-004-natale.md` §2), day and night. `paper`, `ink` and `red` of
-/// `MangaPalette` stay the same: the season only adds these.
-struct SeasonPalette: Equatable {
-    /// Snowflakes (grey-blue on white paper, white at night).
-    let snow: Color
-    /// Yellow bulbs, sparks.
-    let gold: Color
-    /// Green bulbs, sparks.
-    let pine: Color
-
-    static let christmasDay = SeasonPalette(snow: Color(hex: 0xAFC0DC), gold: Color(hex: 0xE09A12), pine: Color(hex: 0x1D7A4C))
-    static let christmasNight = SeasonPalette(snow: Color(hex: 0xFFFFFF), gold: Color(hex: 0xFFC94A), pine: Color(hex: 0x46C487))
-
-    /// Palette of a season for the day/night theme already resolved (only Christmas so far).
-    static func of(_ season: Season, _ theme: MangaTheme) -> SeasonPalette {
-        theme == .night ? .christmasNight : .christmasDay
-    }
-}
-
-/// How a season looks (§8): one value per season, the views never ask which season it is.
+/// How a season looks (D-040, `docs/design/T-015-natale.md` §6): one value per season, the views read the names
+/// from here and never ask which season it is.
 struct SeasonLook {
+    /// What runs on the road as the speed slider.
+    enum Slider: Equatable {
+        /// The normal red knob.
+        case knob
+        /// A sticker (imageset name) that follows the road (§3).
+        case sleigh(String)
+    }
+
     let season: Season
-    /// Falling particles in Home, day / night.
-    let flakesDay: Int
-    let flakesNight: Int
+    /// Home illustration and leg (parallax), day / night: same frames as `homeArt` / `homeLeg` of `MangaPalette`.
+    let homeArtDay: String
+    let homeArtNight: String
+    let homeLegDay: String
+    let homeLegNight: String
+    let slider: Slider
     /// Name of the alternate app icon (`ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES`).
     let iconName: String
 
+    func homeArt(_ theme: MangaTheme) -> String { theme == .night ? homeArtNight : homeArtDay }
+    func homeLeg(_ theme: MangaTheme) -> String { theme == .night ? homeLegNight : homeLegDay }
+
     static func of(_ season: Season) -> SeasonLook {
-        SeasonLook(season: season, flakesDay: 26, flakesNight: 34, iconName: "AppIconNatale")
+        // the sleigh on the road; back to the knob (§3, «pomello di riserva»): `slider: .knob`
+        SeasonLook(season: season, homeArtDay: "HomeNataleDay", homeArtNight: "HomeNataleNight",
+                   homeLegDay: "HomeLegNataleDay", homeLegNight: "HomeLegNataleNight", slider: .sleigh("Slitta"),
+                   iconName: "AppIconNatale")
     }
 }
 

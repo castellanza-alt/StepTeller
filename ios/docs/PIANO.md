@@ -12,7 +12,7 @@ cartella `ios/`; la radice è la web app su GitHub Pages e non si tocca. Bundle 
 ## 2. Ultima build
 | Versione | Build | Stato | Provata da William | Note |
 |---|---|---|---|---|
-| 1.2 | 1.147.2 | su TestFlight dal 18/11/2026 (Natale rifatto, notifiche e pop-up; testi nuovi solo in italiano) | no |
+| 1.2 | 1.147.2 | su TestFlight dal 18/11/2026 (Natale rifatto, notifiche e pop-up; testi nuovi solo in italiano) | **sì, 18/11** («si va»; icona da rifare, striscia bianca in alto → T-019) |
 | 1.1 | 1.97.1 | pubblicata il 18/11/2026 (approvata e uscita da sola nella notte) | **sì, 17/11** («funziona tutto») | copia iCloud, Backup, promemoria, niente passi a mano |
 | 1.0 | 1.88.1 | pubblicata sull'App Store il 26/10/2026 | sì | |
 
@@ -57,6 +57,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-016 Natale rifatto nell'app, Jolly regalo, 10 km/h (D-042) | Developer | `task/T-016-natale` | fatto, unito 18/11 (#43) |
 | T-017 Collaudo del Natale rifatto e dei 10 km/h | QA | `qa/T-017` | fatto, unito 18/11 (#44): icona ingrandita (bloccante) e 6 minori → T-018 |
 | T-018 Correzioni dal collaudo del Natale | Developer, Designer (regalo, icona SVG) | `task/T-018-correzioni`, `design/T-018-*` | fatto, unito 18/11 (#45, #46, #47) |
+| T-019 Icona di Natale più chiara (3 proposte) e illustrazione fino in cima | Designer, Developer | `design/T-019-icona`, `task/T-019-bordo` | assegnato 18/11 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

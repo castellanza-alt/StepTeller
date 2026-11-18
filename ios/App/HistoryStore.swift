@@ -41,7 +41,17 @@ final class HistoryStore {
         static let goals = "stepteller.goalHistory"
         static let start = "stepteller.streak.start"
         /// `[season: day]`; also in iCloud (`CloudBackup`, merged) and in the App Group.
-        static let gifts = "stepteller.jollyGifts"
+        static var gifts: String { HistoryStore.debugGifts ? "stepteller.debug.jollyGifts" : "stepteller.jollyGifts" }
+    }
+
+    /// Debug with a simulated date (`-stepteller.debugNow`): the gifts stay under a key of their own, never in the
+    /// App Group or iCloud, so the tests never use up the real gift of the season.
+    nonisolated static var debugGifts: Bool {
+        #if DEBUG
+        UserDefaults.standard.object(forKey: "stepteller.debugNow") != nil
+        #else
+        false
+        #endif
     }
 
     init(provider: (any HistoryProvider)?, currentGoal: Int, defaults: UserDefaults = .standard,
@@ -101,7 +111,7 @@ final class HistoryStore {
     /// The copies of the gifts on this phone (app and App Group), merged: a season received in either stays.
     private static func savedGifts(_ defaults: UserDefaults) -> JollyGift.Ledger {
         let here = JollyGift.Ledger(days: defaults.dictionary(forKey: Keys.gifts) as? [String: String] ?? [:])
-        return here.merged(with: SharedStore.jollyGifts)
+        return debugGifts ? here : here.merged(with: SharedStore.jollyGifts)
     }
 
     private func saveGifts(_ ledger: JollyGift.Ledger) {
@@ -109,7 +119,7 @@ final class HistoryStore {
         if (defaults.dictionary(forKey: Keys.gifts) as? [String: String]) != ledger.days {
             defaults.set(ledger.days, forKey: Keys.gifts)
         }
-        if SharedStore.jollyGifts != ledger { SharedStore.jollyGifts = ledger }
+        if !Self.debugGifts, SharedStore.jollyGifts != ledger { SharedStore.jollyGifts = ledger }
     }
 
     /// Opening of the app: the Christmas gift, if due now (25/12–6/1, not received this season). Saved before
@@ -120,8 +130,7 @@ final class HistoryStore {
         #if DEBUG
         // simulated date (`-stepteller.debugNow`): the fake history is on the real days, so the gift is counted
         // on the real today, otherwise it would be in the future and the pop-up would show the Jollies without it
-        if given, UserDefaults.standard.object(forKey: "stepteller.debugNow") != nil,
-           let season = JollyGift.season(of: now, calendar: calendar) {
+        if given, Self.debugGifts, let season = JollyGift.season(of: now, calendar: calendar) {
             ledger.days[String(season)] = DayKey.of(Date(), calendar: calendar)
         }
         #endif

@@ -42,3 +42,52 @@ niente rete. Nessuna spesa (Higgsfield è del Designer). Non toccare la PR #28 n
 William.
 
 ## Esito
+**18/11/2026, Developer.** Fatto sul ramo `task/T-016-natale`, PR verso `main` non unita (link sotto).
+- **Tolto il Natale di T-010:**
+  - cappelli in Home, Storico, festa, pop-up Jolly e splash;
+  - neve che cade, luci, neve ferma in Storico e widget;
+  - `SeasonDecor.swift`, `SeasonPalette`, l'imageset `SplashHat` e la vecchia icona.
+  
+  Restano `Season`, `SeasonalTheme`, l'interruttore e `SeasonIcon`. Le scintille di festa e pop-up tornano rosso e nero.
+- **Home di Natale:**
+  - `SeasonLook` dà illustrazione e gamba giorno/notte, e `ParallaxLeg` riceve solo il nome dell'immagine;
+  - la slitta (`RoadSpeedSlider`, `.sleigh("Slitta")`) segue la direzione della strada (`SpeedTrack.direction` e `pose`, nel nucleo con test);
+  - per tornare al pomello basta una riga in `SeasonLook.of`: `slider: .knob`.
+- **Jolly regalo:**
+  - `JollyGift` nel nucleo: finestra 25/12–6/1 in ora locale, stagione = anno del dicembre, registro `{stagione: giorno}`, unione in cui vince il giorno più vecchio;
+  - `StreakEngine.compute(gifts:)` aggiunge 1 Jolly all'inizio del giorno di ricezione, prima di giudicarlo; i regali precedenti all'inizio del conteggio o nel futuro non contano;
+  - salvato in UserDefaults (chiave nuova, in iCloud con unione), App Group e Backup (`jollyGifts`);
+  - dopo una reinstallazione aspetta la prima sincronizzazione di iCloud, al massimo 15 s;
+  - pop-up primo nella coda: regalo → usato → guadagnato → festa.
+- **Debug:** `-stepteller.debugNow AAAA-MM-GGTHH:MM` muove tema e regalo. In Debug il registro sta in una chiave a parte, mai in iCloud.
+- **Test:** 112 test del nucleo verdi (21 nuovi tra regalo e slitta); compilazione Simulatore Debug e Release ok.
+- **Simulatore** (iPhone SE e 17 Pro Max), con le date indicate:
+  - 1/12 solo tema;
+  - 24/12 23:59 niente regalo;
+  - 25/12 pop-up con 4 Jolly;
+  - seconda apertura niente;
+  - 6/1 pop-up;
+  - 7/1 app normale;
+  - interruttore spento: pop-up senza tema.
+  
+  Screenshot in `tasks/T-016/` e `T-016-*.png` nelle note condivise.
+- **Peso dell'app** (Release per Simulatore, non assottigliata): da 31,6 a 33,5 MB (+1,9 MB, tutto in `Assets.car`).
+- **Revisione indipendente:** corretti i punti trovati:
+  - la riga del CHANGELOG mancante;
+  - la data simulata che finiva nei dati veri e in iCloud;
+  - il pop-up ripetuto se iCloud arriva tardi dopo una reinstallazione;
+  - l'ordine nella coda.
+- **Da decidere (Director o Designer):**
+  - da 13 a 16 km/h la slitta copre la riga «≈ 8,5 KM» sotto i minuti;
+  - a 3–4 km/h esce di ≈ 6 pt dal bordo sinistro;
+  - la scia resta a sinistra anche quando la slitta va verso sinistra (come da specifica).
+- **Scostamento dalla specifica:** con la slitta specchiata il valore sta a sinistra di tutta la slitta (`p.x − 64,4 − 8`), non a `p.x − 27,6 − 8` dove la coprirebbe.
+- **Limiti:**
+  - il regalo arriva solo dopo una lettura vera di Salute (senza Salute non c'è serie da salvare);
+  - senza iCloud né Backup una reinstallazione lo ridà, ma un Backup importato poi lo riporta a uno.
+- **Solo sul telefono:**
+  - parallasse con i sensori;
+  - cambio dell'icona con l'avviso di iOS;
+  - aspetto dell'icona chiara, scura e tinta;
+  - sincronizzazione iCloud dopo una reinstallazione;
+  - tocco e trascinamento della slitta.

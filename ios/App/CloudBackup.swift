@@ -24,26 +24,57 @@ enum CloudBackup {
     private static let cloud = NSUbiquitousKeyValueStore.default
     private static var observers: [NSObjectProtocol] = []
     private static var defaults = UserDefaults.standard
+    /// iCloud has had its chance to bring back the saved values: true right away when the store already holds
+    /// values here (every launch after the first sync), otherwise at iCloud's first sync after a (re)install or
+    /// after `settleTimeout` (no iCloud account, offline). The Christmas gift waits for it, so a reinstall does
+    /// not give it again only because iCloud has not answered yet (D-040).
+    private(set) static var settled = skipped
+
+    /// Debug runs with fake data or a simulated date never touch iCloud (and the store skips `start`).
+    private static var skipped: Bool {
+        #if DEBUG
+        let d = UserDefaults.standard
+        return d.object(forKey: "stepteller.debugSteps") != nil || HistoryStore.debugGifts
+        #else
+        return false
+        #endif
+    }
+    static let settleTimeout: Duration = .seconds(15)
 
     /// At launch, before creating `StepsStore`: brings back from iCloud what is missing here, then keeps iCloud
     /// up to date. `onRestore` runs when iCloud brings values later (first sync after a reinstall).
-    static func start(_ defaults: UserDefaults = .standard, onRestore: @escaping @MainActor () -> Void) {
+    /// `onSettled` runs once, when `settled` becomes true later than the launch.
+    static func start(_ defaults: UserDefaults = .standard, onRestore: @escaping @MainActor () -> Void,
+                      onSettled: @escaping @MainActor () -> Void = {}) {
         #if DEBUG
-        // Screenshots and tests with fake data: iCloud is neither read nor written.
-        if defaults.object(forKey: "stepteller.debugSteps") != nil { return }
+        // Screenshots and tests with fake data or a simulated date: iCloud is neither read nor written.
+        if skipped { return }
         #endif
         guard observers.isEmpty else { return }
         Self.defaults = defaults
         cloud.synchronize()
+        settled = !cloud.dictionaryRepresentation.isEmpty
         restore(defaults)
         upload(defaults)
+        func settle() {
+            guard !settled else { return }
+            settled = true
+            onSettled()
+        }
         observers.append(NotificationCenter.default.addObserver(
             forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: cloud, queue: .main
         ) { _ in
             MainActor.assumeIsolated {
                 if restore(Self.defaults) { onRestore() }
+                settle()
             }
         })
+        if !settled {
+            Task { @MainActor in
+                try? await Task.sleep(for: settleTimeout)
+                settle()
+            }
+        }
         observers.append(NotificationCenter.default.addObserver(
             forName: UserDefaults.didChangeNotification, object: defaults, queue: .main
         ) { _ in

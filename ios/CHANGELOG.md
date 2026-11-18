@@ -45,6 +45,19 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   per il cambio d'icona aspetta che non ci siano festa né pop-up in corso o in arrivo: parte 0,6 s dopo che lo
   schermo è libero, dopo lo splash, al ritorno in primo piano e a fine introduzione. Debug: `-stepteller.debugPopupClose
   N` chiude i pop-up da soli, `-stepteller.debugIcon 1` lascia cambiare l'icona anche con i passi finti.
+- Natale rifatto (T-016, D-040, specifica `docs/design/T-015-natale.md`), al posto delle decorazioni di T-010: via
+  cappelli, neve che cade, luci sulla strada, neve ferma in Storico e widget e cappello nello splash (via
+  `SeasonDecor.swift`, `SeasonPalette`, `SplashHat`); Storico, splash, festa e widget a Natale sono come il resto
+  dell'anno. In Home illustrazioni innevate giorno/notte e la gamba con lo stivale di Babbo Natale nella stessa
+  parallasse; la slitta con le renne corre sulla strada al posto del pomello (guarda dove va la strada, inclinata al
+  massimo 25°, specchiata sull'ultima curva; torna il pomello con `slider: .knob` in `SeasonLook`). Icona di Natale
+  nuova con lo stivale. **Jolly regalo**: +1 Jolly alla prima apertura dal 25/12 al 6/1, una volta per stagione,
+  ogni anno, anche a interruttore spento, con il pop-up «JOLLY IN REGALO!» primo nella coda; nel nucleo
+  `JollyGift` (date, con test) e `StreakEngine.compute(gifts:)` (il Jolly entra all'inizio del giorno in cui è
+  ricevuto e vale come gli altri); salvato il fatto «regalo della stagione ricevuto il giorno D» in UserDefaults,
+  App Group, iCloud (unito, vince il giorno più vecchio) e Backup (campo nuovo `jollyGifts`); dopo una reinstallazione
+  aspetta iCloud (al massimo 15 s). Testi `jolly.gift.*` nuovi e `set.season.note` cambiato, italiano in tutte le
+  lingue in attesa dell'ok di William e del Traduttore. Debug: `-stepteller.debugNow 2026-12-25T00:00`.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

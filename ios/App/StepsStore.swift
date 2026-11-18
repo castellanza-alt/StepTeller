@@ -324,10 +324,12 @@ final class StepsStore {
 
     /// Christmas gift (D-040): at the first opening from 25/12 to 6/1, one Jolly more, with its pop-up first in
     /// the queue (gift → used → earned → celebration, T-015 §4.1). Does not depend on the seasonal switch.
+    /// After a reinstall it waits for iCloud (`CloudBackup.settled`), which may already know this season's gift.
     private func claimGift() {
-        guard history.claimGift(now: AppClock.now()) else { return }
-        // before the Jolly events of this same check (appended right after): a pop-up already on screen stays
-        popups.append(.gift(streak: history.streak.streak, jolly: history.streak.jolly))
+        guard CloudBackup.settled, history.claimGift(now: AppClock.now()) else { return }
+        // first of the queue, but after a pop-up that may be on screen (the Jolly events of this same check are
+        // appended right after)
+        popups.insert(.gift(streak: history.streak.streak, jolly: history.streak.jolly), at: popups.isEmpty ? 0 : 1)
     }
 
     /// The pop-up on screen was closed: the next one, if any.

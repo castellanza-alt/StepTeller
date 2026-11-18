@@ -224,3 +224,30 @@ final class StreakEventsTests: XCTestCase {
         XCTAssertEqual(DayKey.of(instant, minusDays: 1, calendar: cal), "2026-11-02")
     }
 }
+
+/// Jolly counts along the pop-up queue (T-018): each pop-up shows the count at its point of the queue.
+final class PopupStepCountTests: XCTestCase {
+    func testGiftThenEarned() {
+        // 4 Jollies now: the gift shows 3, then «earned» shows 4
+        XCTAssertEqual(StreakEvents.stepCounts(final: 4, deltas: [1, 1]), [3, 4])
+    }
+
+    func testGiftThenUsed() {
+        // the gift shows 4, then «used» shows 3 left
+        XCTAssertEqual(StreakEvents.stepCounts(final: 3, deltas: [1, -1]), [4, 3])
+    }
+
+    func testGiftUsedEarned() {
+        // order of the design: gift → used (2 days) → earned
+        XCTAssertEqual(StreakEvents.stepCounts(final: 3, deltas: [1, -2, 1]), [4, 2, 3])
+    }
+
+    func testSingleAndEmpty() {
+        XCTAssertEqual(StreakEvents.stepCounts(final: 5, deltas: [-1]), [5])
+        XCTAssertEqual(StreakEvents.stepCounts(final: 5, deltas: []), [])
+    }
+
+    func testNeverNegative() {
+        XCTAssertEqual(StreakEvents.stepCounts(final: 0, deltas: [1, 1]), [0, 0])
+    }
+}

@@ -11,28 +11,24 @@ struct HomeView: View {
     @State private var minutesWidth: CGFloat = 96
     @State private var doneWidth: CGFloat = 130
     @State private var motion = ParallaxMotion()
+    /// Never started: the leg of the soft fill on the sides stays still (rasterised once, T-018).
+    @State private var stillMotion = ParallaxMotion()
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.season) private var season
 
     var body: some View {
         // Normally the canvas scales to the width; on short phones (e.g. SE, 375 × 667) it fits the height,
-        // so road and slider stay on screen (the `paper` background shows on the sides).
+        // so road and slider stay on screen (the `paper` background shows on the sides, or, in season, the
+        // same illustration bigger and soft, T-018).
         let s = min(size.width / Manga.frameWidth, size.height / Manga.frameHeight)
+        let side = max(0, (size.width / s - Manga.frameWidth) / 2)      // canvas points beyond each edge
         MangaCanvas(width: Manga.frameWidth * s, height: size.height / s) {
             Board {
                 // in season the same scene drawn for it (snow in the picture, the boot as the leg, T-015 §2)
                 let look = season.map(SeasonLook.of)
-                ZStack(alignment: .topLeading) {
-                    Image(look?.homeArt(c.theme) ?? c.homeArt)
-                        .resizable()
-                        .frame(width: Manga.artSize.width, height: Manga.artSize.height)
-                        .accessibilityHidden(true)
-                    ParallaxLeg(image: look?.homeLeg(c.theme) ?? c.homeLeg, motion: motion)
-                }
-                .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
-                .clipped()
-                .at(0, Manga.artTop)
+                scene(look, motion: motion)
+                    .at(0, Manga.artTop)
                 stepsBlock
                     .manga(rotate: -15, skew: -10, anchor: .topLeading)
                     .at(14, Manga.artTop + 112)
@@ -46,7 +42,8 @@ struct HomeView: View {
                     minutesBlock
                         .manga(rotate: -5, skew: -9)
                         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { minutesWidth = $0 }
-                        .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480 - (look?.slider.minutesLift ?? 0))
+                        .at(min(290, Manga.frameWidth - 8 - minutesWidth),
+                            Manga.artTop + 480 - (look?.slider ?? .knob).minutesLift)
                 }
                 if !store.plan.isDone {
                     RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }), unit: store.unit,
@@ -60,6 +57,19 @@ struct HomeView: View {
             .animation(.easeInOut(duration: 0.25), value: store.plan.isDone)
         }
         .frame(width: size.width)
+        .background(alignment: .topLeading) {
+            // short phones, in season: the scene to the edges of the screen, without bands (T-018). The same one,
+            // stretched only across (every horizontal line meets the real one), soft and still, behind the canvas;
+            // road and slider stay on the real one. Drawn here, outside the canvas, in screen points.
+            if let look = season.map(SeasonLook.of), side > 0.5 {
+                scene(look, motion: stillMotion)
+                    .scaleEffect(x: size.width / Manga.frameWidth, y: s, anchor: .topLeading)
+                    .frame(width: size.width, height: Manga.artSize.height * s, alignment: .topLeading)
+                    .blur(radius: 6 * s, opaque: true)
+                    .offset(y: Manga.artTop * s)
+                    .accessibilityHidden(true)
+            }
+        }
         .onAppear { updateMotion() }
         .onDisappear { motion.stop() }
         .onChange(of: scenePhase) { _, _ in updateMotion() }
@@ -90,6 +100,19 @@ struct HomeView: View {
         .accessibilityLabel(L10n.format("home.steps.vo", LocalFormat.integer(store.steps), LocalFormat.integer(store.goal)))
     }
 
+    /// Illustration and leg (parallax), 390 × 790, clipped to their frame.
+    private func scene(_ look: SeasonLook?, motion: ParallaxMotion) -> some View {
+        ZStack(alignment: .topLeading) {
+            Image(look?.homeArt(c.theme) ?? c.homeArt)
+                .resizable()
+                .frame(width: Manga.artSize.width, height: Manga.artSize.height)
+                .accessibilityHidden(true)
+            ParallaxLeg(image: look?.homeLeg(c.theme) ?? c.homeLeg, motion: motion)
+        }
+        .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
+        .clipped()
+    }
+
     /// Warning when Health gives no data.
     @ViewBuilder private var notices: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -97,6 +120,9 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     TagText(text: L10n.text("home.noData.title"), size: 14, tracking: 0.06, foreground: c.paper, background: c.ink)
                     AntonText(L10n.text("home.noData.path"), 11, tracking: 0.04)
+                        // over the moon at night (T-001, T-018): a `paper` halo, like the slider's value
+                        .shadow(color: c.paper, radius: 2)
+                        .shadow(color: c.paper, radius: 4)
                     Button {
                         if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
                     } label: {

@@ -44,7 +44,7 @@ senza crediti, in `docs/design/T-015-natale/asset/`.
 - Le misure restano 300 × 296 e 450 × 444, con il disegno centrato su fondo trasparente: la cornice di 128 × 126,3 pt in
   `JollyPopup` va bene così com'è.
 - Il Developer deve solo copiare i due PNG in `App/Assets.xcassets/RegaloJolly.imageset/`.
-**18/11/2026, Developer.** Fatto sul ramo `task/T-018-correzioni`, PR verso `main`, non unita. Screenshot prima/dopo
+**18/11/2026, Developer.** Fatto sul ramo `task/T-018-correzioni`, PR https://github.com/castellanza-alt/StepTeller/pull/47 verso `main`, non unita. Screenshot prima/dopo
 in `tasks/T-018/`.
 1. **Icona di Natale**: i livelli PNG da 2048 px erano letti come 2048 pt su una tela da 1024. In `icon.json` ogni
    livello ha `"position": {"scale": 0.5}`.

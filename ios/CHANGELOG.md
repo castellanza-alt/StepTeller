@@ -46,7 +46,7 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   schermo è libero, dopo lo splash, al ritorno in primo piano e a fine introduzione. Debug: `-stepteller.debugPopupClose
   N` chiude i pop-up da soli, `-stepteller.debugIcon 1` lascia cambiare l'icona anche con i passi finti.
 
-## 1.1 — inviata ad Apple il 17 novembre 2026, build 1.97.1
+## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e
   orario), taratura e tema giorno/notte si salvano anche nell'iCloud dell'utente (archivio chiave-valore di Apple,
   `CloudBackup`). Disinstallando e reinstallando, o su un iPhone nuovo con lo stesso account, tornano da soli e la

@@ -51,6 +51,10 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   - illustrazioni vere con **Higgsfield** (sì di William alla spesa, entro i crediti già presenti: 39 al 18/11, nessuna
     ricarica senza un nuovo sì);
   - **tutto insieme nella 1.2**: niente Natale in un aggiornamento separato, anche a costo di slittare sul 1° dicembre.
+- **D-042 Slitta e velocità massima (18/11/2026, William).** Vista la slitta a grandezza vera nel Simulatore (troppo
+  piccola, a 15 km/h copre i testi): «farei una slitta un filo più grande. Poi cambiamo il passo dei km/h: arriviamo a
+  10, non oltre». Il cursore della velocità arriva a **10 km/h** (in miglia l'equivalente, 6 mph), in tutta l'app e non
+  solo a Natale; le velocità salvate più alte (telefono, iCloud, Backup) scendono a 10.
 - **D-041 Traduttore (18/11/2026, William).** Quinto membro del team, «NEAT: Traduttore» (worktree
   `~/Developer/neat-lang`, rami `lang/…`): traduce nelle 10 lingue i testi italiani approvati da William (D-005) e
   tiene `localizzazione/GLOSSARIO.md`. Sostituisce il giro dei prompt in ChatGPT. Parla solo con il Director.

@@ -5,6 +5,7 @@ curve con tipo, durata e rimbalzo, testi esatti in italiano. Stile «Dan Dan Dan
 
 ## Indice
 - [T-003 Apple Watch: schermata e complicazioni](T-003-watch.md) — 17/11/2026, anteprima https://claude.ai/artifact/ANTG7eMeBxCghsUBB678ae
-- [T-004 Tema stagionale di Natale](T-004-natale.md) — 17/11/2026, icona in `T-004-natale/AppIconNatale.icon/`, anteprima https://claude.ai/artifact/3LNgsKGVLzj6iGs2bF2QB4
+- [T-004 Tema stagionale di Natale](T-004-natale.md) — **sostituita da T-015** — 17/11/2026, icona in `T-004-natale/AppIconNatale.icon/`, anteprima https://claude.ai/artifact/3LNgsKGVLzj6iGs2bF2QB4
 - [T-005 Pop-up e notifiche di obiettivo e Jolly](T-005-popup-jolly.md) — 17/11/2026, anteprima https://claude.ai/artifact/5qwTXAbVtKCeqQTK3Yximp
 - [T-008 Voce «NASTY»](T-008-nasty.md) — 17/11/2026, anteprima https://claude.ai/artifact/VoQCuAcpUoGyEzCnnbPGeC
+- [T-015 Natale rifatto: stivale, neve, slitta, Jolly regalo, icona](T-015-natale.md) — 18/11/2026, asset in `T-015-natale/`, tela di Claude Design https://claude.ai/artifact/SZPn4ouqgQdfiDUA7DtZRY

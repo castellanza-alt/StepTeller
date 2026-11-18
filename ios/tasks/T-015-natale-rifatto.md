@@ -51,3 +51,23 @@ Non toccare il codice Swift. Non superare i 39 crediti né comprare nulla. Non u
 tela. Niente riferimenti religiosi.
 
 ## Esito
+**Designer, 18/11/2026: fatto, in attesa del giudizio di William sulla tela.**
+
+- Tela di Claude Design: https://claude.ai/artifact/SZPn4ouqgQdfiDUA7DtZRY, con 5 tavole:
+  - Home di giorno e di notte, con la gamba che si muove come la parallasse;
+  - slitta (anche girata nell'ultima curva) e pomello di riserva;
+  - pop-up del Jolly regalo;
+  - icona sulla schermata Home di iOS, normale e tinta.
+- Specifica in `docs/design/T-015-natale.md`, che sostituisce T-004 (segnalato in testa a quel file).
+- Asset in `docs/design/T-015-natale/asset/` (≈ 2,5 MB) e icona in `docs/design/T-015-natale/AppIconNatale.icon/`.
+- Il percorso del cursore (`SpeedTrack.road`) non cambia: le nuove illustrazioni sono state rifatte con la stessa
+  inquadratura. La linea tratteggiata sta entro ≈ 4 pt dal percorso.
+- **Slitta**: sta nel cursore, si trascina come il pomello e non cambia la zona di tocco, quindi la propongo. Il pomello
+  di riserva è sulla tela.
+- **Crediti Higgsfield**: 16,5 su 39 (saldo 22,5), nessuna ricarica, 10 lavori annotati in
+  `docs/design/T-015-natale/generazioni.md`.
+  - Un lavoro è fallito sul server e i suoi 2 crediti sono stati addebitati lo stesso.
+  - La gamba di notte è ricolorata in locale, senza crediti.
+- **Aperto**: slitta o pomello (William); regalo anche con l'interruttore spento (propongo sì, decide il Director);
+  frase del regalo per la voce NASTY.
+- La tela è privata all'account: si apre con l'account di William, oppure va condivisa dal menu Condividi.

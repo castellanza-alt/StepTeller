@@ -54,7 +54,8 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-014 Glossario e traduzioni in bozza della 1.2 | Traduttore | `lang/T-014-traduzioni-1.2` | PR #41 aperta, in attesa dell'ok di William sui testi italiani |
 | T-015 Natale rifatto (specifica, illustrazioni Higgsfield, tela Design) | Designer | `design/T-015-natale` | fatto, unito 18/11 (#42), approvato da William («Mi piace»); 16,5 crediti Higgsfield su 39 |
 | T-016 Natale rifatto nell'app, Jolly regalo, 10 km/h (D-042) | Developer | `task/T-016-natale` | fatto, unito 18/11 (#43) |
-| T-017 Collaudo del Natale rifatto e dei 10 km/h | QA | `qa/T-017` | assegnato 18/11 |
+| T-017 Collaudo del Natale rifatto e dei 10 km/h | QA | `qa/T-017` | fatto, unito 18/11 (#44): icona ingrandita (bloccante) e 6 minori → T-018 |
+| T-018 Correzioni dal collaudo del Natale | Developer, Designer (regalo) | `task/T-018-correzioni`, `design/T-018-regalo` | assegnato 18/11, PR entro il 21/11 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

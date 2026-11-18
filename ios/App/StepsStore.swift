@@ -133,9 +133,15 @@ final class StepsStore {
         // Launch argument `-stepteller.units miles` too (screenshots).
         let preference = defaults.string(forKey: Keys.units).flatMap(UnitPreference.init(rawValue:)) ?? .automatic
         unitPreference = preference
-        // Slider on the road: 3–16 km/h or 2–10 mph in 0.5 steps (an old value like 8.3 becomes 8.5).
+        // Slider on the road: 3–10 km/h or 2–6 mph in 0.5 steps (an old value like 8.3 becomes 8.5; a speed saved
+        // before D-042, up to 16 km/h or 10 mph, comes down to 10 km/h or 6 mph and is saved so, iCloud too).
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed
-        speed = preference.resolved(regionUsesMiles: Units.regionUsesMiles).snapKmh(v)
+        let startUnit = preference.resolved(regionUsesMiles: Units.regionUsesMiles)
+        let startSpeed = startUnit.snapKmh(v)
+        speed = startSpeed
+        if let saved = Self.persistentSpeed(defaults), saved > startUnit.km(fromValue: startUnit.maxSpeed) + 1e-9 {
+            defaults.set(startSpeed, forKey: Keys.speed)
+        }
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         eventNotificationsOn = defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true
@@ -172,6 +178,12 @@ final class StepsStore {
             SharedStore.eventLedger = EventLedger(since: DayKey.of(Date(), minusDays: back, calendar: controller.calendar))
         }
         #endif
+    }
+
+    /// The speed saved on this phone, not a launch argument (`-stepteller.speed` in the screenshots).
+    private static func persistentSpeed(_ defaults: UserDefaults) -> Double? {
+        guard let id = Bundle.main.bundleIdentifier else { return nil }
+        return defaults.persistentDomain(forName: id)?[Keys.speed] as? Double
     }
 
     // MARK: derived

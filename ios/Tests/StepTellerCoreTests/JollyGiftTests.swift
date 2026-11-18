@@ -209,10 +209,10 @@ final class SleighPoseTests: XCTestCase {
 
     func testOnTheRoad() {
         XCTAssertFalse(pose(kmh: 3).mirrored)
-        XCTAssertFalse(pose(kmh: 8).mirrored)
-        XCTAssertFalse(pose(kmh: 13).mirrored)
-        XCTAssertTrue(pose(kmh: 14).mirrored)                    // from ≈ 13.6 km/h, the last curve
-        XCTAssertTrue(pose(kmh: 16).mirrored)
-        for v in stride(from: 3.0, through: 16, by: 0.5) { XCTAssertLessThanOrEqual(abs(pose(kmh: v).rotation), 25) }
+        XCTAssertFalse(pose(kmh: 6).mirrored)
+        XCTAssertFalse(pose(kmh: 8.5).mirrored)
+        XCTAssertTrue(pose(kmh: 9).mirrored)                     // the last curve, from ≈ 8.7 km/h (3–10 km/h road)
+        XCTAssertTrue(pose(kmh: 10).mirrored)
+        for v in stride(from: 3.0, through: 10, by: 0.5) { XCTAssertLessThanOrEqual(abs(pose(kmh: v).rotation), 25) }
     }
 }

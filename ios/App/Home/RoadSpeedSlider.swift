@@ -92,8 +92,10 @@ struct RoadSpeedSlider: View {
 
     /// Frame of the sleigh and its attach point (under the runners), which sits on the road where the knob's
     /// center would be.
-    private static let sleighSize = CGSize(width: 92, height: 42.4)
-    private static let sleighAnchor = CGPoint(x: 27.6, y: 33.9)
+    /// 92 × 42.4 pt in the specification, 35% bigger after William saw it (D-042).
+    private static let sleighScale: CGFloat = 1.35
+    private static let sleighSize = CGSize(width: 92 * sleighScale, height: 42.4 * sleighScale)
+    private static let sleighAnchor = CGPoint(x: 27.6 * sleighScale, y: 33.9 * sleighScale)
     private static let sleighLabelGap: CGFloat = 8
 
     @ViewBuilder

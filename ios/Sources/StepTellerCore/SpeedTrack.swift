@@ -11,7 +11,8 @@ public struct SpeedTrack: Sendable {
     }
 
     public static let minSpeed = 3.0
-    public static let maxSpeed = 16.0
+    /// 10 km/h, not further (D-042, William, 18/11/2026; it was 16).
+    public static let maxSpeed = 10.0
     public static let step = 0.5
     public static let defaultSpeed = 4.0
 

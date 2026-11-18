@@ -15,17 +15,18 @@ final class SpeedTrackTests: XCTestCase {
 
     func testSpeedMapping() {
         XCTAssertEqual(SpeedTrack.speed(forFraction: 0), 3)
-        XCTAssertEqual(SpeedTrack.speed(forFraction: 1), 16)
-        XCTAssertEqual(SpeedTrack.speed(forFraction: 0.5), 9.5)
-        XCTAssertEqual(SpeedTrack.fraction(forSpeed: 4), 1.0 / 13, accuracy: 1e-9)
+        XCTAssertEqual(SpeedTrack.speed(forFraction: 1), 10)
+        XCTAssertEqual(SpeedTrack.speed(forFraction: 0.5), 6.5)
+        XCTAssertEqual(SpeedTrack.fraction(forSpeed: 4), 1.0 / 7, accuracy: 1e-9)
         XCTAssertEqual(SpeedTrack.snap(8.3), 8.5)
         XCTAssertEqual(SpeedTrack.snap(6.2), 6.0)
-        XCTAssertEqual(SpeedTrack.snap(20), 16)
+        XCTAssertEqual(SpeedTrack.snap(20), 10)
+        XCTAssertEqual(SpeedTrack.snap(16), 10)          // speeds saved before D-042
         XCTAssertEqual(SpeedTrack.snap(1), 3)
     }
 
     func testProjectionRoundTrip() {
-        for v in stride(from: 3.0, through: 16.0, by: 0.5) {
+        for v in stride(from: 3.0, through: 10.0, by: 0.5) {
             let p = track.point(atFraction: SpeedTrack.fraction(forSpeed: v))
             let n = track.nearest(to: p)
             XCTAssertLessThan(n.distance, 0.5)
@@ -44,16 +45,18 @@ final class SpeedTrackTests: XCTestCase {
 
     func testPositionGrowsWithSpeedAlongTheArc() {
         var last = -1.0
-        for v in stride(from: 3.0, through: 16.0, by: 0.5) {
+        for v in stride(from: 3.0, through: 10.0, by: 0.5) {
             let f = track.nearest(to: track.point(atFraction: SpeedTrack.fraction(forSpeed: v))).fraction
             XCTAssertGreaterThan(f, last)
             last = f
         }
     }
 
-    func testPlanAcceptsSixteen() {
+    func testPlanCapsAtTen() {
+        // the slider stops at 10 km/h (D-042): an older 16 counts as 10
         let p = Plan(goal: 10_000, steps: 3_465, speed: 16)
-        XCTAssertEqual(p.speed, 16)
+        XCTAssertEqual(p.speed, 10)
+        XCTAssertEqual(p.minutes, Plan(goal: 10_000, steps: 3_465, speed: 10).minutes)
         XCTAssertGreaterThan(p.minutes, 0)
     }
 }

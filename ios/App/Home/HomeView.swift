@@ -46,7 +46,7 @@ struct HomeView: View {
                     minutesBlock
                         .manga(rotate: -5, skew: -9)
                         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { minutesWidth = $0 }
-                        .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480)
+                        .at(min(290, Manga.frameWidth - 8 - minutesWidth), Manga.artTop + 480 - (look?.slider.minutesLift ?? 0))
                 }
                 if !store.plan.isDone {
                     RoadSpeedSlider(speed: Binding(get: { store.speed }, set: { store.speed = $0 }), unit: store.unit,

@@ -34,7 +34,7 @@ public struct CadenceModel: Sendable {
     /// From this speed (inclusive) you run.
     public static let runFrom = 7.1
     /// Speeds accepted by the automatic calibration (workouts outside are ignored).
-    /// The app's slider goes further (up to `SpeedTrack.maxSpeed`): the curve is extrapolated.
+    /// Wider than the app's slider (3–10 km/h, `SpeedTrack.maxSpeed`): faster workouts still shape the running curve.
     public static let minSpeed = 3.0
     public static let maxSpeed = 12.0
 

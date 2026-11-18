@@ -58,6 +58,11 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   App Group, iCloud (unito, vince il giorno più vecchio) e Backup (campo nuovo `jollyGifts`); dopo una reinstallazione
   aspetta iCloud (al massimo 15 s). Testi `jolly.gift.*` nuovi e `set.season.note` cambiato, italiano in tutte le
   lingue in attesa dell'ok di William e del Traduttore. Debug: `-stepteller.debugNow 2026-12-25T00:00`.
+- Velocità massima 10 km/h (6 mph) in tutta l'app (D-042, T-016): il cursore va da 3 a 10 km/h o da 2 a 6 mph sulla
+  stessa strada, `SpeedTrack.maxSpeed` 10, `DistanceUnit` e `Plan` di conseguenza (test aggiornati); una velocità
+  salvata più alta (telefono, iCloud, Backup) scende a 10 km/h o 6 mph e si salva così. La taratura (`CadenceModel`,
+  `AutoCalibration`, 3–12 km/h) non cambia: gli allenamenti più veloci danno ancora forma alla curva della corsa. A
+  Natale la slitta è più grande del 35% e il blocco «minuti mancanti» sale di 46 pt, così la slitta non lo copre.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

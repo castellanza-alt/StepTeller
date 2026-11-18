@@ -98,3 +98,22 @@ William.
   - aspetto dell'icona chiara, scura e tinta;
   - sincronizzazione iCloud dopo una reinstallazione;
   - tocco e trascinamento della slitta.
+
+**18/11/2026, Developer, punti 9 e 10 (D-042)**, stessa PR #43:
+- **Slitta +35%** (`sleighScale` in `RoadSpeedSlider`), area di tocco invariata (20 pt dalla strada).
+  - Con la slitta il blocco «minuti mancanti» sale di 46 pt (`SeasonLook.Slider.minutesLift`, 0 con il pomello: tornare al pomello resta una riga). Così a 10 km/h la slitta non copre «MINUTI MANCANTI», i minuti e i km.
+  - L'asset @3x è di 276 px, a 124 pt servirebbero 372 px: un poco ingrandito, da rifare più grande se si vede sul telefono.
+- **Velocità massima 10 km/h / 6 mph**:
+  - nel nucleo, `SpeedTrack.maxSpeed` 10, `DistanceUnit` 2–6 mph, `kmhRange` 3–10;
+  - `Plan` limita a 10;
+  - test aggiornati: 112 verdi.
+  - Una velocità salvata più alta scende a 10:
+    - sul telefono si riscrive all'avvio;
+    - da iCloud e dal Backup passa da `speed` che arrotonda e salva.
+  - `CadenceModel` e `AutoCalibration` (3–12 km/h) restano: gli allenamenti più veloci servono alla curva della corsa.
+  - La slitta ora si specchia da ≈ 8,7 km/h.
+- **Screenshot nuovi** in `tasks/T-016/`: SE e 17 Pro Max, giorno e notte, a 5,5 e 10 km/h; in più 3 km/h e Home normale a 10 km/h.
+- **Da guardare:**
+  - a 3 km/h la slitta più grande esce di ≈ 15 pt dal bordo sinistro (entra dalla strada);
+  - di notte su SE «MINUTI» sfiora la pelliccia dello stivale.
+

@@ -156,6 +156,19 @@ public enum StreakEvents {
         }
     }
 
+    /// Jollies to show on each pop-up of a queue shown in this order (T-018): the last one shows `final` (the
+    /// Jollies now), each one before it what there was before the next one changed it. `deltas`: change of each
+    /// pop-up (gift +1, earned +N, used −N). Never below 0.
+    public static func stepCounts(final: Int, deltas: [Int]) -> [Int] {
+        var out = Array(repeating: final, count: deltas.count)
+        var after = final
+        for i in deltas.indices.reversed() {
+            out[i] = max(0, after)
+            after -= deltas[i]
+        }
+        return out
+    }
+
     /// What reaching today's goal means, as the app computes it, for the widget (which does not read the history)
     /// to tell it: streak and Jollies after reaching it, and whether it earns a Jolly (15th day in a row).
     public struct Reach: Equatable, Sendable {

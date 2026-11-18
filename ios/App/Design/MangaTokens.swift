@@ -95,11 +95,11 @@ struct SeasonLook {
         /// A sticker (imageset name) that follows the road (§3).
         case sleigh(String)
 
-        /// How much higher the «minutes left» block sits, so that the sleigh at the end of the road (up to 10 km/h,
-        /// D-042) never covers the minutes or the km. 0 with the knob: the normal Home.
+        /// How much higher the «minutes left» block sits, so that what runs on the road, at its end (10 km/h,
+        /// D-042), never covers the minutes or the km (T-018): the sleigh is bigger than the knob.
         var minutesLift: CGFloat {
             if case .sleigh = self { return 46 }
-            return 0
+            return 22
         }
     }
 

@@ -316,7 +316,7 @@ final class StepsStore {
         defer { eventsCheckedAt = Date() }
         guard history.eventsReady else { return }
         // after a real Health read: the pop-up shows the Jollies counted with the gift
-        if started, UIApplication.shared.applicationState == .active { claimGift() }
+        let gift = started && UIApplication.shared.applicationState == .active ? claimGift() : nil
         let now = Date()
         let calendar = controller.calendar
         let events = StreakEvents.events(in: history.streak, now: now, calendar: calendar)
@@ -327,22 +327,32 @@ final class StepsStore {
         guard active else { return }
         var ledger = EventNotifier.ledger(now: now, calendar: calendar)
         let show = StreakEvents.toShow(events, ledger: ledger, now: now, calendar: calendar)
-        guard !show.isEmpty else { return }
-        // marked before being seen: never shown twice, also if the app closes meanwhile
-        ledger.shown.formUnion(show.map(\.id))
-        EventNotifier.save(ledger, now: now, calendar: calendar)
-        EventNotifier.withdraw(show)
-        popups += StreakEvents.popups(show).map { JollyPopupItem(event: $0.event, count: $0.count) }
+        var batch = StreakEvents.popups(show).map { JollyPopupItem(event: $0.event, count: $0.count) }
+        if !show.isEmpty {
+            // marked before being seen: never shown twice, also if the app closes meanwhile
+            ledger.shown.formUnion(show.map(\.id))
+            EventNotifier.save(ledger, now: now, calendar: calendar)
+            EventNotifier.withdraw(show)
+        }
+        if let gift { batch.insert(gift, at: 0) }
+        guard !batch.isEmpty else { return }
+        // each pop-up shows the Jollies at its point of the queue, the last one those of now (T-018)
+        let counts = StreakEvents.stepCounts(final: history.streak.jolly, deltas: batch.map(\.delta))
+        for i in batch.indices { batch[i].jolly = counts[i] }
+        if gift != nil {
+            // first of the queue, but after a pop-up that may be on screen
+            popups.insert(batch.removeFirst(), at: popups.isEmpty ? 0 : 1)
+        }
+        popups += batch
     }
 
     /// Christmas gift (D-040): at the first opening from 25/12 to 6/1, one Jolly more, with its pop-up first in
     /// the queue (gift → used → earned → celebration, T-015 §4.1). Does not depend on the seasonal switch.
     /// After a reinstall it waits for iCloud (`CloudBackup.settled`), which may already know this season's gift.
-    private func claimGift() {
-        guard CloudBackup.settled, history.claimGift(now: AppClock.now()) else { return }
-        // first of the queue, but after a pop-up that may be on screen (the Jolly events of this same check are
-        // appended right after)
-        popups.insert(.gift(streak: history.streak.streak, jolly: history.streak.jolly), at: popups.isEmpty ? 0 : 1)
+    /// Returns its pop-up, which `announceEvents` puts in the queue with the events of the same check.
+    private func claimGift() -> JollyPopupItem? {
+        guard CloudBackup.settled, history.claimGift(now: AppClock.now()) else { return nil }
+        return .gift(streak: history.streak.streak, jolly: history.streak.jolly)
     }
 
     /// The pop-up on screen was closed: the next one, if any.

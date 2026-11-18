@@ -97,11 +97,18 @@ struct RoadSpeedSlider: View {
     private static let sleighSize = CGSize(width: 92 * sleighScale, height: 42.4 * sleighScale)
     private static let sleighAnchor = CGPoint(x: 27.6 * sleighScale, y: 33.9 * sleighScale)
     private static let sleighLabelGap: CGFloat = 8
+    /// Least room between the sleigh and the left edge of the illustration.
+    private static let sleighEdgeMargin: CGFloat = 4
 
     @ViewBuilder
     private func sleighAndLabel(_ name: String, at p: CGPoint, pose: SpeedTrack.Pose, flip: Bool) -> some View {
         let box = Self.sleighSize, anchor = Self.sleighAnchor
         let unit = UnitPoint(x: anchor.x / box.width, y: anchor.y / box.height)
+        let left = pose.mirrored ? box.width - anchor.x : anchor.x       // sleigh's extent left / right of p
+        let right = box.width - left
+        // the road starts at the left edge: at the lowest speeds the sleigh slides a little ahead along it, so it
+        // stays whole on screen (T-018)
+        let push = max(0, Self.sleighEdgeMargin - (p.x - left))
         Image(name)
             .resizable()
             .frame(width: box.width, height: box.height)
@@ -109,15 +116,13 @@ struct RoadSpeedSlider: View {
             .scaleEffect(x: pose.mirrored ? -1 : 1, y: 1, anchor: unit)
             .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: pose.mirrored)
             .rotationEffect(.degrees(pose.rotation), anchor: unit)
-            .offset(x: p.x - anchor.x, y: p.y - anchor.y)
+            .offset(x: p.x - anchor.x + push, y: p.y - anchor.y)
             .accessibilityHidden(true)
         // the value beside the sleigh, on the side the knob's would be (`Manga.knobFlipX`), clear of the sleigh
-        let left = pose.mirrored ? box.width - anchor.x : anchor.x       // sleigh's extent left / right of p
-        let right = box.width - left
         label
             .fixedSize()
             .frame(width: 0, height: 0, alignment: flip ? .trailing : .leading)
-            .offset(x: flip ? p.x - left - Self.sleighLabelGap : p.x + right + Self.sleighLabelGap, y: p.y - 10)
+            .offset(x: flip ? p.x - left - Self.sleighLabelGap : p.x + right + push + Self.sleighLabelGap, y: p.y - 10)
     }
 
     // MARK: trail

@@ -17,7 +17,14 @@
                 "solid": "extended-gray:1.00000,1.00000"
               }
             }
-          ]
+          ],
+          "position": {
+            "scale": 0.5,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          }
         }
       ],
       "lighting": "combined",
@@ -43,7 +50,14 @@
               "appearance": "tinted",
               "value": 0.6
             }
-          ]
+          ],
+          "position": {
+            "scale": 0.5,
+            "translation-in-points": [
+              0,
+              0
+            ]
+          }
         }
       ],
       "lighting": "combined",

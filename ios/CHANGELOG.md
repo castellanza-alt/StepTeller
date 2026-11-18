@@ -64,6 +64,12 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   `AutoCalibration`, 3–12 km/h) non cambia: gli allenamenti più veloci danno ancora forma alla curva della corsa. A
   Natale la slitta è più grande del 35% e il blocco «minuti mancanti» sale di 46 pt, così la slitta non lo copre;
   «MINUTI MANCANTI» ha un alone `paper`, solo a Natale, per leggersi sulla pelliccia dello stivale.
+- Correzioni dal collaudo del Natale (T-018, collaudo T-017): l'icona di Natale non è più ingrandita (i livelli PNG
+  da 2048 px valgono 1024 pt: scala 0,5 in `icon.json`); sui telefoni bassi (SE) le bande ai lati della Home di Natale
+  sono riempite con la stessa scena più grande e sfumata dietro quella vera (strada e cursore invariati); nella coda dei
+  pop-up ogni pop-up mostra i Jolly a quel punto della coda (`StreakEvents.stepCounts`, con test: regalo 3 → guadagnato
+  4); a 10 km/h il pomello non copre più i km (blocco dei minuti 22 pt più in alto anche fuori stagione); «SALUTE →
+  CONDIVISIONE…» con l'alone `paper`, leggibile sulla luna di notte; la slitta a 3 km/h resta tutta dentro lo schermo.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

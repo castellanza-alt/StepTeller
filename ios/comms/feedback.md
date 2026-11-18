@@ -3,6 +3,9 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **18/11/2026**, icona di Natale (T-019, nessuna build): bocciate le proposte A1/A2 («la gamba pare unirsi a centro
+  piede»); vuole «una versione bella» dell'icona normale, con proporzioni giuste tra gamba e scarpa. Approvata la
+  proposta ricavata dalla normale (suola da scarpone, stivale nero, pelliccia, pantalone rosso): «questa». → T-019
 - **18/11/2026**, build 1.147.2 (1.2, TestFlight, data del telefono spostata a dicembre): «si va». Jolly regalo e Natale
   ok, notifiche ok, velocità a 10 ok. «L'icona non è bella, troppo confusa.» «Occhio che la app non arriva fino a
   coprire tutto lo schermo» (screenshot: striscia bianca in alto tra la barra di stato e il cielo grigio). → T-019

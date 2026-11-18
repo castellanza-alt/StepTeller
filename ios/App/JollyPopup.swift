@@ -6,8 +6,8 @@ import StepTellerCore
 struct JollyPopupItem: Identifiable, Equatable {
     enum Kind: Equatable { case used, earned, gift }
     let kind: Kind
-    /// Streak and Jollies after the event, for the texts. `jolly` is the count at this point of the queue
-    /// (`StreakEvents.stepCounts`), set by the store.
+    /// Streak after the event and Jollies at this point of the queue (`StreakEvents.stepCounts`, set by the store),
+    /// for the texts.
     let streak: Int
     var jolly: Int
     let count: Int

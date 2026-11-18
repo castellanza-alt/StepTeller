@@ -44,3 +44,35 @@ senza crediti, in `docs/design/T-015-natale/asset/`.
 - Le misure restano 300 × 296 e 450 × 444, con il disegno centrato su fondo trasparente: la cornice di 128 × 126,3 pt in
   `JollyPopup` va bene così com'è.
 - Il Developer deve solo copiare i due PNG in `App/Assets.xcassets/RegaloJolly.imageset/`.
+**18/11/2026, Developer.** Fatto sul ramo `task/T-018-correzioni`, PR verso `main`, non unita. Screenshot prima/dopo
+in `tasks/T-018/`.
+1. **Icona di Natale**: i livelli PNG da 2048 px erano letti come 2048 pt su una tela da 1024. In `icon.json` ogni
+   livello ha `"position": {"scale": 0.5}`.
+   - Compilata con `actool`, è uguale a `icona-natale-1024.png`.
+   - Sul Simulatore è intera sulla Home chiara e scura e nell'avviso di iOS.
+   - La tinta non si prova sul Simulatore.
+   - Se il Director preferisce gli SVG del Designer, si sostituiscono e la scala si toglie.
+2. **Bande sull'SE**: a Natale, dietro la tela, la stessa scena allargata solo in orizzontale, ferma e sfumata. È
+   disegnata fuori dalla tela, nei punti dello schermo. Strada e cursore restano su quella vera; sui telefoni larghi
+   non viene disegnata.
+3. **Conti nella coda**: `StreakEvents.stepCounts` nel nucleo, con 5 test. L'ultimo pop-up mostra i Jolly di adesso,
+   ognuno prima di lui quelli prima del pop-up successivo.
+   - Il regalo si chiede insieme agli eventi dello stesso controllo, con un solo «app attiva»: prima poteva arrivare
+     dopo «usato».
+   - Si ricontano tutti i pop-up in attesa, tranne quello sullo schermo.
+   - Simulatore: regalo 5 → usato 4 (Home 4); regalo 3 → guadagnato 4 → festa.
+4. **Pomello a 10 km/h**: il blocco dei minuti sale di 22 pt anche fuori stagione (46 con la slitta). Il pomello non
+   copre i km a 10 km/h né a 6 mph, su SE e 17 Pro Max.
+5. **«SALUTE» sulla luna**: alone `paper` sulla riga del percorso, come «MINUTI».
+6. **Slitta a 3 km/h**: si sposta un poco avanti lungo la strada e sale con essa, fino a restare a 10 pt dal bordo.
+8. Asset del regalo del Designer (#45) copiati; il pop-up non ha più il bordo quadrato.
+
+- `swift test`: 117 test verdi. Debug e Release ok.
+- Revisione indipendente, corretti:
+  - il riempimento allungato anche in verticale;
+  - il riempimento disegnato su tutti i telefoni e a ogni movimento;
+  - i conti con una coda già in attesa;
+  - la slitta spostata che non saliva con la strada.
+- Da guardare: il blocco dei minuti più in alto di 22 pt anche fuori stagione è un piccolo cambio della Home normale
+  (Director o Designer).
+

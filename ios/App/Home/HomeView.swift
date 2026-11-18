@@ -11,6 +11,8 @@ struct HomeView: View {
     @State private var minutesWidth: CGFloat = 96
     @State private var doneWidth: CGFloat = 130
     @State private var motion = ParallaxMotion()
+    /// Never started: the leg of the soft fill on the sides stays still (rasterised once, T-018).
+    @State private var stillMotion = ParallaxMotion()
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.season) private var season
@@ -25,16 +27,7 @@ struct HomeView: View {
             Board {
                 // in season the same scene drawn for it (snow in the picture, the boot as the leg, T-015 §2)
                 let look = season.map(SeasonLook.of)
-                if look != nil, side > 0 {
-                    // the scene to the edges of the screen, without bands: the same one, a little bigger and soft,
-                    // behind the real one (road and slider stay on the real one)
-                    scene(look)
-                        .scaleEffect((Manga.frameWidth + 2 * side) / Manga.frameWidth, anchor: .top)
-                        .blur(radius: 6, opaque: true)
-                        .accessibilityHidden(true)
-                        .at(0, Manga.artTop)
-                }
-                scene(look)
+                scene(look, motion: motion)
                     .at(0, Manga.artTop)
                 stepsBlock
                     .manga(rotate: -15, skew: -10, anchor: .topLeading)
@@ -64,6 +57,19 @@ struct HomeView: View {
             .animation(.easeInOut(duration: 0.25), value: store.plan.isDone)
         }
         .frame(width: size.width)
+        .background(alignment: .topLeading) {
+            // short phones, in season: the scene to the edges of the screen, without bands (T-018). The same one,
+            // stretched only across (every horizontal line meets the real one), soft and still, behind the canvas;
+            // road and slider stay on the real one. Drawn here, outside the canvas, in screen points.
+            if let look = season.map(SeasonLook.of), side > 0.5 {
+                scene(look, motion: stillMotion)
+                    .scaleEffect(x: size.width / Manga.frameWidth, y: s, anchor: .topLeading)
+                    .frame(width: size.width, height: Manga.artSize.height * s, alignment: .topLeading)
+                    .blur(radius: 6 * s, opaque: true)
+                    .offset(y: Manga.artTop * s)
+                    .accessibilityHidden(true)
+            }
+        }
         .onAppear { updateMotion() }
         .onDisappear { motion.stop() }
         .onChange(of: scenePhase) { _, _ in updateMotion() }
@@ -95,7 +101,7 @@ struct HomeView: View {
     }
 
     /// Illustration and leg (parallax), 390 × 790, clipped to their frame.
-    private func scene(_ look: SeasonLook?) -> some View {
+    private func scene(_ look: SeasonLook?, motion: ParallaxMotion) -> some View {
         ZStack(alignment: .topLeading) {
             Image(look?.homeArt(c.theme) ?? c.homeArt)
                 .resizable()

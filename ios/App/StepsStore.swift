@@ -315,8 +315,6 @@ final class StepsStore {
     func announceEvents() async {
         defer { eventsCheckedAt = Date() }
         guard history.eventsReady else { return }
-        // after a real Health read: the pop-up shows the Jollies counted with the gift
-        let gift = started && UIApplication.shared.applicationState == .active ? claimGift() : nil
         let now = Date()
         let calendar = controller.calendar
         let events = StreakEvents.events(in: history.streak, now: now, calendar: calendar)
@@ -325,6 +323,9 @@ final class StepsStore {
         let due = StreakEvents.toNotify(events, ledger: EventNotifier.ledger(now: now, calendar: calendar), now: now, calendar: calendar)
         await EventNotifier.notify(due, steps: steps, goal: goal, appActive: active, now: now, calendar: calendar)
         guard active else { return }
+        // after a real Health read, with the app on screen, together with the Jolly events of this same check (one
+        // reading of «active»: the gift is never left for a later check while the events go in the queue now)
+        let gift = started ? claimGift() : nil
         var ledger = EventNotifier.ledger(now: now, calendar: calendar)
         let show = StreakEvents.toShow(events, ledger: ledger, now: now, calendar: calendar)
         var batch = StreakEvents.popups(show).map { JollyPopupItem(event: $0.event, count: $0.count) }
@@ -334,16 +335,14 @@ final class StepsStore {
             EventNotifier.save(ledger, now: now, calendar: calendar)
             EventNotifier.withdraw(show)
         }
-        if let gift { batch.insert(gift, at: 0) }
-        guard !batch.isEmpty else { return }
-        // each pop-up shows the Jollies at its point of the queue, the last one those of now (T-018)
-        let counts = StreakEvents.stepCounts(final: history.streak.jolly, deltas: batch.map(\.delta))
-        for i in batch.indices { batch[i].jolly = counts[i] }
-        if gift != nil {
-            // first of the queue, but after a pop-up that may be on screen
-            popups.insert(batch.removeFirst(), at: popups.isEmpty ? 0 : 1)
-        }
+        guard gift != nil || !batch.isEmpty else { return }
+        let onScreen = !popups.isEmpty                     // the first one may already be shown: it stays as it is
+        if let gift { popups.insert(gift, at: onScreen ? 1 : 0) }   // first of the queue, after one on screen
         popups += batch
+        // each pop-up still waiting shows the Jollies at its point of the queue, the last one those of now (T-018)
+        let from = onScreen ? 1 : 0
+        let counts = StreakEvents.stepCounts(final: history.streak.jolly, deltas: popups[from...].map(\.delta))
+        for (k, i) in popups.indices.dropFirst(from).enumerated() { popups[i].jolly = counts[k] }
     }
 
     /// Christmas gift (D-040): at the first opening from 25/12 to 6/1, one Jolly more, with its pop-up first in

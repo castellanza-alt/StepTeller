@@ -149,7 +149,7 @@ Le differenze:
   destra e un pezzo di pantalone rosso. Niente lacci, niente cappello, niente neve.
 - Il formato di Icon Composer è lo stesso di `App/AppIcon.icon`:
   - `icon.json` copiato da lì, con il gruppo «Scarpa» rinominato «Stivale»;
-  - due livelli PNG 2048 × 2048: `rosso.png` (#E5231B, vetro sì, tinta grigio 1,0) e `bianco.png` (#FFFFFF, vetro no,
+  - due livelli SVG (1024 pt, come l'icona normale; T-018): `rosso.svg` (#E5231B, vetro sì, tinta grigio 1,0) e `bianco.svg` (#FFFFFF, vetro no,
     tinta opacità 0,6);
   - fondo #0C0C0C.
 - Varianti chiara, scura e trasparente: le genera Icon Composer dagli stessi livelli, come per l'icona attuale.

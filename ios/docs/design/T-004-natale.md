@@ -1,5 +1,8 @@
 # T-004 Tema stagionale di Natale
 
+> **Sostituita da [T-015-natale.md](T-015-natale.md) (18/11/2026, D-040).** William ha bocciato questa versione con i
+> cappelli. Da qui valgono solo il meccanismo, le date e le regole del cambio icona, come richiamati in T-015.
+
 **Designer, 17/11/2026.** Regole: D-036, D-037. Anteprima ferma: https://claude.ai/artifact/3LNgsKGVLzj6iGs2bF2QB4 (sorgente
 `T-004-natale/anteprima.html`). Icona pronta in `T-004-natale/AppIconNatale.icon/`.
 

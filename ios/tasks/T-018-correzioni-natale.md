@@ -36,3 +36,11 @@ Solo SSD: file pesanti in `/Volumes/SSD/Temp/NEAT/`, cancellati a fine compito; 
 Non unire, nessuna build TestFlight, nessun tag, nessuna chiave. Non scrivere a William.
 
 ## Esito
+**Designer, 18/11/2026: punto 8 fatto.** `RegaloJolly` @2x/@3x rifatti in locale dall'originale della generazione #10,
+senza crediti, in `docs/design/T-015-natale/asset/`.
+- I tratteggi dello scoppio sfumano a zero verso i lati alto e destra, entro 230 px su 1024. Il nastro e la fiamma rossi
+  restano pieni.
+- Pacco e coperchio non cambiano.
+- Le misure restano 300 × 296 e 450 × 444, con il disegno centrato su fondo trasparente: la cornice di 128 × 126,3 pt in
+  `JollyPopup` va bene così com'è.
+- Il Developer deve solo copiare i due PNG in `App/Assets.xcassets/RegaloJolly.imageset/`.

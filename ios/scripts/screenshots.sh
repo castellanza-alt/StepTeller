@@ -40,7 +40,7 @@ shot() { # name theme(day/night) steps speed [extra arguments…]
 }
 for theme in $THEMES; do
   shot home-4kmh $theme 3465 4.0
-  shot home-16kmh $theme 3465 16.0
+  shot home-10kmh $theme 3465 10.0
   shot home-fatto $theme 10729 6.0
   shot home-nodati $theme -1 4.0
   shot storico-sett $theme 3465 4.0 -stepteller.debugTab storico

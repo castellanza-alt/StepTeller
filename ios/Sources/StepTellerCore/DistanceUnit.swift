@@ -8,14 +8,14 @@ public enum DistanceUnit: String, Sendable, CaseIterable {
 
     public static let kmPerMile = 1.609344
 
-    /// Slider range and step in this unit: 3–16 km/h or 2–10 mph, both in 0.5 steps.
+    /// Slider range and step in this unit: 3–10 km/h or 2–6 mph, both in 0.5 steps (D-042).
     public var minSpeed: Double { self == .miles ? 2 : SpeedTrack.minSpeed }
-    public var maxSpeed: Double { self == .miles ? 10 : SpeedTrack.maxSpeed }
+    public var maxSpeed: Double { self == .miles ? 6 : SpeedTrack.maxSpeed }
     public var step: Double { SpeedTrack.step }
 
-    /// Speeds (km/h) the slider can produce in any unit: 3 km/h … 10 mph (16.09 km/h).
+    /// Speeds (km/h) the slider can produce in any unit: 3 … 10 km/h (6 mph = 9.66 km/h stays inside).
     public static let kmhRange: ClosedRange<Double> =
-        min(SpeedTrack.minSpeed, 2 * kmPerMile)...max(SpeedTrack.maxSpeed, 10 * kmPerMile)
+        min(SpeedTrack.minSpeed, 2 * kmPerMile)...max(SpeedTrack.maxSpeed, 6 * kmPerMile)
 
     /// Kilometers (or km/h) → this unit.
     public func value(fromKm km: Double) -> Double { self == .miles ? km / Self.kmPerMile : km }

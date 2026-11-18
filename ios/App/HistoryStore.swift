@@ -23,6 +23,8 @@ final class HistoryStore {
     /// The last reread from Health returned days: the streak is real and its events can be announced. With the
     /// phone locked Health answers nothing, and an empty history would look like days missed (Jollies spent).
     private(set) var eventsReady = false
+    /// Christmas gifts received (`JollyGift`, D-040): their days enter the Jolly count.
+    private(set) var gifts: JollyGift.Ledger
 
     @ObservationIgnored private let provider: (any HistoryProvider)?
     @ObservationIgnored private let defaults: UserDefaults
@@ -38,6 +40,18 @@ final class HistoryStore {
     private enum Keys {
         static let goals = "stepteller.goalHistory"
         static let start = "stepteller.streak.start"
+        /// `[season: day]`; also in iCloud (`CloudBackup`, merged) and in the App Group.
+        static var gifts: String { HistoryStore.debugGifts ? "stepteller.debug.jollyGifts" : "stepteller.jollyGifts" }
+    }
+
+    /// Debug with a simulated date (`-stepteller.debugNow`): the gifts stay under a key of their own, never in the
+    /// App Group or iCloud, so the tests never use up the real gift of the season.
+    nonisolated static var debugGifts: Bool {
+        #if DEBUG
+        UserDefaults.standard.object(forKey: "stepteller.debugNow") != nil
+        #else
+        false
+        #endif
     }
 
     init(provider: (any HistoryProvider)?, currentGoal: Int, defaults: UserDefaults = .standard,
@@ -57,6 +71,7 @@ final class HistoryStore {
             streakStart = today
             defaults.set(today, forKey: Keys.start)
         }
+        gifts = Self.savedGifts(defaults)
         let empty = HistoryStats(records: [], goals: loadedGoals, now: Date(), calendar: cal, labels: .current)
         stats = empty
         personalRecords = empty.personalRecords()
@@ -93,17 +108,50 @@ final class HistoryStore {
         recompute()
     }
 
+    /// The copies of the gifts on this phone (app and App Group), merged: a season received in either stays.
+    private static func savedGifts(_ defaults: UserDefaults) -> JollyGift.Ledger {
+        let here = JollyGift.Ledger(days: defaults.dictionary(forKey: Keys.gifts) as? [String: String] ?? [:])
+        return debugGifts ? here : here.merged(with: SharedStore.jollyGifts)
+    }
+
+    private func saveGifts(_ ledger: JollyGift.Ledger) {
+        gifts = ledger
+        if (defaults.dictionary(forKey: Keys.gifts) as? [String: String]) != ledger.days {
+            defaults.set(ledger.days, forKey: Keys.gifts)
+        }
+        if !Self.debugGifts, SharedStore.jollyGifts != ledger { SharedStore.jollyGifts = ledger }
+    }
+
+    /// Opening of the app: the Christmas gift, if due now (25/12–6/1, not received this season). Saved before
+    /// it is shown, so it is never given twice. Returns `true` when given.
+    func claimGift(now: Date) -> Bool {
+        var ledger = Self.savedGifts(defaults).merged(with: gifts)
+        let given = JollyGift.claim(&ledger, now: now, calendar: calendar)
+        #if DEBUG
+        // simulated date (`-stepteller.debugNow`): the fake history is on the real days, so the gift is counted
+        // on the real today, otherwise it would be in the future and the pop-up would show the Jollies without it
+        if given, Self.debugGifts, let season = JollyGift.season(of: now, calendar: calendar) {
+            ledger.days[String(season)] = DayKey.of(Date(), calendar: calendar)
+        }
+        #endif
+        saveGifts(ledger)
+        if given { recompute() }
+        return given
+    }
+
     /// Goal history and streak start brought back from iCloud after a reinstall (see `CloudBackup`).
     func reloadSaved() {
         if let saved = defaults.data(forKey: Keys.goals).flatMap({ try? JSONDecoder().decode(GoalHistory.self, from: $0) }) {
             goals = saved
         }
         if let saved = defaults.object(forKey: Keys.start) as? Date { streakStart = saved }
+        saveGifts(Self.savedGifts(defaults).merged(with: gifts))
         recompute()
     }
 
     /// Manual backup import: the file's goal history replaces this one, the streak start keeps the earliest.
-    func importBackup(goals imported: GoalHistory?, streakStart importedStart: Date?) {
+    func importBackup(goals imported: GoalHistory?, streakStart importedStart: Date?, gifts importedGifts: [String: String]?) {
+        if let importedGifts { saveGifts(gifts.merged(with: JollyGift.Ledger(days: importedGifts))) }
         if let imported, let data = try? JSONEncoder().encode(imported) { defaults.set(data, forKey: Keys.goals) }
         if let start = BackupFile.mergedStreakStart(current: streakStart, imported: importedStart) {
             defaults.set(start, forKey: Keys.start)
@@ -127,7 +175,8 @@ final class HistoryStore {
         let today = calendar.startOfDay(for: now)
         if let live = todayLive, live.day == today { steps[today] = max(steps[today] ?? 0, live.steps) }
         streak = StreakEngine.compute(start: streakStart, initialJolly: Self.initialJolly, steps: steps,
-                                      goals: goals, now: now, calendar: calendar)
+                                      goals: goals, gifts: JollyGift.days(gifts, calendar: calendar), now: now,
+                                      calendar: calendar)
         if eventsReady {
             // the widget tells «goal reached» (and the Jolly it earns) with these numbers (see WidgetEvents)
             let reach = StreakEvents.reach(streak, now: now, calendar: calendar)

@@ -21,7 +21,7 @@ public struct Plan: Sendable, Equatable {
     public static let glanceSpeed = 4.0
 
     public init(goal: Int, steps: Int, speed: Double, model: CadenceModel = .standard) {
-        // km/h; the slider in miles reaches 10 mph (16.09 km/h), just past the 16 km/h of the road in km
+        // km/h, inside the slider's range in any unit (3–10 km/h; an older saved 16 counts as 10)
         let v = min(DistanceUnit.kmhRange.upperBound, max(DistanceUnit.kmhRange.lowerBound, speed))
         let cad = model.cadence(at: v)
         let gap = max(0, goal - steps)

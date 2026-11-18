@@ -29,8 +29,8 @@ con 2 o più è interpolato e costante oltre gli estremi. Aggiornare poi i test 
 
 Le schermate sono disegnate sulla tela del handoff (390 × 844 pt) e scalate in larghezza (`MangaCanvas`). Colori solo da
 `MangaPalette` (`.day` / `.night`) via `@Environment(\.manga)`; `Theme.swift` resta per le Impostazioni.
-Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–16 km/h
-(o 2–10 mph) lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
+Il cursore della velocità segue `SpeedTrack.road` (nucleo, con test): tracciato in pixel dell'illustrazione, 3–10 km/h
+(o 2–6 mph, D-042) lineare sulla lunghezza dell'arco. Debug: `-stepteller.themeMode day|night|system|clock`, `-stepteller.debugSteps -1`
 (Salute senza dati), `-stepteller.debugScroll 0…1` (Storico già scorso, per gli screenshot).
 
 ## Introduzione (primo avvio)
@@ -68,7 +68,7 @@ semplificato e tradizionale: l'app segue la lingua del telefono (o quella scelta
   o `.uk`) distanze in miglia e velocità in mph, altrimenti km e km/h; Impostazioni → «Unità di misura» sceglie
   Automatiche (predefinito), Chilometri o Miglia. **Dentro tutto resta in km/h e km** (calcoli, taratura, App Group,
   test golden): le miglia sono solo visualizzazione (`DistanceUnit` nel nucleo, `Shared/Units.swift`). Il cursore in
-  miglia va da 2 a 10 mph a scatti di 0,5 sulla stessa strada; cambiando unità la velocità salvata passa allo scatto
+  miglia va da 2 a 6 mph a scatti di 0,5 sulla stessa strada; cambiando unità la velocità salvata passa allo scatto
   più vicino (4 km/h → 2,5 mph). Testi in miglia: righe del foglio con «mi» nell'ID (es. `home.minutes.mi`,
   `n.body.mi`); nel codice `unit.pick("home.minutes.km", "home.minutes.mi")`. L'unità arriva al widget via App Group.
   Debug: `-stepteller.units miles|kilometers|automatic`.

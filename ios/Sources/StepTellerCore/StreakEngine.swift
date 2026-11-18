@@ -20,6 +20,8 @@ public struct StreakState: Sendable, Equatable {
     public var jolly = 0
     public var jollyEarned = 0
     public var jollyUsed = 0
+    /// Christmas gifts counted (`JollyGift`), included in `jolly`.
+    public var jollyGifted = 0
     /// Consecutive successful days since the last Jolly earned or spent (0…14).
     public var counter = 0
     public var statuses: [Date: DayStatus] = [:]
@@ -45,20 +47,32 @@ public struct StreakState: Sendable, Equatable {
 ///   and the count towards the next Jolly restarts from 0;
 /// - a missed day without a Jolly resets the streak (and the count); the record stays.
 /// No Jolly is spent while the streak is 0: there is nothing to save.
+/// - a Christmas gift (`JollyGift`, D-040) adds 1 Jolly at the start of the day it was received, before that day
+///   is judged: a gift received today already saves today if it is missed. It does not touch streak or count.
+///   Gifts before the start of the count belong to a count that no longer exists and are ignored.
 public enum StreakEngine {
     public static let jollyEvery = 15
 
     /// - Parameters:
     ///   - start: first day of the count (start of day).
     ///   - steps: steps per day (key = start of day); missing days = 0.
+    ///   - gifts: days of the Christmas gifts received (start of day, see `JollyGift.days`).
     public static func compute(start: Date, initialJolly: Int = 3, steps: [Date: Int],
-                               goals: GoalHistory, now: Date, calendar: Calendar) -> StreakState {
+                               goals: GoalHistory, gifts: [Date] = [], now: Date, calendar: Calendar) -> StreakState {
         var s = StreakState()
         s.jolly = initialJolly
         var currentStart: Date?
         let first = calendar.startOfDay(for: start)
         let today = calendar.startOfDay(for: now)
         guard first <= today else { return s }
+        var giftsByDay: [Date: Int] = [:]
+        for g in gifts { giftsByDay[calendar.startOfDay(for: g), default: 0] += 1 }
+
+        func receiveGifts(_ day: Date) {
+            guard let n = giftsByDay[day] else { return }
+            s.jolly += n
+            s.jollyGifted += n
+        }
 
         func apply(reached: Bool, day: Date) {
             if reached {
@@ -86,11 +100,13 @@ public enum StreakEngine {
 
         var day = first
         while day < today {
+            receiveGifts(day)
             apply(reached: (steps[day] ?? 0) >= goals.goal(on: day), day: day)
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
             day = next
         }
         // today: provisional
+        receiveGifts(today)
         if (steps[today] ?? 0) >= goals.goal(on: today) {
             apply(reached: true, day: today)
             s.todayReached = true

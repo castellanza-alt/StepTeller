@@ -11,7 +11,8 @@ public struct SpeedTrack: Sendable {
     }
 
     public static let minSpeed = 3.0
-    public static let maxSpeed = 16.0
+    /// 10 km/h, not further (D-042, William, 18/11/2026; it was 16).
+    public static let maxSpeed = 10.0
     public static let step = 0.5
     public static let defaultSpeed = 4.0
 
@@ -59,6 +60,30 @@ public struct SpeedTrack: Sendable {
         let t = span > 0 ? (target - lengths[lo]) / span : 0
         let a = samples[lo], b = samples[hi]
         return Point(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t)
+    }
+
+    /// Direction of the road at a fraction, in degrees: 0 = to the right, negative = upwards (y grows downwards,
+    /// as on screen). From the points just before and after.
+    public func direction(atFraction f: Double) -> Double {
+        let e = 0.004
+        let lo = max(0, min(1, f) - e), hi = min(1, max(0, f) + e)
+        let a = point(atFraction: lo), b = point(atFraction: hi)
+        return atan2(b.y - a.y, b.x - a.x) * 180 / .pi
+    }
+
+    /// How a sticker running on the road sits at a direction (T-015 §3): it faces where the road goes and leans
+    /// at most `maxTilt` degrees. Going left it is mirrored, and the angle is taken after the mirror.
+    public struct Pose: Equatable, Sendable {
+        public let mirrored: Bool
+        public let rotation: Double
+    }
+
+    public static func pose(direction a: Double, maxTilt: Double = 25) -> Pose {
+        let clamp = { (x: Double) in min(maxTilt, max(-maxTilt, x)) }
+        if cos(a * .pi / 180) >= 0 { return Pose(mirrored: false, rotation: clamp(a)) }
+        var b = (a - 180).truncatingRemainder(dividingBy: 360)      // into (−180, 180]
+        if b <= -180 { b += 360 } else if b > 180 { b -= 360 }
+        return Pose(mirrored: true, rotation: clamp(b))
     }
 
     /// Projection onto the path: fraction of the nearest point and its distance (same units as the points).

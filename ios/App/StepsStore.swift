@@ -51,7 +51,7 @@ final class StepsStore {
             else { Task { await EventNotifier.withdrawAllPending() } }
         }
     }
-    /// Seasonal themes (Christmas: snow, lights, hat, icon), default yes (D-037).
+    /// Seasonal themes (Christmas: Home with the boot, the snow and the sleigh, icon), default yes (D-037, D-040).
     var seasonalThemesOn: Bool {
         didSet {
             // iCloud and Backup reassign it at every restore: only a real change touches widget and icon
@@ -133,9 +133,16 @@ final class StepsStore {
         // Launch argument `-stepteller.units miles` too (screenshots).
         let preference = defaults.string(forKey: Keys.units).flatMap(UnitPreference.init(rawValue:)) ?? .automatic
         unitPreference = preference
-        // Slider on the road: 3–16 km/h or 2–10 mph in 0.5 steps (an old value like 8.3 becomes 8.5).
+        // Slider on the road: 3–10 km/h or 2–6 mph in 0.5 steps (an old value like 8.3 becomes 8.5; a speed saved
+        // before D-042, up to 16 km/h or 10 mph, comes down to 10 km/h or 6 mph and is saved so, iCloud too).
         let v = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed
-        speed = preference.resolved(regionUsesMiles: Units.regionUsesMiles).snapKmh(v)
+        let startUnit = preference.resolved(regionUsesMiles: Units.regionUsesMiles)
+        let startSpeed = startUnit.snapKmh(v)
+        speed = startSpeed
+        if let saved = Self.persistentSpeed(defaults), saved > startUnit.km(fromValue: startUnit.maxSpeed) + 1e-9 {
+            // the saved value, lowered (not a `-stepteller.speed` launch argument, which `v` may be)
+            defaults.set(startUnit.snapKmh(saved), forKey: Keys.speed)
+        }
         reminderEnabled = defaults.object(forKey: Keys.reminderOn) != nil ? defaults.bool(forKey: Keys.reminderOn) : true
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         eventNotificationsOn = defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true
@@ -172,6 +179,12 @@ final class StepsStore {
             SharedStore.eventLedger = EventLedger(since: DayKey.of(Date(), minusDays: back, calendar: controller.calendar))
         }
         #endif
+    }
+
+    /// The speed saved on this phone, not a launch argument (`-stepteller.speed` in the screenshots).
+    private static func persistentSpeed(_ defaults: UserDefaults) -> Double? {
+        guard let id = Bundle.main.bundleIdentifier else { return nil }
+        return defaults.persistentDomain(forName: id)?[Keys.speed] as? Double
     }
 
     // MARK: derived
@@ -302,6 +315,8 @@ final class StepsStore {
     func announceEvents() async {
         defer { eventsCheckedAt = Date() }
         guard history.eventsReady else { return }
+        // after a real Health read: the pop-up shows the Jollies counted with the gift
+        if started, UIApplication.shared.applicationState == .active { claimGift() }
         let now = Date()
         let calendar = controller.calendar
         let events = StreakEvents.events(in: history.streak, now: now, calendar: calendar)
@@ -318,6 +333,16 @@ final class StepsStore {
         EventNotifier.save(ledger, now: now, calendar: calendar)
         EventNotifier.withdraw(show)
         popups += StreakEvents.popups(show).map { JollyPopupItem(event: $0.event, count: $0.count) }
+    }
+
+    /// Christmas gift (D-040): at the first opening from 25/12 to 6/1, one Jolly more, with its pop-up first in
+    /// the queue (gift → used → earned → celebration, T-015 §4.1). Does not depend on the seasonal switch.
+    /// After a reinstall it waits for iCloud (`CloudBackup.settled`), which may already know this season's gift.
+    private func claimGift() {
+        guard CloudBackup.settled, history.claimGift(now: AppClock.now()) else { return }
+        // first of the queue, but after a pop-up that may be on screen (the Jolly events of this same check are
+        // appended right after)
+        popups.insert(.gift(streak: history.streak.streak, jolly: history.streak.jolly), at: popups.isEmpty ? 0 : 1)
     }
 
     /// The pop-up on screen was closed: the next one, if any.
@@ -358,6 +383,7 @@ final class StepsStore {
         file.theme = defaults.string(forKey: ThemeMode.storageKey)
         file.streakStart = history.streakStart
         file.goalHistory = history.goals
+        if !history.gifts.days.isEmpty { file.jollyGifts = history.gifts.days }
         if calibration != .empty { file.calibration = calibration }
         return file
     }
@@ -365,7 +391,7 @@ final class StepsStore {
     /// Settings → Backup → Import: values in the file replace these, missing ones stay. History first, so the
     /// goal set afterwards matches its last entry and adds nothing.
     func importBackup(_ file: BackupFile) {
-        history.importBackup(goals: file.goalHistory, streakStart: file.streakStart)
+        history.importBackup(goals: file.goalHistory, streakStart: file.streakStart, gifts: file.jollyGifts)
         if let value = file.goal { goal = max(0, value) }
         if let raw = file.units, let units = UnitPreference(rawValue: raw) { unitPreference = units }
         if let value = file.speed { speed = unit.snapKmh(value) }

@@ -88,6 +88,7 @@ PARAMS = {
     "notif.jollyUsed.body.none": ["serie"],
     "jolly.earned.vo": ["serie", "n"],
     "jolly.used.vo": ["serie", "n"],
+    "jolly.gift.vo": ["n"],
     # composed
     "n.body.jolly": ["min", "velocita", "obiettivo", "mancano", "n"],
     "n.body.lose": ["min", "velocita", "obiettivo", "mancano", "n"],

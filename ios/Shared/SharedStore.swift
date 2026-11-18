@@ -24,12 +24,18 @@ enum SharedStore {
         static let eventLedger = "eventLedger"
         static let goalReach = "goalReach"
         static let seasonal = "stepteller.seasonal"
+        static let jollyGifts = "jollyGifts"
         static let forcedSeason = "debugSeason"
     }
 
-    /// Speed of the Home slider (km/h): the widget computes its minutes with the same one.
+    /// Speed of the Home slider (km/h): the widget computes its minutes with the same one. On the slider's step of
+    /// the unit in use: a speed written before D-042 (up to 16 km/h or 10 mph) reads as 10 km/h or 6 mph, like the
+    /// app, also before the app is opened after the update.
     static var speed: Double {
-        get { defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed }
+        get {
+            let raw = defaults.object(forKey: Keys.speed) != nil ? defaults.double(forKey: Keys.speed) : SpeedTrack.defaultSpeed
+            return unitPreference.resolved(regionUsesMiles: Units.regionUsesMiles).snapKmh(raw)
+        }
         set { defaults.set(newValue, forKey: Keys.speed) }
     }
 
@@ -125,6 +131,13 @@ enum SharedStore {
     static var seasonalOn: Bool {
         get { defaults.object(forKey: Keys.seasonal) != nil ? defaults.bool(forKey: Keys.seasonal) : true }
         set { defaults.set(newValue, forKey: Keys.seasonal) }
+    }
+
+    /// Christmas gifts received (`JollyGift.Ledger`), copy in the App Group: the main copy is in the app's
+    /// UserDefaults (iCloud, Backup), see `HistoryStore`.
+    static var jollyGifts: JollyGift.Ledger {
+        get { JollyGift.Ledger(days: defaults.dictionary(forKey: Keys.jollyGifts) as? [String: String] ?? [:]) }
+        set { defaults.set(newValue.days, forKey: Keys.jollyGifts) }
     }
 
     #if DEBUG

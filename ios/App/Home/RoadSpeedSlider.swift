@@ -4,12 +4,14 @@ import StepTellerCore
 /// Speed slider running **on the dashed line of the road** (`SpeedTrack.road`).
 /// Lives in the illustration space (390 × 790 pt). Grabbed with a tap or a drag within
 /// 20 pt of the path; the finger is projected onto the nearest point and the speed snaps to 0.5.
-/// Same road in both units: 3–16 km/h or 2–10 mph; `speed` stays in km/h.
+/// Same road in both units: 3–10 km/h or 2–6 mph (D-042); `speed` stays in km/h.
+/// In season a sticker (the Christmas sleigh, T-015 §3) runs instead of the knob: `look` from `SeasonLook`.
 struct RoadSpeedSlider: View {
     @Binding var speed: Double
     let unit: DistanceUnit
+    var look: SeasonLook.Slider = .knob
     @Environment(\.manga) private var c
-    @Environment(\.season) private var season
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private let track = SpeedTrack.road
     private let k = Manga.artScale
 
@@ -27,13 +29,15 @@ struct RoadSpeedSlider: View {
                     if new != speed { speed = new }
                 })
             trail(at: p, f: f)
-            knobAndLabel(flip: flip)
-                .frame(width: 0, height: 0, alignment: flip ? .trailing : .leading)
-                .offset(x: p.x + (flip ? Manga.knobSize / 2 : -Manga.knobSize / 2), y: p.y)
-                .allowsHitTesting(false)
-            if season != nil {
-                // the season's accessory rides on the knob: attach point 15 pt above its center
-                SeasonAccessory(width: 30, rotation: -15).offset(x: p.x, y: p.y - 15)
+            switch look {
+            case .knob:
+                knobAndLabel(flip: flip)
+                    .frame(width: 0, height: 0, alignment: flip ? .trailing : .leading)
+                    .offset(x: p.x + (flip ? Manga.knobSize / 2 : -Manga.knobSize / 2), y: p.y)
+                    .allowsHitTesting(false)
+            case .sleigh(let name):
+                sleighAndLabel(name, at: p, pose: SpeedTrack.pose(direction: track.direction(atFraction: f)), flip: flip)
+                    .allowsHitTesting(false)
             }
         }
         .sensoryFeedback(.selection, trigger: speed)
@@ -84,10 +88,42 @@ struct RoadSpeedSlider: View {
         .manga(rotate: -4, skew: -8)
     }
 
+    // MARK: sleigh (T-015 §3)
+
+    /// Frame of the sleigh and its attach point (under the runners), which sits on the road where the knob's
+    /// center would be.
+    /// 92 × 42.4 pt in the specification, 35% bigger after William saw it (D-042).
+    private static let sleighScale: CGFloat = 1.35
+    private static let sleighSize = CGSize(width: 92 * sleighScale, height: 42.4 * sleighScale)
+    private static let sleighAnchor = CGPoint(x: 27.6 * sleighScale, y: 33.9 * sleighScale)
+    private static let sleighLabelGap: CGFloat = 8
+
+    @ViewBuilder
+    private func sleighAndLabel(_ name: String, at p: CGPoint, pose: SpeedTrack.Pose, flip: Bool) -> some View {
+        let box = Self.sleighSize, anchor = Self.sleighAnchor
+        let unit = UnitPoint(x: anchor.x / box.width, y: anchor.y / box.height)
+        Image(name)
+            .resizable()
+            .frame(width: box.width, height: box.height)
+            // mirrored about the attach point, so it stays on the road (= attach point at 64.4 of the mirrored frame)
+            .scaleEffect(x: pose.mirrored ? -1 : 1, y: 1, anchor: unit)
+            .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: pose.mirrored)
+            .rotationEffect(.degrees(pose.rotation), anchor: unit)
+            .offset(x: p.x - anchor.x, y: p.y - anchor.y)
+            .accessibilityHidden(true)
+        // the value beside the sleigh, on the side the knob's would be (`Manga.knobFlipX`), clear of the sleigh
+        let left = pose.mirrored ? box.width - anchor.x : anchor.x       // sleigh's extent left / right of p
+        let right = box.width - left
+        label
+            .fixedSize()
+            .frame(width: 0, height: 0, alignment: flip ? .trailing : .leading)
+            .offset(x: flip ? p.x - left - Self.sleighLabelGap : p.x + right + Self.sleighLabelGap, y: p.y - 10)
+    }
+
     // MARK: trail
 
     /// Three tapered triangles behind the knob, rotated −8°: black 4 pt, red 6 pt, black 3 pt.
-    /// Lengths: red 18 + f·120, black 12 + f·90 (f = fraction of the road, (v − 3) / 13 in km/h).
+    /// Lengths: red 18 + f·120, black 12 + f·90 (f = fraction of the road, (v − 3) / 7 in km/h).
     private func trail(at p: CGPoint, f: Double) -> some View {
         let black = (12 + f * 90).rounded(), red = (18 + f * 120).rounded()
         return ZStack(alignment: .topLeading) {

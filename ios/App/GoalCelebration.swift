@@ -17,7 +17,6 @@ struct GoalCelebration: View {
     @State private var sparkOrigin = CGPoint.zero
 
     @Environment(\.manga) private var c
-    @Environment(\.season) private var season
     @State private var pop: CGFloat = 0.6
 
     var body: some View {
@@ -32,7 +31,7 @@ struct GoalCelebration: View {
             if !reduceMotion {
                 TimelineView(.animation) { timeline in
                     Canvas { ctx, size in
-                        Sparks.draw(&ctx, origin: sparkOrigin, t: timeline.date.timeIntervalSince(start), colors: sparkColors)
+                        Sparks.draw(&ctx, origin: sparkOrigin, t: timeline.date.timeIntervalSince(start), colors: [c.red, c.ink])
                     }
                 }
                 .allowsHitTesting(false)
@@ -51,9 +50,6 @@ struct GoalCelebration: View {
                         .manga(rotate: -5, skew: -10)
                 }
                 .frame(width: 320, height: 180)
-                .overlay(alignment: .topLeading) {
-                    if season != nil { SeasonAccessory(width: 64, rotation: -18).offset(x: 100, y: 22) }
-                }
                 .scaleEffect(pop)
                 .background(GeometryReader { g in
                     let f = g.frame(in: .named("celebration"))
@@ -97,13 +93,6 @@ struct GoalCelebration: View {
             try? await Task.sleep(for: .seconds(3.4))
             close()
         }
-    }
-
-    /// Red and black; in season also the season's two colors.
-    private var sparkColors: [Color] {
-        guard let season else { return [c.red, c.ink] }
-        let p = SeasonPalette.of(season, c.theme)
-        return [c.red, c.ink, p.pine, p.gold]
     }
 
     private static let rays = KineticLines.rays(cx: 195, cy: 422, count: 90, innerMin: 150, innerMax: 230, outer: 700, seed: 7, redEvery: 7)

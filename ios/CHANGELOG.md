@@ -62,7 +62,8 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   stessa strada, `SpeedTrack.maxSpeed` 10, `DistanceUnit` e `Plan` di conseguenza (test aggiornati); una velocità
   salvata più alta (telefono, iCloud, Backup) scende a 10 km/h o 6 mph e si salva così. La taratura (`CadenceModel`,
   `AutoCalibration`, 3–12 km/h) non cambia: gli allenamenti più veloci danno ancora forma alla curva della corsa. A
-  Natale la slitta è più grande del 35% e il blocco «minuti mancanti» sale di 46 pt, così la slitta non lo copre.
+  Natale la slitta è più grande del 35% e il blocco «minuti mancanti» sale di 46 pt, così la slitta non lo copre;
+  «MINUTI MANCANTI» ha un alone `paper`, solo a Natale, per leggersi sulla pelliccia dello stivale.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

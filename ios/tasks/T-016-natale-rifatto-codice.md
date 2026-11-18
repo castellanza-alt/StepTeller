@@ -116,4 +116,4 @@ William.
 - **Da guardare:**
   - a 3 km/h la slitta più grande esce di ≈ 15 pt dal bordo sinistro (entra dalla strada);
   - di notte su SE «MINUTI» sfiora la pelliccia dello stivale.
-
+- **Leggibilità (Director, dopo la revisione della PR):** a Natale «MINUTI MANCANTI» ha un alone `paper` (raggio 2 e 4, come il valore del cursore), così sulla pelliccia si legge di giorno e di notte, su SE e su 17 Pro Max. Screenshot a 10 km/h aggiornati.

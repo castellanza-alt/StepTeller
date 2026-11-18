@@ -115,8 +115,13 @@ struct HomeView: View {
     private var minutesBlock: some View {
         let p = store.plan, unit = store.unit
         return VStack(alignment: .leading, spacing: 0) {
-            AntonText(L10n.text("home.minutes.1"), 17)
-            AntonText(L10n.text("home.minutes.2"), 17)
+            // at Christmas the block sits higher, over the boot's fur: a `paper` halo like the slider's value
+            Group {
+                AntonText(L10n.text("home.minutes.1"), 17)
+                AntonText(L10n.text("home.minutes.2"), 17)
+            }
+            .shadow(color: season != nil ? c.paper : .clear, radius: 2)
+            .shadow(color: season != nil ? c.paper : .clear, radius: 4)
             HStack(alignment: .lastTextBaseline, spacing: 5) {
                 AntonText(LocalFormat.integer(p.minutes), 68, lineHeight: 0.95, tracking: -0.02)
                     .contentTransition(.numericText())

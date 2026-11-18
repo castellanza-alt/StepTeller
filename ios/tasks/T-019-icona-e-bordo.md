@@ -30,3 +30,21 @@ Solo SSD, file pesanti in `/Volumes/SSD/Temp/NEAT/`, niente acceso a fine turno.
 Non unire, nessuna build, nessun tag, nessuna chiave. Non scrivere a William (salvo la tela, tramite me).
 
 ## Esito
+
+### 2. Developer (18/11/2026, ramo `task/T-019-bordo`)
+- Causa: la tela della Home ha fondo `paper` e l'illustrazione parte da `artTop` = 54 pt (handoff), quindi a Natale
+  sopra il cielo restava una striscia di carta (bianca di giorno, blu notte di notte); sugli iPhone più alti del 390 × 844
+  anche qualche punto in basso, sull'SE pure gli angoli delle bande laterali.
+- Correzione (`App/Home/HomeView.swift`, `edgeFill`): solo in stagione il fondo della tela è trasparente e dietro c'è la
+  stessa scena, ferma e sfumata, allargata alla larghezza dello schermo e ripetuta a specchio sopra e sotto, così cielo e
+  strada continuano senza giunture fino ai bordi; il bordo alto dell'illustrazione vera sfuma in 20 pt. Strada, cursore
+  e testi non si spostano. Sostituisce il riempimento laterale di T-018 (stessa scena, stessa geometria).
+- Verifica: Simulatore Debug su SE (tasto Home), 17e (notch) e 17 Pro Max (Dynamic Island), giorno e notte, prima e
+  dopo in `tasks/T-019/natale-*.jpg`. Fuori stagione: screenshot identici pixel per pixel su SE giorno/notte e Pro Max
+  giorno; sul Pro Max di notte differenze di pochi pixel vicino al pulsante delle impostazioni, invisibili a occhio
+  (`tasks/T-019/fuori-stagione.jpg`), che sembrano rumore del vetro o dell'effetto parallasse. Il mini non c'è tra i simulatori di iOS 27: a 375 × 812 la
+  striscia era di 1 pt in basso più quella in alto, coperte allo stesso modo. 117 test verdi, build Debug e Release OK.
+- Revisione indipendente: nessun errore di geometria; un rischio: lo sfocato a tutto schermo ora c'è su ogni iPhone in
+  stagione (prima solo sull'SE) e potrebbe essere ricalcolato a ogni fotogramma della parallasse della gamba. Con
+  `.drawingGroup()` la scena diventava nera e fuori posto (come in T-018), quindi non usato. Da misurare sul telefono
+  (fluidità e batteria); se servisse, si limita lo sfocato alle sole strisce visibili.

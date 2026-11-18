@@ -11,7 +11,7 @@ struct HomeView: View {
     @State private var minutesWidth: CGFloat = 96
     @State private var doneWidth: CGFloat = 130
     @State private var motion = ParallaxMotion()
-    /// Never started: the leg of the soft fill on the sides stays still (rasterised once, T-018).
+    /// Never started: the leg of the soft fill at the edges (`edgeFill`) stays still.
     @State private var stillMotion = ParallaxMotion()
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -20,15 +20,27 @@ struct HomeView: View {
     var body: some View {
         // Normally the canvas scales to the width; on short phones (e.g. SE, 375 × 667) it fits the height,
         // so road and slider stay on screen (the `paper` background shows on the sides, or, in season, the
-        // same illustration bigger and soft, T-018).
+        // same illustration stretched and soft, `edgeFill`).
         let s = min(size.width / Manga.frameWidth, size.height / Manga.frameHeight)
-        let side = max(0, (size.width / s - Manga.frameWidth) / 2)      // canvas points beyond each edge
         MangaCanvas(width: Manga.frameWidth * s, height: size.height / s) {
             Board {
                 // in season the same scene drawn for it (snow in the picture, the boot as the leg, T-015 §2)
                 let look = season.map(SeasonLook.of)
-                scene(look, motion: motion)
-                    .at(0, Manga.artTop)
+                Group {
+                    if look != nil {
+                        // in season the top edge fades into the soft fill behind the status bar (T-019)
+                        scene(look, motion: motion).mask {
+                            VStack(spacing: 0) {
+                                LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
+                                    .frame(height: 20)
+                                Color.black
+                            }
+                        }
+                    } else {
+                        scene(nil, motion: motion)
+                    }
+                }
+                .at(0, Manga.artTop)
                 stepsBlock
                     .manga(rotate: -15, skew: -10, anchor: .topLeading)
                     .at(14, Manga.artTop + 112)
@@ -53,22 +65,13 @@ struct HomeView: View {
                         .transition(.opacity)
                 }
             }
-            .background(c.paper)
+            // in season the edge fill shows above and below the illustration (T-019)
+            .background(season == nil ? c.paper : .clear)
             .animation(.easeInOut(duration: 0.25), value: store.plan.isDone)
         }
         .frame(width: size.width)
         .background(alignment: .topLeading) {
-            // short phones, in season: the scene to the edges of the screen, without bands (T-018). The same one,
-            // stretched only across (every horizontal line meets the real one), soft and still, behind the canvas;
-            // road and slider stay on the real one. Drawn here, outside the canvas, in screen points.
-            if let look = season.map(SeasonLook.of), side > 0.5 {
-                scene(look, motion: stillMotion)
-                    .scaleEffect(x: size.width / Manga.frameWidth, y: s, anchor: .topLeading)
-                    .frame(width: size.width, height: Manga.artSize.height * s, alignment: .topLeading)
-                    .blur(radius: 6 * s, opaque: true)
-                    .offset(y: Manga.artTop * s)
-                    .accessibilityHidden(true)
-            }
+            if let look = season.map(SeasonLook.of) { edgeFill(look, s: s) }
         }
         .onAppear { updateMotion() }
         .onDisappear { motion.stop() }
@@ -111,6 +114,26 @@ struct HomeView: View {
         }
         .frame(width: Manga.artSize.width, height: Manga.artSize.height, alignment: .topLeading)
         .clipped()
+    }
+
+    /// In season, the illustration to every edge of the screen, behind the canvas, in screen points: the
+    /// status bar strip above `artTop` and what is left below (T-019), the sides of short phones (T-018). The same
+    /// scene, still and soft: stretched only across, so every horizontal line meets the real one, and mirrored
+    /// above and below its edges, so sky and road go on without a seam. Road and slider stay on the real one.
+    private func edgeFill(_ look: SeasonLook, s: CGFloat) -> some View {
+        let band = scene(look, motion: stillMotion)
+            .scaleEffect(x: size.width / Manga.frameWidth, y: s, anchor: .topLeading)
+            .frame(width: size.width, height: Manga.artSize.height * s, alignment: .topLeading)
+        return VStack(spacing: 0) {
+            band.scaleEffect(y: -1)
+            band
+            band.scaleEffect(y: -1)
+        }
+        .offset(y: (Manga.artTop - Manga.artSize.height) * s)
+        .frame(width: size.width, height: size.height, alignment: .topLeading)
+        .clipped()
+        .blur(radius: 6 * s, opaque: true)
+        .accessibilityHidden(true)
     }
 
     /// Warning when Health gives no data.

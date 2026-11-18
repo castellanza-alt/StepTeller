@@ -71,6 +71,10 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   4); a 10 km/h il pomello non copre più i km (blocco dei minuti 22 pt più in alto anche fuori stagione); «SALUTE →
   CONDIVISIONE…» con l'alone `paper`, leggibile sulla luna di notte; la slitta a 3 km/h resta tutta dentro lo schermo;
   illustrazione del regalo senza bordo quadrato (asset del Designer, #45).
+- La Home di Natale arriva fino ai bordi dello schermo (T-019, prova di William della 1.147.2): niente più striscia
+  bianca tra la barra di stato e il cielo. Dietro la tela la stessa scena, ferma e sfumata, allargata a tutto lo schermo e
+  ripetuta a specchio sopra e sotto l'illustrazione (dietro la barra di stato, in basso e ai lati dell'SE); il bordo
+  alto dell'illustrazione sfuma nei primi 20 pt. Strada e cursore invariati; fuori stagione nessun cambiamento.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

@@ -15,6 +15,8 @@ struct SettingsSheet: View {
     @State private var pendingBackup: BackupFile?
     /// Outcome of the import shown in an alert (done or error text).
     @State private var importMessage: String?
+    /// Accessibility text sizes: rows whose label and value no longer fit side by side are laid out again (T-020).
+    @Environment(\.dynamicTypeSize) private var typeSize
     /// «Replay the introduction»: closes Settings and shows it again.
     var onReplayIntro: () -> Void = {}
 
@@ -53,7 +55,7 @@ struct SettingsSheet: View {
                         Toggle(L10n.text("reminder.toggle"), isOn: $store.reminderEnabled).tint(Theme.accent)
                             .padding(.horizontal, 16).padding(.vertical, 10)
                         rowDivider
-                        DatePicker(L10n.text("reminder.time"), selection: .reminderTime($store.reminderMinutes), displayedComponents: .hourAndMinute)
+                        reminderTimeRow(.reminderTime($store.reminderMinutes))
                             .disabled(!store.reminderEnabled).opacity(store.reminderEnabled ? 1 : 0.4)
                             .padding(.horizontal, 16).padding(.vertical, 8)
                     }
@@ -69,7 +71,7 @@ struct SettingsSheet: View {
                     Picker(L10n.text("set.theme.section"), selection: $themeMode) {
                         ForEach(ThemeMode.allCases) { Text($0.label).tag($0.rawValue) }
                     }
-                    .pickerStyle(.segmented)
+                    .segmentedOrMenu(typeSize.isAccessibilitySize)
                     Toggle(L10n.text("set.season.toggle"), isOn: $store.seasonalThemesOn).tint(Theme.accent)
                         .padding(.horizontal, 16).padding(.vertical, 10)
                         .glassCard()
@@ -83,7 +85,7 @@ struct SettingsSheet: View {
                         Text(L10n.text("set.units.km")).tag(UnitPreference.kilometers)
                         Text(L10n.text("set.units.mi")).tag(UnitPreference.miles)
                     }
-                    .pickerStyle(.segmented)
+                    .segmentedOrMenu(typeSize.isAccessibilitySize)
                     note(L10n.text("set.units.note"))
                 }
 
@@ -239,6 +241,22 @@ struct SettingsSheet: View {
         .buttonStyle(.plain)
     }
 
+    /// Reminder time: label and time side by side; at accessibility sizes the label above the time, so long
+    /// labels («Heure», «Uhrzeit») wrap between words instead of breaking.
+    @ViewBuilder private func reminderTimeRow(_ time: Binding<Date>) -> some View {
+        if typeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(L10n.text("reminder.time"))
+                    .accessibilityHidden(true)      // the picker keeps the label for VoiceOver
+                DatePicker(L10n.text("reminder.time"), selection: time, displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        } else {
+            DatePicker(L10n.text("reminder.time"), selection: time, displayedComponents: .hourAndMinute)
+        }
+    }
+
     /// Thin line between the rows of a card.
     private var rowDivider: some View { Divider().overlay(Theme.ink.opacity(0.08)) }
 
@@ -263,6 +281,11 @@ struct SettingsSheet: View {
 }
 
 private extension View {
+    /// Segmented control; at accessibility sizes, where its segments would be cut, a menu with the full names.
+    @ViewBuilder func segmentedOrMenu(_ menu: Bool) -> some View {
+        if menu { pickerStyle(.menu).frame(maxWidth: .infinity, alignment: .leading) } else { pickerStyle(.segmented) }
+    }
+
     /// Settings card: glass background with a thin border, continuous corners.
     func glassCard() -> some View {
         background(RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Theme.glass))

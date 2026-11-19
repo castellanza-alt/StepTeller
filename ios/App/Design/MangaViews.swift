@@ -182,9 +182,11 @@ struct TagText: View {
     var background: Color
     var border: Color? = nil
     var padding = EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8)
+    /// Inside a box: the text shrinks down to this scale to stay on one line within the width it is given (T-020).
+    var minScale: CGFloat? = nil
 
     var body: some View {
-        AntonText(text, size, tracking: tracking, color: foreground)
+        AntonText(text, size, tracking: tracking, color: foreground, minScale: minScale)
             .padding(padding)
             .background(background)
             .overlay { if let border { Rectangle().strokeBorder(border, lineWidth: 2) } }

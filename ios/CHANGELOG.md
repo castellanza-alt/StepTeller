@@ -83,6 +83,11 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   interruttore e nota degli avvisi di obiettivo e Jolly, temi stagionali, pop-up del Jolly guadagnato, usato e in
   regalo, notifiche di obiettivo e Jolly. Testi dei pop-up tenuti vicini alla lunghezza dell'italiano perché stiano
   nel riquadro. Glossario delle lingue in `localizzazione/GLOSSARIO.md`. Cataloghi rigenerati con `scripts/cataloghi.py`.
+- Nessuna parola fuori dai riquadri, in tutte le lingue (T-020): nei pop-up del Jolly titolo e targhetta su una riga
+  si riducono fino a stare nel pannello inclinato (in giapponese il titolo del regalo usciva a destra), le frasi vanno
+  a capo fino a 3 righe; nella festa dell'obiettivo titolo, targhetta e serie si riducono se servisse. Nelle
+  Impostazioni, con il testo più grande di Accessibilità, l'ora del promemoria va sotto la sua etichetta (non più
+  «Heur/e» spezzato) e Tema e Unità diventano un menu invece dei segmenti tagliati. Testi invariati.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

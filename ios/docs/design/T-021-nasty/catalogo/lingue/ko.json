@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}걸음. 로봇 청소기도 너보단 많이 돌아다녀."
+  "testo": "{passi}걸음. 앉아만 있는 것도 정도가 있지, 씨발."
  },
  {
   "id": "N030",
@@ -177,7 +177,7 @@
   "id": "N032",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}걸음. 한 걸음 세고 다음 걸음까지 휴가 다녀와도 되겠다."
+  "testo": "{passi}걸음. 한 걸음 사이에 휴가 다녀와도 되겠다."
  },
  {
   "id": "N033",
@@ -741,7 +741,7 @@
   "id": "N132",
   "livello": "NASTY",
   "situazione": "Notifiche",
-  "testo": "쪽팔리지? / 목표 {obiettivo}걸음에 {passi}걸음. 뭐 할 말 있어?"
+  "testo": "쪽팔리지? / {obiettivo}걸음 중 {passi}걸음. 할 말 있어?"
  },
  {
   "id": "N133",

@@ -45,7 +45,7 @@
   "id": "N008",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}步。少得要命。也沒少得比昨天意外。"
+  "testo": "{passi}步。少得要命。跟平常一樣。"
  },
  {
   "id": "N009",
@@ -69,7 +69,7 @@
   "id": "N012",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}步。還好沙發那邊收得到Wi-Fi齁。"
+  "testo": "{passi}步。還好沙發那邊收得到 Wi-Fi 齁。"
  },
  {
   "id": "N014",
@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}步。掃地機器人都比你熟你家格局。"
+  "testo": "{passi}步。整天窩著不動，幹，有夠廢。"
  },
  {
   "id": "N030",
@@ -537,7 +537,7 @@
   "id": "N097",
   "livello": "NASTY",
   "situazione": "Jolly e serie",
-  "testo": "護身符少一個，還剩{jolly}個。用光就自己扛。"
+  "testo": "護身符少一枚，還剩{jolly}枚。用光就自己扛。"
  },
  {
   "id": "N098",
@@ -597,7 +597,7 @@
   "id": "N107",
   "livello": "NASTY",
   "situazione": "Jolly e serie",
-  "testo": "最後一個護身符也燒掉了。現在真的得走了齁。"
+  "testo": "最後一枚護身符也燒掉了。現在真的得走了齁。"
  },
  {
   "id": "N108",
@@ -1047,7 +1047,7 @@
   "id": "P038",
   "livello": "Piccante",
   "situazione": "Jolly e serie",
-  "testo": "還有{jolly}個。別太指望它們喔。"
+  "testo": "還有{jolly}枚。別太指望它們喔。"
  },
  {
   "id": "P039",

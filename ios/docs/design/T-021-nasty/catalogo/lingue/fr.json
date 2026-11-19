@@ -57,7 +57,7 @@
   "id": "N010",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pas. Des heures au même endroit. Tu couves la télécommande ?"
+  "testo": "{passi} pas. Des heures sans bouger. Tu fais pitié."
  },
  {
   "id": "N011",
@@ -93,7 +93,7 @@
   "id": "N017",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pas. Qu’est-ce que tu trouves si compliqué dans « marche » ?"
+  "testo": "{passi} pas. C’est quoi, le problème avec « marcher » ?"
  },
  {
   "id": "N019",
@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pas. Même ton aspirateur fait le tour du salon."
+  "testo": "{passi} pas. De la glande à l’état pur, bordel."
  },
  {
   "id": "N030",
@@ -291,7 +291,7 @@
   "id": "N051",
   "livello": "NASTY",
   "situazione": "Mattina e pomeriggio",
-  "testo": "17 h. {passi} pas. Dernière chance de sauver les meubles."
+  "testo": "17 h. {passi} pas. Dernière chance d’être moins minable."
  },
  {
   "id": "N052",
@@ -363,7 +363,7 @@
   "id": "N064",
   "livello": "NASTY",
   "situazione": "Sera",
-  "testo": "Bilan du jour, {passi} pas. C’était même pas la peine d’additionner."
+  "testo": "Bilan du jour : {passi} pas. Minable."
  },
  {
   "id": "N065",
@@ -621,7 +621,7 @@
   "id": "N111",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "C’est fait. Recommence demain qu’on écarte la putain de coïncidence."
+  "testo": "C’est fait. Pareil demain, sinon c’était un putain de coup de bol."
  },
  {
   "id": "N112",
@@ -669,7 +669,7 @@
   "id": "N119",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "Objectif atteint. C’était littéralement le minimum que tu demandais."
+  "testo": "Objectif atteint. C’était le minimum, et c’est toi qui l’as fixé."
  },
  {
   "id": "N120",
@@ -939,7 +939,7 @@
   "id": "P020",
   "livello": "Piccante",
   "situazione": "Mattina, pomeriggio, sera",
-  "testo": "16 h. {passi} pas. On prend son temps, à ce que je vois."
+  "testo": "16 h. {passi} pas. On prend son temps, on dirait."
  },
  {
   "id": "P021",

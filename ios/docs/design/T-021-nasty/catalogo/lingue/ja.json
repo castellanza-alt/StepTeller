@@ -9,7 +9,7 @@
   "id": "N002",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}歩。よくその数字、人前で開けるな。"
+  "testo": "{passi}歩。恥ずかしくねえのか。"
  },
  {
   "id": "N003",
@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}歩。ロボット掃除機のほうが部屋を回ってるぞ。"
+  "testo": "{passi}歩。座りっぱなしにも程があるだろ。"
  },
  {
   "id": "N030",
@@ -231,7 +231,7 @@
   "id": "N041",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}歩。歩くか、私を消すか。選べ。"
+  "testo": "{passi}歩。歩くか、このアプリを消すか。選べ。"
  },
  {
   "id": "N042",
@@ -285,7 +285,7 @@
   "id": "N050",
   "livello": "NASTY",
   "situazione": "Mattina e pomeriggio",
-  "testo": "もう午後だぞ。{passi}歩。時計くらい動いてみろよ。"
+  "testo": "午後だぞ。{passi}歩。時計は動くのに、お前は動かねえ。"
  },
  {
   "id": "N051",

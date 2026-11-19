@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} passos. Até seu robô aspirador dá volta na sala."
+  "testo": "{passi} passos. Sedentarismo puro, porra."
  },
  {
   "id": "N030",
@@ -279,7 +279,7 @@
   "id": "N049",
   "livello": "NASTY",
   "situazione": "Mattina e pomeriggio",
-  "testo": "16h. {passi} passos. Já tá cumprindo aviso prévio da caminhada?"
+  "testo": "16h. {passi} passos. Já tá desistindo, porra?"
  },
  {
   "id": "N050",
@@ -429,7 +429,7 @@
   "id": "N077",
   "livello": "NASTY",
   "situazione": "A metà e quasi",
-  "testo": "Faltam {mancano} passos. Puta lugar merda pra desistir."
+  "testo": "Faltam {mancano} passos. Desistir agora seria uma puta merda."
  },
  {
   "id": "N078",
@@ -519,7 +519,7 @@
   "id": "N094",
   "livello": "NASTY",
   "situazione": "Jolly e serie",
-  "testo": "Perdeu a sequência. {serie} dias no lixo. Adivinha de quem foi a culpa."
+  "testo": "Perdeu a sequência. {serie} dias no lixo. Culpa sua."
  },
  {
   "id": "N095",
@@ -585,7 +585,7 @@
   "id": "N105",
   "livello": "NASTY",
   "situazione": "Jolly e serie",
-  "testo": "Primeiro dia. De novo. Já dá pra pedir música no Fantástico."
+  "testo": "Primeiro dia. De novo. Você já devia pagar aluguel aqui."
  },
  {
   "id": "N106",
@@ -789,7 +789,7 @@
   "id": "N140",
   "livello": "NASTY",
   "situazione": "Notifiche",
-  "testo": "Sem novidades / {passi} passos. Continua feio pra caralho."
+  "testo": "Sem novidades / {passi} passos. Continua uma vergonha do caralho."
  },
  {
   "id": "N141",
@@ -801,7 +801,7 @@
   "id": "N142",
   "livello": "NASTY",
   "situazione": "Se tocchi il cuore",
-  "testo": "Eu conto passos. Quero que se fodam os toques."
+  "testo": "Eu conto passos. Que se fodam seus toques."
  },
  {
   "id": "N143",

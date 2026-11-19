@@ -57,7 +57,7 @@
   "id": "N010",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos. Llevas horas ahí. ¿Pagas alquiler por cojín?"
+  "testo": "{passi} pasos. Llevas horas sin moverte. Das pena."
  },
  {
   "id": "N011",
@@ -81,19 +81,19 @@
   "id": "N015",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos. La vergüenza también me toca ponerla a mí."
+  "testo": "{passi} pasos. Me das vergüenza ajena."
  },
  {
   "id": "N016",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{percento}% de tu meta. El resto se lo lleva el sofá."
+  "testo": "{percento}% de tu objetivo. El resto se lo lleva el sofá."
  },
  {
   "id": "N017",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos. ¿Qué mierda se te complica de caminar?"
+  "testo": "{passi} pasos. Caminar no es lo tuyo. Nada lo es, carajo."
  },
  {
   "id": "N019",
@@ -129,7 +129,7 @@
   "id": "N024",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos. Me daría risa si contaras los tuyos."
+  "testo": "{passi} pasos. Das risa. Y no de la buena."
  },
  {
   "id": "N025",
@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos. La aspiradora sale a pasear más que tú."
+  "testo": "{passi} pasos. Sedentarismo en estado puro, carajo."
  },
  {
   "id": "N030",
@@ -183,7 +183,7 @@
   "id": "N033",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos. Tu propia meta se está riendo de ti."
+  "testo": "{passi} pasos. Tu propio objetivo se está riendo de ti."
  },
  {
   "id": "N034",
@@ -225,7 +225,7 @@
   "id": "N040",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{percento}% de la meta. Tu calificación es una mierda."
+  "testo": "{percento}% del objetivo. Tu calificación: una mierda."
  },
  {
   "id": "N041",
@@ -285,13 +285,13 @@
   "id": "N050",
   "livello": "NASTY",
   "situazione": "Mattina e pomeriggio",
-  "testo": "Ya es tarde. {passi} pasos. Hasta el puto reloj avanza."
+  "testo": "Por la tarde. {passi} pasos. Hasta el puto reloj avanza."
  },
  {
   "id": "N051",
   "livello": "NASTY",
   "situazione": "Mattina e pomeriggio",
-  "testo": "Cinco de la tarde. {passi} pasos. Todavía puedes salvar el día."
+  "testo": "Cinco de la tarde. {passi} pasos. Última oportunidad de no dar pena."
  },
  {
   "id": "N052",
@@ -345,7 +345,7 @@
   "id": "N061",
   "livello": "NASTY",
   "situazione": "Sera",
-  "testo": "Ya es de noche. {passi} pasos. Vuelves a perder en casa."
+  "testo": "Ya es de noche. {passi} pasos. Hoy también perdiste."
  },
  {
   "id": "N062",
@@ -381,7 +381,7 @@
   "id": "N067",
   "livello": "NASTY",
   "situazione": "A metà e quasi",
-  "testo": "Mitad de la meta. ¿Quieres medio puto trofeo? Sigue."
+  "testo": "Mitad del objetivo. ¿Quieres medio puto trofeo? Sigue."
  },
  {
   "id": "N069",
@@ -429,13 +429,13 @@
   "id": "N077",
   "livello": "NASTY",
   "situazione": "A metà e quasi",
-  "testo": "A {mancano} pasos de la meta. Qué cagada rendirse aquí."
+  "testo": "A {mancano} pasos del objetivo. Qué cagada rendirse aquí."
  },
  {
   "id": "N078",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Meta de {obiettivo} pasos. Qué mierda de ambición."
+  "testo": "Objetivo: {obiettivo} pasos. Qué mierda de ambición."
  },
  {
   "id": "N079",
@@ -447,13 +447,13 @@
   "id": "N080",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Bajaste la meta. Qué puta cobardía."
+  "testo": "Bajaste el objetivo. Qué puta cobardía."
  },
  {
   "id": "N082",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "{obiettivo} pasos. ¿Te puso la meta el puto sofá?"
+  "testo": "{obiettivo} pasos. ¿Te puso el objetivo el puto sofá?"
  },
  {
   "id": "N083",
@@ -471,25 +471,25 @@
   "id": "N086",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Bajaste la meta. Te rendiste sin levantarte."
+  "testo": "Bajaste el objetivo. Te rendiste sin levantarte."
  },
  {
   "id": "N087",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Bajaste la meta. El sofá te agradece las horas extra."
+  "testo": "Bajaste el objetivo. El sofá te agradece las horas extra."
  },
  {
   "id": "N088",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Volviste a bajar la meta. Das pena."
+  "testo": "Volviste a bajar el objetivo. Das pena."
  },
  {
   "id": "N089",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Subiste la meta a {obiettivo}. Veamos cuánto te dura."
+  "testo": "Subiste el objetivo a {obiettivo}. Veamos cuánto te dura."
  },
  {
   "id": "N090",
@@ -501,7 +501,7 @@
   "id": "N091",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Subiste la meta. Menos promesas y más putos pasos."
+  "testo": "Subiste el objetivo. Menos promesas y más putos pasos."
  },
  {
   "id": "N092",
@@ -603,7 +603,7 @@
   "id": "N108",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "Llegaste a la meta. Ya era puta hora."
+  "testo": "Llegaste al objetivo. Ya era puta hora."
  },
  {
   "id": "N109",
@@ -615,7 +615,7 @@
   "id": "N110",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "Cumpliste la meta. Yo no daba nada por ti. Tú tampoco."
+  "testo": "Cumpliste el objetivo. Yo no daba nada por ti. Tú tampoco."
  },
  {
   "id": "N111",
@@ -633,7 +633,7 @@
   "id": "N113",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "Cumpliste la meta. Tuve que revisar la puta fecha."
+  "testo": "Cumpliste el objetivo. Tuve que revisar la puta fecha."
  },
  {
   "id": "N114",
@@ -651,7 +651,7 @@
   "id": "N116",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "Cumpliste la meta. Día de mierda para el sofá."
+  "testo": "Cumpliste el objetivo. Día de mierda para el sofá."
  },
  {
   "id": "N117",
@@ -669,7 +669,7 @@
   "id": "N119",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "Cumpliste la meta. Era lo mínimo. La pusiste tú."
+  "testo": "Cumpliste el objetivo. Era lo mínimo. Lo pusiste tú."
  },
  {
   "id": "N120",
@@ -693,7 +693,7 @@
   "id": "N123",
   "livello": "NASTY",
   "situazione": "Quando ce la fai",
-  "testo": "El doble de tu meta. ¿A quién le prestaste el teléfono?"
+  "testo": "El doble de tu objetivo. ¿A quién le prestaste el teléfono?"
  },
  {
   "id": "N124",
@@ -765,7 +765,7 @@
   "id": "N136",
   "livello": "NASTY",
   "situazione": "Notifiche",
-  "testo": "Qué pena / {percento}% de tu meta. Levántate."
+  "testo": "Qué pena / {percento}% de tu objetivo. Levántate."
  },
  {
   "id": "N137",
@@ -849,7 +849,7 @@
   "id": "P005",
   "livello": "Piccante",
   "situazione": "Pochi passi",
-  "testo": "{passi} pasos de {obiettivo}. Tu meta sí que es optimista."
+  "testo": "{passi} pasos de {obiettivo}. Tu objetivo sí que es optimista."
  },
  {
   "id": "P006",
@@ -1017,7 +1017,7 @@
   "id": "P033",
   "livello": "Piccante",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Bajaste la meta. Voy a ensayar mi cara de sorpresa."
+  "testo": "Bajaste el objetivo. Voy a ensayar mi cara de sorpresa."
  },
  {
   "id": "P034",
@@ -1029,7 +1029,7 @@
   "id": "P035",
   "livello": "Piccante",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "Subiste la meta. Veamos cuánto dura."
+  "testo": "Subiste el objetivo. Veamos cuánto dura."
  },
  {
   "id": "P036",
@@ -1083,7 +1083,7 @@
   "id": "P044",
   "livello": "Piccante",
   "situazione": "Quando ce la fai",
-  "testo": "Cumpliste la meta. Voy a marcar la fecha."
+  "testo": "Cumpliste el objetivo. Voy a marcar la fecha."
  },
  {
   "id": "P045",
@@ -1095,7 +1095,7 @@
   "id": "P046",
   "livello": "Piccante",
   "situazione": "Quando ce la fai",
-  "testo": "Cumpliste la meta. Así que sí sabes caminar."
+  "testo": "Cumpliste el objetivo. Así que sí sabes caminar."
  },
  {
   "id": "P047",

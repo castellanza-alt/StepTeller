@@ -57,7 +57,7 @@
   "id": "N010",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} Schritte. Seit Stunden da. Zahlst du pro Sitzkissen Miete?"
+  "testo": "{passi} Schritte. Seit Stunden keine Bewegung. Echt erbärmlich."
  },
  {
   "id": "N011",
@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi} Schritte. Dein Saugroboter kommt mehr rum als du."
+  "testo": "{passi} Schritte. Rumgammeln in Reinform, verdammt."
  },
  {
   "id": "N030",
@@ -291,7 +291,7 @@
   "id": "N051",
   "livello": "NASTY",
   "situazione": "Mattina e pomeriggio",
-  "testo": "17 Uhr. {passi} Schritte. Letzte Chance, den Tag zu retten."
+  "testo": "17 Uhr. {passi} Schritte. Letzte Chance, nicht scheiße zu sein."
  },
  {
   "id": "N052",
@@ -459,7 +459,7 @@
   "id": "N083",
   "livello": "NASTY",
   "situazione": "Obiettivo scelto o cambiato",
-  "testo": "{obiettivo} Schritte täglich. Hauptsache, der Sieg passt zwischen zwei Werbepausen."
+  "testo": "{obiettivo} Schritte täglich. Du gewinnst wohl gern ohne Aufwand."
  },
  {
   "id": "N085",

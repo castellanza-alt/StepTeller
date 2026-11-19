@@ -33,7 +33,8 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   persona: ha una forma ma non un volto. Tre livelli (Normale, intermedio, NASTY), gratuiti; di serie Normale, e
   l'introduzione chiede se si vuole «un'esperienza più piccante». Tono da roast («Roast in Peace»), non da battuta
   bonaria: i testi di T-008 (Hargreaves) sono troppo blandi e vanno riscritti; Hargreaves come personaggio terzo
-  decade. Di D-039 restano i limiti: da chiarire con William le parolacce; restano fuori corpo, peso, aspetto,
+  decade. Linguaggio (William, 19/11): parolacce al livello 3 e insulti diretti sul comportamento («pigro
+  bastardo»), che superano D-039 su questi due punti; restano fuori corpo, peso, aspetto,
   salute, età, genere e altre caratteristiche personali (linee guida di Apple). Prima del codice: ricerca su Carrot
   (`docs/design/T-008-nasty/carrot-ricerca.md`), carattere e campione di battute approvati da William.
 - **D-039 NASTY (17/11/2026, William).** «Cattiva ma senza parolacce, lo scopo è umiliare con humor inglese, non

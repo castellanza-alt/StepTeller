@@ -3,6 +3,9 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, forma e linguaggio (nessuna build): «Pazza idea: possiamo usare l'icona di Apple Salute?
+  […] Colori normali per il livello normale e più "evil" per gli altri due.» «Parolacce: livello 3 sì. Qualche
+  insulto però lo metterei. Pigro bastardo. Robe così.» → D-044
 - **19/11/2026**, NASTY, impostazione (nessuna build): vuole «un approccio così» come Carrot Weather. «NEAT deve
   diventare un personaggio […] Gli darei una forma ma non un volto.» Tre livelli, gratuita, di serie normale e
   nell'introduzione «gli chiediamo se vuole una esperienza più piccante». Sulle frasi di T-008: «troppo blande. Qui

@@ -12,6 +12,7 @@ enum CloudBackup {
         "stepteller.goal", "stepteller.goalHistory", "stepteller.streak.start", "stepteller.speed",
         "stepteller.units", "stepteller.reminder.on", "stepteller.reminder.minutes", "stepteller.calibration.v1",
         ThemeMode.storageKey, "stepteller.events.on", "stepteller.seasonal", giftsKey,
+        "stepteller.voice.level", "stepteller.roast.frequency",
     ]
     private static let streakStartKey = "stepteller.streak.start"
     /// Christmas gifts received (`JollyGift.Ledger.days`): merged both ways, a season received anywhere stays.

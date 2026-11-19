@@ -1,0 +1,43 @@
+{
+ "_nota": "Vincoli delle battute per id, uguali in ogni lingua (T-024). «ore»: quando la frase è vera, ora locale «HH:MM-HH:MM», estremi compresi; in una notifica conta l'ora di consegna. «evento»: il fatto di cui parla (nomi in NastyEvent). Chi aggiunge una battuta che nomina un'ora o un evento la aggiunge qui; un test lo controlla. Lo legge scripts/battute.py.",
+ "ore": {
+  "N045": "11:30-12:59",
+  "N046": "10:30-11:59",
+  "N048": "12:00-17:59",
+  "N049": "15:30-16:59",
+  "N050": "13:00-17:59",
+  "N051": "16:30-17:59",
+  "N052": "14:30-15:59",
+  "N053": "18:30-19:59",
+  "N055": "19:30-20:59",
+  "N059": "18:30-19:59",
+  "N060": "20:00-23:59",
+  "N063": "19:00-19:59",
+  "N064": "20:00-23:59",
+  "N065": "20:00-23:59",
+  "N066": "20:00-23:59",
+  "N137": "17:30-18:59",
+  "P019": "11:30-12:59",
+  "P020": "15:30-16:59",
+  "P021": "18:30-19:59",
+  "P022": "18:00-23:59",
+  "P024": "20:00-23:59",
+  "P025": "19:30-20:59",
+  "P054": "17:30-18:59"
+ },
+ "evento": {
+  "N080": "abbassato", "N085": "abbassato", "N086": "abbassato", "N087": "abbassato", "N088": "abbassato",
+  "P033": "abbassato", "P034": "abbassato",
+  "N089": "alzato", "N091": "alzato", "P035": "alzato",
+  "N092": "jollyUsato", "N096": "jollyUsato", "N097": "jollyUsato", "N098": "jollyUsato", "P037": "jollyUsato",
+  "P038": "jollyUsato",
+  "N093": "jollyFiniti", "N107": "jollyFiniti",
+  "N099": "jollyGuadagnato", "P039": "jollyGuadagnato",
+  "N094": "seriePersa", "N095": "seriePersa", "N101": "seriePersa", "N102": "seriePersa", "N103": "seriePersa",
+  "N104": "seriePersa", "N105": "seriePersa", "P041": "seriePersa", "P042": "seriePersa", "P043": "seriePersa",
+  "N100": "serieInCorso", "P040": "serieInCorso",
+  "N106": "serieARischio",
+  "N112": "record", "N120": "record", "N121": "record", "P048": "record", "P049": "record",
+  "N123": "doppio"
+ }
+}

@@ -233,5 +233,7 @@ William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. 
 3. **A verbale**: ogni «domani comincio» finisce agli atti; al primo obiettivo NEAT chiude il fascicolo.
 
 ### Aperto
-- **Battute a sfondo sessuale sul divano.** Funzionano, ma nel questionario di Apple vanno dichiarate come temi
-  maturi o allusivi: l'età può salire da 13+ a 16+. Decide William.
+- **Battute a sfondo sessuale sul divano: sì** (William, 19/11, «anche 16+»). Nel questionario di Apple si dichiarano
+  come temi maturi o allusivi; l'età calcolata va verificata alla compilazione (13+ o 16+).
+- **Notifiche roast** (William, 19/11): 4-5 al giorno tra le 10 e le 20, a orari non fissi. Da progettare.
+- **Battute aggiornabili senza App Store** (domanda di William): da progettare, vedi risposta del Director.

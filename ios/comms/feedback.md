@@ -3,6 +3,10 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, battute (bozza T-021, nessuna build): «Belle, farei anche di peggio.» Il cuore che «batte
+  100000 volte non lo capisco»: meglio «sono il modello più veloce che esiste». Battute sessuali sul divano: «sì,
+  anche 16+». «Dobbiamo strappare la pelle.» Vuole 4-5 roast al giorno in notifica, solo dalle 10 alle 20, non a ore
+  precise; chiede se le battute si possono aggiungere da un repository senza passare dall'App Store. → D-044, T-021
 - **19/11/2026**, NASTY, forma e linguaggio (nessuna build): «Pazza idea: possiamo usare l'icona di Apple Salute?
   […] Colori normali per il livello normale e più "evil" per gli altri due.» «Parolacce: livello 3 sì. Qualche
   insulto però lo metterei. Pigro bastardo. Robe così.» → D-044

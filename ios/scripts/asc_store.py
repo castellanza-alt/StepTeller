@@ -4,7 +4,8 @@ store-prova  Reads the current listing and prints, per area and per language, wh
 store        Applies the same changes, then reads everything back and checks that nothing is left to change.
              Idempotent: a second run finds the listing aligned and only reads.
 store-invio  Attaches the build of the current version (latest VALID, or BUILD_NUMBER) and submits it for review.
-             Refuses if the listing still differs from the repository, if the «What's New» texts of the version are
+             Refuses while the previous version is not published (CHANGELOG.md or App Store Connect, D-046), if the
+             listing still differs from the repository, if the «What's New» texts of the version are
              missing (except for the very first version) or if CHANGELOG.md still says «in lavorazione».
              Only after Will's explicit ok.
 
@@ -48,7 +49,8 @@ DISPLAY_TYPE = 'APP_IPHONE_67'
 SCREENSHOTS = 6
 
 # Age rating: every question «none» / «no» (Will chose 4+ on 21 October 2026: with «yes» to health or wellness topics
-# Apple shows 9+ on iOS 26 and later). Only the keys the API returns are sent.
+# Apple shows 9+ on iOS 26 and later). Only the keys the API returns are sent. From 1.3 (D-044, D-047) the default
+# voice swears: profanity «frequent», 13+ (`age_profile`).
 AGE_NONE = ['alcoholTobaccoOrDrugUseOrReferences', 'contests', 'gamblingSimulated', 'gunsOrOtherWeapons',
             'horrorOrFearThemes', 'matureOrSuggestiveThemes', 'medicalOrTreatmentInformation',
             'profanityOrCrudeHumor', 'sexualContentGraphicAndNudity', 'sexualContentOrNudity',
@@ -59,6 +61,12 @@ AGE_NO = ['healthOrWellnessTopics', 'advertising', 'ageAssurance', 'gambling', '
 # follow-ups of a «yes» (socialMediaAgeRestricted) or set by Apple / per country: left as they are
 # ratings approved by Will: after saving the questionnaire, [store] stops if Apple computes anything else
 AGE_ALLOWED = {'FOUR_PLUS'}
+# From 1.3: `profanityOrCrudeHumor` frequent. The API (OpenAPI 4.6.1) accepts NONE, INFREQUENT_OR_MILD,
+# FREQUENT_OR_INTENSE (the old questionnaire) and INFREQUENT, FREQUENT (the 2025 one): FREQUENT first, the old value
+# if Apple refuses it. The 13+ band is THIRTEEN_PLUS (`AppStoreAgeRating`).
+VOICE_VERSION = (1, 3)
+PROFANITY_FREQUENT = ('FREQUENT', 'FREQUENT_OR_INTENSE')
+AGE_ALLOWED_VOICE = {'THIRTEEN_PLUS'}
 AGE_UNTOUCHED = {'kidsAgeBand', 'ageRatingOverride', 'ageRatingOverrideV2', 'koreaAgeRatingOverride',
                  'developerAgeRatingInfoUrl', 'seventeenPlus', 'socialMediaAgeRestricted',
                  'gracRatingClassificationNumber'}
@@ -66,9 +74,46 @@ AGE_UNTOUCHED = {'kidsAgeBand', 'ageRatingOverride', 'ageRatingOverrideV2', 'kor
 EDITABLE_VERSION = {'PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'DEVELOPER_REJECTED', 'REJECTED',
                     'METADATA_REJECTED', 'INVALID_BINARY'}
 LIVE_INFO = {'READY_FOR_DISTRIBUTION', 'READY_FOR_SALE', 'REPLACED_WITH_NEW_INFO'}
+# Version states: on sale (or on sale and replaced by a later one), and still with Apple.
+LIVE_VERSION = {'READY_FOR_DISTRIBUTION', 'READY_FOR_SALE', 'REPLACED_WITH_NEW_VERSION'}
+IN_REVIEW = {'WAITING_FOR_REVIEW', 'IN_REVIEW', 'PENDING_APPLE_RELEASE', 'PROCESSING_FOR_DISTRIBUTION',
+             'PROCESSING_FOR_APP_STORE'}
 SECRET_FIELDS = {'contactFirstName', 'contactLastName', 'contactPhone', 'contactEmail', 'copyright'}
 LIMITS = {'name': 30, 'subtitle': 30, 'promotionalText': 170, 'description': 4000}
 WHATS_NEW_LIMIT = 4000
+# Notes for the reviewer (appStoreReviewDetails.notes)
+NOTES_LIMIT = 4000
+
+
+def age_profile(version: str):
+    """(answers that are not «NONE», allowed ratings) for the version of project.yml: the declaration changes only
+    with the [store] of 1.3 or later, never before."""
+    if registro.version_tuple(version) >= VOICE_VERSION:
+        return {'profanityOrCrudeHumor': PROFANITY_FREQUENT}, AGE_ALLOWED_VOICE
+    return {}, AGE_ALLOWED
+
+
+def previous_published(version: str, sections, store_states: dict):
+    """D-046: a version goes to Apple only once the one before it is published. `sections`: CHANGELOG.md sections
+    (registro.parse_sections); `store_states`: versionString → state on App Store Connect. Returns None if fine,
+    otherwise the reason."""
+    current = registro.version_tuple(version)
+    earlier = [s for s in sections if registro.version_tuple(s['version']) < current]
+    if not earlier:
+        return None
+    previous = max(earlier, key=lambda s: registro.version_tuple(s['version']))
+    in_review = sorted(v for v, state in store_states.items()
+                       if registro.version_tuple(v) < current and state in IN_REVIEW)
+    if in_review:
+        return (f"la {', '.join(in_review)} è ancora in revisione da Apple ({store_states[in_review[0]]}): "
+                f'la {version} si invia solo dopo la sua pubblicazione (D-046)')
+    if previous['state'] == 'pubblicata':
+        return None
+    if store_states.get(previous['version']) in LIVE_VERSION:
+        return None     # published, CHANGELOG.md not updated yet: the store is the truth
+    return (f"CHANGELOG.md dice «{previous['heading']}» e su App Store Connect la {previous['version']} è "
+            f"{store_states.get(previous['version'], 'assente')}: la {version} si invia solo dopo la pubblicazione "
+            f"della {previous['version']} (D-046). Quando è in vendita, aggiornare l'intestazione a «pubblicata il…»")
 
 
 class Stop(RuntimeError):
@@ -232,6 +277,8 @@ def load_inputs():
     if problems:
         raise Stop('Dati del repository non validi:\n' + '\n'.join('- ' + p for p in problems))
     notes = (STORE / 'note_revisore.txt').read_text(encoding='utf-8').strip()
+    if len(notes) > NOTES_LIMIT:
+        raise Stop(f'store/note_revisore.txt: {len(notes)} caratteri > {NOTES_LIMIT} (limite di Apple)')
     secrets = {name: os.environ.get(env, '').strip() for name, env in [
         ('contactFirstName', 'ASC_REVIEW_FIRST_NAME'), ('contactLastName', 'ASC_REVIEW_LAST_NAME'),
         ('contactPhone', 'ASC_REVIEW_PHONE'), ('contactEmail', 'ASC_REVIEW_EMAIL'), ('copyright', 'ASC_COPYRIGHT')]}
@@ -321,7 +368,9 @@ def app_info_section(report, app_id, metadata, version_exists):
 
 
 def age_rating_section(report, info):
-    area = 'Classificazione per età (tutte le risposte «no»)'
+    answers, allowed = age_profile(VERSION)
+    area = ('Classificazione per età (tutte le risposte «no»)' if not answers else
+            f'Classificazione per età ({VERSION}: parolacce frequenti, 13+; il resto «no»)')
     rating = info['attributes'].get('appStoreAgeRating')
     report.note(area, f'Classificazione calcolata ora da Apple: {rating or "nessuna (questionario non salvato)"}')
     declaration = get_optional(f"/v1/appInfos/{info['id']}/ageRatingDeclaration")
@@ -332,6 +381,10 @@ def age_rating_section(report, info):
     wanted = {k: 'NONE' for k in AGE_NONE if k in attrs}
     wanted.update({k: False for k in AGE_NO if k in attrs})
     wanted.update({k: True for k in AGE_YES if k in attrs})
+    # from 1.3 a non-«NONE» answer: any of the accepted spellings already there is fine, otherwise the first
+    for k, values in answers.items():
+        if k in attrs:
+            wanted[k] = attrs[k] if attrs[k] in values else values[0]
     changed = {k: v for k, v in wanted.items() if attrs.get(k) != v}
     for field, value in changed.items():
         report.change(area, 'Questionario', field, attrs.get(field), value)
@@ -339,16 +392,29 @@ def age_rating_section(report, info):
     if unknown:
         report.note(area, f'⚠️ Domande nuove non gestite dallo script (lasciate): {", ".join(unknown)}')
     if changed and report.apply:
-        update('ageRatingDeclarations', declaration['id'], changed)
+        try:
+            update('ageRatingDeclarations', declaration['id'], changed)
+        except asc.ApiError as error:
+            # the other accepted spelling of «frequent», if Apple refuses the first one
+            retry = {k: answers[k][1] for k in changed if k in answers and len(answers[k]) > 1
+                     and changed[k] == answers[k][0]}
+            if error.status not in (409, 422) or not retry:
+                raise
+            report.note(area, f'Apple rifiuta {", ".join(f"{k}={changed[k]}" for k in retry)}: provo {retry}')
+            changed.update(retry)
+            update('ageRatingDeclarations', declaration['id'], changed)
         rating = get(f"/v1/appInfos/{info['id']}")['data']['attributes'].get('appStoreAgeRating')
         report.note(area, f'Classificazione calcolata da Apple dopo il salvataggio: {rating}')
-        if rating not in AGE_ALLOWED:
-            raise Stop(f'Apple calcola {rating}, non approvata ({", ".join(sorted(AGE_ALLOWED))}): '
-                       'solo il questionario è stato salvato; chiedere a Will prima di proseguire')
-    elif rating and rating not in AGE_ALLOWED:
+        if rating not in allowed:
+            raise Stop(f'Apple calcola {rating}, non quella attesa ({", ".join(sorted(allowed))}): '
+                       'solo il questionario è stato salvato; chiedere al Director prima di proseguire')
+    elif rating and rating not in allowed:
         if report.apply:
-            raise Stop(f'Apple calcola {rating}, non approvata: chiedere a Will prima di proseguire')
-        report.note(area, f'⚠️ {rating} non è tra le classificazioni approvate ({", ".join(sorted(AGE_ALLOWED))})')
+            raise Stop(f'Apple calcola {rating}, non quella attesa ({", ".join(sorted(allowed))}): '
+                       'chiedere al Director prima di proseguire')
+        report.note(area, f'⚠️ {rating} non è la classificazione attesa per la {VERSION} '
+                          f'({", ".join(sorted(allowed))}): la cambierà [store]' if changed else
+                          f'⚠️ {rating} non è tra le classificazioni attese ({", ".join(sorted(allowed))})')
     return info
 
 
@@ -631,12 +697,18 @@ def store_invio():
     if top['state'] not in ('testflight', 'inviata'):
         raise Stop(f"CHANGELOG.md dice «{top['heading']}»: si invia solo una versione già su TestFlight e provata da Will. "
                    f'Aggiornare l\'intestazione a «## {VERSION} — su TestFlight, build N»')
+    # D-046: never while the version before is not published (read before anything else, nothing written)
+    app = asc.app_record()
+    all_versions, _ = get_all(f"/v1/apps/{app['id']}/appStoreVersions", {'filter[platform]': 'IOS', 'limit': 50})
+    states = {v['attributes'].get('versionString'): v['attributes'].get('appVersionState') or
+              v['attributes'].get('appStoreState') for v in all_versions}
+    reason = previous_published(VERSION, registro.parse_sections(registro.CHANGELOG.read_text(encoding='utf-8')), states)
+    if reason:
+        raise Stop(f'Invio della {VERSION} rifiutato: {reason}')
     check = sync(apply=False)
     if check.changes:
         asc.summary(check.markdown('Invio rifiutato: la scheda non corrisponde al repository'))
         raise Stop('Lanciare prima [store] e controllare la rilettura')
-    app = asc.app_record()
-    all_versions, _ = get_all(f"/v1/apps/{app['id']}/appStoreVersions", {'filter[platform]': 'IOS', 'limit': 50})
     if not is_first_version(all_versions) and whats_new_texts() is None:
         raise Stop(f'Novità della versione {VERSION} assenti: compilare la riga novita.{VERSION} in '
                    'localizzazione/NEAT_novita.xlsx, rigenerare metadata.json e lanciare [store]')

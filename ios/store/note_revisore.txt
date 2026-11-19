@@ -3,32 +3,35 @@ Hello,
 Thank you for reviewing NEAT - Every Step Counts. NEAT has no account, login, user-generated content or paid content.
 
 1. PURPOSE AND TARGET AUDIENCE
-NEAT is a simple daily step-goal app for anyone who wants to walk more, outdoors or on a treadmill. It answers three questions at a glance: how many steps have I taken today, how many are left to reach my goal, and how many minutes I still need to walk at the speed I choose. Each day the goal is reached extends a streak. Every 15 days in a row the user earns a "Joker" that saves the streak if a day is missed. The History screen shows totals and averages by week, month, year and all time, plus personal records. An optional evening reminder and widgets help users stay on track. NEAT makes no medical or health claims.
+NEAT is a simple daily step-goal app for anyone who wants to walk more, outdoors or on a treadmill: today's steps, the steps left to the goal, and the walking minutes needed at the chosen speed. Each day at goal extends a streak; every 15 days in a row the user earns a "Joker" that saves the streak if a day is missed. History shows totals, averages and records. NEAT makes no medical or health claims.
 
 2. HOW TO USE THE APP
 - No login, account or demo credentials are needed.
-- First launch: a 4-page introduction. Page 2 asks for read-only access to Apple Health (no data is written). Page 3 sets the daily step goal. Page 4 turns the evening reminder on or off. Notification permission is requested only when the user taps START with the reminder turned on.
-- Home: today's steps, the steps left to reach the goal, and the walking minutes needed. Tap or drag along the dashed line of the road to change the walking speed.
-- If Health returns no step data (no data on the device, or access not granted), Home shows 0 steps, "NO DATA FROM HEALTH" and an OPEN SETTINGS button. Steps come only from Health; goal, walking minutes, speed, History, Settings and widgets keep working.
-- Top bar: the red button on the left (chart icon) opens History and, from History, goes back to Home. The button on the right opens Settings.
-- Settings: daily goal, Notifications (evening reminder; goal & Joker alerts), Streak & Jokers rules, units (Automatic / Kilometers / Miles), theme, Backup (Export backup / Import backup: a JSON file the user saves and opens through the system share sheet and file picker), and in About: Privacy, Support and Replay introduction.
-- Widgets: Home Screen (small and medium) and Lock Screen. Long-press the Home Screen, tap Edit > Add Widget, and choose NEAT.
+- First launch: a 5-page introduction. Page 2 asks for read-only Apple Health access. Page 3 sets the daily goal. Page 4 chooses NEAT's voice (see NEW IN 1.3). Page 5 turns the evening reminder on or off; notification permission is requested when the user taps START.
+- Home: today's steps, steps left and walking minutes. Drag along the dashed road line to change the speed. With no Health data, Home shows "NO DATA FROM HEALTH" and an OPEN SETTINGS button.
+- Top bar: the red button on the left opens History (and goes back to Home); the button on the right opens Settings.
+- Settings: goal, Voice, Notifications, Streak & Jokers, units, theme, Backup (JSON file via share sheet and file picker), Privacy, Support, Replay introduction.
+- Widgets: Home Screen (small, medium) and Lock Screen.
 
 3. EXTERNAL SERVICES
-- Apple HealthKit, read-only: step count, walking + running distance, and walking/running workouts. Workouts are used only on the device, to adjust the estimate of walking minutes to the user's real pace. NEAT never writes to Health.
-- Local notifications for the optional evening reminder and for goal and Joker alerts (scheduled on the device, no push server).
-- WidgetKit, with an App Group shared between the app and its widgets.
-- iCloud key-value storage (NSUbiquitousKeyValueStore), in the user's own iCloud account: goal and goal history, streak start date, speed, units, reminder settings, theme and cadence calibration, so they come back after a reinstall or on a new iPhone. No Health data is stored in iCloud. The developer has no access to it.
-No servers of our own, analytics, ads, AI services, sign-in services or payment providers. No data is sent to the developer. The only links in the app (Privacy and Support in Settings) open our web pages in the browser.
+- Apple HealthKit, read-only: steps, walking + running distance, walking/running workouts (to fit the minutes to the user's pace). NEAT never writes to Health.
+- Local notifications only (no push server): evening reminder, goal and Joker alerts, NEAT's lines.
+- WidgetKit, with an App Group shared by the app and its widgets.
+- iCloud key-value storage in the user's own account: settings, goal history and streak start. No Health data in iCloud; the developer has no access.
+- A static public text file of NEAT's lines, downloaded once a day from our GitHub Pages site (https://castellanza-alt.github.io/StepTeller/neat/nasty/<language>/battute.json), only when the voice is Spicy or No mercy. A plain GET with no parameters, cookies or identifiers: no user data is sent. Without it, the lines inside the app are used.
+No servers that receive data, analytics, ads, AI services, sign-in or payment providers. No data is sent to the developer.
 
 4. REGIONAL DIFFERENCES
-Same in all regions, except language (10 localizations, English fallback) and default unit (miles in US/UK, km elsewhere; changeable in Settings).
+Same everywhere, except language (10 localizations, English fallback) and default unit (miles in US/UK, km elsewhere).
 
 5. REGULATED INDUSTRY / THIRD-PARTY MATERIAL
 Not applicable. Not a medical device; no third-party protected material; fonts under the SIL Open Font License.
 
-NEW IN 1.2
-- Goal & Joker alerts: local notifications (none 10 pm-8 am) and a one-time in-app pop-up. Switch: Settings > Notifications.
+NEW IN 1.3
+- NEAT has a voice, with three levels: Normal (silent, the app as before), Spicy (sarcasm, no swearing) and No mercy. The user chooses in the introduction (page 4) and in Settings > Voice, and can change it at any time.
+- No mercy is the default level: its lines contain swearing and playful insults aimed only at not walking enough. Declared in the age rating (frequent profanity or crude humor, 13+). The lines never refer to body, weight, appearance, health, age, gender or other personal traits. Choosing Normal turns the voice off completely.
+- With Spicy or No mercy, a heart in Home says a line about today's steps; tapping it gives another line. Lines also appear in the Joker pop-ups, the goal celebration and the notifications: a few local notifications a day, only between 10 am and 8 pm, none once the goal is reached (Settings > Voice > NEAT notifications: Few, Normal, Lots).
+- Lines are chosen on the device (file in section 3).
 - Christmas theme, only Dec 1-Jan 6 (not visible during review): snowy Home, holiday icon via setAlternateIconName (standard iOS alert), one gift Joker from Dec 25. Switch: Settings > Theme > Seasonal themes.
 
 6. IN-APP PURCHASES

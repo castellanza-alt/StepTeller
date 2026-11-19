@@ -66,3 +66,14 @@ nessun commit `[store…]`.
    - **per la prova vera con App Store Connect** serve un `[store-prova]` su main, che decide il Director. Non scrive
      nulla, ma vede la 1.2 in revisione.
 5. CHANGELOG non toccato: la sezione in cima è «su TestFlight, build 1.204.1» e questi file non sono nella build.
+6. **Revisione indipendente, corretto:**
+   - `[store]` poteva scrivere la dichiarazione 13+ sulla «App Information» della 1.2 in revisione. Ora:
+     - si scrive solo su un'App Information in preparazione;
+     - `[store]` della 1.3 si ferma subito se una versione precedente è ancora da Apple;
+     - `[store-prova]` resta libero.
+   - Il secondo tentativo con l'altra grafia parte solo se Apple contesta proprio quel valore, non per un record
+     bloccato.
+   - Se App Store Connect conosce la versione precedente, conta solo «in vendita», qualunque cosa dica il CHANGELOG
+     (per esempio con PENDING_DEVELOPER_RELEASE si rifiuta).
+   - App mancante: il messaggio chiaro, non un errore.
+   - Tutto riprovato senza rete con le risposte simulate.

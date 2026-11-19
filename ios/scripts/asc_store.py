@@ -77,7 +77,9 @@ LIVE_INFO = {'READY_FOR_DISTRIBUTION', 'READY_FOR_SALE', 'REPLACED_WITH_NEW_INFO
 # Version states: on sale (or on sale and replaced by a later one), and still with Apple.
 LIVE_VERSION = {'READY_FOR_DISTRIBUTION', 'READY_FOR_SALE', 'REPLACED_WITH_NEW_VERSION'}
 IN_REVIEW = {'WAITING_FOR_REVIEW', 'IN_REVIEW', 'PENDING_APPLE_RELEASE', 'PROCESSING_FOR_DISTRIBUTION',
-             'PROCESSING_FOR_APP_STORE'}
+             'PROCESSING_FOR_APP_STORE', 'ACCEPTED', 'PENDING_DEVELOPER_RELEASE'}
+# «App Information» that can be written: only while being prepared (never one with Apple or published)
+EDITABLE_INFO = {'PREPARE_FOR_SUBMISSION', 'READY_FOR_REVIEW', 'DEVELOPER_REJECTED', 'REJECTED'}
 SECRET_FIELDS = {'contactFirstName', 'contactLastName', 'contactPhone', 'contactEmail', 'copyright'}
 LIMITS = {'name': 30, 'subtitle': 30, 'promotionalText': 170, 'description': 4000}
 WHATS_NEW_LIMIT = 4000
@@ -107,10 +109,15 @@ def previous_published(version: str, sections, store_states: dict):
     if in_review:
         return (f"la {', '.join(in_review)} è ancora in revisione da Apple ({store_states[in_review[0]]}): "
                 f'la {version} si invia solo dopo la sua pubblicazione (D-046)')
+    on_store = store_states.get(previous['version'])
+    if on_store is not None:
+        # App Store Connect knows it: only «on sale» counts, whatever CHANGELOG.md says
+        if on_store in LIVE_VERSION:
+            return None     # if CHANGELOG.md is not updated yet, the store is the truth
+        return (f"su App Store Connect la {previous['version']} è {on_store}, non ancora in vendita: la {version} si "
+                f"invia solo dopo la sua pubblicazione (D-046)")
     if previous['state'] == 'pubblicata':
         return None
-    if store_states.get(previous['version']) in LIVE_VERSION:
-        return None     # published, CHANGELOG.md not updated yet: the store is the truth
     return (f"CHANGELOG.md dice «{previous['heading']}» e su App Store Connect la {previous['version']} è "
             f"{store_states.get(previous['version'], 'assente')}: la {version} si invia solo dopo la pubblicazione "
             f"della {previous['version']} (D-046). Quando è in vendita, aggiornare l'intestazione a «pubblicata il…»")
@@ -313,9 +320,11 @@ def sync_localizations(report, area, kind, parent, existing, wanted):
 
 
 def editable_app_infos(app_id):
+    """(being prepared, published). An «App Information» with Apple (in review, accepted, pending release) is in
+    neither: never written (T-032: the 1.3 rating must not land on the 1.2 in review)."""
     infos, _ = get_all(f'/v1/apps/{app_id}/appInfos')
-    live = lambda i: (i['attributes'].get('state') or i['attributes'].get('appStoreState')) in LIVE_INFO
-    return [i for i in infos if not live(i)], [i for i in infos if live(i)]
+    state = lambda i: i['attributes'].get('state') or i['attributes'].get('appStoreState')
+    return [i for i in infos if state(i) in EDITABLE_INFO], [i for i in infos if state(i) in LIVE_INFO]
 
 
 def app_info_section(report, app_id, metadata, version_exists):
@@ -395,14 +404,18 @@ def age_rating_section(report, info):
         try:
             update('ageRatingDeclarations', declaration['id'], changed)
         except asc.ApiError as error:
-            # the other accepted spelling of «frequent», if Apple refuses the first one
+            # the other accepted spelling of «frequent», only if Apple refuses that value (not a locked record)
             retry = {k: answers[k][1] for k in changed if k in answers and len(answers[k]) > 1
                      and changed[k] == answers[k][0]}
-            if error.status not in (409, 422) or not retry:
+            about_value = any(k in error.detail for k in retry) or 'ATTRIBUTE.INVALID' in error.detail
+            if error.status not in (409, 422) or not retry or not about_value:
                 raise
             report.note(area, f'Apple rifiuta {", ".join(f"{k}={changed[k]}" for k in retry)}: provo {retry}')
             changed.update(retry)
-            update('ageRatingDeclarations', declaration['id'], changed)
+            try:
+                update('ageRatingDeclarations', declaration['id'], changed)
+            except asc.ApiError as second:
+                raise second from error
         rating = get(f"/v1/appInfos/{info['id']}")['data']['attributes'].get('appStoreAgeRating')
         report.note(area, f'Classificazione calcolata da Apple dopo il salvataggio: {rating}')
         if rating not in allowed:
@@ -678,6 +691,20 @@ def store_prova():
 
 
 def store_applica():
+    # from 1.3 the age rating changes (13+): nothing is written while an earlier version is with Apple, so the new
+    # declaration can never reach it (T-032)
+    if age_profile(VERSION)[0]:
+        app = asc.app_record()
+        if not app:
+            raise Stop(f'App non trovata per il Bundle ID {asc.BUNDLE}')
+        versions, _ = get_all(f"/v1/apps/{app['id']}/appStoreVersions", {'filter[platform]': 'IOS', 'limit': 50})
+        busy = sorted(v['attributes'].get('versionString') for v in versions
+                      if (v['attributes'].get('appVersionState') or v['attributes'].get('appStoreState')) in IN_REVIEW
+                      and registro.version_tuple(v['attributes'].get('versionString')) < registro.version_tuple(VERSION))
+        if busy:
+            raise Stop(f"[store] della {VERSION} rifiutato: la {', '.join(busy)} è ancora da Apple; la scheda della "
+                       f'{VERSION} (con la classificazione 13+) si applica dopo la sua pubblicazione. '
+                       '[store-prova] si può lanciare (sola lettura)')
     report = Report(apply=True)
     try:
         sync(apply=True, report=report)
@@ -699,6 +726,8 @@ def store_invio():
                    f'Aggiornare l\'intestazione a «## {VERSION} — su TestFlight, build N»')
     # D-046: never while the version before is not published (read before anything else, nothing written)
     app = asc.app_record()
+    if not app:
+        raise Stop(f'App non trovata per il Bundle ID {asc.BUNDLE}')
     all_versions, _ = get_all(f"/v1/apps/{app['id']}/appStoreVersions", {'filter[platform]': 'IOS', 'limit': 50})
     states = {v['attributes'].get('versionString'): v['attributes'].get('appVersionState') or
               v['attributes'].get('appStoreState') for v in all_versions}

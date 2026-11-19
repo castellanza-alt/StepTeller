@@ -1,5 +1,5 @@
 # T-028 NASTY (1.3): testi dell'interfaccia, privacy e scheda dello store nelle lingue
-**Assegnato a:** Traduttore **Base:** `main` **Stato:** fatto 19/11/2026, PR da unire; interfaccia da inserire nel foglio quando T-027 aggiunge le righe
+**Assegnato a:** Traduttore **Base:** `main` **Stato:** fatto 19/11/2026, PR da unire; interfaccia consegnata in `localizzazione/nasty-interfaccia.json` (la importa il Developer, T-027)
 
 ## Perché
 William ha approvato il 19/11 i testi italiani di `docs/design/T-026-nasty-testi.md` (interfaccia §1, privacy §2,
@@ -35,8 +35,11 @@ Il più lungo ha 10 caratteri (ES, FR). Dubbi: DE «Bissig» (mordace) invece di
 «eccitato»); PT «Sem dó» è parlato, «Sem piedade» (11) è più comune ma più lungo; KO 무자비 è secco, l'alternativa
 독설 («lingua velenosa») suona meglio ma dice meno «senza pietà». Da provare sullo schermo dell'SE (T-027).
 
-### 2. Interfaccia (T-026 §1), da inserire nel foglio
-Le righe non ci sono ancora in `NEAT_testi_tradotti.xlsx` (T-027 non le ha aggiunte). Chiave = italiano. Sezione
+### 2. Interfaccia (T-026 §1)
+**Valido: `localizzazione/nasty-interfaccia.json`** (14 chiavi del foglio di T-027, 9 lingue, tutti nei limiti; kicker e
+titolo dell'introduzione in maiuscolo). Le tabelle sotto sono la prima stesura; nel JSON, per i limiti di 60
+caratteri: FR titolo «JE TE LE DIS GENTIMENT OU JE TE DIS LA VÉRITÉ ?», FR prima battuta «Désormais, je parle. Tu ne
+supportes pas ? Réglages › Voix.», DE prima battuta «Ab heute rede ich. Zu viel? Einstellungen › Stimme.». Sezione
 «Voce»: EN Voice, ES/PT Voz, FR Voix, DE Stimme, JA 口調, KO 말투, ZH 语气/語氣 (NEAT non ha audio, quindi in
 JA/KO/ZH «modo di parlare»). JA e KO: nell'introduzione e nella prima battuta parla NEAT, registro informale; la nota
 delle Impostazioni nel registro dell'app (です・ます, 해요체).

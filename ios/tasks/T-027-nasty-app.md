@@ -84,8 +84,9 @@ Impostazioni, una notifica).
 8. Testi: 14 righe nel foglio, lingue dal Traduttore (`localizzazione/nasty-interfaccia.json`, T-028), cataloghi
    rigenerati; controllati su SE DE, FR e JA (i tre segmenti ci stanno). Font JA/KO/ZH ridotti anche ai caratteri delle
    battute (`font_asia.py`), tutti coperti.
-9. Privacy: italiano T-026 §2 e inglese T-028 in `neat/privacy/index.html` (Jolly → Joker nella pagina inglese); data
-   19 novembre 2026, da cambiare se si vuole quella della pubblicazione.
+9. Privacy: italiano T-026 §2 e inglese T-028 (Jolly → Joker nella pagina inglese) **in attesa nel ramo
+   `task/T-027-privacy`, PR #57 «da unire quando la 1.3 viene pubblicata»**: il merge pubblica il sito e la 1.2 è in
+   revisione (Director). Qui `neat/privacy/index.html` resta come main. Data da mettere alla pubblicazione.
 10. Revisione indipendente: corretti orologi sempre accesi, riga del promemoria instabile, memoria persa tra roast e
     Home, scaricamento dove la voce è Normale e senza nuovo tentativo, catalogo vecchio nel widget, VoiceOver del
     cuore, riga dell'obiettivo spuria nell'introduzione, prima battuta segnata sotto un pop-up, permesso delle

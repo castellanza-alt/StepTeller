@@ -233,7 +233,9 @@ William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. 
 3. **A verbale**: ogni «domani comincio» finisce agli atti; al primo obiettivo NEAT chiude il fascicolo.
 
 ### Aperto
-- **Battute a sfondo sessuale sul divano: sì** (William, 19/11, «anche 16+»). Nel questionario di Apple si dichiarano
+- **Battute a sfondo sessuale: no** (William, 19/11, ha cambiato idea: «lasciamo stare le battute sul sesso e sullo
+  scopare»). Quelle dei §8 e §9 non si usano. L'età torna a dipendere solo dalle parolacce (13+). Testo precedente:
+  «sì, anche 16+». Nel questionario di Apple si dichiarano
   come temi maturi o allusivi; l'età calcolata va verificata alla compilazione (13+ o 16+).
 - **Notifiche roast** (William, 19/11): 4-5 al giorno tra le 10 e le 20, a orari non fissi. Da progettare.
 - **Battute aggiornabili senza App Store: sì** (William, 19/11): l'app scarica il catalogo dal sito di NEAT
@@ -241,7 +243,7 @@ William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. 
   per Apple da aggiornare. Da progettare.
 - **Catalogo:** le 100 di `T-021-nasty/battute-nasty-100.md` per William sono troppo morbide per il livello 3:
   diventano la base del livello 2 (tolte le parolacce). Il livello 3 riparte da `T-021-nasty/battute-nasty-duro.md`
-  (51 battute, 19/11), sul tono del §9. **Mai «zero passi»**: si dice «pochi», con `{passi}` (William).
+  (103 battute, 19/11, senza sesso), sul tono del §9. **Mai «zero passi»**: si dice «pochi», con `{passi}` (William).
 
 ## 9. Terzo giro (19/11): le tecniche del roast applicate
 Ricerca in `T-008-nasty/roast-ricerca.md` (tecniche da autori di roast; nessuna battuta sulla pigrizia trovata pronta:

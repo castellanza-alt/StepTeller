@@ -1,6 +1,8 @@
 # T-022 NASTY: progetto dell'app (prima del codice)
 
-**Director, 19/11/2026.** Da approvare da William. Regole: D-044. Carattere: `T-021-nasty-roast.md`. Battute
+**Director, 19/11/2026.** Approvato da William (D-045), poi corretto da D-046 (tutte le lingue) e **D-047**: il terzo
+livello in italiano si chiama «Senza pietà» ed è quello di serie per tutti, anche per chi aggiorna; niente avviso
+prima di attivarlo. Dove il testo sotto dice il contrario, vale D-047. Regole: D-044. Carattere: `T-021-nasty-roast.md`. Battute
 approvate: `T-021-nasty/catalogo/catalogo-approvato.md` (196: 137 NASTY, 59 Piccante). Nessun codice finché William
 non approva questo documento.
 

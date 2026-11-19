@@ -29,6 +29,15 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   mai durante la notte e mai doppia con il promemoria; Jolly guadagnato e usato: una notifica per evento e un pop-up
   alla prima apertura dopo l'evento, mai ripetuto. Si usano i meccanismi già presenti (consegna in sottofondo di Salute,
   widget, risveglio in sottofondo), Salute sempre in sola lettura, nessuna rete. Si possono spegnere in Impostazioni.
+- **D-047 Nome e livello di serie (19/11/2026, William).** «NASTY non lo userei in italiano, troviamo un'altra parola»:
+  in italiano il terzo livello si chiama **«Senza pietà»** (scelta sua tra quattro proposte); i livelli sono Normale ·
+  Piccante · Senza pietà. «NASTY» resta il nome interno del progetto e dei file; nelle altre lingue il nome lo
+  propone il Traduttore. «Ho cambiato idea: l'impostazione di default deve essere la più volgare, non lo standard»:
+  **di serie l'app parte su Senza pietà**, anche per chi aggiorna dalla 1.2, senza domande (scelta sua: «Tutti al
+  livello massimo»; il Director ha segnalato il rischio di recensioni negative e notifiche spente). Corregge D-044 e
+  D-045 su questo punto. Ne segue: niente avviso prima del livello massimo; nell'introduzione la scelta resta, già
+  puntata su Senza pietà; la prima battuta dopo l'aggiornamento dice dove si cambia livello (Impostazioni › Voce);
+  screenshot e testi dello store da rifare, perché il cuore e le battute si vedono di serie.
 - **D-046 NASTY in tutte le lingue, dopo la 1.2 (19/11/2026, William).** «Prima di pubblicare due cose: 1. aspettiamo
   che la 1.2 sia pubblicata. E poi facciamo le traduzioni anche nelle altre lingue (usiamo ChatGPT).» Corregge D-045:
   la 1.3 non esce solo in italiano ma nelle 10 lingue, e non si invia ad Apple finché la 1.2 non è pubblicata. Le

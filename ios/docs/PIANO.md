@@ -73,6 +73,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-029 Collaudo della 1.3 (voce di NEAT) | QA | `qa/T-029` | fatto 19/11 (#59): nessun bloccante, 5 minori corretti in T-031 |
 | T-030 Screenshot dello store per la 1.3 | Designer | `design/T-030-screenshot` | fatto 19/11 (#58) |
 | T-031 Correzioni dal collaudo della 1.3 | Developer | `task/T-031-correzioni` | fatto 19/11 (#60) |
+| T-032 Scheda dello store pronta per la 1.3 (età 13+, note per il revisore), senza inviare | Developer | `task/T-032-store` | assegnato 19/11 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

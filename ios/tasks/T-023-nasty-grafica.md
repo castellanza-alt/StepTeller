@@ -53,3 +53,20 @@ Niente codice dell'app, niente testi nuovi (le battute sono quelle approvate), n
 etichetta «VOCE»); sono nel §7 della specifica. Restano da decidere anche i numeri di Poche e Tante.
 
 **Higgsfield.** 1 generazione da 1,5 crediti. Saldo 13,5 → 12.
+
+**19/11/2026, Designer, secondo giro.** William: «A me piacciono molto». I due cuori sono approvati e non cambiano.
+Ha chiesto più animazione.
+
+- **Livelli.** Ogni cuore è diviso in livelli che, sovrapposti, rifanno il disegno approvato: Piccante in punte,
+  corpo e lucido; NASTY in schegge, corna, corpo, crepe e lucido. Sono in `docs/design/T-023-nasty/livelli/`, 11 SVG,
+  di giorno e di notte.
+- **Tavola 2.** È rifatta: i due cuori affiancati si possono provare sulla tela.
+  - A riposo: un doppio colpo. Piccante è morbido e le punte respirano. NASTY è nervoso e le crepe si accendono a ogni
+    battito.
+  - Quando parla: si gonfia e spara il fumetto. NASTY intanto trema e lancia le schegge.
+  - Quando lo tocchi, le reazioni girano a rotazione: Piccante ne ha 3 (riccio, si scansa, sbuffa), NASTY 4 (si
+    spacca, cornata, si gira di scatto, crepe che lampeggiano).
+  - Con più tocchi entro 4 s si arrabbia di più.
+  - Riduci movimento: solo dissolvenze.
+- **Specifica.** Il §3 è riscritto con tempi, curve, livelli e aptica per ogni animazione, tutto fattibile in SwiftUI.
+- **Testi.** I testi di T-026 §1 sono sulla tela (tavole 5 e 6) e nella specifica (§7).

@@ -2,8 +2,8 @@
 
 **Designer, 19/11/2026.** Da approvare da William sulla tela:
 https://claude.ai/artifact/AVJ8rdN4Jpd6nAbZzzcHeF (7 tavole). Progetto: `T-022-nasty-progetto.md`; regole: D-044,
-D-045; battute: `T-021-nasty/catalogo/catalogo-approvato.md`. Nessun testo nuovo: le battute sono quelle approvate; i
-pochi testi che mancano sono in §7.
+D-045; battute: `T-021-nasty/catalogo/catalogo-approvato.md`. Nessun testo nuovo: le battute sono quelle approvate;
+gli altri testi dell'interfaccia sono quelli di `T-026-nasty-testi.md` §1. I cuori sono approvati da William (19/11).
 
 Misure in punti della tela della Home (`Manga.frameWidth` 390 × 844, `Manga.artTop` 54), come in `HomeView`. Colori:
 token di `MangaPalette` (giorno `paper` #FFFFFF, `ink` #141414, `red` #E5231B; notte `paper` #0E1430, `ink` #E2EAFF,
@@ -45,23 +45,110 @@ token di `MangaPalette` (giorno `paper` #FFFFFF, `ink` #141414, `red` #E5231B; n
   - Il fumetto copre una parte della gamba, come il riquadro «FATTO!»: è voluto, il fondo `paper` lo rende leggibile.
 - Quando cambia la battuta, il fumetto si ridimensiona all'altezza nuova (1–3 righe). Il cuore resta fermo.
 
-## 3. Come si muove (tavola 2, che si può provare)
-- **Battito lento:** un doppio battito ogni 2,4 s (scala 1 → 1,06 → 1 → 1,035 → 1 nel primo 32% del ciclo, poi
-  fermo), attorno al centro. Solo con l'app in primo piano.
-- **Sussulto al cambio di battuta:**
-  - il cuore, in 0,4 s: (1,16 × 0,88, −6°) → (0,94 × 1,08, +4°) → (1,04, −2°) → fermo;
-  - il fumetto, dopo 0,08 s: nasce dalla coda in 0,28 s (scala 0,5 → 1,06 → 1, opacità 0 → 1).
-- **Tocco:**
-  - il cuore, in 0,5 s: (0,86 × 1,1) → (1,14 × 0,9) → (0,97 × 1,03) → fermo;
-  - un anello rosso tratteggiato (diametro da 0,6 a 1,35 volte quello del cuore) si allarga e sparisce;
-  - aptica leggera;
-  - esce una battuta «Se tocchi il cuore»; un altro tocco entro 3 s non la cambia.
-- **Riduci movimento:**
-  - niente battito, sussulto né anello;
-  - la battuta nuova entra in dissolvenza (0,2 s);
-  - al tocco il cuore lampeggia (opacità 0,55 → 1, 0,2 s);
-  - l'aptica resta.
-- Accessibilità: il cuore è un pulsante. Etichetta: il testo della battuta. Suggerimento: da scrivere (§7).
+## 3. Le animazioni (tavola 2, che si può provare)
+William, 19/11: «vorrei che fossero fatti animati in modo tale che il cuore possa battere quando è presente e anche
+avere delle animazioni interessanti quando viene toccato o quando parla». I disegni approvati non cambiano: sono
+divisi in livelli che, sovrapposti, rifanno esattamente `cuore-*.svg`.
+
+### 3.1 Livelli (`T-023-nasty/livelli/`)
+Tutti hanno la stessa tela, viewBox 2048 e 256 × 256 pt, quindi si impilano senza spostamenti. Le varianti `-notte`
+hanno il bordo #E2EAFF, gli altri livelli valgono per giorno e notte. Ordine dal basso:
+
+| Livello | Piccante | NASTY |
+|---|---|---|
+| 1 | `piccante-punte-giorno/notte`: corona di punte con l'anello nero; il buco sta sotto il corpo | `nasty-schegge-giorno/notte`: le 5 schegge staccate |
+| 2 | `piccante-corpo`: cuore, bordo rosso, ombra | `nasty-corna-giorno/notte`: corna più la fascia esterna della sagoma |
+| 3 | `piccante-lucido`: le due lune bianche | `nasty-corpo`: cuore nero e contorno rosso, senza crepe né lucido |
+| 4 | — | `nasty-crepe`: solo le crepe rosse |
+| 5 | — | `nasty-lucido`: le due lune bianche |
+
+In SwiftUI ogni livello è un `Image` vettoriale nello stesso frame quadrato (`ZStack`), con le sole trasformazioni
+`scaleEffect`, `rotationEffect`, `offset`, `opacity`, `brightness` e `shadow`. Niente sfocature grandi, video o
+librerie: a 120 Hz basta un `drawingGroup()` sul cuore intero. Le animazioni a tappe sono `keyframeAnimator`; il battito
+è `phaseAnimator`, oppure `TimelineView(.animation)` con una funzione del tempo. L'origine di tutte le trasformazioni
+è il centro del quadrato, salvo dove è scritto diverso. Nella tavola il cuore è da 200 pt e gli spostamenti in pt sono
+pensati per quella misura: in Home (64 pt) vanno scalati per 64/200.
+
+`k` è la rabbia: vale 1, poi 1,35 al secondo tocco e 1,7 al terzo, se i tocchi arrivano entro 4 s l'uno dall'altro.
+Moltiplica gli spostamenti e le rotazioni del tocco. Dopo 4 s senza tocchi torna a 1.
+
+### 3.2 A riposo (sempre, con l'app in primo piano)
+- **Piccante:**
+  - battito: ciclo di 1,2 s (50 al minuto), `easeInOut`. Scala 1 → 1,07 al 10% → 1 al 20% → 1,04 al 30% → 1 al 42%,
+    poi fermo;
+  - punte: respirano in 2,4 s, `easeInOut`, in modo continuo. Scala 1 → 1,06 e rotazione 0 → +3° a metà ciclo, poi
+    ritorno; il ciclo è indipendente dal battito;
+  - arrabbiato (`k` > 1): ciclo di 0,9 s.
+- **NASTY:**
+  - battito: ciclo di 0,85 s (70 al minuto), lineare, più secco. Scala 1 → 1,09 all'8% (con `offset` x −1,5) → 0,99
+    al 15% (x +1,5) → 1,06 al 23% (x −1) → 1 al 33%, poi fermo;
+  - crepe: si accendono con ogni colpo. `brightness` +0,9 e `shadow` #FF3B30 di raggio 7 all'8%, di nuovo 0,6 e
+    raggio 5 al 23%, spente al 40%;
+  - arrabbiato: ciclo di 0,6 s e crepe sempre accese, che pulsano tra +0,7 e +1,1 di `brightness`.
+
+### 3.3 Quando parla (esce o cambia una battuta): 0,7 s
+Si legge come «sta parlando lui»: il cuore si carica e spara il fumetto.
+- **Cuore Piccante,** curva `easeOut`: (0,9 × 1,08) al 15% → 1,18 al 35% → 0,95 con x −4 al 50% → 1,03 al 70% →
+  fermo. Le punte scattano a 1,22 e −4° al 30%, poi tornano.
+- **Cuore NASTY,** curva `easeOut`:
+  - 0,88 × 1,1 al 15%;
+  - dal 30% al 62% trema di rabbia: scala da 1,2 a 1,04, rotazione ±3° e x ±2 che si alternano ogni 6% del tempo;
+  - 0,97 al 72%, poi fermo.
+- **Crepe di NASTY:** `brightness` +1,2 con `shadow` di raggio 10 dal 30% al 70%.
+- **Schegge di NASTY:** volano via (scala 1,7, +25°, opacità 0) tra il 30% e il 70%; poi ricompaiono al loro posto
+  (scala 0,6 → 1, opacità 0 → 1).
+- **Il fumetto** parte dal centro del cuore:
+  - fino al 32% resta nascosto, a scala 0,2, dentro il cuore;
+  - al 55% è al suo posto a 1,08, con un piccolo superamento in avanti (+6, −4);
+  - 0,97 al 70%, poi fermo;
+  - curva `timingCurve(0.2, 0.9, 0.3, 1.2)`.
+- **Aptica:** Piccante `.soft`. NASTY `.rigid` al 30% e di nuovo al 50%.
+
+### 3.4 Quando lo tocchi
+Una reazione a ogni tocco, a rotazione. Dopo la reazione, a 0,3 s, entra una battuta «Se tocchi il cuore» (comparsa
+0,25 s: scala 0,6 → 1). Le reazioni della prova non dipendono dal livello di rabbia; dipende solo `k`.
+- **Piccante** (aptica `.impact(.medium)`; con `k` 1,7 `.impact(.heavy)`):
+  1. **Riccio,** 0,6 s, molla `timingCurve(0.2, 1.6, 0.4, 1)`: le punte scattano fuori a 1 + 0,3·`k` al 12%,
+     restano a 1 + 0,27·`k` fino al 40%, poi rientrano. Il corpo si rannicchia a 0,9.
+  2. **Si scansa,** 0,6 s, molla `timingCurve(0.3, 1.4, 0.5, 1)`: tutto il cuore scarta a destra di 30·`k` e ruota
+     di +12°·`k` al 18%, resta così fino al 50%, rimbalza a (−3, −2°) all'80%, poi torna.
+  3. **Sbuffa,** 0,7 s, `easeOut`: si gonfia a 1 + 0,12·`k` al 30%, si sgonfia a 0,94 al 45%, poi 1,02 e fermo.
+     Dalla gobba escono tre sbuffi: ovali 30 × 24 pt con fondo `paper` e bordo `ink` 2,5. Compaiono al 55% e salgono
+     di 70 pt allargandosi (−40, 0, +40) mentre spariscono.
+- **NASTY** (aptica `.impact(.heavy)`; la cornata ha in più `.rigid` all'impatto):
+  1. **Si spacca e si ricompone,** 0,65 s, molla `timingCurve(0.3, 1.5, 0.5, 1)`. Corpo, crepe e lucido sono
+     disegnati due volte, ognuna con una maschera a zig-zag lungo la crepa centrale (punti in % del lato: 52/0, 49/22,
+     55/38, 46/55, 53/72, 50/100).
+     - Metà sinistra: (−8·`k`, +3) e −6°·`k` al 15%, così fino al 45%, poi (+1, 0) e +1° al 70%, poi ferma.
+     - Metà destra: lo stesso, a specchio.
+     - Le crepe lampeggiano: `brightness` +1,2.
+  2. **Cornata,** 0,7 s, `timingCurve(0.4, 0, 0.2, 1)`:
+     - carica: −14°·`k` e (−6, +4) al 25%;
+     - colpo: +18°·`k` e (+14·`k`, −10) al 40%;
+     - due scosse: 14° al 48%, 18° al 56%;
+     - ritorno.
+  3. **Si gira di scatto,** 0,8 s, `timingCurve(0.2, 0.8, 0.3, 1)`:
+     - al 12% si specchia (`scaleEffect(x: −1)`), ruota di −6° e si sposta di x +8; la luce bianca passa dall'altra
+       parte, quindi si legge come «girato di spalle»;
+     - resta girato con un tremito (−4°/−7°) fino all'80%;
+     - all'88% torna dritto con un piccolo 1,05;
+     - fermo al 100%.
+  4. **Crepe che lampeggiano,** 0,7 s, lineare: tre lampi (`brightness` +1,4 e `shadow` di raggio 12 al 10%, al 40% e
+     al 70%), con un sobbalzo 1,06 → 0,98 → 1.
+- **Più tocchi, più rabbia.** Si contano i tocchi degli ultimi 4 s:
+  - secondo tocco: `k` 1,35;
+  - terzo tocco: `k` 1,7, battito arrabbiato (§3.2), aptica più forte.
+
+### 3.5 Riduci movimento
+Solo dissolvenze:
+- niente battito, respiro, schegge, maschere né spostamenti;
+- battuta nuova: il fumetto entra in dissolvenza in 0,2 s;
+- tocco: il cuore lampeggia (opacità 0,55 → 1, 0,2 s), poi la battuta entra in dissolvenza;
+- l'aptica resta.
+
+### 3.6 Accessibilità
+Il cuore è un pulsante. Etichetta: «NEAT. Tocca per un'altra battuta.» (T-026). Il testo della battuta si legge come
+valore.
 
 ## 4. Introduzione (tavola 5)
 - **Pagina nuova** dopo quella dell'obiettivo: le pagine diventano 5. Di serie è scelto Normale.
@@ -79,7 +166,7 @@ token di `MangaPalette` (giorno `paper` #FFFFFF, `ink` #141414, `red` #E5231B; n
   - Riquadro come i pop-up dei Jolly: largo 340, bordo 3, ombra `red` (6, 6), ruotato −2°, con il velo `paper` al 72%.
   - Dentro: il cuore NASTY da 84, poi «Parolacce e insulti. L'hai voluto tu.» in Anton 30, con la seconda frase in
     `red`.
-  - Due tasti: uno a bordo, uno rosso (§7).
+  - Due tasti: «Annulla» a bordo, «NASTY» rosso.
   - «Annulla» torna alla pagina con Piccante scelto.
 
 ## 5. Impostazioni › Voce (tavola 6)
@@ -88,7 +175,8 @@ token di `MangaPalette` (giorno `paper` #FFFFFF, `ink` #141414, `red` #E5231B; n
 - Sotto: il controllo a tre Normale · Piccante · NASTY, lo stesso del Tema.
 - Con Piccante o NASTY, sotto una linea, la manopola **Poche · Normali · Tante** (di serie Normali) con la sua
   etichetta. In Normale la manopola non compare.
-- Nota grigia sotto la scheda (§7).
+- Nota grigia sotto la scheda: «Piccante: sarcasmo. NASTY: parolacce e insulti. NEAT commenta i tuoi passi
+  nell'app e nelle notifiche.»
 - Passare a NASTY dalle Impostazioni mostra lo stesso avviso dell'introduzione.
 
 ## 6. Gli altri punti dove parla (tavola 7 e tavola 6)
@@ -124,14 +212,14 @@ Ho misurato con Anton e numeri realistici: 3.240 passi, 10.000 di obiettivo, 6.7
 Nessuna battuta va scartata per lo spazio. Con numeri più lunghi (passi a 5 cifre, serie oltre 100) può aggiungersi una
 riga solo dove già c'è margine.
 
-## 7. Testi che mancano (da scrivere, Director e William)
-1. I due tasti dell'avviso di NASTY. Sulla tela la proposta è «Annulla» e «NASTY».
-2. L'etichetta della manopola. Sulla tela: «Notifiche di NEAT».
-3. La nota sotto la sezione Voce. Sulla tela c'è una bozza presa da T-022.
-4. Il suggerimento di VoiceOver sul cuore, per esempio «Tocca per un'altra battuta».
-5. L'etichetta rossa «VOCE» dell'introduzione, se il nome della sezione non va bene anche lì.
+## 7. Testi dell'interfaccia
+Sono quelli di `T-026-nasty-testi.md` §1, raccolti dal Director, e sono già sulla tela:
+- avviso: tasti «Annulla» · «NASTY»;
+- sezione «Voce», con la sua nota;
+- manopola «Notifiche di NEAT» · «Poche» · «Normali» · «Tante», cioè al giorno NASTY 2 · 4–5 · 7 e Piccante 1 · 1–2 · 3;
+- VoiceOver del cuore.
 
-Poche e Tante: quante notifiche al giorno è una decisione del Director (Normali = T-022).
+L'etichetta rossa dell'introduzione riprende «Voce».
 
 ## 8. Higgsfield
 Una sola generazione: job `098efe47`, `nano_banana_2_1` 1k, 1,5 crediti. Saldo verificato con `balance`: 13,5 → 12.

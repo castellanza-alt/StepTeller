@@ -25,3 +25,22 @@ Solo SSD: screenshot pesanti in `/Volumes/SSD/Temp/NEAT/`, cancellati a fine com
 Non unire, nessuna build TestFlight, non cambiare i testi. Non scrivere a William.
 
 ## Esito
+**Developer, 19/11/2026** (ramo `task/T-020-riquadri`, su `main` cdbf076 con le traduzioni #41)
+- Verifica: Simulatore Debug su iPhone SE e 17 Pro Max, 10 lingue, cataloghi di `main` cdbf076. Casi: pop-up Jolly
+  usato con 0 Jolly (targhetta più lunga, «JOLLY FINITI…»), guadagnato, regalo; festa dell'obiettivo; Impostazioni;
+  widget. Testo normale e testo Accessibilità più grande (AX5) per Impostazioni, widget e pop-up.
+- Unico testo fuori dal riquadro con i testi attuali: in **giapponese** il titolo del regalo «おまもりのプレゼント！»
+  usciva a destra del pannello (il «！» era tagliato), su SE e Pro Max. Le altre lingue stavano dentro, alcune a
+  pochi punti dal bordo (ES «¡COMODÍN DE REGALO!», DE «JOKER EINGESETZT»).
+- Con il testo più grande: nelle Impostazioni l'etichetta dell'ora del promemoria si spezzava a metà parola (FR
+  «Heur/e», DE «Uhr-/zeit»); i segmenti di Tema e Unità a quella misura sono troppo stretti per i nomi interi. I testi
+  dei pop-up, della festa e del widget hanno misura fissa (Anton) e non cambiano con il testo più grande.
+- Correzione, uguale per tutte le lingue: titolo e targhetta dei pop-up (una riga) si riducono fino al 60/70% per
+  stare nel pannello, lasciando 14 pt a destra per l'inclinazione; le frasi vanno a capo fino a 3 righe prima di
+  ridursi; nella festa titolo, targhetta e serie si riducono se superassero 330 pt. Nelle Impostazioni, alle misure
+  di Accessibilità, l'ora va sotto l'etichetta e Tema/Unità diventano un menu con i nomi interi. Testi invariati.
+- Opzione solo Debug `-stepteller.debugPopupJolly N` per fotografare il pop-up con N Jolly (0 = targhetta più lunga).
+- Nessun testo da far accorciare al Traduttore. Screenshot in `tasks/T-020/` (1 e 2 prima/dopo, 3–5 dopo, 10 lingue).
+- 117 test verdi, Debug e Release OK, revisione indipendente: nessun errore; applicato il suo suggerimento
+  (VoiceOver non legge due volte «Ora» quando l'etichetta va sopra).
+

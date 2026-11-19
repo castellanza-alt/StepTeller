@@ -38,7 +38,9 @@ struct GoalCelebration: View {
             }
 
             VStack(spacing: 18) {
-                AntonText(L10n.text("party.title"), 30, tracking: 0.02)
+                // one line each, shrinking if a language needs more than the width (T-020)
+                AntonText(L10n.text("party.title"), 30, tracking: 0.02, minScale: 0.6)
+                    .frame(maxWidth: 330)
                     .manga(rotate: -5, skew: -10)
                 ZStack {
                     KineticLines.star(cx: 160, cy: 90, points: 16, outer: 92, inner: 62, rotation: 0.1)
@@ -58,13 +60,15 @@ struct GoalCelebration: View {
                         .onChange(of: f) { _, f in sparkOrigin = CGPoint(x: f.midX, y: f.midY) }
                 })
                 TagText(text: L10n.format("party.of", LocalFormat.integer(goal)), size: 18, tracking: 0.14,
-                        foreground: c.paper, background: c.ink)
+                        foreground: c.paper, background: c.ink, minScale: 0.7)
+                    .frame(maxWidth: 330)
                     .manga(rotate: -3, skew: -10)
                 if streak > 0 {
                     HStack(spacing: 6) {
                         FlameIcon(kind: .streak).frame(width: 22, height: 27)
-                        AntonText(L10n.format("party.streak", streak), 22, tracking: 0.04)
+                        AntonText(L10n.format("party.streak", streak), 22, tracking: 0.04, minScale: 0.7)
                     }
+                    .frame(maxWidth: 330)
                     .manga(rotate: -3, skew: -8)
                 }
             }

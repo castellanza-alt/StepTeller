@@ -64,7 +64,14 @@ struct JollyPopup: View {
     private var earned: Bool { item.kind != .used }
     private var gift: Bool { item.kind == .gift }
     private var streak: Int { item.streak }
-    private var jolly: Int { item.jolly }
+    private var jolly: Int {
+        #if DEBUG
+        // Simulator checks of the longest tag (T-020): `-stepteller.debugPopupJolly 0` shows «no Jollies left».
+        if let n = UserDefaults.standard.object(forKey: "stepteller.debugPopupJolly") as? NSNumber { return n.intValue }
+        if let s = UserDefaults.standard.string(forKey: "stepteller.debugPopupJolly"), let n = Int(s) { return n }
+        #endif
+        return item.jolly
+    }
 
     var body: some View {
         ZStack {
@@ -113,8 +120,11 @@ struct JollyPopup: View {
             VStack(alignment: .leading, spacing: 0) {
                 // extra top margin: the slanted title rises to the right, where the panel's top edge drops (T-013)
                 Color.clear.frame(height: Self.titleRoom)
+                // every text in the panel stays inside it, in every language (T-020): one-line titles and tags
+                // shrink to the width left by the slant, sentences go to a third line before shrinking
                 AntonText(L10n.text(gift ? "jolly.gift.title" : earned ? "jolly.earned.title" : "jolly.used.title"), 30,
-                          tracking: 0.02)
+                          tracking: 0.02, minScale: 0.6)
+                    .padding(.trailing, Self.slantRoom)
                     .manga(rotate: -5, skew: -10)
                 HStack(spacing: gift ? 6 : 10) {
                     flameIcon
@@ -132,7 +142,8 @@ struct JollyPopup: View {
                     sentence(L10n.format("jolly.used.saved", streak), color: c.red)
                         .padding(.top, 2)
                 }
-                TagText(text: tag, size: 16, tracking: 0.1, foreground: c.paper, background: c.ink)
+                TagText(text: tag, size: 16, tracking: 0.1, foreground: c.paper, background: c.ink, minScale: 0.7)
+                    .padding(.trailing, Self.slantRoom)
                     .manga(rotate: -3, skew: -10)
                     .padding(.top, 12)
                 if earned {
@@ -188,13 +199,13 @@ struct JollyPopup: View {
             })
     }
 
-    /// Anton 20, at most 2 lines.
+    /// Anton 20, at most 3 lines.
     private func sentence(_ text: String, color: Color) -> some View {
         Text(text)
             .font(.antonText(20))
             .tracking(20 * TitleFont.tracking(0.02))
             .foregroundStyle(color)
-            .lineLimit(2)
+            .lineLimit(3)
             .minimumScaleFactor(0.8)
             .fixedSize(horizontal: false, vertical: true)
     }
@@ -211,6 +222,8 @@ struct JollyPopup: View {
 
     /// Room above the title inside the panel, so the rotated title never touches the top edge.
     static let titleRoom: CGFloat = 16
+    /// Room on the right of the one-line texts: rotated and skewed, they reach further right than their frame.
+    static let slantRoom: CGFloat = 14
 
     private static let rays = KineticLines.rays(cx: 195, cy: 380, count: 90, innerMin: 150, innerMax: 230, outer: 700,
                                                 seed: 7, redEvery: 7)

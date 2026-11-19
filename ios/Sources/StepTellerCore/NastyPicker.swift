@@ -205,15 +205,17 @@ public enum NastyPicker {
     /// - `excluding`: placeholders never said, because the place shows that number already (the Jolly tag of the
     ///   pop-up, the minutes of the reminder).
     /// - `notSaying`: texts the line must not repeat, because the place shows them already (the pop-up's title);
-    ///   compared without case, accents and punctuation.
+    ///   compared without case, accents and punctuation. Translations reword titles: `repeating` finds the lines on
+    ///   the Italian reference, and `excludingIDs` leaves them out in every language (ids are shared).
+    /// - `excludingIDs`: lines never said here.
     public static func pick(_ catalog: NastyCatalog, level: NastyLevel, moment: NastyMoment, memory: NastyMemory,
                             avoiding: Set<NastyPlaceholder> = [], excluding: Set<NastyPlaceholder> = [],
-                            notSaying: [String] = [], allowRecent: Bool = true,
+                            excludingIDs: Set<String> = [], notSaying: [String] = [], allowRecent: Bool = true,
                             format: (Int) -> String = ItalianFormat.integer,
                             using rng: inout some RandomNumberGenerator) -> NastyQuote? {
         let shown = notSaying.map(plain).filter { !$0.isEmpty }
         let all = candidates(catalog, level: level, moment: moment).filter { line in
-            line.placeholders.isDisjoint(with: excluding)
+            !excludingIDs.contains(line.id) && line.placeholders.isDisjoint(with: excluding)
                 && !shown.contains { plain((line.titolo ?? "") + " " + line.testo).contains($0) }
         }
         guard !all.isEmpty else { return nil }
@@ -233,6 +235,14 @@ public enum NastyPicker {
         guard allowRecent, let top = tiers.first else { return nil }
         let line = preferred(top).max { (recent.firstIndex(of: $0.id) ?? .max) < (recent.firstIndex(of: $1.id) ?? .max) }!
         return quote(line, values: moment.values, format: format)
+    }
+
+    /// Lines of `catalog` (the Italian reference) that repeat one of `texts`: their ids, to leave out in any language.
+    public static func repeating(_ texts: [String], in catalog: NastyCatalog) -> Set<String> {
+        let shown = texts.map(plain).filter { !$0.isEmpty }
+        return Set(catalog.battute.filter { line in
+            shown.contains { plain((line.titolo ?? "") + " " + line.testo).contains($0) }
+        }.map(\.id))
     }
 
     /// Which lines come first: the rarer the event, the higher (T-031: record, then twice the goal, then the last

@@ -91,12 +91,12 @@ enum NastyVoice {
     /// the lines seen: it changes during the day, and the line with it.
     /// `excluding`, `notSaying`: what the notification says already (T-031).
     private static func line(_ moment: NastyMoment, purpose: String, day: String, excluding: Set<NastyPlaceholder> = [],
-                             notSaying: [String] = []) -> NastyQuote? {
+                             excludingIDs: Set<String> = [], notSaying: [String] = []) -> NastyQuote? {
         let level = level
         guard level != .normale, let catalog else { return nil }
         var rng = SeededRandom(seed: SeededRandom.seed("voice.\(purpose).\(day)"))
         return NastyPicker.pick(catalog, level: level, moment: moment, memory: NastyMemory(),
-                                excluding: excluding, notSaying: notSaying,
+                                excluding: excluding, excludingIDs: excludingIDs, notSaying: notSaying,
                                 format: LocalFormat.integer, using: &rng)
     }
 
@@ -139,10 +139,25 @@ enum NastyVoice {
         case .jollyEarned: .jollyEarned
         case .jollyUsed: .jollyUsed
         }
-        // never the notification's title again («Jolly usato» / «Jolly usato. Ieri hai fatto schifo.»)
+        // never the notification's title again («Jolly usato» / «Jolly usato. Ieri hai fatto schifo.»), in any language
+        let key: String? = switch event.kind {
+        case .goalReached: "notif.goal.title"
+        case .jollyEarned: "notif.jollyEarned.title"
+        case .jollyUsed: "notif.jollyUsed.title"
+        }
         guard let quote = line(NastyMoment.of(trigger, day: today), purpose: "event." + event.id, day: event.day,
+                               excludingIDs: key.map { repeatingTitle($0, table: L10n.widget) } ?? [],
                                notSaying: [base.title]) else { return base }
         return ReminderContent(title: base.title, body: quote.text)
+    }
+
+    /// Lines that repeat a title (key of the sheet), found on the Italian catalog with the Italian title: the
+    /// translations reword titles («NEUER JOKER!» / «Joker verdient…»), the ids are the same in every language.
+    static func repeatingTitle(_ key: String, table: String? = nil) -> Set<String> {
+        guard let italian = library.catalogs[NastyLibrary.reference],
+              let path = Bundle.main.path(forResource: NastyLibrary.reference, ofType: "lproj"),
+              let bundle = Bundle(path: path) else { return [] }
+        return NastyPicker.repeating([bundle.localizedString(forKey: key, value: nil, table: table)], in: italian)
     }
 
     /// The reminder says minutes, goal and steps left by itself («… per arrivare a 10.000 (mancano 6.535)»): its line

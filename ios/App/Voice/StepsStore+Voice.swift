@@ -19,7 +19,11 @@ extension StepsStore {
     }
 
     /// Steps really read from Health (not «no data»): only then do the notifications speak about them.
-    var hasReadSteps: Bool { origin == .health && !showsNoDataWarning }
+    /// Before the first read of this launch, the count saved today by a real read counts (T-031: not the empty state).
+    var hasReadSteps: Bool {
+        guard origin == .health, !showsNoDataWarning else { return false }
+        return lastUpdate != nil || SharedStore.cachedStepsToday(now: Date()) != nil
+    }
 
     /// Today as the voice sees it (`AppClock`: `-stepteller.debugNow` moves the voice's hours too).
     func voiceDay(now: Date = AppClock.now(), steps: Int? = nil, goal: Int? = nil) -> NastyMoment.Day {
@@ -42,8 +46,9 @@ extension StepsStore {
     /// The bubble with Home on screen (a line counts as seen only when it shows): the line stays or changes
     /// (`NastyBubble.home`); when it comes or changes the heart speaks. The first line after the update wins once.
     func updateHomeLine(now: Date = AppClock.now()) {
-        // a tap's line stays its few seconds (T-031): then the line of the situation comes back
-        if let until = heartLineUntil, Date() < until { return }
+        // a tap's line stays its few seconds (T-031): then the line of the situation comes back (at once if the
+        // level changed)
+        if let until = heartLineUntil, Date() < until, heartLineLevel == voice { return }
         heartLineUntil = nil
         let level = voice
         guard level != .normale, let catalog = NastyVoice.catalog, !showsNoDataWarning, goal > 0 else {
@@ -86,12 +91,14 @@ extension StepsStore {
         homeQuote = result.quote
         let until = Date().addingTimeInterval(Self.heartLineSeconds)
         heartLineUntil = until
+        heartLineLevel = level
         heartLineTask?.cancel()
         heartLineTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(Self.heartLineSeconds))
             guard !Task.isCancelled, let self, self.heartLineUntil == until else { return }
             self.heartLineUntil = nil
-            withAnimation(.easeInOut(duration: 0.25)) { self.updateHomeLine() }
+            // Home asks again, with its own checks (on screen, not covered)
+            self.homeLineRequests += 1
         }
     }
 
@@ -133,13 +140,17 @@ extension StepsStore {
     // MARK: the other places (T-023 §6)
 
     /// `excluding` and `notSaying`: what the place shows already (T-031), never repeated by the line.
-    private func say(_ moment: NastyMoment, excluding: Set<NastyPlaceholder> = [], notSaying: [String] = []) -> NastyQuote? {
+    /// `title`: key of the place's title, never repeated (in the app's language, and by id from the Italian one).
+    private func say(_ moment: NastyMoment, excluding: Set<NastyPlaceholder> = [], title: String? = nil) -> NastyQuote? {
         let level = voice
         guard level != .normale, let catalog = NastyVoice.catalog else { return nil }
         var memory = SharedStore.nastyMemory
         var rng = SystemRandomNumberGenerator()
+        let shown = title.map { [L10n.text($0)] } ?? []
+        let ids = title.map { NastyVoice.repeatingTitle($0) } ?? []
         guard let quote = NastyPicker.pick(catalog, level: level, moment: moment, memory: memory, excluding: excluding,
-                                           notSaying: notSaying, format: LocalFormat.integer, using: &rng) else { return nil }
+                                           excludingIDs: ids, notSaying: shown, format: LocalFormat.integer,
+                                           using: &rng) else { return nil }
         memory.record(quote.id, level: level)
         SharedStore.nastyMemory = memory
         return quote
@@ -158,10 +169,8 @@ extension StepsStore {
         // never the title of the pop-up, nor the Jollies of its tag (nor, for «used», the streak of its red line):
         // without such a line the pop-up keeps its own sentence
         switch item.kind {
-        case .used: return say(NastyMoment.of(.jollyUsed, day: day), excluding: [.jolly, .serie],
-                               notSaying: [L10n.text("jolly.used.title")])
-        case .earned: return say(NastyMoment.of(.jollyEarned, day: day), excluding: [.jolly],
-                                 notSaying: [L10n.text("jolly.earned.title")])
+        case .used: return say(NastyMoment.of(.jollyUsed, day: day), excluding: [.jolly, .serie], title: "jolly.used.title")
+        case .earned: return say(NastyMoment.of(.jollyEarned, day: day), excluding: [.jolly], title: "jolly.earned.title")
         case .gift: return nil
         }
     }
@@ -209,14 +218,15 @@ extension StepsStore {
             salt = Int.random(in: Int.min...Int.max)
             defaults.set(salt, forKey: Keys.roastSalt)
         }
-        // without a count really read from Health no roast (T-031): never a line about steps nobody read
-        var level = hasReadSteps ? voice : .normale
+        var level = voice
         #if DEBUG
         if defaults.object(forKey: "stepteller.debugSteps") != nil, defaults.object(forKey: "stepteller.debugRoast") == nil {
             level = .normale        // screenshots: no notification permission prompt over the UI
         }
         #endif
-        return RoastScheduler.Input(now: now, level: level, frequency: roastFrequency, catalog: NastyVoice.catalog,
+        // without a count really read from Health no roast about it (T-031): the plan waits for a read
+        return RoastScheduler.Input(now: now, known: hasReadSteps, level: level, frequency: roastFrequency,
+                                    catalog: NastyVoice.catalog,
                                     day: voiceDay(now: now, steps: steps), salt: UInt64(bitPattern: Int64(salt ?? 0)))
     }
 }

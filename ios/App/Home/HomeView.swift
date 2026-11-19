@@ -93,6 +93,7 @@ struct HomeView: View {
         .onChange(of: store.catalogEdition) { _, _ in speak() }
         .onChange(of: store.showsNoDataWarning) { _, _ in speak() }
         .onChange(of: covered) { _, _ in speak() }
+        .onChange(of: store.homeLineRequests) { _, _ in withAnimation(.easeInOut(duration: 0.25)) { speak() } }
         .onReceive(Timer.publish(every: 60, on: .main, in: .common).autoconnect()) { _ in speak() }
     }
 

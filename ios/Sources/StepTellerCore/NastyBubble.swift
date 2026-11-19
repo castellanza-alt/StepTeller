@@ -42,7 +42,10 @@ public struct NastyBubble: Codable, Equatable, Sendable {
                             using rng: inout some RandomNumberGenerator) -> (bubble: NastyBubble, quote: NastyQuote)? {
         guard level != .normale else { return nil }
         if let current, current.keeps(level: level, moment: moment, now: now, calendar: calendar),
-           let line = current.line(in: catalog, moment: moment) {
+           let line = current.line(in: catalog, moment: moment),
+           // an event came meanwhile (twice the goal, a record) and has its lines: they come first (T-031)
+           !NastyPicker.candidates(catalog, level: level, moment: moment)
+               .contains(where: { NastyPicker.precedence($0.event) > NastyPicker.precedence(line.event) }) {
             return (current, NastyPicker.quote(line, values: moment.values, format: format))
         }
         guard let quote = NastyPicker.pick(catalog, level: level, moment: moment, memory: memory, format: format,

@@ -31,9 +31,10 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
 - Correzioni dal collaudo (T-031, T-029): la voce legge `AppClock` (con `-stepteller.debugNow` le ore della voce si
   provano sul Simulatore; le animazioni restano sull'ora vera); le battute non ripetono quello che il posto dice già
   (titolo e targhetta dei pop-up, minuti e passi mancanti del promemoria, titolo degli avvisi: `excluding` e
-  `notSaying` di `NastyPicker`); le battute di un evento vengono prima delle generiche, il più raro per primo (record,
-  doppio, ultimo Jolly); la battuta del tocco resta 6 s e non diventa quella della Home; senza passi letti da Salute
-  promemoria con il testo di sempre e nessuna roast.
+  `notSaying` di `NastyPicker`; le battute che ripetono un titolo si trovano sull'italiano e si escludono per id in
+  tutte le lingue); le battute di un evento vengono prima delle generiche, il più raro per primo (record, doppio,
+  ultimo Jolly), anche se l'evento arriva dopo nella stessa situazione; la battuta del tocco resta 6 s e non diventa quella della Home; senza passi letti da Salute
+  promemoria con il testo di sempre e le roast non si ripianificano.
 
 ## 1.2 — inviata ad Apple il 19 novembre 2026, build 1.162.1
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai

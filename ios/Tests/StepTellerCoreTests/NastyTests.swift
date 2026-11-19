@@ -356,6 +356,26 @@ final class NastyChoiceTests: XCTestCase {
                                       memory: NastyMemory(), notSaying: ["a", "e", "i", "o", "u"], using: &rng))
     }
 
+    /// Translations reword the title: the lines that repeat it are found on Italian and left out by id everywhere.
+    func testTitleRepeatsLeftOutInEveryLanguage() {
+        let earned = NastyPicker.repeating(["JOLLY GUADAGNATO!"], in: catalog)
+        let used = NastyPicker.repeating(["JOLLY USATO"], in: catalog)
+        XCTAssertTrue(earned.isSuperset(of: ["N099", "P039"]))
+        XCTAssertTrue(used.isSuperset(of: ["N096", "P037"]))
+        for (code, other) in NastyLibrary.onBoard.catalogs {
+            for (trigger, ids) in [(NastyMoment.Trigger.jollyEarned, earned), (.jollyUsed, used)] {
+                let moment = NastyMoment.of(trigger, day: day(3_000, jolly: 3))
+                for seed in 0..<40 {
+                    var rng = SeededRandom(seed: UInt64(seed))
+                    if let q = NastyPicker.pick(other, level: .nasty, moment: moment, memory: NastyMemory(),
+                                                excludingIDs: ids, using: &rng) {
+                        XCTAssertFalse(ids.contains(q.id), "\(code) \(q.id)")
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: situations
 
     func testHomeSituations() {
@@ -746,6 +766,29 @@ final class NastyBubbleTests: XCTestCase {
         // Normale: nothing
         XCTAssertNil(NastyBubble.home(nil, catalog: catalog, level: .normale, moment: home(3_000, 15), memory: &memory,
                                       now: date(15), calendar: calendar, using: &rng))
+    }
+
+    /// Twice the goal later the same day: the event's lines take the bubble, without waiting (T-031).
+    func testAnEventLaterTakesTheBubble() {
+        var memory = NastyMemory()
+        var rng = SeededRandom(seed: 5)
+        var bubble: NastyBubble?
+        // a generic «Quando ce la fai» line at the goal
+        for seed in 0..<50 {
+            var r = SeededRandom(seed: UInt64(seed))
+            let b = NastyBubble.home(nil, catalog: catalog, level: .nasty, moment: home(10_200, 15), memory: &memory,
+                                     now: date(15), calendar: calendar, using: &r)!.bubble
+            if catalog.battute.first(where: { $0.id == b.id })!.event == nil { bubble = b; break }
+        }
+        let generic = try! XCTUnwrap(bubble)
+        // same situation ([.fatto]) ten minutes later, now twice the goal
+        let twice = NastyBubble.home(generic, catalog: catalog, level: .nasty, moment: home(21_000, 15, 10),
+                                     memory: &memory, now: date(15, 10), calendar: calendar, using: &rng)!
+        XCTAssertEqual(catalog.battute.first { $0.id == twice.bubble.id }!.event, .doppio)
+        // and it stays
+        let still = NastyBubble.home(twice.bubble, catalog: catalog, level: .nasty, moment: home(21_500, 15, 20),
+                                     memory: &memory, now: date(15, 20), calendar: calendar, using: &rng)!
+        XCTAssertEqual(still.bubble, twice.bubble)
     }
 
     func testHeartLineStaysWhileTheSituationStaysAtMostAnHour() {

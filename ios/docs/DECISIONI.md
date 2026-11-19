@@ -35,7 +35,7 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   bonaria: i testi di T-008 (Hargreaves) sono troppo blandi e vanno riscritti; Hargreaves come personaggio terzo
   decade. Di D-039 restano i limiti: da chiarire con William le parolacce; restano fuori corpo, peso, aspetto,
   salute, età, genere e altre caratteristiche personali (linee guida di Apple). Prima del codice: ricerca su Carrot
-  (`/Volumes/SSD/Temp/NEAT/nasty/carrot-ricerca.md`), carattere e campione di battute approvati da William.
+  (`docs/design/T-008-nasty/carrot-ricerca.md`), carattere e campione di battute approvati da William.
 - **D-039 NASTY (17/11/2026, William).** «Cattiva ma senza parolacce, lo scopo è umiliare con humor inglese, non
   offendere in modo facile con insulti. L'utente deve ridere ma anche sentirsi incentivato a fare i passi. Questo deve
   essere vero in ogni aspetto, anche quando imposta il target dei passi.» Regole del Director che ne seguono: niente

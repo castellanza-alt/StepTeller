@@ -3,6 +3,9 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, le 100 battute (bozza, nessuna build): «Per il 3 andrei giù molto più duro, le 100 mi
+  sembrano molto meno piccanti di quelle che mi hai anticipato prima» (il terzo giro). «Zero passi non li farò mai.
+  Usiamo una formula generica per dire: pochi.» → T-021
 - **19/11/2026**, NASTY, terzo giro di battute (bozza T-021, nessuna build): «Cazzo bravo, le battute sono proprio
   belle!!!» Chiede «un centinaio» di battute. Le battute nuove «le scarica dal sito». → T-021
 - **19/11/2026**, NASTY, battute (bozza T-021, nessuna build): «Belle, farei anche di peggio.» Il cuore che «batte

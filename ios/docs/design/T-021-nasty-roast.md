@@ -239,7 +239,9 @@ William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. 
 - **Battute aggiornabili senza App Store: sì** (William, 19/11): l'app scarica il catalogo dal sito di NEAT
   (Pages), senza inviare dati; a bordo resta un catalogo di base. Prima volta che NEAT usa la rete: privacy e note
   per Apple da aggiornare. Da progettare.
-- **Catalogo:** primo lotto di 100 battute NASTY in `T-021-nasty/battute-nasty-100.md` (19/11), in attesa di William.
+- **Catalogo:** le 100 di `T-021-nasty/battute-nasty-100.md` per William sono troppo morbide per il livello 3:
+  diventano la base del livello 2 (tolte le parolacce). Il livello 3 riparte da `T-021-nasty/battute-nasty-duro.md`
+  (51 battute, 19/11), sul tono del §9. **Mai «zero passi»**: si dice «pochi», con `{passi}` (William).
 
 ## 9. Terzo giro (19/11): le tecniche del roast applicate
 Ricerca in `T-008-nasty/roast-ricerca.md` (tecniche da autori di roast; nessuna battuta sulla pigrizia trovata pronta:

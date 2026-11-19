@@ -38,3 +38,22 @@ Solo SSD: file pesanti in `/Volumes/SSD/Temp/NEAT/`, cancellati a fine compito; 
 Non correggere il codice, non unire, nessuna build TestFlight. Non scrivere a William.
 
 ## Esito
+**19/11/2026, QA.** Collaudo sul Simulatore (17 Pro, SE, 17 Pro Max). Rapporto `comms/qa/T-029.md` con 14 screenshot,
+ramo `qa/T-029`. **Nessun difetto bloccante.**
+- **Funziona**:
+  - Senza pietà di serie, anche dopo l'aggiornamento dalla 1.2, con la prima battuta;
+  - cuore e animazioni come la pagina approvata;
+  - battute giuste, niente numero dei passi sotto i 50;
+  - Piccante senza parolacce;
+  - promemoria con la voce;
+  - catalogo scaricato, e con Normale niente rete;
+  - 10 lingue;
+  - Natale insieme alla voce;
+  - 151 test.
+- **Notifiche roast**: le regole (10–20, 90 minuti, quantità) le ho provate sul nucleo, non dal vivo.
+- **Medio, strumento**: `debugNow` non sposta l'ora della voce.
+- **Minori**:
+  - ripetizioni nei pop-up e nel promemoria;
+  - doppio e record senza precedenza;
+  - la battuta del tocco resta nel fumetto.
+- Provato da William: no.

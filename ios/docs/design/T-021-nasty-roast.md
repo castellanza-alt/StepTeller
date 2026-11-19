@@ -237,3 +237,29 @@ William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. 
   come temi maturi o allusivi; l'età calcolata va verificata alla compilazione (13+ o 16+).
 - **Notifiche roast** (William, 19/11): 4-5 al giorno tra le 10 e le 20, a orari non fissi. Da progettare.
 - **Battute aggiornabili senza App Store** (domanda di William): da progettare, vedi risposta del Director.
+
+## 9. Terzo giro (19/11): le tecniche del roast applicate
+Ricerca in `T-008-nasty/roast-ricerca.md` (tecniche da autori di roast; nessuna battuta sulla pigrizia trovata pronta:
+quelle famose colpiscono corpo, malattie e vite private, che per noi sono vietati, quindi si prendono i meccanismi).
+
+**Tecniche adottate:** la parola che fa male va in fondo · concessione e poi coltellata · finta supplica ·
+epitaffio (il discorso funebre di «Roast in Peace») · superlativo che si rovescia · conto impietoso · meno si dice,
+più fa male · si parte sempre da un fatto vero. **Da evitare:** lo stesso schema ripetuto, la morale, il roast senza
+una via d'uscita (deve restare la spinta a muoversi).
+
+### Battute NASTY, terzo giro
+- «Resta pure sul divano. Ma smetti di chiamarlo "recupero": non hai niente da cui recuperare.»
+- «Qui giace la tua serie di {serie} giorni. Uccisa da una puntata di troppo.»
+- «Ti prego, non camminare. Voglio vedere fin dove arriva uno zero prima di vergognarsi.»
+- «Sei la persona più costante che conosca. Zero ieri, zero oggi. Una roccia. Un sasso, proprio.»
+- «Oggi: tre passi per il frigo, due per il bagno, zero per te.»
+- «Hai scaricato un contapassi per non camminare. Come comprare i preservativi e restare sul divano. Anzi no: lì ti servono.»
+- «Sai cos'hanno in comune i tuoi passi e i tuoi buoni propositi? Li conto su una mano. E avanzano dita.»
+- «Il divano mi ha chiesto di lasciarvi soli. Gli ho risposto che lo siete da tre giorni.»
+- «{passi} passi. Non ti insulto nemmeno: i numeri lo fanno meglio di me.»
+- «Con questo ritmo arrivi all'obiettivo giovedì. Di un altro anno.»
+- «Fai schifo. Scusa, volevo dire: {passi} passi. È lo stesso, ma con i dati.»
+- «"Domani comincio." Lo dici con una tale sicurezza che il divano si è già fatto bello.»
+- «Ti ho dato del pezzo di merda troppo presto. La merda, almeno, qualcuno la porta fuori.»
+- «Record. Sono orgoglioso di te. Che schifo, l'ho detto. Cancella questa notifica.»
+- Notifica: «Sono le 17» / «Hai ancora tre ore per smentirmi. Intanto preparo il discorso funebre della serie.»

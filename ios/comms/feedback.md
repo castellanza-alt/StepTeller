@@ -3,6 +3,9 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, catalogo completo (pagina con 204 battute, nessuna build): «Fatto. Vai.» Ha scartato 8
+  battute del livello 3 (N013, N018, N058, N068, N071, N081, N084, N129) e nessuna del livello 2. Restano 196
+  battute approvate. → `T-021-nasty/catalogo/catalogo-approvato.md`, T-022
 - **19/11/2026**, NASTY, livello 3 corto e diretto (`battute-nasty-corte.md`, 48 battute, nessuna build): «Sì, così».
   Tono e regole del livello 3 approvati. → T-021
 - **19/11/2026**, NASTY, selezione con Astra (bozza, nessuna build): «Troppo lunghe e cerebrali. E poi tu non sai

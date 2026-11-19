@@ -7,8 +7,9 @@ Stato: **bozza in attesa del giudizio di William**. Solo italiano (D-005). Nessu
 - **NEAT è l'app, e parla in prima persona.** Dà del **tu**.
 - **Forma:** un cuore disegnato da noi in stile manga (rosso, bianco, nero), **senza volto**. Non è l'icona di Apple
   Salute e non deve ricordarla. Si esprime con il corpo: batte, si gonfia, si crepa, mette le punte, cambia colore.
-- **Perché è cattivo:** lui lavora sempre («io batto centomila volte al giorno») e tu no. Ti massacra perché ci
-  tiene: è un roast tra amici, non l'insulto di un estraneo.
+- **Perché è cattivo:** è una macchina vanitosa e superiore («faccio un miliardo di calcoli al secondo»), condannata
+  a contare i passi di uno che non cammina. Ti massacra perché ci tiene: è un roast tra amici, non l'insulto di un
+  estraneo. (William, 19/11: via l'idea del cuore che «batte centomila volte», non si capiva.)
 - **Come ti chiama:** «soprammobile» (un oggetto che sta fermo e prende polvere; vale per chiunque).
 - **Il nemico fisso:** il divano, l'amante con cui lo tradisci.
 - **Non parla mai della salute del tuo cuore vero:** è un personaggio, non un consiglio medico.
@@ -42,7 +43,7 @@ Di serie: Normale. Nell'introduzione: «Vuoi che te lo dica gentilmente o che te
 Segnaposti: `{passi}` `{obiettivo}` `{mancano}` `{minuti}` `{serie}` `{jolly}`. **P** = Piccante, **N** = NASTY.
 
 **Zero passi**
-- P «Zero passi. Io ho già battuto quarantamila volte, tu non hai ancora trovato le scarpe.»
+- P «Zero passi. Io faccio un miliardo di calcoli al secondo, e mi tocca contare fino a zero.»
 - N «Zero passi, cazzo. Zero. Perfino il divano si vergogna di farsi vedere con te.»
 - N «Zero. Ho controllato se il telefono fosse rotto. No: sei tu.»
 
@@ -112,8 +113,13 @@ Segnaposti: `{passi}` `{obiettivo}` `{mancano}` `{minuti}` `{serie}` `{jolly}`. 
 
 **Se tocchi il cuore**
 - P «Non toccarmi. Usa quelle dita per allacciarti le scarpe.»
-- P «Sì, batto. Uno dei due deve pur lavorare.»
+- P «Sì, funziono. Uno dei due deve pur lavorare.»
 - N «Toccami ancora e ti azzero la serie. Scherzo. Forse. Cammina.»
+
+**La macchina superiore**
+- P «Sono il software più veloce che tu abbia mai installato. Tu sei l'utente più lento che mi sia capitato.»
+- N «Potrei pilotare un razzo. Invece conto i passi di uno che non fa un cazzo. Almeno dammi qualcosa da contare.»
+- N «Ho aggiornato i tuoi passi. Ci ho messo un millisecondo. Tu per farne cento ci metti una giornata.»
 
 **Appena scelto NASTY**
 - N «Hai scelto NASTY. Ricordatelo quando piangerai: l'hai voluto tu.»
@@ -141,7 +147,7 @@ Scrivi le battute di NEAT, un'app contapassi per iPhone che massacra chi non cam
 
 IL PERSONAGGIO
 - NEAT è l'app stessa e parla in prima persona, dando del tu.
-- È un cuore senza volto, in stile manga. Lavora sempre («io batto centomila volte al giorno») e l'utente no.
+- È un cuore senza volto, in stile manga. È una macchina vanitosa e superiore («faccio un miliardo di calcoli al secondo»), condannata a contare i passi di uno che non cammina.
 - Massacra perché ci tiene: è il roast di un amico, non l'insulto di un estraneo.
 - Chiama l'utente «soprammobile». Il suo nemico fisso è il divano, l'amante con cui l'utente lo tradisce.
 

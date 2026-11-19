@@ -3,6 +3,10 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, i cuori del Designer (T-023, tela, nessuna build): «A me piacciono molto, però vorrei che
+  fossero fatti animati in modo tale che il cuore possa battere quando è presente e anche avere delle animazioni
+  interessanti quando viene toccato o quando parla.» Chiede anche di aggiornare la pagina della privacy e «tutta la
+  parte di aggiornamento dei testi». → T-023 (animazioni), T-026 (testi)
 - **19/11/2026**, NASTY, prima di pubblicare: «1. aspettiamo che la 1.2 sia pubblicata. E poi facciamo le traduzioni
   anche nelle altre lingue (usiamo ChatGPT).» → D-046
 - **19/11/2026**, NASTY, progetto dell'app (T-022, nessuna build): «Sì, parti»: NASTY solo in italiano come

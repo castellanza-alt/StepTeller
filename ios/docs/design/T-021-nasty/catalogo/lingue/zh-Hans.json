@@ -57,7 +57,7 @@
   "id": "N010",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}步。好几个钟头没挪窝，你孵遥控器呢？"
+  "testo": "{passi}步。好几个钟头没挪窝，真他妈能坐。"
  },
  {
   "id": "N011",
@@ -159,7 +159,7 @@
   "id": "N029",
   "livello": "NASTY",
   "situazione": "Pochi passi",
-  "testo": "{passi}步。扫地机器人一天都比你有奔头。"
+  "testo": "{passi}步。纯粹瘫着不动，真他妈行。"
  },
  {
   "id": "N030",
@@ -537,7 +537,7 @@
   "id": "N097",
   "livello": "NASTY",
   "situazione": "Jolly e serie",
-  "testo": "护身符用掉一个，还剩{jolly}个。用完自己想辙。"
+  "testo": "护身符用掉一枚，还剩{jolly}枚。用完自己想辙。"
  },
  {
   "id": "N098",
@@ -597,7 +597,7 @@
   "id": "N107",
   "livello": "NASTY",
   "situazione": "Jolly e serie",
-  "testo": "最后一个护身符也烧光了。这下得真走了。"
+  "testo": "最后一枚护身符也烧光了。这下得真走了。"
  },
  {
   "id": "N108",
@@ -1047,7 +1047,7 @@
   "id": "P038",
   "livello": "Piccante",
   "situazione": "Jolly e serie",
-  "testo": "还剩{jolly}个。别太指望它们。"
+  "testo": "还剩{jolly}枚。别太指望它们。"
  },
  {
   "id": "P039",

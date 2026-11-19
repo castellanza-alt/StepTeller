@@ -87,3 +87,19 @@ Scelte che valgono anche dopo:
 - Le righe `.one` / `.other` in JA/KO/ZH: iOS usa solo `.other`, quindi la frase di `.other` deve stare bene anche con 1.
 - Controllo automatico (19/11): nessuna riga ha l'italiano fuori dalla colonna italiana, salvo parole uguali nelle due
   lingue già prima della 1.2 (Tema, Sistema, Backup, Serie, Privacy, Media).
+
+## 5. NEAT NASTY (1.3, T-025)
+
+Battute in `docs/design/T-021-nasty/catalogo/lingue/` (D-044…D-046), riscritte da ChatGPT e riviste dal Traduttore il
+19/11/2026. Valgono i termini fissi della sezione 1 (in ES «objetivo», non «meta»; in ZH il contatore di 护身符 è 枚).
+
+| Italiano | EN | ES | FR | DE | PT-BR | JA | KO | ZH-Hans | ZH-Hant |
+|---|---|---|---|---|---|---|---|---|---|
+| soprammobile (nomignolo, uno solo) | paperweight | florero | bibelot | Staubfänger | enfeite de estante | 置物 | 장식품 | 摆件 | 擺飾 |
+| divano | couch | sofá | canapé | Sofa | sofá | ソファ | 소파 | 沙发 | 沙發 |
+
+Tono: NEAT dà del tu come nell'app; in JA e KO le battute usano il registro rozzo (お前, 〜やがれ; 반말) invece di
+です・ます e 해요체, perché è un personaggio che insulta. Il livello Piccante resta senza parolacce (JA «君», 〜ね).
+Parolacce del livello NASTY: EN fuck/shit; ES puta/mierda/carajo (spagnolo neutro); FR putain/merde/bordel; DE
+Scheiße/verdammt; PT porra/caralho/merda; JA クソ e registro; KO 씨발/존나/좆; ZH-Hans 他妈/操; ZH-Hant 幹/靠 (Taiwan).
+Niente bestemmie e niente insulti a gruppi.

@@ -97,5 +97,5 @@ Impostazioni, una notifica).
   riga in `catalogo/lingue/pt-BR.json`; poi `python3 scripts/battute.py` e `scripts/font_asia.py`). Testo del Traduttore.
 - Il selettore PT-BR su SE va guardato dopo la correzione (con il catalogo rifiutato la sezione non compare).
 
-**Verifiche:** `swift test` 156 test, verdi tranne i 3 di PT-BR; build Debug e Release; `battute.py --check`,
+**Verifiche:** `swift test` 151 test, verdi tranne 3 test (4 asserzioni) di PT-BR; build Debug e Release; `battute.py --check`,
 `registro.py`. Nessuna build TestFlight.

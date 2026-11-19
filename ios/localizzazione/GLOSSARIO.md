@@ -97,6 +97,17 @@ Battute in `docs/design/T-021-nasty/catalogo/lingue/` (D-044…D-046), riscritte
 |---|---|---|---|---|---|---|---|---|---|
 | soprammobile (nomignolo, uno solo) | paperweight | florero | bibelot | Staubfänger | enfeite de estante | 置物 | 장식품 | 摆件 | 擺飾 |
 | divano | couch | sofá | canapé | Sofa | sofá | ソファ | 소파 | 沙发 | 沙發 |
+| **Normale** (livello 1) | Normal | Normal | Normal | Normal | Normal | ふつう | 보통 | 普通 | 普通 |
+| **Piccante** (livello 2) | Spicy | Picante | Piquant | Bissig | Picante | ピリ辛 | 매운맛 | 辛辣 | 辛辣 |
+| **Senza pietà** (livello 3, di serie, D-047) | No mercy | Sin piedad | Sans pitié | Gnadenlos | Sem dó | 容赦なし | 무자비 | 毫不留情 | 毫不留情 |
+| Voce (sezione di Impostazioni) | Voice | Voz | Voix | Stimme | Voz | 口調 | 말투 | 语气 | 語氣 |
+| Notifiche di NEAT: Poche · Normali · Tante | NEAT notifications: Few · Normal · Lots | Notificaciones de NEAT: Pocas · Normales · Muchas | Notifications de NEAT : Peu · Normal · Beaucoup | Mitteilungen von NEAT: Wenige · Normal · Viele | Notificações do NEAT: Poucas · Normais · Muitas | NEATの通知：少なめ · ふつう · 多め | NEAT 알림: 적게 · 보통 · 많이 | NEAT 通知：少 · 正常 · 多 | NEAT 通知：少 · 一般 · 多 |
+
+Nomi dei livelli (T-028, 19/11/2026): al massimo 10 caratteri, perché stanno in un selettore a tre segmenti anche su
+iPhone SE (circa 90 pt a segmento). «NASTY» resta solo il nome interno. DE «Bissig» (mordace) invece di «Scharf», che
+in tedesco ha anche un senso sessuale; PT «Sem dó» è il modo brasiliano parlato (alternativa più lunga «Sem
+piedade», 11); JA, KO e ZH chiamano la sezione Voce «tono di parlare» (口調, 말투, 语气/語氣) perché NEAT non ha audio.
+Nei testi dello store i nomi dei livelli ci sono, le parolacce no.
 
 Tono: NEAT dà del tu come nell'app; in JA e KO le battute usano il registro rozzo (お前, 〜やがれ; 반말) invece di
 です・ます e 해요체, perché è un personaggio che insulta. Il livello Piccante resta senza parolacce (JA «君», 〜ね).

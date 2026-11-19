@@ -13,6 +13,11 @@ cartella `ios/`; la radice è la web app su GitHub Pages e non si tocca. Bundle 
 | Versione | Build | Stato | Provata da William | Note |
 |---|---|---|---|---|
 | 1.3 | 1.204.1 | su TestFlight dal 19/11/2026 (voce di NEAT: Piccante e Senza pietà, 10 lingue) | no |
+
+> **1.3, fermi prima dell'invio (William, 19/11).** Pronto: build 1.204.1 su TestFlight, testi e Novità in 10 lingue,
+> screenshot, età 13+ e note per il revisore negli script. Mancano: prova di William sul telefono; 1.2 pubblicata
+> (D-046); poi, con il suo ok esplicito: `[store-prova]` → `[store]` → unire la #57 (privacy) → `[store-invio]`.
+
 | 1.2 | 1.162.1 | inviata ad Apple il 19/11/2026 (10 lingue, Novità 1.2, testi nei riquadri) | no (invio subito per scelta di William) |
 | 1.2 | 1.155.2 | su TestFlight dal 18/11/2026 (icona di Natale nuova, Home fino ai bordi, T-019) | no |
 | 1.2 | 1.147.2 | su TestFlight dal 18/11/2026 (Natale rifatto, notifiche e pop-up; testi nuovi solo in italiano) | **sì, 18/11** («si va»; icona da rifare, striscia bianca in alto → T-019) |
@@ -73,7 +78,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-029 Collaudo della 1.3 (voce di NEAT) | QA | `qa/T-029` | fatto 19/11 (#59): nessun bloccante, 5 minori corretti in T-031 |
 | T-030 Screenshot dello store per la 1.3 | Designer | `design/T-030-screenshot` | fatto 19/11 (#58) |
 | T-031 Correzioni dal collaudo della 1.3 | Developer | `task/T-031-correzioni` | fatto 19/11 (#60) |
-| T-032 Scheda dello store pronta per la 1.3 (età 13+, note per il revisore), senza inviare | Developer | `task/T-032-store` | assegnato 19/11 |
+| T-032 Scheda dello store pronta per la 1.3 (età 13+, note per il revisore), senza inviare | Developer | `task/T-032-store` | fatto 19/11 (#61): niente scritto su App Store Connect |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

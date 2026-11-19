@@ -6,7 +6,7 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
-## 1.2 — su TestFlight, build 1.162.1
+## 1.2 — inviata ad Apple il 19 novembre 2026, build 1.162.1
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai
   tra le 22 e le 8, toglie il promemoria serale di quel giorno), una quando guadagni un Jolly e una quando un Jolly
   salva la serie (di notte aspetta le 8; tolta se i passi del giorno arrivano tardi e il Jolly non serviva più). Alla prima apertura dopo un evento Jolly un pop-up, mai ripetuto (più

@@ -1,0 +1,1178 @@
+[
+ {
+  "id": "N001",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 존나 한심하네."
+ },
+ {
+  "id": "N002",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 이걸 무슨 낯으로 열어 봐?"
+ },
+ {
+  "id": "N003",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "고작 {passi}걸음. 아, 씨발 좀 일어나."
+ },
+ {
+  "id": "N004",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 그놈의 소파에서 좀 떨어져."
+ },
+ {
+  "id": "N005",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "목표는 {obiettivo}걸음인데 {passi}걸음? 장난하냐?"
+ },
+ {
+  "id": "N006",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 오늘도 소파만 고생했네."
+ },
+ {
+  "id": "N007",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 넌 폰 들고 있는 장식품이야."
+ },
+ {
+  "id": "N008",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 적네. 존나 적네. 늘 그렇듯이."
+ },
+ {
+  "id": "N009",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 오늘도 이 지랄이네."
+ },
+ {
+  "id": "N010",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 몇 시간째 거기야? 소파랑 한 세트냐?"
+ },
+ {
+  "id": "N011",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{obiettivo}걸음 걷겠다더니 {passi}걸음. 입만 살았지."
+ },
+ {
+  "id": "N012",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 소파에서 와이파이 잘 터져서 좋겠다."
+ },
+ {
+  "id": "N014",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 이걸 산책이라고 치면 소파도 운동 기구지."
+ },
+ {
+  "id": "N015",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 씨발, 창피한 건 왜 내 몫이냐."
+ },
+ {
+  "id": "N016",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "목표의 {percento}%. 나머진 소파에 갖다 바쳤네."
+ },
+ {
+  "id": "N017",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. ‘걸어’가 그렇게 어려운 말이냐?"
+ },
+ {
+  "id": "N019",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "개판이네. 아, {passi}걸음이라고. 뭐 같은 말이지."
+ },
+ {
+  "id": "N020",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 그 정도 세워 뒀으면 주차비 내라."
+ },
+ {
+  "id": "N021",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 이 꼴을 굳이 확인하러 왔냐?"
+ },
+ {
+  "id": "N022",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 잘못 셌나? 씨발, 맞네."
+ },
+ {
+  "id": "N023",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 소파가 단골 할인 해 주겠네."
+ },
+ {
+  "id": "N024",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 덕분에 웃었다. 칭찬 아니야."
+ },
+ {
+  "id": "N025",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 건진 게 쥐뿔도 없네."
+ },
+ {
+  "id": "N026",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 이거 세려고 나까지 깔았냐?"
+ },
+ {
+  "id": "N027",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 기다린 내 시간이 더 아깝다."
+ },
+ {
+  "id": "N028",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 이래 놓고 벌써 퇴근 찍냐?"
+ },
+ {
+  "id": "N029",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 로봇 청소기도 너보단 많이 돌아다녀."
+ },
+ {
+  "id": "N030",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 야, 장식품. 움직여."
+ },
+ {
+  "id": "N031",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 씨발, 택도 없네."
+ },
+ {
+  "id": "N032",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 한 걸음 세고 다음 걸음까지 휴가 다녀와도 되겠다."
+ },
+ {
+  "id": "N033",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 네 목표가 널 비웃겠다."
+ },
+ {
+  "id": "N034",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 아주 제대로 말아먹었네."
+ },
+ {
+  "id": "N035",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 씨발, 현관문 좀 열고 나가."
+ },
+ {
+  "id": "N036",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 소파가 어디 가서 네 자랑 하겠다."
+ },
+ {
+  "id": "N037",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "목표 {obiettivo}걸음에 {passi}걸음. 노력하는 척도 안 하네."
+ },
+ {
+  "id": "N038",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 빈둥대는 건 존나 성실하게 하네."
+ },
+ {
+  "id": "N039",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 존나 딱하다."
+ },
+ {
+  "id": "N040",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "목표의 {percento}%. 총평은 딱 두 글자. 개판."
+ },
+ {
+  "id": "N041",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 걷든가 날 지우든가."
+ },
+ {
+  "id": "N042",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 나 같으면 폰 뒤집어 놨다."
+ },
+ {
+  "id": "N043",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 남은 건 {mancano}걸음. 씨발, 거의 다 남았네."
+ },
+ {
+  "id": "N044",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 대체 신발 끈은 왜 묶었냐?"
+ },
+ {
+  "id": "N045",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "정오에 {passi}걸음. 오전을 통째로 말아먹었네."
+ },
+ {
+  "id": "N046",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "오전 11시. {passi}걸음. 시작부터 개판이네."
+ },
+ {
+  "id": "N047",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "벌써 한낮에 {passi}걸음. 정신 차려, 장식품."
+ },
+ {
+  "id": "N048",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "오전 끝. {passi}걸음. 벌써 소파에 밀리네."
+ },
+ {
+  "id": "N049",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "오후 4시. {passi}걸음. 벌써 접었냐?"
+ },
+ {
+  "id": "N050",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "오후에 {passi}걸음. 적어도 시곗바늘은 움직이네."
+ },
+ {
+  "id": "N051",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "오후 5시. {passi}걸음. 오늘 덜 쪽팔릴 마지막 기회다."
+ },
+ {
+  "id": "N052",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "오후 3시. {passi}걸음. 반나절을 통째로 날려 먹었네."
+ },
+ {
+  "id": "N053",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "저녁 7시. {passi}걸음. 오늘 하루 제대로 말아먹었네."
+ },
+ {
+  "id": "N054",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "저녁까지 {passi}걸음. 꼬라지 한번 끝내주네."
+ },
+ {
+  "id": "N055",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "저녁 8시. {passi}걸음. 또 소파가 이겼네."
+ },
+ {
+  "id": "N056",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "벌써 저녁인데 {passi}걸음. 쪽팔리면 나가서 걸어."
+ },
+ {
+  "id": "N057",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{mancano}걸음 남았어. {minuti}분이면 돼. 당장 일어나, 좀."
+ },
+ {
+  "id": "N059",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "저녁 7시. 아직 {mancano}걸음 남았어. 뭐 하냐, 빨리 가."
+ },
+ {
+  "id": "N060",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "하루 끝. {passi}걸음. 하루 종일 한 게 이거냐?"
+ },
+ {
+  "id": "N061",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "저녁에 {passi}걸음. 오늘도 안방에서 졌네."
+ },
+ {
+  "id": "N062",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{minuti}분. 딱 {minuti}분. 그거 쓰기가 그렇게 아깝냐?"
+ },
+ {
+  "id": "N063",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "마지막 한 시간. {mancano}걸음 남았어. 씨발, 나가."
+ },
+ {
+  "id": "N064",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "오늘 최종 {passi}걸음. 집계한 내가 다 민망하다."
+ },
+ {
+  "id": "N065",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "오늘 {passi}걸음. 그냥 자라. 하루 종일 예행연습했잖아."
+ },
+ {
+  "id": "N066",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "최종 {passi}걸음. 소파는 벌써 샴페인 땄다."
+ },
+ {
+  "id": "N067",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "절반 왔네. 트로피도 반 잘라 줘? 계속 걸어."
+ },
+ {
+  "id": "N069",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}걸음. 딱 한 번만 좀 끝까지 해 봐라."
+ },
+ {
+  "id": "N070",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "절반. 여기서 또 때려치울 거지?"
+ },
+ {
+  "id": "N072",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{percento}%. 남은 절반은 뭐, 내가 대신 걸어 주냐?"
+ },
+ {
+  "id": "N073",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}걸음 남았어. 오늘은 좀 말아먹지 마라."
+ },
+ {
+  "id": "N074",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "거의 다 왔다고? ‘거의’는 좆도 안 쳐줘."
+ },
+ {
+  "id": "N075",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}걸음. 누구나 한다고? 그럼 너도 해 봐."
+ },
+ {
+  "id": "N076",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{minuti}분만 더 걸으면 돼. 좀 움직여."
+ },
+ {
+  "id": "N077",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "목표까지 {mancano}걸음. 여기서 접으면 진짜 개쪽이다."
+ },
+ {
+  "id": "N078",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표가 {obiettivo}걸음. 포부 한번 존나 소박하네."
+ },
+ {
+  "id": "N079",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음? 누구나 하지. 넌 일단 두고 보자."
+ },
+ {
+  "id": "N080",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표 낮췄네. 쫄았냐?"
+ },
+ {
+  "id": "N082",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표가 {obiettivo}걸음. 이거 소파가 정해 줬냐?"
+ },
+ {
+  "id": "N083",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "하루 {obiettivo}걸음. 날로 먹을 궁리만 존나 잘하네."
+ },
+ {
+  "id": "N085",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음으로 낮췄네. 너 대신 결승선이 움직였어."
+ },
+ {
+  "id": "N086",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표 낮췄네. 일어나지도 않고 포기부터 하냐."
+ },
+ {
+  "id": "N087",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표 낮췄네. 소파에 앉을 시간이 그렇게 부족했냐?"
+ },
+ {
+  "id": "N088",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표를 낮췄어. 또. 진짜 한심하다."
+ },
+ {
+  "id": "N089",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음으로 올렸네. 그 기세 며칠 가나 보자."
+ },
+ {
+  "id": "N090",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음. 일단 한 걸음이라도 떼면 불러."
+ },
+ {
+  "id": "N091",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표 올렸네. 아가리는 그만 털고 걸어."
+ },
+ {
+  "id": "N092",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "어제 지킴이가 살려 줬지. 네가 잘한 건 좆도 없어."
+ },
+ {
+  "id": "N093",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이 다 썼어. 이제 걷든가 연속 기록 날리든가."
+ },
+ {
+  "id": "N094",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "연속 기록 깨졌어. {serie}일을 날려 먹었네. 네 탓이야."
+ },
+ {
+  "id": "N095",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "연속 기록 초기화. 소파한테 축하나 해 줘. 다시 시작해."
+ },
+ {
+  "id": "N096",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이 썼어. 어제 네 기록은 개판이었거든."
+ },
+ {
+  "id": "N097",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이 하나 썼어. 이제 {jolly}개 남았어. 그다음엔 얄짤없어."
+ },
+ {
+  "id": "N098",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이가 연속 기록 살렸어. 넌 씨발 뭘 했냐?"
+ },
+ {
+  "id": "N099",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이 얻었네. 그거 날려 먹는 건 금방이지?"
+ },
+ {
+  "id": "N100",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}일째 이어 왔네. 또 말아먹지 마라."
+ },
+ {
+  "id": "N101",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "연속 기록 깨졌네. 씨발, 그냥 걷기만 하면 됐잖아."
+ },
+ {
+  "id": "N102",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "연속 기록이 {serie}일 만에 끝났네. 존나 아깝다."
+ },
+ {
+  "id": "N103",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}일을 날려 먹었어. 그깟 소파 때문에."
+ },
+ {
+  "id": "N104",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "연속 기록 깨졌어. 소파한테 또 졌냐."
+ },
+ {
+  "id": "N105",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "또 첫날이네. 아예 여기로 주소 옮겨라."
+ },
+ {
+  "id": "N106",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "오늘 밤 연속 기록 끊기겠어. {mancano}걸음 남았어. 움직여."
+ },
+ {
+  "id": "N107",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "마지막 지킴이까지 날렸네. 이젠 진짜로 걸어야지."
+ },
+ {
+  "id": "N108",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 씨발, 드디어."
+ },
+ {
+  "id": "N109",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo}걸음 달성. 웬일로 오늘은 욕할 게 없네."
+ },
+ {
+  "id": "N110",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 난 안 될 줄 알았어. 너도 그랬잖아."
+ },
+ {
+  "id": "N111",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "해냈네. 뽀록 아니면 내일도 해 봐."
+ },
+ {
+  "id": "N112",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "신기록. 누가 장식품 들고 산책 나갔냐?"
+ },
+ {
+  "id": "N113",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 씨발, 오류 신고할 뻔했네."
+ },
+ {
+  "id": "N114",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "해냈네. 칭찬에 익숙해지진 마라."
+ },
+ {
+  "id": "N115",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo}걸음. 존나 오래 걸렸네."
+ },
+ {
+  "id": "N116",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 소파한텐 좆같은 날이네."
+ },
+ {
+  "id": "N117",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "해냈네. 내일은 소파에 건다."
+ },
+ {
+  "id": "N118",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "해냈네. 전날까지 싼 똥이 다 치워지진 않아."
+ },
+ {
+  "id": "N119",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 네가 정한 최소치잖아."
+ },
+ {
+  "id": "N120",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "신기록. 딴 날은 그냥 귀찮아서 안 걸었던 거네."
+ },
+ {
+  "id": "N121",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "신기록. 전엔 일부러 그따위로 걸었냐?"
+ },
+ {
+  "id": "N122",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}걸음. 그래, 오늘은 내가 닥칠게."
+ },
+ {
+  "id": "N123",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "목표의 두 배. 누구한테 폰 맡겼냐?"
+ },
+ {
+  "id": "N124",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}걸음. 오늘은 한심하단 말 안 해도 되겠네."
+ },
+ {
+  "id": "N125",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "일어나 / {passi}걸음. 모자라. 맨날 존나 모자라."
+ },
+ {
+  "id": "N126",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "야, 장식품 / 목표 {obiettivo}걸음에 {passi}걸음. 움직여."
+ },
+ {
+  "id": "N127",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "한심하다 / {passi}걸음. {mancano}걸음 남았어. 당장 나가."
+ },
+ {
+  "id": "N128",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "아직도 소파냐? / {passi}걸음. 거봐, 씨발. 맞잖아."
+ },
+ {
+  "id": "N130",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "나쁜 소식 / {passi}걸음. 나쁜 소식이 바로 너야."
+ },
+ {
+  "id": "N131",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "정신 차려 / {passi}걸음. 소파 지키면 시급 나오냐?"
+ },
+ {
+  "id": "N132",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "쪽팔리지? / 목표 {obiettivo}걸음에 {passi}걸음. 뭐 할 말 있어?"
+ },
+ {
+  "id": "N133",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "움직여 / {mancano}걸음 남았어. 가만두면 저절로 줄어드냐?"
+ },
+ {
+  "id": "N134",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "다시 알려 준다 / 여전히 개판이야. {passi}걸음."
+ },
+ {
+  "id": "N135",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "속보 / {passi}걸음. 소파가 너한테 감사패 준대."
+ },
+ {
+  "id": "N136",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "꼴좋네 / 목표의 {percento}%. 일어나."
+ },
+ {
+  "id": "N137",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "오후 6시야 / {passi}걸음. 마지막 기회야, 장식품."
+ },
+ {
+  "id": "N138",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "소파에서 꺼져 / {passi}걸음. 하루 종일 그게 다냐?"
+ },
+ {
+  "id": "N139",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "아직도 거기냐? / {passi}걸음. 한 시간 전이랑 똑같잖아."
+ },
+ {
+  "id": "N140",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "별일 없음 / {passi}걸음. 변함없이 개판이네."
+ },
+ {
+  "id": "N141",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "그만 눌러. 걸으라고, 씨발."
+ },
+ {
+  "id": "N142",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "눌러 봤자 소용없어. 난 걸음만 세거든."
+ },
+ {
+  "id": "N143",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "그놈의 폰 내려놓고 좀 일어나."
+ },
+ {
+  "id": "N144",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "또 나만 열었네. 그 정성으로 현관문 좀 열어라."
+ },
+ {
+  "id": "N145",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "째려봐라. 걸음 수가 올라가나."
+ },
+ {
+  "id": "P001",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 장식품치곤 대단한데."
+ },
+ {
+  "id": "P002",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 소파가 안부 전해 달래."
+ },
+ {
+  "id": "P003",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 더 적게도 되나? 시험해 보진 마."
+ },
+ {
+  "id": "P004",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 몇 초나 걸렸겠네."
+ },
+ {
+  "id": "P005",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "목표 {obiettivo}걸음에 {passi}걸음. 목표는 참 긍정적이네."
+ },
+ {
+  "id": "P006",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 계속 거기 있으면 안 질려?"
+ },
+ {
+  "id": "P007",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 천천히 해. 누가 쫓아오는 것도 아닌데."
+ },
+ {
+  "id": "P008",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 소파가 널 자랑스러워해."
+ },
+ {
+  "id": "P009",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 박수. 오늘 한 번, 내일 한 번."
+ },
+ {
+  "id": "P010",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 오늘 일정이 꽉 찼나 봐."
+ },
+ {
+  "id": "P011",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 기대를 낮췄는데 그 밑으로 가네."
+ },
+ {
+  "id": "P012",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "지금 {percento}%. 나머지는 소파가 걸어 줘?"
+ },
+ {
+  "id": "P013",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 장식품으로선 알찬 하루였네."
+ },
+ {
+  "id": "P014",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 너무 무리하진 말고."
+ },
+ {
+  "id": "P015",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 돌아오는 길까지 다 합쳐서?"
+ },
+ {
+  "id": "P016",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{mancano}걸음 남았어. 그냥 그렇다고."
+ },
+ {
+  "id": "P017",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 운동화가 심심해하네."
+ },
+ {
+  "id": "P018",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}걸음. 현관문 한번 열어 봐. 열려."
+ },
+ {
+  "id": "P019",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "정오에 {passi}걸음. 느긋한 출발이네. 아주 느긋해."
+ },
+ {
+  "id": "P020",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "오후 4시. {passi}걸음. 서두를 생각은 없나 봐."
+ },
+ {
+  "id": "P021",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "저녁 7시. {passi}걸음. 오늘도 소파가 이기네."
+ },
+ {
+  "id": "P022",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "벌써 저녁이야. {mancano}걸음 남았어. 계획은?"
+ },
+ {
+  "id": "P023",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "{minuti}분이면 도착이야. 출발을 한다면 말이지."
+ },
+ {
+  "id": "P024",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "하루 종일 {passi}걸음. 꾸준하긴 하네."
+ },
+ {
+  "id": "P025",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "저녁 8시. {passi}걸음. 그럼 내일 다시?"
+ },
+ {
+  "id": "P026",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "절반 왔어. 평소엔 여기가 종점인데. 오늘은 어때?"
+ },
+ {
+  "id": "P027",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "절반 왔어. 소파가 전화하면 받지 마."
+ },
+ {
+  "id": "P028",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}걸음 남았어. 여기서 그만두면 딱 너답지."
+ },
+ {
+  "id": "P029",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "거의 다 왔네. ‘거의’ 뗄 때 알려 줘."
+ },
+ {
+  "id": "P030",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}걸음. 이 정도는 너도 하겠다."
+ },
+ {
+  "id": "P031",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음. 장식품치곤 야심 찬 목표네."
+ },
+ {
+  "id": "P032",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음. 자신한테 참 너그럽네."
+ },
+ {
+  "id": "P033",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표 낮췄네. 잠깐만, 놀란 척 좀 하게."
+ },
+ {
+  "id": "P034",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음으로 낮췄네. 소파도 찬성이래."
+ },
+ {
+  "id": "P035",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "목표 올렸네. 얼마나 가나 보자."
+ },
+ {
+  "id": "P036",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}걸음. 그래, 그래. 믿을게."
+ },
+ {
+  "id": "P037",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이 썼어. 어제는 내가 대신 수습했지."
+ },
+ {
+  "id": "P038",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{jolly}개 남았어. 너무 믿진 말고."
+ },
+ {
+  "id": "P039",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "지킴이 얻었네. 내일까지는 가려나."
+ },
+ {
+  "id": "P040",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}일째 이어 왔네. 이번 기록은 잘 간직해 봐."
+ },
+ {
+  "id": "P041",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "연속 기록이 끊겼어. 산책 한 번이면 됐는데."
+ },
+ {
+  "id": "P042",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}일 버티고 다시 소파. 익숙한 결말이네."
+ },
+ {
+  "id": "P043",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "다시 첫날. 둘이 인사는 생략해도 되겠네."
+ },
+ {
+  "id": "P044",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 달력에 동그라미 쳐 둘게."
+ },
+ {
+  "id": "P045",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "해냈네. 감탄할 뻔했어."
+ },
+ {
+  "id": "P046",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "목표 달성. 걸을 줄 아는구나."
+ },
+ {
+  "id": "P047",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "해냈네. 축하 행진은 좀 이따 하자."
+ },
+ {
+  "id": "P048",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "신기록. 하려고 들면 되는구나."
+ },
+ {
+  "id": "P049",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "신기록. 소파가 서운하대."
+ },
+ {
+  "id": "P050",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}걸음. 오늘은 나도 할 말이 없네."
+ },
+ {
+  "id": "P051",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "있잖아 / {passi}걸음. 소파는 어디 안 가."
+ },
+ {
+  "id": "P052",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "알림 / {mancano}걸음 남았어. 혹시 궁금할까 봐."
+ },
+ {
+  "id": "P053",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "별일 없어? / {passi}걸음. 이것도 소파에서 읽고 있지?"
+ },
+ {
+  "id": "P054",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "오후 6시야 / {passi}걸음. 아직 시간 있어. 조금."
+ },
+ {
+  "id": "P055",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "새 소식 / 없어. 아직 {passi}걸음이야."
+ },
+ {
+  "id": "P056",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "해 봐 / 걸어서 {minuti}분이야. 너도 할 수 있어."
+ },
+ {
+  "id": "P057",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "화면 한 번 누른다고 한 걸음은 아니야."
+ },
+ {
+  "id": "P058",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "응, 난 잘 돌아가. 너는?"
+ },
+ {
+  "id": "P059",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "숫자는 쳐다본다고 올라가지 않아."
+ }
+]

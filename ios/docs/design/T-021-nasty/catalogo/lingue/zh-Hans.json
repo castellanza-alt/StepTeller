@@ -1,0 +1,1178 @@
+[
+ {
+  "id": "N001",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。真他妈丢人。"
+ },
+ {
+  "id": "N002",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。这成绩你也好意思点开？"
+ },
+ {
+  "id": "N003",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "才{passi}步。赶紧他妈的起来。"
+ },
+ {
+  "id": "N004",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。跟那破沙发有完没完？"
+ },
+ {
+  "id": "N005",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目标{obiettivo}步，你走{passi}步。糊弄谁呢？"
+ },
+ {
+  "id": "N006",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。今天辛苦沙发了。"
+ },
+ {
+  "id": "N007",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你就是个会玩手机的摆件。"
+ },
+ {
+  "id": "N008",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。少得可怜。你倒是一如既往。"
+ },
+ {
+  "id": "N009",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。又是这副德行。"
+ },
+ {
+  "id": "N010",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。好几个钟头没挪窝，你孵遥控器呢？"
+ },
+ {
+  "id": "N011",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "说好{obiettivo}步，结果{passi}步。你就吹吧。"
+ },
+ {
+  "id": "N012",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。幸亏沙发那儿有网，不然你怎么活？"
+ },
+ {
+  "id": "N014",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。说你散了个步，都算造谣。"
+ },
+ {
+  "id": "N015",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。丢人的是你，尴尬的倒是我。"
+ },
+ {
+  "id": "N016",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目标完成{percento}%。剩下的全归沙发。"
+ },
+ {
+  "id": "N017",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。“出门走走”这四个字，哪个难为你了？"
+ },
+ {
+  "id": "N019",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "真够废的。说错了，是{passi}步。一个意思。"
+ },
+ {
+  "id": "N020",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。停这么久，搁外面早收费了。"
+ },
+ {
+  "id": "N021",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你他妈还特地进来看一眼？"
+ },
+ {
+  "id": "N022",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。我又数了一遍。操，还真没数错。"
+ },
+ {
+  "id": "N023",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。沙发说了，感谢你长期捧场。"
+ },
+ {
+  "id": "N024",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你可真逗。我这是在笑话你。"
+ },
+ {
+  "id": "N025",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。忙活半天，就攒了这么点破玩意儿。"
+ },
+ {
+  "id": "N026",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。数这点破步数，还得专门下载我？"
+ },
+ {
+  "id": "N027",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。等你下一步，纯属浪费我时间。"
+ },
+ {
+  "id": "N028",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你这就好意思收工了？"
+ },
+ {
+  "id": "N029",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。扫地机器人一天都比你有奔头。"
+ },
+ {
+  "id": "N030",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。动一动，摆件。"
+ },
+ {
+  "id": "N031",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。这点步数顶个屁用。"
+ },
+ {
+  "id": "N032",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。等你迈下一步，我都够休个年假了。"
+ },
+ {
+  "id": "N033",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。连你定的目标都在笑话你。"
+ },
+ {
+  "id": "N034",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。真有你的，干得稀烂。"
+ },
+ {
+  "id": "N035",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。别他妈磨蹭了，出门。"
+ },
+ {
+  "id": "N036",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。沙发出去吹牛，聊的肯定是你。"
+ },
+ {
+  "id": "N037",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目标{obiettivo}步，实走{passi}步。你连装都懒得装。"
+ },
+ {
+  "id": "N038",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。论偷懒，你他妈是真勤快。"
+ },
+ {
+  "id": "N039",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。真他妈寒碜。"
+ },
+ {
+  "id": "N040",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目标完成{percento}%。评语就俩字：稀烂。"
+ },
+ {
+  "id": "N041",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。要么出门，要么把我卸了。"
+ },
+ {
+  "id": "N042",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。我要是你，早把屏幕扣桌上了。"
+ },
+ {
+  "id": "N043",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "走了{passi}步，还差{mancano}步。好家伙，基本全欠着。"
+ },
+ {
+  "id": "N044",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你特地系鞋带，就为了这个？"
+ },
+ {
+  "id": "N045",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "中午十二点，{passi}步。一上午全他妈白给了。"
+ },
+ {
+  "id": "N046",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "上午十一点，{passi}步。开局就这德行。"
+ },
+ {
+  "id": "N047",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "都中午了，{passi}步。醒醒，摆件。"
+ },
+ {
+  "id": "N048",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "上午结束，{passi}步。沙发已经领先了。"
+ },
+ {
+  "id": "N049",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "下午四点，{passi}步。你这就打算摆烂到底了？"
+ },
+ {
+  "id": "N050",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "都下午了，{passi}步。连钟都知道往前走。"
+ },
+ {
+  "id": "N051",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "下午五点，{passi}步。最后一次挽尊的机会。"
+ },
+ {
+  "id": "N052",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "下午三点，{passi}步。半天时间让你霍霍没了。"
+ },
+ {
+  "id": "N053",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "晚上七点，{passi}步。一整天算是让你糟蹋了。"
+ },
+ {
+  "id": "N054",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "天都黑了，{passi}步。走得真他妈漂亮。"
+ },
+ {
+  "id": "N055",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "晚上八点，{passi}步。沙发又赢了。"
+ },
+ {
+  "id": "N056",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "都晚上了，{passi}步。嫌丢人就出去走。"
+ },
+ {
+  "id": "N057",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "还差{mancano}步。{minuti}分钟。别他妈坐着了。"
+ },
+ {
+  "id": "N059",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "晚上七点，还差{mancano}步。磨叽什么呢？"
+ },
+ {
+  "id": "N060",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "一天结束，{passi}步。一整天就憋出这么点？"
+ },
+ {
+  "id": "N061",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "晚上了，{passi}步。又在主场输给了沙发。"
+ },
+ {
+  "id": "N062",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{minuti}分钟。就{minuti}分钟。这你也得讨价还价？"
+ },
+ {
+  "id": "N063",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "最后一小时，还差{mancano}步。赶紧滚出去走。"
+ },
+ {
+  "id": "N064",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "今天收在{passi}步。报这个数我都嫌丢人。"
+ },
+ {
+  "id": "N065",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "今天{passi}步。睡吧，你都彩排一天了。"
+ },
+ {
+  "id": "N066",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "最终成绩，{passi}步。沙发开香槟了。"
+ },
+ {
+  "id": "N067",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "才走一半。要不要给你颁半块奖牌？接着走。"
+ },
+ {
+  "id": "N069",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}步。你他妈倒是有一回走完啊。"
+ },
+ {
+  "id": "N070",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "一半了。又准备在老地方撂挑子？"
+ },
+ {
+  "id": "N072",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{percento}%。剩下一半，难不成要我替你走？"
+ },
+ {
+  "id": "N073",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "还差{mancano}步。今天别他妈又掉链子。"
+ },
+ {
+  "id": "N074",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "差一点？“差一点”有个屁用。"
+ },
+ {
+  "id": "N075",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}步。谁都能走？那你倒是走啊。"
+ },
+ {
+  "id": "N076",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "再走{minuti}分钟。麻利点。"
+ },
+ {
+  "id": "N077",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "离目标还差{mancano}步。搁这儿放弃可真够丢人的。"
+ },
+ {
+  "id": "N078",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标{obiettivo}步。你可真他妈有出息。"
+ },
+ {
+  "id": "N079",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}步？谁走不完啊。看见你，我犹豫了。"
+ },
+ {
+  "id": "N080",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "把目标调低了？瞧你这点出息。"
+ },
+ {
+  "id": "N082",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}步。这破目标是沙发帮你定的吧？"
+ },
+ {
+  "id": "N083",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "每天{obiettivo}步。为了躺赢，你倒挺会动脑筋。"
+ },
+ {
+  "id": "N085",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "降到{obiettivo}步。恭喜，总算把终点挪近了。"
+ },
+ {
+  "id": "N086",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标调低了。你连站都没站起来就认输了。"
+ },
+ {
+  "id": "N087",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标调低了。怎么，沙发那边排期太满？"
+ },
+ {
+  "id": "N088",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "又调低目标。你可真行，次次都怂。"
+ },
+ {
+  "id": "N089",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标提高到{obiettivo}步了。看你能硬气几天。"
+ },
+ {
+  "id": "N090",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}步。等你真迈出第一步再叫我。"
+ },
+ {
+  "id": "N091",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标提高了。少他妈吹，走两步。"
+ },
+ {
+  "id": "N092",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "昨天全靠护身符救场。你他妈纯属躺赢。"
+ },
+ {
+  "id": "N093",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "护身符用光了。要么走，要么跟连续记录说拜拜。"
+ },
+ {
+  "id": "N094",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "连续记录断了。{serie}天打水漂。你自己干的。"
+ },
+ {
+  "id": "N095",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "连续记录归零。给沙发道个喜，然后重来。"
+ },
+ {
+  "id": "N096",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "护身符用掉了。谁让你昨天走得那么烂。"
+ },
+ {
+  "id": "N097",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "护身符用掉一个，还剩{jolly}个。用完自己想辙。"
+ },
+ {
+  "id": "N098",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "护身符保住了连续记录。你他妈干啥了？"
+ },
+ {
+  "id": "N099",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "护身符到手。糟蹋这东西你可在行。"
+ },
+ {
+  "id": "N100",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "连着走了{serie}天。别又他妈搞砸了。"
+ },
+ {
+  "id": "N101",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "连续记录断了。出门走一圈的事，愣是没办成。"
+ },
+ {
+  "id": "N102",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "连续记录断在第{serie}天。真他妈可惜。"
+ },
+ {
+  "id": "N103",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}天全白搭。就为了那破沙发。"
+ },
+ {
+  "id": "N104",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "连续记录断了。你他妈又输给一件家具。"
+ },
+ {
+  "id": "N105",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "又是第一天。你干脆把收货地址填这儿得了。"
+ },
+ {
+  "id": "N106",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "今晚连续记录要断了。还差{mancano}步。赶紧走。"
+ },
+ {
+  "id": "N107",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "最后一个护身符也烧光了。这下得真走了。"
+ },
+ {
+  "id": "N108",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。你他妈可算走到了。"
+ },
+ {
+  "id": "N109",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo}步走完了。难得没给我丢人。"
+ },
+ {
+  "id": "N110",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。我没想到。你自己也没想到吧。"
+ },
+ {
+  "id": "N111",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "成了。不是瞎猫碰上死耗子，明天就再走一回。"
+ },
+ {
+  "id": "N112",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "新纪录。谁把摆件带出去遛了？"
+ },
+ {
+  "id": "N113",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。操，我差点当故障上报。"
+ },
+ {
+  "id": "N114",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "走完了。别指望我天天夸你。"
+ },
+ {
+  "id": "N115",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo}步。可他妈算到了。"
+ },
+ {
+  "id": "N116",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。今天沙发过得挺操蛋啊。"
+ },
+ {
+  "id": "N117",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "你做到了。明天我还是押沙发。"
+ },
+ {
+  "id": "N118",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "走完了。以前那些破成绩可没一笔勾销。"
+ },
+ {
+  "id": "N119",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。这不就是你自己定的最低要求？"
+ },
+ {
+  "id": "N120",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "新纪录。合着你之前就是懒得走。"
+ },
+ {
+  "id": "N121",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "新纪录。以前走得那么烂，你故意的吧。"
+ },
+ {
+  "id": "N122",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}步。行，今天我闭嘴。"
+ },
+ {
+  "id": "N123",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目标翻倍完成。你他妈把手机借谁了？"
+ },
+ {
+  "id": "N124",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}步。今天你还真没走得太寒碜。"
+ },
+ {
+  "id": "N125",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "起来 / {passi}步。不够。你他妈就没够过。"
+ },
+ {
+  "id": "N126",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "喂，摆件 / 目标{obiettivo}步，你走了{passi}步。动起来。"
+ },
+ {
+  "id": "N127",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "真丢人 / {passi}步。还差{mancano}步。现在就出门。"
+ },
+ {
+  "id": "N128",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "还在沙发上？ / {passi}步。我就知道。"
+ },
+ {
+  "id": "N130",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "坏消息 / {passi}步。坏消息就是你。"
+ },
+ {
+  "id": "N131",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "醒醒 / {passi}步。你守着沙发能领工资啊？"
+ },
+ {
+  "id": "N132",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "丢不丢人 / 目标{obiettivo}步，实走{passi}步。还有啥可狡辩的？"
+ },
+ {
+  "id": "N133",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "动起来 / 还差{mancano}步。等着它自己走完啊？"
+ },
+ {
+  "id": "N134",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "提醒一下 / 今天还是走得稀烂。{passi}步。"
+ },
+ {
+  "id": "N135",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "快讯 / {passi}步。沙发给你送锦旗来了。"
+ },
+ {
+  "id": "N136",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "真够惨的 / 目标完成{percento}%。起来。"
+ },
+ {
+  "id": "N137",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "下午六点了 / {passi}步。最后的机会了，摆件。"
+ },
+ {
+  "id": "N138",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "滚下沙发 / {passi}步。你一整天就干了这个？"
+ },
+ {
+  "id": "N139",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "还在原地？ / {passi}步。一个钟头前就是这个破数。"
+ },
+ {
+  "id": "N140",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "没啥新鲜的 / {passi}步。还是那副德行。"
+ },
+ {
+  "id": "N141",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "别他妈戳了。走。"
+ },
+ {
+  "id": "N142",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "我数的是步数。你戳出火星子也没用。"
+ },
+ {
+  "id": "N143",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "把那破手机放下。起来。"
+ },
+ {
+  "id": "N144",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "又把我打开了。有本事把门打开啊。"
+ },
+ {
+  "id": "N145",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "瞪我干吗？步数又不是我欠你的。"
+ },
+ {
+  "id": "P001",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。对摆件来说，挺了不起。"
+ },
+ {
+  "id": "P002",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。沙发托我跟你打个招呼。"
+ },
+ {
+  "id": "P003",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。还能更少吗？不用特意试。"
+ },
+ {
+  "id": "P004",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。想必花了你好几秒吧。"
+ },
+ {
+  "id": "P005",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "目标{obiettivo}步，实际{passi}步。目标还挺乐观。"
+ },
+ {
+  "id": "P006",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。老待在那儿，不腻吗？"
+ },
+ {
+  "id": "P007",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。慢点儿，没人追你。"
+ },
+ {
+  "id": "P008",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你是沙发的骄傲。"
+ },
+ {
+  "id": "P009",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。给你鼓掌。今天一下，明天一下。"
+ },
+ {
+  "id": "P010",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。看来今天行程挺满。"
+ },
+ {
+  "id": "P011",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。我没抱多大期望。你还真能再低点。"
+ },
+ {
+  "id": "P012",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "完成了{percento}%。剩下的交给沙发走？"
+ },
+ {
+  "id": "P013",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。摆件今天也算没白忙。"
+ },
+ {
+  "id": "P014",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。悠着点，可别走多了。"
+ },
+ {
+  "id": "P015",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。这就连回程都算上了？"
+ },
+ {
+  "id": "P016",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "还差{mancano}步。我就随口一提。"
+ },
+ {
+  "id": "P017",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。你的鞋正琢磨找点别的事做。"
+ },
+ {
+  "id": "P018",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}步。试试家门，能打开的。"
+ },
+ {
+  "id": "P019",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "中午十二点，{passi}步。起步挺慢。相当慢。"
+ },
+ {
+  "id": "P020",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "下午四点，{passi}步。看得出你不赶时间。"
+ },
+ {
+  "id": "P021",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "晚上七点，{passi}步。沙发又拿下一局。"
+ },
+ {
+  "id": "P022",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "天黑了，还差{mancano}步。打算怎么办？"
+ },
+ {
+  "id": "P023",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "{minuti}分钟就能走到。前提是你出发。"
+ },
+ {
+  "id": "P024",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "一天下来{passi}步。你倒是发挥稳定。"
+ },
+ {
+  "id": "P025",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "晚上八点，{passi}步。那就改明天？"
+ },
+ {
+  "id": "P026",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "一半了。往常你都在这儿收工。今天呢？"
+ },
+ {
+  "id": "P027",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "走到一半了。沙发来电话，别接。"
+ },
+ {
+  "id": "P028",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "还差{mancano}步。现在停，倒是很有你的风格。"
+ },
+ {
+  "id": "P029",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "差一点。等“一点”走完了再叫我。"
+ },
+ {
+  "id": "P030",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano}步。这个连你都走得完。"
+ },
+ {
+  "id": "P031",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}步。对摆件来说，志向不小。"
+ },
+ {
+  "id": "P032",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}步。你对自己挺体贴啊。"
+ },
+ {
+  "id": "P033",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标调低了。等我酝酿一下惊讶的表情。"
+ },
+ {
+  "id": "P034",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "降到{obiettivo}步了。沙发给你点了个赞。"
+ },
+ {
+  "id": "P035",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目标调高了。看看能保持多久。"
+ },
+ {
+  "id": "P036",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}步。行行行，我信。"
+ },
+ {
+  "id": "P037",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "护身符用掉了。昨天是我替你兜的底。"
+ },
+ {
+  "id": "P038",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "还剩{jolly}个。别太指望它们。"
+ },
+ {
+  "id": "P039",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "拿到护身符了。在你这儿能过夜吗？"
+ },
+ {
+  "id": "P040",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "已经连着走了{serie}天。这回可要保住。"
+ },
+ {
+  "id": "P041",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "连续记录断了。原本散个步就行。"
+ },
+ {
+  "id": "P042",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "坚持了{serie}天，然后是沙发。熟悉的结局。"
+ },
+ {
+  "id": "P043",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "第一天。你俩就不用互相介绍了吧。"
+ },
+ {
+  "id": "P044",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。这日子我得在日历上圈一下。"
+ },
+ {
+  "id": "P045",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "做到了。我差点就对你刮目相看了。"
+ },
+ {
+  "id": "P046",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "达标了。原来你会走啊。"
+ },
+ {
+  "id": "P047",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "做到了。庆功宴先别急着订。"
+ },
+ {
+  "id": "P048",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "新纪录。你想走的时候，这不是能走吗？"
+ },
+ {
+  "id": "P049",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "新纪录。沙发觉得你变了。"
+ },
+ {
+  "id": "P050",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}步。今天我没什么可挑的。"
+ },
+ {
+  "id": "P051",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "喂 / {passi}步。放心，你走了沙发也不会跑。"
+ },
+ {
+  "id": "P052",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "提醒一下 / 还差{mancano}步。怕你好奇。"
+ },
+ {
+  "id": "P053",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "还好吧？ / {passi}步。这条也是在沙发上看的吧？"
+ },
+ {
+  "id": "P054",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "下午六点了 / {passi}步。还有时间。不多。"
+ },
+ {
+  "id": "P055",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "有进展吗？ / 没有。还是{passi}步。"
+ },
+ {
+  "id": "P056",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "走吧 / 走路{minuti}分钟。连你都行。"
+ },
+ {
+  "id": "P057",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "点我一下，不算走了一步。"
+ },
+ {
+  "id": "P058",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "嗯，我在正常运转。你呢？"
+ },
+ {
+  "id": "P059",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "光盯着看，步数可不会涨。"
+ }
+]

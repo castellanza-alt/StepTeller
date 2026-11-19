@@ -1,0 +1,1178 @@
+[
+ {
+  "id": "N001",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。しょぼすぎて話になんねえ。"
+ },
+ {
+  "id": "N002",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。よくその数字、人前で開けるな。"
+ },
+ {
+  "id": "N003",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "たった{passi}歩。いいからさっさと立て。"
+ },
+ {
+  "id": "N004",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。そのクソソファから離れろ。"
+ },
+ {
+  "id": "N005",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目標{obiettivo}歩で{passi}歩。ふざけてんのか。"
+ },
+ {
+  "id": "N006",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ソファはよく頑張ったな。"
+ },
+ {
+  "id": "N007",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。置物のくせにスマホは持つんだな。"
+ },
+ {
+  "id": "N008",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。少なっ。まあ、いつものことか。"
+ },
+ {
+  "id": "N009",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。またこのザマかよ。"
+ },
+ {
+  "id": "N010",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。何時間そこにいんだよ。指定席か。"
+ },
+ {
+  "id": "N011",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{obiettivo}歩って言ってたよな。{passi}歩。口だけかよ。"
+ },
+ {
+  "id": "N012",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ソファまでWi-Fiが届いてよかったな。"
+ },
+ {
+  "id": "N014",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。「サボった」って言ってやるのも甘いな。"
+ },
+ {
+  "id": "N015",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。表示するこっちが恥ずかしいわ。"
+ },
+ {
+  "id": "N016",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目標の{percento}%。残りは全部ソファ行き。"
+ },
+ {
+  "id": "N017",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。「歩け」のどこがそんなに難しいんだよ。"
+ },
+ {
+  "id": "N019",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "しょっぼ。あ、ごめん。{passi}歩。意味は同じか。"
+ },
+ {
+  "id": "N020",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。そこ、そろそろ駐車料金取られるぞ。"
+ },
+ {
+  "id": "N021",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。よくそれで記録を見に来たな。"
+ },
+ {
+  "id": "N022",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。マジかよ。数え直した。マジかよ。"
+ },
+ {
+  "id": "N023",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ソファが「毎度どうも」だってよ。"
+ },
+ {
+  "id": "N024",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。笑ったわ。褒めてねえぞ。"
+ },
+ {
+  "id": "N025",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。なんだこのショボい稼ぎ。"
+ },
+ {
+  "id": "N026",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。こんなもん数えるのにアプリ入れたのかよ。"
+ },
+ {
+  "id": "N027",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。待たされたこっちの時間返せ。"
+ },
+ {
+  "id": "N028",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。それでもう今日の仕事は終わりってか。"
+ },
+ {
+  "id": "N029",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ロボット掃除機のほうが部屋を回ってるぞ。"
+ },
+ {
+  "id": "N030",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。おい、置物。動け。"
+ },
+ {
+  "id": "N031",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。クソの足しにもならねえ。"
+ },
+ {
+  "id": "N032",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。次の一歩を待ってる間がクソ長い。"
+ },
+ {
+  "id": "N033",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。目標の数字にまで笑われてるぞ。"
+ },
+ {
+  "id": "N034",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。見事なまでにクソだな。"
+ },
+ {
+  "id": "N035",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。いいから外に出やがれ。"
+ },
+ {
+  "id": "N036",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ソファにとっちゃ自慢の常連だな。"
+ },
+ {
+  "id": "N037",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目標{obiettivo}歩で{passi}歩。やるフリすらなしか。"
+ },
+ {
+  "id": "N038",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ダラダラする時だけは手を抜かねえな。"
+ },
+ {
+  "id": "N039",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。見るに堪えねえ。"
+ },
+ {
+  "id": "N040",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "目標の{percento}%。判定、クソ。"
+ },
+ {
+  "id": "N041",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。歩くか、私を消すか。選べ。"
+ },
+ {
+  "id": "N042",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。その画面、今すぐ伏せたくならねえの？"
+ },
+ {
+  "id": "N043",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。あと{mancano}歩。ほぼ丸ごと残してんじゃねえか。"
+ },
+ {
+  "id": "N044",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。何のために靴ひも結んだんだよ。"
+ },
+ {
+  "id": "N045",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "正午で{passi}歩。午前中を丸ごとドブに捨てたな。"
+ },
+ {
+  "id": "N046",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "午前11時。{passi}歩。出だしからこのザマか。"
+ },
+ {
+  "id": "N047",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "もう昼だ。{passi}歩。起きろ、置物。"
+ },
+ {
+  "id": "N048",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "午前終了。{passi}歩。もうソファにリードされてるぞ。"
+ },
+ {
+  "id": "N049",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "午後4時。{passi}歩。もう店じまいかよ。"
+ },
+ {
+  "id": "N050",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "もう午後だぞ。{passi}歩。時計くらい動いてみろよ。"
+ },
+ {
+  "id": "N051",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "午後5時。{passi}歩。今日のクソ記録、まだ直せるぞ。"
+ },
+ {
+  "id": "N052",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "午後3時。{passi}歩。半日ドブに捨てやがって。"
+ },
+ {
+  "id": "N053",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "午後7時。{passi}歩。今日一日、棒に振ったな。"
+ },
+ {
+  "id": "N054",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "夜になって{passi}歩。ひでえ出来だな。"
+ },
+ {
+  "id": "N055",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "午後8時。{passi}歩。またソファの勝ちだ。"
+ },
+ {
+  "id": "N056",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "もう夜だ。{passi}歩。恥をかいたついでに歩いてこい。"
+ },
+ {
+  "id": "N057",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "あと{mancano}歩。{minuti}分だ。今すぐ立て、グズ。"
+ },
+ {
+  "id": "N059",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "午後7時。あと{mancano}歩。何モタモタしてんだ。"
+ },
+ {
+  "id": "N060",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{passi}歩で一日終了。丸一日かけてそれかよ。"
+ },
+ {
+  "id": "N061",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "夜だ。{passi}歩。今日もホームで負けてやんの。"
+ },
+ {
+  "id": "N062",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{minuti}分だぞ。たった{minuti}分。それすら渋るのかよ。"
+ },
+ {
+  "id": "N063",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "残り1時間。あと{mancano}歩。とっとと外に出ろ。"
+ },
+ {
+  "id": "N064",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "本日の最終記録、{passi}歩。発表するのもアホらしい。"
+ },
+ {
+  "id": "N065",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "今日は{passi}歩。もう寝ろ。予行練習は十分だろ。"
+ },
+ {
+  "id": "N066",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "最終結果、{passi}歩。ソファが祝杯あげてるぞ。"
+ },
+ {
+  "id": "N067",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "目標の半分。メダルも半分ほしいのか。歩け。"
+ },
+ {
+  "id": "N069",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "あと{mancano}歩。たまには最後までやりやがれ。"
+ },
+ {
+  "id": "N070",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "半分。どうせここで投げるんだろ？"
+ },
+ {
+  "id": "N072",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{percento}%。残り半分、誰が歩くんだよ。"
+ },
+ {
+  "id": "N073",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "あと{mancano}歩。今日くらいしくじるなよ。"
+ },
+ {
+  "id": "N074",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "惜しい？ 「惜しい」にクソほどの価値もねえよ。"
+ },
+ {
+  "id": "N075",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "あと{mancano}歩。誰でもできるって？ じゃあやれよ。"
+ },
+ {
+  "id": "N076",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "あと{minuti}分。さっさと動け。"
+ },
+ {
+  "id": "N077",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "ゴールまで{mancano}歩。ここで投げたらダサすぎるぞ。"
+ },
+ {
+  "id": "N078",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標{obiettivo}歩。志の低さにクソ笑った。"
+ },
+ {
+  "id": "N079",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩？ 誰でもいけるだろ。お前はどうかな。"
+ },
+ {
+  "id": "N080",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標下げやがった。逃げ道作るのは早えな。"
+ },
+ {
+  "id": "N082",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩。その目標、ソファに決めさせたのか。"
+ },
+ {
+  "id": "N083",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "一日{obiettivo}歩。楽に勝つための工夫だけはするんだな。"
+ },
+ {
+  "id": "N085",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩に下げたな。ゴールのほうを動かしてどうする。"
+ },
+ {
+  "id": "N086",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標下げたな。立ちもしねえでギブアップか。"
+ },
+ {
+  "id": "N087",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標下げたな。そんなにソファの予定が詰まってんのか。"
+ },
+ {
+  "id": "N088",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "また目標下げたのか。情けねえ。"
+ },
+ {
+  "id": "N089",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標を{obiettivo}歩に上げたか。いつまで持つかな。"
+ },
+ {
+  "id": "N090",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩。最初の一歩が出たら呼んでくれ。"
+ },
+ {
+  "id": "N091",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標上げたな。口はもういい。歩け。"
+ },
+ {
+  "id": "N092",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "昨日はおまもりに救われたな。お前はサボっただけだ。"
+ },
+ {
+  "id": "N093",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "おまもりは品切れ。歩くか、連続記録を捨てるかだ。"
+ },
+ {
+  "id": "N094",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録が途切れた。{serie}日がパー。誰のせいだろうな。"
+ },
+ {
+  "id": "N095",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録はゼロ。ソファに拍手して、一からやり直せ。"
+ },
+ {
+  "id": "N096",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "おまもり使ったぞ。昨日の歩きっぷりはクソだった。"
+ },
+ {
+  "id": "N097",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "おまもりを1個消費。残り{jolly}個。尽きたら自力でなんとかしろ。"
+ },
+ {
+  "id": "N098",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録はおまもりが守った。で、お前は何した？"
+ },
+ {
+  "id": "N099",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "おまもり獲得。どう無駄遣いするか見ものだな。"
+ },
+ {
+  "id": "N100",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}日間の連続記録。いつもの調子でぶち壊すなよ。"
+ },
+ {
+  "id": "N101",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録が途切れた。歩きゃ済んだ話だろうが。"
+ },
+ {
+  "id": "N102",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録は{serie}日で終了。もったいねえにも程がある。"
+ },
+ {
+  "id": "N103",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}日分がパー。あのクソソファのためにな。"
+ },
+ {
+  "id": "N104",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録は終了。またソファなんかに負けやがって。"
+ },
+ {
+  "id": "N105",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "また初日かよ。ここに住所移したらどうだ。"
+ },
+ {
+  "id": "N106",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "今夜で連続記録が切れそうだぞ。あと{mancano}歩。動け。"
+ },
+ {
+  "id": "N107",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "最後のおまもりを使ったぞ。今度こそ自分で歩け。"
+ },
+ {
+  "id": "N108",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。ったく、待たせやがって。"
+ },
+ {
+  "id": "N109",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo}歩達成。今日は文句のつけようがねえな。"
+ },
+ {
+  "id": "N110",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。まさかと思ったよ。お前もだろ。"
+ },
+ {
+  "id": "N111",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "達成だ。まぐれじゃねえなら明日もやれ。"
+ },
+ {
+  "id": "N112",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "新記録。誰だ、置物を散歩に連れ出したのは。"
+ },
+ {
+  "id": "N113",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。危うくバグ報告するとこだった。"
+ },
+ {
+  "id": "N114",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "達成だ。褒められるのが当然だと思うなよ。"
+ },
+ {
+  "id": "N115",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo}歩。やっとかよ、まったく。"
+ },
+ {
+  "id": "N116",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。ソファにとっちゃクソみたいな日だな。"
+ },
+ {
+  "id": "N117",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "達成したな。明日はソファに賭けるわ。"
+ },
+ {
+  "id": "N118",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "達成だ。それまでのクソ記録は消えねえぞ。"
+ },
+ {
+  "id": "N119",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。自分で決めた最低ラインだけどな。"
+ },
+ {
+  "id": "N120",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "新記録。ほかの日はただサボってたんだな。"
+ },
+ {
+  "id": "N121",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "新記録。前はわざとあのザマだったのかよ。"
+ },
+ {
+  "id": "N122",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}歩。わかったよ。今日は黙っとく。"
+ },
+ {
+  "id": "N123",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "目標の倍だと？ 誰にスマホ貸したんだよ。"
+ },
+ {
+  "id": "N124",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}歩。今日はクソ記録ってわけにはいかねえな。"
+ },
+ {
+  "id": "N125",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "立て / {passi}歩。足りねえ。いつも足りねえ。"
+ },
+ {
+  "id": "N126",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "おい、置物 / 目標{obiettivo}歩で{passi}歩。動け。"
+ },
+ {
+  "id": "N127",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "ひでえな / {passi}歩。あと{mancano}歩。今すぐ外に出ろ。"
+ },
+ {
+  "id": "N128",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "まだソファか？ / {passi}歩。やっぱりな。"
+ },
+ {
+  "id": "N130",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "悲報 / {passi}歩。悲報ってのはお前のことだ。"
+ },
+ {
+  "id": "N131",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "起きろ / {passi}歩。ソファに座ると時給でも出るのか。"
+ },
+ {
+  "id": "N132",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "よく見ろ / 目標{obiettivo}歩で{passi}歩。何か言い訳は？"
+ },
+ {
+  "id": "N133",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "動け / あと{mancano}歩。ほっときゃ増えるとでも思ってんのか。"
+ },
+ {
+  "id": "N134",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "念のため / 相変わらずひでえな。{passi}歩。"
+ },
+ {
+  "id": "N135",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "速報 / {passi}歩。ソファから感謝状が届いてるぞ。"
+ },
+ {
+  "id": "N136",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "情けねえ / 目標の{percento}%。とっとと立て。"
+ },
+ {
+  "id": "N137",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "午後6時だ / {passi}歩。ラストチャンスだぞ、置物。"
+ },
+ {
+  "id": "N138",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "ソファからどけ / {passi}歩。一日かけてそれっぽっちか。"
+ },
+ {
+  "id": "N139",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "まだそこか？ / {passi}歩。1時間前もそうだったぞ。"
+ },
+ {
+  "id": "N140",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "異常なし / {passi}歩。いつもどおりクソ少ねえ。"
+ },
+ {
+  "id": "N141",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "つついてねえで歩け。"
+ },
+ {
+  "id": "N142",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "タップなんか数えてねえよ。歩け。"
+ },
+ {
+  "id": "N143",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "スマホを置け。さっさと立て。"
+ },
+ {
+  "id": "N144",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "またアプリ開いたな。たまには玄関開けやがれ。"
+ },
+ {
+  "id": "N145",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "にらんだって増えねえよ。歩数だぞ。"
+ },
+ {
+  "id": "P001",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。置物にしては上出来。"
+ },
+ {
+  "id": "P002",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ソファがよろしくって。"
+ },
+ {
+  "id": "P003",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。これより少なくできる？ 試さなくていいよ。"
+ },
+ {
+  "id": "P004",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。そりゃ何秒もかかっただろうね。"
+ },
+ {
+  "id": "P005",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "目標{obiettivo}歩で{passi}歩。強気なのは目標のほうだね。"
+ },
+ {
+  "id": "P006",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。そこにいるの、飽きない？"
+ },
+ {
+  "id": "P007",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。まあ落ち着いて。誰も追ってないよ。"
+ },
+ {
+  "id": "P008",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ソファの自慢だね。"
+ },
+ {
+  "id": "P009",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。拍手。一回は今日、もう一回は明日。"
+ },
+ {
+  "id": "P010",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。ずいぶんご多忙のようで。"
+ },
+ {
+  "id": "P011",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。期待は低めにしたよ。その下を行ったね。"
+ },
+ {
+  "id": "P012",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "今{percento}%。残りはソファが歩くの？"
+ },
+ {
+  "id": "P013",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。置物としては充実した一日だね。"
+ },
+ {
+  "id": "P014",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。飛ばしすぎないでね。"
+ },
+ {
+  "id": "P015",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。帰り道も込みで？"
+ },
+ {
+  "id": "P016",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "あと{mancano}歩。まあ、一応言っとくね。"
+ },
+ {
+  "id": "P017",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。靴が暇を持て余してるよ。"
+ },
+ {
+  "id": "P018",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi}歩。玄関のドア、ちゃんと開くよ。"
+ },
+ {
+  "id": "P019",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "正午で{passi}歩。ゆっくり始めたね。ほんとにゆっくり。"
+ },
+ {
+  "id": "P020",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "午後4時。{passi}歩。ずいぶんのんびりだね。"
+ },
+ {
+  "id": "P021",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "午後7時。{passi}歩。またソファの勝ち。"
+ },
+ {
+  "id": "P022",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "もう夜だよ。あと{mancano}歩。どうする？"
+ },
+ {
+  "id": "P023",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "{minuti}分で着くよ。出発すればね。"
+ },
+ {
+  "id": "P024",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "一日終わって{passi}歩。安定感はあるね。"
+ },
+ {
+  "id": "P025",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "午後8時。{passi}歩。じゃ、また明日かな。"
+ },
+ {
+  "id": "P026",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "半分。いつもならここが終点。今日はどうかな。"
+ },
+ {
+  "id": "P027",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "折り返しだよ。ソファからの着信は無視して。"
+ },
+ {
+  "id": "P028",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "あと{mancano}歩。ここでやめたら、いかにも君らしいね。"
+ },
+ {
+  "id": "P029",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "惜しいね。「惜しい」が取れたら教えて。"
+ },
+ {
+  "id": "P030",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "あと{mancano}歩。これなら君でもいけるよ。"
+ },
+ {
+  "id": "P031",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩。置物にしては大きく出たね。"
+ },
+ {
+  "id": "P032",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩。自分にやさしい設定だね。"
+ },
+ {
+  "id": "P033",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標下げたね。ちょっと待って、驚く準備するから。"
+ },
+ {
+  "id": "P034",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩に下げたね。ソファも賛成だって。"
+ },
+ {
+  "id": "P035",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "目標上げたね。さて、いつまで続くかな。"
+ },
+ {
+  "id": "P036",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo}歩。うんうん、信じてるよ。"
+ },
+ {
+  "id": "P037",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "おまもり使用。昨日は私がカバーしといたよ。"
+ },
+ {
+  "id": "P038",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "残り{jolly}個。あんまり当てにしないでね。"
+ },
+ {
+  "id": "P039",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "おまもり獲得。明日までもつかな。"
+ },
+ {
+  "id": "P040",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}日間の連続記録。今度は大事にね。"
+ },
+ {
+  "id": "P041",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "連続記録はここまで。ひと歩きで済んだのにね。"
+ },
+ {
+  "id": "P042",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{serie}日続いて、そのあとソファ。おなじみの結末だね。"
+ },
+ {
+  "id": "P043",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "初日。もう顔なじみだね。"
+ },
+ {
+  "id": "P044",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。カレンダーに丸つけとくね。"
+ },
+ {
+  "id": "P045",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "達成。ちょっと感心しかけたよ。"
+ },
+ {
+  "id": "P046",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "目標達成。なんだ、ちゃんと歩けるんだ。"
+ },
+ {
+  "id": "P047",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "やったね。パレードの手配はまだ早いよ。"
+ },
+ {
+  "id": "P048",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "新記録。やる気がある日は違うね。"
+ },
+ {
+  "id": "P049",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "新記録。ソファがすねてるよ。"
+ },
+ {
+  "id": "P050",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi}歩。今日は私から言うことないよ。"
+ },
+ {
+  "id": "P051",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "ねえ / {passi}歩。出かけてもソファは逃げないよ。"
+ },
+ {
+  "id": "P052",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "お知らせ / あと{mancano}歩。念のためね。"
+ },
+ {
+  "id": "P053",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "どうしたの？ / {passi}歩。これもソファで読んでるのかな。"
+ },
+ {
+  "id": "P054",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "午後6時だよ / {passi}歩。まだ時間はあるよ。少しね。"
+ },
+ {
+  "id": "P055",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "続報 / 特になし。まだ{passi}歩。"
+ },
+ {
+  "id": "P056",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "ほら / 歩いて{minuti}分。君でも行けるよ。"
+ },
+ {
+  "id": "P057",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "タップ一回は一歩に入らないよ。"
+ },
+ {
+  "id": "P058",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "うん、私は動いてるよ。そっちは？"
+ },
+ {
+  "id": "P059",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "カウンターは眺めても回らないよ。"
+ }
+]

@@ -29,6 +29,13 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   mai durante la notte e mai doppia con il promemoria; Jolly guadagnato e usato: una notifica per evento e un pop-up
   alla prima apertura dopo l'evento, mai ripetuto. Si usano i meccanismi già presenti (consegna in sottofondo di Salute,
   widget, risveglio in sottofondo), Salute sempre in sola lettura, nessuna rete. Si possono spegnere in Impostazioni.
+- **D-045 NASTY è la 1.3, solo in italiano (19/11/2026, William: «Sì, parti»).** Progetto in
+  `docs/design/T-022-nasty-progetto.md`, approvato. Piccante e NASTY escono solo in italiano (nelle altre lingue la
+  sezione Voce non compare); inglese subito dopo, poi le altre, riscritte e non tradotte. L'Apple Watch (PR #28)
+  passa alla 1.4. Catalogo approvato: 196 battute (`docs/design/T-021-nasty/catalogo/catalogo-approvato.md`); regole
+  delle battute: solo dati che l'app ha, massimo 12 parole, mai «zero passi», niente sesso, corpo, salute, età,
+  famiglia, nessun genere di chi legge; parolacce e insulti solo al livello NASTY. Età 13+. Hargreaves (T-008)
+  archiviato.
 - **D-044 NASTY, impostazione alla Carrot (19/11/2026, William).** NEAT stesso è il personaggio e parla in prima
   persona: ha una forma ma non un volto. Tre livelli (Normale, intermedio, NASTY), gratuiti; di serie Normale, e
   l'introduzione chiede se si vuole «un'esperienza più piccante». Tono da roast («Roast in Peace»), non da battuta

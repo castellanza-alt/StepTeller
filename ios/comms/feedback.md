@@ -3,6 +3,9 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, testi italiani dei pop-up, delle notifiche e del Jolly regalo (tela, nessuna build): «i testi sono ok».
+  «Occhio alla grafica perché le parole escono dal quadrato.» Ok a preparare le Novità 1.2 e all'invio della 1.2
+  ad Apple («ok procedi»). → 1.2
 - **18/11/2026**, icona di Natale (T-019, nessuna build): bocciate le proposte A1/A2 («la gamba pare unirsi a centro
   piede»); vuole «una versione bella» dell'icona normale, con proporzioni giuste tra gamba e scarpa. Approvata la
   proposta ricavata dalla normale (suola da scarpone, stivale nero, pelliccia, pantalone rosso): «questa». → T-019

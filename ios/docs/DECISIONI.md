@@ -29,6 +29,11 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   mai durante la notte e mai doppia con il promemoria; Jolly guadagnato e usato: una notifica per evento e un pop-up
   alla prima apertura dopo l'evento, mai ripetuto. Si usano i meccanismi già presenti (consegna in sottofondo di Salute,
   widget, risveglio in sottofondo), Salute sempre in sola lettura, nessuna rete. Si possono spegnere in Impostazioni.
+- **D-046 NASTY in tutte le lingue, dopo la 1.2 (19/11/2026, William).** «Prima di pubblicare due cose: 1. aspettiamo
+  che la 1.2 sia pubblicata. E poi facciamo le traduzioni anche nelle altre lingue (usiamo ChatGPT).» Corregge D-045:
+  la 1.3 non esce solo in italiano ma nelle 10 lingue, e non si invia ad Apple finché la 1.2 non è pubblicata. Le
+  battute si riscrivono lingua per lingua con ChatGPT (GPT-6.2 Astra, dal browser di Claude con l'accesso di
+  William); il Traduttore le controlla contro regole e glossario. Il nucleo tiene un catalogo per lingua.
 - **D-045 NASTY è la 1.3, solo in italiano (19/11/2026, William: «Sì, parti»).** Progetto in
   `docs/design/T-022-nasty-progetto.md`, approvato. Piccante e NASTY escono solo in italiano (nelle altre lingue la
   sezione Voce non compare); inglese subito dopo, poi le altre, riscritte e non tradotte. L'Apple Watch (PR #28)

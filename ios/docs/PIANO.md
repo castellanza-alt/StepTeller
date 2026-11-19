@@ -63,8 +63,10 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-020 Nessuna parola fuori dai riquadri, in tutte le lingue | Developer | `task/T-020-riquadri` | fatto 19/11 (#50) |
 | T-021 NASTY: carattere di NEAT e catalogo delle battute (D-044) | Director | `docs/design/T-021-nasty/catalogo/` | fatto 19/11: 196 battute approvate da William |
 | T-022 NASTY: progetto dell'app prima del codice | Director | `docs/design/T-022-nasty-progetto.md` | approvato da William 19/11 (D-045) |
-| T-023 NASTY: il cuore, il fumetto e le schermate nuove | Designer | `design/T-023-nasty` | assegnato 19/11 |
-| T-024 NASTY: situazioni, scelta della battuta e catalogo nel nucleo | Developer | `task/T-024-nasty-nucleo` | assegnato 19/11 |
+| T-023 NASTY: il cuore, il fumetto e le schermate nuove | Designer | `design/T-023-nasty` | cuori piaciuti a William 19/11; animazioni da arricchire (PR #52 aperta) |
+| T-024 NASTY: situazioni, scelta della battuta e catalogo nel nucleo | Developer | `task/T-024-nasty-nucleo` | fatto 19/11 (#51) |
+| T-025 NASTY: controllo delle battute nelle 9 lingue (riscritte da ChatGPT) | Traduttore | `lang/T-025-nasty` | fatto 19/11 (#53): 73 righe corrette; resa comica non giudicata da madrelingua |
+| T-026 NASTY (1.3): privacy, store e testi dell'interfaccia | Director | `docs/design/T-026-nasty-testi.md` | bozza 19/11, in attesa di William |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

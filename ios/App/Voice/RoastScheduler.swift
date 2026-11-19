@@ -9,6 +9,8 @@ import StepTellerCore
 enum RoastScheduler {
     struct Input: Sendable {
         let now: Date
+        /// Steps really read from Health: without them nothing changes (no plan from an empty count).
+        let known: Bool
         let level: NastyLevel
         let frequency: RoastFrequency
         let catalog: NastyCatalog?
@@ -20,6 +22,8 @@ enum RoastScheduler {
     static let lineKey = "line"
 
     static func update(_ input: Input, calendar: Calendar = .current) async {
+        // a voice in force but no count read: the plan of the last read stays (Normale still withdraws)
+        guard input.known || input.level == .normale else { return }
         let center = UNUserNotificationCenter.current()
         let pending = await center.pendingNotificationRequests().map(\.identifier)
             .filter { $0.hasPrefix(RoastPlan.notificationPrefix) }

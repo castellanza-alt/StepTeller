@@ -197,29 +197,70 @@ public enum NastyPicker {
     }
 
     /// At random among the candidates not among the last `NastyMemory.size` of the level; when all were seen
-    /// recently, the one seen longest ago (with `allowRecent`; otherwise nil). `avoiding`: placeholders to do
-    /// without when possible (notifications: `{passi}` can be old by delivery time). Nil: no line fits (Normale, or
+    /// recently, the one seen longest ago (with `allowRecent`; otherwise nil). Nil: no line fits (Normale, or
     /// nothing for these numbers).
+    /// - The lines of a true event come before the generic ones, the rarest event first (`precedence`: record, then
+    ///   twice the goal…): «Doppio dell'obiettivo» wins over «Obiettivo raggiunto» (T-031).
+    /// - `avoiding`: placeholders to do without when possible (notifications: `{passi}` can be old by delivery time).
+    /// - `excluding`: placeholders never said, because the place shows that number already (the Jolly tag of the
+    ///   pop-up, the minutes of the reminder).
+    /// - `notSaying`: texts the line must not repeat, because the place shows them already (the pop-up's title);
+    ///   compared without case, accents and punctuation. Translations reword titles: `repeating` finds the lines on
+    ///   the Italian reference, and `excludingIDs` leaves them out in every language (ids are shared).
+    /// - `excludingIDs`: lines never said here.
     public static func pick(_ catalog: NastyCatalog, level: NastyLevel, moment: NastyMoment, memory: NastyMemory,
-                            avoiding: Set<NastyPlaceholder> = [], allowRecent: Bool = true, format: (Int) -> String = ItalianFormat.integer,
+                            avoiding: Set<NastyPlaceholder> = [], excluding: Set<NastyPlaceholder> = [],
+                            excludingIDs: Set<String> = [], notSaying: [String] = [], allowRecent: Bool = true,
+                            format: (Int) -> String = ItalianFormat.integer,
                             using rng: inout some RandomNumberGenerator) -> NastyQuote? {
-        let all = candidates(catalog, level: level, moment: moment)
+        let shown = notSaying.map(plain).filter { !$0.isEmpty }
+        let all = candidates(catalog, level: level, moment: moment).filter { line in
+            !excludingIDs.contains(line.id) && line.placeholders.isDisjoint(with: excluding)
+                && !shown.contains { plain((line.titolo ?? "") + " " + line.testo).contains($0) }
+        }
         guard !all.isEmpty else { return nil }
         let recent = memory.recent(level)
-        let fresh = all.filter { !recent.contains($0.id) }
         func preferred(_ lines: [NastyLine]) -> [NastyLine] {
             let without = lines.filter { $0.placeholders.isDisjoint(with: avoiding) }
             return without.isEmpty ? lines : without
         }
-        let line: NastyLine
-        if fresh.isEmpty {
-            guard allowRecent else { return nil }
-            line = preferred(all).max { (recent.firstIndex(of: $0.id) ?? .max) < (recent.firstIndex(of: $1.id) ?? .max) }!
-        } else {
+        // tiers by event, rarest first; in each, the lines not seen recently
+        let tiers = Dictionary(grouping: all, by: { precedence($0.event) }).sorted { $0.key > $1.key }.map(\.value)
+        for tier in tiers {
+            let fresh = tier.filter { !recent.contains($0.id) }
+            guard !fresh.isEmpty else { continue }
             let pool = preferred(fresh)
-            line = pool[Int.random(in: 0..<pool.count, using: &rng)]
+            return quote(pool[Int.random(in: 0..<pool.count, using: &rng)], values: moment.values, format: format)
         }
+        guard allowRecent, let top = tiers.first else { return nil }
+        let line = preferred(top).max { (recent.firstIndex(of: $0.id) ?? .max) < (recent.firstIndex(of: $1.id) ?? .max) }!
         return quote(line, values: moment.values, format: format)
+    }
+
+    /// Lines of `catalog` (the Italian reference) that repeat one of `texts`: their ids, to leave out in any language.
+    public static func repeating(_ texts: [String], in catalog: NastyCatalog) -> Set<String> {
+        let shown = texts.map(plain).filter { !$0.isEmpty }
+        return Set(catalog.battute.filter { line in
+            shown.contains { plain((line.titolo ?? "") + " " + line.testo).contains($0) }
+        }.map(\.id))
+    }
+
+    /// Which lines come first: the rarer the event, the higher (T-031: record, then twice the goal, then the last
+    /// Jolly, then any other event, then the generic lines).
+    static func precedence(_ event: NastyEvent?) -> Int {
+        switch event {
+        case nil: 0
+        case .record: 4
+        case .doppio: 3
+        case .jollyFiniti: 2
+        default: 1
+        }
+    }
+
+    /// Lowercase letters and digits only, words split by one space: «JOLLY GUADAGNATO!» → «jolly guadagnato».
+    static func plain(_ text: String) -> String {
+        let folded = text.folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: nil)
+        return folded.split(whereSeparator: { !($0.isLetter || $0.isNumber) }).joined(separator: " ")
     }
 
     /// Fills the placeholders. `format`: numbers as in the rest of the app in the catalog's language (the app passes

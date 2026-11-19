@@ -295,6 +295,87 @@ final class NastyChoiceTests: XCTestCase {
                         isRecord: record, minuteOfDay: hour * 60 + minute)
     }
 
+    // MARK: T-031
+
+    /// Record and twice the goal win over the generic «Quando ce la fai», the record first.
+    func testEventLinesComeFirst() {
+        for (record, event) in [(true, NastyEvent.record), (false, .doppio)] {
+            let moment = NastyMoment.of(.home, day: day(25_000, record: record))
+            for level in [NastyLevel.nasty, .piccante] {
+                // as many as the event's lines: each one once, then (seen) the next tier
+                let count = catalog.battute.filter { $0.livello == level.catalogName && $0.event == event }.count
+                var memory = NastyMemory()
+                for seed in 0..<count {
+                    var rng = SeededRandom(seed: UInt64(seed))
+                    let quote = NastyPicker.pick(catalog, level: level, moment: moment, memory: memory, using: &rng)!
+                    let line = catalog.battute.first { $0.id == quote.id }!
+                    XCTAssertEqual(line.event, event, "\(level) \(quote.text)")
+                    memory.record(quote.id, level: level)
+                }
+            }
+        }
+        // the event lines all seen recently: a fresh generic line rather than a repeat
+        let moment = NastyMoment.of(.home, day: day(25_000))
+        var memory = NastyMemory()
+        for line in catalog.battute where line.livello == "NASTY" && line.event == .doppio { memory.record(line.id, level: .nasty) }
+        var rng = SeededRandom(seed: 1)
+        let quote = NastyPicker.pick(catalog, level: .nasty, moment: moment, memory: memory, using: &rng)!
+        XCTAssertNil(catalog.battute.first { $0.id == quote.id }!.event)
+        XCTAssertEqual(NastyPicker.precedence(.record), 4)
+        XCTAssertGreaterThan(NastyPicker.precedence(.doppio), NastyPicker.precedence(.jollyUsato))
+        XCTAssertEqual(NastyPicker.precedence(nil), 0)
+    }
+
+    /// The pop-up never repeats its title nor the number of its tag; the reminder never its minutes and numbers.
+    func testNoRepetitionOfThePlace() {
+        XCTAssertEqual(NastyPicker.plain("JOLLY GUADAGNATO!"), "jolly guadagnato")
+        XCTAssertEqual(NastyPicker.plain("Già fatto: perché?"), "gia fatto perche")
+        for (trigger, title) in [(NastyMoment.Trigger.jollyEarned, "JOLLY GUADAGNATO!"), (.jollyUsed, "JOLLY USATO")] {
+            let moment = NastyMoment.of(trigger, day: day(3_000, jolly: 3))
+            for level in [NastyLevel.nasty, .piccante] {
+                let said = Set((0..<60).compactMap { seed -> String? in
+                    var rng = SeededRandom(seed: UInt64(seed))
+                    return NastyPicker.pick(catalog, level: level, moment: moment, memory: NastyMemory(),
+                                            excluding: [.jolly, .serie], notSaying: [title], using: &rng)?.id
+                })
+                // today's catalog: only «Jolly usato» in Senza pietà keeps lines (N092, N098); the others all repeat
+                // title or tag, so those pop-ups keep their own sentence
+                XCTAssertEqual(!said.isEmpty, trigger == .jollyUsed && level == .nasty, "\(level) \(title)")
+                for id in said {
+                    let line = catalog.battute.first { $0.id == id }!
+                    XCTAssertTrue(line.placeholders.isDisjoint(with: [.jolly, .serie]), id)
+                    XCTAssertFalse(NastyPicker.plain(line.testo).contains(NastyPicker.plain(title)), id)
+                }
+            }
+        }
+        // the ones the place repeats exist: without the rule they could come out
+        XCTAssertTrue(catalog.battute.contains { NastyPicker.plain($0.testo).hasPrefix("jolly guadagnato") })
+        // nothing left: nil, and the place keeps its own text
+        var rng = SeededRandom(seed: 2)
+        XCTAssertNil(NastyPicker.pick(catalog, level: .nasty, moment: NastyMoment.of(.jollyEarned, day: day(3_000)),
+                                      memory: NastyMemory(), notSaying: ["a", "e", "i", "o", "u"], using: &rng))
+    }
+
+    /// Translations reword the title: the lines that repeat it are found on Italian and left out by id everywhere.
+    func testTitleRepeatsLeftOutInEveryLanguage() {
+        let earned = NastyPicker.repeating(["JOLLY GUADAGNATO!"], in: catalog)
+        let used = NastyPicker.repeating(["JOLLY USATO"], in: catalog)
+        XCTAssertTrue(earned.isSuperset(of: ["N099", "P039"]))
+        XCTAssertTrue(used.isSuperset(of: ["N096", "P037"]))
+        for (code, other) in NastyLibrary.onBoard.catalogs {
+            for (trigger, ids) in [(NastyMoment.Trigger.jollyEarned, earned), (.jollyUsed, used)] {
+                let moment = NastyMoment.of(trigger, day: day(3_000, jolly: 3))
+                for seed in 0..<40 {
+                    var rng = SeededRandom(seed: UInt64(seed))
+                    if let q = NastyPicker.pick(other, level: .nasty, moment: moment, memory: NastyMemory(),
+                                                excludingIDs: ids, using: &rng) {
+                        XCTAssertFalse(ids.contains(q.id), "\(code) \(q.id)")
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: situations
 
     func testHomeSituations() {
@@ -685,6 +766,29 @@ final class NastyBubbleTests: XCTestCase {
         // Normale: nothing
         XCTAssertNil(NastyBubble.home(nil, catalog: catalog, level: .normale, moment: home(3_000, 15), memory: &memory,
                                       now: date(15), calendar: calendar, using: &rng))
+    }
+
+    /// Twice the goal later the same day: the event's lines take the bubble, without waiting (T-031).
+    func testAnEventLaterTakesTheBubble() {
+        var memory = NastyMemory()
+        var rng = SeededRandom(seed: 5)
+        var bubble: NastyBubble?
+        // a generic «Quando ce la fai» line at the goal
+        for seed in 0..<50 {
+            var r = SeededRandom(seed: UInt64(seed))
+            let b = NastyBubble.home(nil, catalog: catalog, level: .nasty, moment: home(10_200, 15), memory: &memory,
+                                     now: date(15), calendar: calendar, using: &r)!.bubble
+            if catalog.battute.first(where: { $0.id == b.id })!.event == nil { bubble = b; break }
+        }
+        let generic = try! XCTUnwrap(bubble)
+        // same situation ([.fatto]) ten minutes later, now twice the goal
+        let twice = NastyBubble.home(generic, catalog: catalog, level: .nasty, moment: home(21_000, 15, 10),
+                                     memory: &memory, now: date(15, 10), calendar: calendar, using: &rng)!
+        XCTAssertEqual(catalog.battute.first { $0.id == twice.bubble.id }!.event, .doppio)
+        // and it stays
+        let still = NastyBubble.home(twice.bubble, catalog: catalog, level: .nasty, moment: home(21_500, 15, 20),
+                                     memory: &memory, now: date(15, 20), calendar: calendar, using: &rng)!
+        XCTAssertEqual(still.bubble, twice.bubble)
     }
 
     func testHeartLineStaysWhileTheSituationStaysAtMostAnHour() {

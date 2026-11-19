@@ -84,7 +84,8 @@ struct BubblePose {
 }
 
 /// What the heart is doing and since when (T-023 §3): rest, speaking, the tap reactions in rotation and the anger
-/// of quick taps. The views ask for the pose of an instant: one clock for heart and bubble.
+/// of quick taps. The views ask for the pose of an instant: one clock for heart and bubble, always the real time
+/// (never `AppClock`: with `-stepteller.debugNow` the views' clock is the real one).
 @MainActor
 @Observable
 final class HeartMotion {

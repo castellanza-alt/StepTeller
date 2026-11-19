@@ -91,6 +91,12 @@ final class StepsStore {
     var catalogEdition = 0
     /// The heart's clock: speaking, taps, anger (T-023 §3).
     @ObservationIgnored let heart = HeartMotion()
+    /// A tap's line is in the bubble until then (`tapHeart`).
+    @ObservationIgnored var heartLineUntil: Date?
+    @ObservationIgnored var heartLineLevel: NastyLevel?
+    /// Grows when the Home bubble should be asked again (a tap's line is over): `HomeView` does it if on screen.
+    var homeLineRequests = 0
+    @ObservationIgnored var heartLineTask: Task<Void, Never>?
     /// End of the last check of the events (`announceEvents`): the goal celebration waits for it, so the Jolly
     /// pop-ups of the same reading come first (T-005 §1.1).
     private(set) var eventsCheckedAt: Date?
@@ -278,6 +284,7 @@ final class StepsStore {
     /// App in the background: the deferred work runs now (whoever drags the slider and closes the app must
     /// find widget and reminders up to date), then one widget reload with the final state.
     func becameInactive() async {
+        heartLineUntil = nil                    // back in the app: the line of the situation, not the tap's
         pendingWidgetReload = true
         await flushSync()
         dayTask?.cancel()
@@ -526,9 +533,10 @@ final class StepsStore {
         let scheduler = scheduler
         let unit = unit
         let roast = roastInput(steps: reminderPlan.steps)
+        let voiced = hasReadSteps          // without a Health count the reminder keeps its usual text (T-031)
         let task = Task {
             await previous?.value
-            if enabled { await scheduler.apply(requests, unit: unit) } else { await scheduler.cancelAll() }
+            if enabled { await scheduler.apply(requests, unit: unit, voiced: voiced) } else { await scheduler.cancelAll() }
             await RoastScheduler.update(roast)
         }
         reminderQueue = task

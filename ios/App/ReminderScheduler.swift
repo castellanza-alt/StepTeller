@@ -19,13 +19,15 @@ struct ReminderScheduler {
     }
 
     /// Replaces all reminder notifications with the computed ones.
-    func apply(_ requests: [ReminderRequest], unit: DistanceUnit) async {
+    /// `voiced`: with NEAT's voice (only with steps really read from Health).
+    func apply(_ requests: [ReminderRequest], unit: DistanceUnit, voiced: Bool = true) async {
         await removePending()
         let settings = await center.notificationSettings()
         guard [.authorized, .provisional, .ephemeral].contains(settings.authorizationStatus) else { return }
         for r in requests {
             // with NEAT's voice (Piccante, Senza pietà): a line before the numbers
-            let text = NastyVoice.reminder(ReminderText.content(r.message, unit: unit), message: r.message, fire: r.fire)
+            let base = ReminderText.content(r.message, unit: unit)
+            let text = voiced ? NastyVoice.reminder(base, message: r.message, fire: r.fire) : base
             let content = UNMutableNotificationContent()
             content.title = text.title
             content.body = text.body

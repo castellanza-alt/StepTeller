@@ -30,6 +30,11 @@ public struct BackupFile: Codable, Equatable, Sendable {
     /// Christmas gifts received (`JollyGift.Ledger.days`, 1.2): a restore never gives the same season twice.
     /// Added field, like the ones above.
     public var jollyGifts: [String: String]?
+    /// NEAT's voice (`NastyLevel` raw value, 1.3). Added field: older files lack it; a value from a newer app that
+    /// this one does not know is ignored on import.
+    public var voiceLevel: String?
+    /// Roast notifications a day (`RoastFrequency` raw value, 1.3). Added field, like the one above.
+    public var roastFrequency: String?
 
     public init(exportedAt: Date) { self.exportedAt = exportedAt }
 

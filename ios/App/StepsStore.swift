@@ -62,6 +62,15 @@ final class StepsStore {
             SeasonIcon.update()                  // switched off: the normal icon right away (iOS shows its alert)
         }
     }
+    /// NEAT's voice (D-044, T-024): Normale (default), Piccante, NASTY. Saved also in iCloud and the Backup; the
+    /// interface comes with the app task, here only the value. `NastyLevel.effective` gives what the language allows.
+    var voiceLevel: NastyLevel {
+        didSet { defaults.set(voiceLevel.rawValue, forKey: Keys.voiceLevel) }
+    }
+    /// Roast notifications a day (Poche · Normali · Tante), default Normali; saved like the voice.
+    var roastFrequency: RoastFrequency {
+        didSet { defaults.set(roastFrequency.rawValue, forKey: Keys.roastFrequency) }
+    }
     /// End of the last check of the events (`announceEvents`): the goal celebration waits for it, so the Jolly
     /// pop-ups of the same reading come first (T-005 §1.1).
     private(set) var eventsCheckedAt: Date?
@@ -116,6 +125,8 @@ final class StepsStore {
         static let calibration = "stepteller.calibration.v1"
         static let eventsOn = "stepteller.events.on"
         static let seasonal = "stepteller.seasonal"
+        static let voiceLevel = "stepteller.voice.level"
+        static let roastFrequency = "stepteller.roast.frequency"
     }
 
     init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
@@ -147,6 +158,8 @@ final class StepsStore {
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         eventNotificationsOn = defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true
         seasonalThemesOn = defaults.object(forKey: Keys.seasonal) != nil ? defaults.bool(forKey: Keys.seasonal) : true
+        voiceLevel = NastyLevel.saved(defaults.string(forKey: Keys.voiceLevel)) ?? .normale
+        roastFrequency = RoastFrequency.saved(defaults.string(forKey: Keys.roastFrequency)) ?? .normali
         #if DEBUG
         // Simulator screenshots: no notification permission prompt over the UI.
         if defaults.object(forKey: "stepteller.debugSteps") != nil { reminderEnabled = false }
@@ -370,6 +383,8 @@ final class StepsStore {
         if defaults.object(forKey: Keys.reminderTime) != nil { reminderMinutes = defaults.integer(forKey: Keys.reminderTime) }
         if defaults.object(forKey: Keys.eventsOn) != nil { eventNotificationsOn = defaults.bool(forKey: Keys.eventsOn) }
         if defaults.object(forKey: Keys.seasonal) != nil { seasonalThemesOn = defaults.bool(forKey: Keys.seasonal) }
+        if let value = NastyLevel.saved(defaults.string(forKey: Keys.voiceLevel)) { voiceLevel = value }
+        if let value = RoastFrequency.saved(defaults.string(forKey: Keys.roastFrequency)) { roastFrequency = value }
         if let saved = defaults.data(forKey: Keys.calibration).flatMap({ try? JSONDecoder().decode(CalibrationResult.self, from: $0) }) {
             calibration = saved
             SharedStore.calibration = saved
@@ -389,6 +404,8 @@ final class StepsStore {
         file.reminderMinutes = reminderMinutes
         file.eventNotificationsOn = eventNotificationsOn
         file.seasonalThemes = seasonalThemesOn
+        file.voiceLevel = voiceLevel.rawValue
+        file.roastFrequency = roastFrequency.rawValue
         file.theme = defaults.string(forKey: ThemeMode.storageKey)
         file.streakStart = history.streakStart
         file.goalHistory = history.goals
@@ -408,6 +425,8 @@ final class StepsStore {
         if let value = file.reminderMinutes, (0..<24 * 60).contains(value) { reminderMinutes = value }
         if let value = file.eventNotificationsOn { eventNotificationsOn = value }
         if let value = file.seasonalThemes { seasonalThemesOn = value }
+        if let value = NastyLevel.saved(file.voiceLevel) { voiceLevel = value }
+        if let value = RoastFrequency.saved(file.roastFrequency) { roastFrequency = value }
         if let raw = file.theme, ThemeMode(rawValue: raw) != nil { defaults.set(raw, forKey: ThemeMode.storageKey) }
         if let saved = file.calibration {
             calibration = saved

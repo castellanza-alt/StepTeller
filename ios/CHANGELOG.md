@@ -6,6 +6,17 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
+## 1.3 — in lavorazione
+- NASTY, nucleo (T-024, D-044, D-046): un catalogo delle battute per lingua (`NastyCatalog`, `NastyLibrary`),
+  generato da `docs/design/T-021-nasty/catalogo/` (catalogo approvato per lingua e `vincoli.json` con ore ed evento per
+  id) con `scripts/battute.py`, che scrive anche `neat/nasty/<lingua>/battute.json` per il sito; controllo di ogni
+  catalogo (formato, versione, edizione, segnaposti, lunghezze, livelli, situazioni, ore, eventi; le altre lingue
+  contro l'italiano: stessi id e segnaposti), un file rifiutato non sostituisce quello buono e una lingua senza
+  catalogo non offre Piccante e NASTY. Situazione dai dati dell'app (`NastyMoment`), scelta della battuta senza
+  ripetere le ultime 20, mai «zero passi», ore e eventi rispettati (`NastyPicker`), piano delle notifiche roast tra le
+  10 e le 20 con seme (`RoastPlan`), livello della voce e frequenza salvati anche in iCloud e nel Backup (campi nuovi
+  `voiceLevel`, `roastFrequency`). Solo logica, con test: nessuna interfaccia e nessuna rete.
+
 ## 1.2 — inviata ad Apple il 19 novembre 2026, build 1.162.1
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai
   tra le 22 e le 8, toglie il promemoria serale di quel giorno), una quando guadagni un Jolly e una quando un Jolly

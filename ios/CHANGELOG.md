@@ -6,7 +6,7 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
-## 1.3 — in lavorazione
+## 1.3 — su TestFlight, build 1.204.1
 - NASTY, nucleo (T-024, D-044, D-046): un catalogo delle battute per lingua (`NastyCatalog`, `NastyLibrary`),
   generato da `docs/design/T-021-nasty/catalogo/` (catalogo approvato per lingua e `vincoli.json` con ore ed evento per
   id) con `scripts/battute.py`, che scrive anche `neat/nasty/<lingua>/battute.json` per il sito; controllo di ogni

@@ -3,6 +3,9 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, terzo lotto «roast vero» (bozza, nessuna build): nessun giudizio diretto; chiede «tu scrivi,
+  Astra ti risponde e iterate un poco. Fagli fare anche a lui il lavoro di background». Sceglie ChatGPT nel browser
+  (non OpenRouter). → T-021, `battute-nasty-selezione.md`
 - **19/11/2026**, NASTY, lotto da 103 (bozza, nessuna build): «A me sembrano più blande. Ok togliere lo scopare ma
   non sono cattive. Dai con sti roast!» → T-021, terzo lotto
 - **19/11/2026**, NASTY, primo lotto duro del livello 3 (bozza, nessuna build): «Ottime. Da qui a peggio. Ma

@@ -68,7 +68,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-025 NASTY: controllo delle battute nelle 9 lingue (riscritte da ChatGPT) | Traduttore | `lang/T-025-nasty` | fatto 19/11 (#53): 73 righe corrette; resa comica non giudicata da madrelingua |
 | T-026 NASTY (1.3): privacy, store e testi dell'interfaccia | Director | `docs/design/T-026-nasty-testi.md` | approvato da William 19/11 |
 | T-027 NASTY: l'interfaccia (cuore, fumetto, voce, notifiche, catalogo dal sito) | Developer | `task/T-027-nasty-app` | assegnato 19/11 |
-| T-028 NASTY (1.3): testi dell'interfaccia, privacy e store nelle lingue | Traduttore | `lang/T-028-nasty-testi` | assegnato 19/11 |
+| T-028 NASTY (1.3): testi dell'interfaccia, privacy e store nelle lingue | Traduttore | `lang/T-028-nasty-testi` | fatto 19/11 (#54) |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

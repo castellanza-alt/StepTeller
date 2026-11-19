@@ -1,0 +1,156 @@
+{
+ "intro.5.kicker": {
+  "en": "VOICE",
+  "es": "VOZ",
+  "fr": "VOIX",
+  "de": "STIMME",
+  "pt-BR": "VOZ",
+  "ja": "口調",
+  "ko": "말투",
+  "zh-Hans": "语气",
+  "zh-Hant": "語氣"
+ },
+ "intro.5.title": {
+  "en": "WANT ME TO SAY IT NICELY, OR TELL IT LIKE IT IS?",
+  "es": "¿TE LO DIGO CON BUENAS PALABRAS O TE LO DIGO DE VERDAD?",
+  "fr": "JE TE LE DIS GENTIMENT OU JE TE DIS LA VÉRITÉ ?",
+  "de": "SOLL ICH’S DIR NETT SAGEN ODER SO, WIE ES IST?",
+  "pt-BR": "QUER QUE EU FALE COM JEITINHO OU QUE EU FALE A REAL?",
+  "ja": "やさしく言ってほしい？それとも本音で言ってほしい？",
+  "ko": "좋게 말해 줄까, 아니면 제대로 말해 줄까?",
+  "zh-Hans": "想让我好好说，还是说实话？",
+  "zh-Hant": "想要我好好說，還是說真話？"
+ },
+ "intro.5.note": {
+  "en": "Swearing and insults included. Change it anytime in Settings › Voice.",
+  "es": "Palabrotas e insultos incluidos. Lo cambias cuando quieras en Ajustes › Voz.",
+  "fr": "Gros mots et insultes compris. Tu changes quand tu veux dans Réglages › Voix.",
+  "de": "Mit Schimpfwörtern und Beleidigungen. Jederzeit änderbar unter Einstellungen › Stimme.",
+  "pt-BR": "Palavrões e xingamentos inclusos. Dá para mudar quando quiser em Ajustes › Voz.",
+  "ja": "暴言・悪口あり。「設定」›「口調」でいつでも変更できます。",
+  "ko": "욕설과 독설 포함. 설정 › 말투에서 언제든 바꿀 수 있어요.",
+  "zh-Hans": "含脏话和骂人的话。随时可在“设置”›“语气”中更改。",
+  "zh-Hant": "含髒話和罵人的話。隨時可在「設定」›「語氣」中更改。"
+ },
+ "voice.level.normale": {
+  "en": "Normal",
+  "es": "Normal",
+  "fr": "Normal",
+  "de": "Normal",
+  "pt-BR": "Normal",
+  "ja": "ふつう",
+  "ko": "보통",
+  "zh-Hans": "普通",
+  "zh-Hant": "普通"
+ },
+ "voice.level.piccante": {
+  "en": "Spicy",
+  "es": "Picante",
+  "fr": "Piquant",
+  "de": "Bissig",
+  "pt-BR": "Picante",
+  "ja": "ピリ辛",
+  "ko": "매운맛",
+  "zh-Hans": "辛辣",
+  "zh-Hant": "辛辣"
+ },
+ "voice.level.nasty": {
+  "en": "No mercy",
+  "es": "Sin piedad",
+  "fr": "Sans pitié",
+  "de": "Gnadenlos",
+  "pt-BR": "Sem dó",
+  "ja": "容赦なし",
+  "ko": "무자비",
+  "zh-Hans": "毫不留情",
+  "zh-Hant": "毫不留情"
+ },
+ "voice.firstLine": {
+  "en": "From today, I talk. Can’t take it? Settings › Voice.",
+  "es": "Desde hoy hablo. Si no lo aguantas: Ajustes › Voz.",
+  "fr": "Désormais, je parle. Tu ne supportes pas ? Réglages › Voix.",
+  "de": "Ab heute rede ich. Zu viel? Einstellungen › Stimme.",
+  "pt-BR": "A partir de hoje, eu falo. Se não aguentar: Ajustes › Voz.",
+  "ja": "今日からしゃべるぞ。耐えられないなら「設定」›「口調」へ。",
+  "ko": "오늘부터 말한다. 못 견디겠으면: 설정 › 말투.",
+  "zh-Hans": "从今天起我开口了。受不了就去“设置”›“语气”。",
+  "zh-Hant": "從今天起我開口了。受不了就去「設定」›「語氣」。"
+ },
+ "voice.heart.vo": {
+  "en": "NEAT. Tap for another line.",
+  "es": "NEAT. Toca para otra frase.",
+  "fr": "NEAT. Touche pour une autre réplique.",
+  "de": "NEAT. Tippen für einen neuen Spruch.",
+  "pt-BR": "NEAT. Toque para outra frase.",
+  "ja": "NEAT。タップすると別のセリフ。",
+  "ko": "NEAT. 탭하면 다른 한마디.",
+  "zh-Hans": "NEAT。轻点换一句。",
+  "zh-Hant": "NEAT。點一下換一句。"
+ },
+ "set.voice.section": {
+  "en": "Voice",
+  "es": "Voz",
+  "fr": "Voix",
+  "de": "Stimme",
+  "pt-BR": "Voz",
+  "ja": "口調",
+  "ko": "말투",
+  "zh-Hans": "语气",
+  "zh-Hant": "語氣"
+ },
+ "set.voice.note": {
+  "en": "Spicy: sarcasm. No mercy: swearing and insults. NEAT comments on your steps in the app and in notifications. Normal: NEAT keeps quiet.",
+  "es": "Picante: sarcasmo. Sin piedad: palabrotas e insultos. NEAT comenta tus pasos en la app y en las notificaciones. Normal: NEAT se calla.",
+  "fr": "Piquant : sarcasme. Sans pitié : gros mots et insultes. NEAT commente tes pas dans l’app et dans les notifications. Normal : NEAT se tait.",
+  "de": "Bissig: Sarkasmus. Gnadenlos: Schimpfwörter und Beleidigungen. NEAT kommentiert deine Schritte in der App und in Mitteilungen. Normal: NEAT schweigt.",
+  "pt-BR": "Picante: sarcasmo. Sem dó: palavrões e xingamentos. O NEAT comenta seus passos no app e nas notificações. Normal: o NEAT fica quieto.",
+  "ja": "ピリ辛：皮肉。容赦なし：暴言と悪口。NEATがアプリ内と通知であなたの歩数にコメントします。ふつう：NEATは黙っています。",
+  "ko": "매운맛: 비꼬기. 무자비: 욕설과 독설. NEAT가 앱과 알림에서 걸음 수에 한마디해요. 보통: NEAT는 조용히 있어요.",
+  "zh-Hans": "辛辣：讽刺。毫不留情：脏话和骂人。NEAT 会在 App 和通知里点评你的步数。普通：NEAT 保持安静。",
+  "zh-Hant": "辛辣：諷刺。毫不留情：髒話和罵人。NEAT 會在 App 和通知裡點評你的步數。普通：NEAT 保持安靜。"
+ },
+ "set.voice.freq": {
+  "en": "NEAT notifications",
+  "es": "Notificaciones de NEAT",
+  "fr": "Notifications de NEAT",
+  "de": "Mitteilungen von NEAT",
+  "pt-BR": "Notificações do NEAT",
+  "ja": "NEATの通知",
+  "ko": "NEAT 알림",
+  "zh-Hans": "NEAT 通知",
+  "zh-Hant": "NEAT 通知"
+ },
+ "set.voice.freq.poche": {
+  "en": "Few",
+  "es": "Pocas",
+  "fr": "Peu",
+  "de": "Wenige",
+  "pt-BR": "Poucas",
+  "ja": "少なめ",
+  "ko": "적게",
+  "zh-Hans": "少",
+  "zh-Hant": "少"
+ },
+ "set.voice.freq.normali": {
+  "en": "Normal",
+  "es": "Normales",
+  "fr": "Normal",
+  "de": "Normal",
+  "pt-BR": "Normais",
+  "ja": "ふつう",
+  "ko": "보통",
+  "zh-Hans": "正常",
+  "zh-Hant": "一般"
+ },
+ "set.voice.freq.tante": {
+  "en": "Lots",
+  "es": "Muchas",
+  "fr": "Beaucoup",
+  "de": "Viele",
+  "pt-BR": "Muitas",
+  "ja": "多め",
+  "ko": "많이",
+  "zh-Hans": "多",
+  "zh-Hant": "多"
+ }
+}

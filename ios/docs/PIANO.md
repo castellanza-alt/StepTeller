@@ -59,7 +59,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-017 Collaudo del Natale rifatto e dei 10 km/h | QA | `qa/T-017` | fatto, unito 18/11 (#44): icona ingrandita (bloccante) e 6 minori → T-018 |
 | T-018 Correzioni dal collaudo del Natale | Developer, Designer (regalo, icona SVG) | `task/T-018-correzioni`, `design/T-018-*` | fatto, unito 18/11 (#45, #46, #47) |
 | T-019 Icona di Natale più chiara (3 proposte) e illustrazione fino in cima | Designer, Developer | `design/T-019-icona`, `task/T-019-bordo` | fatto 18/11: bordo #48, icona scelta da William #49 |
-| T-020 Nessuna parola fuori dai riquadri, in tutte le lingue | Developer | `task/T-020-riquadri` | assegnato 19/11 |
+| T-020 Nessuna parola fuori dai riquadri, in tutte le lingue | Developer | `task/T-020-riquadri` | fatto 19/11 (#50) |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

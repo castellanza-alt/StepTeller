@@ -251,6 +251,9 @@ final class NastyCatalogTests: XCTestCase {
         XCTAssertEqual(NastyLevel.saved("nasty"), .nasty)
         XCTAssertNil(NastyLevel.saved("diabolico"))
         XCTAssertNil(NastyLevel.saved(nil))
+        // D-047: without a saved value (new install, update from 1.2) the voice is Senza pietà
+        XCTAssertEqual(NastyLevel.standard, .nasty)
+        XCTAssertEqual(NastyLevel.saved(nil) ?? .standard, .nasty)
         XCTAssertEqual(RoastFrequency.saved("tante"), .tante)
         XCTAssertNil(RoastFrequency.saved("sempre"))
         XCTAssertEqual(NastyLevel.normale.catalogName, nil)
@@ -492,8 +495,9 @@ final class RoastPlanTests: XCTestCase {
                 XCTAssertEqual(counts, Set(RoastPlan.countRange(level, frequency)))
             }
         }
-        XCTAssertEqual(RoastPlan.countRange(.nasty, .normali), 4...5)
-        XCTAssertEqual(RoastPlan.countRange(.piccante, .normali), 1...2)
+        // T-026 §1: Senza pietà 2 · 4–5 · 7, Piccante 1 · 1–2 · 3
+        XCTAssertEqual(RoastFrequency.allCases.map { RoastPlan.countRange(.nasty, $0) }, [2...2, 4...5, 7...7])
+        XCTAssertEqual(RoastFrequency.allCases.map { RoastPlan.countRange(.piccante, $0) }, [1...1, 1...2, 3...3])
         XCTAssertEqual(RoastPlan.minutes(level: .normale, frequency: .tante, seed: 1), [])
         // not fixed: the first time changes from day to day
         let firsts = Set((1...30).map { d in
@@ -609,5 +613,107 @@ final class RoastPlanTests: XCTestCase {
                                   format: { "<\($0)>" })
         XCTAssertTrue(plan.contains { $0.quote.text.contains("<7000>") || $0.quote.text.contains("<30>") })
         XCTAssertFalse(plan.contains { $0.quote.text.contains("7.000") })
+    }
+}
+
+final class NastyBubbleTests: XCTestCase {
+    let catalog = NastyLibrary.onBoard.catalogs["it"]!
+    var calendar: Calendar = {
+        var c = Calendar(identifier: .gregorian)
+        c.timeZone = TimeZone(identifier: "Europe/Rome")!
+        return c
+    }()
+
+    private func date(_ hour: Int, _ minute: Int = 0, day: Int = 19) -> Date {
+        calendar.date(from: DateComponents(year: 2026, month: 11, day: day, hour: hour, minute: minute))!
+    }
+
+    private func home(_ steps: Int, _ hour: Int, _ minute: Int = 0) -> NastyMoment {
+        NastyMoment.of(.home, day: NastyMoment.Day(steps: steps, goal: 10_000, minutesLeft: max(0, 10_000 - steps) / 110,
+                                                   streak: 5, jolly: 1, minuteOfDay: hour * 60 + minute))
+    }
+
+    func testKeepsTheLineUntilTheSituationChangesAtMostHourly() {
+        var memory = NastyMemory()
+        var rng = SeededRandom(seed: 3)
+        let first = NastyBubble.home(nil, catalog: catalog, level: .nasty, moment: home(3_000, 9), memory: &memory,
+                                     now: date(9), calendar: calendar, using: &rng)!
+        XCTAssertEqual(memory.recent(.nasty), [first.bubble.id])
+        // same situation, hours later: the same line, numbers filled again
+        let later = NastyBubble.home(first.bubble, catalog: catalog, level: .nasty, moment: home(3_400, 10, 30),
+                                     memory: &memory, now: date(10, 30), calendar: calendar, using: &rng)!
+        XCTAssertEqual(later.bubble, first.bubble)
+        if catalog.battute.first(where: { $0.id == first.bubble.id })!.placeholders.contains(.passi) {
+            XCTAssertTrue(later.quote.text.contains("3.400"), later.quote.text)
+        }
+        // situation changed (11:00 adds morning and afternoon) less than an hour after: still the same line
+        let pick = NastyBubble(id: first.bubble.id, level: .nasty, situations: [.pochiPassi], since: date(10, 30), heart: false)
+        let soon = NastyBubble.home(pick, catalog: catalog, level: .nasty, moment: home(3_400, 11, 10), memory: &memory,
+                                    now: date(11, 10), calendar: calendar, using: &rng)!
+        XCTAssertEqual(soon.bubble, pick)
+        // and a new one after the hour
+        let after = NastyBubble.home(pick, catalog: catalog, level: .nasty, moment: home(3_400, 11, 40), memory: &memory,
+                                     now: date(11, 40), calendar: calendar, using: &rng)!
+        XCTAssertEqual(after.bubble.situations, [.pochiPassi, .mattinaPomeriggio])
+        XCTAssertEqual(after.bubble.since, date(11, 40))
+    }
+
+    func testChangesRightAwayWhenTheLineCanNoLongerBeSaid() {
+        var memory = NastyMemory()
+        var rng = SeededRandom(seed: 9)
+        let low = NastyBubble.home(nil, catalog: catalog, level: .nasty, moment: home(3_000, 15), memory: &memory,
+                                   now: date(15), calendar: calendar, using: &rng)!
+        let done = NastyBubble.home(low.bubble, catalog: catalog, level: .nasty, moment: home(10_200, 15, 5),
+                                    memory: &memory, now: date(15, 5), calendar: calendar, using: &rng)!
+        XCTAssertEqual(done.bubble.situations, [.fatto])
+        XCTAssertTrue(catalog.lines(.nasty, .fatto).contains { $0.id == done.bubble.id })
+        // another level, another day: a new line
+        let piccante = NastyBubble.home(done.bubble, catalog: catalog, level: .piccante, moment: home(10_200, 15, 6),
+                                        memory: &memory, now: date(15, 6), calendar: calendar, using: &rng)!
+        XCTAssertEqual(piccante.bubble.level, .piccante)
+        let tomorrow = NastyBubble.home(piccante.bubble, catalog: catalog, level: .piccante, moment: home(10_200, 15, 6),
+                                        memory: &memory, now: date(15, 6, day: 20), calendar: calendar, using: &rng)!
+        XCTAssertEqual(tomorrow.bubble.since, date(15, 6, day: 20))
+        // Normale: nothing
+        XCTAssertNil(NastyBubble.home(nil, catalog: catalog, level: .normale, moment: home(3_000, 15), memory: &memory,
+                                      now: date(15), calendar: calendar, using: &rng))
+    }
+
+    func testHeartLineStaysWhileTheSituationStaysAtMostAnHour() {
+        var memory = NastyMemory()
+        var rng = SeededRandom(seed: 4)
+        let tap = NastyBubble.heart(catalog: catalog, level: .nasty, moment: home(3_000, 15), memory: &memory,
+                                    now: date(15), using: &rng)!
+        XCTAssertTrue(tap.bubble.heart)
+        XCTAssertTrue(catalog.lines(.nasty, .cuore).contains { $0.id == tap.bubble.id })
+        XCTAssertEqual(tap.bubble.situations, [.pochiPassi, .mattinaPomeriggio])
+        let kept = NastyBubble.home(tap.bubble, catalog: catalog, level: .nasty, moment: home(3_100, 15, 30),
+                                    memory: &memory, now: date(15, 30), calendar: calendar, using: &rng)!
+        XCTAssertEqual(kept.bubble, tap.bubble)
+        let hour = NastyBubble.home(tap.bubble, catalog: catalog, level: .nasty, moment: home(3_100, 16, 1),
+                                    memory: &memory, now: date(16, 1), calendar: calendar, using: &rng)!
+        XCTAssertFalse(hour.bubble.heart)
+        let half = NastyBubble.home(tap.bubble, catalog: catalog, level: .nasty, moment: home(6_000, 15, 10),
+                                    memory: &memory, now: date(15, 10), calendar: calendar, using: &rng)!
+        XCTAssertEqual(half.bubble.situations, [.aMetaQuasi])
+        XCTAssertFalse(half.bubble.heart)
+    }
+
+    func testRage() {
+        XCTAssertEqual([1, 2, 3, 7].map(NastyRage.k), [1, 1.35, 1.7, 1.7])
+        XCTAssertFalse(NastyRage.angry(taps: 1))
+        XCTAssertTrue(NastyRage.angry(taps: 2))
+        let now = Date(timeIntervalSince1970: 1_000)
+        let taps = [now - 5, now - 3.9, now - 1, now]
+        XCTAssertEqual(NastyRage.recent(taps, now: now), [now - 3.9, now - 1, now])
+    }
+
+    func testDownloadOnceADay() {
+        XCTAssertEqual(NastyDownload.url(language: "pt-BR").absoluteString,
+                       "https://castellanza-alt.github.io/StepTeller/neat/nasty/pt-BR/battute.json")
+        XCTAssertTrue(NastyDownload.isDue(last: nil, now: date(9), calendar: calendar))
+        XCTAssertFalse(NastyDownload.isDue(last: date(0, 5), now: date(23, 59), calendar: calendar))
+        XCTAssertTrue(NastyDownload.isDue(last: date(23, 59, day: 18), now: date(0, 1), calendar: calendar))
+        XCTAssertTrue(NastyDownload.isDue(last: date(10, day: 20), now: date(9), calendar: calendar))
     }
 }

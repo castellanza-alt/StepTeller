@@ -3,6 +3,11 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, pagina delle animazioni del cuore e testi (nessuna build): prima «Ma io, dove le vedo le
+  animazioni? Continui a chiedermi cose che non so dove devo andare a cercare» (da allora: le cose da giudicare
+  vanno messe in chat o in una pagina diretta); poi, vista la pagina: «Ok, mi piace tutto procediamo. Finisci il
+  lavoro e prepara tutto e fermati un attimo prima di mandarlo ad Apple.» Approvati cuori, animazioni e testi di
+  T-026. → T-027, T-028
 - **19/11/2026**, NASTY, testi di privacy e store (T-026, bozza): «Mi piacciono ma NASTY non lo userei in italiano,
   troviamo un'altra parola. E poi ho cambiato idea: l'impostazione di default deve essere la più volgare, non lo
   standard.» Ha scelto il nome «Senza pietà» e, per chi aggiorna, «Tutti al livello massimo». → D-047

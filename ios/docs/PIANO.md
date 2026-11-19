@@ -71,6 +71,7 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-028 NASTY (1.3): testi dell'interfaccia, privacy e store nelle lingue | Traduttore | `lang/T-028-nasty-testi` | fatto 19/11 (#54) |
 | T-029 Collaudo della 1.3 (voce di NEAT) | QA | `qa/T-029` | assegnato 19/11 |
 | T-030 Screenshot dello store per la 1.3 | Designer | `design/T-030-screenshot` | assegnato 19/11 |
+| T-031 Correzioni dal collaudo della 1.3 | Developer | `task/T-031-correzioni` | assegnato 19/11 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

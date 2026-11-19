@@ -1,0 +1,1226 @@
+[
+ {
+  "id": "N001",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Fai schifo."
+ },
+ {
+  "id": "N002",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Che vergogna."
+ },
+ {
+  "id": "N003",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "Solo {passi} passi. Alzati, cazzo."
+ },
+ {
+  "id": "N004",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Muovi il culo."
+ },
+ {
+  "id": "N005",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi su {obiettivo}. Ridicolo."
+ },
+ {
+  "id": "N006",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Complimenti al divano."
+ },
+ {
+  "id": "N007",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Sei un soprammobile con il telefono."
+ },
+ {
+  "id": "N008",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Pochi. Troppo pochi. Come sempre."
+ },
+ {
+  "id": "N009",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Non ci siamo. Non ci siamo mai."
+ },
+ {
+  "id": "N010",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Non ti muovi da ore. Fai pena."
+ },
+ {
+  "id": "N011",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Avevi detto {obiettivo}. Stronzate."
+ },
+ {
+  "id": "N012",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Questa è sedentarietà con il wifi."
+ },
+ {
+  "id": "N013",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Vivi sul divano. Si vede dai numeri."
+ },
+ {
+  "id": "N014",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Chiamarla sedentarietà è un complimento."
+ },
+ {
+  "id": "N015",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Mi vergogno io per te."
+ },
+ {
+  "id": "N016",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "Sei al {percento}% dell'obiettivo. Il resto è divano."
+ },
+ {
+  "id": "N017",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Camminare non è il tuo forte. Niente lo è."
+ },
+ {
+  "id": "N018",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "Mancano {mancano} passi. Smetti di leggere e cammina."
+ },
+ {
+  "id": "N019",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "Fai schifo. Scusa, volevo dire: {passi} passi. È lo stesso."
+ },
+ {
+  "id": "N020",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Non è una giornata: è una sosta."
+ },
+ {
+  "id": "N021",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Imbarazzante."
+ },
+ {
+  "id": "N022",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Davvero? Davvero."
+ },
+ {
+  "id": "N023",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Il divano ringrazia."
+ },
+ {
+  "id": "N024",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Fai ridere. Non in senso buono."
+ },
+ {
+  "id": "N025",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Una miseria."
+ },
+ {
+  "id": "N026",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Ti serve un'app per fare così poco?"
+ },
+ {
+  "id": "N027",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Mi fai perdere tempo."
+ },
+ {
+  "id": "N028",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. E la chiami giornata."
+ },
+ {
+  "id": "N029",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Sedentarietà allo stato puro."
+ },
+ {
+  "id": "N030",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Muoviti, soprammobile."
+ },
+ {
+  "id": "N031",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Non valgono un cazzo."
+ },
+ {
+  "id": "N032",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Mi annoio perfino a contarli."
+ },
+ {
+  "id": "N033",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Il tuo obiettivo ride di te."
+ },
+ {
+  "id": "N034",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Bel lavoro di merda."
+ },
+ {
+  "id": "N035",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Esci di casa, cazzo."
+ },
+ {
+  "id": "N036",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Sei l'orgoglio del divano."
+ },
+ {
+  "id": "N037",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi su {obiettivo}. Nemmeno ci provi."
+ },
+ {
+  "id": "N038",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Poltrire è l'unica cosa che fai bene."
+ },
+ {
+  "id": "N039",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Che pena."
+ },
+ {
+  "id": "N040",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{percento}% dell'obiettivo. Voto: fai schifo."
+ },
+ {
+  "id": "N041",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Datti una mossa o disinstallami."
+ },
+ {
+  "id": "N042",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Vergogna pura."
+ },
+ {
+  "id": "N043",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Ti manca tutto: {mancano} passi."
+ },
+ {
+  "id": "N044",
+  "livello": "NASTY",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Una nullità con le scarpe."
+ },
+ {
+  "id": "N045",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Mezzogiorno, {passi} passi. Mattinata sprecata."
+ },
+ {
+  "id": "N046",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Sono le 11. {passi} passi. Cominciamo male."
+ },
+ {
+  "id": "N047",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "{passi} passi a metà giornata. Sveglia, soprammobile."
+ },
+ {
+  "id": "N048",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Mattina finita. {passi} passi. Il divano è già in vantaggio."
+ },
+ {
+  "id": "N049",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Sono le 16. {passi} passi. Ti stai arrendendo."
+ },
+ {
+  "id": "N050",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Pomeriggio. {passi} passi. Il tempo passa, tu no."
+ },
+ {
+  "id": "N051",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Ore 17. {passi} passi. Ultima occasione per non fare schifo."
+ },
+ {
+  "id": "N052",
+  "livello": "NASTY",
+  "situazione": "Mattina e pomeriggio",
+  "testo": "Ore 15. {passi} passi. Metà giornata buttata."
+ },
+ {
+  "id": "N053",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Sono le 19. {passi} passi. Giornata buttata."
+ },
+ {
+  "id": "N054",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{passi} passi a sera. Bella merda."
+ },
+ {
+  "id": "N055",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Ore 20. {passi} passi. Il divano ha vinto ancora."
+ },
+ {
+  "id": "N056",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "È sera. {passi} passi. Vergognati e cammina."
+ },
+ {
+  "id": "N057",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Mancano {mancano} passi. {minuti} minuti. Alza il culo adesso."
+ },
+ {
+  "id": "N058",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{minuti} minuti e ci arrivi. Oppure resti una nullità. Scegli."
+ },
+ {
+  "id": "N059",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Ore 19. Mancano {mancano} passi. Sbrigati, nullità."
+ },
+ {
+  "id": "N060",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{passi} passi e la giornata è finita. Uno schifo."
+ },
+ {
+  "id": "N061",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Sera. {passi} passi. Anche oggi hai perso."
+ },
+ {
+  "id": "N062",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{minuti} minuti. Solo {minuti}. E non li fai, vero?"
+ },
+ {
+  "id": "N063",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Ultima ora. {mancano} passi. Fuori, cazzo."
+ },
+ {
+  "id": "N064",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Giornata chiusa a {passi} passi. Fai pena."
+ },
+ {
+  "id": "N065",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "{passi} passi oggi. Dormi pure: è quello che fai meglio."
+ },
+ {
+  "id": "N066",
+  "livello": "NASTY",
+  "situazione": "Sera",
+  "testo": "Fine giornata: {passi} passi. Il divano festeggia."
+ },
+ {
+  "id": "N067",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Metà obiettivo. Metà di niente è niente. Cammina."
+ },
+ {
+  "id": "N068",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Mancano {mancano} passi. Se molli ora sei una testa di cazzo."
+ },
+ {
+  "id": "N069",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano} passi. Pochi. Falli, per una volta."
+ },
+ {
+  "id": "N070",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Metà. E adesso molli, come sempre?"
+ },
+ {
+  "id": "N071",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Sei a metà. Non fermarti, testa di cazzo."
+ },
+ {
+  "id": "N072",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{percento}%. L'altra metà non si fa da sola."
+ },
+ {
+  "id": "N073",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Mancano {mancano} passi. Evita la solita figura di merda."
+ },
+ {
+  "id": "N074",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Quasi. \"Quasi\" non vale un cazzo."
+ },
+ {
+  "id": "N075",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano} passi. Li fa chiunque. Dimostralo."
+ },
+ {
+  "id": "N076",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "Ti mancano {minuti} minuti. Muoviti."
+ },
+ {
+  "id": "N077",
+  "livello": "NASTY",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano} passi al traguardo. Se molli, fai schifo il doppio."
+ },
+ {
+  "id": "N078",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo: {obiettivo} passi. Che ambizione di merda."
+ },
+ {
+  "id": "N079",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi? Li fa chiunque. Tu, forse."
+ },
+ {
+  "id": "N080",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Hai abbassato l'obiettivo. Vigliaccata."
+ },
+ {
+  "id": "N081",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo abbassato. Così non cammini: ti arrendi."
+ },
+ {
+  "id": "N082",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi. Obiettivo da divano."
+ },
+ {
+  "id": "N083",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi al giorno. Ti piace vincere facile."
+ },
+ {
+  "id": "N084",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo {obiettivo}. Ridicolo, come i tuoi passi."
+ },
+ {
+  "id": "N085",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Abbassato a {obiettivo}. Complimenti per la resa."
+ },
+ {
+  "id": "N086",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo abbassato. Hai mollato senza nemmeno camminare."
+ },
+ {
+  "id": "N087",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo abbassato. Più tempo per il divano. Che tristezza."
+ },
+ {
+  "id": "N088",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Hai abbassato l'obiettivo. Di nuovo. Fai pena."
+ },
+ {
+  "id": "N089",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo alzato a {obiettivo}. Vediamo quanto dura."
+ },
+ {
+  "id": "N090",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi. Tanto non li fai."
+ },
+ {
+  "id": "N091",
+  "livello": "NASTY",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo alzato. Parole. Ora i passi."
+ },
+ {
+  "id": "N092",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Ieri pochi passi. Ti ha salvato un Jolly. Non te lo meriti."
+ },
+ {
+  "id": "N093",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Jolly finiti. Ora cammini o perdi tutto."
+ },
+ {
+  "id": "N094",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Serie persa. {serie} giorni buttati. Colpa tua."
+ },
+ {
+  "id": "N095",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Serie a zero. Complimenti al divano. Ricomincia."
+ },
+ {
+  "id": "N096",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Jolly usato. Ieri hai fatto schifo."
+ },
+ {
+  "id": "N097",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Un Jolly in meno. Ne restano {jolly}. Poi è finita."
+ },
+ {
+  "id": "N098",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Ti ha salvato un Jolly. Tu non salvi niente."
+ },
+ {
+  "id": "N099",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Jolly guadagnato. Lo sprecherai presto."
+ },
+ {
+  "id": "N100",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie} giorni di fila. Non rovinarla come al solito."
+ },
+ {
+  "id": "N101",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Serie finita. Bastava camminare."
+ },
+ {
+  "id": "N102",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Serie persa a {serie} giorni. Che spreco."
+ },
+ {
+  "id": "N103",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "{serie} giorni buttati. Per il divano."
+ },
+ {
+  "id": "N104",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Serie persa. Il divano ha vinto. Ancora."
+ },
+ {
+  "id": "N105",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Giorno uno. Di nuovo. Fai pena."
+ },
+ {
+  "id": "N106",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Stasera rischi la serie. Mancano {mancano} passi. Muoviti."
+ },
+ {
+  "id": "N107",
+  "livello": "NASTY",
+  "situazione": "Jolly e serie",
+  "testo": "Ultimo Jolly bruciato. Adesso cammini davvero."
+ },
+ {
+  "id": "N108",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Era ora, cazzo."
+ },
+ {
+  "id": "N109",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo} passi fatti. Per una volta non fai schifo."
+ },
+ {
+  "id": "N110",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Non ci credevo. Nemmeno tu."
+ },
+ {
+  "id": "N111",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Fatto. Domani uguale, o torni una merda."
+ },
+ {
+  "id": "N112",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Record. Vedi che non sei solo un soprammobile?"
+ },
+ {
+  "id": "N113",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Miracolo."
+ },
+ {
+  "id": "N114",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Fatto. Non abituarti ai complimenti."
+ },
+ {
+  "id": "N115",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{obiettivo} passi. Finalmente, cazzo."
+ },
+ {
+  "id": "N116",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Oggi il divano piange."
+ },
+ {
+  "id": "N117",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Ce l'hai fatta. Domani scommetto di no."
+ },
+ {
+  "id": "N118",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Fatto. Un giorno non cancella gli altri."
+ },
+ {
+  "id": "N119",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Era il minimo."
+ },
+ {
+  "id": "N120",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Record. Allora gli altri giorni era pigrizia."
+ },
+ {
+  "id": "N121",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Nuovo record. Quindi prima facevi schifo apposta."
+ },
+ {
+  "id": "N122",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi} passi. Ok, oggi sto zitto."
+ },
+ {
+  "id": "N123",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "Doppio dell'obiettivo. Chi sei?"
+ },
+ {
+  "id": "N124",
+  "livello": "NASTY",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi} passi. Per oggi non fai schifo."
+ },
+ {
+  "id": "N125",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Alzati / {passi} passi. Non bastano. Non bastano mai."
+ },
+ {
+  "id": "N126",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Ehi, soprammobile / {passi} passi su {obiettivo}. Muoviti."
+ },
+ {
+  "id": "N127",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Fai schifo / {passi} passi. Mancano {mancano}. Fuori, adesso."
+ },
+ {
+  "id": "N128",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Ancora sul divano? / {passi} passi. Indovinato."
+ },
+ {
+  "id": "N129",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Sedentarietà / Oggi ne sei il simbolo: {passi} passi."
+ },
+ {
+  "id": "N130",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Brutte notizie / {passi} passi. La brutta notizia sei tu."
+ },
+ {
+  "id": "N131",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Sveglia / {passi} passi. Il divano non è un lavoro."
+ },
+ {
+  "id": "N132",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Vergogna / {passi} passi su {obiettivo}. Altro da aggiungere?"
+ },
+ {
+  "id": "N133",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Muoviti / Mancano {mancano} passi. Non si fanno da soli."
+ },
+ {
+  "id": "N134",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Promemoria / Fai ancora schifo. {passi} passi."
+ },
+ {
+  "id": "N135",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Notizia / {passi} passi. Il divano ringrazia."
+ },
+ {
+  "id": "N136",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Che pena / {percento}% dell'obiettivo. Alzati."
+ },
+ {
+  "id": "N137",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Sono le 18 / {passi} passi. Ultima occasione, soprammobile."
+ },
+ {
+  "id": "N138",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Alza il culo / {passi} passi non sono una giornata."
+ },
+ {
+  "id": "N139",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Ancora lì? / {passi} passi. Come un'ora fa."
+ },
+ {
+  "id": "N140",
+  "livello": "NASTY",
+  "situazione": "Notifiche",
+  "testo": "Niente di nuovo / {passi} passi. Fai ancora schifo."
+ },
+ {
+  "id": "N141",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Non toccarmi. Cammina."
+ },
+ {
+  "id": "N142",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Toccare non conta. Camminare sì."
+ },
+ {
+  "id": "N143",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Giù le mani. Su il culo."
+ },
+ {
+  "id": "N144",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Mi apri e non cammini. Fai pena."
+ },
+ {
+  "id": "N145",
+  "livello": "NASTY",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Guardarmi non aumenta i passi."
+ },
+ {
+  "id": "P001",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Notevole. Per un soprammobile."
+ },
+ {
+  "id": "P002",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Il divano ti saluta."
+ },
+ {
+  "id": "P003",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Si può fare di meno? Non credo."
+ },
+ {
+  "id": "P004",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Che fatica, immagino."
+ },
+ {
+  "id": "P005",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi su {obiettivo}. Ottimista, l'obiettivo."
+ },
+ {
+  "id": "P006",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Non ti stanchi mai di stare lì?"
+ },
+ {
+  "id": "P007",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Prendila con calma, eh."
+ },
+ {
+  "id": "P008",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Il divano è fiero di te."
+ },
+ {
+  "id": "P009",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Applausi. Lenti."
+ },
+ {
+  "id": "P010",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Una giornata intensa, vedo."
+ },
+ {
+  "id": "P011",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Mi aspettavo poco. Hai fatto meno."
+ },
+ {
+  "id": "P012",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "Sei al {percento}%. Il resto lo fa il divano?"
+ },
+ {
+  "id": "P013",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Bella giornata da soprammobile."
+ },
+ {
+  "id": "P014",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Non esagerare, mi raccomando."
+ },
+ {
+  "id": "P015",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Davvero tutto qui?"
+ },
+ {
+  "id": "P016",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "Mancano {mancano} passi. Così, per dire."
+ },
+ {
+  "id": "P017",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Le scarpe si annoiano."
+ },
+ {
+  "id": "P018",
+  "livello": "Piccante",
+  "situazione": "Pochi passi",
+  "testo": "{passi} passi. Coraggio: la porta si apre."
+ },
+ {
+  "id": "P019",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "Mezzogiorno, {passi} passi. Partenza lenta. Lentissima."
+ },
+ {
+  "id": "P020",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "Ore 16. {passi} passi. Con calma, eh."
+ },
+ {
+  "id": "P021",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "Sono le 19. {passi} passi. Il divano vince ancora."
+ },
+ {
+  "id": "P022",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "Sera. Mancano {mancano} passi. Che si fa?"
+ },
+ {
+  "id": "P023",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "{minuti} minuti e ci arrivi. O no?"
+ },
+ {
+  "id": "P024",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "{passi} passi a fine giornata. Complimenti alla costanza."
+ },
+ {
+  "id": "P025",
+  "livello": "Piccante",
+  "situazione": "Mattina, pomeriggio, sera",
+  "testo": "Ore 20. {passi} passi. Ci riproviamo domani, immagino."
+ },
+ {
+  "id": "P026",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "Metà. Qui di solito ti fermi. Sorprendimi."
+ },
+ {
+  "id": "P027",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "Sei a metà. Il divano chiama: non rispondere."
+ },
+ {
+  "id": "P028",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "Mancano {mancano} passi. Mollare ora sarebbe da te."
+ },
+ {
+  "id": "P029",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "Quasi. \"Quasi\" non conta."
+ },
+ {
+  "id": "P030",
+  "livello": "Piccante",
+  "situazione": "A metà e quasi",
+  "testo": "{mancano} passi. Dai, perfino tu."
+ },
+ {
+  "id": "P031",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi. Ambizioso, per un soprammobile."
+ },
+ {
+  "id": "P032",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi. Ti vuoi bene, vedo."
+ },
+ {
+  "id": "P033",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo abbassato. Che sorpresa."
+ },
+ {
+  "id": "P034",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Abbassato a {obiettivo}. Il divano approva."
+ },
+ {
+  "id": "P035",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "Obiettivo alzato. Vediamo quanto dura."
+ },
+ {
+  "id": "P036",
+  "livello": "Piccante",
+  "situazione": "Obiettivo scelto o cambiato",
+  "testo": "{obiettivo} passi. Certo. Ci credo."
+ },
+ {
+  "id": "P037",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "Jolly usato. Ieri ti ho coperto io."
+ },
+ {
+  "id": "P038",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "Ne restano {jolly}. Non contarci troppo."
+ },
+ {
+  "id": "P039",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "Jolly guadagnato. Dura poco, con te."
+ },
+ {
+  "id": "P040",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{serie} giorni di fila. Non rovinare tutto."
+ },
+ {
+  "id": "P041",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "Serie persa. Bastava una passeggiata."
+ },
+ {
+  "id": "P042",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "{serie} giorni, poi il divano. Classico."
+ },
+ {
+  "id": "P043",
+  "livello": "Piccante",
+  "situazione": "Jolly e serie",
+  "testo": "Giorno uno. Vi conoscete già."
+ },
+ {
+  "id": "P044",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Segno la data."
+ },
+ {
+  "id": "P045",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "Fatto. Sono quasi colpito."
+ },
+ {
+  "id": "P046",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "Obiettivo raggiunto. Allora sai camminare."
+ },
+ {
+  "id": "P047",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "Ce l'hai fatta. Non montarti la testa."
+ },
+ {
+  "id": "P048",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "Record. Quindi quando vuoi, puoi."
+ },
+ {
+  "id": "P049",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "Record. Il divano ci è rimasto male."
+ },
+ {
+  "id": "P050",
+  "livello": "Piccante",
+  "situazione": "Quando ce la fai",
+  "testo": "{passi} passi. Oggi non ho niente da dire."
+ },
+ {
+  "id": "P051",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "Ehi / {passi} passi. Il divano non scappa."
+ },
+ {
+  "id": "P052",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "Promemoria / Mancano {mancano} passi. Così, per sapere."
+ },
+ {
+  "id": "P053",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "Tutto bene? / {passi} passi. Dal divano, immagino."
+ },
+ {
+  "id": "P054",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "Sono le 18 / {passi} passi. C'è ancora tempo. Poco."
+ },
+ {
+  "id": "P055",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "Novità / Nessuna: {passi} passi."
+ },
+ {
+  "id": "P056",
+  "livello": "Piccante",
+  "situazione": "Notifiche",
+  "testo": "Coraggio / {minuti} minuti a piedi. Ce la fai perfino tu."
+ },
+ {
+  "id": "P057",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Toccarmi non conta come passo."
+ },
+ {
+  "id": "P058",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Sì, funziono. Tu?"
+ },
+ {
+  "id": "P059",
+  "livello": "Piccante",
+  "situazione": "Se tocchi il cuore",
+  "testo": "Guardarmi non fa salire i passi."
+ }
+]

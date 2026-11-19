@@ -1,0 +1,131 @@
+<title>Battute NASTY</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: una lista da spuntare. Testata fissa con i conti, due schede per livello, righe grandi da toccare. */
+:root {
+  --bg: #F6F4F1; --surface: #FFFFFF; --fg: #141414; --muted: #6B6661; --line: #DDD8D2;
+  --accent: #E5231B; --accent-fg: #FFFFFF; --off-bg: #ECE8E3; --off-fg: #9A948E;
+  --display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1430; --surface: #161D40; --fg: #E2EAFF; --muted: #9AA6CF; --line: #2A335F;
+  --accent: #FF3B30; --accent-fg: #0E1430; --off-bg: #121838; --off-fg: #5F6A96; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0E1430; --surface: #161D40; --fg: #E2EAFF; --muted: #9AA6CF; --line: #2A335F;
+  --accent: #FF3B30; --accent-fg: #0E1430; --off-bg: #121838; --off-fg: #5F6A96; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.4; }
+.wrap { max-width: 720px; margin: 0 auto; padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 14px 10px; border-bottom: 3px solid var(--fg); display: flex; flex-direction: column; gap: 10px; }
+h1 { font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1; margin: 0; letter-spacing: .01em; text-transform: uppercase; }
+h1 span { color: var(--accent); }
+.how { margin: 0; color: var(--muted); font-size: 14px; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tab { font: 600 14px var(--body); padding: 9px 14px; border: 2px solid var(--fg); background: transparent; color: var(--fg); cursor: pointer; }
+.tab[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.count { margin-left: auto; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.count b { color: var(--fg); }
+.note { margin: 10px 0 0; padding: 10px 12px; border: 2px solid var(--accent); font-size: 14px; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 20px; text-transform: uppercase; letter-spacing: .02em; margin: 26px 0 8px; }
+ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.row { display: flex; gap: 12px; align-items: flex-start; width: 100%; text-align: left; min-width: 0;
+  background: var(--surface); color: var(--fg); border: 2px solid var(--line); padding: 12px; cursor: pointer; font: inherit; }
+.row:focus-visible, .tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.row .mark { flex: none; width: 26px; height: 26px; border: 2px solid var(--fg); display: grid; place-items: center; font: 700 16px var(--body); color: transparent; }
+.row .txt { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.row .id { flex: none; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 3px; }
+.row .ttl { display: block; font-weight: 600; }
+.row[aria-pressed="true"] { background: var(--off-bg); border-color: var(--off-bg); color: var(--off-fg); }
+.row[aria-pressed="true"] .txt { text-decoration: line-through; }
+.row[aria-pressed="true"] .mark { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+@media (prefers-reduced-motion: no-preference) { .row { transition: background .12s, color .12s; } }
+</style>
+<div class="wrap">
+  <header class="top">
+    <h1>Battute <span>NASTY</span></h1>
+    <p class="how">Tocca una battuta per scartarla. Toccala di nuovo per riprenderla. Si salva da sola.</p>
+    <div class="bar">
+      <button class="tab" id="tab-N" type="button" aria-pressed="true">Livello 3 · NASTY</button>
+      <button class="tab" id="tab-P" type="button" aria-pressed="false">Livello 2 · Piccante</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+  </header>
+  <p class="note" id="note" hidden></p>
+  <main id="list"></main>
+</div>
+<script>
+const CAT = __CATALOGO__;
+const SAMPLE = {passi:"412", obiettivo:"8.000", mancano:"7.588", minuti:"18", serie:"23", jolly:"2", percento:"5"};
+const show = t => t.replace(/\{(\w+)\}/g, (m, k) => SAMPLE[k] ?? m);
+const off = new Set();
+let level = "N", db = null, local = false;
+const $ = id => document.getElementById(id);
+
+function render() {
+  const rows = CAT.filter(c => c.id[0] === level);
+  const groups = [];
+  for (const c of rows) { let g = groups.find(g => g.s === c.situazione); if (!g) groups.push(g = {s: c.situazione, items: []}); g.items.push(c); }
+  const main = $("list"); main.textContent = "";
+  for (const g of groups) {
+    const h = document.createElement("h2"); h.textContent = g.s; main.append(h);
+    const ul = document.createElement("ul");
+    for (const c of g.items) {
+      const li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.className = "row"; b.id = "r-" + c.id; b.setAttribute("aria-pressed", off.has(c.id));
+      const mark = document.createElement("span"); mark.className = "mark"; mark.textContent = "✕"; mark.setAttribute("aria-hidden", "true");
+      const txt = document.createElement("span"); txt.className = "txt";
+      const parts = show(c.testo).split(" / ");
+      if (parts.length === 2) { const t = document.createElement("span"); t.className = "ttl"; t.textContent = parts[0]; txt.append(t, parts[1]); }
+      else txt.textContent = parts[0];
+      const id = document.createElement("span"); id.className = "id"; id.textContent = c.id;
+      b.append(mark, txt, id); b.addEventListener("click", () => toggle(c.id));
+      li.append(b); ul.append(li);
+    }
+    main.append(ul);
+  }
+  counts();
+}
+function counts() {
+  const rows = CAT.filter(c => c.id[0] === level), n = rows.filter(c => off.has(c.id)).length;
+  $("count").innerHTML = "tenute <b>" + (rows.length - n) + "</b> · scartate <b>" + n + "</b>";
+  $("tab-N").setAttribute("aria-pressed", level === "N"); $("tab-P").setAttribute("aria-pressed", level === "P");
+}
+function paint(id) { const b = $("r-" + id); if (b) b.setAttribute("aria-pressed", off.has(id)); counts(); }
+function note(msg) { const n = $("note"); n.textContent = msg; n.hidden = !msg; }
+const busy = new Set();
+async function toggle(id) {
+  if (busy.has(id)) return;
+  const was = off.has(id); was ? off.delete(id) : off.add(id); paint(id);
+  if (local) { try { localStorage.setItem("scarti", JSON.stringify([...off])); } catch (e) {} return; }
+  if (!db) return;
+  busy.add(id);
+  try { const d = db.collection("scarti").doc(id); was ? await d.delete() : await d.set({scartata: true}); }
+  catch (e) { was ? off.add(id) : off.delete(id); paint(id); note("Non sono riuscito a salvare questa scelta. Riprova tra poco."); }
+  finally { busy.delete(id); }
+}
+$("tab-N").addEventListener("click", () => { level = "N"; render(); });
+$("tab-P").addEventListener("click", () => { level = "P"; render(); });
+render();
+
+(async () => {
+  db = await (window.claude?.use ? window.claude.use("db") : null);
+  if (!db) {
+    local = true;
+    try { for (const id of JSON.parse(localStorage.getItem("scarti") || "[]")) off.add(id); } catch (e) {}
+    render(); note("Le scelte restano solo su questo dispositivo: apri la pagina dall'account di William per salvarle.");
+    return;
+  }
+  const timer = setTimeout(() => note("Sto ancora caricando le scelte salvate…"), 10000);
+  db.collection("scarti").onSnapshot(snap => {
+    clearTimeout(timer); note("");
+    const seen = new Set(snap.docs.map(d => d.id));
+    for (const id of [...off]) if (!seen.has(id) && !busy.has(id)) off.delete(id);
+    for (const id of seen) if (!busy.has(id)) off.add(id);
+    render();
+  }, () => { clearTimeout(timer); note("Non riesco a leggere le scelte salvate. Ricarica la pagina."); });
+})();
+</script>

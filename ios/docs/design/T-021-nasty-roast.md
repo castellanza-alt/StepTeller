@@ -3,7 +3,10 @@
 **Director, 19/11/2026.** Regole: D-044 (supera T-008 e Hargreaves). Ricerca: `T-008-nasty/carrot-ricerca.md`.
 Stato: **tono del livello 3 approvato da William il 19/11** sulle battute di `T-021-nasty/battute-nasty-corte.md`
 (corte, dirette, solo passi e obiettivo: le regole in testa a quel file prevalgono su §3 e sui lotti precedenti,
-che restano come archivio). Da fare: catalogo completo del livello 3, livello 2, progetto grafico e tecnico. Solo italiano (D-005). Nessun codice.
+che restano come archivio). Catalogo completo (19/11): `T-021-nasty/catalogo/` (204 battute: 145 NASTY, 59 Piccante; `genera.py` produce
+`catalogo.json`, `catalogo.md` e la pagina). William scarta le battute su
+https://claude.ai/artifact/5ZpoavPL42yq6FSpZ4sgmU (gli scarti sono nella raccolta `scarti` del database della pagina).
+Da fare dopo la sua scelta: progetto grafico e tecnico. Solo italiano (D-005). Nessun codice.
 
 ## 1. Chi è NEAT
 - **NEAT è l'app, e parla in prima persona.** Dà del **tu**.

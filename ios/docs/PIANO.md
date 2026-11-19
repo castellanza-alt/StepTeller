@@ -67,10 +67,10 @@ della 1.1 (28/10, `8d5ccfb`). Rami `ia/1.0.1-promemoria` e `ia/rilascio`, già t
 | T-024 NASTY: situazioni, scelta della battuta e catalogo nel nucleo | Developer | `task/T-024-nasty-nucleo` | fatto 19/11 (#51) |
 | T-025 NASTY: controllo delle battute nelle 9 lingue (riscritte da ChatGPT) | Traduttore | `lang/T-025-nasty` | fatto 19/11 (#53): 73 righe corrette; resa comica non giudicata da madrelingua |
 | T-026 NASTY (1.3): privacy, store e testi dell'interfaccia | Director | `docs/design/T-026-nasty-testi.md` | approvato da William 19/11 |
-| T-027 NASTY: l'interfaccia (cuore, fumetto, voce, notifiche, catalogo dal sito) | Developer | `task/T-027-nasty-app` | assegnato 19/11 |
+| T-027 NASTY: l'interfaccia (cuore, fumetto, voce, notifiche, catalogo dal sito) | Developer | `task/T-027-nasty-app` | fatto 19/11 (#56); privacy nuova nella #57, da unire alla pubblicazione della 1.3 |
 | T-028 NASTY (1.3): testi dell'interfaccia, privacy e store nelle lingue | Traduttore | `lang/T-028-nasty-testi` | fatto 19/11 (#54) |
-| T-029 Collaudo della 1.3 (voce di NEAT) | QA | `qa/T-029` | scritto 19/11, parte dopo il merge della #56 |
-| T-030 Screenshot dello store per la 1.3 | Designer | `design/T-030-screenshot` | scritto 19/11, parte dopo il merge della #56 |
+| T-029 Collaudo della 1.3 (voce di NEAT) | QA | `qa/T-029` | assegnato 19/11 |
+| T-030 Screenshot dello store per la 1.3 | Designer | `design/T-030-screenshot` | assegnato 19/11 |
 | T-008 Voce «NASTY»: carattere e testi italiani | Designer | `design/T-008-nasty` | fatto, unito 17/11 (#32): William sceglie il personaggio e approva i testi |
 
 ## 6. Dove si prova cosa

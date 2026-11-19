@@ -3,6 +3,8 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, terzo giro di battute (bozza T-021, nessuna build): «Cazzo bravo, le battute sono proprio
+  belle!!!» Chiede «un centinaio» di battute. Le battute nuove «le scarica dal sito». → T-021
 - **19/11/2026**, NASTY, battute (bozza T-021, nessuna build): «Belle, farei anche di peggio.» Il cuore che «batte
   100000 volte non lo capisco»: meglio «sono il modello più veloce che esiste». Battute sessuali sul divano: «sì,
   anche 16+». «Dobbiamo strappare la pelle.» Vuole 4-5 roast al giorno in notifica, solo dalle 10 alle 20, non a ore

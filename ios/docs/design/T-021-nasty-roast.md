@@ -236,7 +236,10 @@ William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. 
 - **Battute a sfondo sessuale sul divano: sì** (William, 19/11, «anche 16+»). Nel questionario di Apple si dichiarano
   come temi maturi o allusivi; l'età calcolata va verificata alla compilazione (13+ o 16+).
 - **Notifiche roast** (William, 19/11): 4-5 al giorno tra le 10 e le 20, a orari non fissi. Da progettare.
-- **Battute aggiornabili senza App Store** (domanda di William): da progettare, vedi risposta del Director.
+- **Battute aggiornabili senza App Store: sì** (William, 19/11): l'app scarica il catalogo dal sito di NEAT
+  (Pages), senza inviare dati; a bordo resta un catalogo di base. Prima volta che NEAT usa la rete: privacy e note
+  per Apple da aggiornare. Da progettare.
+- **Catalogo:** primo lotto di 100 battute NASTY in `T-021-nasty/battute-nasty-100.md` (19/11), in attesa di William.
 
 ## 9. Terzo giro (19/11): le tecniche del roast applicate
 Ricerca in `T-008-nasty/roast-ricerca.md` (tecniche da autori di roast; nessuna battuta sulla pigrizia trovata pronta:

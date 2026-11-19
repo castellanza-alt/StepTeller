@@ -3,6 +3,8 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, livello 3 corto e diretto (`battute-nasty-corte.md`, 48 battute, nessuna build): «Sì, così».
+  Tono e regole del livello 3 approvati. → T-021
 - **19/11/2026**, NASTY, selezione con Astra (bozza, nessuna build): «Troppo lunghe e cerebrali. E poi tu non sai
   davvero l'utente cosa fa. Inutile parlare di parcheggi, di palestre. Tu sai solo che obiettivo si pone e quanti
   passi fa. Devi insultarlo dicendogli che è sedentario e non ne fa abbastanza. Tutto qui.» → T-021,

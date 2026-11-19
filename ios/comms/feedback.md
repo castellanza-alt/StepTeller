@@ -3,6 +3,8 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, Novità 1.2 per lo store in italiano (testo del Director: Natale, Jolly regalo, avvisi, pop-up,
+  correzioni): «Sì, approvate». → 1.2
 - **19/11/2026**, testi italiani dei pop-up, delle notifiche e del Jolly regalo (tela, nessuna build): «i testi sono ok».
   «Occhio alla grafica perché le parole escono dal quadrato.» Ok a preparare le Novità 1.2 e all'invio della 1.2
   ad Apple («ok procedi»). → 1.2

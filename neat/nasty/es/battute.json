@@ -1,0 +1,1267 @@
+{
+ "formato": "neat-battute",
+ "versione": 1,
+ "edizione": "2026-11-19",
+ "lingua": "es",
+ "battute": [
+  {
+   "id": "N001",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Das pena."
+  },
+  {
+   "id": "N002",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Hasta a mí me da vergüenza."
+  },
+  {
+   "id": "N003",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "Apenas {passi} pasos. Levántate de una puta vez."
+  },
+  {
+   "id": "N004",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Suelta el puto sofá."
+  },
+  {
+   "id": "N005",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos de {obiettivo}. Qué ridículo."
+  },
+  {
+   "id": "N006",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Mis felicitaciones al sofá."
+  },
+  {
+   "id": "N007",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Eres un florero con teléfono."
+  },
+  {
+   "id": "N008",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Pocos ayer. Pocos hoy. Qué puta constancia."
+  },
+  {
+   "id": "N009",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Otra vez la misma mierda."
+  },
+  {
+   "id": "N010",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Llevas horas sin moverte. Das pena."
+  },
+  {
+   "id": "N011",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Prometiste {obiettivo}. Pura mierda."
+  },
+  {
+   "id": "N012",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Qué bien llega el wifi al puto sofá."
+  },
+  {
+   "id": "N014",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Hasta la pereza te pide un poco de iniciativa."
+  },
+  {
+   "id": "N015",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Me das vergüenza ajena."
+  },
+  {
+   "id": "N016",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{percento}% de tu objetivo. El resto se lo lleva el sofá."
+  },
+  {
+   "id": "N017",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Caminar no es lo tuyo. Nada lo es, carajo."
+  },
+  {
+   "id": "N019",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "Das pena. Perdón, quise decir «{passi} pasos». Da igual."
+  },
+  {
+   "id": "N020",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Llevas todo el puto día en pausa."
+  },
+  {
+   "id": "N021",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Y todavía vienes a ver el número?"
+  },
+  {
+   "id": "N022",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Conté otra vez. Sí, así de mal."
+  },
+  {
+   "id": "N023",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. El sofá agradece tu fidelidad."
+  },
+  {
+   "id": "N024",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Das risa. Y no de la buena."
+  },
+  {
+   "id": "N025",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Vaya mierda de cosecha."
+  },
+  {
+   "id": "N026",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Me descargaste para esta mierda?"
+  },
+  {
+   "id": "N027",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Qué manera de hacerme perder el tiempo."
+  },
+  {
+   "id": "N028",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Y con eso das el día por terminado?"
+  },
+  {
+   "id": "N029",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Sedentarismo en estado puro, carajo."
+  },
+  {
+   "id": "N030",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Muévete, florero."
+  },
+  {
+   "id": "N031",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. No valen una mierda."
+  },
+  {
+   "id": "N032",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Entre uno y otro casi me desinstalo."
+  },
+  {
+   "id": "N033",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Tu propio objetivo se está riendo de ti."
+  },
+  {
+   "id": "N034",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Un trabajo de mierda, hasta para ti."
+  },
+  {
+   "id": "N035",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Sal de una puta vez."
+  },
+  {
+   "id": "N036",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Tu sofá presume de ti."
+  },
+  {
+   "id": "N037",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos de {obiettivo}. Ni siquiera finges intentarlo."
+  },
+  {
+   "id": "N038",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Para perder el tiempo sí tienes talento."
+  },
+  {
+   "id": "N039",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Qué puta tristeza."
+  },
+  {
+   "id": "N040",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{percento}% del objetivo. Tu calificación: una mierda."
+  },
+  {
+   "id": "N041",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. O caminas o me desinstalas."
+  },
+  {
+   "id": "N042",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Yo que tú cerraría la aplicación."
+  },
+  {
+   "id": "N043",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Faltan {mancano}. O sea, casi todo, carajo."
+  },
+  {
+   "id": "N044",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Para qué mierda te pusiste zapatos?"
+  },
+  {
+   "id": "N045",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Mediodía. {passi} pasos. Una mañana entera a la mierda.",
+   "ore": "11:30-12:59"
+  },
+  {
+   "id": "N046",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Son las 11. {passi} pasos. Ya empezamos con tus mierdas.",
+   "ore": "10:30-11:59"
+  },
+  {
+   "id": "N047",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Mediodía. {passi} pasos. Despierta, florero."
+  },
+  {
+   "id": "N048",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Se acabó la mañana. {passi} pasos. Ya gana el sofá.",
+   "ore": "12:00-17:59"
+  },
+  {
+   "id": "N049",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Cuatro de la tarde. {passi} pasos. ¿Ya te rendiste?",
+   "ore": "15:30-16:59"
+  },
+  {
+   "id": "N050",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Por la tarde. {passi} pasos. Hasta el puto reloj avanza.",
+   "ore": "13:00-17:59"
+  },
+  {
+   "id": "N051",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Cinco de la tarde. {passi} pasos. Última oportunidad de no dar pena.",
+   "ore": "16:30-17:59"
+  },
+  {
+   "id": "N052",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Tres de la tarde. {passi} pasos. Medio día a la mierda.",
+   "ore": "14:30-15:59"
+  },
+  {
+   "id": "N053",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Siete de la tarde. {passi} pasos. Qué desperdicio de día.",
+   "ore": "18:30-19:59"
+  },
+  {
+   "id": "N054",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Ya es de noche. {passi} pasos. Vaya mierda."
+  },
+  {
+   "id": "N055",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Ocho de la noche. {passi} pasos. Otra victoria del sofá.",
+   "ore": "19:30-20:59"
+  },
+  {
+   "id": "N056",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Ya es de noche. {passi} pasos. Saca esa vergüenza a pasear."
+  },
+  {
+   "id": "N057",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Faltan {mancano} pasos. {minuti} minutos. Muévete de una puta vez."
+  },
+  {
+   "id": "N059",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Siete de la tarde. Faltan {mancano} pasos. Date prisa, carajo.",
+   "ore": "18:30-19:59"
+  },
+  {
+   "id": "N060",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{passi} pasos. Se acabó el día. ¿Todo para esta mierda?",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N061",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Ya es de noche. {passi} pasos. Hoy también perdiste."
+  },
+  {
+   "id": "N062",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{minuti} minutos. Solo {minuti}. ¿También te parece una puta eternidad?"
+  },
+  {
+   "id": "N063",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Última hora. Faltan {mancano} pasos. Sal, carajo.",
+   "ore": "19:00-19:59"
+  },
+  {
+   "id": "N064",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Cierras el día con {passi} pasos. Qué puta vergüenza.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N065",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{passi} pasos hoy. A dormir. Llevas todo el día practicando.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N066",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Recuento final, {passi} pasos. El sofá destapa la botella.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N067",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Mitad del objetivo. ¿Quieres medio puto trofeo? Sigue."
+  },
+  {
+   "id": "N069",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "{mancano} pasos. Por una puta vez, termina."
+  },
+  {
+   "id": "N070",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "La mitad. Aquí es donde te rindes, ¿verdad?"
+  },
+  {
+   "id": "N072",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "{percento}%. ¿Quién va a caminar la otra mitad? ¿Yo?"
+  },
+  {
+   "id": "N073",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Faltan {mancano} pasos. Por una vez, no la cagues."
+  },
+  {
+   "id": "N074",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Casi. «Casi» no vale una mierda."
+  },
+  {
+   "id": "N075",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "{mancano} pasos. Dices que cualquiera puede. Pues demuéstralo."
+  },
+  {
+   "id": "N076",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Te faltan {minuti} minutos. Muévete, carajo."
+  },
+  {
+   "id": "N077",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "A {mancano} pasos del objetivo. Qué cagada rendirse aquí."
+  },
+  {
+   "id": "N078",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objetivo: {obiettivo} pasos. Qué mierda de ambición."
+  },
+  {
+   "id": "N079",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "¿{obiettivo} pasos? Cualquiera puede. Contigo tengo mis dudas."
+  },
+  {
+   "id": "N080",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Bajaste el objetivo. Qué puta cobardía.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N082",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pasos. ¿Te puso el objetivo el puto sofá?"
+  },
+  {
+   "id": "N083",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pasos al día. Así hasta tu sofá compite."
+  },
+  {
+   "id": "N085",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Bajaste a {obiettivo}. Felicidades, ya moviste algo.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N086",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Bajaste el objetivo. Te rendiste sin levantarte.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N087",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Bajaste el objetivo. El sofá te agradece las horas extra.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N088",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Volviste a bajar el objetivo. Das pena.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N089",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Subiste el objetivo a {obiettivo}. Veamos cuánto te dura.",
+   "evento": "alzato"
+  },
+  {
+   "id": "N090",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pasos. Avísame si algún día das el primero."
+  },
+  {
+   "id": "N091",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Subiste el objetivo. Menos promesas y más putos pasos.",
+   "evento": "alzato"
+  },
+  {
+   "id": "N092",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Ayer te salvó un Comodín. No te lo ganaste.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N093",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Sin Comodín. O caminas o tu racha se va a la mierda.",
+   "evento": "jollyFiniti"
+  },
+  {
+   "id": "N094",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Perdiste la racha. {serie} días a la mierda. Culpa tuya.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N095",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Racha en cero. Felicita al puto sofá y empieza otra vez.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N096",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Comodín usado. Lo de ayer fue una mierda.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N097",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Un Comodín menos. Te quedan {jolly}. Después te jodes.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N098",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Un Comodín te salvó la racha. ¿Tú qué mierda hiciste?",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N099",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Ganaste un Comodín. A ver cuánto tardas en desperdiciarlo.",
+   "evento": "jollyGuadagnato"
+  },
+  {
+   "id": "N100",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} días de racha. No la cagues como siempre.",
+   "evento": "serieInCorso"
+  },
+  {
+   "id": "N101",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Perdiste la racha. Bastaba con salir a caminar, carajo.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N102",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Rompiste la racha a los {serie} días. Qué puto desperdicio.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N103",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} días a la mierda. Por un puto sofá.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N104",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Perdiste la racha. Te ganó un sofá. Otra vez.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N105",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Día uno. Otra vez. Ya podrías pagar alquiler aquí.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N106",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Esta noche peligra tu racha. Faltan {mancano} pasos. Muévete.",
+   "evento": "serieARischio"
+  },
+  {
+   "id": "N107",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Gastaste el último Comodín. Ahora sí te toca caminar, carajo.",
+   "evento": "jollyFiniti"
+  },
+  {
+   "id": "N108",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Llegaste al objetivo. Ya era puta hora."
+  },
+  {
+   "id": "N109",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{obiettivo} pasos. Por una vez no das pena."
+  },
+  {
+   "id": "N110",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Cumpliste el objetivo. Yo no daba nada por ti. Tú tampoco."
+  },
+  {
+   "id": "N111",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Lo lograste. Repítelo mañana o fue pura suerte, carajo."
+  },
+  {
+   "id": "N112",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Nuevo récord. ¿Quién sacó a pasear al florero?",
+   "evento": "record"
+  },
+  {
+   "id": "N113",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Cumpliste el objetivo. Tuve que revisar la puta fecha."
+  },
+  {
+   "id": "N114",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Lo lograste. No te acostumbres a los aplausos."
+  },
+  {
+   "id": "N115",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{obiettivo} pasos. Por fin, carajo."
+  },
+  {
+   "id": "N116",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Cumpliste el objetivo. Día de mierda para el sofá."
+  },
+  {
+   "id": "N117",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Lo lograste. Mañana le apuesto al sofá."
+  },
+  {
+   "id": "N118",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Lo lograste. Un día no borra tanta mierda."
+  },
+  {
+   "id": "N119",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Cumpliste el objetivo. Era lo mínimo. Lo pusiste tú."
+  },
+  {
+   "id": "N120",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Nuevo récord. Así que los otros días te daba pereza.",
+   "evento": "record"
+  },
+  {
+   "id": "N121",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Nuevo récord. Antes lo hacías de pena a propósito.",
+   "evento": "record"
+  },
+  {
+   "id": "N122",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{passi} pasos. Hoy sí me callo la puta boca."
+  },
+  {
+   "id": "N123",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "El doble de tu objetivo. ¿A quién le prestaste el teléfono?",
+   "evento": "doppio"
+  },
+  {
+   "id": "N124",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{passi} pasos. Hoy no das pena."
+  },
+  {
+   "id": "N125",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Levántate",
+   "testo": "{passi} pasos. Siguen siendo una mierda."
+  },
+  {
+   "id": "N126",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Oye, florero",
+   "testo": "{passi} pasos de {obiettivo}. Muévete."
+  },
+  {
+   "id": "N127",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Das pena",
+   "testo": "{passi} pasos. Faltan {mancano}. A la calle. Ya."
+  },
+  {
+   "id": "N128",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "¿Sigues en el sofá?",
+   "testo": "{passi} pasos. Lo sabía."
+  },
+  {
+   "id": "N130",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Malas noticias",
+   "testo": "{passi} pasos. La mala noticia eres tú."
+  },
+  {
+   "id": "N131",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Despierta",
+   "testo": "{passi} pasos. El sofá no te paga por hora."
+  },
+  {
+   "id": "N132",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Qué vergüenza",
+   "testo": "{passi} pasos de {obiettivo}. ¿Algo que añadir?"
+  },
+  {
+   "id": "N133",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Muévete",
+   "testo": "Faltan {mancano} pasos. ¿Quién mierda va a darlos?"
+  },
+  {
+   "id": "N134",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Recordatorio",
+   "testo": "Sigues dando pena. {passi} pasos."
+  },
+  {
+   "id": "N135",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Última hora",
+   "testo": "{passi} pasos. El sofá agradece tus servicios."
+  },
+  {
+   "id": "N136",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Qué pena",
+   "testo": "{percento}% de tu objetivo. Levántate."
+  },
+  {
+   "id": "N137",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Seis de la tarde",
+   "testo": "{passi} pasos. Última oportunidad, florero.",
+   "ore": "17:30-18:59"
+  },
+  {
+   "id": "N138",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Suelta el puto sofá",
+   "testo": "{passi} pasos. ¿Eso fue todo tu día?"
+  },
+  {
+   "id": "N139",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "¿Sigues ahí?",
+   "testo": "{passi} pasos. La misma mierda que hace una hora."
+  },
+  {
+   "id": "N140",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Sin novedades",
+   "testo": "{passi} pasos. Sigues dando pena."
+  },
+  {
+   "id": "N141",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Deja de tocarme. Camina, carajo."
+  },
+  {
+   "id": "N142",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Cuento pasos. Tus putos toques me dan igual."
+  },
+  {
+   "id": "N143",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Suelta el puto teléfono. Levántate."
+  },
+  {
+   "id": "N144",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Otra vez me abres. Prueba con la puta puerta."
+  },
+  {
+   "id": "N145",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Mira cuanto quieras. El número sube cuando caminas."
+  },
+  {
+   "id": "P001",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Impresionante para un florero."
+  },
+  {
+   "id": "P002",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Saludos de parte del sofá."
+  },
+  {
+   "id": "P003",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Se puede hacer menos? Mejor no pregunto."
+  },
+  {
+   "id": "P004",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Qué esfuerzo, me imagino."
+  },
+  {
+   "id": "P005",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos de {obiettivo}. Tu objetivo sí que es optimista."
+  },
+  {
+   "id": "P006",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Nunca te aburre estar ahí?"
+  },
+  {
+   "id": "P007",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Con calma, que nadie te persigue."
+  },
+  {
+   "id": "P008",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Eres el orgullo del sofá."
+  },
+  {
+   "id": "P009",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Te aplaudiría, pero a tu ritmo tardaría horas."
+  },
+  {
+   "id": "P010",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Qué agenda tan apretada."
+  },
+  {
+   "id": "P011",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Esperaba poco. Hiciste menos."
+  },
+  {
+   "id": "P012",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "Vas por el {percento}%. ¿El resto lo camina el sofá?"
+  },
+  {
+   "id": "P013",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Otro día productivo para un florero."
+  },
+  {
+   "id": "P014",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Cuidado, no te vayas a exceder."
+  },
+  {
+   "id": "P015",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. ¿Ya incluye la vuelta?"
+  },
+  {
+   "id": "P016",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "Faltan {mancano} pasos. Yo solo digo."
+  },
+  {
+   "id": "P017",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Tus zapatos ya buscan otro pasatiempo."
+  },
+  {
+   "id": "P018",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pasos. Prueba con la puerta. Se abre."
+  },
+  {
+   "id": "P019",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Mediodía. {passi} pasos. Empezaste con calma. Muchísima calma.",
+   "ore": "11:30-12:59"
+  },
+  {
+   "id": "P020",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Cuatro de la tarde. {passi} pasos. Sin prisas, por lo visto.",
+   "ore": "15:30-16:59"
+  },
+  {
+   "id": "P021",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Siete de la tarde. {passi} pasos. Vuelve a ganar el sofá.",
+   "ore": "18:30-19:59"
+  },
+  {
+   "id": "P022",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Ya es de noche. Faltan {mancano} pasos. ¿Qué hacemos?",
+   "ore": "18:00-23:59"
+  },
+  {
+   "id": "P023",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "En {minuti} minutos llegas. Claro que tendrías que salir."
+  },
+  {
+   "id": "P024",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Terminas el día con {passi} pasos. Constancia sí tienes.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "P025",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Ocho de la noche. {passi} pasos. ¿Mañana entonces?",
+   "ore": "19:30-20:59"
+  },
+  {
+   "id": "P026",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "La mitad. Aquí sueles parar. Sorpréndeme."
+  },
+  {
+   "id": "P027",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "Vas por la mitad. Si llama el sofá, no contestes."
+  },
+  {
+   "id": "P028",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "Faltan {mancano} pasos. Parar ahora sería muy tuyo."
+  },
+  {
+   "id": "P029",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "Casi. Avísame cuando pueda quitar el «casi»."
+  },
+  {
+   "id": "P030",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "{mancano} pasos. Hasta tú puedes con eso."
+  },
+  {
+   "id": "P031",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pasos. Mucha ambición para un florero."
+  },
+  {
+   "id": "P032",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pasos. Veo que te tratas con cariño."
+  },
+  {
+   "id": "P033",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Bajaste el objetivo. Voy a ensayar mi cara de sorpresa.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "P034",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Bajaste a {obiettivo}. El sofá lo aprueba.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "P035",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Subiste el objetivo. Veamos cuánto dura.",
+   "evento": "alzato"
+  },
+  {
+   "id": "P036",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pasos. Claro. Te creo."
+  },
+  {
+   "id": "P037",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Usaste un Comodín. Ayer te cubrí yo.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "P038",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Te quedan {jolly}. Yo no contaría demasiado con eso.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "P039",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Ganaste un Comodín. Contigo le doy un día.",
+   "evento": "jollyGuadagnato"
+  },
+  {
+   "id": "P040",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} días de racha. A ver si conservas esta.",
+   "evento": "serieInCorso"
+  },
+  {
+   "id": "P041",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Perdiste la racha. Un paseo bastaba.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "P042",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} días, luego el sofá. Un clásico.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "P043",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Día uno. Ustedes ya se conocen.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "P044",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Cumpliste el objetivo. Voy a marcar la fecha."
+  },
+  {
+   "id": "P045",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Lo lograste. Casi me impresionas."
+  },
+  {
+   "id": "P046",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Cumpliste el objetivo. Así que sí sabes caminar."
+  },
+  {
+   "id": "P047",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Lo lograste. El desfile puede esperar."
+  },
+  {
+   "id": "P048",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Nuevo récord. Curioso lo que pasa cuando quieres.",
+   "evento": "record"
+  },
+  {
+   "id": "P049",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Nuevo récord. El sofá se lo tomó a mal.",
+   "evento": "record"
+  },
+  {
+   "id": "P050",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "{passi} pasos. Hoy me dejaste sin comentarios."
+  },
+  {
+   "id": "P051",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Oye",
+   "testo": "{passi} pasos. El sofá seguirá ahí cuando vuelvas."
+  },
+  {
+   "id": "P052",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Recordatorio",
+   "testo": "Faltan {mancano} pasos. Por si tenías curiosidad."
+  },
+  {
+   "id": "P053",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "¿Todo bien?",
+   "testo": "{passi} pasos. Me lees desde el sofá, supongo."
+  },
+  {
+   "id": "P054",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Seis de la tarde",
+   "testo": "{passi} pasos. Aún hay tiempo. Poco.",
+   "ore": "17:30-18:59"
+  },
+  {
+   "id": "P055",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "¿Novedades?",
+   "testo": "Ninguna. Sigues en {passi} pasos."
+  },
+  {
+   "id": "P056",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Ánimo",
+   "testo": "{minuti} minutos a pie. Hasta tú puedes."
+  },
+  {
+   "id": "P057",
+   "livello": "Piccante",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Tocarme no cuenta como paso."
+  },
+  {
+   "id": "P058",
+   "livello": "Piccante",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Sí, funciono. ¿Tú?"
+  },
+  {
+   "id": "P059",
+   "livello": "Piccante",
+   "situazione": "Se tocchi il cuore",
+   "testo": "El número no sube por mucho que lo mires."
+  }
+ ]
+}

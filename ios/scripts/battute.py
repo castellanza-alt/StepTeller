@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """NASTY catalogs (T-024, D-046): generates the on-board catalogs and the files for the site from the approved ones.
 
-Sources: ios/docs/design/T-021-nasty/catalogo/catalogo-approvato.json            Italian (id, livello, situazione, testo)
-         ios/docs/design/T-021-nasty/catalogo/catalogo-approvato.<lingua>.json   the other languages, same ids
+Sources: ios/docs/design/T-021-nasty/catalogo/catalogo-approvato.json   Italian (id, livello, situazione, testo)
+         ios/docs/design/T-021-nasty/catalogo/lingue/<lingua>.json        the other languages, same ids (T-025)
          ios/docs/design/T-021-nasty/catalogo/vincoli.json                       `ore` and `evento` by id
 Outputs: ios/Sources/StepTellerCore/NastyCatalog+Bordo.swift       (the same JSON, inside the app)
          neat/nasty/<lingua>/battute.json                            (published on the site with the merge on main)
@@ -42,10 +42,11 @@ LANGUAGES = ['it', 'en', 'de', 'fr', 'es', 'pt-BR', 'ja', 'ko', 'zh-Hans', 'zh-H
 
 
 def sources():
-    """Approved catalog per language: `catalogo-approvato.json` is Italian, `catalogo-approvato.<lingua>.json` the others."""
+    """Approved catalog per language: `catalogo-approvato.json` is Italian, `lingue/<lingua>.json` the others."""
     out = {}
-    for path in sorted(CATALOG.glob('catalogo-approvato*.json')):
-        code = path.name[len('catalogo-approvato'):-len('.json')].lstrip('.') or 'it'
+    paths = [CATALOG / 'catalogo-approvato.json'] + sorted((CATALOG / 'lingue').glob('*.json'))
+    for path in paths:
+        code = 'it' if path.parent == CATALOG else path.stem
         if code not in LANGUAGES:
             raise SystemExit(f'{path.name}: lingua sconosciuta «{code}» (ammesse: {", ".join(LANGUAGES)})')
         out[code] = json.loads(path.read_text(encoding='utf-8'))

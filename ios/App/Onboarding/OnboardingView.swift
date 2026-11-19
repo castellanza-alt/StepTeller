@@ -6,7 +6,9 @@ enum Onboarding {
     static let doneKey = "stepteller.onboarding.done"
     /// Health permission already asked (by the introduction or, for existing users, by the old launch).
     static let healthAskedKey = "stepteller.onboarding.healthAsked"
-    static let pageCount = 4
+    /// Welcome, Health, goal, NEAT's voice (only where the language has the catalog, T-027), reminder.
+    static var pageCount: Int { hasVoicePage ? 5 : 4 }
+    static var hasVoicePage: Bool { NastyVoice.levels.count > 1 }
 
     /// Keys the app has always saved: if at least one exists, the app was already installed.
     private static let existingUserKeys = [
@@ -27,8 +29,8 @@ enum Onboarding {
     }
 }
 
-/// Introduction: welcome, Health, goal, reminder. The system prompts start here, at the right
-/// moment; goal and reminder are saved only if the user changes them.
+/// Introduction: welcome, Health, goal, NEAT's voice, reminder. The system prompts start here, at the right
+/// moment; goal, voice and reminder are saved only if the user changes them.
 struct OnboardingView: View {
     let isReplay: Bool
     let onFinish: () -> Void
@@ -40,6 +42,9 @@ struct OnboardingView: View {
     @State private var goal = 10_000
     @State private var reminderOn = true
     @State private var reminderMinutes = 20 * 60 + 30
+    /// Already on Senza pietà for a new install (D-047); the current one when the introduction is replayed.
+    @State private var voice = NastyLevel.standard
+    @State private var goalLine = GoalLineAsker()
     @State private var loaded = false
     @State private var finishing = false
     @FocusState private var goalFocused: Bool
@@ -58,7 +63,8 @@ struct OnboardingView: View {
                     welcome(compact).tag(0)
                     health(compact).tag(1)
                     goalPage(compact).tag(2)
-                    reminder(compact).tag(3)
+                    if Onboarding.hasVoicePage { voicePage(compact).tag(3) }
+                    reminder(compact).tag(Onboarding.pageCount - 1)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 bottomBar
@@ -73,6 +79,13 @@ struct OnboardingView: View {
             goal = store.goal
             reminderOn = store.reminderEnabled
             reminderMinutes = store.reminderMinutes
+            voice = store.voiceLevel
+        }
+        .onChange(of: goal) { old, new in
+            // the line under the goal speaks with the voice in force (Senza pietà for a new install); not when the
+            // page loads the saved goal (replay), only for a choice
+            guard loaded, new != store.goal, store.voice != .normale else { return }
+            goalLine.changed(old: isReplay ? store.goal : nil, new: new, store: store)
         }
         .onChange(of: page) { old, new in
             goalFocused = false
@@ -116,7 +129,31 @@ struct OnboardingView: View {
             Kicker(L10n.text("intro.3.kicker"))
             TitleText(L10n.text("intro.3.title"), compact: compact)
             goalControl
+            if let quote = goalLine.quote, store.voice != .normale {
+                GoalVoiceLine(quote: quote, level: store.voice, heart: compact ? 26 : 30)
+            }
             Text(L10n.text("intro.3.note")).modifier(Paragraph(note: true))
+        }
+    }
+
+    private func voicePage(_ compact: Bool) -> some View {
+        PageLayout(compact: compact) {
+            VoiceArt(compact: compact)
+        } content: {
+            Kicker(L10n.text("intro.5.kicker"))
+            TitleText(L10n.text("intro.5.title"), compact: compact, sizes: (31, 24))
+            VStack(spacing: compact ? 8 : 12) {
+                ForEach(NastyLevel.allCases, id: \.self) { level in
+                    VoiceChoiceRow(level: level, selected: voice == level, compact: compact) {
+                        withAnimation(.easeOut(duration: 0.15)) { voice = level }
+                    }
+                }
+            }
+            .padding(.trailing, 6)
+            Text(L10n.text("intro.5.note"))
+                .font(.system(size: compact ? 12 : 14))
+                .foregroundStyle(c.ink.opacity(0.6))
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -233,6 +270,7 @@ struct OnboardingView: View {
             if goal != store.goal { store.goal = max(500, goal) }
             if reminderMinutes != store.reminderMinutes { store.reminderMinutes = reminderMinutes }
             if reminderOn != store.reminderEnabled { store.reminderEnabled = reminderOn }
+            if Onboarding.hasVoicePage, voice != store.voiceLevel { store.voiceLevel = voice }
             onFinish()
         }
     }
@@ -277,11 +315,15 @@ private struct Kicker: View {
 private struct TitleText: View {
     let text: String
     let compact: Bool
-    init(_ text: String, compact: Bool) { self.text = text; self.compact = compact }
+    /// Font size (normal, compact) when not the usual 42 / 34: the voice question is longer (Anton 31 / 24).
+    var sizes: (CGFloat, CGFloat) = (42, 34)
+    init(_ text: String, compact: Bool, sizes: (CGFloat, CGFloat) = (42, 34)) {
+        self.text = text; self.compact = compact; self.sizes = sizes
+    }
     @Environment(\.manga) private var c
     var body: some View {
         Text(text)
-            .font(.anton(compact ? 34 : 42))
+            .font(.anton(compact ? sizes.1 : sizes.0))
             .foregroundStyle(c.ink)
             .lineSpacing(-4)
             .fixedSize(horizontal: false, vertical: true)

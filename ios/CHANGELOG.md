@@ -16,6 +16,18 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   ripetere le ultime 20, mai «zero passi», ore e eventi rispettati (`NastyPicker`), piano delle notifiche roast tra le
   10 e le 20 con seme (`RoastPlan`), livello della voce e frequenza salvati anche in iCloud e nel Backup (campi nuovi
   `voiceLevel`, `roastFrequency`). Solo logica, con test: nessuna interfaccia e nessuna rete.
+- NASTY, l'app (T-027, D-047): di serie la voce è Senza pietà per tutti, anche per chi aggiorna; cuore (Piccante,
+  Senza pietà, giorno e notte, livelli vettoriali) e fumetto in Home con le animazioni di T-023 (battito, quando parla,
+  reazioni al tocco con rabbia crescente, «Riduci movimento», aptica, VoiceOver); battute nel fumetto, sotto
+  l'obiettivo, nei pop-up dei Jolly e nel titolo della festa; prima battuta dopo l'aggiornamento, una volta;
+  introduzione con la pagina della voce; Impostazioni › Voce con «Notifiche di NEAT» (2·4–5·7 e 1·1–2·3 al giorno);
+  notifiche roast programmate con `RoastPlan` e ritirate a obiettivo raggiunto (anche dal widget), promemoria serale e
+  avvisi con la voce del livello; catalogo scaricato una volta al giorno da `neat/nasty/<lingua>/battute.json`
+  (GET di un file pubblico, senza cookie né dati) e usato solo se passa il controllo; privacy italiana
+  (T-026 §2) e inglese (T-028) pronta a parte (PR #57, online con la pubblicazione della 1.3). Testi nuovi nel foglio, tradotti in T-028. Catalogo a bordo nelle 10 lingue:
+  `scripts/battute.py` legge anche `catalogo/lingue/<lingua>.json` (T-025) e scrive un file per lingua sul sito; il
+  conteggio delle parole non conta più la punteggiatura isolata (il francese « ? »); font asiatici ridotti anche ai
+  caratteri delle battute (`scripts/font_asia.py`).
 
 ## 1.2 — inviata ad Apple il 19 novembre 2026, build 1.162.1
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai

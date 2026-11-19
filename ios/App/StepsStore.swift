@@ -62,15 +62,35 @@ final class StepsStore {
             SeasonIcon.update()                  // switched off: the normal icon right away (iOS shows its alert)
         }
     }
-    /// NEAT's voice (D-044, T-024): Normale (default), Piccante, NASTY. Saved also in iCloud and the Backup; the
-    /// interface comes with the app task, here only the value. `NastyLevel.effective` gives what the language allows.
+    /// NEAT's voice (D-044, D-047): Normale, Piccante, Senza pietà (`nasty`, the default for everybody). Saved also in
+    /// iCloud and the Backup; the widget reads its App Group copy. `voice` is the one the language allows.
     var voiceLevel: NastyLevel {
-        didSet { defaults.set(voiceLevel.rawValue, forKey: Keys.voiceLevel) }
+        didSet {
+            defaults.set(voiceLevel.rawValue, forKey: Keys.voiceLevel)
+            SharedStore.voiceLevel = voiceLevel
+            // iCloud and Backup reassign it at every restore: only a real change touches notifications and catalog
+            guard voiceLevel != oldValue else { return }
+            deferSync(reloadWidget: false)
+            if voiceLevel != .normale {
+                Task { _ = await scheduler.requestIfNeeded(); await refreshCatalog() }
+            }
+        }
     }
     /// Roast notifications a day (Poche · Normali · Tante), default Normali; saved like the voice.
     var roastFrequency: RoastFrequency {
-        didSet { defaults.set(roastFrequency.rawValue, forKey: Keys.roastFrequency) }
+        didSet {
+            defaults.set(roastFrequency.rawValue, forKey: Keys.roastFrequency)
+            if roastFrequency != oldValue { deferSync(reloadWidget: false) }
+        }
     }
+    /// The line in the Home bubble now (nil: no bubble), set by `updateHomeLine` and `tapHeart`.
+    var homeQuote: NastyQuote?
+    /// The first line after the update from 1.2 is in the bubble (T-023 §4).
+    var showsFirstLine = false
+    /// Grows when a downloaded catalog replaces the one in use.
+    var catalogEdition = 0
+    /// The heart's clock: speaking, taps, anger (T-023 §3).
+    @ObservationIgnored let heart = HeartMotion()
     /// End of the last check of the events (`announceEvents`): the goal celebration waits for it, so the Jolly
     /// pop-ups of the same reading come first (T-005 §1.1).
     private(set) var eventsCheckedAt: Date?
@@ -101,7 +121,7 @@ final class StepsStore {
     let history: HistoryStore
     private(set) var calibration: CalibrationResult
 
-    @ObservationIgnored private let defaults: UserDefaults
+    @ObservationIgnored let defaults: UserDefaults
     @ObservationIgnored private let controller: StepsController
     @ObservationIgnored private let workouts: (any WorkoutsProvider)?
     @ObservationIgnored private let scheduler = ReminderScheduler()
@@ -116,7 +136,7 @@ final class StepsStore {
     /// Reminder applications queued, one at a time.
     @ObservationIgnored private var reminderQueue: Task<Void, Never>?
 
-    private enum Keys {
+    enum Keys {
         static let goal = "stepteller.goal"
         static let speed = "stepteller.speed"
         static let units = "stepteller.units"
@@ -127,7 +147,13 @@ final class StepsStore {
         static let seasonal = "stepteller.seasonal"
         static let voiceLevel = "stepteller.voice.level"
         static let roastFrequency = "stepteller.roast.frequency"
+        /// Phone only (not iCloud nor Backup): the bubble, the first line, the last download, the roast seed.
+        static let bubble = "stepteller.voice.bubble"
+        static let firstLine = "stepteller.voice.firstLine"
+        static let catalogCheck = "stepteller.voice.catalogCheck"
+        static let roastSalt = "stepteller.roast.salt"
     }
+
 
     init(provider: any StepsProvider, workouts: (any WorkoutsProvider)? = nil,
          historyProvider: (any HistoryProvider)? = nil, streakStartOverride: Date? = nil,
@@ -158,7 +184,8 @@ final class StepsStore {
         reminderMinutes = defaults.object(forKey: Keys.reminderTime) != nil ? defaults.integer(forKey: Keys.reminderTime) : 20 * 60 + 30
         eventNotificationsOn = defaults.object(forKey: Keys.eventsOn) != nil ? defaults.bool(forKey: Keys.eventsOn) : true
         seasonalThemesOn = defaults.object(forKey: Keys.seasonal) != nil ? defaults.bool(forKey: Keys.seasonal) : true
-        voiceLevel = NastyLevel.saved(defaults.string(forKey: Keys.voiceLevel)) ?? .normale
+        // D-047: whoever has none saved (new install, update from 1.2) starts at Senza pietà
+        voiceLevel = NastyLevel.saved(defaults.string(forKey: Keys.voiceLevel)) ?? .standard
         roastFrequency = RoastFrequency.saved(defaults.string(forKey: Keys.roastFrequency)) ?? .normali
         #if DEBUG
         // Simulator screenshots: no notification permission prompt over the UI.
@@ -182,6 +209,7 @@ final class StepsStore {
         SharedStore.reminderMinutes = reminderMinutes
         SharedStore.eventsOn = eventNotificationsOn
         SharedStore.seasonalOn = seasonalThemesOn
+        SharedStore.voiceLevel = voiceLevel
         #if DEBUG
         // `-stepteller.season christmas` / `none`: forces the seasonal theme (screenshots, QA), widget included.
         SharedStore.forcedSeason = defaults.string(forKey: "stepteller.season")
@@ -223,7 +251,7 @@ final class StepsStore {
         await activate()
         await startObserving()
         await refreshCalibration(force: true)
-        var askNotifications = reminderEnabled || eventNotificationsOn
+        var askNotifications = reminderEnabled || eventNotificationsOn || voice != .normale
         #if DEBUG
         // Simulator screenshots: no notification permission prompt over the UI.
         if defaults.object(forKey: "stepteller.debugSteps") != nil { askNotifications = false }
@@ -236,6 +264,7 @@ final class StepsStore {
     func becameActive() async {
         await activate()
         await refreshCalibration(force: false)
+        await refreshCatalog()
     }
 
     /// Whole history reread first (the celebration waits for a history read after activation), then
@@ -496,9 +525,11 @@ final class StepsStore {
         let previous = reminderQueue
         let scheduler = scheduler
         let unit = unit
+        let roast = roastInput(steps: reminderPlan.steps)
         let task = Task {
             await previous?.value
             if enabled { await scheduler.apply(requests, unit: unit) } else { await scheduler.cancelAll() }
+            await RoastScheduler.update(roast)
         }
         reminderQueue = task
         await task.value

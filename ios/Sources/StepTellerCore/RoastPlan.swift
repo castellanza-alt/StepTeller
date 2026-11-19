@@ -19,17 +19,17 @@ public enum RoastPlan {
         public let id: String
     }
 
-    /// How many a day: NASTY 4–5 and Piccante 1–2 with «Normali» (T-022 §1); «Poche» and «Tante» one step down
-    /// and up. At most 7: 6 gaps of 90 minutes fill the 10:00–20:00 window.
+    /// How many a day (T-026 §1, approved by William): Senza pietà 2 · 4–5 · 7, Piccante 1 · 1–2 · 3 with «Poche» ·
+    /// «Normali» · «Tante». At most 7: 6 gaps of 90 minutes fill the 10:00–20:00 window.
     public static func countRange(_ level: NastyLevel, _ frequency: RoastFrequency) -> ClosedRange<Int> {
         switch (level, frequency) {
         case (.normale, _): 0...0
         case (.piccante, .poche): 1...1
         case (.piccante, .normali): 1...2
-        case (.piccante, .tante): 2...3
-        case (.nasty, .poche): 2...3
+        case (.piccante, .tante): 3...3
+        case (.nasty, .poche): 2...2
         case (.nasty, .normali): 4...5
-        case (.nasty, .tante): 6...7
+        case (.nasty, .tante): 7...7
         }
     }
 

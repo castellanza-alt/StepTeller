@@ -63,7 +63,9 @@ enum EventNotifier {
             if let morning = StreakEvents.morningDelivery(after: now, calendar: calendar) {
                 trigger = UNCalendarNotificationTrigger(dateMatching: morning, repeats: false)
             }
-            let text = EventText.notification(event, steps: steps, goal: goal)
+            // with NEAT's voice (Piccante, Senza pietà): the line as the text
+            let text = NastyVoice.event(EventText.notification(event, steps: steps, goal: goal), event: event,
+                                        steps: steps, goal: goal, now: now, calendar: calendar)
             let content = UNMutableNotificationContent()
             content.title = text.title
             content.body = text.body

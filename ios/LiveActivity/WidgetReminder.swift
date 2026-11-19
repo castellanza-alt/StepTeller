@@ -26,7 +26,11 @@ enum WidgetReminder {
             log.notice("widget: goal reached with \(freshSteps) steps, reminder cancelled")
             return
         }
-        let text = ReminderText.content(message, unit: Units.current)
+        // the same voice as the app's (same line for the same day: the body changes only with the numbers)
+        let fire = (trigger as? UNCalendarNotificationTrigger)?.dateComponents
+            ?? calendar.dateComponents([.year, .month, .day, .hour, .minute], from: now)
+        let text = NastyVoice.reminder(ReminderText.content(message, unit: Units.current), message: message, fire: fire,
+                                       calendar: calendar)
         guard text.body != pending.content.body else { log.notice("widget: reminder already up to date"); return }
         let content = UNMutableNotificationContent()
         content.title = text.title

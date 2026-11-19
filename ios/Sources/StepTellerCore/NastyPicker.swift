@@ -178,6 +178,8 @@ public struct NastyQuote: Equatable, Sendable {
     public let id: String
     public let title: String?
     public let text: String
+
+    public init(id: String, title: String?, text: String) { self.id = id; self.title = title; self.text = text }
 }
 
 /// Choice of the line (T-022 §2).

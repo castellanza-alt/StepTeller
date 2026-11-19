@@ -1,9 +1,13 @@
 import Foundation
 
-/// NEAT's voice (D-044, D-045): Normale is the app as it was; Piccante and NASTY roast. Chosen in Settings,
-/// default Normale. Raw values are what Settings, iCloud and the Backup save.
+/// NEAT's voice (D-044, D-045): Normale is the app as it was; Piccante and NASTY roast. Chosen in Settings and in
+/// the introduction. In Italian NASTY is called «Senza pietà» (D-047). Raw values are what Settings, iCloud and the
+/// Backup save.
 public enum NastyLevel: String, Codable, CaseIterable, Sendable {
     case normale, piccante, nasty
+
+    /// The level of whoever has none saved, new install or update from 1.2 (D-047: «Tutti al livello massimo»).
+    public static let standard: NastyLevel = .nasty
 
     /// Name of the level in the catalog (`livello`); Normale has no lines.
     public var catalogName: String? {
@@ -27,7 +31,7 @@ public enum RoastFrequency: String, Codable, CaseIterable, Sendable {
 
 /// Situations of the catalog (`situazione`), the same for both levels except one: Piccante joins morning,
 /// afternoon and evening in «Mattina, pomeriggio, sera».
-public enum NastySituation: String, CaseIterable, Sendable {
+public enum NastySituation: String, Codable, CaseIterable, Sendable {
     case pochiPassi, mattinaPomeriggio, sera, aMetaQuasi, obiettivo, jollySerie, fatto, notifiche, cuore
 
     public func catalogName(_ level: NastyLevel) -> String {
@@ -238,8 +242,10 @@ public struct NastyCatalog: Codable, Equatable, Sendable {
         return out
     }
 
+    /// Words: what lies between spaces and has a letter or a digit (the French « ? » and « ! », a dash, are not words).
     static func words(_ text: String) -> Int {
-        text.split(whereSeparator: { $0 == " " || $0 == "\n" }).count
+        text.split(whereSeparator: { $0 == " " || $0 == "\n" || $0 == "\u{00A0}" || $0 == "\u{202F}" })
+            .filter { $0.contains(where: { $0.isLetter || $0.isNumber }) }.count
     }
 
     /// Braces that are not one of the allowed placeholders (also a lone `{` or `}`).

@@ -80,7 +80,7 @@ struct RootView: View {
                         switch screen {
                         case .home:
                             // child gestures (slider on the road) take precedence over the swipe
-                            HomeView(size: size)
+                            HomeView(size: size, covered: showSettings || celebrating || !store.popups.isEmpty)
                                 .contentShape(Rectangle())
                                 .gesture(swipe(to: .history))
                                 .transition(.move(edge: .leading))

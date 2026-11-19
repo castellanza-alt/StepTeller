@@ -45,3 +45,55 @@ delle battute. Non scrivere a William.
 Solo SSD; file pesanti in `/Volumes/SSD/Temp/NEAT/`; a fine turno niente acceso.
 
 ## Esito
+**Developer, 19/11/2026.** Ramo `task/T-027-nasty-app`, PR verso `main` (non unita). Screenshot in `tasks/T-027/`
+(`pm-` 17 Pro Max, `se-` SE; Home Senza pietà e Piccante giorno e notte, prima battuta, pop-up, festa, introduzione,
+Impostazioni, una notifica).
+
+**Fatto**
+1. Livello di serie nel nucleo: `NastyLevel.standard = .nasty` (D-047), usato da `StepsStore` e dalla copia del widget.
+   Notifiche al giorno come T-026 §1: Senza pietà 2 · 4–5 · 7, Piccante 1 · 1–2 · 3 (`RoastPlan.countRange`).
+2. Cuore e fumetto in Home (`App/Voice/`): i livelli vettoriali di `T-023-nasty/livelli/` come imageset SVG, impilati;
+   le animazioni di T-023 §3 e della pagina di riferimento come funzioni del tempo (`HeartMotion`, curve CSS per tratto):
+   battito e respiro, «quando parla» con il fumetto sparato dal cuore, quattro (NASTY) e tre (Piccante) reazioni al
+   tocco a rotazione, rabbia `k` 1 · 1,35 · 1,7 entro 4 s (`NastyRage` nel nucleo). Orologio a 120 Hz mentre parla o
+   reagisce, 60 Hz per il battito a riposo, fermo con l'app in sottofondo e, a riposo, con «Riduci movimento» (solo
+   dissolvenze e lampo). Aptica come §3.3–3.4. VoiceOver: il cuore è un pulsante «NEAT. Tocca per un'altra battuta.»
+   con la battuta come valore. Con Normale, o con l'avviso «nessun dato», niente.
+3. Fumetto (`NastyBubble` nel nucleo): cambia quando cambia la situazione, al massimo una volta l'ora, e con il giorno;
+   subito se la battuta non si può più dire (obiettivo raggiunto, numero mancante, ora finita). I numeri si riempiono a
+   ogni comparsa. Una battuta conta come vista solo quando compare in Home non coperta. Prima battuta dopo
+   l'aggiornamento: in sospeso per chi aveva già l'app (introduzione fatta), segnata quando compare davvero, resta per
+   la stessa situazione del giorno; chi installa da zero non la vede.
+4. Altri punti: riga sotto l'obiettivo (introduzione e Impostazioni, una battuta per raffica di tocchi), pop-up dei
+   Jolly (la battuta al posto della prima frase, cuore adesivo; non per il Jolly di Natale), titolo della festa
+   (2 righe in 330, fino ad Anton 24; solo a obiettivo raggiunto).
+5. Introduzione a 5 pagine, la voce è la 4ª (`-stepteller.debugOnboarding 4`; `screenshots.sh` aggiornato); già su Senza
+   pietà. Impostazioni › Voce dopo l'obiettivo, con «Notifiche di NEAT» solo con Piccante o Senza pietà. Scegliere una
+   voce chiede il permesso delle notifiche se manca. Lingua senza catalogo valido: niente pagina né sezione, voce Normale.
+6. Notifiche roast (`RoastScheduler`): rifatte a ogni lettura di Salute (apertura, risveglio, consegna in sottofondo),
+   in coda con il promemoria; le consegnate di oggi entrano tra le viste e tengono i 90 minuti; nessuna a obiettivo
+   raggiunto (le ritira anche il widget appena vede l'obiettivo). Prefisso `stepteller.roast.`. **Limite di iOS:** 64
+   notifiche in attesa; qui al massimo 7 roast + 7 promemoria + pochi avvisi. Promemoria serale: battuta + i minuti di
+   sempre; avvisi di obiettivo e Jolly: titolo di sempre, battuta come testo. Scelta ripetibile per giorno e scopo, senza
+   memoria delle viste, così il widget non la cambia a ogni riscrittura.
+7. Catalogo: a bordo le 10 lingue (`battute.py` legge anche `catalogo/lingue/<lingua>.json` di T-025; un file per lingua
+   sul sito, T-022 §4 aggiornato). Una volta al giorno, solo con una voce in uso: GET di
+   `neat/nasty/it/battute.json` e della lingua dell'app, sessione effimera, niente cookie, cache né credenziali,
+   User-Agent «NEAT», `Accept-Language: *`; tenuto nell'App Group solo se passa il controllo ed è nuovo; senza rete
+   riprova all'apertura dopo. Il widget rilegge i file quando cambiano.
+8. Testi: 14 righe nel foglio, lingue dal Traduttore (`localizzazione/nasty-interfaccia.json`, T-028), cataloghi
+   rigenerati; controllati su SE DE, FR e JA (i tre segmenti ci stanno). Font JA/KO/ZH ridotti anche ai caratteri delle
+   battute (`font_asia.py`), tutti coperti.
+9. Privacy: italiano T-026 §2 e inglese T-028 (Jolly → Joker nella pagina inglese) **in attesa nel ramo
+   `task/T-027-privacy`, PR #57 «da unire quando la 1.3 viene pubblicata»**: il merge pubblica il sito e la 1.2 è in
+   revisione (Director). Qui `neat/privacy/index.html` resta come main. Data da mettere alla pubblicazione.
+10. Revisione indipendente: corretti orologi sempre accesi, riga del promemoria instabile, memoria persa tra roast e
+    Home, scaricamento dove la voce è Normale e senza nuovo tentativo, catalogo vecchio nel widget, VoiceOver del
+    cuore, riga dell'obiettivo spuria nell'introduzione, prima battuta segnata sotto un pop-up, permesso delle
+    notifiche, conteggio delle parole con la punteggiatura francese.
+
+**PT-BR:** il titolo di N138 è stato corretto in main (#55, «Larga o sofá, porra»); cataloghi rigenerati, il portoghese
+offre i tre livelli e su SE selettore e introduzione ci stanno.
+
+**Verifiche:** `swift test` 151 test verdi; build Debug e Release; `battute.py --check`,
+`registro.py`. Nessuna build TestFlight.

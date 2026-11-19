@@ -91,11 +91,8 @@ Impostazioni, una notifica).
     cuore, riga dell'obiettivo spuria nell'introduzione, prima battuta segnata sotto un pop-up, permesso delle
     notifiche, conteggio delle parole con la punteggiatura francese.
 
-**Aperto**
-- **PT-BR N138:** il titolo «Larga a porra do sofá» ha 5 parole (massimo 4): il controllo rifiuta il catalogo portoghese
-  intero, quindi in PT-BR oggi niente Piccante e Senza pietà. Tre test lo segnalano (CI rossa finché non si corregge la
-  riga in `catalogo/lingue/pt-BR.json`; poi `python3 scripts/battute.py` e `scripts/font_asia.py`). Testo del Traduttore.
-- Il selettore PT-BR su SE va guardato dopo la correzione (con il catalogo rifiutato la sezione non compare).
+**PT-BR:** il titolo di N138 è stato corretto in main (#55, «Larga o sofá, porra»); cataloghi rigenerati, il portoghese
+offre i tre livelli e su SE selettore e introduzione ci stanno.
 
-**Verifiche:** `swift test` 151 test, verdi tranne 3 test (4 asserzioni) di PT-BR; build Debug e Release; `battute.py --check`,
+**Verifiche:** `swift test` 151 test verdi; build Debug e Release; `battute.py --check`,
 `registro.py`. Nessuna build TestFlight.

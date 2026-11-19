@@ -7189,7 +7189,7 @@ extension NastyLibrary {
    "id": "N138",
    "livello": "NASTY",
    "situazione": "Notifiche",
-   "titolo": "Larga a porra do sofá",
+   "titolo": "Larga o sofá, porra",
    "testo": "{passi} passos. Isso lá é dia?"
   },
   {

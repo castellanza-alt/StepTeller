@@ -3,6 +3,11 @@
 Più recente in alto: data, build (presunta quando William non l'ha detta), cosa ha provato, giudizio con le sue
 parole; dove le parole esatte non sono conservate è scritto «in sintesi». Ogni voce finisce con → la versione che l'ha risolta.
 
+- **19/11/2026**, NASTY, impostazione (nessuna build): vuole «un approccio così» come Carrot Weather. «NEAT deve
+  diventare un personaggio […] Gli darei una forma ma non un volto.» Tre livelli, gratuita, di serie normale e
+  nell'introduzione «gli chiediamo se vuole una esperienza più piccante». Sulle frasi di T-008: «troppo blande. Qui
+  dobbiamo mordere. L'approccio non è da dad joke ma da Roast in Peace.» «Facciamo peggio, molto peggio […] una
+  cosa bella spinta.» → D-044
 - **19/11/2026**, Novità 1.2 per lo store in italiano (testo del Director: Natale, Jolly regalo, avvisi, pop-up,
   correzioni): «Sì, approvate». → 1.2
 - **19/11/2026**, testi italiani dei pop-up, delle notifiche e del Jolly regalo (tela, nessuna build): «i testi sono ok».

@@ -29,6 +29,13 @@ Le decisioni di prodotto della 1.0 sono nella tabella di `STORE_CHECKLIST.md` e 
   mai durante la notte e mai doppia con il promemoria; Jolly guadagnato e usato: una notifica per evento e un pop-up
   alla prima apertura dopo l'evento, mai ripetuto. Si usano i meccanismi già presenti (consegna in sottofondo di Salute,
   widget, risveglio in sottofondo), Salute sempre in sola lettura, nessuna rete. Si possono spegnere in Impostazioni.
+- **D-044 NASTY, impostazione alla Carrot (19/11/2026, William).** NEAT stesso è il personaggio e parla in prima
+  persona: ha una forma ma non un volto. Tre livelli (Normale, intermedio, NASTY), gratuiti; di serie Normale, e
+  l'introduzione chiede se si vuole «un'esperienza più piccante». Tono da roast («Roast in Peace»), non da battuta
+  bonaria: i testi di T-008 (Hargreaves) sono troppo blandi e vanno riscritti; Hargreaves come personaggio terzo
+  decade. Di D-039 restano i limiti: da chiarire con William le parolacce; restano fuori corpo, peso, aspetto,
+  salute, età, genere e altre caratteristiche personali (linee guida di Apple). Prima del codice: ricerca su Carrot
+  (`/Volumes/SSD/Temp/NEAT/nasty/carrot-ricerca.md`), carattere e campione di battute approvati da William.
 - **D-039 NASTY (17/11/2026, William).** «Cattiva ma senza parolacce, lo scopo è umiliare con humor inglese, non
   offendere in modo facile con insulti. L'utente deve ridere ma anche sentirsi incentivato a fare i passi. Questo deve
   essere vero in ogni aspetto, anche quando imposta il target dei passi.» Regole del Director che ne seguono: niente

@@ -295,6 +295,67 @@ final class NastyChoiceTests: XCTestCase {
                         isRecord: record, minuteOfDay: hour * 60 + minute)
     }
 
+    // MARK: T-031
+
+    /// Record and twice the goal win over the generic «Quando ce la fai», the record first.
+    func testEventLinesComeFirst() {
+        for (record, event) in [(true, NastyEvent.record), (false, .doppio)] {
+            let moment = NastyMoment.of(.home, day: day(25_000, record: record))
+            for level in [NastyLevel.nasty, .piccante] {
+                // as many as the event's lines: each one once, then (seen) the next tier
+                let count = catalog.battute.filter { $0.livello == level.catalogName && $0.event == event }.count
+                var memory = NastyMemory()
+                for seed in 0..<count {
+                    var rng = SeededRandom(seed: UInt64(seed))
+                    let quote = NastyPicker.pick(catalog, level: level, moment: moment, memory: memory, using: &rng)!
+                    let line = catalog.battute.first { $0.id == quote.id }!
+                    XCTAssertEqual(line.event, event, "\(level) \(quote.text)")
+                    memory.record(quote.id, level: level)
+                }
+            }
+        }
+        // the event lines all seen recently: a fresh generic line rather than a repeat
+        let moment = NastyMoment.of(.home, day: day(25_000))
+        var memory = NastyMemory()
+        for line in catalog.battute where line.livello == "NASTY" && line.event == .doppio { memory.record(line.id, level: .nasty) }
+        var rng = SeededRandom(seed: 1)
+        let quote = NastyPicker.pick(catalog, level: .nasty, moment: moment, memory: memory, using: &rng)!
+        XCTAssertNil(catalog.battute.first { $0.id == quote.id }!.event)
+        XCTAssertEqual(NastyPicker.precedence(.record), 4)
+        XCTAssertGreaterThan(NastyPicker.precedence(.doppio), NastyPicker.precedence(.jollyUsato))
+        XCTAssertEqual(NastyPicker.precedence(nil), 0)
+    }
+
+    /// The pop-up never repeats its title nor the number of its tag; the reminder never its minutes and numbers.
+    func testNoRepetitionOfThePlace() {
+        XCTAssertEqual(NastyPicker.plain("JOLLY GUADAGNATO!"), "jolly guadagnato")
+        XCTAssertEqual(NastyPicker.plain("Già fatto: perché?"), "gia fatto perche")
+        for (trigger, title) in [(NastyMoment.Trigger.jollyEarned, "JOLLY GUADAGNATO!"), (.jollyUsed, "JOLLY USATO")] {
+            let moment = NastyMoment.of(trigger, day: day(3_000, jolly: 3))
+            for level in [NastyLevel.nasty, .piccante] {
+                let said = Set((0..<60).compactMap { seed -> String? in
+                    var rng = SeededRandom(seed: UInt64(seed))
+                    return NastyPicker.pick(catalog, level: level, moment: moment, memory: NastyMemory(),
+                                            excluding: [.jolly, .serie], notSaying: [title], using: &rng)?.id
+                })
+                // today's catalog: only «Jolly usato» in Senza pietà keeps lines (N092, N098); the others all repeat
+                // title or tag, so those pop-ups keep their own sentence
+                XCTAssertEqual(!said.isEmpty, trigger == .jollyUsed && level == .nasty, "\(level) \(title)")
+                for id in said {
+                    let line = catalog.battute.first { $0.id == id }!
+                    XCTAssertTrue(line.placeholders.isDisjoint(with: [.jolly, .serie]), id)
+                    XCTAssertFalse(NastyPicker.plain(line.testo).contains(NastyPicker.plain(title)), id)
+                }
+            }
+        }
+        // the ones the place repeats exist: without the rule they could come out
+        XCTAssertTrue(catalog.battute.contains { NastyPicker.plain($0.testo).hasPrefix("jolly guadagnato") })
+        // nothing left: nil, and the place keeps its own text
+        var rng = SeededRandom(seed: 2)
+        XCTAssertNil(NastyPicker.pick(catalog, level: .nasty, moment: NastyMoment.of(.jollyEarned, day: day(3_000)),
+                                      memory: NastyMemory(), notSaying: ["a", "e", "i", "o", "u"], using: &rng))
+    }
+
     // MARK: situations
 
     func testHomeSituations() {

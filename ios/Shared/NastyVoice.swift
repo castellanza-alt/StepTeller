@@ -89,11 +89,14 @@ enum NastyVoice {
     /// Repeatable choice for a notification: the same for the same day and purpose (the widget rewrites the
     /// reminder often, and the text must not change at every rewrite), different every day. Without the memory of
     /// the lines seen: it changes during the day, and the line with it.
-    private static func line(_ moment: NastyMoment, purpose: String, day: String) -> NastyQuote? {
+    /// `excluding`, `notSaying`: what the notification says already (T-031).
+    private static func line(_ moment: NastyMoment, purpose: String, day: String, excluding: Set<NastyPlaceholder> = [],
+                             notSaying: [String] = []) -> NastyQuote? {
         let level = level
         guard level != .normale, let catalog else { return nil }
         var rng = SeededRandom(seed: SeededRandom.seed("voice.\(purpose).\(day)"))
         return NastyPicker.pick(catalog, level: level, moment: moment, memory: NastyMemory(),
+                                excluding: excluding, notSaying: notSaying,
                                 format: LocalFormat.integer, using: &rng)
     }
 
@@ -110,9 +113,11 @@ enum NastyVoice {
             let today = NastyMoment.Day(steps: max(0, goal - remaining), goal: goal, minutesLeft: minutes,
                                         streak: SharedStore.streak, jolly: SharedStore.jolly, minuteOfDay: minute)
             if case .wouldBreak? = warning {
-                quote = line(NastyMoment.of(.streakAtRisk, day: today), purpose: "reminder.risk", day: day)
+                quote = line(NastyMoment.of(.streakAtRisk, day: today), purpose: "reminder.risk", day: day,
+                             excluding: reminderNumbers)
             }
-            quote = quote ?? line(NastyMoment.of(.notification, day: today), purpose: "reminder", day: day)
+            quote = quote ?? line(NastyMoment.of(.notification, day: today), purpose: "reminder", day: day,
+                                  excluding: reminderNumbers)
         case .generic:
             let moment = NastyMoment(situations: [.notifiche], values: NastyValues(obiettivo: SharedStore.goal),
                                      minuteOfDay: minute)
@@ -134,9 +139,15 @@ enum NastyVoice {
         case .jollyEarned: .jollyEarned
         case .jollyUsed: .jollyUsed
         }
-        guard let quote = line(NastyMoment.of(trigger, day: today), purpose: "event." + event.id, day: event.day) else { return base }
+        // never the notification's title again («Jolly usato» / «Jolly usato. Ieri hai fatto schifo.»)
+        guard let quote = line(NastyMoment.of(trigger, day: today), purpose: "event." + event.id, day: event.day,
+                               notSaying: [base.title]) else { return base }
         return ReminderContent(title: base.title, body: quote.text)
     }
+
+    /// The reminder says minutes, goal and steps left by itself («… per arrivare a 10.000 (mancano 6.535)»): its line
+    /// never repeats them (T-031).
+    private static let reminderNumbers: Set<NastyPlaceholder> = [.mancano, .minuti, .obiettivo]
 
     /// Between two sentences: a space, none in Japanese and Chinese.
     private static var gap: String {

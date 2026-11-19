@@ -54,3 +54,5 @@ Correzioni ricorrenti:
 
 Non verificato: la resa comica vera la può giudicare solo un madrelingua (non c'è nel team); lunghezze a schermo con
 T-023. Nessuna bestemmia né insulto a gruppi trovato. Glossario aggiornato (sezione 5), `lingue/LEGGIMI.md` aggiornato.
+
+**Correzione 19/11 (lang/T-025-fix).** Titolo di notifica oltre le 4 parole del controllo dell'app (`NastyCatalog.maxTitleWords`): pt-BR N138 «Larga o sofá, porra». Ricontrollate le 9 lingue: nessun altro titolo oltre 4 parole o 30 caratteri (il «?» staccato non conta più come parola, correzione del Developer), nessun testo oltre 12 parole o 90 caratteri.

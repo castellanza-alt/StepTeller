@@ -3121,13 +3121,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "JETZT %arg JOKER"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "JETZT %arg JOKER"
                     }
                   }
                 }
@@ -3149,13 +3149,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "YOU HAVE %arg JOKER"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "YOU HAVE %arg JOKERS"
                     }
                   }
                 }
@@ -3177,13 +3177,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "TIENES %arg COMODÍN"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "TIENES %arg COMODINES"
                     }
                   }
                 }
@@ -3205,13 +3205,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "TU AS %arg JOKER"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "TU AS %arg JOKERS"
                     }
                   }
                 }
@@ -3261,7 +3261,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "おまもりが%arg個に"
                     }
                   }
                 }
@@ -3283,7 +3283,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "이제 지킴이 %arg개"
                     }
                   }
                 }
@@ -3305,13 +3305,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "VOCÊ TEM %arg CORINGA"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "VOCÊ TEM %arg CORINGAS"
                     }
                   }
                 }
@@ -3333,7 +3333,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "现在有%arg枚护身符"
                     }
                   }
                 }
@@ -3355,7 +3355,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "ORA HAI %arg JOLLY"
+                      "value" : "現在有%arg枚護身符"
                     }
                   }
                 }
@@ -3383,13 +3383,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNO DI FILA!"
+                      "value" : "%arg TAG IN FOLGE!"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "%arg TAGE IN FOLGE!"
                     }
                   }
                 }
@@ -3411,13 +3411,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNO DI FILA!"
+                      "value" : "%arg DAY IN A ROW!"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "%arg DAYS IN A ROW!"
                     }
                   }
                 }
@@ -3439,13 +3439,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNO DI FILA!"
+                      "value" : "¡%arg DÍA SEGUIDO!"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "¡%arg DÍAS SEGUIDOS!"
                     }
                   }
                 }
@@ -3467,13 +3467,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNO DI FILA!"
+                      "value" : "%arg JOUR D’AFFILÉE !"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "%arg JOURS D’AFFILÉE !"
                     }
                   }
                 }
@@ -3523,7 +3523,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "%arg日連続！"
                     }
                   }
                 }
@@ -3545,7 +3545,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "%arg일 연속!"
                     }
                   }
                 }
@@ -3567,13 +3567,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNO DI FILA!"
+                      "value" : "%arg DIA SEGUIDO!"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "%arg DIAS SEGUIDOS!"
                     }
                   }
                 }
@@ -3595,7 +3595,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "连续%arg天！"
                     }
                   }
                 }
@@ -3617,7 +3617,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI DI FILA!"
+                      "value" : "連續%arg天！"
                     }
                   }
                 }
@@ -3634,25 +3634,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "TAG VERPASST? EIN JOKER RETTET DEINE SERIE."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "IF YOU MISS A DAY, A JOKER SAVES YOUR STREAK."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "SI FALLAS UN DÍA, UN COMODÍN SALVA TU RACHA."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "UN JOUR MANQUÉ ? UN JOKER SAUVE TA SÉRIE."
           }
         },
         "it" : {
@@ -3664,31 +3664,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "1日休んでも、おまもりが連続記録を守るよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "하루를 놓쳐도 지킴이가 연속 기록을 지켜줘요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "PULOU UM DIA? UM CORINGA SALVA SUA SEQUÊNCIA."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "漏掉一天时，护身符会保住连续记录。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SE SALTI UN GIORNO, UN JOLLY SALVA LA STREAK."
+            "value" : "漏掉一天時，護身符會保住連續紀錄。"
           }
         }
       }
@@ -3700,25 +3700,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "NEUER JOKER!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "JOKER EARNED!"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "¡COMODÍN GANADO!"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "JOKER GAGNÉ !"
           }
         },
         "it" : {
@@ -3730,31 +3730,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "おまもりゲット！"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "지킴이 획득!"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "CORINGA GANHO!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "获得护身符！"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY GUADAGNATO!"
+            "value" : "獲得護身符！"
           }
         }
       }
@@ -3766,25 +3766,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "Joker bekommen: %1$@ Tage in Folge. Verfügbare Joker: %2$@."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "Joker earned: %1$@ days in a row. Jokers available: %2$@."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "Comodín ganado: %1$@ días seguidos. Comodines disponibles: %2$@."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "Joker gagné : %1$@ jours d’affilée. Jokers disponibles : %2$@."
           }
         },
         "it" : {
@@ -3796,31 +3796,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "おまもりゲット：%1$@日連続。使えるおまもり：%2$@個。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "지킴이 획득: %1$@일 연속. 사용 가능한 지킴이: %2$@개."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "Coringa ganho: %1$@ dias seguidos. Coringas disponíveis: %2$@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "获得护身符：连续%1$@天。可用护身符：%2$@枚。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly guadagnato: %1$@ giorni di fila, ora hai %2$@ Jolly."
+            "value" : "獲得護身符：連續%1$@天。可用護身符：%2$@枚。"
           }
         }
       }
@@ -3832,25 +3832,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "WEIHNACHTEN: EIN PAUSENTAG GEHT AUF UNS."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "IT'S CHRISTMAS: A DAY OFF, ON US."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "ES NAVIDAD: TE REGALAMOS UN DÍA DE DESCANSO."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "C’EST NOËL : ON T’OFFRE UN JOUR DE PAUSE."
           }
         },
         "it" : {
@@ -3862,31 +3862,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "クリスマスだから、1日分の休みをプレゼント。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "크리스마스니까 하루 쉬는 날을 선물할게요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "É NATAL: UM DIA DE FOLGA POR NOSSA CONTA."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "圣诞节到了：送你一天休息。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "È NATALE: UN GIORNO DI PAUSA TE LO OFFRIAMO NOI."
+            "value" : "聖誕節到了：送你一天休息。"
           }
         }
       }
@@ -3898,25 +3898,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "WIE DIE ANDEREN: TAG VERPASST? ER RETTET DEINE SERIE."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "SAME AS THE OTHERS: MISS A DAY AND IT SAVES YOUR STREAK."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "VALE COMO LOS DEMÁS: SI FALLAS UN DÍA, SALVA TU RACHA."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "COMME LES AUTRES : UN JOUR MANQUÉ ? IL SAUVE TA SÉRIE."
           }
         },
         "it" : {
@@ -3928,31 +3928,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "ほかのおまもりと同じ：1日休んでも連続記録を守るよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "다른 지킴이와 같아요: 하루를 놓쳐도 연속 기록을 지켜줘요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "VALE COMO OS OUTROS: PULOU UM DIA? ELE SALVA SUA SEQUÊNCIA."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "和其他护身符一样：漏掉一天时，它会保住连续记录。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VALE COME GLI ALTRI: SE SALTI UN GIORNO, SALVA LA STREAK."
+            "value" : "和其他護身符一樣：漏掉一天時，它會保住連續紀錄。"
           }
         }
       }
@@ -3964,25 +3964,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "JOKER GESCHENKT!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "A JOKER FOR YOU!"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "¡COMODÍN DE REGALO!"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "UN JOKER OFFERT !"
           }
         },
         "it" : {
@@ -3994,31 +3994,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "おまもりのプレゼント！"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "지킴이 선물!"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "CORINGA DE NATAL!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "送你一枚护身符！"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY IN REGALO!"
+            "value" : "送你一枚護身符！"
           }
         }
       }
@@ -4030,25 +4030,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "Weihnachtsgeschenk: ein Joker. Verfügbare Joker: %@. Verpasst du einen Tag, rettet ein Joker deine Serie."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "Christmas gift: one Joker. Jokers available: %@. If you miss a day, a Joker saves your streak."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "Regalo de Navidad: un Comodín. Comodines disponibles: %@. Si fallas un día, un Comodín salva tu racha."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "Cadeau de Noël : un Joker. Jokers disponibles : %@. Si tu manques un jour, un Joker sauve ta série."
           }
         },
         "it" : {
@@ -4060,31 +4060,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "クリスマスのプレゼント：おまもり1個。使えるおまもり：%@個。1日休んでも、おまもりが連続記録を守るよ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "크리스마스 선물: 지킴이 1개. 사용 가능한 지킴이: %@개. 하루를 놓쳐도 지킴이가 연속 기록을 지켜줘요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "Presente de Natal: um Coringa. Coringas disponíveis: %@. Se pular um dia, um Coringa salva sua sequência."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "圣诞礼物：一枚护身符。可用护身符：%@枚。漏掉一天时，护身符会保住连续记录。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly in regalo per Natale: più uno. Ora hai %@ Jolly. Se salti un giorno, un Jolly salva la streak."
+            "value" : "聖誕禮物：一枚護身符。可用護身符：%@枚。漏掉一天時，護身符會保住連續紀錄。"
           }
         }
       }
@@ -4107,13 +4107,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTA %arg JOLLY"
+                      "value" : "NOCH %arg JOKER"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "NOCH %arg JOKER"
                     }
                   }
                 }
@@ -4135,13 +4135,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTA %arg JOLLY"
+                      "value" : "%arg JOKER LEFT"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "%arg JOKERS LEFT"
                     }
                   }
                 }
@@ -4163,13 +4163,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTA %arg JOLLY"
+                      "value" : "QUEDA %arg COMODÍN"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "QUEDAN %arg COMODINES"
                     }
                   }
                 }
@@ -4191,13 +4191,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTA %arg JOLLY"
+                      "value" : "ENCORE %arg JOKER"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "ENCORE %arg JOKERS"
                     }
                   }
                 }
@@ -4247,7 +4247,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "残りのおまもり：%arg個"
                     }
                   }
                 }
@@ -4269,7 +4269,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "남은 지킴이 %arg개"
                     }
                   }
                 }
@@ -4291,13 +4291,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTA %arg JOLLY"
+                      "value" : "RESTA %arg CORINGA"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "RESTAM %arg CORINGAS"
                     }
                   }
                 }
@@ -4319,7 +4319,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "剩余%arg枚护身符"
                     }
                   }
                 }
@@ -4341,7 +4341,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "TI RESTANO %arg JOLLY"
+                      "value" : "剩餘%arg枚護身符"
                     }
                   }
                 }
@@ -4358,25 +4358,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "KEINE JOKER: HEUTE DRANBLEIBEN"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "NO JOKERS: DON'T QUIT TODAY"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "SIN COMODINES: HOY NO AFLOJES"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "PLUS DE JOKERS : NE LÂCHE RIEN"
           }
         },
         "it" : {
@@ -4388,31 +4388,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "おまもりなし：今日はがんばろう"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "지킴이 없음: 오늘은 꼭 해내요"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "SEM CORINGAS: HOJE NÃO DESISTA"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "护身符用完了：今天别放弃"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY FINITI: OGGI NON MOLLARE"
+            "value" : "護身符用完了：今天別放棄"
           }
         }
       }
@@ -4460,7 +4460,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "확인"
           }
         },
         "pt-BR" : {
@@ -4472,13 +4472,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "好"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "好"
           }
         }
       }
@@ -4501,13 +4501,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "IERI NON HAI CHIUSO L'OBIETTIVO."
+                      "value" : "GESTERN HAST DU DEIN ZIEL VERPASST."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg TAGE UNTER DEINEM ZIEL."
                     }
                   }
                 }
@@ -4529,13 +4529,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "IERI NON HAI CHIUSO L'OBIETTIVO."
+                      "value" : "YOU MISSED YOUR GOAL YESTERDAY."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg DAYS SHORT OF YOUR GOAL."
                     }
                   }
                 }
@@ -4557,13 +4557,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "IERI NON HAI CHIUSO L'OBIETTIVO."
+                      "value" : "AYER NO ALCANZASTE TU OBJETIVO."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg DÍAS SIN OBJETIVO."
                     }
                   }
                 }
@@ -4585,13 +4585,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "IERI NON HAI CHIUSO L'OBIETTIVO."
+                      "value" : "HIER, OBJECTIF NON ATTEINT."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg JOURS SANS OBJECTIF."
                     }
                   }
                 }
@@ -4641,7 +4641,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg日間、目標に届かなかった。"
                     }
                   }
                 }
@@ -4663,7 +4663,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg일 동안 목표를 달성하지 못했어요."
                     }
                   }
                 }
@@ -4685,13 +4685,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "IERI NON HAI CHIUSO L'OBIETTIVO."
+                      "value" : "ONTEM VOCÊ NÃO ATINGIU SUA META."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg DIAS SEM ATINGIR A META."
                     }
                   }
                 }
@@ -4713,7 +4713,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg天没有达成目标。"
                     }
                   }
                 }
@@ -4735,7 +4735,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg GIORNI SENZA OBIETTIVO."
+                      "value" : "%arg天沒有達成目標。"
                     }
                   }
                 }
@@ -4763,13 +4763,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNO È SALVA."
+                      "value" : "DEINE %arg-TAG-SERIE IST SICHER."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "DEINE %arg-TAGE-SERIE IST SICHER."
                     }
                   }
                 }
@@ -4791,13 +4791,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNO È SALVA."
+                      "value" : "YOUR %arg-DAY STREAK IS SAFE."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "YOUR %arg-DAY STREAK IS SAFE."
                     }
                   }
                 }
@@ -4819,13 +4819,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNO È SALVA."
+                      "value" : "TU RACHA DE %arg DÍA ESTÁ A SALVO."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "TU RACHA DE %arg DÍAS ESTÁ A SALVO."
                     }
                   }
                 }
@@ -4847,13 +4847,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNO È SALVA."
+                      "value" : "TA SÉRIE DE %arg JOUR EST SAUVÉE."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "TA SÉRIE DE %arg JOURS EST SAUVÉE."
                     }
                   }
                 }
@@ -4903,7 +4903,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "%arg日の連続記録は守られた！"
                     }
                   }
                 }
@@ -4925,7 +4925,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "%arg일 연속 기록을 지켰어요."
                     }
                   }
                 }
@@ -4947,13 +4947,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNO È SALVA."
+                      "value" : "SEQUÊNCIA DE %arg DIA SALVA."
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "SEQUÊNCIA DE %arg DIAS SALVA."
                     }
                   }
                 }
@@ -4975,7 +4975,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "%arg天的连续记录保住了。"
                     }
                   }
                 }
@@ -4997,7 +4997,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "LA STREAK DI %arg GIORNI È SALVA."
+                      "value" : "%arg天的連續紀錄保住了。"
                     }
                   }
                 }
@@ -5014,25 +5014,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "JOKER EINGESETZT"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "JOKER USED"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "COMODÍN USADO"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "JOKER UTILISÉ"
           }
         },
         "it" : {
@@ -5044,31 +5044,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "おまもりを使用"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "지킴이 사용"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "CORINGA USADO"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "已使用护身符"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "JOLLY USATO"
+            "value" : "已使用護身符"
           }
         }
       }
@@ -5080,25 +5080,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "Joker eingesetzt: Deine Serie von %1$@ Tagen ist gerettet. Übrige Joker: %2$@."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "Joker used: your %1$@-day streak is safe. Jokers left: %2$@."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "Comodín usado: tu racha de %1$@ días está a salvo. Comodines restantes: %2$@."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "Joker utilisé : ta série de %1$@ jours est sauvée. Jokers restants : %2$@."
           }
         },
         "it" : {
@@ -5110,31 +5110,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "おまもりを使用：%1$@日の連続記録は守られたよ。残りのおまもり：%2$@個。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "지킴이 사용: %1$@일 연속 기록을 지켰어요. 남은 지킴이: %2$@개."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "Coringa usado: sua sequência de %1$@ dias está salva. Coringas restantes: %2$@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "已使用护身符：%1$@天的连续记录保住了。剩余护身符：%2$@枚。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jolly usato: la streak di %1$@ giorni è salva, ti restano %2$@ Jolly."
+            "value" : "已使用護身符：%1$@天的連續紀錄保住了。剩餘護身符：%2$@枚。"
           }
         }
       }
@@ -6992,25 +6992,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "Eine Mitteilung, wenn du dein Ziel erreichst (nie nachts) und wenn du einen Joker bekommst oder nutzt. Die Pop-ups in der App bleiben."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "A notification when you reach your goal (never at night) and when you earn or use a Joker. In-app pop-ups stay on."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "Una notificación cuando alcanzas tu objetivo (nunca de noche) y cuando ganas o usas un Comodín. Los avisos en la app se mantienen."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "Une notification quand tu atteins ton objectif (jamais la nuit) et quand tu gagnes ou utilises un Joker. Les pop-ups dans l’app restent."
           }
         },
         "it" : {
@@ -7022,31 +7022,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "目標を達成したとき（夜間を除く）と、おまもりを獲得・使用したときに通知します。アプリ内のポップアップはそのまま表示されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "목표를 달성했을 때(밤 제외)와 지킴이를 받거나 사용했을 때 알려줘요. 앱 안의 팝업은 그대로 나와요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "Uma notificação quando você atinge sua meta (nunca à noite) e quando ganha ou usa um Coringa. Os pop-ups no app continuam."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "达成目标时（夜间除外）以及获得或使用护身符时发送通知。App 内的弹窗仍会显示。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una notifica quando chiudi l'obiettivo (mai di notte) e quando guadagni o usi un Jolly. I pop-up nell'app restano."
+            "value" : "達成目標時（夜間除外）以及獲得或使用護身符時傳送通知。App 內的彈出視窗仍會顯示。"
           }
         }
       }
@@ -7058,25 +7058,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "Ziel- und Joker-Hinweise"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "Goal & Joker alerts"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "Avisos de objetivo y Comodín"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "Alertes objectif et Joker"
           }
         },
         "it" : {
@@ -7088,31 +7088,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "目標とおまもりの通知"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "목표·지킴이 알림"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "Avisos de meta e Coringa"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "目标和护身符通知"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvisi di obiettivo e Jolly"
+            "value" : "目標和護身符通知"
           }
         }
       }
@@ -7190,25 +7190,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abenderinnerung"
+            "value" : "Mitteilungen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Evening reminder"
+            "value" : "Notifications"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recordatorio nocturno"
+            "value" : "Notificaciones"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rappel du soir"
+            "value" : "Notifications"
           }
         },
         "it" : {
@@ -7220,31 +7220,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "夜のリマインダー"
+            "value" : "通知"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "저녁 알림"
+            "value" : "알림"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lembrete noturno"
+            "value" : "Notificações"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "晚间提醒"
+            "value" : "通知"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "晚間提醒"
+            "value" : "通知"
           }
         }
       }
@@ -7586,25 +7586,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Vom 1. Dezember bis 6. Januar: Stiefel, Schnee, Schlitten und das Weihnachtssymbol. Ändert sich das Symbol, zeigt iOS einen Hinweis."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "From December 1 to January 6: boot, snow, sleigh and the Christmas icon. When the icon changes, iOS shows an alert."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Del 1 de diciembre al 6 de enero: bota, nieve, trineo y el icono de Navidad. Cuando el icono cambia, iOS muestra un aviso."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "Du 1er décembre au 6 janvier : botte, neige, traîneau et l’icône de Noël. Quand l’icône change, iOS affiche une alerte."
           }
         },
         "it" : {
@@ -7616,31 +7616,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "12月1日から1月6日まで：ブーツ、雪、そり、クリスマスのアイコン。アイコンが変わるときは、iOS のお知らせが表示されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "12월 1일부터 1월 6일까지: 부츠, 눈, 썰매, 크리스마스 아이콘. 아이콘이 바뀌면 iOS 안내가 표시돼요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "De 1º de dezembro a 6 de janeiro: bota, neve, trenó e o ícone de Natal. Quando o ícone muda, o iOS mostra um aviso."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "12月1日至1月6日：靴子、雪、雪橇和圣诞图标。图标更换时，iOS 会显示提示。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dal 1° dicembre al 6 gennaio: stivale, neve, slitta e l'icona di Natale. Quando l'icona cambia, iOS mostra un avviso."
+            "value" : "12月1日至1月6日：靴子、雪、雪橇和聖誕圖示。圖示更換時，iOS 會顯示提示。"
           }
         }
       }
@@ -7652,25 +7652,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "Saisonale Designs"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "Seasonal themes"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "Temas de temporada"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "Thèmes saisonniers"
           }
         },
         "it" : {
@@ -7682,31 +7682,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "季節のテーマ"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "계절 테마"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "Temas sazonais"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "季节主题"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi stagionali"
+            "value" : "季節主題"
           }
         }
       }

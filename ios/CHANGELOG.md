@@ -6,7 +6,7 @@ sezione è sempre la versione di `project.yml` e il suo stato dice la verità su
 tocca il codice aggiunge la sua riga alla sezione in cima (lo controlla la CI con `scripts/registro.py`). Regola dei
 numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le sezioni portano solo la data della build.
 
-## 1.2 — su TestFlight, build 1.155.2
+## 1.2 — in lavorazione
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai
   tra le 22 e le 8, toglie il promemoria serale di quel giorno), una quando guadagni un Jolly e una quando un Jolly
   salva la serie (di notte aspetta le 8; tolta se i passi del giorno arrivano tardi e il Jolly non serviva più). Alla prima apertura dopo un evento Jolly un pop-up, mai ripetuto (più
@@ -79,6 +79,10 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   sotto, fianco a destra, scie in basso a sinistra), con suola da scarpone e tacco staccato, stivale nero senza lacci,
   risvolto di pelliccia e pantalone rosso; la gamba entra nello stivale sopra il tallone. Solo i due livelli SVG di
   `App/AppIconNatale.icon` (e la copia in `docs/design/T-015-natale/`), `icon.json` invariato.
+- Testi nuovi della 1.2 tradotti nelle 9 lingue (T-014, italiano approvato da William il 19/11): sezione «Notifiche»,
+  interruttore e nota degli avvisi di obiettivo e Jolly, temi stagionali, pop-up del Jolly guadagnato, usato e in
+  regalo, notifiche di obiettivo e Jolly. Testi dei pop-up tenuti vicini alla lunghezza dell'italiano perché stiano
+  nel riquadro. Glossario delle lingue in `localizzazione/GLOSSARIO.md`. Cataloghi rigenerati con `scripts/cataloghi.py`.
 
 ## 1.1 — pubblicata il 18 novembre 2026, build 1.97.1
 - Copia in iCloud: inizio della streak, storico degli obiettivi, obiettivo, velocità, unità, promemoria (acceso e

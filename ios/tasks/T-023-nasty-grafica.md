@@ -70,3 +70,19 @@ Ha chiesto più animazione.
   - Riduci movimento: solo dissolvenze.
 - **Specifica.** Il §3 è riscritto con tempi, curve, livelli e aptica per ogni animazione, tutto fattibile in SwiftUI.
 - **Testi.** I testi di T-026 §1 sono sulla tela (tavole 5 e 6) e nella specifica (§7).
+
+**19/11/2026, Designer, D-047.** Ho applicato le due decisioni sulla tela e nella specifica.
+
+- **Nome.** Nell'interfaccia il terzo livello si chiama «Senza pietà». Ci sta nel controllo a tre segmenti anche su SE
+  (circa 75 pt su circa 103), quindi non serve un menu.
+- **Di serie.** L'app parte su Senza pietà:
+  - tolti l'avviso e i suoi tasti;
+  - l'introduzione parte già su Senza pietà, con sotto la riga «Parolacce e insulti compresi. Si cambia quando vuoi in
+    Impostazioni › Voce.»;
+  - nuova nota sotto Voce.
+- **Prima battuta dopo l'aggiornamento.** È disegnata nella tavola 5, una volta sola: fumetto rosso pieno, bordo e
+  ombra più spessi, cuore più grande, linee di richiamo, entrata lenta.
+- **Specifica.** Riscritti il §4 e il §5. Nuovo §8, sugli screenshot dello store:
+  - cambiano 01 e 02 (Home di giorno e di notte);
+  - 03 e 02 mostrano ancora 16 km/h, che dalla 1.2 non esiste più;
+  - le battute proposte per gli screenshot sono senza parolacce.

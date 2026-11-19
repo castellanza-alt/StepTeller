@@ -1,5 +1,10 @@
 # T-023 — NASTY: il cuore, il fumetto e le schermate nuove
 
+**D-047 (19/11/2026, William).** In italiano il terzo livello si chiama **«Senza pietà»**: i livelli sono Normale ·
+Piccante · Senza pietà. «NASTY» resta il nome interno di file e compiti, ed è quello usato sotto per il livello.
+**Di serie l'app parte su Senza pietà,** anche per chi aggiorna dalla 1.2: niente avviso, cuore e fumetto in Home
+subito; spariscono solo con Normale.
+
 **Designer, 19/11/2026.** Da approvare da William sulla tela:
 https://claude.ai/artifact/AVJ8rdN4Jpd6nAbZzzcHeF (7 tavole). Progetto: `T-022-nasty-progetto.md`; regole: D-044,
 D-045; battute: `T-021-nasty/catalogo/catalogo-approvato.md`. Nessun testo nuovo: le battute sono quelle approvate;
@@ -150,34 +155,44 @@ Solo dissolvenze:
 Il cuore è un pulsante. Etichetta: «NEAT. Tocca per un'altra battuta.» (T-026). Il testo della battuta si legge come
 valore.
 
-## 4. Introduzione (tavola 5)
-- **Pagina nuova** dopo quella dell'obiettivo: le pagine diventano 5. Di serie è scelto Normale.
+## 4. Introduzione e prima battuta (tavola 5)
+- **Pagina nuova** dopo quella dell'obiettivo: le pagine diventano 5. **Di serie è scelto Senza pietà** (D-047) e non
+  c'è nessun avviso.
 - **Disegno in alto:** l'esplosione rossa con il contorno nero (come `GoalBurst`), con sopra i due cuori:
-  - 17 Pro Max: disegno alto 330; cuori da 130 (Piccante, −10°) e 170 (NASTY, +8°);
-  - SE: disegno alto 196; cuori da 84 e 110.
+  - 17 Pro Max: disegno alto 300; cuori da 120 (Piccante, −10°) e 160 (Senza pietà, +8°);
+  - SE: disegno alto 168; cuori da 74 e 100.
 - **Testi**, come nelle altre pagine:
   - etichetta rossa «VOCE»;
-  - titolo «Vuoi che te lo dica gentilmente o che te lo dica davvero?», con `TitleText`: Anton 31, su SE 25, 3 righe.
-- **Tre scelte** in colonna:
-  - righe alte 56 (SE 46), Anton 22 (SE 19), bordo `ink` 2,5, inclinate −8°;
-  - nella riga, a sinistra, il cuore piccolo (34, SE 28); per Normale una lineetta;
-  - la riga scelta ha fondo `ink`, testo `paper` e ombra `red` (4, 4).
-- **Avviso prima di NASTY:** compare toccando Continua con NASTY scelto.
-  - Riquadro come i pop-up dei Jolly: largo 340, bordo 3, ombra `red` (6, 6), ruotato −2°, con il velo `paper` al 72%.
-  - Dentro: il cuore NASTY da 84, poi «Parolacce e insulti. L'hai voluto tu.» in Anton 30, con la seconda frase in
-    `red`.
-  - Due tasti: «Annulla» a bordo, «NASTY» rosso.
-  - «Annulla» torna alla pagina con Piccante scelto.
+  - titolo «Vuoi che te lo dica gentilmente o che te lo dica davvero?», con `TitleText`: Anton 31, su SE 24, 3 righe.
+- **Tre scelte** in colonna: Normale · Piccante · Senza pietà.
+  - Righe alte 56 (SE 44), Anton 22 (SE 19), bordo `ink` 2,5, inclinate −8°.
+  - Nella riga, a sinistra, il cuore piccolo (34, SE 28); per Normale una lineetta.
+  - La riga scelta ha fondo `ink`, testo `paper` e ombra `red` (4, 4). «Senza pietà» ci sta su una riga anche su SE.
+- **Sotto le scelte,** in testo di sistema 14 (SE 12), grigio: «Parolacce e insulti compresi. Si cambia quando vuoi in
+  Impostazioni › Voce.»
+- **Prima battuta dopo l'aggiornamento dalla 1.2,** una volta sola: «Da oggi parlo. Se non reggi: Impostazioni ›
+  Voce.» Sta nello stesso posto del fumetto (§2), ma si fa notare di più:
+  - fondo `red` pieno e testo `paper` (`MangaPalette.onRed`), Anton 19;
+  - bordo `ink` 3, ombra `ink` (5, 5), largo 228, ruotato −5°;
+  - cuore a 74 pt invece di 64;
+  - sette linee di richiamo `ink` (spessore 3, lunghe 16–20) a raggiera attorno al fumetto;
+  - entra con l'animazione «quando parla» (§3.3) a velocità dimezzata, in 1,4 s, con l'aptica `.rigid` doppia;
+  - resta finché non cambia la situazione;
+  - si segna come già mostrata solo dopo che è comparsa davvero in Home (non al lancio in sottofondo);
+  - chi installa da zero non la vede: per lui c'è la pagina dell'introduzione.
 
 ## 5. Impostazioni › Voce (tavola 6)
-- Sezione nuova **VOCE**, subito dopo l'obiettivo.
+- Sezione nuova **VOCE**, subito dopo l'obiettivo. Di serie è scelto Senza pietà.
 - In cima alla scheda: il cuore del livello (40) e il suo nome in Anton 22. In Normale né cuore né nome.
-- Sotto: il controllo a tre Normale · Piccante · NASTY, lo stesso del Tema.
-- Con Piccante o NASTY, sotto una linea, la manopola **Poche · Normali · Tante** (di serie Normali) con la sua
-  etichetta. In Normale la manopola non compare.
-- Nota grigia sotto la scheda: «Piccante: sarcasmo. NASTY: parolacce e insulti. NEAT commenta i tuoi passi
-  nell'app e nelle notifiche.»
-- Passare a NASTY dalle Impostazioni mostra lo stesso avviso dell'introduzione.
+- Sotto: il controllo a tre Normale · Piccante · Senza pietà, lo stesso del Tema.
+  - Su SE ogni segmento è largo circa 103 pt e «Senza pietà», in testo di sistema 13 semibold, ne occupa circa 75.
+    Quindi ci sta: niente menu.
+  - Con il testo grande di Accessibilità vale quello che fa già iOS per il Tema.
+- Con Piccante o Senza pietà, sotto una linea, compare la manopola **Poche · Normali · Tante** (di serie Normali) con
+  la sua etichetta. In Normale la manopola non compare.
+- Nota grigia sotto la scheda: «Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi
+  nell'app e nelle notifiche. Normale: NEAT sta zitto.»
+- Nessun avviso nel passaggio da un livello all'altro.
 
 ## 6. Gli altri punti dove parla (tavola 7 e tavola 6)
 - **Riga sotto l'obiettivo** (introduzione e Impostazioni, quando lo scegli o lo cambi): una battuta di «Obiettivo
@@ -204,7 +219,7 @@ Ho misurato con Anton e numeri realistici: 3.240 passi, 10.000 di obiettivo, 6.7
 
 | Dove | Regola | Esito |
 |---|---|---|
-| Fumetto in Home (175 battute, notifiche escluse) | 3 righe al massimo | ci stanno tutte; quelle da 3 righe sono 18 NASTY e 6 Piccante |
+| Fumetto in Home (175 battute, notifiche escluse) | 3 righe al massimo | ci stanno tutte; quelle da 3 righe sono 18 Senza pietà e 6 Piccante |
 | Pop-up | 3 righe al massimo | ci stanno tutte |
 | Titolo della festa | 2 righe | ci stanno tutte; solo N121 scende ad Anton 24 (0,8) |
 | Riga sotto l'obiettivo | — | la più lunga ha 60 caratteri, 2 righe |
@@ -214,14 +229,35 @@ riga solo dove già c'è margine.
 
 ## 7. Testi dell'interfaccia
 Sono quelli di `T-026-nasty-testi.md` §1, raccolti dal Director, e sono già sulla tela:
-- avviso: tasti «Annulla» · «NASTY»;
+- scelte «Normale» · «Piccante» · «Senza pietà» e la riga sotto;
+- prima battuta dopo l'aggiornamento;
 - sezione «Voce», con la sua nota;
-- manopola «Notifiche di NEAT» · «Poche» · «Normali» · «Tante», cioè al giorno NASTY 2 · 4–5 · 7 e Piccante 1 · 1–2 · 3;
+- manopola «Notifiche di NEAT» · «Poche» · «Normali» · «Tante», cioè al giorno Senza pietà 2 · 4–5 · 7 e Piccante 1 · 1–2 · 3;
 - VoiceOver del cuore.
 
 L'etichetta rossa dell'introduzione riprende «Voce».
 
-## 8. Higgsfield
+## 8. Screenshot dello store (dopo l'approvazione della tela)
+La Home di serie cambia perché ci sono il cuore e il fumetto. Dei 6 screenshot (`store/screenshots/<lingua>/01…06.jpg`):
+
+| N. | Cosa mostra | Cambia? |
+|---|---|---|
+| 01 | Home di giorno, «Quanti passi hai fatto oggi?» | **sì**: cuore e fumetto |
+| 02 | Home di notte e riquadro dei minuti, «Quanti te ne mancano?» | **sì**: cuore e fumetto. In più oggi mostra 16 km/h, che dalla 1.2 non esiste più (massimo 10, D-042) |
+| 03 | Due ritagli della strada col pomello, «Quanto devi ancora camminare?» | i ritagli stanno sotto il fumetto, quindi il disegno non cambia; ma il secondo mostra 16,0 km/h, da rifare a 10 o meno |
+| 04 | Storico e serie | no: lo Storico resta com'è |
+| 05 | Widget | no: i widget restano come sono |
+| 06 | Privacy dell'introduzione | no |
+
+Nelle battute degli screenshot niente parolacce: si scelgono tra quelle di Senza pietà che non ne hanno, con i numeri
+dello screenshot. Proposte:
+- 01, giorno, 3.465 passi: N007 «3.465 passi. Sei un soprammobile con il telefono.»;
+- 02, notte: N050 «Pomeriggio. 3.465 passi. Il tempo passa, tu no.» oppure N036 «3.465 passi. Sei l'orgoglio del
+  divano.».
+
+Nelle altre lingue: le versioni tradotte delle stesse battute (T-025).
+
+## 9. Higgsfield
 Una sola generazione: job `098efe47`, `nano_banana_2_1` 1k, 1,5 crediti. Saldo verificato con `balance`: 13,5 → 12.
 I due cuori sono nella stessa immagine, su magenta. Poi, in locale: 5 colori esatti, filtro di moda (7) e potrace.
 Prompt esatto:

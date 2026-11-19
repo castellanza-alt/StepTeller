@@ -47,6 +47,7 @@ struct StepTellerApp: App {
     private static func createStore() -> StepsStore {
         // Before creating the store: recognizes who already had the app from the saved keys.
         Onboarding.resolveAtLaunch()
+        StepsStore.resolveFirstLine()          // who updates from 1.2 gets NEAT's first line once (T-023 §4)
         #if DEBUG
         // Debug only (simulator screenshots/tests): `-stepteller.debugSteps 7200`.
         if UserDefaults.standard.object(forKey: "stepteller.debugSteps") != nil {

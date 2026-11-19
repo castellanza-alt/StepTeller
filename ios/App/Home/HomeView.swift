@@ -46,6 +46,13 @@ struct HomeView: View {
                     .at(14, Manga.artTop + 112)
                 notices
                     .at(20, Manga.artTop + 286)
+                // NEAT's heart and bubble, in the room of the notices: the «no data» warning wins (T-023 §2)
+                if !store.showsNoDataWarning, store.voice != .normale, let quote = store.homeQuote {
+                    HomeVoice(level: store.voice, quote: quote, first: store.showsFirstLine, motion: store.heart) {
+                        store.tapHeart()
+                    }
+                    .at(HomeVoice.origin.x, HomeVoice.origin.y)
+                }
                 if store.plan.isDone {
                     doneBlock
                         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { doneWidth = $0 }
@@ -73,10 +80,23 @@ struct HomeView: View {
         .background(alignment: .topLeading) {
             if let look = season.map(SeasonLook.of) { edgeFill(look, s: s) }
         }
-        .onAppear { updateMotion() }
+        .onAppear { updateMotion(); speak() }
         .onDisappear { motion.stop() }
-        .onChange(of: scenePhase) { _, _ in updateMotion() }
+        .onChange(of: scenePhase) { _, _ in updateMotion(); speak() }
         .onChange(of: reduceMotion) { _, _ in updateMotion() }
+        // the bubble follows the day: steps, goal, voice, catalog, the time (situations change at 11 and 18)
+        .onChange(of: store.steps) { _, _ in speak() }
+        .onChange(of: store.goal) { _, _ in speak() }
+        .onChange(of: store.voice) { _, _ in speak() }
+        .onChange(of: store.catalogEdition) { _, _ in speak() }
+        .onChange(of: store.showsNoDataWarning) { _, _ in speak() }
+        .onReceive(Timer.publish(every: 60, on: .main, in: .common).autoconnect()) { _ in speak() }
+    }
+
+    /// NEAT's line in the bubble, only with Home on screen (a line counts as seen when it shows).
+    private func speak() {
+        guard scenePhase == .active else { return }
+        store.updateHomeLine()
     }
 
     /// Parallax only with the app in the foreground and without «Reduce Motion».

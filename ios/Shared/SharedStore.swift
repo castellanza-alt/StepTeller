@@ -26,6 +26,8 @@ enum SharedStore {
         static let seasonal = "stepteller.seasonal"
         static let jollyGifts = "jollyGifts"
         static let forcedSeason = "debugSeason"
+        static let voiceLevel = "voiceLevel"
+        static let nastyMemory = "nastyMemory"
     }
 
     /// Speed of the Home slider (km/h): the widget computes its minutes with the same one. On the slider's step of
@@ -138,6 +140,21 @@ enum SharedStore {
     static var jollyGifts: JollyGift.Ledger {
         get { JollyGift.Ledger(days: defaults.dictionary(forKey: Keys.jollyGifts) as? [String: String] ?? [:]) }
         set { defaults.set(newValue.days, forKey: Keys.jollyGifts) }
+    }
+
+    // MARK: NEAT's voice (see NastyVoice)
+
+    /// Level chosen in Settings, copy for the widget (the main one is in the app's UserDefaults, iCloud, Backup).
+    /// Without a value, the level of whoever has none (D-047).
+    static var voiceLevel: NastyLevel {
+        get { NastyLevel.saved(defaults.string(forKey: Keys.voiceLevel)) ?? .standard }
+        set { defaults.set(newValue.rawValue, forKey: Keys.voiceLevel) }
+    }
+
+    /// Lines already seen, per level (T-022 §2): on the phone only, never in iCloud or the Backup.
+    static var nastyMemory: NastyMemory {
+        get { NastyMemory.decoded(defaults.data(forKey: Keys.nastyMemory)) ?? NastyMemory() }
+        set { defaults.set(newValue.encoded(), forKey: Keys.nastyMemory) }
     }
 
     #if DEBUG

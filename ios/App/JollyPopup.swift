@@ -49,6 +49,10 @@ struct JollyPopup: View {
 
     @Environment(\.manga) private var c
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(StepsStore.self) private var store
+    /// NEAT's line instead of the first sentence (T-023 §6), chosen once when the pop-up shows.
+    @State private var line: NastyQuote?
+    @State private var lineLevel = NastyLevel.normale
     @State private var start = Date()
     @State private var shown = false
     @State private var closing = false
@@ -117,6 +121,20 @@ struct JollyPopup: View {
 
     private var panel: some View {
         Vignette(shape: .panelB, width: 318) {
+            panelContent
+        }
+        // NEAT's heart like a sticker on the top right corner, across the border
+        .overlay(alignment: .topTrailing) {
+            if line != nil {
+                NastyHeart(level: lineLevel, size: 64)
+                    .rotationEffect(.degrees(10))
+                    .offset(x: 18, y: -26)
+            }
+        }
+    }
+
+    private var panelContent: some View {
+        Group {
             VStack(alignment: .leading, spacing: 0) {
                 // extra top margin: the slanted title rises to the right, where the panel's top edge drops (T-013)
                 Color.clear.frame(height: Self.titleRoom)
@@ -134,8 +152,9 @@ struct JollyPopup: View {
                 }
                 .manga(rotate: -5, skew: -10)
                 .padding(.top, 12)
-                sentence(gift ? L10n.text("jolly.gift.line")
-                            : earned ? L10n.format("jolly.earned.days", streak) : L10n.format("jolly.used.missed", item.count),
+                sentence(line.map { $0.text.uppercased(with: Locale.current) }
+                            ?? (gift ? L10n.text("jolly.gift.line")
+                                : earned ? L10n.format("jolly.earned.days", streak) : L10n.format("jolly.used.missed", item.count)),
                          color: c.ink)
                     .padding(.top, 10)
                 if !earned {
@@ -216,6 +235,11 @@ struct JollyPopup: View {
     }
 
     private var voiceOver: String {
+        if let line { return line.text + " " + baseVoiceOver }
+        return baseVoiceOver
+    }
+
+    private var baseVoiceOver: String {
         if gift { return L10n.format("jolly.gift.vo", LocalFormat.integer(jolly)) }
         return L10n.format(earned ? "jolly.earned.vo" : "jolly.used.vo", LocalFormat.integer(streak), LocalFormat.integer(jolly))
     }
@@ -232,6 +256,10 @@ struct JollyPopup: View {
 
     private func appear() {
         start = Date()
+        if line == nil, let quote = store.popupLine(item) {
+            line = quote
+            lineLevel = store.voice
+        }
         #if DEBUG
         // Simulator checks of the queue (no taps there): `-stepteller.debugPopupClose 2` closes it after 2 s.
         let auto = UserDefaults.standard.double(forKey: "stepteller.debugPopupClose")

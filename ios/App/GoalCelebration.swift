@@ -17,7 +17,11 @@ struct GoalCelebration: View {
     @State private var sparkOrigin = CGPoint.zero
 
     @Environment(\.manga) private var c
+    @Environment(StepsStore.self) private var store
     @State private var pop: CGFloat = 0.6
+    /// NEAT's line instead of «OBIETTIVO RAGGIUNTO!» (T-023 §6), chosen once.
+    @State private var line: NastyQuote?
+    @State private var lineLevel = NastyLevel.normale
 
     var body: some View {
         ZStack {
@@ -39,9 +43,22 @@ struct GoalCelebration: View {
 
             VStack(spacing: 18) {
                 // one line each, shrinking if a language needs more than the width (T-020)
-                AntonText(L10n.text("party.title"), 30, tracking: 0.02, minScale: 0.6)
-                    .frame(maxWidth: 330)
-                    .manga(rotate: -5, skew: -10)
+                if let line {
+                    // NEAT's line: 2 lines at most in 330, centered, down to 0.8 (Anton 24)
+                    let text = line.text.uppercased(with: Locale.current)
+                    let size = AntonLines.fitting(text, size: 30, minScale: 0.8, maxLines: 2, tracking: 0.02, width: 330)
+                    AntonLines(text: text, size: size, width: 330, lineHeight: 1.05, alignment: .center)
+                        .manga(rotate: -5, skew: -10)
+                        .overlay(alignment: .topLeading) {
+                            NastyHeart(level: lineLevel, size: 64)
+                                .rotationEffect(.degrees(-12))
+                                .offset(x: -6, y: -62)
+                        }
+                } else {
+                    AntonText(L10n.text("party.title"), 30, tracking: 0.02, minScale: 0.6)
+                        .frame(maxWidth: 330)
+                        .manga(rotate: -5, skew: -10)
+                }
                 ZStack {
                     KineticLines.star(cx: 160, cy: 90, points: 16, outer: 92, inner: 62, rotation: 0.1)
                         .fill(c.ink)
@@ -82,11 +99,13 @@ struct GoalCelebration: View {
         .onTapGesture { close() }
         .sensoryFeedback(.success, trigger: shown)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(L10n.format("party.vo", LocalFormat.integer(steps), LocalFormat.integer(goal)))
+        .accessibilityLabel((line.map { $0.text + " " } ?? "") + L10n.format("party.vo", LocalFormat.integer(steps), LocalFormat.integer(goal)))
         .accessibilityAddTraits(.isButton)
         .accessibilityHint(L10n.text("party.close.vo"))
+        .onChange(of: steps) { _, _ in chooseLine() }
         .task {
             start = Date()
+            chooseLine()
             if reduceMotion {
                 pop = 1
                 withAnimation(.easeOut(duration: 0.3)) { shown = true }
@@ -100,6 +119,13 @@ struct GoalCelebration: View {
     }
 
     private static let rays = KineticLines.rays(cx: 195, cy: 422, count: 90, innerMin: 150, innerMax: 230, outer: 700, seed: 7, redEvery: 7)
+
+    /// NEAT's line, once, as soon as the steps say the goal is reached.
+    private func chooseLine() {
+        guard line == nil, let quote = store.celebrationLine(steps: steps, goal: goal, streak: streak) else { return }
+        line = quote
+        lineLevel = store.voice
+    }
 
     private func close() {
         guard !closing else { return }

@@ -17,6 +17,7 @@ struct SettingsSheet: View {
     @State private var importMessage: String?
     /// Accessibility text sizes: rows whose label and value no longer fit side by side are laid out again (T-020).
     @Environment(\.dynamicTypeSize) private var typeSize
+    @State private var goalLine = GoalLineAsker()
     /// «Replay the introduction»: closes Settings and shows it again.
     var onReplayIntro: () -> Void = {}
 
@@ -47,8 +48,14 @@ struct SettingsSheet: View {
                     }
                     .padding(.horizontal, 16).padding(.vertical, 12)
                     .glassCard()
+                    if let quote = goalLine.quote, store.voice != .normale {
+                        GoalVoiceLine(quote: quote, level: store.voice, heart: 26, width: 320)
+                    }
                     note(L10n.text("set.goal.note"))
                 }
+
+                // NEAT's voice (T-023 §5): only where the language has the catalog
+                if store.voiceLevels.count > 1 { voiceSection }
 
                 section(L10n.text("set.reminder.section")) {
                     VStack(spacing: 0) {
@@ -160,6 +167,10 @@ struct SettingsSheet: View {
         }
         .background(Theme.bg.ignoresSafeArea())
         .presentationDetents([.large])
+        // the line under the goal when it changes, until Settings close
+        .onChange(of: store.goal) { old, new in
+            if store.voice != .normale { goalLine.changed(old: old, new: new, store: store) }
+        }
         .fileImporter(isPresented: $showImporter, allowedContentTypes: [.json]) { readBackup($0) }
         .alert(L10n.text("set.backup.confirm.title"), isPresented: Binding(
             get: { pendingBackup != nil }, set: { if !$0 { pendingBackup = nil } }
@@ -176,6 +187,38 @@ struct SettingsSheet: View {
             get: { importMessage != nil }, set: { if !$0 { importMessage = nil } }
         )) {
             Button(L10n.text("set.backup.ok"), role: .cancel) {}
+        }
+    }
+
+    /// Voice: the heart and the name of the level, the three levels, the roast notifications a day.
+    private var voiceSection: some View {
+        @Bindable var store = store
+        return section(L10n.text("set.voice.section")) {
+            VStack(alignment: .leading, spacing: 12) {
+                if store.voiceLevel != .normale {
+                    HStack(spacing: 10) {
+                        NastyHeart(level: store.voiceLevel, size: 40)
+                        Text(store.voiceLevel.label).font(.anton(22)).foregroundStyle(Theme.ink)
+                    }
+                    .accessibilityHidden(true)
+                }
+                Picker(L10n.text("set.voice.section"), selection: $store.voiceLevel) {
+                    ForEach(NastyLevel.allCases, id: \.self) { Text($0.label).tag($0) }
+                }
+                .segmentedOrMenu(typeSize.isAccessibilitySize)
+                if store.voiceLevel != .normale {
+                    rowDivider
+                    Text(L10n.text("set.voice.freq")).font(.system(size: 15)).foregroundStyle(Theme.ink)
+                    Picker(L10n.text("set.voice.freq"), selection: $store.roastFrequency) {
+                        ForEach(RoastFrequency.allCases, id: \.self) { Text($0.label).tag($0) }
+                    }
+                    .segmentedOrMenu(typeSize.isAccessibilitySize)
+                }
+            }
+            .padding(16)
+            .glassCard()
+            .animation(.easeInOut(duration: 0.2), value: store.voiceLevel)
+            note(L10n.text("set.voice.note"))
         }
     }
 

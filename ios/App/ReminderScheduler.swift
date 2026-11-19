@@ -24,7 +24,8 @@ struct ReminderScheduler {
         let settings = await center.notificationSettings()
         guard [.authorized, .provisional, .ephemeral].contains(settings.authorizationStatus) else { return }
         for r in requests {
-            let text = ReminderText.content(r.message, unit: unit)
+            // with NEAT's voice (Piccante, Senza pietà): a line before the numbers
+            let text = NastyVoice.reminder(ReminderText.content(r.message, unit: unit), message: r.message, fire: r.fire)
             let content = UNMutableNotificationContent()
             content.title = text.title
             content.body = text.body

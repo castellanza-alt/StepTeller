@@ -188,3 +188,50 @@ FORMATO
 Un elenco per situazione, prima le PICCANTE poi le NASTY. Solo le battute, senza commenti. In italiano.
 Alla fine proponi 5 nomignoli alternativi a «soprammobile» e 3 idee di gag ricorrenti.
 ```
+
+## 8. Secondo giro (19/11): confronto con l'altro modello e selezione
+William ha fatto scrivere 150 battute a un altro modello con il prompt del §7. Giudizio del Director:
+- **Da tenere:** il divano come amante (gag a sfondo sessuale), le immagini concrete (annuncio immobiliare, scontrino,
+  scacchiera), il ribaltamento nei momenti buoni («soprammobile un cazzo»), la gag del **divano che scrive a NEAT**.
+- **Da scartare:** le battute lunghe e contorte, quelle che vanno rilette per capirle, e «cazzo» messo in fondo come
+  riempitivo: la parolaccia deve essere la botta, non la virgola. Alcune hanno il maschile («ti sei fatto»).
+
+### Selezione NASTY (le sue migliori, asciugate)
+- «Mezzogiorno, zero passi. Il divano ti scopa da stamattina e io devo scoprirlo dai dati.»
+- «Zero passi. Su un sito di annunci, alla voce "si vende arredato", nella terza foto ci sei tu.»
+- «{passi} passi in tutto il giorno. Il divano ti ha almeno lasciato i soldi del taxi?»
+- «Ho visto scontrini più lunghi del tuo itinerario di oggi.»
+- «Meno di metà. Di' al divano "è stato solo sesso" e vieni a finire questa cazzo di passeggiata.»
+- «Sei a metà. È qui che di solito annunci la seconda stagione e cancelli la serie.»
+- «Mancano {mancano} passi. Se ti fermi adesso, la prossima notifica sarà solo "ma porca puttana".»
+- «Obiettivo raggiunto. Io qui a cesellare insulti e tu esci davvero. Mi rovini il mestiere, pezzo di merda.»
+- «Obiettivo doppiato. Chi cazzo sei, e cosa ne hai fatto del mio soprammobile?»
+- «{obiettivo} passi. Non è un obiettivo: è un alibi di merda con la barra di avanzamento.»
+- «Hai abbassato l'obiettivo. Che rimonta, cazzo: il traguardo corre verso di te.»
+- «Hai aperto le Impostazioni con la grinta che ti chiedo da mesi per aprire la porta.»
+- «Ieri il Jolly ha fatto da preservativo alla tua scopata col divano. Oggi esci.»
+- «Serie a zero. Zero è un numero di merda, ma ha un pregio: lo batti subito.»
+- «Record. Soprammobile un cazzo: oggi ti sei guadagnato il diritto di insultare me.»
+- «Terza sera a zero. Il tuo "caso isolato" ha già due sequel.»
+- «Un tocco non è un passo. Se bastasse accarezzarmi avresti già vinto la maratona.»
+- Piccante: «Hai abbassato l'obiettivo. Quando perdi a scacchi rimpicciolisci anche la scacchiera?»
+
+### Nuove del Director, più cattive (NEAT macchina superiore)
+- «{passi} passi. Il robot aspirapolvere ne ha fatti di più, e lui almeno ha pulito.»
+- «Oggi il tuo telefono ha fatto più strada di te: è caduto dal divano.»
+- «Ho più memoria di te, e la spreco per archiviare i tuoi "domani comincio".»
+- «Mi hanno scritto ingegneri brillanti. Faccio la guardia a un cuscino.»
+- «Hai detto "oggi recupero". L'hai detto anche ieri. Ho i log, cazzo.»
+- «Se la pigrizia fosse uno sport, non ti presenteresti nemmeno lì.»
+- «Ti mando questa notifica sapendo che la leggerai da sdraio. Fammi mentire per una volta.»
+- «Il tuo massimo di oggi è stato alzarti per prendere il caricabatterie. Per me. Commovente.»
+
+### Gag ricorrenti da adottare
+1. **Il divano scrive a NEAT**: a zero «Stasera è con me.»; a metà «Torna presto?»; al record «Ridammi le chiavi.»
+2. **Il museo del soggiorno**: dopo tre giorni fermi, la didascalia «Soprammobile, collezione permanente»; alla
+   prima camminata «Opera in prestito».
+3. **A verbale**: ogni «domani comincio» finisce agli atti; al primo obiettivo NEAT chiude il fascicolo.
+
+### Aperto
+- **Battute a sfondo sessuale sul divano.** Funzionano, ma nel questionario di Apple vanno dichiarate come temi
+  maturi o allusivi: l'età può salire da 13+ a 16+. Decide William.

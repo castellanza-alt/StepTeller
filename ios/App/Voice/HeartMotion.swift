@@ -135,6 +135,16 @@ final class HeartMotion {
     /// Something is moving at `now` besides the rest (the views keep the clock running).
     func busy(_ now: Date) -> Bool { now.timeIntervalSince(eventAt) < 1.6 || angry(now) }
 
+    /// For the views' clocks: true now, false once the event and the anger are over (re-run at every event).
+    static func busyWhile(_ motion: HeartMotion) async -> Bool {
+        guard motion.event != nil else { return false }
+        while motion.busy(Date()) {
+            try? await Task.sleep(for: .milliseconds(250))
+            if Task.isCancelled { return true }
+        }
+        return false
+    }
+
     private func haptic(_ style: UIImpactFeedbackGenerator.FeedbackStyle, at delay: Double) {
         let item = DispatchWorkItem { UIImpactFeedbackGenerator(style: style).impactOccurred() }
         haptics.append(item)

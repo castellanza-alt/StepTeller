@@ -24,7 +24,10 @@ numeri, Novità per lo store e procedura in `RILASCIO.md`. Prima della 1.0 le se
   notifiche roast programmate con `RoastPlan` e ritirate a obiettivo raggiunto (anche dal widget), promemoria serale e
   avvisi con la voce del livello; catalogo scaricato una volta al giorno da `neat/nasty/<lingua>/battute.json`
   (GET di un file pubblico, senza cookie né dati) e usato solo se passa il controllo; privacy italiana aggiornata
-  (T-026 §2). Testi nuovi nel foglio, le altre lingue da T-028.
+  (T-026 §2) e inglese (T-028). Testi nuovi nel foglio, tradotti in T-028. Catalogo a bordo nelle 10 lingue:
+  `scripts/battute.py` legge anche `catalogo/lingue/<lingua>.json` (T-025) e scrive un file per lingua sul sito; il
+  conteggio delle parole non conta più la punteggiatura isolata (il francese « ? »); font asiatici ridotti anche ai
+  caratteri delle battute (`scripts/font_asia.py`).
 
 ## 1.2 — inviata ad Apple il 19 novembre 2026, build 1.162.1
 - Notifiche e pop-up di obiettivo e Jolly (T-006, D-038). Una notifica quando chiudi l'obiettivo (una al giorno, mai

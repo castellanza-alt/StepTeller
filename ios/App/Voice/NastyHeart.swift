@@ -26,11 +26,10 @@ struct NastyHeart: View {
         .rotationEffect(.degrees(pose.rotation))
         .offset(x: pose.x * k, y: pose.y * k)
         .opacity(pose.opacity)
-        .accessibilityHidden(true)
     }
 
     private func layer(_ name: String) -> some View {
-        Image(name).resizable().interpolation(.high).frame(width: size, height: size)
+        Image(decorative: name).resizable().interpolation(.high).frame(width: size, height: size)
     }
 
     // MARK: Piccante
@@ -131,16 +130,21 @@ private struct HalfMask: Shape {
 }
 
 /// The heart that lives (Home, first line): beats at rest, speaks, reacts to taps. One clock with the bubble
-/// (`HeartMotion`); at 120 Hz while something moves, paused with the app in the background.
+/// (`HeartMotion`): at the display's rate (120 Hz) while it speaks or reacts, 60 Hz for the heartbeat at rest,
+/// stopped with «Reduce Motion» at rest and with the app in the background.
 struct LiveHeart: View {
     let level: NastyLevel
     let size: CGFloat
     let motion: HeartMotion
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
+    @State private var busy = false
 
     var body: some View {
-        TimelineView(.animation(paused: scenePhase != .active || reduceMotion && !motion.busy(Date()))) { t in
+        let schedule: AnimationTimelineSchedule = busy
+            ? .animation(paused: scenePhase != .active)
+            : .animation(minimumInterval: 1.0 / 60, paused: scenePhase != .active || reduceMotion)
+        TimelineView(schedule) { t in
             NastyHeart(level: level, size: size,
                        pose: motion.pose(level, at: t.date, rest: true, reduceMotion: reduceMotion))
                 // room around the square: shards, puffs and dodges go out of it, the group would cut them
@@ -149,5 +153,6 @@ struct LiveHeart: View {
                 .padding(-size * 0.6)
         }
         .frame(width: size, height: size)
+        .task(id: motion.eventAt) { busy = await HeartMotion.busyWhile(motion) }
     }
 }

@@ -103,9 +103,9 @@
 
 <section class="lang" id="en" lang="en">
   <h1>Privacy policy</h1>
-  <p class="muted">Last updated: 26 October 2026</p>
+  <p class="muted">Last updated: 19 November 2026</p>
 
-  <div class="box"><p><strong>In short:</strong> NEAT reads steps, walking + running distance and workouts from Apple Health and uses them only on your iPhone. It has no accounts and contains no ads, analytics or tracking. Your settings and your streak are also saved in your own iCloud, so you can get them back on a new iPhone; Health data is not. The developer receives no data, and nobody – not even the developer – can see it.</p></div>
+  <div class="box"><p><strong>In short:</strong> NEAT reads steps, walking + running distance and workouts from Apple Health and uses them only on your iPhone. It has no accounts and contains no ads, analytics or tracking. Your settings and your streak are also saved in your own iCloud, so you can get them back on a new iPhone; Health data is not. The developer receives no data, and nobody – not even the developer – can see it. With the Spicy or No mercy voice (the default), NEAT downloads the updated list of lines from its website: it is the same file for everyone, and the app sends none of your data.</p></div>
 
   <h2>Who is responsible</h2>
   <p>NEAT is developed by a private individual and distributed for free on the App Store, not as a business. For any privacy question, write to <a href="mailto:castellanza@gmail.com">castellanza@gmail.com</a>.</p>
@@ -113,7 +113,7 @@
   <h2>What data it reads and why</h2>
   <p>With your permission, NEAT reads only the following from Apple Health (HealthKit):</p>
   <ul>
-    <li><strong>Steps</strong> – to show today's steps, how many are left to your goal, your history, your streak and your Jolly (streak savers).</li>
+    <li><strong>Steps</strong> – to show today's steps, how many are left to your goal, your history, your streak and your Jokers.</li>
     <li><strong>Walking + running distance</strong> and walking and running <strong>workouts</strong> (steps, distance, duration) – to calibrate your cadence, i.e. how many steps per minute you take at a given speed, and work out the minutes you need.</li>
   </ul>
   <p>NEAT <strong>never writes</strong> to Health and reads no other data type (no weight, heart rate, sleep or location).</p>
@@ -121,20 +121,22 @@
   <h2>Where the data stays</h2>
   <p>Health data stays in Health: NEAT reads it again whenever needed and processes it on the phone. In the app's own storage on the phone, only these are kept:</p>
   <ul>
-    <li>your <strong>preferences</strong>: daily goal (with the history of past goals, so past days are judged fairly), streak start date, reminder on/off and time, theme, chosen speed;</li>
+    <li>your <strong>preferences</strong>: daily goal (with the history of past goals, so past days are judged fairly), streak start date, reminder on/off and time, theme, chosen speed, chosen voice and notification frequency;</li>
     <li>the cadence <strong>calibration</strong>: a few summary values computed from workouts, not the raw data;</li>
-    <li>the data shared with the <strong>widget</strong> through an App Group (a shared space between the app and its widget on the same phone): goal, calibration, speed, streak, Jolly and today's latest step count.</li>
+    <li>the data shared with the <strong>widget</strong> through an App Group (a shared space between the app and its widget on the same phone): goal, calibration, speed, streak, Jokers and today's latest step count.</li>
   </ul>
   <p>Like any app data, these may be included in your iCloud or computer backups if you have turned them on; those backups are managed by Apple and by you, not by the developer.</p>
-  <p><strong>Copy in your iCloud.</strong> If iCloud is turned on on your iPhone, NEAT saves a copy of these in your iCloud space (Apple's «key-value» storage): goal with the history of past goals, streak start date, speed, units, reminder on/off and time, theme and cadence calibration. It lets you get them back if you reinstall the app or move to a new iPhone with the same Apple Account. The copy is managed by Apple and protected by your account: the developer cannot read it. <strong>Health data never goes to iCloud</strong> through NEAT (Health has its own sync, managed by Apple).</p>
+  <p><strong>Copy in your iCloud.</strong> If iCloud is turned on on your iPhone, NEAT saves a copy of these in your iCloud space (Apple's «key-value» storage): goal with the history of past goals, streak start date, speed, units, reminder on/off and time, theme, chosen voice and notification frequency and cadence calibration. It lets you get them back if you reinstall the app or move to a new iPhone with the same Apple Account. The copy is managed by Apple and protected by your account: the developer cannot read it. <strong>Health data never goes to iCloud</strong> through NEAT (Health has its own sync, managed by Apple).</p>
   <p><strong>Backup file.</strong> In Settings → Backup you can export the same data to a file (<code>NEAT-backup-….json</code>) and save it wherever you like (Files, AirDrop, Mail…). You create and keep the file; NEAT never sends it to anyone.</p>
 
+  <h2>NEAT's lines</h2>
+  <p>With the Spicy or No mercy voice, NEAT picks its lines on the phone, based on your steps and your goal. Once a day it downloads the file with the updated list of lines from the NEAT website (hosted on GitHub Pages). It is a public file, the same for everyone: the app only reads it and sends no steps, goals or any other data. As with any web page, the service hosting the website (GitHub) receives the IP address the request comes from; the developer does not see it or keep it. With the Normal voice, the app downloads nothing.</p>
   <h2>Notifications</h2>
-  <p>The evening reminder is a <strong>local notification</strong>: it is computed and scheduled on the phone, with no server involved. You can turn it off in NEAT (Settings → Evening reminder) or in iOS Settings → Notifications → NEAT.</p>
+  <p>All NEAT notifications are local notifications: the evening reminder, the goal and Joker alerts and, if you kept the No mercy voice or chose Spicy, the lines. They are computed and scheduled on the phone, with no server involved. You can turn them off or reduce them in NEAT (Settings → Notifications and Settings → Voice) or in iOS Settings → Notifications → NEAT.</p>
 
   <h2>What NEAT does not do</h2>
   <ul>
-    <li>No developer servers: the app sends data to no one. The only exchange is the copy in your own iCloud, made by iOS.</li>
+    <li>No developer servers: the app sends data to no one. The only exchanges are the copy in your own iCloud, made by iOS, and the download of the list of lines, which contains and sends none of your data.</li>
     <li>No account, no sign-up, no email address required.</li>
     <li>No ads, no usage analytics, no third-party SDKs, no tracking.</li>
     <li>No selling, transferring or sharing of data with anyone.</li>

@@ -2780,25 +2780,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "STIMME"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "VOICE"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "VOZ"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "VOIX"
           }
         },
         "it" : {
@@ -2810,31 +2810,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "口調"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "말투"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "VOZ"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "语气"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VOCE"
+            "value" : "語氣"
           }
         }
       }
@@ -2846,25 +2846,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "Mit Schimpfwörtern und Beleidigungen. Jederzeit änderbar unter Einstellungen › Stimme."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "Swearing and insults included. Change it anytime in Settings › Voice."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "Palabrotas e insultos incluidos. Lo cambias cuando quieras en Ajustes › Voz."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "Gros mots et insultes compris. Tu changes quand tu veux dans Réglages › Voix."
           }
         },
         "it" : {
@@ -2876,31 +2876,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "暴言・悪口あり。「設定」›「口調」でいつでも変更できます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "욕설과 독설 포함. 설정 › 말투에서 언제든 바꿀 수 있어요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "Palavrões e xingamentos inclusos. Dá para mudar quando quiser em Ajustes › Voz."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "含脏话和骂人的话。随时可在“设置”›“语气”中更改。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parolacce e insulti compresi. Si cambia quando vuoi in Impostazioni › Voce."
+            "value" : "含髒話和罵人的話。隨時可在「設定」›「語氣」中更改。"
           }
         }
       }
@@ -2912,25 +2912,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "SOLL ICH’S DIR NETT SAGEN ODER SO, WIE ES IST?"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "WANT ME TO SAY IT NICELY, OR TELL IT LIKE IT IS?"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "¿TE LO DIGO CON BUENAS PALABRAS O TE LO DIGO DE VERDAD?"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "JE TE LE DIS GENTIMENT OU JE TE DIS LA VÉRITÉ ?"
           }
         },
         "it" : {
@@ -2942,31 +2942,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "やさしく言ってほしい？それとも本音で言ってほしい？"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "좋게 말해 줄까, 아니면 제대로 말해 줄까?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "QUER QUE EU FALE COM JEITINHO OU QUE EU FALE A REAL?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "想让我好好说，还是说实话？"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VUOI CHE TE LO DICA GENTILMENTE O CHE TE LO DICA DAVVERO?"
+            "value" : "想要我好好說，還是說真話？"
           }
         }
       }
@@ -9038,25 +9038,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "Mitteilungen von NEAT"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "NEAT notifications"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "Notificaciones de NEAT"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "Notifications de NEAT"
           }
         },
         "it" : {
@@ -9068,31 +9068,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "NEATの通知"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "NEAT 알림"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "Notificações do NEAT"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "NEAT 通知"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche di NEAT"
+            "value" : "NEAT 通知"
           }
         }
       }
@@ -9104,25 +9104,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "Normal"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "Normal"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "Normales"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "Normal"
           }
         },
         "it" : {
@@ -9134,31 +9134,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "ふつう"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "보통"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "Normais"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "正常"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normali"
+            "value" : "一般"
           }
         }
       }
@@ -9170,25 +9170,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "Wenige"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "Few"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "Pocas"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "Peu"
           }
         },
         "it" : {
@@ -9200,31 +9200,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "少なめ"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "적게"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "Poucas"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "少"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poche"
+            "value" : "少"
           }
         }
       }
@@ -9236,25 +9236,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "Viele"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "Lots"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "Muchas"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "Beaucoup"
           }
         },
         "it" : {
@@ -9266,31 +9266,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "多め"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "많이"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "Muitas"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "多"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tante"
+            "value" : "多"
           }
         }
       }
@@ -9302,25 +9302,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "Bissig: Sarkasmus. Gnadenlos: Schimpfwörter und Beleidigungen. NEAT kommentiert deine Schritte in der App und in Mitteilungen. Normal: NEAT schweigt."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "Spicy: sarcasm. No mercy: swearing and insults. NEAT comments on your steps in the app and in notifications. Normal: NEAT keeps quiet."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "Picante: sarcasmo. Sin piedad: palabrotas e insultos. NEAT comenta tus pasos en la app y en las notificaciones. Normal: NEAT se calla."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "Piquant : sarcasme. Sans pitié : gros mots et insultes. NEAT commente tes pas dans l’app et dans les notifications. Normal : NEAT se tait."
           }
         },
         "it" : {
@@ -9332,31 +9332,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "ピリ辛：皮肉。容赦なし：暴言と悪口。NEATがアプリ内と通知であなたの歩数にコメントします。ふつう：NEATは黙っています。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "매운맛: 비꼬기. 무자비: 욕설과 독설. NEAT가 앱과 알림에서 걸음 수에 한마디해요. 보통: NEAT는 조용히 있어요."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "Picante: sarcasmo. Sem dó: palavrões e xingamentos. O NEAT comenta seus passos no app e nas notificações. Normal: o NEAT fica quieto."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "辛辣：讽刺。毫不留情：脏话和骂人。NEAT 会在 App 和通知里点评你的步数。普通：NEAT 保持安静。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante: sarcasmo. Senza pietà: parolacce e insulti. NEAT commenta i tuoi passi nell'app e nelle notifiche. Normale: NEAT sta zitto."
+            "value" : "辛辣：諷刺。毫不留情：髒話和罵人。NEAT 會在 App 和通知裡點評你的步數。普通：NEAT 保持安靜。"
           }
         }
       }
@@ -9368,25 +9368,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "Stimme"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "Voice"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "Voz"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "Voix"
           }
         },
         "it" : {
@@ -9398,31 +9398,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "口調"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "말투"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "Voz"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "语气"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voce"
+            "value" : "語氣"
           }
         }
       }
@@ -14306,25 +14306,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "Ab heute rede ich. Zu viel? Einstellungen › Stimme."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "From today, I talk. Can’t take it? Settings › Voice."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "Desde hoy hablo. Si no lo aguantas: Ajustes › Voz."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "Désormais, je parle. Tu ne supportes pas ? Réglages › Voix."
           }
         },
         "it" : {
@@ -14336,31 +14336,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "今日からしゃべるぞ。耐えられないなら「設定」›「口調」へ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "오늘부터 말한다. 못 견디겠으면: 설정 › 말투."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "A partir de hoje, eu falo. Se não aguentar: Ajustes › Voz."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "从今天起我开口了。受不了就去“设置”›“语气”。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da oggi parlo. Se non reggi: Impostazioni › Voce."
+            "value" : "從今天起我開口了。受不了就去「設定」›「語氣」。"
           }
         }
       }
@@ -14372,25 +14372,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT. Tippen für einen neuen Spruch."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT. Tap for another line."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT. Toca para otra frase."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT. Touche pour une autre réplique."
           }
         },
         "it" : {
@@ -14402,31 +14402,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT。タップすると別のセリフ。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT. 탭하면 다른 한마디."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT. Toque para outra frase."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT。轻点换一句。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "NEAT. Tocca per un'altra battuta."
+            "value" : "NEAT。點一下換一句。"
           }
         }
       }
@@ -14438,25 +14438,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "Gnadenlos"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "No mercy"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "Sin piedad"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "Sans pitié"
           }
         },
         "it" : {
@@ -14468,31 +14468,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "容赦なし"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "무자비"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "Sem dó"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "毫不留情"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Senza pietà"
+            "value" : "毫不留情"
           }
         }
       }
@@ -14504,25 +14504,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "Normal"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "Normal"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "Normal"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "Normal"
           }
         },
         "it" : {
@@ -14534,31 +14534,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "ふつう"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "보통"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "Normal"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "普通"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Normale"
+            "value" : "普通"
           }
         }
       }
@@ -14570,25 +14570,25 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "Bissig"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "Spicy"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "Picante"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "Piquant"
           }
         },
         "it" : {
@@ -14600,31 +14600,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "ピリ辛"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "매운맛"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "Picante"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "辛辣"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccante"
+            "value" : "辛辣"
           }
         }
       }

@@ -150,6 +150,8 @@ struct HomeVoice: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
     @State private var bubbleHeight: CGFloat = 60
+    /// The bubble's clock runs only while it flies out or pops in.
+    @State private var busy = false
 
     /// Top-left corner of this view on the Home canvas.
     static let origin = CGPoint(x: 0, y: 326)
@@ -159,7 +161,7 @@ struct HomeVoice: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            TimelineView(.animation(paused: scenePhase != .active || !motion.busy(Date()))) { t in
+            TimelineView(.animation(paused: scenePhase != .active || !busy)) { t in
                 let b = motion.bubble(level, at: t.date, reduceMotion: reduceMotion)
                 bubble
                     .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { bubbleHeight = $0 }
@@ -182,6 +184,10 @@ struct HomeVoice: View {
             .accessibilityValue(quote.text)
         }
         .frame(width: Manga.frameWidth, height: 220, alignment: .topLeading)
+        .task(id: motion.eventAt) {
+            busy = true
+            busy = await HeartMotion.busyWhile(motion)
+        }
     }
 
     private var bubbleTop: CGFloat { (first ? 332 : 334) - Self.origin.y }

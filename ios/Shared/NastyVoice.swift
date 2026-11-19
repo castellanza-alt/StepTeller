@@ -24,20 +24,33 @@ enum NastyVoice {
     }
 
     private static let lock = NSLock()
-    nonisolated(unsafe) private static var cached: NastyLibrary?
+    nonisolated(unsafe) private static var cached: (library: NastyLibrary, stamp: [String: Date])?
+
+    /// Modification dates of the downloaded files: another process (the app, for the widget) may have saved one.
+    private static func stamp() -> [String: Date] {
+        var out: [String: Date] = [:]
+        for code in NastyLibrary.languages {
+            guard let url = file(code),
+                  let date = (try? FileManager.default.attributesOfItem(atPath: url.path))?[.modificationDate] as? Date
+            else { continue }
+            out[code] = date
+        }
+        return out
+    }
 
     /// The catalogs on board, replaced by the downloaded ones that pass the check (Italian first: the others are
     /// checked against it). A file that does not pass leaves the one on board.
     static var library: NastyLibrary {
         lock.lock(); defer { lock.unlock() }
-        if let cached { return cached }
+        let stamp = stamp()
+        if let cached, cached.stamp == stamp { return cached.library }
         var library = NastyLibrary.onBoard
         let codes = NastyLibrary.languages.sorted { ($0 != NastyLibrary.reference ? 1 : 0, $0) < ($1 != NastyLibrary.reference ? 1 : 0, $1) }
         for code in codes {
             guard let url = file(code), let data = try? Data(contentsOf: url) else { continue }
             library = library.replaced(by: data)
         }
-        cached = library
+        cached = (library, stamp)
         return library
     }
 
@@ -59,7 +72,6 @@ enum NastyVoice {
             log.error("voice: catalog \(code) not saved: \(error.localizedDescription)")
             return false
         }
-        lock.lock(); cached = nil; lock.unlock()
         log.notice("voice: catalog \(code) \(after.catalogs[code]?.edizione ?? "") in use")
         return true
     }
@@ -75,12 +87,13 @@ enum NastyVoice {
     // MARK: notifications
 
     /// Repeatable choice for a notification: the same for the same day and purpose (the widget rewrites the
-    /// reminder often, and the text must not change at every rewrite), different every day.
+    /// reminder often, and the text must not change at every rewrite), different every day. Without the memory of
+    /// the lines seen: it changes during the day, and the line with it.
     private static func line(_ moment: NastyMoment, purpose: String, day: String) -> NastyQuote? {
         let level = level
         guard level != .normale, let catalog else { return nil }
         var rng = SeededRandom(seed: SeededRandom.seed("voice.\(purpose).\(day)"))
-        return NastyPicker.pick(catalog, level: level, moment: moment, memory: SharedStore.nastyMemory,
+        return NastyPicker.pick(catalog, level: level, moment: moment, memory: NastyMemory(),
                                 format: LocalFormat.integer, using: &rng)
     }
 

@@ -82,8 +82,10 @@ struct OnboardingView: View {
             voice = store.voiceLevel
         }
         .onChange(of: goal) { old, new in
-            // the line under the goal speaks with the voice in force (Senza pietà for a new install)
-            if store.voice != .normale { goalLine.changed(old: nil, new: new, store: store) }
+            // the line under the goal speaks with the voice in force (Senza pietà for a new install); not when the
+            // page loads the saved goal (replay), only for a choice
+            guard loaded, new != store.goal, store.voice != .normale else { return }
+            goalLine.changed(old: isReplay ? store.goal : nil, new: new, store: store)
         }
         .onChange(of: page) { old, new in
             goalFocused = false

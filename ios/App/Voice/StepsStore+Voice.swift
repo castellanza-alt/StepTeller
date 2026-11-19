@@ -154,19 +154,22 @@ extension StepsStore {
     /// Once a day, only with a voice chosen (with Normale nothing is downloaded): the public file of the language
     /// (and the Italian one, which the others are checked against). Kept only if it passes the check; nothing sent.
     func refreshCatalog(now: Date = Date()) async {
-        guard voiceLevel != .normale else { return }
+        // the voice in force: chosen, and the language has a catalog (where the app speaks Normale, nothing)
+        guard voice != .normale else { return }
         #if DEBUG
         if defaults.object(forKey: "stepteller.debugSteps") != nil { return }     // screenshots: the catalog on board
         #endif
         let last = defaults.object(forKey: Keys.catalogCheck) as? Date
         guard NastyDownload.isDue(last: last, now: now, calendar: .current) else { return }
-        defaults.set(now, forKey: Keys.catalogCheck)
         let language = NastyVoice.library.catalog(language: NastyVoice.language)?.lingua ?? NastyVoice.language
-        var changed = false
+        var changed = false, answered = false
         for code in Set([NastyLibrary.reference, language]).sorted(by: { $0 == NastyLibrary.reference && $1 != $0 }) {
             guard let data = await CatalogDownload.fetch(NastyDownload.url(language: code)) else { continue }
+            answered = true
             if NastyVoice.store(data) { changed = true }
         }
+        // without network it tries again at the next opening, not tomorrow
+        if answered { defaults.set(now, forKey: Keys.catalogCheck) }
         guard changed else { return }
         catalogEdition += 1
         await updateReminders()

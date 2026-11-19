@@ -4,6 +4,9 @@
 Anton (titles) only has the Latin alphabet: in JA/KO/ZH the missing characters are drawn by a heavy OFL font,
 subset to what is used. The characters to cover are:
   - all the texts of the language in the sheet localizzazione/NEAT_testi_tradotti.xlsx (sheet «Testi»);
+  - NEAT's lines in the language (`neat/nasty/<lingua>/battute.json`, written by scripts/battute.py): the bubble,
+    the pop-ups and the celebration show them in Anton (a catalog downloaded later with new characters falls back
+    to the system font for those only);
   - the texts iOS generates in the app (Settings and record dates, period titles, month and weekday names and
     initials, numbers), produced with the same formatters as the app by scripts/font_asia/stringhe.swift.
 Characters Anton already has (Latin letters, digits, punctuation such as → ≈ —) are left out.
@@ -12,7 +15,7 @@ The full fonts are downloaded from github.com/google/fonts at a fixed commit and
 build/font_asia/). Output in App/Fonts/: one .ttf per language with the OFL license next to it. At the end it
 verifies that every character is in the subset font (or in Anton) and stops with an error if one is missing.
 
-Run again whenever the sheet translations change:
+Run again whenever the sheet translations or the NASTY catalogs change:
   python3 scripts/font_asia.py        (needs: pip install openpyxl fonttools; Xcode for swiftc)
 """
 import hashlib
@@ -92,6 +95,11 @@ def main():
     report = {}
     for lang, t in TARGETS.items():
         sheet = "".join(row[columns[lang]] for row in rows.values())
+        lines = ROOT.parent / "neat" / "nasty" / lang / "battute.json"
+        if lines.exists():
+            # the lines are shown in capitals: both cases (kana and hanzi have none, Latin words in them do)
+            said = "".join(b["testo"] + b.get("titolo", "") for b in json.loads(lines.read_text(encoding="utf-8"))["battute"])
+            sheet += said + said.upper()
         text = sheet + generated[lang]
         need = sorted({c for c in text if not c.isspace() and ord(c) >= 0x20 and ord(c) not in anton})
         src = fetch(t["src"], t["sha"])

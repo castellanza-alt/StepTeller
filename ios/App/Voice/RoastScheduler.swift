@@ -29,11 +29,12 @@ enum RoastScheduler {
               input.level != .normale, let catalog = input.catalog else { return }
 
         // today's delivered ones: their lines are seen, and the next one keeps 90 minutes from the last
+        let delivered = await center.deliveredNotifications()
+            .filter { $0.request.identifier.hasPrefix(RoastPlan.notificationPrefix) && calendar.isDate($0.date, inSameDayAs: input.now) }
+        let last = delivered.map(\.date).max()
+        // read and written with no wait in between: the lines Home records meanwhile are not lost
         var memory = SharedStore.nastyMemory
-        var last: Date?
-        for note in await center.deliveredNotifications()
-        where note.request.identifier.hasPrefix(RoastPlan.notificationPrefix) && calendar.isDate(note.date, inSameDayAs: input.now) {
-            last = max(last ?? note.date, note.date)
+        for note in delivered {
             if let id = note.request.content.userInfo[lineKey] as? String, !memory.recent(input.level).contains(id) {
                 memory.record(id, level: input.level)
             }
@@ -71,7 +72,8 @@ enum CatalogDownload {
         c.requestCachePolicy = .reloadIgnoringLocalCacheData
         c.timeoutIntervalForRequest = 20
         c.timeoutIntervalForResource = 40
-        c.httpAdditionalHeaders = ["User-Agent": "NEAT"]
+        // generic: no app version, no phone language
+        c.httpAdditionalHeaders = ["User-Agent": "NEAT", "Accept-Language": "*"]
         return URLSession(configuration: c)
     }()
 

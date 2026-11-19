@@ -30,9 +30,11 @@ final class NastyCatalogTests: XCTestCase {
         for (code, json) in NastyLibrary.onBoardJSON {
             let site = try String(contentsOf: Self.ios.appendingPathComponent("../neat/nasty/\(code)/battute.json"), encoding: .utf8)
             XCTAssertEqual(site, json + "\n", "neat/nasty/\(code)/battute.json non è il catalogo di bordo")
-            let name = code == "it" ? "catalogo-approvato.json" : "catalogo-approvato.\(code).json"
+            let name = code == "it" ? "catalogo-approvato.json" : "lingue/\(code).json"
             let approved = try JSONDecoder().decode([Approved].self, from: Data(contentsOf: folder.appendingPathComponent(name)))
-            let lines = NastyLibrary.onBoard.catalogs[code]!.battute
+            guard let lines = NastyLibrary.onBoard.catalogs[code]?.battute else {
+                XCTFail("\(code): catalogo di bordo rifiutato dal controllo"); continue
+            }
             XCTAssertEqual(approved.map(\.id), lines.map(\.id), code)
             for (a, b) in zip(approved, lines) {
                 XCTAssertEqual(a.livello, b.livello, a.id)
@@ -215,8 +217,11 @@ final class NastyCatalogTests: XCTestCase {
         XCTAssertEqual(onBoard.levels(language: "xx"), [.normale])
         XCTAssertEqual(onBoard.effective(.nasty, language: "it"), .nasty)
         XCTAssertEqual(onBoard.effective(.nasty, language: "xx"), .normale)
-        // an English catalog arrives: English offers the levels, Italian keeps its own
-        let withEnglish = onBoard.replaced(by: encoded(english()))
+        // the app ships all 10 languages (D-046, T-025)
+        XCTAssertEqual(Set(onBoard.catalogs.keys), NastyLibrary.languages)
+        XCTAssertEqual(onBoard.levels(language: "pt-BR"), [.normale, .piccante, .nasty])
+        // an English catalog arrives in a library with Italian only: English offers the levels, Italian keeps its own
+        let withEnglish = NastyLibrary(catalogs: ["it": Self.it]).replaced(by: encoded(english()))
         XCTAssertEqual(withEnglish.levels(language: "en-GB"), [.normale, .piccante, .nasty])
         XCTAssertEqual(withEnglish.catalog(language: "en")?.lingua, "en")
         XCTAssertEqual(withEnglish.catalog(language: "it")?.lingua, "it")
@@ -251,6 +256,9 @@ final class NastyCatalogTests: XCTestCase {
         XCTAssertEqual(NastyLevel.saved("nasty"), .nasty)
         XCTAssertNil(NastyLevel.saved("diabolico"))
         XCTAssertNil(NastyLevel.saved(nil))
+        // words have a letter or a digit: the French « ? » is not one
+        XCTAssertEqual(NastyCatalog.words("Toujours sur le canapé ?"), 4)
+        XCTAssertEqual(NastyCatalog.words("3 200 pas — bravo !"), 4)
         // D-047: without a saved value (new install, update from 1.2) the voice is Senza pietà
         XCTAssertEqual(NastyLevel.standard, .nasty)
         XCTAssertEqual(NastyLevel.saved(nil) ?? .standard, .nasty)

@@ -242,8 +242,10 @@ public struct NastyCatalog: Codable, Equatable, Sendable {
         return out
     }
 
+    /// Words: what lies between spaces and has a letter or a digit (the French « ? » and « ! », a dash, are not words).
     static func words(_ text: String) -> Int {
-        text.split(whereSeparator: { $0 == " " || $0 == "\n" }).count
+        text.split(whereSeparator: { $0 == " " || $0 == "\n" || $0 == "\u{00A0}" || $0 == "\u{202F}" })
+            .filter { $0.contains(where: { $0.isLetter || $0.isNumber }) }.count
     }
 
     /// Braces that are not one of the allowed placeholders (also a lone `{` or `}`).

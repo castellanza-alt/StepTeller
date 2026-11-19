@@ -1,0 +1,1267 @@
+{
+ "formato": "neat-battute",
+ "versione": 1,
+ "edizione": "2026-11-19",
+ "lingua": "fr",
+ "battute": [
+  {
+   "id": "N001",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tu fais pitié."
+  },
+  {
+   "id": "N002",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. J’aurais honte de montrer ça."
+  },
+  {
+   "id": "N003",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "À peine {passi} pas. Lève-toi, bordel."
+  },
+  {
+   "id": "N004",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Lâche ce putain de canapé."
+  },
+  {
+   "id": "N005",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas sur {obiettivo}. Tu te fous de moi ?"
+  },
+  {
+   "id": "N006",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tous mes compliments au canapé."
+  },
+  {
+   "id": "N007",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. T’es un bibelot avec un téléphone."
+  },
+  {
+   "id": "N008",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. C’était déjà minable hier."
+  },
+  {
+   "id": "N009",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Même merde qu’hier."
+  },
+  {
+   "id": "N010",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Des heures sans bouger. Tu fais pitié."
+  },
+  {
+   "id": "N011",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tu m’avais promis {obiettivo}. Tu parles."
+  },
+  {
+   "id": "N012",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Heureusement que le canapé capte le Wi-Fi."
+  },
+  {
+   "id": "N014",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Même par paresse, j’aurais fait un effort."
+  },
+  {
+   "id": "N015",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. C’est moi qui ai honte à ta place."
+  },
+  {
+   "id": "N016",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{percento}% de l’objectif. Le reste, c’est du canapé."
+  },
+  {
+   "id": "N017",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. C’est quoi, le problème avec « marcher » ?"
+  },
+  {
+   "id": "N019",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "Tu fais pitié. Pardon, je voulais dire « {passi} pas ». Pareil."
+  },
+  {
+   "id": "N020",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. T’appelles ça une journée ? Moi, j’appelle ça stationner."
+  },
+  {
+   "id": "N021",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Et tu viens vérifier, en plus."
+  },
+  {
+   "id": "N022",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. J’ai recompté. Merde, c’est bien ça."
+  },
+  {
+   "id": "N023",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Le canapé te remercie pour ta fidélité."
+  },
+  {
+   "id": "N024",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. J’ai ri. C’était pas un compliment."
+  },
+  {
+   "id": "N025",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tout ça pour ces trois miettes de merde."
+  },
+  {
+   "id": "N026",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. T’avais vraiment besoin d’une appli pour ça ?"
+  },
+  {
+   "id": "N027",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Merci de me faire perdre mon putain de temps."
+  },
+  {
+   "id": "N028",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Et sur ce, tu déclares ta journée faite ?"
+  },
+  {
+   "id": "N029",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. De la glande à l’état pur, bordel."
+  },
+  {
+   "id": "N030",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Bouge, bibelot."
+  },
+  {
+   "id": "N031",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Ça vaut que dalle."
+  },
+  {
+   "id": "N032",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Entre deux, j’ai le temps de compter les coussins."
+  },
+  {
+   "id": "N033",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Même ton objectif se fout de toi."
+  },
+  {
+   "id": "N034",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Beau travail de merde."
+  },
+  {
+   "id": "N035",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Passe cette putain de porte."
+  },
+  {
+   "id": "N036",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Ton canapé parle de toi avec fierté."
+  },
+  {
+   "id": "N037",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas sur {obiettivo}. T’essaies même pas de faire semblant."
+  },
+  {
+   "id": "N038",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Pour glander, par contre, tu rates jamais une occasion."
+  },
+  {
+   "id": "N039",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Ça fait vraiment pitié."
+  },
+  {
+   "id": "N040",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{percento}% de l’objectif. Mon verdict ? À chier."
+  },
+  {
+   "id": "N041",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Marche ou désinstalle-moi."
+  },
+  {
+   "id": "N042",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tu veux vraiment que j’affiche cette merde ?"
+  },
+  {
+   "id": "N043",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Encore {mancano} pas. Autrement dit, pratiquement tout, bordel."
+  },
+  {
+   "id": "N044",
+   "livello": "NASTY",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. T’as mis tes chaussures pour quoi, bordel ?"
+  },
+  {
+   "id": "N045",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Midi. {passi} pas. Une matinée entière foutue en l’air.",
+   "ore": "11:30-12:59"
+  },
+  {
+   "id": "N046",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "11 h. {passi} pas. Ça part déjà en merde.",
+   "ore": "10:30-11:59"
+  },
+  {
+   "id": "N047",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Midi. {passi} pas. Réveille-toi, bibelot."
+  },
+  {
+   "id": "N048",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Matinée terminée. {passi} pas. Le canapé mène déjà.",
+   "ore": "12:00-17:59"
+  },
+  {
+   "id": "N049",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "16 h. {passi} pas. T’as déjà plié pour la journée ?",
+   "ore": "15:30-16:59"
+  },
+  {
+   "id": "N050",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "Cet après-midi, {passi} pas. Au moins, l’horloge avance, elle.",
+   "ore": "13:00-17:59"
+  },
+  {
+   "id": "N051",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "17 h. {passi} pas. Dernière chance d’être moins minable.",
+   "ore": "16:30-17:59"
+  },
+  {
+   "id": "N052",
+   "livello": "NASTY",
+   "situazione": "Mattina e pomeriggio",
+   "testo": "15 h. {passi} pas. Une demi-journée foutue en l’air.",
+   "ore": "14:30-15:59"
+  },
+  {
+   "id": "N053",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "19 h. {passi} pas. Tu viens de foutre ta journée en l’air.",
+   "ore": "18:30-19:59"
+  },
+  {
+   "id": "N054",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{passi} pas ce soir. Sacrée journée de merde."
+  },
+  {
+   "id": "N055",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "20 h. {passi} pas. Encore une victoire du canapé.",
+   "ore": "19:30-20:59"
+  },
+  {
+   "id": "N056",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Ce soir, {passi} pas. Va promener ta honte."
+  },
+  {
+   "id": "N057",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Encore {mancano} pas. {minuti} minutes. Debout, bordel."
+  },
+  {
+   "id": "N059",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "19 h. Encore {mancano} pas. Grouille-toi, bordel.",
+   "ore": "18:30-19:59"
+  },
+  {
+   "id": "N060",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{passi} pas. Toute une putain de journée pour ça.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N061",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Ce soir, {passi} pas. Tu perds encore à domicile."
+  },
+  {
+   "id": "N062",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{minuti} minutes. Juste {minuti}. C’est encore trop te demander, merde ?"
+  },
+  {
+   "id": "N063",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Dernière heure. Encore {mancano} pas. Dehors, bordel.",
+   "ore": "19:00-19:59"
+  },
+  {
+   "id": "N064",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Bilan du jour : {passi} pas. Minable.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N065",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "{passi} pas aujourd’hui. Va dormir, t’as assez répété.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N066",
+   "livello": "NASTY",
+   "situazione": "Sera",
+   "testo": "Bilan du jour, {passi} pas. Le canapé débouche le champagne.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "N067",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "La moitié. Tu veux une demi-médaille, bordel ? Continue."
+  },
+  {
+   "id": "N069",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "{mancano} pas. Pour une fois, finis ce que tu commences."
+  },
+  {
+   "id": "N070",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "La moitié. C’est là que tu lâches, comme d’habitude ?"
+  },
+  {
+   "id": "N072",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "{percento}%. Qui va marcher l’autre moitié ? Pas moi, bordel."
+  },
+  {
+   "id": "N073",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Encore {mancano} pas. Essaie de pas tout foutre en l’air."
+  },
+  {
+   "id": "N074",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Presque. « Presque », ça vaut que dalle."
+  },
+  {
+   "id": "N075",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "{mancano} pas. N’importe qui peut les faire. Prouve-le."
+  },
+  {
+   "id": "N076",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Encore {minuti} minutes. Bouge, bordel."
+  },
+  {
+   "id": "N077",
+   "livello": "NASTY",
+   "situazione": "A metà e quasi",
+   "testo": "Encore {mancano} pas. Faut vraiment le vouloir pour merder si près."
+  },
+  {
+   "id": "N078",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif de {obiettivo} pas. Quelle ambition de merde."
+  },
+  {
+   "id": "N079",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas ? N’importe qui peut faire ça. Pour toi, j’hésite."
+  },
+  {
+   "id": "N080",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "T’as baissé l’objectif. Quel courage de merde.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N082",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas. C’est ton putain de canapé qui décide ?"
+  },
+  {
+   "id": "N083",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas par jour. T’aimes les victoires sans décoller du canapé."
+  },
+  {
+   "id": "N085",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif ramené à {obiettivo}. Bravo, t’as enfin déplacé quelque chose.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N086",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif baissé. T’as réussi à abandonner sans même te lever.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N087",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif baissé. Ça te libère du temps pour foutre quoi ?",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N088",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "T’as encore baissé l’objectif. Tu fais pitié.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "N089",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif relevé à {obiettivo}. Je chronomètre tes bonnes intentions.",
+   "evento": "alzato"
+  },
+  {
+   "id": "N090",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas. Préviens-moi quand t’auras fini d’en parler."
+  },
+  {
+   "id": "N091",
+   "livello": "NASTY",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif relevé. Assez parlé. Marche, bordel.",
+   "evento": "alzato"
+  },
+  {
+   "id": "N092",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Un Joker a sauvé ta série hier. Tu méritais que dalle.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N093",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Plus de Joker. Marche ou dis adieu à ta série.",
+   "evento": "jollyFiniti"
+  },
+  {
+   "id": "N094",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Série perdue. {serie} jours foutus en l’air. Grâce à toi.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N095",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Série à zéro. Félicite ton putain de canapé et recommence.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N096",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Joker utilisé. Ta performance d’hier était à chier.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N097",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Un Joker de moins. Il t’en reste {jolly}. Après, tu te démerdes.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N098",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Un Joker a sauvé ta série. Toi, t’as foutu quoi ?",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "N099",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Joker gagné. Tu vas bien trouver comment le gâcher.",
+   "evento": "jollyGuadagnato"
+  },
+  {
+   "id": "N100",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} jours de suite. Fais pas tout foirer, pour changer.",
+   "evento": "serieInCorso"
+  },
+  {
+   "id": "N101",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Série perdue. Il suffisait de marcher, bordel.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N102",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Série brisée à {serie} jours. Quel putain de gâchis.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N103",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} jours foutus en l’air. Pour un putain de canapé.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N104",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Série perdue. Un canapé vient encore de te battre.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N105",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Jour un. Encore. Tu devrais y faire suivre ton courrier.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "N106",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Ta série risque de sauter ce soir. Encore {mancano} pas. Bouge.",
+   "evento": "serieARischio"
+  },
+  {
+   "id": "N107",
+   "livello": "NASTY",
+   "situazione": "Jolly e serie",
+   "testo": "Dernier Joker grillé. Maintenant, va falloir marcher pour de vrai.",
+   "evento": "jollyFiniti"
+  },
+  {
+   "id": "N108",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. Putain, c’était pas trop tôt."
+  },
+  {
+   "id": "N109",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{obiettivo} pas. Pour une fois, tu fais pas pitié."
+  },
+  {
+   "id": "N110",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. J’y croyais pas. Toi non plus."
+  },
+  {
+   "id": "N111",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "C’est fait. Pareil demain, sinon c’était un putain de coup de bol."
+  },
+  {
+   "id": "N112",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Nouveau record. Qui a sorti le bibelot ?",
+   "evento": "record"
+  },
+  {
+   "id": "N113",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. Merde, j’ai failli signaler un bug."
+  },
+  {
+   "id": "N114",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "C’est fait. T’habitue pas aux compliments."
+  },
+  {
+   "id": "N115",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{obiettivo} pas. Enfin, bordel."
+  },
+  {
+   "id": "N116",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. Journée de merde pour le canapé."
+  },
+  {
+   "id": "N117",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "T’as réussi. Demain, je mise sur le canapé."
+  },
+  {
+   "id": "N118",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "C’est fait. Une journée efface pas toute cette merde."
+  },
+  {
+   "id": "N119",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. C’était le minimum, et c’est toi qui l’as fixé."
+  },
+  {
+   "id": "N120",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Un record. Les autres jours, t’avais juste la flemme, alors.",
+   "evento": "record"
+  },
+  {
+   "id": "N121",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Nouveau record. Donc avant, tu faisais exprès de merder.",
+   "evento": "record"
+  },
+  {
+   "id": "N122",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{passi} pas. Pour aujourd’hui, je la ferme."
+  },
+  {
+   "id": "N123",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "Deux fois ton objectif. T’as prêté ton téléphone à qui ?",
+   "evento": "doppio"
+  },
+  {
+   "id": "N124",
+   "livello": "NASTY",
+   "situazione": "Quando ce la fai",
+   "testo": "{passi} pas. Aujourd’hui, tu fais pas pitié."
+  },
+  {
+   "id": "N125",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Debout",
+   "testo": "{passi} pas. C’est toujours aussi merdique."
+  },
+  {
+   "id": "N126",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Hé, bibelot",
+   "testo": "{passi} pas sur {obiettivo}. Bouge."
+  },
+  {
+   "id": "N127",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Tu fais pitié",
+   "testo": "{passi} pas. Encore {mancano}. Dehors. Maintenant."
+  },
+  {
+   "id": "N128",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Toujours sur le canapé ?",
+   "testo": "{passi} pas. Je le savais."
+  },
+  {
+   "id": "N130",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Mauvaise nouvelle",
+   "testo": "{passi} pas. La mauvaise nouvelle, c’est toi."
+  },
+  {
+   "id": "N131",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Réveil",
+   "testo": "{passi} pas. Le canapé te paie à l’heure ?"
+  },
+  {
+   "id": "N132",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "La honte",
+   "testo": "{passi} pas sur {obiettivo}. Quelque chose à ajouter ?"
+  },
+  {
+   "id": "N133",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Bouge",
+   "testo": "Encore {mancano} pas. Qui va les faire, bordel ?"
+  },
+  {
+   "id": "N134",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Petit rappel",
+   "testo": "Tu fais toujours pitié. {passi} pas."
+  },
+  {
+   "id": "N135",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Dernière minute",
+   "testo": "{passi} pas. Le canapé te remercie pour tes services."
+  },
+  {
+   "id": "N136",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Pitoyable",
+   "testo": "{percento}% de ton objectif. Debout."
+  },
+  {
+   "id": "N137",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Il est 18 h",
+   "testo": "{passi} pas. Dernière chance, bibelot.",
+   "ore": "17:30-18:59"
+  },
+  {
+   "id": "N138",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Debout, bordel",
+   "testo": "{passi} pas. C’est tout ce que t’as foutu ?"
+  },
+  {
+   "id": "N139",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Toujours là ?",
+   "testo": "{passi} pas. Exactement comme il y a une heure."
+  },
+  {
+   "id": "N140",
+   "livello": "NASTY",
+   "situazione": "Notifiche",
+   "titolo": "Rien de neuf",
+   "testo": "{passi} pas. Tu fais toujours aussi pitié."
+  },
+  {
+   "id": "N141",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Arrête de tapoter. Marche, bordel."
+  },
+  {
+   "id": "N142",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Je compte les pas. Tes clics, je m’en fous."
+  },
+  {
+   "id": "N143",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Pose ce putain de téléphone. Debout."
+  },
+  {
+   "id": "N144",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Tu m’ouvres encore. Essaie plutôt d’ouvrir cette foutue porte."
+  },
+  {
+   "id": "N145",
+   "livello": "NASTY",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Fixe-moi tant que tu veux. Je compte les pas."
+  },
+  {
+   "id": "P001",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Remarquable pour un bibelot."
+  },
+  {
+   "id": "P002",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Le canapé te passe le bonjour."
+  },
+  {
+   "id": "P003",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. On peut faire moins ? Je préfère pas te défier."
+  },
+  {
+   "id": "P004",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Ça a dû te prendre plusieurs secondes."
+  },
+  {
+   "id": "P005",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas sur {obiettivo}. Ton objectif a de l’imagination."
+  },
+  {
+   "id": "P006",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tu te lasses jamais de rester là ?"
+  },
+  {
+   "id": "P007",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Doucement, personne ne te poursuit."
+  },
+  {
+   "id": "P008",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tu fais la fierté de ton canapé."
+  },
+  {
+   "id": "P009",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. J’applaudis. À ton rythme, ça prendra la journée."
+  },
+  {
+   "id": "P010",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Une journée bien remplie, à ce que je vois."
+  },
+  {
+   "id": "P011",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. J’en attendais peu. Tu as fait moins."
+  },
+  {
+   "id": "P012",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "Tu en es à {percento}%. Le canapé s’occupe du reste ?"
+  },
+  {
+   "id": "P013",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Une belle journée de travail pour un bibelot."
+  },
+  {
+   "id": "P014",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Attention, faudrait pas en faire trop."
+  },
+  {
+   "id": "P015",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Retour compris ?"
+  },
+  {
+   "id": "P016",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "Encore {mancano} pas. Enfin, je dis ça comme ça."
+  },
+  {
+   "id": "P017",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Tes chaussures commencent à trouver le temps long."
+  },
+  {
+   "id": "P018",
+   "livello": "Piccante",
+   "situazione": "Pochi passi",
+   "testo": "{passi} pas. Essaie la porte. Elle s’ouvre."
+  },
+  {
+   "id": "P019",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "Midi. {passi} pas. Départ en douceur. Tout en douceur.",
+   "ore": "11:30-12:59"
+  },
+  {
+   "id": "P020",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "16 h. {passi} pas. On prend son temps, on dirait.",
+   "ore": "15:30-16:59"
+  },
+  {
+   "id": "P021",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "19 h. {passi} pas. Le canapé gagne encore.",
+   "ore": "18:30-19:59"
+  },
+  {
+   "id": "P022",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "C’est le soir. Encore {mancano} pas. On fait quoi ?",
+   "ore": "18:00-23:59"
+  },
+  {
+   "id": "P023",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "{minuti} minutes et tu y es. En partant, évidemment."
+  },
+  {
+   "id": "P024",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "{passi} pas sur la journée. Tu as le mérite de la constance.",
+   "ore": "20:00-23:59"
+  },
+  {
+   "id": "P025",
+   "livello": "Piccante",
+   "situazione": "Mattina, pomeriggio, sera",
+   "testo": "20 h. {passi} pas. On remet ça à demain, je suppose ?",
+   "ore": "19:30-20:59"
+  },
+  {
+   "id": "P026",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "La moitié. D’habitude, c’est ton terminus. Surprends-moi."
+  },
+  {
+   "id": "P027",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "À mi-chemin. Si le canapé appelle, laisse sonner."
+  },
+  {
+   "id": "P028",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "Encore {mancano} pas. Tout arrêter ici, ça te ressemble."
+  },
+  {
+   "id": "P029",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "Presque. Préviens-moi quand je pourrai enlever le « presque »."
+  },
+  {
+   "id": "P030",
+   "livello": "Piccante",
+   "situazione": "A metà e quasi",
+   "testo": "{mancano} pas. Même toi, tu peux les faire."
+  },
+  {
+   "id": "P031",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas. C’est ambitieux pour un bibelot."
+  },
+  {
+   "id": "P032",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas. Tu sais te ménager, à ce que je vois."
+  },
+  {
+   "id": "P033",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif baissé. Laisse-moi une seconde pour simuler la surprise.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "P034",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif ramené à {obiettivo}. Le canapé approuve.",
+   "evento": "abbassato"
+  },
+  {
+   "id": "P035",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "Objectif relevé. Voyons combien de temps ça dure.",
+   "evento": "alzato"
+  },
+  {
+   "id": "P036",
+   "livello": "Piccante",
+   "situazione": "Obiettivo scelto o cambiato",
+   "testo": "{obiettivo} pas. Bien sûr. J’y crois."
+  },
+  {
+   "id": "P037",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Joker utilisé. Hier, j’ai couvert ton absence.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "P038",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Il t’en reste {jolly}. N’y prends pas trop goût.",
+   "evento": "jollyUsato"
+  },
+  {
+   "id": "P039",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Joker gagné. Avec toi, je lui donne une journée.",
+   "evento": "jollyGuadagnato"
+  },
+  {
+   "id": "P040",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} jours de suite. Essaie de garder cette série.",
+   "evento": "serieInCorso"
+  },
+  {
+   "id": "P041",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Série perdue. Une promenade aurait suffi.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "P042",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "{serie} jours, puis le canapé. Un grand classique.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "P043",
+   "livello": "Piccante",
+   "situazione": "Jolly e serie",
+   "testo": "Jour un. Vous avez déjà fait connaissance.",
+   "evento": "seriePersa"
+  },
+  {
+   "id": "P044",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. Je note la date."
+  },
+  {
+   "id": "P045",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "C’est fait. Tu m’impressionnes. Enfin, presque."
+  },
+  {
+   "id": "P046",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Objectif atteint. Donc tu sais marcher."
+  },
+  {
+   "id": "P047",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Tu as réussi. Attendons un peu avant d’organiser le défilé."
+  },
+  {
+   "id": "P048",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Un record. Tiens, quand tu veux, tu peux.",
+   "evento": "record"
+  },
+  {
+   "id": "P049",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "Nouveau record. Le canapé l’a mal pris.",
+   "evento": "record"
+  },
+  {
+   "id": "P050",
+   "livello": "Piccante",
+   "situazione": "Quando ce la fai",
+   "testo": "{passi} pas. Aujourd’hui, je n’ai rien à redire."
+  },
+  {
+   "id": "P051",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Hé",
+   "testo": "{passi} pas. Le canapé sera encore là à ton retour."
+  },
+  {
+   "id": "P052",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Petit rappel",
+   "testo": "Encore {mancano} pas. Juste pour information."
+  },
+  {
+   "id": "P053",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Tout va bien ?",
+   "testo": "{passi} pas. Tu me lis du canapé, j’imagine."
+  },
+  {
+   "id": "P054",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Il est 18 h",
+   "testo": "{passi} pas. Il reste du temps. Peu.",
+   "ore": "17:30-18:59"
+  },
+  {
+   "id": "P055",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Du nouveau ?",
+   "testo": "Rien. Toujours {passi} pas."
+  },
+  {
+   "id": "P056",
+   "livello": "Piccante",
+   "situazione": "Notifiche",
+   "titolo": "Courage",
+   "testo": "{minuti} minutes de marche. Même toi, tu peux y arriver."
+  },
+  {
+   "id": "P057",
+   "livello": "Piccante",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Me toucher ne compte pas comme un pas."
+  },
+  {
+   "id": "P058",
+   "livello": "Piccante",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Oui, je marche. Et toi ?"
+  },
+  {
+   "id": "P059",
+   "livello": "Piccante",
+   "situazione": "Se tocchi il cuore",
+   "testo": "Le compteur ne monte pas quand tu le regardes."
+  }
+ ]
+}

@@ -6,6 +6,8 @@ import StepTellerCore
 /// shorter than the reference).
 struct HomeView: View {
     let size: CGSize
+    /// Settings, a pop-up or the celebration over Home: NEAT waits (a line counts as seen only when it shows).
+    var covered = false
     @Environment(StepsStore.self) private var store
     @Environment(\.manga) private var c
     @State private var minutesWidth: CGFloat = 96
@@ -90,12 +92,13 @@ struct HomeView: View {
         .onChange(of: store.voice) { _, _ in speak() }
         .onChange(of: store.catalogEdition) { _, _ in speak() }
         .onChange(of: store.showsNoDataWarning) { _, _ in speak() }
+        .onChange(of: covered) { _, _ in speak() }
         .onReceive(Timer.publish(every: 60, on: .main, in: .common).autoconnect()) { _ in speak() }
     }
 
     /// NEAT's line in the bubble, only with Home on screen (a line counts as seen when it shows).
     private func speak() {
-        guard scenePhase == .active else { return }
+        guard scenePhase == .active, !covered else { return }
         store.updateHomeLine()
     }
 

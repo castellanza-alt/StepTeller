@@ -71,7 +71,9 @@ final class StepsStore {
             // iCloud and Backup reassign it at every restore: only a real change touches notifications and catalog
             guard voiceLevel != oldValue else { return }
             deferSync(reloadWidget: false)
-            if voiceLevel != .normale { Task { await refreshCatalog() } }
+            if voiceLevel != .normale {
+                Task { _ = await scheduler.requestIfNeeded(); await refreshCatalog() }
+            }
         }
     }
     /// Roast notifications a day (Poche · Normali · Tante), default Normali; saved like the voice.

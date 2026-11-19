@@ -37,6 +37,8 @@ vecchio di qualche decina di minuti: le notifiche programmate usano di preferenz
 
 ## 4. Battute aggiornabili senza App Store
 - L'app parte con il catalogo approvato dentro (funziona senza rete).
+- **Dopo D-046 (T-024, T-027):** un file per lingua, `neat/nasty/<lingua>/battute.json`; l'app scarica quello della sua
+  lingua (e l'italiano, contro cui le altre lingue si controllano).
 - Una volta al giorno scarica `battute.json` dal sito di NEAT (GitHub Pages, lo stesso della privacy), lo controlla
   (formato, versione, lunghezze, segnaposti) e lo usa al posto di quello a bordo. Se il file è rotto o manca, resta
   il precedente.
